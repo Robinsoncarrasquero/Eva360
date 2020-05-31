@@ -11,7 +11,7 @@ $factory->define(Evaluador::class, function (Faker $faker) {
         'name'=>$faker->name(),
         'email' => $faker->email(),
         'relation' => 'Boss',
-        'status' => 'I',
+        'status' => 0,
         'remember_token' => Str::random(32),
 
 

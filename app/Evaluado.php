@@ -19,7 +19,7 @@ class Evaluado extends Model
     ];
 
     protected $attributes=[
-        'status'=>null,
+        'status'=>0,
 
     ];
     //Relacion 1 a muchos

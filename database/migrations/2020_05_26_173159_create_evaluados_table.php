@@ -17,8 +17,8 @@ class CreateEvaluadosTable extends Migration
             $table->id();
             $table->string('name',100)->notnullable();
             $table->string('word_key',10)->notnullable();
-            $table->string('status',1)->nullable();
-           $table->timestamps();
+            $table->boolean('status');
+            $table->timestamps();
         });
     }
 
