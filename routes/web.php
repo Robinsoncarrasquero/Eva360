@@ -21,17 +21,25 @@ Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
 
 Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
 
-//Mostramos la lista de evaluados para seleccionar
-Route::get('evaluado', "EvaluadoController@index")
-        ->name('evaluado.index');
+//Presentar la lista de evaluados para seleccionar
+Route::get('lanzar', "LanzarPruebaController@index")
+        ->name('lanzar.index');
 
+        //Buscar un Evaluado por nombre
+Route::get('lanzar/buscarpornombre', "LanzarPruebaController@burcarWordKey")
+->name('lanzar.buscarwordkey');
 
-//Lanzamos la prueba para seleccionar los evaluadores y las preguntas
-Route::get('evaluado/{evaluado}/lanzar',"EvaluadoController@edit")
-        ->name('evaluado.lanzar')
+//Seleccionar las competencias y evaluadores de la prueba paso1
+Route::get('lanzar/{evaluado}/seleccionar',"LanzarPruebaController@seleccionar")
+        ->name('lanzar.seleccionar')
         ->where('evaluado','[0-9]+');
 
-//Update para marcar el chk de los evaluuadores y las preguntas
-Route::post('evaluado/{evaluado}',"EvaluadoController@update")
-        ->name('evaluado.update');
+//Confirmacion de los datos seleccionado en le paso 1
+Route::get('lanzar/{evaluado}/confirmar',"LanzarPruebaController@confirmar")
+->name('lanzar.confirmar')
+->where('evaluado','[0-9]+');
+
+//Lanzar la prueba creando los registros de la prueba y enviando los correso
+Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
+        ->name('lanzar.procesar');
 

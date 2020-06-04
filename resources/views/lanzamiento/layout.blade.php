@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" href="favicon.ico">
 
     <title>@yield('title') - Eva360</title>
-
     <!-- Iconos para bootstrap -->
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
@@ -49,23 +49,26 @@
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
-
-
         </div>
       </nav>
     </header>
 
     <!-- Begin page content -->
     <main role="main" class="container">
+        <div id="app">
+            @include('flash-message')
+
+        </div>
         <div class="row ">
-            <div class="col-md-12">
+            <div class=" col-8">
 
                 @yield('content')
 
             </div>
 
-            <div class="col-md-12">
+            <div class="col-4">
                 @section('sidebar')
+
                 @show
             </div>
 

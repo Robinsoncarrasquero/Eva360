@@ -27,5 +27,12 @@ class Evaluado extends Model
         return $this->hasMany(Evaluador::class);
     }
 
+    //Hacer busquedas por nombre
+    public function scopeName($query,$name){
+
+        $query->where('name','like',"%$name%");
+
+    }
+
 
 }
