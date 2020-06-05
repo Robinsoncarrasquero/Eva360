@@ -13,9 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/emergencia', 'EmailController@emergency')->name('emergency');
+
+Route::get('/contactar', 'EmailController@emailtest')->name('emailtest');
+
+Route::post('/contactar', 'EmailController@contact')->name('contact');
+
 
 Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
 

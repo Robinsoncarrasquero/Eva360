@@ -55,11 +55,9 @@
 
     <!-- Begin page content -->
     <main role="main" class="container">
-        <div id="app">
-            @include('flash-message')
 
-        </div>
         <div class="row ">
+
             <div class=" col-8">
 
                 @yield('content')

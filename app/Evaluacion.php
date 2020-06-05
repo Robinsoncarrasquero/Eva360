@@ -12,6 +12,9 @@ class Evaluacion extends Model
 
     protected $fillable=['competencia_id','grado','pronderacion','frecuencia','evaluador_id'];
 
+    /**
+     * Una evaluacion pertenece a un evaluador
+     */
     public function evaluador(){
         return $this->BelongsTo(Evaluador::class);
     }

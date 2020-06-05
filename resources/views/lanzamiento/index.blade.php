@@ -10,24 +10,29 @@
 
         <div class="col-md-12">
 
-        <div class="panel panel pb-3">
+            <div id="flash-message">
+                @include('flash-message')
 
-            <div class="clearfix">
+            </div>
 
-                <form class="form-inline mt-2 mt-md-0 float-left">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="buscarWordKey">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+            <div class="panel panel pb-3">
 
-                <div class="text text-center">
-                    <h3>Lista de Evaluados</h3>
+                <div class="clearfix">
+
+                    <form class="form-inline mt-2 mt-md-0 float-left">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="buscarWordKey">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+
+                    <div class="text text-center">
+                        <h3>Lista de Evaluados</h3>
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
-
-        @if($evaluados->count())
+            @if($evaluados->count())
 
             <div class="panel-body">
 
@@ -65,15 +70,15 @@
 
             </div>
 
-        @else
+            @else
 
             <div class="alert-info">
                 <p>No hay usuarios registrados</p>
             <div>
 
-        @endif
+            @endif
 
-        {{ $evaluados->links() }}
+            {{ $evaluados->links() }}
 
         </div>
 

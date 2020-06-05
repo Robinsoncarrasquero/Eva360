@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Redirect;
 use phpDocumentor\Reflection\Types\Null_;
 use SebastianBergmann\Type\NullType;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EvaluacionEnviada;
+
 class LanzarPruebaController extends Controller
 {
 
@@ -119,6 +122,37 @@ class LanzarPruebaController extends Controller
 
         }
 
+        foreach($evaluadores as $evaluador){
+
+            $receivers = $evaluadores->pluck('email');
+
+            $receivers= \collect(['rcarrasquero@gmail.com']);
+            $to= 'rcarrasquero@gmail.com';
+
+            $data = new Evaluador();
+            $data->evaluadoName=$evaluador->name;
+            $data->relation =$evaluador->relation;
+            $data->token=$evaluador->remember_token;
+            $data->siteweb ='http://eva360.test.ve/evaluacion/'.$evaluador->remember_token;
+            $data->name =$evaluado->name;
+            // Mail::to($receivers)->send(new EvaluacionEnviada($data));
+            $data2=['evaluadorName'=>$evaluador->name,
+            'relation'=>$evaluador->relation,
+            'token'=>$evaluador->remember_token,
+            'evaluadoName'=>$evaluado->name,
+            'siteweb'=>$data->siteweb,
+
+            ];
+
+            Mail::send('evaluacionenviada', $data2, function ($msj) use ($to) {
+                $msj->from("robinson.carrasquero@gmail.com", "Robinson Director");
+                $msj->subject('Welcome');
+                $msj->to($to);
+            });
+
+
+
+        }
 
         return \redirect()->route('lanzar.index')->with('success','Prueba lanzada exitosamente');
 
