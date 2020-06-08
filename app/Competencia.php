@@ -16,5 +16,9 @@ class Competencia extends Model
         return $this->hasMany(Grado::class);
 
     }
+    //Una competencias tiene una o mas evaluaciones
+    public function evaluaciones(){
+        return $this->hasMany(Evaluacion::class);
+    }
 
 }

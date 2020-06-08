@@ -20,7 +20,7 @@ class CreateEvaluacionsTable extends Migration
             $table->unsignedDecimal('ponderacion',5,2);
             $table->unsignedDecimal('frecuencia',5,2);
             $table->foreignId('evaluador_id')->constrained("evaluadores");
-            $table->foreignId('evaluado_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('evaluado_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

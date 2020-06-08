@@ -16,7 +16,14 @@ class Evaluacion extends Model
      * Una evaluacion pertenece a un evaluador
      */
     public function evaluador(){
-        return $this->BelongsTo(Evaluador::class);
+        return $this->belongsTo(Evaluador::class);
     }
+
+    //Una Evaluacion esta relacionada con una competencias
+    public function competencia(){
+        return $this->belongsTo(Competencia::class);
+    }
+
+
 
 }

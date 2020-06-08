@@ -1,13 +1,13 @@
 @extends('lanzamiento.layout')
 
-@section('title',"Lanzamiento de Prueba")
+@section('title',"Ajax Lanzamiento de Prueba")
 
 @section('content')
 
 <div class="container">
 
     <div class="panel panel pb-3">
-        <h2 class="text text-md-center ">Seleccione las Competencias para la Evaluacion de</h2>
+        <h2 class="text text-md-center ">Ajax Seleccione las Competencias para la Evaluacion de</h2>
         <h2 class="text text-md-center text-danger">{{ $evaluado->name }}</h2>
     </div>
 
@@ -28,9 +28,9 @@
     @endif
     @if ($evaluadores->isNotEmpty())
         <div class="col-md-12">
-            <form action="{{ route('lanzar.confirmar',$evaluado) }}" method="POST" id="form-select">
+            <form action="{{ route('ajaxlanzar.filtrar',':ID-COMPETENCIA') }}" method="POST" id="form-select">
                 {{-- {{ method_field('PUT') }} --}}
-                {{ csrf_field() }}
+                @csrf
 
             <table class="table ">
                 <thead>
@@ -44,21 +44,21 @@
                 </thead>
                 <tbody>
                 @foreach ($competencias as $competencia)
-                <tr data-id="{{" $competencia->id "}}">
+                <tr data-id="{{"$competencia->id"}}">
                     <th scope="row">{{ $competencia->id }}</th>
                     <td>{{$competencia->name}}</td>
                     <td>{{$competencia->description}}</td>
                     <td>
 
-                           <div class="form-check">
-                                <input type="checkbox" class="check-select" id="{{"$competencia->id"}}"
-                                value="{{"$competencia->id"}}" name="competenciascheck[]">
-                                <label class="form-check-label" for="{{"$competencia->id"}}">Evaluar</label>
-                            </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="check-select" id="{{"$competencia->id"}}"
+                            value="{{"$competencia->id"}}" name="competenciascheck[]">
+                            <label class="form-check-label" for="{{"$competencia->id"}}">Evaluar</label>
+                        </div>
 
 
                     </td>
-                    <td>
+                    <td >
                         <div class="form-check">
                             <a href="#"><span><i class="material-icons check-select">add-box</i></span></a>
                         </div>
@@ -102,7 +102,47 @@
 
 
 
+
 @endsection
 
+@section('scripts')
+<script>
 
+    $(document).ready(function() {
+
+        $('.check-select').click(function(e){
+
+            e.preventDefault();
+
+            var row = $(this).parents('tr');
+            var id=row.data('id');
+
+            var form = $('#form-select');
+            var attrAccion =form.attr('action');
+            var url = attrAccion.replace(':ID-COMPETENCIA',id)
+
+            var data = form.serialize();
+
+
+            // $.post(url,data,function(result){
+            //     alert(result);
+            // });
+            $.ajax({
+                type: "POST",
+                url:url,
+                data:data,
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+
+
+        });
+
+    });
+</script>
+@endsection
 

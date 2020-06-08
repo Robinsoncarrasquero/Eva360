@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Lanzamiento de Prueba")
+@section('title',"Responder la Prueba")
 
 @section('content')
 
@@ -18,50 +18,47 @@
             <div class="panel panel pb-3">
 
                 <div class="clearfix">
+                    <div class="alert alert-info">
+                        <h3>Bienvenido {{ $evaluador->name }}!! Usted evalua a {{ $evaluado->name }}</h3>
+                    </div>
 
-                    <form class="form-inline mt-2 mt-md-0 float-left">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="buscarWordKey">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
 
                     <div class="text text-center">
-                        <h3>Lista de Evaluados</h3>
+                        <h3>Competencias a Evaluar</h3>
                     </div>
 
                 </div>
 
             </div>
 
-            @if($evaluados->count())
+            @if($competencias->count())
 
             <div class="panel-body">
 
                 <div class="table">
                     <table id="mytable" class="table  table-bordred table-striped">
                     <thead>
-                    <th>Nombre</th>
-                    <th>Status</th>
-                    <th>Editar</th>
-                    <th>Resultados</th>
+                    <th>Competencias</th>
+                    <th>Descripcion</th>
+                    <th>Answer</th>
                     </thead>
                     <tbody>
-                    @foreach($evaluados as $evaluado)
+                    @foreach($competencias as $competencia)
                     <tr>
-                        <td>{{$evaluado->name}}</td>
-                        <td>{{$evaluado->status}}</td>
+                        <td>{{$competencia->name}}</td>
+                        <td>{{$competencia->description}}</td>
                         <td>
-                            @if($evaluado->status==0)
-                                <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
+                            @if($competencia->status==0)
+                                <a href="{{route('evaluacion.responder', $competencia->id)}}" >
                                 <span><i class="material-icons ">send</i></span></a>
                             @else
-                                <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
+                                <a href="{{route('evaluacion.responder', $competencia->id)}}" >
                                 <span><i class="material-icons"></i></span></a>
 
                             @endif
 
                         </td>
-                        <td><i class="material-icons md-24">preview</i>
-                        </td>
+
                     </tr>
                     @endforeach
                     </tbody>
@@ -78,7 +75,7 @@
 
             @endif
 
-            {{ $evaluados->links() }}
+            {{-- {{ $competencias->links() }} --}}
 
         </div>
 

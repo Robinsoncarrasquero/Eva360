@@ -14,13 +14,14 @@ class Evaluador extends Model
 
     ];
 
+    //Un evaluador pertenece a un evaluado
     public function evaluado(){
         return $this->belongsTo(Evaluado::class);
     }
 
-    //Un evaluador tiene una sola evaluacion
-    public function evaluacion(){
-        return $this->hasOne(Evaluacion::class);
+    //Un evaluador tiene una o muchas evaluaciones
+    public function evaluaciones(){
+        return $this->hasMany(Evaluacion::class);
     }
 
 }

@@ -7,10 +7,25 @@
 <div class="container">
 
     <div class="panel panel pb-3">
-        <h2 class="text text-md-center ">A continuacion las Competencias seleccionadas para la Evaluacion de</h2>
+        <h2 class="text text-md-center ">Competencias seleccionadas para Lanzar de:</h2>
         <h2 class="text text-md-center text-danger">{{ $evaluado->name }}</h2>
     </div>
 
+    @if ($errors->any())
+
+        <div class="alert alert-danger">
+            <p>Errores encontrados:</p>
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li> {{ $error }} </li>
+                @endforeach
+
+            </ul>
+
+        </div>
+
+    @endif
 
     @if ($evaluadores->isNotEmpty())
         <div class="col-md-12">
@@ -36,7 +51,7 @@
                     <td>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="{{"$competencia->id"}}"
-                            value="{{"$competencia->id"}}" name="competenciascheck[]" checked >
+                            value="{{"$competencia->id"}}" name="competenciascheck[]" checked readonly >
                             <label class="form-check-label" for="{{"$competencia->id"}}">Evaluar</label>
                         </div>
                     </td>
@@ -47,7 +62,7 @@
                 </tbody>
             </table>
             <div class="clearfix">
-                <span class="float-left"><a href="{{ back() }}" class="btn btn-dark btn-lg">Back</a></span>
+                <span class="float-left"><a href="{{route('lanzar.index')}}" class="btn btn-dark btn-lg">Back</a></span>
                 <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Lanzar</button>
 
             </div>
@@ -112,6 +127,4 @@
 @endsection
 
 <script src="{{ asset('js/lanzar.js') }}"></script>
-
-
 

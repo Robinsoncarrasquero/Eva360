@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,9 +35,6 @@ Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.
 Route::get('lanzar', "LanzarPruebaController@index")
         ->name('lanzar.index');
 
-        //Buscar un Evaluado por nombre
-Route::get('lanzar/buscarpornombre', "LanzarPruebaController@burcarWordKey")
-->name('lanzar.buscarwordkey');
 
 //Seleccionar las competencias y evaluadores de la prueba paso1
 Route::get('lanzar/{evaluado}/seleccionar',"LanzarPruebaController@seleccionar")
@@ -44,11 +42,31 @@ Route::get('lanzar/{evaluado}/seleccionar',"LanzarPruebaController@seleccionar")
         ->where('evaluado','[0-9]+');
 
 //Confirmacion de los datos seleccionado en le paso 1
-Route::get('lanzar/{evaluado}/confirmar',"LanzarPruebaController@confirmar")
+Route::post('lanzar/{evaluado}/confirmar',"LanzarPruebaController@confirmar")
 ->name('lanzar.confirmar')
 ->where('evaluado','[0-9]+');
 
 //Lanzar la prueba creando los registros de la prueba y enviando los correso
 Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
         ->name('lanzar.procesar');
+
+//Evaluador Responder las prueba
+Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@responder")
+        ->name('evaluacion.responder');
+
+/**
+ * ajax prueba
+ */
+    //Presentar la lista de evaluados para seleccionar
+    Route::get('ajaxlanzar', "AjaxLanzarPruebaController@index")
+            ->name('ajaxlanzar.index');
+
+    //Seleccionar las competencias y evaluadores de la prueba paso1
+    Route::get('ajaxlanzar/{evaluado}/seleccionar',"AjaxLanzarPruebaController@seleccionar")
+            ->name('ajaxlanzar.seleccionar')
+            ->where('evaluado','[0-9]+');
+
+    //Seleccionar las competencias y evaluadores de la prueba paso1
+    Route::post('ajaxlanzar/{id}/filtrar',"AjaxLanzarPruebaController@filtrar")
+    ->name('ajaxlanzar.filtrar');
 

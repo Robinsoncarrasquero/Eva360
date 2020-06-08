@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Lanzamiento de Prueba")
+@section('title',"Ajax Lanzamiento de Prueba")
 
 @section('content')
 
@@ -51,11 +51,11 @@
                         <td>{{$evaluado->status}}</td>
                         <td>
                             @if($evaluado->status==0)
-                                <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
-                                <span><i class="material-icons ">send</i></span></a>
+                                <a href="{{route('ajaxlanzar.seleccionar', $evaluado->id)}}" >
+                                <span><i class="material-icons ">text_snippet</i></span></a>
                             @else
-                                <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
-                                <span><i class="material-icons"></i></span></a>
+                                <a href="{{route('ajaxlanzar.seleccionar', $evaluado->id)}}" >
+                                <span><i class="material-icons md-inactive">face</i></span></a>
 
                             @endif
 
