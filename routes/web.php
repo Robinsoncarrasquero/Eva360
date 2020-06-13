@@ -27,9 +27,9 @@ Route::get('/contactar', 'EmailController@emailtest')->name('emailtest');
 Route::post('/contactar', 'EmailController@contact')->name('contact');
 
 
-Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
+// Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
 
-Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
+// Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
 
 //Presentar la lista de evaluados para seleccionar
 Route::get('lanzar', "LanzarPruebaController@index")
@@ -50,9 +50,21 @@ Route::post('lanzar/{evaluado}/confirmar',"LanzarPruebaController@confirmar")
 Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
         ->name('lanzar.procesar');
 
+
+/**
+ *Route de evaluaciones
+ */
 //Evaluador Responder las prueba
-Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@responder")
-        ->name('evaluacion.responder');
+Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@index")
+        ->name('evaluacion.index');
+
+Route::get('evaluacionget/{competencia}/preguntas',"EvaluacionController@responder")
+->name('evaluacion.responder')
+->where('evaluador','[0-9]+');
+
+Route::post('evaluacionpost/{competencia}/respuesta',"EvaluacionController@store")
+->name('evaluacion.store')
+->where('evaluador','[0-9]+');
 
 /**
  * ajax prueba

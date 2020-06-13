@@ -11,6 +11,7 @@ $factory->define(Competencia::class, function (Faker $faker) {
         'name'=>$faker->name(),
         'description' => $faker->text() ,
         'tipo' => 'G',
+        'nivelrequerido'=>100,
 
     ];
 });

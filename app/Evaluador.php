@@ -24,4 +24,10 @@ class Evaluador extends Model
         return $this->hasMany(Evaluacion::class);
     }
 
+    public function competencias()
+    {
+        return $this->hasManyThrough('App\Competencia', 'App\Evaluacion','evaluador_id','id','id','competencia_id');
+    }
+
+
 }

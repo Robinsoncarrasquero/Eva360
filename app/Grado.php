@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Grado extends Model
 {
     //
-    protected $fillable=['grado','description','competencia_id'];
+    protected $fillable=['grado','description','ponderacion','frecuencia','competencia_id'];
 
     public function competencias(){
 

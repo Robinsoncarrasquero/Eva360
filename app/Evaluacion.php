@@ -10,7 +10,11 @@ class Evaluacion extends Model
     //
     protected $table='evaluaciones';
 
-    protected $fillable=['competencia_id','grado','pronderacion','frecuencia','evaluador_id'];
+    protected $fillable=['competencia_id','grado','ponderacion','frecuencia','evaluador_id'];
+    protected $casts = [
+        'frecuencia' => 'integer',
+    ];
+
 
     /**
      * Una evaluacion pertenece a un evaluador
@@ -22,6 +26,15 @@ class Evaluacion extends Model
     //Una Evaluacion esta relacionada con una competencias
     public function competencia(){
         return $this->belongsTo(Competencia::class);
+    }
+
+    public function setFrecuenciaAttribute($value)
+    {
+        # code...
+
+        $this->attributes['frecuencia'] = is_string($value) ? intval($value) : $value;
+
+
     }
 
 

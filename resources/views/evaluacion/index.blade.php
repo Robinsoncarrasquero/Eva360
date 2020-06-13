@@ -18,12 +18,11 @@
             <div class="panel panel pb-3">
 
                 <div class="clearfix">
-                    <div class="alert alert-info">
-                        <h3>Bienvenido {{ $evaluador->name }}!! Usted evalua a {{ $evaluado->name }}</h3>
+                    <div class="alert alert-info text-center">
+                        <h5>Bienvenido {{ $evaluador->name }}!! Evalue las competencias de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                     </div>
 
-
-                    <div class="text text-center">
+                    <div class="text text-center text-danger">
                         <h3>Competencias a Evaluar</h3>
                     </div>
 
@@ -31,31 +30,35 @@
 
             </div>
 
-            @if($competencias->count())
+            @if($evaluacions)
 
             <div class="panel-body">
 
                 <div class="table">
                     <table id="mytable" class="table  table-bordred table-striped">
                     <thead>
-                    <th>Competencias</th>
+                    <th>Competencia</th>
                     <th>Descripcion</th>
+                    <th>Status</th>
                     <th>Answer</th>
                     </thead>
                     <tbody>
-                    @foreach($competencias as $competencia)
-                    <tr>
-                        <td>{{$competencia->name}}</td>
-                        <td>{{$competencia->description}}</td>
-                        <td>
-                            @if($competencia->status==0)
-                                <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                <span><i class="material-icons ">send</i></span></a>
-                            @else
-                                <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                <span><i class="material-icons"></i></span></a>
 
+                    @foreach($evaluacions as $competencia)
+
+                    <tr>
+                        <td>{{$competencia->competencia->name}}</td>
+                        <td>{{$competencia->competencia->description}}</td>
+                        <td>
+                            @if($competencia->grado)
+                                <span><i class="material-icons ">spellcheck</i></span></a>
+                            @else
+                                <span><i class="material-icons ">av_timer</i></span></a>
                             @endif
+                        </td>
+                        <td>
+                            <a href="{{route('evaluacion.responder', $competencia->id)}}" >
+                            <span><i class="material-icons ">create</i></span></a>
 
                         </td>
 

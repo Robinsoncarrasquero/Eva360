@@ -64,19 +64,16 @@ class EvaluacionCreateRequest extends FormRequest
 
         //Obtenemos los evaluadores
         $evaluadores = Evaluado::find($evaluado->id)->evaluadores;
-
         //Recorremos los evaluadores y creamos la evaluacion para cada uno
         foreach($evaluadores as $evaluador){
 
             //Creamos la Evaluacion con los datos solo de las competencias
-            foreach($competencias as $key=>$value){
+            foreach($competencias as $key=>$competencia){
                 $evaluacion = new Evaluacion();
-                $evaluacion->competencia_id=$value->id;
-                $evaluacion->ponderacion=0;
-                $evaluacion->frecuencia=0;
-               // $evaluacion->evaluado_id=$evaluado->id;
+                $evaluacion->competencia_id=$competencia->id;
                 $unevaluador = Evaluador::find($evaluador->id);
-                $eva360=$unevaluador->evaluacion()->save($evaluacion);
+                $eva360=$unevaluador->evaluaciones()->save($evaluacion);
+
             }
 
 

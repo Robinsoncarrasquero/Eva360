@@ -21,13 +21,16 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
 
+    <style type="text/css">
+        .table{
+            border: 8px  solid #009990;
 
-
+        }
+        </style>
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
 
@@ -63,9 +66,8 @@
     <!-- Begin page content -->
     <main role="main" class="container">
 
-        <div class="row ">
-
-            <div class=" col-8">
+        <div class="row mt-3">
+            <div class="col-8">
 
                 @yield('content')
 
@@ -73,7 +75,7 @@
 
             <div class="col-4">
                 @section('sidebar')
-
+                    <h2>Barra Lateral Main</h2>
                 @show
             </div>
 
@@ -83,7 +85,7 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">Sistemas de Evaluaciones eva360</span>
       </div>
     </footer>
 
