@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Responder la Prueba")
+@section('title',"Evaluacion de Prueba")
 
 @section('content')
 
@@ -18,50 +18,64 @@
             <div class="panel panel pb-3">
 
                 <div class="clearfix">
-                    <div class="alert alert-info text-center">
-                        <h5>Bienvenido {{ $evaluador->name }}!! Evalue las competencias de <span class="text-danger">{{ $evaluado->name }}</span></h5>
-                    </div>
 
-                    <div class="text text-center text-danger">
-                        <h3>Competencias a Evaluar</h3>
+                    <form class="form-inline mt-2 mt-md-0 float-left">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="buscarWordKey">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+
+                    <div class="text text-center">
+                        <h3>Lista de Evaluados</h3>
                     </div>
 
                 </div>
 
             </div>
 
-            @if($evaluacions)
+            @if($evaluados->count())
 
             <div class="panel-body">
 
                 <div class="table">
                     <table id="mytable" class="table  table-bordred table-striped">
                     <thead>
-                    <th>Competencia</th>
-                    <th>Descripcion</th>
+                    <th>Nombre</th>
                     <th>Status</th>
-                    <th>Answer</th>
+                    <th>Editar</th>
+                    <th>Resultados</th>
                     </thead>
                     <tbody>
-
-                    @foreach($evaluacions as $competencia)
-
+                    @foreach($evaluados as $evaluado)
                     <tr>
-                        <td>{{$competencia->competencia->name}}</td>
-                        <td>{{$competencia->competencia->description}}</td>
+                        <td>{{$evaluado->name}}</td>
                         <td>
-                            @if($competencia->grado)
-                                <span><i class="material-icons ">spellcheck</i></span></a>
+                            @switch($evaluado->status)
+                                @case(0)
+                                    Inicio
+                                    @break
+                                @case(1)
+                                    Lanzada
+                                    @break
+                                @case(2)
+                                    Finalizada
+                                    @break
+                                @default
+
+                            @endswitch
+                        </td>
+                        <td>
+                            @if($evaluado->status==0)
+                                <a href="{{route('evaluacion.competencias', $evaluador->remember_token)}}" >
+                                <span><i class="material-icons ">send</i></span></a>
                             @else
-                                <span><i class="material-icons ">av_timer</i></span></a>
+                                <a href="#" >
+                                <span><i class="material-icons">hourglass_disabled</i></span></a>
+
                             @endif
-                        </td>
-                        <td>
-                            <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                            <span><i class="material-icons ">create</i></span></a>
 
                         </td>
-
+                        <td><i class="material-icons md-24">preview</i>
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>
@@ -72,13 +86,12 @@
 
             @else
 
-            <div class="alert-info">
+            <div class="alert alert-info">
                 <p>No hay usuarios registrados</p>
             <div>
 
             @endif
 
-            {{-- {{ $competencias->links() }} --}}
 
         </div>
 

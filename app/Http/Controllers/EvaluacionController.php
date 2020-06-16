@@ -12,15 +12,38 @@ use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Float_;
 use Illuminate\Support\Arr;
 use App\Frecuencia2;
-
+use PhpParser\Node\Stmt\Foreach_;
 
 class EvaluacionController extends Controller
 {
 
     /**
+     * Muestra las evaluaciones del evaluador
+     */
+    public function index(Request $request,$token)
+    {
+        $title="Lista de Evaluados";
+
+        $evaluador = Evaluador::all()->where('remember_token',$token)->first();
+        $evaluados = $evaluador->evaluado;
+        $evaluado_id=$evaluador->evaluado_id;
+        $buscarWordKey = $request->get('buscarWordKey');
+
+        $evaluados = Evaluado::all();
+        $evaluados = $evaluados->reject(function ($user) use ($evaluado_id) {
+            return $user->id!==$evaluado_id;
+        });
+
+        return view('evaluacion.index',compact('evaluados','title',"evaluador"));
+
+    }
+
+    /**
      * El contolador recibe el token del evaluador y muestra la lista de competencias relacionadas.
      */
-    public function index($token)
+
+
+    public function competencias($token)
     {
 
         //Filtramos el evaluador segun el token recibido
@@ -28,7 +51,7 @@ class EvaluacionController extends Controller
         $evaluado = $evaluador->evaluado;
         $evaluacions = $evaluador->evaluaciones;
 
-        return \view('evaluacion.index',\compact('evaluacions','evaluador','evaluado'));
+        return \view('evaluacion.competencias',\compact('evaluacions','evaluador','evaluado'));
 
     }
 
@@ -91,6 +114,30 @@ class EvaluacionController extends Controller
         //retomamos el token
         $token=$evaluacion->evaluador->remember_token;
         return \redirect()->route('evaluacion.index',$token);
+    }
+
+    public function finalizar($evaluador_id ){
+
+        $evaluador = Evaluador::findOrFail($evaluador_id);
+        $evaluaciones = $evaluador->evaluaciones;
+
+        //Eliminamos las competencias evaluadas
+        $competencias = $evaluaciones->reject(function ($eva) {
+            return $eva->ponderacion==0;
+        })
+        ->map(function ($eva) {
+            return $eva->grado;
+        });
+
+        if ($evaluaciones->count()>$competencias->count()){
+            return \redirect()->back()->with('danger','Aun tiene evaluaciones pendientes');
+        }
+
+        $evaluado= $evaluador->evaluado;
+        $evaluado->status=2; //0=Inicio,1=Lanzada, 2=Finalizada
+        $evaluado->save();
+        return \redirect()->route('evaluacion.index',$evaluador->remember_token)->with('success',"Evaluacion de $evaluado->name finalizada exitosamente");
+
     }
 
 

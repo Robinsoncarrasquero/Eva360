@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Competencia;
+use App\EmailSend;
 use App\Evaluacion;
 use App\Evaluado;
 use App\Evaluador;
@@ -10,6 +11,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EvaluacionEnviada;
+use Illuminate\Support\facades\Log;
+use Illuminate\Database\QueryException;
 
 class EvaluacionCreateRequest extends FormRequest
 {
@@ -18,6 +21,7 @@ class EvaluacionCreateRequest extends FormRequest
      *
      * @return bool
      */
+
     public function authorize()
     {
         return true;
@@ -44,6 +48,7 @@ class EvaluacionCreateRequest extends FormRequest
 
         ];
     }
+
     /**
      * Crea la evaluacion y la envia por correo
      */
@@ -71,20 +76,28 @@ class EvaluacionCreateRequest extends FormRequest
             foreach($competencias as $key=>$competencia){
                 $evaluacion = new Evaluacion();
                 $evaluacion->competencia_id=$competencia->id;
-                $unevaluador = Evaluador::find($evaluador->id);
-                $eva360=$unevaluador->evaluaciones()->save($evaluacion);
+                $unevaluador = Evaluador::findOrFail($evaluador->id);
 
+                try {
+                //    $this->model->create($data);
+                    $eva360=$unevaluador->evaluaciones()->save($evaluacion);
+
+                } catch (QueryException $e) {
+                    //dd($e);
+                 return \redirect()->route('lanzar.index')->with('error','Error, Esta prueba ya habia sido lanzada..');
+
+                }
             }
 
 
         }
 
-        //Enviamos el correo a los evaluadores
+        // //Enviamos el correo a los evaluadores
         foreach($evaluadores as $evaluador){
             $receivers = $evaluador->email;
 
             //Creamos un objeto para pasarlo a la clase Mailable
-            $data = new Evaluador();
+            $data = new EmailSend();
             $data->evaluadorName=$evaluador->name;
             $data->relation =$evaluador->relation;
             $data->token=$evaluador->remember_token;
@@ -93,6 +106,7 @@ class EvaluacionCreateRequest extends FormRequest
 
             Mail::to($receivers)->send(new EvaluacionEnviada($data));
         }
+
 
 
     }

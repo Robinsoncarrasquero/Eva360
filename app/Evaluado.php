@@ -18,10 +18,7 @@ class Evaluado extends Model
         'name', 'word_key', 'status',
     ];
 
-    protected $attributes=[
-        'status'=>0,
 
-    ];
     //Relacion 1 a muchos
     public function evaluadores(){
         return $this->hasMany(Evaluador::class);
@@ -31,6 +28,15 @@ class Evaluado extends Model
     public function scopeName($query,$name){
 
         $query->where('name','like',"%$name%");
+
+    }
+
+    public function setStatusAttribute($value)
+    {
+        # code...
+
+        $this->attributes['status'] = is_string($value) ? intval($value) : $value;
+
 
     }
 

@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-    $('#alert').hide();
     $('btn-update-chk').click(function(e){
 
         e.preventDefault();

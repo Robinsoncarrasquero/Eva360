@@ -71,7 +71,6 @@ class AjaxLanzarPruebaController extends Controller
     public function seleccionar(Evaluado $evaluado)
     {
         $title="Ajax Lanzamiento de Prueba";
-
         //Obtenemos los evaluadores del evaluador
         $evaluadores = Evaluado::find($evaluado->id)->evaluadores;
 
@@ -85,11 +84,30 @@ class AjaxLanzarPruebaController extends Controller
     public function filtrar(Request $request)
     {
         # code...
-
+        $input = $request->all();
 
         return response()->json(['success'=>'Got Simple Ajax Request.']);
 
 
     }
+
+public function activation(Request $request)
+{
+
+    $user = Evaluacion::findOrFail($request->user_id);
+
+    if($user->active == 1){
+        $user->active = 0;
+    } else {
+        $user->active = 1;
+    }
+
+    return response()->json([
+      'data' => [
+        'success' => $user->save(),
+      ]
+    ]);
+}
+
 
 }

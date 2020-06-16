@@ -1,5 +1,6 @@
 <?php
 
+use App\Category;
 use Illuminate\Database\Seeder;
 use App\Evaluado;
 use App\Evaluador;
@@ -17,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(EvaluadoSeeder::class);
         $this->call(CompetenciaSeeder::class);
         $this->call(FrecuenciaSeeder::class);
+        $this->call(CategorySeeder::class);
 
-        //$this->carga_evaluados();
     }
 
 

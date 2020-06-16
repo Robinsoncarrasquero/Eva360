@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailSend;
 use App\Evaluador;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,7 +21,7 @@ class EvaluacionEnviada extends Mailable
      *
      * @return void
      */
-    public function __construct(Evaluador $dataEvaluador)
+    public function __construct(EmailSend $dataEvaluador)
     {
         //
         $this->dataEvaluador=$dataEvaluador;

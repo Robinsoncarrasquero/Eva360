@@ -19,6 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/error', function () {
+    return abort(500);
+});
 
 Route::get('/emergencia', 'EmailController@emergency')->name('emergency');
 
@@ -27,9 +30,9 @@ Route::get('/contactar', 'EmailController@emailtest')->name('emailtest');
 Route::post('/contactar', 'EmailController@contact')->name('contact');
 
 
-// Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
+Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
 
-// Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
+Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
 
 //Presentar la lista de evaluados para seleccionar
 Route::get('lanzar', "LanzarPruebaController@index")
@@ -55,8 +58,8 @@ Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
  *Route de evaluaciones
  */
 //Evaluador Responder las prueba
-Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@index")
-        ->name('evaluacion.index');
+Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@competencias")
+        ->name('evaluacion.competencias');
 
 Route::get('evaluacionget/{competencia}/preguntas',"EvaluacionController@responder")
 ->name('evaluacion.responder')
@@ -65,6 +68,18 @@ Route::get('evaluacionget/{competencia}/preguntas',"EvaluacionController@respond
 Route::post('evaluacionpost/{competencia}/respuesta',"EvaluacionController@store")
 ->name('evaluacion.store')
 ->where('evaluador','[0-9]+');
+
+/*
+*Evaluador finaliza la prueba
+*/
+Route::post('evaluacion/{evaluador}/finalizar',"EvaluacionController@finalizar")
+->name('evaluacion.finalizar');
+
+/*
+ * Lista de evaluados del Evaluador
+ */
+Route::get('evaluacion/{token}/index',"EvaluacionController@index")
+        ->name('evaluacion.index');
 
 /**
  * ajax prueba
@@ -79,6 +94,18 @@ Route::post('evaluacionpost/{competencia}/respuesta',"EvaluacionController@store
             ->where('evaluado','[0-9]+');
 
     //Seleccionar las competencias y evaluadores de la prueba paso1
-    Route::post('ajaxlanzar/{id}/filtrar',"AjaxLanzarPruebaController@filtrar")
+    Route::post('ajaxlanzar/filtrar',"AjaxLanzarPruebaController@filtrar")
     ->name('ajaxlanzar.filtrar');
+
+
+    //How to delete multiple row with checkbox using Ajax
+    Route::get('category', 'CategoryController@index');
+
+    //Route::delete('category/{id}', ['as'=>'category.destroy','uses'=>'CategoryController@destroy']);
+
+    Route::delete('category/{id}', 'CategoryController@destroy')->name('category.destroy');
+
+    Route::put('category/{id}', 'CategoryController@update')->name('category.update');
+
+    Route::delete('delete-multiple-category', ['as'=>'category.multiple-delete','uses'=>'CategoryController@deleteMultiple']);
 

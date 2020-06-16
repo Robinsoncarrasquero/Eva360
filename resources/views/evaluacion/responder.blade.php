@@ -36,7 +36,7 @@
                 {{-- {{ method_field('PUT') }} --}}
                 {{ csrf_field() }}
     <div class="form-row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
             <table class="table ">
                 <thead>
                 <tr>
@@ -50,18 +50,18 @@
 
                 @foreach ($evaluacion->competencia->grados as $grado)
 
-                     <tr data-id="{{" $grado->id "}}">
+                     <tr data-id="{{" $grado->id "}}" class="filas" >
                         <th scope="row">{{ $grado->grado }}</th>
                         <td>{{$grado->description}}</td>
                         <td>
                             @if($evaluacion->grado===$grado->grado)
                                 <div class="form-check">
-                                    <input type="radio" class="check-select" id="{{"$grado->id"}}"
+                                    <input type="radio" class="check-select radiogrado" id="{{"radiogrado$grado->id"}}"
                                     value="{{"$grado->id"}}" name="gradocheck[]" checked >
                                 </div>
                             @else
                                 <div class="form-check">
-                                    <input type="radio" class="check-select" id="{{"$grado->id"}}"
+                                    <input type="radio" class="check-select" id="{{"radiogrado$grado->id"}}"
                                     value="{{"$grado->id"}}" name="gradocheck[]">
                                 </div>
 
@@ -75,11 +75,11 @@
 
                                 <div class="form-check">
                                     <label for="frecuencia[]" class="form-check-label">{{ $frecuencia->name}}</label>
-                                    @if($evaluacion->frecuencia==$frecuencia->valor)
-                                        <input type="radio" class="form-check" id="{{"$frecuencia->name"}}"
+                                    @if($evaluacion->frecuencia===$frecuencia->valor && $evaluacion->grado===$grado->grado)
+                                        <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
                                         value="{{"$frecuencia->id"}}" name="frecuenciacheck[]" checked >
                                     @else
-                                        <input type="radio" class="form-check" id="{{"$frecuencia->name"}}"
+                                        <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
                                         value="{{"$frecuencia->id"}}" name="frecuenciacheck[]" >
                                     @endif
                                 </div>
@@ -101,6 +101,9 @@
 
         <div class="form-group col-md-4 ">
 
+            <div id="divtodo">
+
+            </div>
 
 
         </div>
@@ -133,3 +136,62 @@
 @endsection
 
 
+@section('scripts')
+<script >
+$(document).ready(function() {
+
+
+
+    $('.check-select').click(function(e){
+
+        //e.preventDefault();
+
+        var row = $(this).parents('tr');
+        var id=row.data('id');
+        var divtodo= document.getElementById('divtodo');
+        // for(i=0;i<row.length;i++)
+        //     // if(chkAsientos[i].checked)
+        //     //     asientos.push(chkAsientos[i].value);
+        //     divtodo.innerHTML = "<b>Tus tr:</b> ";
+
+        // }
+
+        $(".filas").each(function(){
+            var xrow = $(this).attr('data-id');
+            if (id!=xrow){
+               $(this).remove();
+            }
+
+        });
+
+
+        // var form = $('#form-select');
+        // var attrAccion =form.attr('action');
+        // var url = attrAccion.replace(':ID-COMPETENCIA',id)
+
+        // var data = form.serialize();
+
+
+        // $.post(url,data,function(result){
+        //     alert(result);
+        // });
+        // $.ajax({
+        //     type: "POST",
+        //     url:url,
+        //     data:data,
+        //     success: function (data) {
+        //         alert(data);
+        //     },
+        //     error: function (data) {
+        //         console.log('Error:', data);
+        //     }
+        // });
+
+
+    });
+
+});
+
+
+</script>
+@endsection

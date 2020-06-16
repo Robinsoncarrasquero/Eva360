@@ -21,6 +21,7 @@
                     <li> {{ $error }} </li>
                 @endforeach
 
+
             </ul>
 
         </div>
@@ -28,9 +29,9 @@
     @endif
     @if ($evaluadores->isNotEmpty())
         <div class="col-md-12">
-            <form action="{{ route('ajaxlanzar.filtrar',':ID-COMPETENCIA') }}" method="POST" id="form-select">
+            <div   data-id="form-select">
                 {{-- {{ method_field('PUT') }} --}}
-                @csrf
+                {{-- @csrf --}}
 
             <table class="table ">
                 <thead>
@@ -51,7 +52,7 @@
                     <td>
 
                         <div class="form-check">
-                            <input type="checkbox" class="check-select" id="{{"$competencia->id"}}"
+                            <input type="checkbox" class="check-select" id="{{"competencia$competencia->id"}}"
                             value="{{"$competencia->id"}}" name="competenciascheck[]">
                             <label class="form-check-label" for="{{"$competencia->id"}}">Evaluar</label>
                         </div>
@@ -78,7 +79,7 @@
 
             </div>
 
-        </form>
+            </div> {{-- form-end --}}
 
         </div>
 
@@ -109,36 +110,76 @@
 <script>
 
     $(document).ready(function() {
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        // });
 
-        $('.check-select').click(function(e){
 
-            e.preventDefault();
+        $('.ccheck-select').click(function(e){
+
+            //e.preventDefault();
 
             var row = $(this).parents('tr');
             var id=row.data('id');
 
             var form = $('#form-select');
             var attrAccion =form.attr('action');
-            var url = attrAccion.replace(':ID-COMPETENCIA',id)
+            //var url = attrAccion.replace(':ID-COMPETENCIA',id)
 
             var data = form.serialize();
 
-
-            // $.post(url,data,function(result){
-            //     alert(result);
-            // });
             $.ajax({
-                type: "POST",
-                url:url,
-                data:data,
-                success: function (data) {
-                    alert(data);
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
-            });
+                type:'POST',
+                url:url,// "{{ route('ajaxlanzar.filtrar') }}",
+                data:{id:id},
+                success:function(data){
+                    alert(data.success);
 
+                }
+
+           });
+
+
+
+        });
+
+
+        $("input:checkbox").change(function() {
+            //var user_id = $(this).closest('tr').attr('data-id');
+            var isChecked = $("input:checkbox").is(":checked") ? 1:0;
+
+            var row = $(this).parents('tr');
+            var id=row.data('id');
+
+            // var form = $('#form-select');
+
+            // var data = form.serialize();
+
+
+            // $.ajaxSetup({
+            //     headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+            alert(id);
+            $.ajax({
+                    type:'POST',
+                    url:"ajaxlanzar/filtrar",
+                    dataType:JSON;
+                    data: data,
+                  //  headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                    success: function(data){
+                        if(data.success){
+                            //do something
+                            alert(data.success);
+                        }
+                    },
+                    errors:function(errors){
+                        alert(errors.message);
+                    }
+            });
 
         });
 

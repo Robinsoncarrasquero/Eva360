@@ -47,11 +47,11 @@
 </body>
 <script type="text/javascript">
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
 
     $(".btn-submit").click(function(e){
 
@@ -65,8 +65,13 @@
            type:'POST',
            url:"{{ route('ajaxRequest.post') }}",
            data:{ name:name, password:password, email:email},
+           headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+
            success:function(data){
               alert(data.success);
+           },
+           error:function(data){
+               alert(errors.message)
            }
         });
 

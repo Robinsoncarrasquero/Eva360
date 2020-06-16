@@ -89,7 +89,7 @@
     @endif
     <div class="clearfix">
 
-        {{ $competencias->links() }}
+        {{-- {{ $competencias->links() }} --}}
     </div>
 
 

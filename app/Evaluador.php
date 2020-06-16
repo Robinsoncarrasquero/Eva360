@@ -10,7 +10,7 @@ class Evaluador extends Model
     protected $table='evaluadores';
 
     protected $fillable=[
-        'name','email','relation','status','remember_token','evaluado_id'
+        'name','email','relation','status','remember_token','evaluado_id','linkweb'
 
     ];
 

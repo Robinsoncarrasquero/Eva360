@@ -26,6 +26,13 @@
             border: 8px  solid #009990;
 
         }
+        .tr .table{
+
+        }
+        span .spellcheck{
+            color: blue;
+            background: #009990;
+        }
         </style>
 
     <!-- Custom styles for this template -->

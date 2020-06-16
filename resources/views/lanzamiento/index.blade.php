@@ -48,14 +48,28 @@
                     @foreach($evaluados as $evaluado)
                     <tr>
                         <td>{{$evaluado->name}}</td>
-                        <td>{{$evaluado->status}}</td>
+                        <td>
+                            @switch($evaluado->status)
+                                @case(0)
+                                    Inicio
+                                    @break
+                                @case(1)
+                                    Lanzada
+                                    @break
+                                @case(2)
+                                    Finalizada
+                                    @break
+                                @default
+
+                            @endswitch
+                        </td>
                         <td>
                             @if($evaluado->status==0)
                                 <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
                                 <span><i class="material-icons ">send</i></span></a>
                             @else
                                 <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
-                                <span><i class="material-icons"></i></span></a>
+                                <span><i class="material-icons">hourglass_full</i></span></a>
 
                             @endif
 

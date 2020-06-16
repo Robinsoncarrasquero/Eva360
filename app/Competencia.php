@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Competencia extends Model
 {
     //
+    protected $table='competencias';
 
     protected $fillable=['name','description','tipo'];
 

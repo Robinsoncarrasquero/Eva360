@@ -15,7 +15,7 @@
     <p>En el siguiente link podra acceder al cuestionario para responder el cuestionario web sobre las competencias a evaluar></p>
     <ul>
         <li>
-            <a href="{{ $siteweb }}">
+            <a href="{{ $linkweb }}">
                 Direccion web directamente al sitio con este token : {{ $token }}
             </a>
         </li>
