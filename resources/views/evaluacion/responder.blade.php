@@ -73,7 +73,7 @@
 
                             @foreach ($frecuencias  as $frecuencia)
 
-                                <div class="form-check">
+                                <div class="form-check checkbox-inline ">
                                     <label for="frecuencia[]" class="form-check-label">{{ $frecuencia->name}}</label>
                                     @if($evaluacion->frecuencia===$frecuencia->valor && $evaluacion->grado===$grado->grado)
                                         <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"

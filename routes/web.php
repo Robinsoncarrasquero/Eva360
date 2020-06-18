@@ -98,6 +98,16 @@ Route::get('evaluacion/{token}/index',"EvaluacionController@index")
     ->name('ajaxlanzar.filtrar');
 
 
+    /*
+     *Resultados de las pruebas
+    */
+    Route::get('resultados/{evaluado_id}',"ResultadosController@resultados")
+    ->name('resultados.resultados');
+
+    Route::get('resultados/{evaluado_id}/resumidos',"ResultadosController@resumidos")
+    ->name('resultados.resumidos');
+
+
     //How to delete multiple row with checkbox using Ajax
     Route::get('category', 'CategoryController@index');
 

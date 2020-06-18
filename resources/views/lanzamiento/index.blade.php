@@ -43,6 +43,7 @@
                     <th>Status</th>
                     <th>Editar</th>
                     <th>Resultados</th>
+                    <th>Resumido</th>
                     </thead>
                     <tbody>
                     @foreach($evaluados as $evaluado)
@@ -74,7 +75,27 @@
                             @endif
 
                         </td>
-                        <td><i class="material-icons md-24">preview</i>
+                        <td>
+                            @if($evaluado->status==2)
+                                <a href="{{route('resultados.resultados', $evaluado->id)}}" >
+                                <span><i class="material-icons md-24">preview</i></span>
+                            @else
+                            <a href="{{route('resultados.resultados', $evaluado->id)}}" >
+                                <i class="material-icons md-24">unlock</i>
+
+                            @endif
+
+                        </td>
+                        <td>
+                            @if($evaluado->status==2)
+                                <a href="{{route('resultados.resumidos', $evaluado->id)}}" >
+                                <span><i class="material-icons md-24">preview</i></span>
+                            @else
+                            <a href="{{route('resultados.resumidos', $evaluado->id)}}" >
+                                <i class="material-icons md-24">unlock</i>
+
+                            @endif
+
                         </td>
                     </tr>
                     @endforeach

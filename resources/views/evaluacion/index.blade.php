@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Evaluacion de Prueba")
+@section('title',"Lista de Evaluados")
 
 @section('content')
 
@@ -49,7 +49,7 @@
                     <tr>
                         <td>{{$evaluado->name}}</td>
                         <td>
-                            @switch($evaluado->status)
+                            @switch($evaluador->status)
                                 @case(0)
                                     Inicio
                                     @break
@@ -64,7 +64,7 @@
                             @endswitch
                         </td>
                         <td>
-                            @if($evaluado->status==0)
+                            @if($evaluador->status==0)
                                 <a href="{{route('evaluacion.competencias', $evaluador->remember_token)}}" >
                                 <span><i class="material-icons ">send</i></span></a>
                             @else
