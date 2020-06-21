@@ -49,7 +49,7 @@
                     @foreach($evaluados as $evaluado)
                     <tr>
                         <td>{{$evaluado->name}}</td>
-                        <td>
+                        {{-- <td>
                             @switch($evaluado->status)
                                 @case(0)
                                     Inicio
@@ -63,7 +63,8 @@
                                 @default
 
                             @endswitch
-                        </td>
+                        </td> --}}
+                        <td>{{Helper::estatus($evaluado->status) }}</td>
                         <td>
                             @if($evaluado->status==0)
                                 <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >

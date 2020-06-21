@@ -19,11 +19,11 @@
 
                 <div class="clearfix">
                     <div class="alert alert-info text-center">
-                        <h5>Resultados obtenidos de la evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                        <h5>Resultados de la evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                     </div>
 
                     <div class="text text-center">
-                        <h4>Competencias evaluadas y resultados observables</span></h4>
+                        <h4>Competencias evaluadas y respuestas</span></h4>
                     </div>
 
                 </div>

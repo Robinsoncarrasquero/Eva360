@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class ResultadosController extends Controller
 {
-    //
 
     public function resultados($evaluado_id)
     {
@@ -24,7 +23,9 @@ class ResultadosController extends Controller
        return \view('resultados.resultadosevaluador',compact("evaluado","evaluadores","title"));
 
     }
-
+    /**
+     * Obtenemos los resultados finales de la prueba
+     */
     public function resumidos($evaluado_id)
     {
         $title="Finales";
@@ -33,29 +34,49 @@ class ResultadosController extends Controller
         $evaluado = Evaluado::find($evaluado_id);
         $evaluadores = $evaluado->evaluadores;
 
-        $whereEvaluadores=$evaluadores->pluck('id');
+        $whereIn=$evaluadores->pluck('id');
 
         $competencias = DB::table('evaluaciones')
         ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
         ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
-        ->select('competencias.name','evaluadores.relation',DB::raw('AVG(resultado) as calculo'))
-        ->whereIn('evaluador_id',$whereEvaluadores)
-        ->groupBy('competencias.name','relation')
+        ->select('competencias.name','evaluadores.relation','competencias.nivelrequerido',
+         DB::raw('AVG(resultado) as average'))
+        ->whereIn('evaluador_id',$whereIn)
+        ->groupBy('competencias.name','relation','competencias.nivelrequerido')
         ->orderByRaw('competencias.name')
         ->get();
-        $array = json_decode(json_encode($competencias), true);
 
-        $collection= collect($array);
+        //Lo convertimos a un arreglo manipulable ya que recibimos un objecto sdtClass
+        $dataarray = json_decode(json_encode($competencias), true);
 
+        $collection= collect($dataarray);
+
+        //Agrupamos la coleccion por nombre de competencia
         $grouped = $collection->mapToGroups(function ($item, $key) {
-            return [$item['name'] => [$item['calculo'],$item['relation']]];
+            return [$item['name'] => [$item['average'],$item['relation'],$item['nivelrequerido']]];
         });
 
-        //dd($grouped);
-        // $grouped->toArray();
-        // dd($grouped);
-        $competencias=collect($grouped);
-        //dd($competencias);
+        //Creamos un arreglo desde la coleccion para contruir el arreglo
+        $adata=[];
+        foreach ($grouped as $key => $value) {
+
+            $sumaaverage=0;
+            $evaluador=[];
+            $nivelrequerido=0;
+
+            foreach ($value as $item) {
+                $evaluador[] = ['name'=>$item[1],'average'=>$item[0]];
+                $sumaaverage += $item[0];
+                $nivelrequerido=$item[2];
+            }
+
+            $adata[]=['competencia'=>$key,'eva360'=>$sumaaverage/$value->count(),'nivelRequerido'=>$nivelrequerido,'data'=>$evaluador];
+
+        }
+        $adatacollection= collect($adata);
+
+        $competencias= collect($adatacollection);
+
         return \view('resultados.resumidos',compact("evaluado","competencias","title"));
 
     }

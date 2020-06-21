@@ -35,12 +35,12 @@
             <div class="panel-body">
 
                 @foreach($competencias as $key=>$value)
-                    <div class="table table-striped">
+                    <div class="table ">
                         <table id="{{$key}}" class="table  table-bordred table-striped">
                         <thead>
                         <tr>
                             <th class="text text-center alert-warning" colspan="2">
-                            {{ $key}}
+                            {{ $value['competencia']}} (Nivel Requerido {{ $value['nivelRequerido'] }})
                             </th>
                         </tr>
                         <th>Evaluador</th>
@@ -50,14 +50,18 @@
                         <tbody>
 
 
-                       @foreach ($value as $item)
+                       @foreach ($value['data'] as $item)
 
-                       <tr>
-                            <td class="text text-dark">{{ $item[1]}}</td>
-                            <td>{{$item[0]}}</td>
+                        <tr>
+                            <td >{{ $item['name']}}</td>
+                            <td>{{$item['average']}}</td>
                         </tr>
 
                        @endforeach
+                       <tr>
+                        <td class="text text-center">Evaluacion final </td>
+                        <td class="  alert alert-info">{{ $value['eva360']}}</td>
+                       </tr>
 
                     </tbody>
                     </table>
@@ -66,7 +70,6 @@
             </div>
             <div class="clearfix">
                 <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-
             </div>
 
 
