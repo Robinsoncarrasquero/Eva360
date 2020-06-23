@@ -30,6 +30,66 @@ class ResultadosController extends Controller
     {
         $title="Finales";
 
+        $title="Finales";
+        //Obtenemos los evaluadores del evaluador
+        $evaluado = Evaluado::find($evaluado_id);
+
+        $adatacollection = $this->sqldata($evaluado_id);
+        $competencias= collect($adatacollection);
+//        $competencias= collect($adatacollection);
+
+        return \view('resultados.resumidos',compact("evaluado","competencias","title"));
+
+
+    }
+
+    public function graficas($evaluado_id)
+    {
+        $title="Finales";
+        //Obtenemos los evaluadores del evaluador
+        $evaluado = Evaluado::find($evaluado_id);
+
+        $adatacollection = $this->sqldata($evaluado_id);
+        $competencias= collect($adatacollection);
+
+        foreach ($competencias as $key => $value) {
+
+            $arrayCategoria[]=$value['competencia'];
+            $arrayNivel[]=(int) $value['nivelRequerido'];
+            $arrayEvaluacion[]=$value['eva360'];
+
+            //Creamos una array con la data de los evaluadores
+            foreach ($value['data'] as $item) {
+                $arrayEvaluador[] =['name'=> $item['name'],'average'=>$item['average']];
+            }
+        }
+
+        $collection= collect($arrayEvaluador);
+        //Agrupamos la data de evaluadores para obtener una coleccion agrupa
+        $evagrouped = $collection->mapToGroups(function ($item, $key) {
+            return [$item['name']=>$item['average']];
+        });
+
+        //Creamos un array con la data de cada serie para crear el patron de datos de la grafica
+        $dataSerie=[];
+        foreach ($evagrouped as $key => $value) {
+            $dataSerie[]=['name'=>$key,'data'=>$value];
+        }
+
+        $dataSerie[]= ['name'=>'Nivel Requerido','data'=>$arrayNivel];
+        $dataSerie[]= ['name'=>'Eva360','data'=>$arrayEvaluacion];
+
+        //Lo convertimos en un json para pasarlo a la vista
+        $dataCategoria=$arrayCategoria;
+
+        return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado"));
+
+
+    }
+
+    //Organiza la data de sql
+    private function sqldata($evaluado_id){
+
         //Obtenemos los evaluadores del evaluador
         $evaluado = Evaluado::find($evaluado_id);
         $evaluadores = $evaluado->evaluadores;
@@ -69,15 +129,11 @@ class ResultadosController extends Controller
                 $sumaaverage += $item[0];
                 $nivelrequerido=$item[2];
             }
-
             $adata[]=['competencia'=>$key,'eva360'=>$sumaaverage/$value->count(),'nivelRequerido'=>$nivelrequerido,'data'=>$evaluador];
-
         }
         $adatacollection= collect($adata);
 
-        $competencias= collect($adatacollection);
-
-        return \view('resultados.resumidos',compact("evaluado","competencias","title"));
-
+        return $adatacollection;
     }
+
 }

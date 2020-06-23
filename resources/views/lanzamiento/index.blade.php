@@ -44,26 +44,12 @@
                     <th>Editar</th>
                     <th>Resultados</th>
                     <th>Resumido</th>
+                    <th>Graficas</th>
                     </thead>
                     <tbody>
                     @foreach($evaluados as $evaluado)
                     <tr>
                         <td>{{$evaluado->name}}</td>
-                        {{-- <td>
-                            @switch($evaluado->status)
-                                @case(0)
-                                    Inicio
-                                    @break
-                                @case(1)
-                                    Lanzada
-                                    @break
-                                @case(2)
-                                    Finalizada
-                                    @break
-                                @default
-
-                            @endswitch
-                        </td> --}}
                         <td>{{Helper::estatus($evaluado->status) }}</td>
                         <td>
                             @if($evaluado->status==0)
@@ -93,6 +79,17 @@
                                 <span><i class="material-icons md-24">preview</i></span>
                             @else
                             <a href="{{route('resultados.resumidos', $evaluado->id)}}" >
+                                <i class="material-icons md-24">unlock</i>
+
+                            @endif
+
+                        </td>
+                        <td>
+                            @if($evaluado->status==2)
+                                <a href="{{route('resultados.graficas', $evaluado->id)}}" >
+                                <span><i class="material-icons md-24">report</i></span>
+                            @else
+                            <a href="{{route('resultados.graficas', $evaluado->id)}}" >
                                 <i class="material-icons md-24">unlock</i>
 
                             @endif

@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('chart', 'ChartController@index');
+
 Route::get('/error', function () {
     return abort(500);
 });
@@ -106,6 +108,9 @@ Route::get('evaluacion/{token}/index',"EvaluacionController@index")
 
     Route::get('resultados/{evaluado_id}/resumidos',"ResultadosController@resumidos")
     ->name('resultados.resumidos');
+
+    Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
+    ->name('resultados.graficas');
 
 
     //How to delete multiple row with checkbox using Ajax
