@@ -103,11 +103,11 @@ Route::get('evaluacion/{token}/index',"EvaluacionController@index")
     /*
      *Resultados de las pruebas
     */
-    Route::get('resultados/{evaluado_id}',"ResultadosController@resultados")
-    ->name('resultados.resultados');
+    Route::get('resultados/{evaluado_id}/evaluacion',"ResultadosController@resultados")
+    ->name('resultados.evaluacion');
 
-    Route::get('resultados/{evaluado_id}/resumidos',"ResultadosController@resumidos")
-    ->name('resultados.resumidos');
+    Route::get('resultados/{evaluado_id}/finales',"ResultadosController@resumidos")
+    ->name('resultados.finales');
 
     Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
     ->name('resultados.graficas');

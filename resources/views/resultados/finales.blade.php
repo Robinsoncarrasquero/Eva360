@@ -19,7 +19,7 @@
 
                 <div class="clearfix">
                     <div class="alert alert-info text-center">
-                        <h5>Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                        <h5>Resultados Finales Ponderados de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                     </div>
 
                     <div class="text text-center">
@@ -36,7 +36,7 @@
 
                 @foreach($competencias as $key=>$value)
                     <div class="table ">
-                        <table id="{{$key}}" class="table  table-bordred table-striped">
+                        <table id="{{$key}}" class="table  table-bordered">
                         <thead>
                         <tr>
                             <th class="text text-center alert-warning" colspan="2">
@@ -59,8 +59,8 @@
 
                        @endforeach
                        <tr>
-                        <td class="text text-center">Evaluacion final </td>
-                        <td class="  alert alert-info">{{ $value['eva360']}}</td>
+                        <td class="text text-center"><strong>Evaluacion Final( {{ count($value['data']) }} evaluadores)</strong></td>
+                        <td class="alert alert-dark">{{ $value['eva360']}}</td>
                        </tr>
 
                     </tbody>
@@ -78,7 +78,7 @@
             @else
 
             <div class="alert-info">
-                <p>No hay informacion de resultados procesados</p>
+                <p>No hay informacion disponibles</p>
             <div>
 
             @endif

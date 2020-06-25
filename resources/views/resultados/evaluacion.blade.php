@@ -19,7 +19,7 @@
 
                 <div class="clearfix">
                     <div class="alert alert-info text-center">
-                        <h5>Resultados de la evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                        <h5>Evaluacion Detallada de la Prueba realizada sobre <span class="text-danger">{{ $evaluado->name }}</span></h5>
                     </div>
 
                     <div class="text text-center">
@@ -35,7 +35,7 @@
             <div class="panel-body">
                     @foreach($evaluadores as $evaluador)
                     <div class="table table-striped">
-                        <table id="{{ 'table'.$evaluador->id }}mytable" class="table  table-bordred table-striped">
+                        <table id="{{ 'table'.$evaluador->id }}" class="table  table-bordred table-striped">
                         <thead>
 
                         <th>Competencia</th>
@@ -46,7 +46,7 @@
                         <th>Resultado</th>
                         <tr>
                             <th class="text text-center alert alert-warning" colspan="6">
-                            {{$evaluador->name}} == {{ $evaluador->relation }}
+                            <mark>Evaluador :</mark> {{$evaluador->name}} <mark>( {{ $evaluador->relation }} )</mark>
                             </th>
                         </tr>
 
@@ -61,7 +61,7 @@
                             <td>{{ $evaluacion->grado }}{{ $evaluacion->competencia_id }}</td>
                             <td class="text text-center">{{ $evaluacion->ponderacion}}</td>
                             <td class="text text-center">{{ $evaluacion->frecuencia/100}}</td>
-                            <td class="text text-center alert-dark">{{ $evaluacion->resultado}}</td>
+                            <td class="text text-center"><span class="badge badge-dark">{{ $evaluacion->resultado}}</span></td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -8,6 +8,7 @@ use App\Evaluado;
 use App\Evaluador;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class ResultadosController extends Controller
 {
@@ -20,7 +21,7 @@ class ResultadosController extends Controller
         $evaluado = Evaluado::find($evaluado_id);
         $evaluadores = $evaluado->evaluadores;
 
-       return \view('resultados.resultadosevaluador',compact("evaluado","evaluadores","title"));
+       return \view('resultados.evaluacion',compact("evaluado","evaluadores","title"));
 
     }
     /**
@@ -30,27 +31,25 @@ class ResultadosController extends Controller
     {
         $title="Finales";
 
-        $title="Finales";
         //Obtenemos los evaluadores del evaluador
         $evaluado = Evaluado::find($evaluado_id);
 
-        $adatacollection = $this->sqldata($evaluado_id);
-        $competencias= collect($adatacollection);
-//        $competencias= collect($adatacollection);
+        $competencias = $this->sqldata($evaluado_id);
 
-        return \view('resultados.resumidos',compact("evaluado","competencias","title"));
+        return \view('resultados.finales',compact("evaluado","competencias","title"));
 
 
     }
 
+    //Generamos la data para la grafica
     public function graficas($evaluado_id)
     {
         $title="Finales";
-        //Obtenemos los evaluadores del evaluador
+
+        //Obtenemos los evaluadores del evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
-        $adatacollection = $this->sqldata($evaluado_id);
-        $competencias= collect($adatacollection);
+        $competencias = $this->sqldata($evaluado_id);
 
         foreach ($competencias as $key => $value) {
 
@@ -65,21 +64,22 @@ class ResultadosController extends Controller
         }
 
         $collection= collect($arrayEvaluador);
-        //Agrupamos la data de evaluadores para obtener una coleccion agrupa
+        //Agrupamos la data de evaluadores para obtener una coleccion
         $evagrouped = $collection->mapToGroups(function ($item, $key) {
             return [$item['name']=>$item['average']];
         });
 
-        //Creamos un array con la data de cada serie para crear el patron de datos de la grafica
+        //Creamos un array con la data de cada serie
         $dataSerie=[];
+        $dataSerie[]= ['name'=>'Nivel Requerido','data'=>$arrayNivel];
+
         foreach ($evagrouped as $key => $value) {
             $dataSerie[]=['name'=>$key,'data'=>$value];
         }
 
-        $dataSerie[]= ['name'=>'Nivel Requerido','data'=>$arrayNivel];
         $dataSerie[]= ['name'=>'Eva360','data'=>$arrayEvaluacion];
 
-        //Lo convertimos en un json para pasarlo a la vista
+
         $dataCategoria=$arrayCategoria;
 
         return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado"));
@@ -87,13 +87,13 @@ class ResultadosController extends Controller
 
     }
 
-    //Organiza la data de sql
+    //Obtenemos la data sql de los resultados grupadas por competencia y relacion
     private function sqldata($evaluado_id){
 
         //Obtenemos los evaluadores del evaluador
-        $evaluado = Evaluado::find($evaluado_id);
-        $evaluadores = $evaluado->evaluadores;
+        $evaluado = Evaluado::findOrFail($evaluado_id);
 
+        $evaluadores = $evaluado->evaluadores;
         $whereIn=$evaluadores->pluck('id');
 
         $competencias = DB::table('evaluaciones')
@@ -106,34 +106,39 @@ class ResultadosController extends Controller
         ->orderByRaw('competencias.name')
         ->get();
 
-        //Lo convertimos a un arreglo manipulable ya que recibimos un objecto sdtClass
-        $dataarray = json_decode(json_encode($competencias), true);
+        //recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
+        $dataArray = json_decode(json_encode($competencias), true);
 
-        $collection= collect($dataarray);
+        $collection= collect($dataArray);
 
         //Agrupamos la coleccion por nombre de competencia
         $grouped = $collection->mapToGroups(function ($item, $key) {
             return [$item['name'] => [$item['average'],$item['relation'],$item['nivelrequerido']]];
         });
 
-        //Creamos un arreglo desde la coleccion para contruir el arreglo
+        //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
         $adata=[];
         foreach ($grouped as $key => $value) {
 
-            $sumaaverage=0;
+            $sumaAverage=0;
             $evaluador=[];
-            $nivelrequerido=0;
+            $nivelRequerido=0;
 
             foreach ($value as $item) {
                 $evaluador[] = ['name'=>$item[1],'average'=>$item[0]];
-                $sumaaverage += $item[0];
-                $nivelrequerido=$item[2];
+                $sumaAverage += $item[0];
+                $nivelRequerido=$item[2];
             }
-            $adata[]=['competencia'=>$key,'eva360'=>$sumaaverage/$value->count(),'nivelRequerido'=>$nivelrequerido,'data'=>$evaluador];
-        }
-        $adatacollection= collect($adata);
 
-        return $adatacollection;
+            $adata[]=
+            [
+                'competencia'=>$key,'eva360'=>$sumaAverage/$value->count(),
+                'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador
+            ];
+
+        }
+
+        return collect($adata);
     }
 
 }

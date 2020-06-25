@@ -42,56 +42,50 @@
                     <th>Nombre</th>
                     <th>Status</th>
                     <th>Editar</th>
-                    <th>Resultados</th>
-                    <th>Resumido</th>
-                    <th>Graficas</th>
-                    </thead>
+                    <th>Evaluacion</th>
+                    <th>Resultado</th>
+                    <th>Grafica</th>
+                   </thead>
                     <tbody>
                     @foreach($evaluados as $evaluado)
                     <tr>
                         <td>{{$evaluado->name}}</td>
                         <td>{{Helper::estatus($evaluado->status) }}</td>
                         <td>
-                            @if($evaluado->status==0)
+                            @if(Helper::estatus($evaluado->status)=='Inicio')
                                 <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
                                 <span><i class="material-icons ">send</i></span></a>
                             @else
-                                <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
                                 <span><i class="material-icons">hourglass_full</i></span></a>
 
                             @endif
 
                         </td>
                         <td>
-                            @if($evaluado->status==2)
-                                <a href="{{route('resultados.resultados', $evaluado->id)}}" >
+                            @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
                                 <span><i class="material-icons md-24">preview</i></span>
                             @else
-                            <a href="{{route('resultados.resultados', $evaluado->id)}}" >
-                                <i class="material-icons md-24">unlock</i>
-
+                                <span><i class="material-icons md-24">unlock</i></span>
                             @endif
 
                         </td>
                         <td>
-                            @if($evaluado->status==2)
-                                <a href="{{route('resultados.resumidos', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24">preview</i></span>
+                            @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                <a href="{{route('resultados.finales', $evaluado->id)}}" >
+                                <span><i class="material-icons md-24">table_view</i></span>
                             @else
-                            <a href="{{route('resultados.resumidos', $evaluado->id)}}" >
-                                <i class="material-icons md-24">unlock</i>
-
+                                <span><i class="material-icons md-24">unlock</i></span>
                             @endif
 
                         </td>
                         <td>
-                            @if($evaluado->status==2)
+                            @if(Helper::estatus($evaluado->status)=='Finalizada')
                                 <a href="{{route('resultados.graficas', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24">report</i></span>
+                                <span><i class="material-icons md-24">assessment</i></span>
                             @else
                             <a href="{{route('resultados.graficas', $evaluado->id)}}" >
-                                <i class="material-icons md-24">unlock</i>
-
+                                <span><i class="material-icons md-24">unlock</i></span>
                             @endif
 
                         </td>
