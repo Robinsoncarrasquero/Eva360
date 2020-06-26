@@ -35,7 +35,7 @@ class ResultadosController extends Controller
         $evaluado = Evaluado::find($evaluado_id);
 
         $competencias = $this->sqldata($evaluado_id);
-
+        dd($competencias);
         return \view('resultados.finales',compact("evaluado","competencias","title"));
 
 

@@ -17,6 +17,20 @@
     var categorias =  <?php echo json_encode($dataCategoria) ?>;
     var evaluado =  <?php echo json_encode($evaluado->name) ?>;
 
+    var fileevaluado=[
+        {
+            "name":"Pedro Perez",
+            "Evaluadores":
+            [
+                {'name':'Pedro Martinez','relation':'Boss','email':'pmartinez@eva360.com'},
+                {'name':'Maria Rodriguez','relation':'Parner','email':'mrodriguez@eva360.com'},
+            ]
+        }
+
+        ];
+
+    alert(JSON.stringify(fileevaluado));
+
     Highcharts.chart('container', {
         title: {
             text: "Eva360 de "+evaluado

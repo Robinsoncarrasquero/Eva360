@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +112,33 @@ Route::get('evaluacion/{token}/index',"EvaluacionController@index")
 
     Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
     ->name('resultados.graficas');
+
+
+    /**
+     *Subir los archivo con los datos del evaluado y los evaluadores
+     */
+
+    Route::get('file-upload', 'FileUploadController@index')->name('evaluado.fileindex');
+
+    Route::post('file-upload', 'FileUploadController@upload')->name('evaluado.fileupload');
+
+
+    Route::post('file-save/{data}', 'FileUploadController@save')->name('evaluado.filesave');
+
+    Route::get('storagestorage/{archivo}', function ($archivo) {
+        $public_path = public_path();
+        $url = $public_path.'/storage/'.$archivo;
+        //verificamos si el archivo existe y lo retornamos
+        return $url;
+
+        if (Storage::exists($archivo))
+        {
+          return response()->download($url);
+        }
+        //si no se encuentra lanzamos un error 404.
+        abort(404);
+
+   });
 
 
     //How to delete multiple row with checkbox using Ajax
