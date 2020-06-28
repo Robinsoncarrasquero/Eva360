@@ -81,10 +81,6 @@ class EvaluacionController extends Controller
 
         //Grado
         $grados=$competencia->grados;
-        $frecuencias=\collect([
-        ['Siempre'=>100,'frecuencia'=>75,'Medio'=>50,'Ocacionalmente'=>25],
-        ]);
-        $fre= Arr::dot($frecuencias);
 
         $frecuencias =Frecuencia::all();
 
@@ -119,6 +115,8 @@ class EvaluacionController extends Controller
         $evaluacion->ponderacion= $modelgrado->grado->ponderacion;
         //Actualizamos la frecuencia
         $evaluacion->frecuencia=$modelfrecuencia->valor->valor;
+        $evaluacion->resultado=$modelfrecuencia->valor->valor * $modelgrado->grado->ponderacion/100;
+
         $evaluacion->save();
 
         //retomamos el token
@@ -131,7 +129,7 @@ class EvaluacionController extends Controller
         $evaluador = Evaluador::findOrFail($evaluador_id);
         $evaluaciones = $evaluador->evaluaciones;
 
-        //Eliminamos las competencias ya evaluadas
+        //Excluimos las competencias ya evaluadas
         $competencias = $evaluaciones->reject(function ($eva) {
             return $eva->frecuencia==0;
         })
@@ -141,7 +139,7 @@ class EvaluacionController extends Controller
 
         //Revisamos cuantas estan pendientes por realizar
         if ($evaluaciones->count()>$competencias->count()){
-            return \redirect()->back()->with('danger','Aun tiene evaluaciones pendientes');
+            return \redirect()->back()->withDanger('Aun tiene evaluaciones pendientes');
         }
 
         $evaluado= $evaluador->evaluado;
@@ -151,7 +149,7 @@ class EvaluacionController extends Controller
         $evaluador->save();
 
 
-        //Eliminamos los evaluadores que han finzalizados
+        //Excluimos a los evaluadores que han finzalizados
         $listaDeEvaluadores= $evaluado->evaluadores;
         $evaluacionesPendientes = $listaDeEvaluadores->reject(function ($eva) {
             return $eva->status==2;
@@ -166,7 +164,8 @@ class EvaluacionController extends Controller
             $evaluado->save();
         }
 
-        return \redirect()->route('evaluacion.index',$evaluador->remember_token)->with('success',"Evaluacion de $evaluado->name finalizada exitosamente");
+        return \redirect()->route('evaluacion.index',$evaluador->remember_token)
+        ->withSuccess("Evaluacion de $evaluado->name finalizada exitosamente");
 
     }
 

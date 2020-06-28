@@ -22,7 +22,6 @@ class ResultadosController extends Controller
         $evaluadores = $evaluado->evaluadores;
 
        return \view('resultados.evaluacion',compact("evaluado","evaluadores","title"));
-
     }
     /**
      * Obtenemos los resultados finales de la prueba
@@ -35,9 +34,7 @@ class ResultadosController extends Controller
         $evaluado = Evaluado::find($evaluado_id);
 
         $competencias = $this->sqldata($evaluado_id);
-        dd($competencias);
         return \view('resultados.finales',compact("evaluado","competencias","title"));
-
 
     }
 
@@ -79,12 +76,9 @@ class ResultadosController extends Controller
 
         $dataSerie[]= ['name'=>'Eva360','data'=>$arrayEvaluacion];
 
-
         $dataCategoria=$arrayCategoria;
 
         return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado"));
-
-
     }
 
     //Obtenemos la data sql de los resultados grupadas por competencia y relacion

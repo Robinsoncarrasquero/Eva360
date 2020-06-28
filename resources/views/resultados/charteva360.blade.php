@@ -29,7 +29,6 @@
 
         ];
 
-    alert(JSON.stringify(fileevaluado));
 
     Highcharts.chart('container', {
         title: {

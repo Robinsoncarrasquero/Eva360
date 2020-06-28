@@ -3,6 +3,31 @@
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\DNSCheckValidation;
+use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
+use Egulias\EmailValidator\Validation\RFCValidation;
+
+
+    //Validar Email
+    // Route::post('check', function (Request $request) {
+    //     $request->validate([
+    //         'email' => function ($attribute, $value, $fail) {
+    //         if ( !(new EmailValidator())->isValid($value, new DNSCheckValidation()) ) {
+    //             $fail(trans('validation.check_email_dns',[$attribute]));
+    //         }
+    //     },]);
+    //     return response()->json(['ok' => 'it´s ok']);
+    // });
+
+    Route::post('check', function (Request $request) {
+        $request->validate([
+            'email' => 'foo',
+        ]);
+        return response()->json(['ok' =>'ok' ]);
+    });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -114,31 +139,31 @@ Route::get('evaluacion/{token}/index',"EvaluacionController@index")
     ->name('resultados.graficas');
 
 
+
     /**
      *Subir los archivo con los datos del evaluado y los evaluadores
      */
 
-    Route::get('file-upload', 'FileUploadController@index')->name('evaluado.fileindex');
-
-    Route::post('file-upload', 'FileUploadController@upload')->name('evaluado.fileupload');
+    Route::get('file-upload', 'FileUploadController@index')->name('json.fileindex');
 
 
-    Route::post('file-save/{data}', 'FileUploadController@save')->name('evaluado.filesave');
+    Route::post('file-upload', 'FileUploadController@upload')->name('json.fileupload');
 
-    Route::get('storagestorage/{archivo}', function ($archivo) {
-        $public_path = public_path();
-        $url = $public_path.'/storage/'.$archivo;
-        //verificamos si el archivo existe y lo retornamos
-        return $url;
+    Route::get('filevalida/{filename}/{fileOname}/valida',"FileUploadController@validar")
+        ->name('json.validar');
 
-        if (Storage::exists($archivo))
-        {
-          return response()->download($url);
+    Route::post('file-save/{data}/jsonsave','FileUploadController@save')->name('json.filesave');
+
+    Route::get('uploads', function () {
+        if (Storage::exists("uploads/eva360.json")){
+            return Storage::response("uploads/eva360.json");
         }
-        //si no se encuentra lanzamos un error 404.
-        abort(404);
+         //si no se encuentra lanzamos un error 404.
+         abort(404);
 
-   });
+    })->where([
+        'file' => '(.*?)\.(json|jpg|png|jpeg|gif)$'
+    ]);
 
 
     //How to delete multiple row with checkbox using Ajax

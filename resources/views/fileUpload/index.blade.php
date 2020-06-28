@@ -1,30 +1,48 @@
-<html lang="en" class="">
-<head>
-<meta charset="UTF-8">
-<title>File Upload Evaluado y Evaluadores</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
-</head>
-<body>
+
+@extends('layout')
+
+@section('title',"Upload Fila de Evaluacion")
+
+@section('content')
+
+
 <div class="container">
-  <div class="row justify-content-center">
+
+  <div class="row clearfix ">
     <div class="card">
-       <div class="card-header">Subir archivo de Evaluado</div>
+        <div id="flash-message">
+            @include('flash-message')
+
+
+        </div>
+
+        <div class="card-header text text-success">Subir archivo en el formato JSON con los datos basicos del Evaluado y sus evaluadores</div>
+        <div class="card-header small text-muted">Formato:<br>
+            <code>
+            {<br>
+                "Evaluado":"Pedro Perez",<br>
+                "Evaluadores":<br>
+                [
+                    <br>{"name":"Juan  Martinez","relation":"Boss","email":"jm@example.com"},
+                    <br>{"name":"Maria Rodriguez","relation":"Supervisor","email":"mr@example.com"},
+                    <br>{"name":"Jonh Doe","relation":"Parner","email":"jd@example.com"},
+                    <br>{"name":"Frank Aguilar","relation":"Parner","email":"faguilar@example.com"}
+                    <br>{"name":"Pedro Perez","relation":"Auto","email":"pp@example.com"},
+                    <br>
+                ]<br>
+            }<br>
+            </code>
+            <p>Descargue el formato del archivo JSON requerido para subir la informacion y lanzar la Evaluacion 360
+                <a href="http://eva360.test.ve/uploads" target="_blank"><i class="material-icons">cloud_download</i></a>
+            </p>
+
+        </div>
 
          <div class="card-body">
-            @if ($message = Session::get('success'))
-
-                <div class="alert alert-success alert-block">
-
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-
-                    <strong>{{ $message }}</strong>
-
-                </div>
-            @endif
 
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <strong>Whoops ! </strong>Hemos encontrados un problema con su input.<br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -32,18 +50,20 @@
                     </ul>
                 </div>
             @endif
-
-            <form action="{{ route('evaluado.fileupload') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('json.fileupload') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <input type="file" class="form-control-file" name="fileName" id="fileName" aria-describedby="fileHelp">
-                    <small id="fileHelp" class="form-text text-muted">Please Choose file</small>
+                    <small id="fileHelp" class="form-text text-muted">Por favor seleccion un archivo</small>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
 
+                </div>
+            </form>
          </div>
      </div>
   </div>
 </div>
-</html>
+
+@endsection

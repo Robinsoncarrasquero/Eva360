@@ -130,6 +130,7 @@ class LanzarPruebaController extends Controller
             //Creamos la Evaluacion con los datos solo de las competencias
             foreach($competencias as $key=>$competencia){
                 $evaluacion = new Evaluacion();
+                $evaluacion->resultado=0;
                 $evaluacion->competencia_id=$competencia->id;
                 try {
                     //Salvamos a la evaluacion

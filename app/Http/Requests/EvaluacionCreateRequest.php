@@ -45,7 +45,6 @@ class EvaluacionCreateRequest extends FormRequest
     {
         return [
             'competenciascheck.required' => 'Debe seleccionar al menos una competencia. Es mandatorio',
-
         ];
     }
 

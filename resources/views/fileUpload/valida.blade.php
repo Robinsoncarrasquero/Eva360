@@ -12,18 +12,18 @@
 
             <div id="flash-message">
                 @include('flash-message')
-
             </div>
 
             <div class="panel panel pb-3">
 
                 <div class="clearfix">
+
                     <div class="alert alert-info text-center">
-                        <h5>Validacion de Informacion subida en el archivo <span class="text-danger">{{ $fileOriginalName}}</span></h5>
+                        <h5>Formulario para la Validacion de la Informacion subida en el archivo <span class="text-danger">{{ $fileOName }}</span></h5>
                     </div>
 
-                    <div class="text text-center">
-                        <h4>Revise la informacion si esta correcta para lanzar la Evaluacion</span></h4>
+                    <div class="text text-left">
+                        <h4>Revise la informacion y actualice cualquier dato antes de Guardar la data.</h4>
                     </div>
 
                 </div>
@@ -34,12 +34,14 @@
 
             <div class="panel-body">
 
+                <form action="{{ route('json.filesave',$fileName) }}" method="POST" id="form-jsonfile">
+                    @csrf
                     <div class="table ">
                         <table id="evaluado" class="table  table-bordered">
                         <thead>
                         <tr>
-                            <th class="text text-center alert-warning" colspan="3">
-                            {{ $evaluadoArray['Evaluado']}}
+                            <th class="text text-center  title alert-warning" colspan="3">
+                            <h4>{{ $evaluadoArray['Evaluado']}}</h4>
                             </th>
                         </tr>
                         <th>Evaluadores</th>
@@ -48,36 +50,42 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($evaluadoArray['Evaluadores'] as $key=>$value)
+                            @foreach ($evaluadoArray['Evaluadores'] as $key=>$value)
 
-                        <tr>
-                            <td>{{$value->name}}</td>
-                            <td>{{$value->relation}}</td>
-                            <td>{{$value->email}}</td>
-                        </tr>
+                                <tr>
+                                    <td><input type="text" name="name[]" value="{{$value->name}}"></td>
+                                    <td><input type="text" name="relation[]" value="{{$value->relation}}"></td>
+                                    <td><input type="email" name="email[]" value="{{$value->email}}"></td>
+                                </tr>
 
-                       @endforeach
+                            @endforeach
 
-                    </tbody>
+                        </tbody>
+
                     </table>
 
+                    <div class="clearfix">
+                        <span class="float-left"><a href="{{ route('json.fileindex')}}" class="btn btn-dark btn-lg">Back</a></span>
+                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Guardar</button>
+
+                    </div>
+
+                </form>
+
             </div>
-            <div class="clearfix">
-                <span class="float-left"><a href="{{ url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-            </div>
+
 
 
             </div>
 
             @else
 
-            <div class="alert-info">
-                <p>No hay informacion disponibles</p>
-            <div>
+                <div class="alert-info">
+                    <p>No hay informacion disponibles</p>
+                <div>
 
             @endif
 
-            {{-- {{ $competencias->links() }} --}}
 
         </div>
 

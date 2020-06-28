@@ -66,7 +66,8 @@
                                 <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
                                 <span><i class="material-icons md-24">preview</i></span>
                             @else
-                                <span><i class="material-icons md-24">unlock</i></span>
+                                <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
+                                <span><i class="material-icons md-24 text-dark md-inactive">preview</i></span>
                             @endif
 
                         </td>
@@ -75,7 +76,8 @@
                                 <a href="{{route('resultados.finales', $evaluado->id)}}" >
                                 <span><i class="material-icons md-24">table_view</i></span>
                             @else
-                                <span><i class="material-icons md-24">unlock</i></span>
+                                <a href="{{route('resultados.finales', $evaluado->id)}}" >
+                                <span><i class="material-icons md-24 text-dark md-inactive">table_view</i></span>
                             @endif
 
                         </td>
@@ -85,7 +87,8 @@
                                 <span><i class="material-icons md-24">assessment</i></span>
                             @else
                             <a href="{{route('resultados.graficas', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24">unlock</i></span>
+
+                                <span><i class="material-icons md-24 text-dark md-inactive">assessment</i></span>
                             @endif
 
                         </td>

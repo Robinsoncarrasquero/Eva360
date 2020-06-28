@@ -117,7 +117,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
-    'check_email_dns' => 'The :attribute no tiene un host válido.',
+    'check_email_dns' => 'El campo :attribute no tiene un host válido.',
 
     /*
     |--------------------------------------------------------------------------
