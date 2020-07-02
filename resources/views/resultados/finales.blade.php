@@ -18,9 +18,13 @@
             <div class="panel panel pb-3">
 
                 <div class="clearfix">
-                    <div class="alert alert-info text-center">
-                        <h5>Resultados Finales Ponderados de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
-                    </div>
+                    @if ($evaluado->status!==Helper::estatus('Finalizada'))
+                        <h2 class="alert alert-danger text text-center">La Prueba de <strong class=" text text-dark">{{ $evaluado->name }}</strong> aun no ha finalizado</h2>
+                    @else
+                        <div class="alert alert-info text-center">
+                            <h5>Resultados Finales Ponderados de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                        </div>
+                    @endif
 
                     <div class="text text-center">
                         <h4>Competencias evaluadas y resultados finales</span></h4>
@@ -39,12 +43,12 @@
                         <table id="{{$key}}" class="table  table-bordered">
                         <thead>
                         <tr>
-                            <th class="text text-center alert-warning" colspan="2">
-                            {{ $value['competencia']}} (Nivel Requerido {{ $value['nivelRequerido'] }})
-                            </th>
+                            <th class="text text-center alert alert alert-warning" colspan="2">
+                            <span class="text text-dark">{{ $value['competencia']}} (Margen Requerido {{ $value['nivelRequerido'] }})
+                            </strong> </th>
                         </tr>
-                        <th>Evaluador</th>
-                        <th>Valoracion</th>
+                        <th>Grupo</th>
+                        <th>Ponderacion</th>
 
                         </thead>
                         <tbody>
@@ -59,7 +63,7 @@
 
                        @endforeach
                        <tr>
-                        <td class="text text-center"><strong>Evaluacion Final( {{ count($value['data']) }} evaluadores)</strong></td>
+                        <td class="text text-center"><strong>Resultado Final( sobre {{ count($value['data']) }} Grupos)</strong></td>
                         <td class="alert alert-dark">{{ $value['eva360']}}</td>
                        </tr>
 

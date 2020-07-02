@@ -30,9 +30,6 @@ class AppServiceProvider extends ServiceProvider
             return (new EmailValidator())->isValid($value, new DNSCheckValidation());
         });
 
-        // Validator::extend('foo',function($attribute,$value,$parameters,$validator){
-        //     return $value=='foo';
-        // });
 
     }
 }

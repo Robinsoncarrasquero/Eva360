@@ -45,6 +45,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/**
+ * Resource de competencias
+ *
+ */
+Route::resource('competencia', 'CompetenciaController');
+
+
 Route::get('chart', 'ChartController@index');
 
 Route::get('/error', function () {
@@ -164,6 +171,20 @@ Route::get('evaluacion/{token}/index',"EvaluacionController@index")
     })->where([
         'file' => '(.*?)\.(json|jpg|png|jpeg|gif)$'
     ]);
+
+    Route::post('file', function (Request $request,$fileName) {
+
+        $pathFile = $request->fileName->storeAs('uploads', $fileName);
+
+        if (Storage::exists("uploads/$fileName")){
+            return Storage::response("uploads/$fileName");
+        }
+         //si no se encuentra lanzamos un error 404.
+         abort(404);
+
+    })->where([
+        'file' => '(.*?)\.(json|jpg|png|jpeg|gif)$'
+    ])->name('jsonfile');
 
 
     //How to delete multiple row with checkbox using Ajax

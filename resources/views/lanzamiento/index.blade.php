@@ -64,31 +64,31 @@
                         <td>
                             @if(Helper::estatus($evaluado->status)=='Finalizada')
                                 <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24">preview</i></span>
+                                <span><i class="material-icons md-24">question_answer</i></span>
                             @else
                                 <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24 text-dark md-inactive">preview</i></span>
+                                <span><i class="material-icons md-24 text-dark md-inactive">question_answer</i></span>
                             @endif
 
                         </td>
                         <td>
                             @if(Helper::estatus($evaluado->status)=='Finalizada')
                                 <a href="{{route('resultados.finales', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24">table_view</i></span>
+                                <span><i class="material-icons md-24">score</i></span>
                             @else
                                 <a href="{{route('resultados.finales', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24 text-dark md-inactive">table_view</i></span>
+                                <span><i class="material-icons md-24 text-dark md-inactive">score</i></span>
                             @endif
 
                         </td>
                         <td>
                             @if(Helper::estatus($evaluado->status)=='Finalizada')
                                 <a href="{{route('resultados.graficas', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24">assessment</i></span>
+                                <span><i class="material-icons md-24">pie_chart</i></span>
                             @else
                             <a href="{{route('resultados.graficas', $evaluado->id)}}" >
 
-                                <span><i class="material-icons md-24 text-dark md-inactive">assessment</i></span>
+                                <span><i class="material-icons md-24 text-dark md-inactive">pie_chart</i></span>
                             @endif
 
                         </td>

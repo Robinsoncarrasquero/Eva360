@@ -3,23 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Arr;
-
 use Illuminate\Http\Request ;
 use App\Evaluado;
 use App\EmailSend;
 use App\Competencia;
 use App\Evaluacion;
-use Illuminate\Mail\Message;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Redirect;
-use phpDocumentor\Reflection\Types\Null_;
-use SebastianBergmann\Type\NullType;
-
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EvaluacionEnviada;
-
 use App\Http\Requests\EvaluacionCreateRequest;
 use Illuminate\Database\QueryException;
+use app\Helpers\Helper;
 
 class LanzarPruebaController extends Controller
 {
@@ -130,7 +123,7 @@ class LanzarPruebaController extends Controller
             //Creamos la Evaluacion con los datos solo de las competencias
             foreach($competencias as $key=>$competencia){
                 $evaluacion = new Evaluacion();
-                $evaluacion->resultado=0;
+                $evaluacion->resultado=Helper::estatus('Inicio');
                 $evaluacion->competencia_id=$competencia->id;
                 try {
                     //Salvamos a la evaluacion
@@ -158,9 +151,9 @@ class LanzarPruebaController extends Controller
 
             //Creamos un objeto para pasarlo a la clase Mailable
             $data = new EmailSend();
-
             $data->nameEvaluador=$evaluador->name;
             $data->relation =$evaluador->relation;
+
             //$data->token=$evaluador->remember_token;
             $data->linkweb =$root."/evaluacion/$evaluador->remember_token/evaluacion";
             $data->nameEvaluado =$evaluado->name;
@@ -168,8 +161,6 @@ class LanzarPruebaController extends Controller
         }
 
         return \redirect()->route('lanzar.index')->with('success','Hurra!! La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
-
-
     }
 
 

@@ -1,13 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Evaluacion 360 Resultados</title>
-</head>
+{{-- @extends('layout')
 
+@section('title',"Lanzamiento de Prueba")
+
+@section('content') --}}
+
+{{-- <div class="container"> --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
 <body>
 
 <div id="container"></div>
-</body>
+
+<div class="clearfix">
+    <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+</div>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
@@ -73,4 +85,5 @@
         }
 });
 </script>
+</body>
 </html>

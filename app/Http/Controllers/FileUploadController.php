@@ -17,7 +17,7 @@ class FileUploadController extends Controller
 {
 
     /**
-     * Muesta el formulario para subir el archivo
+     * Muesta el formulario para subir el archivo tipo json
      */
     public function index()
     {
@@ -27,8 +27,8 @@ class FileUploadController extends Controller
     }
 
     /**
-     * Sube el archivo al servidor en la carpeta de upload y redirecciona a una vista para validar
-     * los datos recibidos en el archivo subido.
+     * Sube el archivo tipo json al servidor a la carpeta upload y luego redirecciona a una vista para validar
+     * los datos recibidos en el archivo.
      */
     public function upload(Request $request)
     {
@@ -74,15 +74,15 @@ class FileUploadController extends Controller
     }
 
     /**
-     * Presenta los datos recibidos en el archivo los valida y los salva el archivo en dos
-     * archivos evaluado y evaluadores
+     * Crea el registro del evaluado y los evaluadores relacionados
+     * que realizaran la evaluacion
      */
-    public function save(FileJson $request,$fileName){
+    public function save(FileJson $fileJsonRequest,$fileName){
 
 
-        $name=$request->input('name.*');
-        $relation=$request->input('relation.*');
-        $email=$request->input('email.*');
+        $name=$fileJsonRequest->input('name.*');
+        $relation=$fileJsonRequest->input('relation.*');
+        $email=$fileJsonRequest->input('email.*');
 
         $pathFile = 'uploads/'.$fileName;
 
@@ -94,7 +94,7 @@ class FileUploadController extends Controller
             $evaluado= new Evaluado();
             $evaluado->name=$evaluadoJson['Evaluado'];
             $evaluado->status=0;
-            $evaluado->word_key='';
+            $evaluado->word_key=$fileName;
             $evaluado->save();
 
             for ($i=0; $i < count($name); $i++) {

@@ -18,7 +18,7 @@ class CreateEvaluadoresTable extends Migration
             $table->string('name',50)->notnualble();
             $table->string('email',100)->notnualble();
             $table->string('relation',10)->notnualble();
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->rememberToken();
             $table->foreignId('evaluado_id')->constrained()->onDelete('cascade');
             $table->timestamps();

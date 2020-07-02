@@ -7,10 +7,7 @@ use App\Evaluador;
 use App\Evaluacion;
 use App\Evaluado;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Float_;
-use Illuminate\Support\Arr;
-use PhpParser\Node\Stmt\Foreach_;
-
+use app\Helpers\Helper;
 class EvaluacionController extends Controller
 {
 
@@ -36,10 +33,8 @@ class EvaluacionController extends Controller
     }
 
     /**
-     * El contolador recibe el token del evaluador y muestra la lista de competencias relacionadas.
+     * El controlador recibe el token del evaluador y muestra la lista de competencias relacionadas.
      */
-
-
     public function competencias($token)
     {
 
@@ -49,7 +44,7 @@ class EvaluacionController extends Controller
         $evaluacions = $evaluador->evaluaciones;
 
         //Evaluacion ddel evaluado esta terminada es redirigido a la lista de usuarios
-        if ($evaluador->status==2){
+        if ($evaluador->status==Helper::estatus('Finalizada')){
             $evaluado_id=$evaluado->id;
 
             $title="Lista de Evaluados";
@@ -64,7 +59,6 @@ class EvaluacionController extends Controller
         return \view('evaluacion.competencias',\compact('evaluacions','evaluador','evaluado'));
 
     }
-
 
     /**
      * Controlador para cargar las preguntas a la vista.
@@ -103,27 +97,37 @@ class EvaluacionController extends Controller
             ]);
 
 
-        $evaluacion=Evaluacion::find($evaluacion_id);
-        //Tomamos el grado
+        $evaluacion=Evaluacion::findOrFail($evaluacion_id);
 
+        //Obtenemos el modelo de grado
         $modelgrado = $evaluacion->competencia->grados->find($request->gradocheck)->first;
 
+        //Obtenemos el modelo la frecuencia
         $modelfrecuencia = Frecuencia::find($request->frecuenciacheck)->first;
 
         //Actualizamos el grado en la evaluacion
         $evaluacion->grado=$modelgrado->grado->grado;
+
+        //Actualizamos la ponderacion
         $evaluacion->ponderacion= $modelgrado->grado->ponderacion;
+
         //Actualizamos la frecuencia
         $evaluacion->frecuencia=$modelfrecuencia->valor->valor;
+
+        //Obtenemos el resultado
         $evaluacion->resultado=$modelfrecuencia->valor->valor * $modelgrado->grado->ponderacion/100;
 
         $evaluacion->save();
 
-        //retomamos el token
+        //redirigimos al usuario a ruta de sus competencias con el token del evaluador
         $token=$evaluacion->evaluador->remember_token;
         return \redirect()->route('evaluacion.competencias',$token);
+
     }
 
+    /**
+     * Controlador para indicar finalizaada la prueba del evaluador
+     */
     public function finalizar($evaluador_id ){
 
         $evaluador = Evaluador::findOrFail($evaluador_id);
@@ -144,23 +148,23 @@ class EvaluacionController extends Controller
 
         $evaluado= $evaluador->evaluado;
 
-        //Flag para indicar que le evaluador a culimnado la prueba
-        $evaluador->status=2; //0=Inicio,1=Lanzada, 2=Finalizada
+        //Flag para indicar que le evaluador a culminado la prueba
+        $evaluador->status=Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
         $evaluador->save();
 
 
         //Excluimos a los evaluadores que han finzalizados
         $listaDeEvaluadores= $evaluado->evaluadores;
         $evaluacionesPendientes = $listaDeEvaluadores->reject(function ($eva) {
-            return $eva->status==2;
+            return $eva->status==Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
         })
         ->map(function ($eva) {
             return $eva->status;
         });
 
-        //Sin evaluaciones pendientes de avanza a finalizar el status de finalizado. Este flag es para el administrador
+        //Cambia el status del evaluador finalizada(2) la evaluacion
         if ($evaluacionesPendientes->count()==0){
-            $evaluado->status=2; //0=Inicio,1=Lanzada, 2=Finalizada
+            $evaluado->status= Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
             $evaluado->save();
         }
 
@@ -168,7 +172,6 @@ class EvaluacionController extends Controller
         ->withSuccess("Evaluacion de $evaluado->name finalizada exitosamente");
 
     }
-
 
 
 }
