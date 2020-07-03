@@ -17,8 +17,8 @@ class CreateGradoCompetenciasTable extends Migration
             $table->id();
             $table->string('grado',1);
             $table->text('description')->notnullable();
-            $table->unsignedDecimal('ponderacion',5,2);
-            $table->foreignId('competencia_id')->constrained();
+            $table->integer('ponderacion')->default(0);
+            $table->foreignId('competencia_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

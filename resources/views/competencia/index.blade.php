@@ -9,7 +9,7 @@
 
     <div class="col-sm-12">
 
-        <h1 class="display-3">Lista de Competencias</h1>
+        <h1 class="display-5">Lista de Competencias</h1>
         <div id="flash-message">
             @include('flash-message')
 
@@ -18,9 +18,9 @@
             <a style="margin: 19px;" href="{{ route('competencia.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>
 
-        <table class="table table-light ">
+        <table class="table table-light table-striped ">
             <thead>
-                <th>id</th>
+                <th>#</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Nivel Requerido</th>

@@ -17,7 +17,7 @@ class CreateCompetenciasTable extends Migration
             $table->id();
             $table->string('name',50)->notnullable()->unique();
             $table->text('description',1000)->notnullable();
-            $table->unsignedDecimal('nivelrequerido',5,2);
+            $table->integer('nivelrequerido')->default(0);
             $table->string('tipo',3)->nullable();
             $table->timestamps();
         });

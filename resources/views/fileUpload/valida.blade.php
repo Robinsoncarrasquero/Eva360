@@ -44,7 +44,7 @@
                             <h4>{{ $evaluadoArray['Evaluado']}}</h4>
                             </th>
                         </tr>
-                        <th>Evaluadores</th>
+                        <th>Evaluador</th>
                         <th>Relation</th>
                         <th>Email</th>
                         </thead>

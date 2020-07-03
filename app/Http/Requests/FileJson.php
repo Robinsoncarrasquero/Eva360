@@ -36,9 +36,9 @@ class FileJson extends FormRequest
     public function messages()
     {
         return [
-            'name.*'=> 'El Nombre es requerido, debe indicarlo correctamente',
-            'email.*'=> 'El Email is requerido, debe especificarlo correctamente',
-            'relation.*' => 'La Relation es requerida, debe ingresar un tipo de relacion (parner, supervisor,externo,etc)',
+            'name.*.required'=> 'El Nombre es requerido, debe indicarlo correctamente',
+            'email.*.required'=> 'El Email is requerido, debe especificarlo correctamente',
+            'relation.*.required' => 'La Relation es requerida, debe ingresar un tipo de relacion (parner, supervisor,externo,etc)',
         ];
     }
     public function save(){

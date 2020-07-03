@@ -46,7 +46,47 @@
 
             </select>
         </div>
-        <button type="submit" class="btn btn-primary"><i class="material-icons">save</i></button>
+        <table class="table table-light">
+            <thead>
+                <table class="table table-light">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Grado</th>
+                            <th>Pregunta</th>
+                            <th>Ponderacion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($competencia->grados as $key=>$value)
+                        <tr>
+                            <td>
+                                {{ $key }}
+                                <input hidden type="text" name="gradoid[]" value="{{ $value->id }}">
+                            </td>
+                            <td>
+                                <input type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">
+                            </td>
+                            <td>
+                                <textarea cols="50" rows="4" name="gradoDescription[]">{{ old('gradoDescription.'.$key, $value->description)}}</textarea>
+                            </td>
+                            <td>
+                                <input type="text" name="gradoPonderacion[]" value="{{ old('gradoPonderacion.'.$key, $value->ponderacion)}}">
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+
+            </thead>
+
+        </table>
+
+        <div class="clearfix">
+            <a href="{{route('competencia.index')}}" class="btn btn-dark float-left">Back</a>
+            <button type="submit" class="btn btn-primary float-right">Save</button>
+
+        </div>
+
     </form>
 </div>
 

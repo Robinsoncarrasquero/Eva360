@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
 use App\Competencia;
+use App\Grado;
+use App\Http\Requests\CompetenciaCreateRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CompetenciaController extends Controller
 {
@@ -31,7 +34,13 @@ class CompetenciaController extends Controller
     public function create()
     {
 
-        return view('competencia.create');
+        //Buscamos el json configurado de grado
+        $jsonfile = Storage::disk('local')->get('config/grado.json');
+
+        //Convertimos en una array
+        $filegrado=collect(json_decode($jsonfile));
+
+        return view('competencia.create',compact('filegrado'));
     }
 
     /**
@@ -40,44 +49,29 @@ class CompetenciaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompetenciaCreateRequest  $formrequest)
     {
-
-        $request->validate([
-            'name'=>'required',
-            'description'=>'required',
-            'nivelrequerido'=>'required|integer|between:0,100',
-            'tipo'=>'required'
-        ],[
-            'name.required'=>'Nombre es requerido',
-            'description.required'=>'Descripcion es requerida',
-            'nivelrequerido.required'=>'El nivel es requerido y deber ser entero de 0 a 100',
-            'tipo.required'=>'El tipo es requerido'
-        ]);
-
         $competencia = new Competencia();
-
-        $competencia->name=$request->name;
-        $competencia->description=$request->description;
-        $competencia->nivelrequerido = $request->nivelrequerido;
-        $competencia->tipo = $request->tipo;
+        $competencia->name=$formrequest->name;
+        $competencia->description=$formrequest->description;
+        $competencia->nivelrequerido = $formrequest->nivelrequerido;
+        $competencia->tipo = $formrequest->tipo;
         $competencia->save();
 
+        //Creamos los grados con las preguntas
+        $gName=$formrequest->input('gradoName.*');
+        $gDescription=$formrequest->input('gradoDescription.*');
+        $gPonderacion=$formrequest->input('gradoPonderacion.*');
+
+        for ($i=0; $i < count($gName); $i++) {
+            $grado= new Grado();
+            $grado->grado=$gName[$i];
+            $grado->description=$gDescription[$i];
+            $grado->ponderacion=$gPonderacion[$i];
+            $competencia->grados()->save($grado);
+        }
         return \redirect('competencia')->withSuccess('Competencia creada exitosamente');
 
-
-
-    }
-
-    /**
-     * Display the specified competencia.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -89,8 +83,8 @@ class CompetenciaController extends Controller
     public function edit($competencia)
     {
         $competencia = Competencia::findOrFail($competencia);
-        return \view('competencia.edit',\compact('competencia'));
 
+        return \view('competencia.edit',\compact('competencia'));
     }
 
     /**
@@ -100,37 +94,37 @@ class CompetenciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $competencia)
+    public function update(CompetenciaCreateRequest $formrequest, $competencia)
     {
-        //
-        $request->validate([
-            'name'=>'required',
-            'description'=>'required',
-            'nivelrequerido'=>'required|integer|between:0,100',
-            'tipo'=>'required'
-        ],[
-            'name.required'=>'Nombre es requerido',
-            'description.required'=>'Descripcion es requerida',
-            'nivelrequerido.required|integer'=>'El nivel es requerido y deber ser entero de 0 a 100',
-            'tipo.required'=>'El tipo es requerido'
-        ]);
 
         $competencia = Competencia::findOrFail($competencia);
 
         try {
-            $competencia->name=$request->name;
-            $competencia->description=$request->description;
-            $competencia->nivelrequerido = $request->nivelrequerido;
-            $competencia->tipo = $request->tipo;
+            $competencia->name=$formrequest->name;
+            $competencia->description=$formrequest->description;
+            $competencia->nivelrequerido = $formrequest->nivelrequerido;
+            $competencia->tipo = $formrequest->tipo;
             $competencia->save();
+
+            //Creamos los grados con las preguntas
+            $gName=$formrequest->input('gradoName.*');
+            $gDescription=$formrequest->input('gradoDescription.*');
+            $gPonderacion=$formrequest->input('gradoPonderacion.*');
+            $gradoid=$formrequest->input('gradoid');
+            for ($i=0; $i < count($gradoid); $i++) {
+                $grado= Grado::find($gradoid[$i]);
+                //$grado->grado=$gName[$i];
+                $grado->description=$gDescription[$i];
+                $grado->ponderacion=$gPonderacion[$i];
+                $grado->save();
+            }
+
         } catch (QueryException $e) {
             return redirect()->back()
-            ->withErrors('Error imposible Guardar este registro, revise los datos e intente nuevamante.');
+            ->withErrors('Error imposible Guardar este registro. Revise los datos del formulario e intente nuevamante.');
         }
 
-
-        return \redirect('competencia')->withSuccess('Competencia : '.$request->name.' Actualizada exitosamente');
-
+        return \redirect('competencia')->withSuccess('Competencia : '.$formrequest->name.' Actualizada exitosamente');
     }
 
     /**
@@ -141,7 +135,6 @@ class CompetenciaController extends Controller
      */
     public function destroy($competencia)
     {
-
         $competencia = Competencia::find($competencia);
         try {
             $competencia->delete();
@@ -149,7 +142,6 @@ class CompetenciaController extends Controller
             return redirect()->back()->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas evaluaciones realizadas.');
         }
 
-        return redirect('competencia')->withSuccess('Competencia eliminada con exito');
-
+        return redirect('competencia')->withSuccess('La Competencia ha sido eliminada con exito!!');
     }
 }

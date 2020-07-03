@@ -50,15 +50,35 @@
                     @foreach($evaluados as $evaluado)
                     <tr>
                         <td>{{$evaluado->name}}</td>
-                        <td>{{Helper::estatus($evaluado->status) }}</td>
                         <td>
-                            @if(Helper::estatus($evaluado->status)=='Inicio')
+                            <div class="form-check form-check-inline">
+                                @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                <input id="inicio" class="form-check-input" type="checkbox" name=""  checked>
+                                <input id="medio" class="form-check-input" type="checkbox" name="" checked >
+                                <input id="fin" class="form-check-input" type="checkbox" name=""  checked >
+                                @endif
+
+                                @if(Helper::estatus($evaluado->status)=='Inicio')
+                                <input id="inicio" class="form-check-input" type="checkbox" name="" value="false">
+                                <input id="medio" class="form-check-input" type="checkbox" name="" value="false">
+                                <input id="fin" class="form-check-input" type="checkbox" name="" value="false">
+                                @endif
+                                @if(Helper::estatus($evaluado->status)=='Lanzada')
+                                <input id="inicio" class="form-check-input" type="checkbox" name="" checked value="false">
+                                <input id="medio" class="form-check-input" type="checkbox" name="" checked value="false">
+                                <input id="fin" class="form-check-input" type="checkbox" name="" value="false">
+                                @endif
+                            </div>
+                        </td>
+                        <td>
+                            @if(Helper::estatus($evaluado->status)!='Finalizada')
                                 <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
                                 <span><i class="material-icons ">send</i></span></a>
                             @else
                                 <span><i class="material-icons">hourglass_full</i></span></a>
 
                             @endif
+
 
                         </td>
                         <td>
