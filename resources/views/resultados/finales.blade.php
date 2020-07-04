@@ -40,7 +40,7 @@
 
                 @foreach($competencias as $key=>$value)
                     <div class="table ">
-                        <table id="{{$key}}" class="table  table-bordered">
+                        <table id="{{$key}}" class="table table-bordered">
                         <thead>
                         <tr>
                             <th class="text text-center alert alert alert-warning" colspan="2">
@@ -52,9 +52,7 @@
 
                         </thead>
                         <tbody>
-
-
-                       @foreach ($value['data'] as $item)
+                        @foreach ($value['data'] as $item)
 
                         <tr>
                             <td >{{ $item['name']}}</td>
@@ -64,11 +62,13 @@
                        @endforeach
                        <tr>
                         <td class="text text-center"><strong>Resultado Final( sobre {{ count($value['data']) }} Grupos)</strong></td>
-                        <td class="alert alert-dark">{{ $value['eva360']}}</td>
+                        <td class="alert alert-dark">{{ number_format($value['eva360'],2)}}</td>
                        </tr>
 
-                    </tbody>
+                      </tbody>
+
                     </table>
+
                 @endforeach
 
             </div>

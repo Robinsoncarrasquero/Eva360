@@ -38,11 +38,15 @@
         <div class="form-group">
             <label for="tipo">Tipo</label>
             <select id="tipo" class="form-control" name="tipo">
-                @if ($competencia->tipo==Helper::tipoCompetencia($competencia->tipo))
-                    <option selected value="{{$competencia->tipo}}">{{ Helper::tipoCompetencia($competencia->tipo) }}</option>
-                @else
-                    <option value="{{ $competencia->tipo }}">{{ Helper::tipoCompetencia($competencia->tipo) }}</option>
-                @endif
+
+                @foreach ($tipos as $tipo)
+                     @if ($competencia->tipo==$tipo)
+                        <option selected value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
+                     @else
+                        <option          value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
+
+                     @endif
+                @endforeach
 
             </select>
         </div>

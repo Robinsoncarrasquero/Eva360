@@ -45,11 +45,13 @@
                         <div class="form-group">
                             <label for="tipo">Tipo</label>
                             <select id="tipo" class="form-control" name="tipo" >
-                                <option value="G" @if(old('tipo')=='G') selected @endif>General</option>
-                                <option value="T" @if(old('tipo')=='T') selected @endif>Tecnica</option>
-                                <option value="S" @if(old('tipo')=='S') selected @endif>Supervisor</option>
-                                <option value="E" @if(old('tipo')=='E') selected @endif>Especifica</option>
-
+                                @foreach ($tipos as $tipo)
+                                    @if (old('tipo')==$tipo->id)
+                                        <option selected value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
+                                    @else
+                                        <option          value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
 

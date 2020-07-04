@@ -50,7 +50,7 @@
                 @foreach ($grados as $grado)
                 <tr data-id="{{" $grado->id "}}">
                     <th scope="row">{{ $grado->id }}</th>
-                    <td>{{$grado->name}}</td>
+                    <td>{{$grado->grado}}</td>
                     <td>{{$grado->description}}</td>
                     <td>
 

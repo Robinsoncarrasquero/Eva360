@@ -51,24 +51,26 @@
                     <tr>
                         <td>{{$evaluado->name}}</td>
                         <td>
-                            <div class="form-check form-check-inline">
+                            <div class="status-progress">
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                <input id="inicio" class="form-check-input" type="checkbox" name=""  checked>
-                                <input id="medio" class="form-check-input" type="checkbox" name="" checked >
-                                <input id="fin" class="form-check-input" type="checkbox" name=""  checked >
+                                    <span id="inicio" class="radio-checkeado" ></span>
+                                    <span id="medio" class="radio-checkeado" ></span>
+                                    <span id="final" class="radio-checkeado" ></span>
                                 @endif
 
                                 @if(Helper::estatus($evaluado->status)=='Inicio')
-                                <input id="inicio" class="form-check-input" type="checkbox" name="" value="false">
-                                <input id="medio" class="form-check-input" type="checkbox" name="" value="false">
-                                <input id="fin" class="form-check-input" type="checkbox" name="" value="false">
+                                    <span id="inicio" class="radio-no-checkeado" ></span>
+                                    <span id="medio" class="radio-no-checkeado" ></span>
+                                    <span id="final" class="radio-no-checkeado"></span>
                                 @endif
+
                                 @if(Helper::estatus($evaluado->status)=='Lanzada')
-                                <input id="inicio" class="form-check-input" type="checkbox" name="" checked value="false">
-                                <input id="medio" class="form-check-input" type="checkbox" name="" checked value="false">
-                                <input id="fin" class="form-check-input" type="checkbox" name="" value="false">
+                                    <span id="inicio" class="radio-checkeado"></span>
+                                    <span id="medio" class="radio-checkeado"></span>
+                                   <span id="final" class="radio-no-checkeado"></span>
                                 @endif
                             </div>
+                            <span>{{ Helper::estatus($evaluado->status) }}</span>
                         </td>
                         <td>
                             @if(Helper::estatus($evaluado->status)!='Finalizada')
@@ -122,13 +124,17 @@
 
             @else
 
-            <div class="alert-info">
+            <div class="alert alert-info">
                 <p>No hay usuarios registrados</p>
             <div>
 
             @endif
 
-            {{ $evaluados->links() }}
+            <div class=" d-flex justify-content-center">
+                {{ $evaluados->links() }}
+                {{-- {{ $evaluados->appends(["name"=>$evaluado->name])  }} --}}
+
+            </div>
 
         </div>
 

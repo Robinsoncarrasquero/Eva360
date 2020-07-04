@@ -35,7 +35,7 @@
                     <td>{{ $competencia->name }}</td>
                     <td>{{ $competencia->description }}</td>
                     <td>{{ $competencia->nivelrequerido }}</td>
-                    <td>{{ $competencia->tipo }}</td>
+                    <td>{{ $competencia->tipo->tipo}}</td>
                     <td><a href="{{ route('competencia.edit',$competencia) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                     <td>
                         <form action="{{ route('competencia.destroy',$competencia) }}" method="POST">

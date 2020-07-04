@@ -28,9 +28,44 @@
     <style>
         .spellcheck{
         color:darkgreen;
+        }
+
+        .radio-checkeado,.radio-no-checkeado{
+            margin-left: 2px;
+        }
+
+        .radio-checkeado{
+        width: 1em;
+        height: 1em;
+        border-radius: 3ex;
+        top: -2px;
+        left: -3px;
+        position: relative;
+        background-color:green;
+        content: '';
+        visibility: visible;
+        border: 1px solid white;
+        display: inline-block;
+
+        }
 
 
-    }
+        .radio-no-checkeado{
+        width: 1em;
+        height: 1em;
+        border-radius: 3ex;
+        top: -2px;
+        left: -3px;
+        position: relative;
+        background-color:orange;
+        content: '';
+        visibility: visible;
+        border: 1px solid white;
+        display: inline-block;
+
+        }
+
+
     </style>
 
   </head>

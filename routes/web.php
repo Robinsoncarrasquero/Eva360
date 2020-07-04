@@ -52,6 +52,9 @@ Route::get('/', function () {
 Route::resource('competencia', 'CompetenciaController');
 
 
+/**Resource de tipo de competencia */
+Route::resource('tipo', 'TipoController');
+
 Route::get('chart', 'ChartController@index');
 
 Route::get('/error', function () {

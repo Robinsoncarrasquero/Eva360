@@ -7,7 +7,10 @@ use Illuminate\Database\QueryException;
 
 use App\Competencia;
 use App\Grado;
+use App\Tipo;
 use App\Http\Requests\CompetenciaCreateRequest;
+use Brick\Math\BigInteger;
+use Brick\Math\BigNumber;
 use Illuminate\Support\Facades\Storage;
 
 class CompetenciaController extends Controller
@@ -21,7 +24,6 @@ class CompetenciaController extends Controller
     {
         //
         $competencias=Competencia::all();
-
         return \view('competencia.index',compact('competencias'));
 
     }
@@ -34,13 +36,14 @@ class CompetenciaController extends Controller
     public function create()
     {
 
-        //Buscamos el json configurado de grado
+        //Buscamos el json configurado con la tabla de grado
         $jsonfile = Storage::disk('local')->get('config/grado.json');
 
         //Convertimos en una array
         $filegrado=collect(json_decode($jsonfile));
+        $tipos = Tipo::all();
 
-        return view('competencia.create',compact('filegrado'));
+        return view('competencia.create',compact('filegrado','tipos'));
     }
 
     /**
@@ -55,7 +58,7 @@ class CompetenciaController extends Controller
         $competencia->name=$formrequest->name;
         $competencia->description=$formrequest->description;
         $competencia->nivelrequerido = $formrequest->nivelrequerido;
-        $competencia->tipo = $formrequest->tipo;
+        $competencia->tipo_id = $formrequest->tipo;
         $competencia->save();
 
         //Creamos los grados con las preguntas
@@ -83,8 +86,9 @@ class CompetenciaController extends Controller
     public function edit($competencia)
     {
         $competencia = Competencia::findOrFail($competencia);
+        $tipos = Tipo::all();
 
-        return \view('competencia.edit',\compact('competencia'));
+        return \view('competencia.edit',\compact('competencia','tipos'));
     }
 
     /**
@@ -103,11 +107,10 @@ class CompetenciaController extends Controller
             $competencia->name=$formrequest->name;
             $competencia->description=$formrequest->description;
             $competencia->nivelrequerido = $formrequest->nivelrequerido;
-            $competencia->tipo = $formrequest->tipo;
+            $competencia->tipo_id = $formrequest->tipo;
             $competencia->save();
 
             //Creamos los grados con las preguntas
-            $gName=$formrequest->input('gradoName.*');
             $gDescription=$formrequest->input('gradoDescription.*');
             $gPonderacion=$formrequest->input('gradoPonderacion.*');
             $gradoid=$formrequest->input('gradoid');
@@ -139,7 +142,8 @@ class CompetenciaController extends Controller
         try {
             $competencia->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas evaluaciones realizadas.');
+            return redirect()->back()
+            ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas evaluaciones realizadas.');
         }
 
         return redirect('competencia')->withSuccess('La Competencia ha sido eliminada con exito!!');
