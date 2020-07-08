@@ -26,6 +26,7 @@ class FileJson extends FormRequest
     public function rules()
     {
         return [
+                'nameevaluado'=>'required',
                 'name.*'       => 'required|max:50',
                 'relation.*' => 'required|max:20',
                 'email.*' => [new CheckEmailDns()],
@@ -36,6 +37,7 @@ class FileJson extends FormRequest
     public function messages()
     {
         return [
+            'nameevaluado.required'=> 'El Nombre del evaluador es requerido, debe indicarlo correctamente',
             'name.*.required'=> 'El Nombre es requerido, debe indicarlo correctamente',
             'email.*.required'=> 'El Email is requerido, debe especificarlo correctamente',
             'relation.*.required' => 'La Relation es requerida, debe ingresar un tipo de relacion (parner, supervisor,externo,etc)',

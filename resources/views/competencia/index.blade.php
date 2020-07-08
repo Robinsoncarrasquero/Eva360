@@ -38,7 +38,7 @@
                     <td>{{ $competencia->tipo->tipo}}</td>
                     <td><a href="{{ route('competencia.edit',$competencia) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                     <td>
-                        <form action="{{ route('competencia.destroy',$competencia) }}" method="POST">
+                        <form  action="{{ route('competencia.destroy',$competencia) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>

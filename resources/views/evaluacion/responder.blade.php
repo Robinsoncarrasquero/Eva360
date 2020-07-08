@@ -33,7 +33,6 @@
 
     @if ($evaluacion->competencia->grados->isNotEmpty())
             <form action="{{ route('evaluacion.store',$evaluacion) }}" method="POST" id="form-select">
-                {{-- {{ method_field('PUT') }} --}}
                 {{ csrf_field() }}
     <div class="form-row">
         <div class="form-group col-md-8">
@@ -49,7 +48,6 @@
                 <tbody>
 
                 @foreach ($evaluacion->competencia->grados as $grado)
-
                      <tr data-id="{{" $grado->id "}}" class="filas" >
                         <th scope="row">{{ $grado->grado }}</th>
                         <td>{{$grado->description}}</td>
@@ -69,26 +67,20 @@
 
                         </td>
                         <td>
-
-
                             @foreach ($frecuencias  as $frecuencia)
 
-                                <div class="form-check checkbox-inline ">
-                                    <label for="frecuencia[]" class="form-check-label">{{ $frecuencia->name}}</label>
-                                    @if($evaluacion->frecuencia===$frecuencia->valor && $evaluacion->grado===$grado->grado)
-                                        <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
-                                        value="{{"$frecuencia->id"}}" name="frecuenciacheck[]" checked >
-                                    @else
-                                        <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
-                                        value="{{"$frecuencia->id"}}" name="frecuenciacheck[]" >
-                                    @endif
-                                </div>
+                            <div class="form-check checkbox-inline ">
+                                <label for="frecuencia[]" class="form-check-label">{{ $frecuencia->name}}</label>
+                                @if($evaluacion->frecuencia===$frecuencia->valor && $evaluacion->grado===$grado->grado)
+                                    <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
+                                    value="{{"$frecuencia->id"}}" name="frecuenciacheck[]" checked >
+                                @else
+                                    <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
+                                    value="{{"$frecuencia->id"}}" name="frecuenciacheck[]" >
+                                @endif
+                            </div>
 
                             @endforeach
-
-
-
-
                         </td>
 
                     </tr>

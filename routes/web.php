@@ -45,12 +45,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 /**
- * Resource de competencias
+ * Resource de Evaluado para ingresar manualmente un Evaluado con sus evaluadores
+ *
+ */
+
+Route::resource('evaluado', 'EvaluadoController');
+
+/**
+ * Resource de tipo de competencia
  *
  */
 Route::resource('competencia', 'CompetenciaController');
-
 
 /**Resource de tipo de competencia */
 Route::resource('tipo', 'TipoController');

@@ -16,7 +16,11 @@
 
         </div>
 
-        <div class="card-header text text-success">Subir archivo en el formato JSON con los datos basicos del Evaluado y sus evaluadores</div>
+        <div class=" card-header">
+            <h5 class="display-4">Subir archivo en el formato JSON con los datos basicos del Evaluado y sus Evaluadores</h5>
+
+        </div>
+
         <div class="card-header small text-muted">Formato:<br>
             <code>
             {<br>
@@ -57,7 +61,7 @@
                     <small id="fileHelp" class="form-text text-muted">Por favor seleccion un archivo</small>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Subir archivo</button>
 
                 </div>
             </form>

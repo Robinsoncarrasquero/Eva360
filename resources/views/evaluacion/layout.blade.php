@@ -92,7 +92,7 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">Sistemas de Evaluaciones eva360</span>
+        <span class="text-muted">Sistemas de Evaluaciones</span>
       </div>
     </footer>
 

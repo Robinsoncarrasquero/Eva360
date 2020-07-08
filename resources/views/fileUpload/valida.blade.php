@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="text text-left">
-                        <h4>Revise la informacion y actualice cualquier dato antes de Guardar la data.</h4>
+                        <h4>Revise la informacion y actualice cualquier dato y presione Save para guardar la data.</h4>
                     </div>
 
                 </div>
@@ -40,8 +40,9 @@
                         <table id="evaluado" class="table  table-bordered">
                         <thead>
                         <tr>
-                            <th class="text text-center  title alert-warning" colspan="3">
-                            <h4>{{ $evaluadoArray['Evaluado']}}</h4>
+                            <th class="text text-left alert-dark" colspan="3">
+                            <label for="nameevaluado">Nombre de Evaluado</label>
+                            <input  type="text" name="nameevaluado" value="{{ $evaluadoArray['Evaluado'] }}">
                             </th>
                         </tr>
                         <th>Evaluador</th>
@@ -66,7 +67,7 @@
 
                     <div class="clearfix">
                         <span class="float-left"><a href="{{ route('json.fileindex')}}" class="btn btn-dark btn-lg">Back</a></span>
-                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Guardar</button>
+                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Save</button>
 
                     </div>
 

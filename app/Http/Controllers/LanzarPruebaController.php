@@ -39,7 +39,7 @@ class LanzarPruebaController extends Controller
         $title="Competencias";
 
         //Obtenemos los evaluadores del evaluador
-        $evaluadores = Evaluado::find($evaluado->id)->evaluadores;
+        $evaluadores = Evaluado::findOrFail($evaluado->id)->evaluadores;
 
         //Obtenemos las competencias
         $competencias = Competencia::all();
