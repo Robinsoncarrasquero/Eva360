@@ -59,7 +59,7 @@ class EvaluadoController extends Controller
 
 
         $fileName='evaluado.json';
-        $pathFile = 'config/.'.$fileName;
+        $pathFile = 'config/'.$fileName;
         if (Storage::exists($pathFile)){
             $evaluado= new Evaluado();
             $evaluado->name=$fileJsonRequest->nameevaluado;

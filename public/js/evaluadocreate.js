@@ -47,6 +47,7 @@ $(document).ready(function () {
         var input1 =$("<input/>",{
             type: "text",
             name: "name[]",
+            maxlength:100,
             placeholder: "Ingrese el Nombre del Evaluador"
         });
         var td1=$('<td/>');
@@ -55,6 +56,7 @@ $(document).ready(function () {
         var input2 =$("<input/>",{
             type: "text",
             name: "relation[]",
+            maxlength:10,
             placeholder: "Relacion con el evaluado (Jefe,Partner,Cliente,XYZ)"
         });
         var td2=$('<td/>');
@@ -64,6 +66,7 @@ $(document).ready(function () {
             type: "email",
             name: "email[]",
             value:'boss@example.com',
+            maxlength:100,
             placeholder: "Ingrese un email valido"
         });
         var td3=$('<td/>');

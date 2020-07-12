@@ -54,9 +54,9 @@
                             @foreach ($evaluadoArray['Evaluadores'] as $key=>$value)
 
                                 <tr>
-                                    <td><input type="text" name="name[]" value="{{$value->name}}"></td>
-                                    <td><input type="text" name="relation[]" value="{{$value->relation}}"></td>
-                                    <td><input type="email" name="email[]" value="{{$value->email}}"></td>
+                                    <td><input maxlength="50" type="text" name="name[]" value="{{$value->name}}"></td>
+                                    <td><input maxlength="10" type="text" name="relation[]" value="{{$value->relation}}"></td>
+                                    <td><input maxlength="100" type="email" name="email[]" value="{{$value->email}}"></td>
                                 </tr>
 
                             @endforeach

@@ -13,7 +13,6 @@
         <div id="flash-message">
             @include('flash-message')
 
-
         </div>
 
         <div class=" card-header">
@@ -44,16 +43,6 @@
 
          <div class="card-body">
 
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops ! </strong>Hemos encontrados un problema con su input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <form action="{{ route('json.fileupload') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

@@ -8,18 +8,18 @@
 
     <div class="panel panel-default">
 
-        <div class="col-md-12">
-
+        <div class=" col-sm-12">
             <div id="flash-message">
                 @include('flash-message')
             </div>
+
 
             <div class="panel panel pb-3">
 
                 <div class="clearfix">
 
                     <div class="alert alert-info text-center">
-                        <h5>Formulario para la creacion de un Evaluado con sus Evaluadores de forma <span class="text-danger">Automatica</span></h5>
+                        <h5>Formulario para la creacion de un Evaluado con sus Evaluadores de forma <span class="text-danger">Manual</span></h5>
                     </div>
 
                     <div class="text text-left">
@@ -36,17 +36,19 @@
                 <form action="{{ route('evaluado.store',$fileName) }}" method="POST" id="frm-evaluado">
                     @csrf
                     <div  class="card-header">
-                        <label for="nameevaluado">Nombre de Evaluado:</label>
-                        <input type="text" name="nameevaluado" value="{{$evaluadoArray['Evaluado'] }}">
-                            <div class="text text-sm-right">
-                                <button type="button" class="btnponer btn btn-dark"><i class="material-icons">library_add</library-add></i> </button>
+                        <div class="col-sm-12">
+                                <label for="nameevaluado">Nombre de la persona evaluar:</label>
+                                <input  class="col-sm-8" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}">
+                                <button type="button" class="btnponer btn btn-dark " ><i class=" material-icons">library_add</library-add></i> </button>
                             </div>
+
+                        </div>
 
                     </div>
 
 
                     <div class="table ">
-                        <table id="tableevaluado" class="table ">
+                        <table id="tableevaluado" class="table">
                         <thead>
                         <th>Evaluador</th>
                         <th>Relation</th>
@@ -54,12 +56,12 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($evaluadoArray['Evaluadores'] as $key=>$value)
+                            @foreach ($evaluadoArray['Evaluadores'] as $key=>$evaluador)
 
                                 <tr id="{{ $key }}">
-                                    <td><input type="text" name="name[]" value="{{old('name[]',$value->name)}}"></td>
-                                    <td><input type="text" name="relation[]" value="{{old('relation[]',$value->relation)}}"></td>
-                                    <td><input type="email" name="email[]" value="{{$value->email}}"></td>
+                                    <td><input type="text" maxlength="50" name="name[]" value="{{old('name.'.$key,$evaluador->name)}}"></td>
+                                    <td><input type="text" maxlength="10" name="relation[]" value="{{old('relation.'.$key,$evaluador->relation)}}"></td>
+                                    <td><input type="email" maxlength="100" name="email[]"  value="{{old('email.'.$key,$evaluador->email)}}" ></td>
                                     <td>
                                         <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>
                                     </td>

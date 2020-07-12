@@ -45,6 +45,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/**
+ * Resource de Frecuencia de la evaluacion
+ *
+ */
+
+Route::resource('frecuencia', 'FrecuenciaController');
+
 
 /**
  * Resource de Evaluado para ingresar manualmente un Evaluado con sus evaluadores

@@ -62,7 +62,25 @@
 
         }
         .btnquitar{
+
         }
+
+        Input:Focus {
+            Background-color: yellow;
+        }
+        input[type=text] {
+            width: 100%;
+            padding: 2px 10px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+        input[type=email] {
+            width: 100%;
+            padding: 2px 10px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+
 
 
     </style>

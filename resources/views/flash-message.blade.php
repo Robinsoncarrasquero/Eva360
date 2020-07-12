@@ -41,9 +41,9 @@
 
 @if ($errors->any())
 
-<div class="alert alert-danger">
+<div class="mt-1 alert alert-danger">
     <button type="button" class="close" data-dismiss="alert">×</button>
-    <h6>Hemos Encontrados algunos errores !!</h6>
+    <h6>Errores</h6>
     <ul>
         @foreach ($errors->all() as $error)
             <li> {{ $error }} </li>

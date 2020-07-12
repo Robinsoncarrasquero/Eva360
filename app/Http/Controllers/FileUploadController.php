@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Constraint\IsJson;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Evaluado;
 use App\Evaluador;
+
+use Opis\JsonSchema\Validator;
+use Opis\JsonSchema\ValidationResult;
+use Opis\JsonSchema\ValidationError;
+use Opis\JsonSchema\Schema;
+
 
 class FileUploadController extends Controller
 {
@@ -27,7 +32,7 @@ class FileUploadController extends Controller
     }
 
     /**
-     * Sube el archivo tipo json al servidor a la carpeta upload y luego redirecciona a una vista para validar
+     * Sube el archivo tipo json al servidor en la carpeta upload y luego redirecciona a una vista para validar
      * los datos recibidos en el archivo.
      */
     public function upload(Request $request)
@@ -35,28 +40,55 @@ class FileUploadController extends Controller
 
         request()->validate(
         [
-            'fileName' => 'required',
-            'fileName.*' => 'mimes:json|max:1024'
+            'fileName' => 'required|file|max:1',
+            'fileName.*' => 'mimes:json|max:1',
         ],
         [
-            'fileName.required'=>'Debe seleccionar un archivo en formato JSON con los datos del Evaluado y sus Evaluadores..'
+            'fileName.required'=>'Debe seleccionar un archivo en formato JSON segun el formato definido.',
+            'fileName.max' => "El Maximo permitido para subir un archivo es un 1kb con un maximo de 10 evaluadores."
         ]);
 
         $fileOName= $request->fileName->getClientOriginalName();
         $fileName = date('YmdHis') . "." . $request->fileName-> getClientOriginalExtension();
         $pathFile = $request->fileName->storeAs('uploads', $fileName);
-        if (Storage::exists($pathFile))
+
+        $mensaje=$this->validaJsonSchema($pathFile);
+
+        if (Storage::exists($pathFile) && $mensaje["validjson"])
         {
             return \redirect()->route('json.validar',[$fileName,$fileOName]);
         }
-
-        return redirect()->route('lanzar.index')
-        ->with('danger','Archivo Json no fue subido exitosamente, intente nuevamente y corrija los datos incorrectos');
-
+        return redirect()->route('json.fileindex')
+        ->with('danger','Error ' .$mensaje["msg"]. ' Haga las correcciones e intente nuevamente ');
     }
 
+    /**Validar el esquema del archivo Json */
+    private function validaJsonSchema($pathFile){
 
-    //Valida que el archivo subido exista en
+        $pathFile=$pathFile;
+        $pathSchema='config/my-schema.json';
+        //$pathSchema='config/schema_other.json';
+        $data = json_decode(Storage::get($pathFile));
+        $schema = Schema::fromJsonString(Storage::get($pathSchema));
+        $validator = new Validator();
+        /** @var ValidationResult $result */
+        $jsonresult = $validator->schemaValidation($data, $schema);
+
+        if ($jsonresult->isValid()) {
+            return ["validjson"=>true,"msg"=>"Data is valid"];
+        } else {
+            /** @var ValidationError $error */
+            $error = $jsonresult->getFirstError();
+            dd($jsonresult);
+            // echo '$data is invalid', PHP_EOL;
+            // echo "Error: ", $error->keyword(), PHP_EOL;
+            // echo json_encode($error->keywordArgs(), JSON_PRETTY_PRINT), PHP_EOL;
+            return ["validjson"=>false,"msg"=>"JSON does not validate."];
+
+        }
+    }
+
+    //Valida que el archivo subido al servidor exista
     public function validar($fileName,$fileOName)
     {
 
