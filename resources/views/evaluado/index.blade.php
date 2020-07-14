@@ -25,14 +25,12 @@
                 <th>#</th>
                 <th>Nombre</th>
                 <th></th>
-                <th></th>
             </thead>
             <tbody>
                 @foreach ($evaluados as $evaluado)
                 <tr>
                     <td>{{ $evaluado->id }}</td>
                     <td>{{ $evaluado->name }}</td>
-                    <td><a href="{{ route('evaluado.edit',$evaluado) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                     <td>
                         <form action="{{ route('evaluado.destroy',$evaluado) }}" method="POST">
                             @csrf

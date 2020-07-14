@@ -105,6 +105,9 @@ class EvaluadoController extends Controller
     public function edit($id)
     {
         //
+        $evaluado = Evaluado::findOrFail($id);
+        return \view('evaluado.edit',\compact('evaluado'));
+
     }
 
     /**

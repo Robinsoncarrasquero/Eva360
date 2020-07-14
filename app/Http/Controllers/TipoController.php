@@ -133,7 +133,7 @@ class TipoController extends Controller
             ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas Competencias.');
         }
 
-        return redirect('tipo')->withSuccess('Ell tipo de Competencia ha sido eliminado con exito!!');
+        return redirect('tipo')->withSuccess('El tipo de Competencia ha sido eliminado con exito!!');
 
     }
 

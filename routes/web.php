@@ -8,25 +8,9 @@ use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
+use Illuminate\Support\Facades\Auth;
 
 
-    //Validar Email
-    // Route::post('check', function (Request $request) {
-    //     $request->validate([
-    //         'email' => function ($attribute, $value, $fail) {
-    //         if ( !(new EmailValidator())->isValid($value, new DNSCheckValidation()) ) {
-    //             $fail(trans('validation.check_email_dns',[$attribute]));
-    //         }
-    //     },]);
-    //     return response()->json(['ok' => 'it´s ok']);
-    // });
-
-    Route::post('check', function (Request $request) {
-        $request->validate([
-            'email' => 'foo',
-        ]);
-        return response()->json(['ok' =>'ok' ]);
-    });
 
 
 /*
@@ -44,6 +28,11 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 Route::get('/', function () {
     return view('welcome');
 });
+
+/**Autenticacion full */
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 /**
  * Resource de Frecuencia de la evaluacion

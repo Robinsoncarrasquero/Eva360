@@ -59,7 +59,7 @@
                                 @endif
 
                                 @if(Helper::estatus($evaluado->status)=='Inicio')
-                                    <span id="inicio" class="radio-no-checkeado" ></span>
+                                    <span id="inicio" class="radio-checkeado" ></span>
                                     <span id="medio" class="radio-no-checkeado" ></span>
                                     <span id="final" class="radio-no-checkeado"></span>
                                 @endif
