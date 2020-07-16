@@ -17,9 +17,9 @@ use app\Helpers\Helper;
 class LanzarPruebaController extends Controller
 {
 
-    // public function __construct(){
-    //     $this->middleware('auth');
-    // }
+    public function __construct(){
+        $this->middleware('auth');
+    }
 
     //Lista de personas para la evaluacion
     public function index(Request $request)

@@ -14,8 +14,8 @@
             @include('flash-message')
 
         </div>
-        <div class="text text-sm-right">
-            <a style="margin: 19px;" href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
+        <div class="text text-sm-right"> <strong>Nuevo</strong>
+            <a style="margin: 19px;" href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">library_add</i> </a>
         </div>
         @if ($evaluados->count())
 

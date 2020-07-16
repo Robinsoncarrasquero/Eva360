@@ -9,7 +9,7 @@
 
     <link rel="icon" href="favicon.ico">
 
-    <title>@yield('title') - Eva360</title>
+    <title>@yield('title') - Vision360</title>
     <!-- Iconos para bootstrap -->
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
@@ -30,6 +30,9 @@
         }
         .visible{
             display: inline;
+        }
+        Input:Focus {
+            Background-color: yellow;
         }
 
     </style>

@@ -83,42 +83,39 @@
 @endsection
 
 @section('sidebar')
-@foreach ($evaluadores as $evaluador )
-
-@endforeach
 <div class="col-md-12">
-<form >
+    <form >
     {{-- {{ method_field('PUT') }} --}}
     {{ csrf_field() }}
 
-<table class="table ">
-    <thead>
-    <tr>
-        <th scope="col">Evaluador</th>
-        <th scope="col">Email</th>
-        <th scope="col">Evaluar</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach ($evaluadores as $evaluador)
-    <tr>
-        <td scope= "row">{{$evaluador->name}}</td>
-        <td>{{$evaluador->email}}</td>
-        <td>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="{{"$evaluador->id"}}"
-                value="{{"$evaluador->id"}}" name="evaluador[]" checked disabled>
-                <label class="form-check-label" for="{{"$evaluador->id"}}"></label>
-            </div>
-        </td>
-    </tr>
+    <table class="table ">
+        <thead>
+        <tr>
+            <th scope="col">Evaluador</th>
+            <th scope="col">Email</th>
+            <th scope="col">Evaluar</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($evaluadores as $evaluador)
+        <tr>
+            <td scope= "row">{{$evaluador->name}}</td>
+            <td>{{$evaluador->email}}</td>
+            <td>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="{{"$evaluador->id"}}"
+                    value="{{"$evaluador->id"}}" name="evaluador[]" checked disabled>
+                    <label class="form-check-label" for="{{"$evaluador->id"}}"></label>
+                </div>
+            </td>
+        </tr>
 
-    @endforeach
+        @endforeach
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-</form>
+    </form>
 
 </div>
 

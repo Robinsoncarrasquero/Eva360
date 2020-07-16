@@ -10,9 +10,6 @@ use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Illuminate\Support\Facades\Auth;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,16 +27,18 @@ Route::get('/', function () {
 });
 
 /**Autenticacion full */
-Auth::routes();
-
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::post('/logout', 'HomeController@logout')->name('logout');
 
 /**
  * Resource de Frecuencia de la evaluacion
  *
  */
 
-Route::resource('frecuencia', 'FrecuenciaController');
+Route::resource('frecuencia', 'FrecuenciaController')->middleware('auth');
 
 
 /**
@@ -47,16 +46,16 @@ Route::resource('frecuencia', 'FrecuenciaController');
  *
  */
 
-Route::resource('evaluado', 'EvaluadoController');
+Route::resource('evaluado', 'EvaluadoController')->middleware('auth');
 
 /**
  * Resource de tipo de competencia
  *
  */
-Route::resource('competencia', 'CompetenciaController');
+Route::resource('competencia', 'CompetenciaController')->middleware('auth');
 
 /**Resource de tipo de competencia */
-Route::resource('tipo', 'TipoController');
+Route::resource('tipo', 'TipoController')->middleware('auth');
 
 Route::get('chart', 'ChartController@index');
 
@@ -77,7 +76,8 @@ Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.
 
 //Presentar la lista de evaluados para seleccionar
 Route::get('lanzar', "LanzarPruebaController@index")
-        ->name('lanzar.index');
+        ->name('lanzar.index')
+        ->middleware('verified');
 
 
 //Seleccionar las competencias y evaluadores de la prueba paso1
@@ -125,31 +125,31 @@ Route::get('evaluacion/{token}/index',"EvaluacionController@index")
 /**
  * ajax prueba
  */
-    //Presentar la lista de evaluados para seleccionar
-    Route::get('ajaxlanzar', "AjaxLanzarPruebaController@index")
-            ->name('ajaxlanzar.index');
+//Presentar la lista de evaluados para seleccionar
+Route::get('ajaxlanzar', "AjaxLanzarPruebaController@index")
+        ->name('ajaxlanzar.index');
 
-    //Seleccionar las competencias y evaluadores de la prueba paso1
-    Route::get('ajaxlanzar/{evaluado}/seleccionar',"AjaxLanzarPruebaController@seleccionar")
-            ->name('ajaxlanzar.seleccionar')
-            ->where('evaluado','[0-9]+');
+//Seleccionar las competencias y evaluadores de la prueba paso1
+Route::get('ajaxlanzar/{evaluado}/seleccionar',"AjaxLanzarPruebaController@seleccionar")
+        ->name('ajaxlanzar.seleccionar')
+        ->where('evaluado','[0-9]+');
 
-    //Seleccionar las competencias y evaluadores de la prueba paso1
-    Route::post('ajaxlanzar/filtrar',"AjaxLanzarPruebaController@filtrar")
-    ->name('ajaxlanzar.filtrar');
+//Seleccionar las competencias y evaluadores de la prueba paso1
+Route::post('ajaxlanzar/filtrar',"AjaxLanzarPruebaController@filtrar")
+->name('ajaxlanzar.filtrar');
 
 
-    /*
-     *Resultados de las pruebas
-    */
-    Route::get('resultados/{evaluado_id}/evaluacion',"ResultadosController@resultados")
-    ->name('resultados.evaluacion');
+/*
+    *Resultados de las pruebas
+*/
+Route::get('resultados/{evaluado_id}/evaluacion',"ResultadosController@resultados")
+->name('resultados.evaluacion');
 
-    Route::get('resultados/{evaluado_id}/finales',"ResultadosController@resumidos")
-    ->name('resultados.finales');
+Route::get('resultados/{evaluado_id}/finales',"ResultadosController@resumidos")
+->name('resultados.finales');
 
-    Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
-    ->name('resultados.graficas');
+Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
+->name('resultados.graficas');
 
 
 

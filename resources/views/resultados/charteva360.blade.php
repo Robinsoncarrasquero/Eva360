@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Vision360</title>
 </head>
 <body>
 
@@ -25,9 +25,9 @@
 
 <script type="text/javascript">
 
-    var dataSerie =  <?php echo json_encode($dataSerie) ?>;
-    var categorias =  <?php echo json_encode($dataCategoria) ?>;
-    var evaluado =  <?php echo json_encode($evaluado->name) ?>;
+    var dataSerie =  @json($dataSerie);
+    var categorias =  @json($dataCategoria);
+    var evaluado =  @json($evaluado->name);
 
     var fileevaluado=[
         {
@@ -44,7 +44,7 @@
 
     Highcharts.chart('container', {
         title: {
-            text: "Eva360 de "+evaluado
+            text: "Vision 360 de "+evaluado
         },
         subtitle: {
             text: 'Source code: https://github.com/Robinsoncarrasquero/Eva360'
