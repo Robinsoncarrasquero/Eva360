@@ -8,6 +8,7 @@ use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -27,8 +28,9 @@ Route::get('/', function () {
 });
 
 /**Autenticacion full */
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 
 Route::post('/logout', 'HomeController@logout')->name('logout');
@@ -38,7 +40,8 @@ Route::post('/logout', 'HomeController@logout')->name('logout');
  *
  */
 
-Route::resource('frecuencia', 'FrecuenciaController')->middleware('auth');
+Route::resource('frecuencia', 'FrecuenciaController')
+->middleware('role:admin');
 
 
 /**
@@ -46,16 +49,19 @@ Route::resource('frecuencia', 'FrecuenciaController')->middleware('auth');
  *
  */
 
-Route::resource('evaluado', 'EvaluadoController')->middleware('auth');
+Route::resource('evaluado', 'EvaluadoController')
+->middleware('role:admin');
 
 /**
  * Resource de tipo de competencia
  *
  */
-Route::resource('competencia', 'CompetenciaController')->middleware('auth');
+Route::resource('competencia', 'CompetenciaController')
+->middleware('role:admin');
 
 /**Resource de tipo de competencia */
-Route::resource('tipo', 'TipoController')->middleware('auth');
+Route::resource('tipo', 'TipoController')
+->middleware('role:admin');
 
 Route::get('chart', 'ChartController@index');
 
@@ -75,52 +81,72 @@ Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
 Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
 
 //Presentar la lista de evaluados para seleccionar
+
 Route::get('lanzar', "LanzarPruebaController@index")
         ->name('lanzar.index')
-        ->middleware('verified');
+        ->middleware(['role:admin']);
 
 
 //Seleccionar las competencias y evaluadores de la prueba paso1
 Route::get('lanzar/{evaluado}/seleccionar',"LanzarPruebaController@seleccionar")
         ->name('lanzar.seleccionar')
-        ->where('evaluado','[0-9]+');
+        ->where('evaluado','[0-9]+')
+        ->middleware(['role:admin']);
+
 
 //Confirmacion de los datos seleccionado en le paso 1
 Route::post('lanzar/{evaluado}/confirmar',"LanzarPruebaController@confirmar")
 ->name('lanzar.confirmar')
-->where('evaluado','[0-9]+');
+->where('evaluado','[0-9]+')
+->middleware(['role:admin']);
+
 
 //Lanzar la prueba creando los registros de la prueba y enviando los correso
 Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
-        ->name('lanzar.procesar');
+        ->name('lanzar.procesar')
+        ->middleware(['role:admin']);
+
 
 
 /**
  *Route de evaluaciones
  */
+//Evaluador entra por el token y loguea
+Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@token")
+        ->name('evaluacion.token');
+
 //Evaluador Responder las prueba
-Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@competencias")
+Route::get('competencias/{evaluador}/evaluacion',"EvaluacionController@competencias")
         ->name('evaluacion.competencias');
+
 
 Route::get('evaluacionget/{competencia}/preguntas',"EvaluacionController@responder")
 ->name('evaluacion.responder')
 ->where('evaluador','[0-9]+');
+//->middleware(['auth']);
+
 
 Route::post('evaluacionpost/{competencia}/respuesta',"EvaluacionController@store")
 ->name('evaluacion.store')
 ->where('evaluador','[0-9]+');
+//->middleware(['auth']);
+
 
 /*
 *Evaluador finaliza la prueba
 */
 Route::post('evaluacion/{evaluador}/finalizar',"EvaluacionController@finalizar")
 ->name('evaluacion.finalizar');
+//->middleware(['auth']);
+
 
 /*
  * Lista de evaluados del Evaluador
  */
-Route::get('evaluacion/{token}/index',"EvaluacionController@index")
+Route::get('evaluacion',"EvaluacionController@index")
         ->name('evaluacion.index');
+        //->middleware(['auth']);
+
 
 /**
  * ajax prueba
@@ -143,13 +169,18 @@ Route::post('ajaxlanzar/filtrar',"AjaxLanzarPruebaController@filtrar")
     *Resultados de las pruebas
 */
 Route::get('resultados/{evaluado_id}/evaluacion',"ResultadosController@resultados")
-->name('resultados.evaluacion');
+->name('resultados.evaluacion')
+->middleware(['auth','role:admin']);
+
 
 Route::get('resultados/{evaluado_id}/finales',"ResultadosController@resumidos")
-->name('resultados.finales');
+->name('resultados.finales')
+->middleware(['auth','role:admin']);
+
 
 Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
-->name('resultados.graficas');
+->name('resultados.graficas')
+->middleware(['auth','role:admin']);
 
 
 
@@ -157,15 +188,24 @@ Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
      *Subir los archivo con los datos del evaluado y los evaluadores
      */
 
-    Route::get('file-upload', 'FileUploadController@index')->name('json.fileindex');
+    Route::get('file-upload', 'FileUploadController@index')
+    ->name('json.fileindex')
+    ->middleware(['auth','role:admin']);
 
+    Route::post('file-upload', 'FileUploadController@upload')
+    ->name('json.fileupload')
+    ->middleware(['auth','role:admin']);
 
-    Route::post('file-upload', 'FileUploadController@upload')->name('json.fileupload');
 
     Route::get('filevalida/{filename}/{fileOname}/valida',"FileUploadController@validar")
-        ->name('json.validar');
+    ->name('json.validar')
+    ->middleware(['auth','role:admin']);
 
-    Route::post('file-save/{data}/jsonsave','FileUploadController@save')->name('json.filesave');
+
+    Route::post('file-save/{data}/jsonsave','FileUploadController@save')
+    ->name('json.filesave')
+    ->middleware(['auth','role:admin']);
+
 
     Route::get('uploads', function () {
         if (Storage::exists("uploads/eva360.json")){

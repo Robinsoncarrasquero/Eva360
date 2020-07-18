@@ -39,7 +39,6 @@ class CompetenciaSeeder extends Seeder
 
         //GENERAL
         $competencia=factory(Competencia::class)->create([
-            'tipo'=>'G',
             'name'=>'Competencia  Adaptabilidad Flexibilidad',
             'tipo_id'=>1,
         ]);
@@ -83,7 +82,6 @@ class CompetenciaSeeder extends Seeder
 
         //ESPECIFICA
         $competencia1 = factory(App\Competencia::class)->create([
-            'tipo'=>'G',
             'name'=>'Identificación con la Institución',
             'tipo_id'=>1,
         ]);
@@ -127,7 +125,6 @@ class CompetenciaSeeder extends Seeder
 
         //TECNICA
         $competencia1 = factory(App\Competencia::class)->create([
-            'tipo'=>'T',
             'name'=>'Capacidad Tecnica',
             'tipo_id'=>4,
         ]);
@@ -171,7 +168,6 @@ class CompetenciaSeeder extends Seeder
 
         //SUPERVISOR
         $competencia1 = factory(App\Competencia::class)->create([
-            'tipo'=>'S',
             'name'=>'Liderazgo',
             'tipo_id'=>2,
         ]);
@@ -215,7 +211,6 @@ class CompetenciaSeeder extends Seeder
 
         //SUPERVISOR
         $competencia1 = factory(App\Competencia::class)->create([
-            'tipo'=>'S',
             'name'=>'Orientacion a Resultados',
             'tipo_id'=>2
         ]);
@@ -260,7 +255,6 @@ class CompetenciaSeeder extends Seeder
 
         //ESPECIFICA
         $competencia1 = factory(App\Competencia::class)->create([
-            'tipo'=>'E',
             'name'=>'Iniciativa',
             'tipo_id'=>3,
         ]);
@@ -303,7 +297,6 @@ class CompetenciaSeeder extends Seeder
 
         //ESPECIFICA
         $competencia1 = factory(App\Competencia::class)->create([
-            'tipo'=>'E',
             'name'=>'Desarrollo de otros',
             'tipo_id'=>3,
         ]);
@@ -346,7 +339,6 @@ class CompetenciaSeeder extends Seeder
 
     //ESPECIFICA
     $competencia1 = factory(App\Competencia::class)->create([
-        'tipo'=>'E',
         'name'=>'Etica e integridad',
         'tipo_id'=>3,
     ]);

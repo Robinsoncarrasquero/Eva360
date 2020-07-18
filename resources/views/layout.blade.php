@@ -93,34 +93,35 @@
     <header>
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="{{ route('lanzar.index') }}"><img src="logo/eva360.png" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
+        <a class="navbar-brand" href="{{ route('home') }}"><img src="logo/eva360.png" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            @guest
+
                 <li class="nav-item ">
-                <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
-            @else
-                <li class="nav-item">
-                <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar Prueba</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('evaluado.index') }}">Evaluado</a>
-                </li>
-                <li class="nav-item">
-                    <a  class="nav-link" href="{{ route('tipo.index') }}">Tipo</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link " href="{{ route('competencia.index') }}">Competencias</a>
-                </li>
-                <li class="nav-item ">
-                    <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
-                </li>
-            @endguest
+
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar Prueba</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('evaluado.index') }}">Evaluado</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link" href="{{ route('tipo.index') }}">Tipo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ route('competencia.index') }}">Competencias</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
+                    </li>
+            @endauth
 
           </ul>
 
@@ -184,79 +185,6 @@
         </div>
 
     </main>
-    <section>
-        @guest
-
-        <div class="card text-center mb-5">
-
-            <div class="card-header">
-            SISTEMA DE VISION 360
-        </div>
-            <div class="card-body">
-             <h5 class="card-title">GESTION POR COMPETENCIAS VISION 360</h5>
-            <p class="card-text">Significa tomar en cuenta que los conocimientos, habilidades, experiencias y cualidades personales influyen en el rendimiento de las personas y aplicar esto, de manera sistemática y sistémica para conseguir los mejores resultados de la empresa y la mayor orientación profesional al empleado.</p>
-            <a href="{{ route('lanzar.index') }}" class="btn btn-primary">Vamos a Lanzar una evaluacion</a>
-            </div>
-
-        </div>
-
-        @endguest
-    </section>
-
-    <section>
-        @guest
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="card text-center">
-                    <div class="card-header">
-                    VISION 90
-                    </div>
-                    <div class="card-body">
-                    <h5 class="card-title">Sistema de Vision 90</h5>
-                    <p class="card-text">Es cuando la persona es evaluada por su supervisor y el supervisor de su supervisor.</p>
-                    </div>
-                    <div class="card-footer text-muted">
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-4">
-                <div class="card text-center">
-                    <div class="card-header">
-                    VISION 180
-                    </div>
-                    <div class="card-body">
-                    <h5 class="card-title">Sistema de Vision 180</h5>
-                    <p class="card-text">Es cuando el empleado es evaluado por su jefe, los pares y eventualmente los clientes internos.</p>
-                    </div>
-                    <div class="card-footer text-muted">
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-4">
-                <div class="card text-center">
-                    <div class="card-header">
-                    VISION 360
-                    </div>
-                    <div class="card-body">
-                    <h5 class="card-title">Sistema de Vision 360</h5>
-                    <p class="card-text">Es cuando el empleado sea evaluado por todo el entorno; jefes, pares, subordinados y autoevaluacion.</p>
-                    </div>
-                    <div class="card-footer text-muted">
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="row text text-center pt-5">
-            <img src="logo/flujogeneral.png" style="width: 1ex;" alt="flujo">
-
-        </div>
-
-        @endguest
-    </section>
 
     <footer class="footer">
       <div class="container">

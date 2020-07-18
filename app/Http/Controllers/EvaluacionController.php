@@ -8,40 +8,66 @@ use App\Evaluacion;
 use App\Evaluado;
 use Illuminate\Http\Request;
 use app\Helpers\Helper;
+use Illuminate\Support\Facades\Auth;
+
 class EvaluacionController extends Controller
 {
 
+    public function __construct()
+    {
+    //Auth::logout();
+    }
     /**
      * Muestra las evaluaciones del evaluador
      */
-    public function index(Request $request,$token)
+    public function index(Request $request)
     {
         $title="Lista de Evaluados";
-
-        $evaluador = Evaluador::all()->where('remember_token',$token)->first();
-        $evaluados = $evaluador->evaluado;
-        $evaluado_id=$evaluador->evaluado_id;
-        $buscarWordKey = $request->get('buscarWordKey');
-
-        $evaluados = Evaluado::all();
-        $evaluados = $evaluados->reject(function ($user) use ($evaluado_id) {
-            return $user->id!==$evaluado_id;
-        });
-
-        return view('evaluacion.index',compact('evaluados','title',"evaluador"));
+        $user = Auth::user();
+        $evaluadores = $user->evaluaciones;
+        return view('evaluacion.index',compact('evaluadores','title'));
 
     }
-
-    /**
-     * El controlador recibe el token del evaluador y muestra la lista de competencias relacionadas.
-     */
-    public function competencias($token)
+    /**Autenticacion con Token*/
+    public function token($token)
     {
 
         //Filtramos el evaluador segun el token recibido
         $evaluador = Evaluador::all()->where('remember_token',$token)->first();
         $evaluado = $evaluador->evaluado;
-        $evaluacions = $evaluador->evaluaciones;
+        $competencias = $evaluador->evaluaciones;
+        $user=Auth::loginUsingId($evaluador->user_id,true);
+
+        //Evaluacion ddel evaluado esta terminada es redirigido a la lista de usuarios
+        if ($evaluador->status==Helper::estatus('Finalizada')){
+            return \redirect()->route('evaluacion.index');
+        }
+
+        return \view('evaluacion.competencias',\compact('competencias','evaluador','evaluado'));
+
+    }
+
+
+    /**
+     * El controlador recibe el token del evaluador y muestra la lista de competencias relacionadas.
+     */
+    public function competencias($evaluador_id)
+    {
+
+        //Filtramos el evaluador segun el token recibido
+        //$evaluador = Evaluador::all()->where('remember_token',$token)->first();
+        $evaluador = Evaluador::find($evaluador_id);
+        $evaluado = $evaluador->evaluado;
+        $competencias = $evaluador->evaluaciones;
+        //$user = $evaluador->user()->first();
+        $user=Auth::loginUsingId($evaluador->user_id,true);
+
+
+        // $credentials = $user->only('email', 'password');
+        // if (Auth::attempt($credentials)) {
+        //     // Authentication passed...
+        //     return redirect()->intended('dashboard');
+        // }
 
         //Evaluacion ddel evaluado esta terminada es redirigido a la lista de usuarios
         if ($evaluador->status==Helper::estatus('Finalizada')){
@@ -52,11 +78,13 @@ class EvaluacionController extends Controller
             $evaluados = $evaluados->reject(function ($user) use ($evaluado_id) {
                 return $user->id!==$evaluado_id;
             });
-
-            return view('evaluacion.index',compact('evaluados','title',"evaluador"));
+            $user = Auth::user();
+            $evaluadores = $user->evaluaciones;
+            return \redirect()->route('evaluacion.index');
+            //return view('evaluacion.index',compact('evaluados','title',"evaluador"));
         }
 
-        return \view('evaluacion.competencias',\compact('evaluacions','evaluador','evaluado'));
+        return \view('evaluacion.competencias',\compact('competencias','evaluador','evaluado'));
 
     }
 
@@ -121,7 +149,7 @@ class EvaluacionController extends Controller
 
         //redirigimos al usuario a ruta de sus competencias con el token del evaluador
         $token=$evaluacion->evaluador->remember_token;
-        return \redirect()->route('evaluacion.competencias',$token);
+        return \redirect()->route('evaluacion.competencias',$evaluacion->evaluador->id);
 
     }
 
@@ -168,7 +196,7 @@ class EvaluacionController extends Controller
             $evaluado->save();
         }
 
-        return \redirect()->route('evaluacion.index',$evaluador->remember_token)
+        return \redirect()->route('evaluacion.index')
         ->withSuccess("Evaluacion de $evaluado->name finalizada exitosamente");
 
     }

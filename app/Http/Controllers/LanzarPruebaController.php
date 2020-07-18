@@ -8,11 +8,16 @@ use App\Evaluado;
 use App\EmailSend;
 use App\Competencia;
 use App\Evaluacion;
+use App\Evaluador;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EvaluacionEnviada;
 use App\Http\Requests\EvaluacionCreateRequest;
 use Illuminate\Database\QueryException;
 use app\Helpers\Helper;
+use App\Role;
+use App\User;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Hash;
 
 class LanzarPruebaController extends Controller
 {
@@ -147,6 +152,29 @@ class LanzarPruebaController extends Controller
 
         // //Enviamos el correo a los evaluadores
         foreach($evaluadores as $evaluador){
+
+
+            try {
+                $user = User::firstOrCreate(
+                    ['email'=>$evaluador->email],[
+                    'name' => $evaluador->name,
+                    'password' => Hash::make('secret1234')
+                ]);
+                if (!$user->hasRole('user')){
+                    $userRole = Role::where('name','user')->first();
+                    $user->roles()->attach($userRole);
+                }
+                $evaluadorx = Evaluador::find($evaluador->id);
+                $evaluadorx->user_id = $user->id;
+                $evaluadorx->save();
+
+               // dd($user,$evaluadorx);
+
+            }catch(QueryException $e) {
+
+                abort(404);
+            }
+
             $receivers = $evaluador->email;
 
             //Creamos un objeto para pasarlo a la clase Mailable

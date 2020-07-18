@@ -30,7 +30,7 @@
 
             </div>
 
-            @if($evaluacions)
+            @if($competencias)
 
             <div class="panel-body">
                 <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
@@ -45,7 +45,7 @@
                     </thead>
                     <tbody>
 
-                    @foreach($evaluacions as $competencia)
+                    @foreach($competencias as $competencia)
 
                     <tr>
                         <td>{{$competencia->competencia->name}}</td>

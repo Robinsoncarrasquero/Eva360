@@ -32,7 +32,7 @@
 
             </div>
 
-            @if($evaluados->count())
+            @if($evaluadores->count())
 
             <div class="panel-body">
 
@@ -45,9 +45,9 @@
                     <th>Resultados</th>
                     </thead>
                     <tbody>
-                    @foreach($evaluados as $evaluado)
+                    @foreach($evaluadores as $evaluador)
                     <tr>
-                        <td>{{$evaluado->name}}</td>
+                        <td>{{$evaluador->evaluado->name}}</td>
                         <td>
                             @switch($evaluador->status)
                                 @case(0)
@@ -65,7 +65,7 @@
                         </td>
                         <td>
                             @if($evaluador->status==0)
-                                <a href="{{route('evaluacion.competencias', $evaluador->remember_token)}}" >
+                                <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
                                 <span><i class="material-icons ">send</i></span></a>
                             @else
                                 <a href="#" >
