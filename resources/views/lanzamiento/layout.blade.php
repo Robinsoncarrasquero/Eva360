@@ -42,32 +42,82 @@
 
   <body>
 
-    <header>
-      <!-- Fixed navbar -->
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Fixed navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+   <!-- Fixed navbar -->
+   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="{{ route('home') }}"><img src="{{('/logo/eva360.png') }}" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
+
+            @auth
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar Prueba</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('evaluado.index') }}">Evaluado</a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link" href="{{ route('tipo.index') }}">Tipo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ route('competencia.index') }}">Competencias</a>
+                </li>
+                <li class="nav-item ">
+                    <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
+                </li>
+        @endauth
+
+      </ul>
+
+      <!-- Right Side Of Navbar -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Authentication Links -->
+        @guest
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}  </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+            @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+        @else
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <i class="material-icons " style="color: green">person</i>{{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        <i class="material-icons" style="color:red">logout</i>
+                        {{-- {{ __('Logout') }} --}}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
             </li>
-          </ul>
-          <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
-    </header>
+        @endguest
+    </ul>
+
+      {{-- <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> --}}
+
+    </div>
+  </nav>
+</header>
 
     <!-- Begin page content -->
     <main role="main" class="container">

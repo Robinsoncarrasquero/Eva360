@@ -88,13 +88,6 @@ class LanzarPruebaController extends Controller
     /**
      * Genera las evaluaciones lanzadas
      */
-    public function procesarx(EvaluacionCreateRequest $formrequest,$evaluado_id){
-
-        $formrequest->crearEvaluacion($evaluado_id);
-        return \redirect()->route('lanzar.index')->with('success','Hurra!! Prueba lanzada exitosamente');
-
-    }
-
     public function procesar(Request $formrequest,$evaluado_id){
 
         //$competencias= $formrequest->validated();
@@ -128,16 +121,16 @@ class LanzarPruebaController extends Controller
             //Creamos la Evaluacion con los datos solo de las competencias
             foreach($competencias as $key=>$competencia){
                 $evaluacion = new Evaluacion();
-                $evaluacion->resultado=Helper::estatus('Inicio');
+                //$evaluacion->resultado=Helper::estatus('Inicio');
                 $evaluacion->competencia_id=$competencia->id;
                 try {
                     //Salvamos a la evaluacion
                     $eva360=$evaluador->evaluaciones()->save($evaluacion);
 
                     //Cambiamos status de Evaluado
-                    $evaluadox=$evaluador->evaluado;
-                    $evaluadox->status=1; //0:Inicio, 1:Lanzada 2:finalizada
-                    $evaluadox->save();
+                    $evaluadorx = Evaluador::find($evaluador->id);
+                    $evaluadorx->status=1; //0:Inicio, 1:Lanzada 2:finalizada
+                    $evaluadorx->save();
 
                 } catch (QueryException $e) {
 
@@ -153,7 +146,7 @@ class LanzarPruebaController extends Controller
         // //Enviamos el correo a los evaluadores
         foreach($evaluadores as $evaluador){
 
-
+            //Creamos un usuario para responder la prueba autenticado
             try {
                 $user = User::firstOrCreate(
                     ['email'=>$evaluador->email],[

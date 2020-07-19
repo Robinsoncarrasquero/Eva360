@@ -93,7 +93,7 @@
     <header>
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="{{ route('home') }}"><img src="logo/eva360.png" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
+        <a class="navbar-brand" href="{{ route('home') }}"><img src="{{('/logo/eva360.png') }}" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -102,12 +102,17 @@
           <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
-                @auth
+                @if (Auth::check())
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluaciones<span class="sr-only">(current)</span></a>
+                    </li>
+                @endif
+                @if (Auth::check() && Auth::user()->admin())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar Prueba</a>
+                        <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar Evaluacion</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('evaluado.index') }}">Evaluado</a>
@@ -121,7 +126,7 @@
                     <li class="nav-item ">
                         <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
                     </li>
-            @endauth
+                @endif
 
           </ul>
 

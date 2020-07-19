@@ -19,10 +19,6 @@
 
                 <div class="clearfix">
 
-                    <form class="form-inline mt-2 mt-md-0 float-left">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="buscarWordKey">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
 
                     <div class="text text-center">
                         <h3>Lista de Evaluados</h3>
@@ -49,27 +45,34 @@
                     <tr>
                         <td>{{$evaluador->evaluado->name}}</td>
                         <td>
-                            @switch($evaluador->status)
-                                @case(0)
-                                    Inicio
-                                    @break
-                                @case(1)
-                                    Lanzada
-                                    @break
-                                @case(2)
-                                    Finalizada
-                                    @break
-                                @default
+                            <div class="status-progress">
+                                @if(Helper::estatus($evaluador->status)=='Finalizada')
+                                    <span id="inicio" class="radio-checkeado" ></span>
+                                    <span id="medio" class="radio-checkeado" ></span>
+                                    <span id="final" class="radio-checkeado" ></span>
+                                @endif
 
-                            @endswitch
+                                @if(Helper::estatus($evaluador->status)=='Inicio')
+                                    <span id="inicio" class="radio-checkeado" ></span>
+                                    <span id="medio" class="radio-no-checkeado" ></span>
+                                    <span id="final" class="radio-no-checkeado"></span>
+                                @endif
+
+                                @if(Helper::estatus($evaluador->status)=='Lanzada')
+                                    <span id="inicio" class="radio-checkeado"></span>
+                                    <span id="medio" class="radio-checkeado"></span>
+                                   <span id="final" class="radio-no-checkeado"></span>
+                                @endif
+                            </div>
+                            <span>{{ Helper::estatus($evaluador->status) }}</span>
                         </td>
                         <td>
                             @if($evaluador->status==0)
                                 <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
                                 <span><i class="material-icons ">send</i></span></a>
                             @else
-                                <a href="#" >
-                                <span><i class="material-icons">hourglass_disabled</i></span></a>
+                                <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
+                                <span><i class="material-icons">visibility</i></span></a>
 
                             @endif
 
@@ -86,7 +89,7 @@
 
             @else
 
-            <div class="alert alert-info">
+            <div class="alert alert-info no-hay-registros">
                 <p>No hay usuarios registrados</p>
             <div>
 
@@ -94,6 +97,12 @@
 
 
         </div>
+        <div class=" d-flex justify-content-center">
+            {{ $evaluadores->links() }}
+            {{-- {{ $evaluados->appends(["name"=>$evaluado->name])  }} --}}
+
+        </div>
+
 
     </div>
 

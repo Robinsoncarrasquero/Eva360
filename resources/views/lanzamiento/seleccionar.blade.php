@@ -1,4 +1,4 @@
-@extends('lanzamiento.layout')
+@extends('layout')
 
 @section('title',"Lanzamiento de Prueba")
 

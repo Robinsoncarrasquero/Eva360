@@ -31,6 +31,13 @@ class Evaluado extends Model
 
     }
 
+    //Hacer busquedas por nombre
+    public function scopeEvaluado($query,$name,$user_id){
+
+        $query->where('name','like',"%$name%",'and','id','=',$user_id);
+
+    }
+
     public function setStatusAttribute($value)
     {
         # code...

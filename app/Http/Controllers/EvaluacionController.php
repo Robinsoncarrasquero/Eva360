@@ -6,9 +6,12 @@ use App\Frecuencia;
 use App\Evaluador;
 use App\Evaluacion;
 use App\Evaluado;
+use App\User;
 use Illuminate\Http\Request;
 use app\Helpers\Helper;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination;
+use Illuminate\Support\Facades\DB;
 
 class EvaluacionController extends Controller
 {
@@ -24,7 +27,8 @@ class EvaluacionController extends Controller
     {
         $title="Lista de Evaluados";
         $user = Auth::user();
-        $evaluadores = $user->evaluaciones;
+        //$evaluadores =  $user->evaluaciones;
+        $evaluadores = Evaluador::where('user_id',$user->id)->orderBy('created_at','DESC')->simplePaginate(10);
         return view('evaluacion.index',compact('evaluadores','title'));
 
     }
@@ -34,16 +38,17 @@ class EvaluacionController extends Controller
 
         //Filtramos el evaluador segun el token recibido
         $evaluador = Evaluador::all()->where('remember_token',$token)->first();
-        $evaluado = $evaluador->evaluado;
-        $competencias = $evaluador->evaluaciones;
-        $user=Auth::loginUsingId($evaluador->user_id,true);
-
-        //Evaluacion ddel evaluado esta terminada es redirigido a la lista de usuarios
-        if ($evaluador->status==Helper::estatus('Finalizada')){
-            return \redirect()->route('evaluacion.index');
+        $user=Auth::loginUsingId($evaluador->user_id);
+        if (!Auth::check()){
+            redirect('login');
         }
 
-        return \view('evaluacion.competencias',\compact('competencias','evaluador','evaluado'));
+        //Evaluacion del evaluado esta terminada es redirigido a la lista de usuarios
+        if ($evaluador->status==Helper::estatus('Finalizada')){
+           return \redirect()->route('evaluacion.index');
+        }
+
+        return \redirect()->route('evaluacion.competencias',$evaluador->id);
 
     }
 
@@ -53,37 +58,9 @@ class EvaluacionController extends Controller
      */
     public function competencias($evaluador_id)
     {
-
-        //Filtramos el evaluador segun el token recibido
-        //$evaluador = Evaluador::all()->where('remember_token',$token)->first();
         $evaluador = Evaluador::find($evaluador_id);
         $evaluado = $evaluador->evaluado;
         $competencias = $evaluador->evaluaciones;
-        //$user = $evaluador->user()->first();
-        $user=Auth::loginUsingId($evaluador->user_id,true);
-
-
-        // $credentials = $user->only('email', 'password');
-        // if (Auth::attempt($credentials)) {
-        //     // Authentication passed...
-        //     return redirect()->intended('dashboard');
-        // }
-
-        //Evaluacion ddel evaluado esta terminada es redirigido a la lista de usuarios
-        if ($evaluador->status==Helper::estatus('Finalizada')){
-            $evaluado_id=$evaluado->id;
-
-            $title="Lista de Evaluados";
-            $evaluados = Evaluado::all();
-            $evaluados = $evaluados->reject(function ($user) use ($evaluado_id) {
-                return $user->id!==$evaluado_id;
-            });
-            $user = Auth::user();
-            $evaluadores = $user->evaluaciones;
-            return \redirect()->route('evaluacion.index');
-            //return view('evaluacion.index',compact('evaluados','title',"evaluador"));
-        }
-
         return \view('evaluacion.competencias',\compact('competencias','evaluador','evaluado'));
 
     }
@@ -176,7 +153,7 @@ class EvaluacionController extends Controller
 
         $evaluado= $evaluador->evaluado;
 
-        //Flag para indicar que le evaluador a culminado la prueba
+        //Flag para indicar que le evaluador ha culminado la prueba
         $evaluador->status=Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
         $evaluador->save();
 

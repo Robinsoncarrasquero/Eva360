@@ -93,6 +93,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return url('reset',$token);
     }
 
+    /**Indica si el usuario es adminitrator*/
+    public function admin(){
+
+        return $this->hasRole('admin');
+
+    }
+
+
 
 
 }

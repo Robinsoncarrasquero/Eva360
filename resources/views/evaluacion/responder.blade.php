@@ -32,82 +32,98 @@
     @endif
 
     @if ($evaluacion->competencia->grados->isNotEmpty())
-            <form action="{{ route('evaluacion.store',$evaluacion) }}" method="POST" id="form-select">
-                {{ csrf_field() }}
-    <div class="form-row">
-        <div class="form-group col-md-8">
-            <table class="table ">
-                <thead>
-                <tr>
-                    <th scope="col">Grado</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Seleccione</th>
-                    <th scope="col">Frecuencia</th>
-                </tr>
-                </thead>
-                <tbody>
+        <form action="{{ route('evaluacion.store',$evaluacion) }}" method="POST" id="form-select">
+        {{ csrf_field() }}
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <table class="table ">
+                        <thead>
+                        <tr>
+                            <th scope="col">Grado</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Seleccione</th>
+                            <th scope="col">Frecuencia</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                @foreach ($evaluacion->competencia->grados as $grado)
-                     <tr data-id="{{" $grado->id "}}" class="filas" >
-                        <th scope="row">{{ $grado->grado }}</th>
-                        <td>{{$grado->description}}</td>
-                        <td>
-                            @if($evaluacion->grado===$grado->grado)
-                                <div class="form-check">
-                                    <input type="radio" class="check-select radiogrado" id="{{"radiogrado$grado->id"}}"
-                                    value="{{"$grado->id"}}" name="gradocheck[]" checked >
-                                </div>
-                            @else
-                                <div class="form-check">
-                                    <input type="radio" class="check-select" id="{{"radiogrado$grado->id"}}"
-                                    value="{{"$grado->id"}}" name="gradocheck[]">
-                                </div>
+                        @foreach ($evaluacion->competencia->grados as $grado)
+                            <tr data-id="{{" $grado->id "}}" class="filas" >
+                                <th scope="row">{{ $grado->grado }}</th>
+                                <td>{{$grado->description}}</td>
+                                <td>
+                                    @if($evaluacion->grado===$grado->grado)
+                                        <div class="form-check">
+                                            <input type="radio" class="check-select radiogrado" id="{{"radiogrado$grado->id"}}"
+                                            value="{{"$grado->id"}}" name="gradocheck[]" checked
+                                            @if ($evaluacion->evaluador->status==2)
+                                                disabled
+                                            @endif>
+                                        </div>
+                                    @else
+                                        <div class="form-check">
+                                            <input type="radio" class="check-select" id="{{"radiogrado$grado->id"}}"
+                                            value="{{"$grado->id"}}" name="gradocheck[]"
+                                            @if ($evaluacion->evaluador->status==2)
+                                                disabled
+                                            @endif>
+                                        </div>
 
-                            @endif
+                                    @endif
 
-                        </td>
-                        <td>
-                            @foreach ($frecuencias  as $frecuencia)
+                                </td>
+                                <td>
+                                    @foreach ($frecuencias  as $frecuencia)
 
-                            <div class="form-check checkbox-inline ">
-                                <label for="frecuencia[]" class="form-check-label">{{ $frecuencia->name}}</label>
-                                @if($evaluacion->frecuencia===$frecuencia->valor && $evaluacion->grado===$grado->grado)
-                                    <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
-                                    value="{{"$frecuencia->id"}}" name="frecuenciacheck[]" checked >
-                                @else
-                                    <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
-                                    value="{{"$frecuencia->id"}}" name="frecuenciacheck[]" >
-                                @endif
-                            </div>
+                                    <div class="form-check checkbox-inline ">
+                                        <label for="frecuencia[]" class="form-check-label">{{ $frecuencia->name}}</label>
+                                        @if($evaluacion->frecuencia===$frecuencia->valor && $evaluacion->grado===$grado->grado)
+                                            <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
+                                            value="{{"$frecuencia->id"}}" name="frecuenciacheck[]" checked
+                                            @if ($evaluacion->evaluador->status==2)
+                                                disabled
+                                            @endif>
+                                        @else
+                                            <input type="radio" class="form-check radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"
+                                            value="{{"$frecuencia->id"}}" name="frecuenciacheck[]"
+                                            @if ($evaluacion->evaluador->status==2)
+                                               disabled
+                                            @endif>
+                                        @endif
+                                    </div>
 
-                            @endforeach
-                        </td>
+                                    @endforeach
+                                </td>
 
-                    </tr>
-                @endforeach
+                            </tr>
+                        @endforeach
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
 
-        </div>
+                </div>
 
-        <div class="form-group col-md-4 ">
+            <div class="form-group col-md-4 ">
 
-            <div id="divtodo">
+                <div id="divtodo">
+
+                </div>
+
 
             </div>
 
-
-        </div>
-
     </div>
+
     <div class="clearfix">
         <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-        <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Next</button>
+        @if ($evaluacion->evaluador->status!=2)
 
-        </div>
+        <button type="submit" class="btn btn-dark btn-lg float-right" value="Next" >Next</button>
+        @endif
 
-       </form>
+    </div>
+
+    </form>
 
 
     @else

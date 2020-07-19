@@ -31,10 +31,10 @@ Route::get('/', function () {
 Auth::routes(['verify' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
 Route::post('/logout', 'HomeController@logout')->name('logout');
 
+/** Entrada al modulo de Vision 360 */
+Route::get('vision360', 'HomeController@vision360')->name('vision360');
 /**
  * Resource de Frecuencia de la evaluacion
  *
@@ -106,8 +106,6 @@ Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
         ->name('lanzar.procesar')
         ->middleware(['role:admin']);
 
-
-
 /**
  *Route de evaluaciones
  */
@@ -122,14 +120,14 @@ Route::get('competencias/{evaluador}/evaluacion',"EvaluacionController@competenc
 
 Route::get('evaluacionget/{competencia}/preguntas',"EvaluacionController@responder")
 ->name('evaluacion.responder')
-->where('evaluador','[0-9]+');
-//->middleware(['auth']);
+->where('evaluador','[0-9]+')
+->middleware(['auth']);
 
 
 Route::post('evaluacionpost/{competencia}/respuesta',"EvaluacionController@store")
 ->name('evaluacion.store')
-->where('evaluador','[0-9]+');
-//->middleware(['auth']);
+->where('evaluador','[0-9]+')
+->middleware(['auth']);
 
 
 /*

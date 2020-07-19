@@ -18,24 +18,30 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application entry home.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
     {
 
-        // $request->user()->authorizeRoles(['admin','user']);
-
         return view('layout');
 
     }
 
-
+    /**Hacer el logout */
     public function logout()
     {
 
         Auth::logout();
-        return redirect()->route('home');
+        return redirect()->route('vision360');
+    }
+
+    /**Mostrar un view con una breve descripcion del sistema */
+    public function vision360(){
+
+        return view('vision360');
+
+
     }
 }

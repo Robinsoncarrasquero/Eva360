@@ -34,7 +34,7 @@
 
             <div class="panel-body">
                 <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
-                    @csrf
+                @csrf
                 <div class="table">
                     <table id="mytable" class="table  table-bordred table-striped">
                     <thead>
@@ -58,9 +58,15 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                            <span><i class="material-icons ">create</i></span></a>
+                            @if($evaluador->status!=2)
+                                <a href="{{route('evaluacion.responder', $competencia->id)}}" >
+                                <span><i class="material-icons ">create</i></span></a>
+                            @else
+                                <a href="{{route('evaluacion.responder',$competencia->id)}}" >
+                                <i class="material-icons">visibility</i></a>
 
+
+                            @endif
                         </td>
 
                     </tr>
@@ -69,9 +75,10 @@
                     </table>
                 </div>
                 <div class="clearfix">
-                    <span class="float-left"><a href="{{back()}}" class="btn btn-dark btn-lg">Back</a></span>
-                    <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalice</button>
-
+                    <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Back</a></span>
+                    @if($evaluador->status!=2)
+                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalice</button>
+                    @endif
                 </div>
 
                 </form>
