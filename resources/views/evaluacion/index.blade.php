@@ -37,7 +37,7 @@
                     <thead>
                     <th>Nombre</th>
                     <th>Status</th>
-                    <th>Editar</th>
+                    <th>Accion</th>
                     <th>Resultados</th>
                     </thead>
                     <tbody>

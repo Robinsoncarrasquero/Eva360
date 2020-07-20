@@ -1,6 +1,6 @@
 {{-- @extends('layout')
 
-@section('title',"Lanzamiento de Prueba")
+@section('title',"Resultados Finales")
 
 @section('content') --}}
 
@@ -12,78 +12,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vision360</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
+<div class="container">
+    <div class="mt-3">
+        <div class="col-lg-12 mb-1" id="container0"></div>
+  
+    </div>
 
-<div id="container"></div>
+    <div class="clearfix">
+        <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+        <span class="float-right"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+    </div>
 
-<div class="clearfix">
-    <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
 </div>
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
 
+<script src="{{ asset('js/hchar/highcharts.js') }}"></script>
+<script src="{{ asset('js/hchar/modules/series-label.js')}}"></script>
+<script src="{{ asset('js/hchar/modules/exporting.js') }}"></script>
+<script src="{{ asset('js/hchar/modules/export-data.js')}}"></script>
+<script src="{{ asset('js/hchar/modules/accessibility.js')}}"></script>
 <script type="text/javascript">
 
     var dataSerie =  @json($dataSerie);
     var categorias =  @json($dataCategoria);
     var evaluado =  @json($evaluado->name);
 
-    var fileevaluado=[
-        {
-            "name":"Pedro Perez",
-            "Evaluadores":
-            [
-                {'name':'Pedro Martinez','relation':'Boss','email':'pmartinez@eva360.com'},
-                {'name':'Maria Rodriguez','relation':'Parner','email':'mrodriguez@eva360.com'},
-            ]
-        }
+    categorias.forEach(logArrayElements);
 
-        ];
+    function logArrayElements(element, index, array) {
+        console.log("a[" + index + "] = " + element);
+    }
 
+    ['data1'].forEach(mychar);
 
-    Highcharts.chart('container', {
-        title: {
-            text: "Vision 360 de "+evaluado
-        },
-        subtitle: {
-            text: 'Source code: https://github.com/Robinsoncarrasquero/Eva360'
-
-        },
-         xAxis: {
-            categories: categorias
-        },
-        yAxis: {
+    function mychar(element,index,array)
+    {
+        Highcharts.chart('container'+index, {
+        //Highcharts.chart('container', {
             title: {
-                text: 'Nivel de Dominio'
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-        },
-        plotOptions: {
-            series: {
-                allowPointSelect: true
-            }
-        },
-        series:dataSerie,
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 500
-                },
-                chartOptions: {
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'center',
-                        verticalAlign: 'bottom'
-                    }
+                text: "Vision 360 de "+evaluado
+            },
+            subtitle: {
+                text: 'Source code: https://github.com/Robinsoncarrasquero/Eva360'
+
+            },
+            xAxis: {
+                categories: categorias
+            },
+            yAxis: {
+                title: {
+                    text: 'Nivel de Dominio'
                 }
-            }]
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true
+                }
+            },
+            series:dataSerie,
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+
         }
-});
+
+
+    });
+
+    }
+
+
 </script>
 </body>
 </html>

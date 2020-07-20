@@ -43,7 +43,7 @@
                     <thead>
                     <th>Nombre</th>
                     <th>Status</th>
-                    <th>Editar</th>
+                    <th>Lanzar</th>
                     <th>Evaluacion</th>
                     <th>Resultado</th>
                     <th>Grafica</th>
@@ -79,8 +79,7 @@
                                 <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
                                 <span><i class="material-icons ">send</i></span></a>
                             @else
-                                <span><i class="material-icons">hourglass_full</i></span></a>
-
+                                <span><i class="material-icons">timer_off</i></span></a>
                             @endif
 
 

@@ -17,9 +17,9 @@ class CreateEvaluacionsTable extends Migration
             $table->id();
             $table->foreignId('competencia_id')->constrained();
             $table->string('grado',1)->nullable();
-            $table->unsignedDecimal('ponderacion',5,2)->default(0);
+            $table->float('ponderacion',5,2)->default(0);
             $table->integer('frecuencia')->default(0);
-            $table->unsignedDecimal('resultado',5,2)->default(0);
+            $table->float('resultado',5,2)->default(0);
 
             $table->foreignId('evaluador_id')->constrained("evaluadores");
             // $table->foreignId('evaluador_id')->constrained("evaluadores")->onDelete('cascade');

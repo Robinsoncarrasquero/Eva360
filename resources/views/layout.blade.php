@@ -81,8 +81,16 @@
             box-sizing: border-box;
         }
         .title-auth{
-            background-color:mediumaquamarine;
+            background-color:chocolate;
         }
+        a .material-icons {
+            color:chocolate;
+        }
+        .radio-checkeado, .radio-no-checkeado{
+            font-size: 2.5ex;
+        }
+
+
     </style>
 
   </head>

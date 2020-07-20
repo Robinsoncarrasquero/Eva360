@@ -56,7 +56,7 @@
 
                         <tr>
                             <td >{{ $item['name']}}</td>
-                            <td>{{$item['average']}}</td>
+                            <td>{{ number_format($item['average'],2)}}</td>
                         </tr>
 
                        @endforeach
