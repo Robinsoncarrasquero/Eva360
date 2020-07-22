@@ -27,6 +27,11 @@ Route::get('/', function () {
     return view('vision360');
 });
 
+
+/**Route de User */
+Route::get('/user/list', 'UserController@index')->name('index');
+Route::resource('user', 'UserController');
+
 /**Autenticacion full */
 Auth::routes(['verify' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
