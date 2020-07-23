@@ -1,0 +1,11 @@
+{
+	"Evaluado":"Pedro Perez",
+	"Evaluadores":
+	[
+		{"xname":"Juan  Martinez","relation":"Boss","xemail":"jm@com"},
+		{"name":"Maria Rodriguez","relation":"Supervisor","email":"mr@example.com"},
+		{"name":"Jonh Doe","relation":"Parner","email":"jd@example.com"},
+		{"name":"Frank Aguilar","relation":"Parner","email":"faguilar@example.com"}
+	]
+}
+

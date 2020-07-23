@@ -1,0 +1,151 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "Evaluado": "Pedro Perez",
+            "Evaluadores": [
+                {
+                    "name": "Juan  Martinez",
+                    "relation": "Boss",
+                    "email": "jm@eva360.com"
+                },
+                {
+                    "name": "Maria Rodriguez",
+                    "relation": "Supervisor",
+                    "email": "mr@eva360.com"
+                },
+                {
+                    "name": "Jonh Doe",
+                    "relation": "Parner",
+                    "email": "jd@eva360.com"
+                },
+                {
+                    "name": "Frank Aguilar",
+                    "relation": "Parner",
+                    "email": "faguilar@eva360.com"
+                }
+            ]
+        }
+    ],
+    "required": [
+        "Evaluado",
+        "Evaluadores"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "Evaluado": {
+            "$id": "#/properties/Evaluado",
+            "type": "string",
+			"maxLength":100,
+			"minLength":4,
+            "title": "The Evaluado schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "Pedro Perez"
+            ]
+        },
+        "Evaluadores": {
+            "$id": "#/properties/Evaluadores",
+            "type": "array",
+            "title": "The Evaluadores schema",
+            "description": "An explanation about the purpose of this instance.",
+			"examples": [
+                [
+                    {
+                        "name": "Juan  Martinez",
+                        "relation": "Boss",
+                        "email": "jm@eva360.com"
+                    },
+                    {
+                        "name": "Maria Rodriguez",
+                        "relation": "Supervisor",
+                        "email": "mr@eva360.com"
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "maxItems": 10,
+			"minItems":2,
+			"items": {
+                "$id": "#/properties/Evaluadores/items",
+                "type": "object",
+                "title": "The items schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                    [
+                        {
+                            "name": "Juan  Martinez",
+                            "relation": "Boss",
+                            "email": "jm@eva360.com"
+                        },
+                        {
+                            "name": "Maria Rodriguez",
+                            "relation": "Supervisor",
+                            "email": "mr@eva360.com"
+                        },
+                        {
+                            "name": "Jonh Doe",
+                            "relation": "Parner",
+                            "email": "jd@eva360.com"
+                        },
+                        {
+                            "name": "Frank Aguilar",
+                            "relation": "Parner",
+                            "email": "faguilar@eva360.com"
+                        }
+                    ]
+                ],
+                "required": [
+                    "name",
+                    "relation",
+                    "email"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                    "name": {
+                        "$id": "#/properties/Evaluadores/items/properties/name",
+                        "type": "string",
+						"maxLength":100,
+						"minLength":4,
+                        "title": "The name schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Juan  Martinez"
+                        ]
+                    },
+                    "relation": {
+                        "$id": "#/properties/Evaluadores/items/properties/relation",
+                        "type": "string",
+						"maxLength":15,
+						"minLength":4,
+                        "title": "The relation schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Boss"
+                        ]
+                    },
+                    "email": {
+                        "$id": "#/properties/Evaluadores/items/properties/email",
+                        "type": "string",
+                        "format": "email",
+                        "title": "The email schema",
+						"description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "jm@eva360.com"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

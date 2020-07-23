@@ -1,0 +1,87 @@
+$schemaData = json_decode(<<<'JSON'
+{
+    "type": "object",
+    "properties": {
+        "Evaluado": {"type": "string"},
+        "Evaluadores": {"type": "array", "items": {"$ref": "#child/data"}},
+    },
+    "child": {
+        "data": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "relation": {"type": "string"},
+                "email": {"type": "email"},
+            }
+        },
+    }
+}
+JSON
+);
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+
+  "definitions": {
+    "evaluado":{
+		"type": "object",
+		"properties":{
+		  "name":{"type": "string"}
+		},
+		"required": ["name"]
+	},
+    "evaluador": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "relation":           { "type": "string" },
+        "email":          { "type": "string" }
+      },
+      "required": ["name", "relation", "email"]
+    }
+  },
+
+  "type": "object",
+
+  "properties": {
+    "Evaluado": { "$ref": "#/definitions/evaluado" },
+    "Evaluadores": { "$ref": "#/definitions/evaluador" }
+  }
+}
+
+
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+
+  "definitions": {
+    "person": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "children": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/evaluador" },
+          "default": []
+        }
+      }
+    },
+	"evaluador": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "relation":           { "type": "string" },
+        "email":          { "type": "string" }
+      },
+      "required": ["name", "relation", "email"]
+    }
+  },
+
+  "type": "object",
+
+  "properties": {
+    "person": { "$ref": "#/definitions/person" }
+  }
+}
+
+

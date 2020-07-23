@@ -1,0 +1,9 @@
+{
+	"Evaluado":"Pedro Perez",
+	"Evaluadores":
+	[
+		{"name":"Juan  Martinez","relation":"Boss","email":"evaluador1@anotherdomain.com"},
+		{"name":"Maria Rodriguez","relation":"Super","email":"evaluador2@anotherdomain.com"}
+	]
+}
+

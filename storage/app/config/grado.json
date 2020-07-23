@@ -1,0 +1,10 @@
+{
+	"Grado":"Tabla de Grados",
+	"Grados":
+	[
+		{"grado":"A","description":"Eos delectus asperiores quia nemo modi.","ponderacion":100},
+		{"grado":"B","description":"Quasi est et blanditiis corrupti et do.","ponderacion":75},
+		{"grado":"C","description":"Magni nemo porro et in dolorem vitae e.","ponderacion":50},
+		{"grado":"D","description":"Est dolorum modi et et sequi deserunte.","ponderacion":25}
+	]
+}

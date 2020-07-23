@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "title": "User",
+  "description": "User profile with connections",
+  "default": {},
+  "type": "object",
+  "properties": {
+    "name": { "type": "string", "maxLength": 100 },
+    "email": { "type": "string", "format": "email" },
+    "connections": {
+      "type": "array",
+      "items": {
+        "title": "Connection",
+        "description": "User connection schema",
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "relation": { "type": "string"},
+		  "email": { "type": "string", "format": "email" },
+	      "phone": { "type": "string", "pattern": "^[0-9()\-\.\s]+$" }
+        },
+        "required": ["name", "relation", "email". "phone"],
+        "additionalProperties": false
+      }
+    }
+  }
+}
