@@ -66,7 +66,7 @@ class FileUploadController extends Controller
     private function validaJsonSchema($pathFile){
 
         $pathFile=$pathFile;
-        $pathSchema='config/my-schema.json';
+        $pathSchema='config/app-evaluado-schema.json';
         //$pathSchema='config/schema_other.json';
         $data = json_decode(Storage::get($pathFile));
         $schema = Schema::fromJsonString(Storage::get($pathSchema));
@@ -79,10 +79,6 @@ class FileUploadController extends Controller
         } else {
             /** @var ValidationError $error */
             $error = $jsonresult->getFirstError();
-            dd($jsonresult);
-            // echo '$data is invalid', PHP_EOL;
-            // echo "Error: ", $error->keyword(), PHP_EOL;
-            // echo json_encode($error->keywordArgs(), JSON_PRETTY_PRINT), PHP_EOL;
             return ["validjson"=>false,"msg"=>"JSON does not validate."];
 
         }
