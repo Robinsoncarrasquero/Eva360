@@ -56,17 +56,17 @@ return [
                     'private' => 0700,
                 ],
             ],
-            'root' => storage_path('log'),
-            'permissions' => [
-                'file' => [
-                    'public' => 0664,
-                    'private' => 0600,
-                ],
-                'dir' => [
-                    'public' => 0775,
-                    'private' => 0700,
-                ],
-            ],
+            // 'root' => storage_path('log'),
+            // 'permissions' => [
+            //     'file' => [
+            //         'public' => 0664,
+            //         'private' => 0600,
+            //     ],
+            //     'dir' => [
+            //         'public' => 0775,
+            //         'private' => 0700,
+            //     ],
+            // ],
         ],
 
         'links' => [

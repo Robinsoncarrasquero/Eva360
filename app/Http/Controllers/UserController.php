@@ -103,14 +103,13 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->save();
 
-        //Agredamos el nuevo rol
-        $new_rol = Role::find($request->newrol);
-        $user->roles()->attach($new_rol);
-
         //Eliminamos el rol anterior
         $userRol = Role::find($request->roluser);
         $user->roles($userRol)->detach();
 
+        //Agredamos el nuevo rol
+        $new_rol = Role::find($request->newrol);
+        $user->roles()->attach($new_rol);
 
         return redirect()->route('user.index')->withSuccess('Usuario Modificado con exito');
     }

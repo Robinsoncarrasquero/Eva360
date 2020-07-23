@@ -120,7 +120,7 @@
                 @endif
                 @if (Auth::check() && Auth::user()->admin())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar Evaluacion</a>
+                        <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('evaluado.index') }}">Evaluado</a>
@@ -133,6 +133,9 @@
                     </li>
                     <li class="nav-item ">
                         <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a  class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
                     </li>
                 @endif
 

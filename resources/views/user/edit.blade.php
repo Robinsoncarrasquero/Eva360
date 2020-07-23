@@ -48,8 +48,11 @@
                 <label >New Rol</label>
                 <select  class="form-control" id="newrol" name="newrol">
                     @foreach ($roles as $rol)
-                            <option  value="{{$rol->id}}">{{$rol->id}} {{ $rol->name}}</option>
-
+                        @if ($rol->id==$roluser->id)
+                            <option selected  value="{{$rol->id}}">{{ $rol->name}}</option>
+                        @else
+                            <option  value="{{$rol->id}}">{{ $rol->name}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
