@@ -26,7 +26,6 @@ class Evaluado extends Model
 
     //Hacer busquedas por nombre
     public function scopeName($query,$name){
-
         $query->where('name','like',"%$name%");
 
     }

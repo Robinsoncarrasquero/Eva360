@@ -9,11 +9,25 @@
 
     <div class="col-sm-12">
 
-        <h1 class="display-5">Lista de Usuarios</h1>
         <div id="flash-message">
             @include('flash-message')
 
         </div>
+
+        <div class="panel panel pb-3">
+            <div class="clearfix">
+                <form class="form-inline mt-2 mt-md-0 float-left">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Nombre" aria-label="Searh" name="buscarWordKey">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+
+                <div class="text text-center">
+                    <h3>Lista de Usuarios</h3>
+                </div>
+
+            </div>
+        </div>
+
         <div class="text text-sm-right">
             <a style="margin: 19px;" href="{{ route('user.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>

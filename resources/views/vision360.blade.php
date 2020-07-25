@@ -32,7 +32,7 @@
                     </div>
                     <div class="card-body">
                     <h5 class="card-title">Sistema de Vision 90</h5>
-                    <p class="card-text">Es cuando la persona es evaluada por su supervisor y el supervisor de su supervisor.</p>
+                    <p class="card-text">Es cuando el empleado es evaluado por su supervisor y el supervisor de su supervisor.</p>
                     </div>
 
                     <div class="card-footer text-muted">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="card-body">
                     <h5 class="card-title">Sistema de Vision 180</h5>
-                    <p class="card-text">Es cuando el empleado es evaluado por su jefe, los pares y eventualmente los clientes internos.</p>
+                    <p class="card-text">Es cuando el empleado es evaluado por su supervisor y el supervisor de su supervisor, los pares y autoevaluacion del evaluado.</p>
                     </div>
                     <div class="card-footer text-muted">
                         <i class="material-icons">people_alt group_add </i>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="card-body">
                     <h5 class="card-title">Sistema de Vision 360</h5>
-                    <p class="card-text">Es cuando el empleado es evaluado por todo el entorno; jefes, pares, subordinados, autoevaluacion.</p>
+                    <p class="card-text">Es cuando el empleado es evaluado por todo el entorno laboral, vision 180 y subordinados.</p>
                     </div>
                     <div class="card-footer text-muted">
                         <i class="material-icons">people_alt group_add group_add</i>

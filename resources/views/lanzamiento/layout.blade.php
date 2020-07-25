@@ -17,23 +17,83 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" /> --}}
+
+    <link rel="stylesheet" href="{{asset('bs40/core/css/bootstrap.min.css')  }}">
+    <script src = {{asset('bs40/core/css/jq/2.1.3/jquery.min.js')  }}></script>
+    <link rel="stylesheet" href="{{ asset('bs40/core/css/open-iconic/1.1.1/font/open-iconic-bootstrap.min.css')  }}"  />
+
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-
     <style>
-        .invisible{
-            display: none;
+       .spellcheck{
+            color:darkgreen;
         }
-        .visible{
-            display: inline;
+
+        .radio-checkeado,.radio-no-checkeado{
+            margin-left: 2px;
         }
+
+        .radio-checkeado{
+        width: 1em;
+        height: 1em;
+        border-radius: 3ex;
+        top: -2px;
+        left: -3px;
+        position: relative;
+        background-color:green;
+        content: '';
+        visibility: visible;
+        border: 1px solid white;
+        display: inline-block;
+
+        }
+
+
+        .radio-no-checkeado{
+        width: 1em;
+        height: 1em;
+        border-radius: 3ex;
+        top: -2px;
+        left: -3px;
+        position: relative;
+        background-color:orange;
+        content: '';
+        visibility: visible;
+        border: 1px solid white;
+        display: inline-block;
+
+        }
+
         Input:Focus {
             Background-color: yellow;
         }
+        input[type=text] {
+            width: 100%;
+            padding: 2px 10px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+        input[type=email] {
+            width: 100%;
+            padding: 2px 10px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+        .title-auth{
+            background-color:chocolate;
+        }
+        a .material-icons {
+            color:chocolate;
+        }
+        .radio-checkeado, .radio-no-checkeado{
+            font-size: 2.5ex;
+        }
+
 
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -52,27 +112,36 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
-            </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
+        </li>
 
-            @auth
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar Prueba</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('evaluado.index') }}">Evaluado</a>
-                </li>
-                <li class="nav-item">
-                    <a  class="nav-link" href="{{ route('tipo.index') }}">Tipo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="{{ route('competencia.index') }}">Competencias</a>
-                </li>
-                <li class="nav-item ">
-                    <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
-                </li>
-        @endauth
+        @if (Auth::check())
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluaciones<span class="sr-only">(current)</span></a>
+            </li>
+        @endif
+        @if (Auth::check() && Auth::user()->admin())
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('evaluado.index') }}">Evaluado</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link" href="{{ route('tipo.index') }}">Tipo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('competencia.index') }}">Competencias</a>
+            </li>
+            <li class="nav-item ">
+                <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
+            </li>
+            <li class="nav-item ">
+                <a  class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
+            </li>
+        @endif
+
 
       </ul>
 
@@ -140,19 +209,17 @@
 
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
-      </div>
+    <footer id="footer" class="footer">
+        <div class="container">
+          <span class="text text-white-50 ">Sistema de Valoracion de Puestos por Competencias Basados en los Métodos o Sistemas de Vision 90, 180 y 360 Grados con resultados y graficas</span>
+        </div>
     </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script src={{ asset('bs40/core/js/jquery-3.2.1.slim.min.js') }}> </script>
+    <script src={{ asset('bs40/core/js/popper.min.js') }}> </script>
+    <script src={{ asset('bs40/core/js/bootstrap.min.js') }}> </script>
     @yield('scripts')
   </body>
 </html>

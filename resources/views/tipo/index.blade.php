@@ -9,7 +9,7 @@
 
     <div class="col-sm-12">
 
-        <h1 class="display-5">Lista de Tipos de Competencias</h1>
+        <h2 class="display-5">Lista de Tipos de Competencias</h2>
         <div id="flash-message">
             @include('flash-message')
 

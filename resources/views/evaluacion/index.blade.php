@@ -21,7 +21,7 @@
 
 
                     <div class="text text-center">
-                        <h3>Lista de Evaluados</h3>
+                        <h2>Lista de Evaluados</h2>
                     </div>
 
                 </div>

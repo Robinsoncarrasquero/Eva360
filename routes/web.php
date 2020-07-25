@@ -33,7 +33,7 @@ Route::get('/user/list', 'UserController@index')->name('index');
 Route::resource('user', 'UserController');
 
 /**Autenticacion full */
-Auth::routes(['verify' => false]);
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/logout', 'HomeController@logout')->name('logout');

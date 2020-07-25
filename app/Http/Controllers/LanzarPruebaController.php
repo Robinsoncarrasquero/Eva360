@@ -17,6 +17,7 @@ use app\Helpers\Helper;
 use App\Role;
 use App\User;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LanzarPruebaController extends Controller
@@ -33,7 +34,6 @@ class LanzarPruebaController extends Controller
         $buscarWordKey = $request->get('buscarWordKey');
 
         $evaluados = Evaluado::name($buscarWordKey)->orderBy('id','DESC')->paginate(10);
-
         return view('lanzamiento.index',compact('evaluados','title'));
 
     }
@@ -95,7 +95,7 @@ class LanzarPruebaController extends Controller
             [
             'competenciascheck'=>'required'],
 
-            ['competenciascheck.required' => 'Debe seleccionar al menos una competencia. Es requerido'],
+            ['competenciascheck.required' => 'Debe seleccionar al menos una competencia. Es obligatorio'],
 
         );
 

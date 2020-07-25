@@ -7,8 +7,8 @@
 <div class="container">
 
     <div class="panel panel pb-3">
-        <h2 class="text text-md-center ">Competencias seleccionadas para Lanzar de:</h2>
-        <h2 class="text text-md-center text-danger">{{ $evaluado->name }}</h2>
+        <h4 class="text text-md-center ">Competencias seleccionadas para Lanzar de: </h2>
+        <h4 class="text text-md-center text-danger">{{ $evaluado->name }}</h2>
     </div>
 
     @if ($errors->any())
@@ -30,7 +30,6 @@
     @if ($evaluadores->isNotEmpty())
         <div class="col-md-12">
             <form action="{{ route('lanzar.procesar',$evaluado) }}" method="POST">
-                {{-- {{ method_field('PUT') }} --}}
                 {{ csrf_field() }}
 
             <table class="table ">
@@ -51,8 +50,10 @@
                     <td>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="{{"$competencia->id"}}"
-                            value="{{"$competencia->id"}}" name="competenciascheck[]" checked readonly >
-                            <label class="form-check-label" for="{{"$competencia->id"}}">Evaluar</label>
+                            value="{{"$competencia->id"}}" name="competenciascheck[]" checked hidden>
+                            <span><i class=" radio-checkeado material-icons">done</i></span>
+
+
                         </div>
                     </td>
                 </tr>
@@ -85,7 +86,6 @@
 @section('sidebar')
 <div class="col-md-12">
     <form >
-    {{-- {{ method_field('PUT') }} --}}
     {{ csrf_field() }}
 
     <table class="table ">
@@ -93,7 +93,7 @@
         <tr>
             <th scope="col">Evaluador</th>
             <th scope="col">Email</th>
-            <th scope="col">Evaluar</th>
+            <th scope="col">Notificar</th>
         </tr>
         </thead>
         <tbody>
@@ -104,8 +104,9 @@
             <td>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="{{"$evaluador->id"}}"
-                    value="{{"$evaluador->id"}}" name="evaluador[]" checked disabled>
+                    value="{{"$evaluador->id"}}" name="evaluador[]" checked  hidden>
                     <label class="form-check-label" for="{{"$evaluador->id"}}"></label>
+                    <span><i class="material-icons">contact_mail</i></span>
                 </div>
             </td>
         </tr>
@@ -124,4 +125,13 @@
 @endsection
 
 <script src="{{ asset('js/lanzar.js') }}"></script>
+<script>
+$document.ready(function(){
+    $(':checkbox[readonly=readonly]').click(function(){
+         return false;
+    });
 
+});
+
+
+</script>

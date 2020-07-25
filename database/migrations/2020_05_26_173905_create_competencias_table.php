@@ -31,5 +31,6 @@ class CreateCompetenciasTable extends Migration
     public function down()
     {
         Schema::dropIfExists('competencias');
+        Schema::dropIfExists('evaluaciones');
     }
 }

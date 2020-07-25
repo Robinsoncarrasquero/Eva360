@@ -9,7 +9,7 @@
 
     <div class="col-sm-12">
 
-        <h1 class="display-5">Lista de Frecuencias</h1>
+        <h2 class="display-5">Lista de Frecuencias</h2>
         <div id="flash-message">
             @include('flash-message')
 

@@ -5,41 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <link rel="icon" href="favicon.ico">
-
-    <title>@yield('title') - Eva360</title>
-    <!-- Iconos para bootstrap -->
-    <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
+    <title>Sticky Footer Navbar Template for Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
-
-    <style type="text/css">
-        .table{
-            border: 8px  solid #009990;
-
-        }
-        .tr .table{
-
-        }
-        span .spellcheck{
-            color: blue;
-            background: #009990;
-        }
-        </style>
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
-
-
-</head>
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
+  </head>
 
   <body>
 
@@ -72,24 +49,14 @@
 
     <!-- Begin page content -->
     <main role="main" class="container">
-
-        <div class="row mt-3">
-
-                @yield('content')
-
-
-                @section('sidebar')
-                    <h2>Barra Lateral Main</h2>
-
-                @show
-
-        </div>
-
+      <h1 class="mt-5">Sticky footer with fixed navbar</h1>
+      <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt; .container</code>.</p>
+      <p>Back to <a href="../sticky-footer/">the default sticky footer</a> minus the navbar.</p>
     </main>
 
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">Sistemas de Evaluaciones</span>
+        <span class="text-muted">Place sticky footer content here.</span>
       </div>
     </footer>
 
@@ -97,9 +64,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    @yield('scripts')
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
   </body>
 </html>

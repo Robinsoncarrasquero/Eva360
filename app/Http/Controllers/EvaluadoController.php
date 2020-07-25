@@ -8,7 +8,9 @@ use Illuminate\Support\Str;
 use App\Http\Requests\FileJson;
 use App\Evaluado;
 use App\Evaluador;
+use App\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class EvaluadoController extends Controller
 {
@@ -132,7 +134,7 @@ class EvaluadoController extends Controller
     {
         $evaluado = Evaluado::find($evaluado);
         try {
-            $evaluado->delete();
+             $evaluado->delete();
         } catch (QueryException $e) {
             return redirect()->back()
             ->withErrors('Error imposible Eliminar este registro, tiene restricciones asociadas');

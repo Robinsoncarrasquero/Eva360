@@ -32,6 +32,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        return redirect()->back()
+        ->withWarning('Los usuarios pueden autoregistrarse por el sistema de autenticacion integrado y verificar su correo.');
         //
     }
 
@@ -124,6 +126,10 @@ class UserController extends Controller
     {
         //
         $user = User::find($user);
+        if ($user->admin()){
+            return redirect()->back()
+            ->withError('No esta permitido Eliminar Un Administrador del Sistema');
+        }
         try {
             $user->delete();
         } catch (QueryException $e) {

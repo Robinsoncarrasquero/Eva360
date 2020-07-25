@@ -100,6 +100,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
+    //Hacer busquedas por nombre
+    public function scopeName($query,$name){
+
+        $query->where('name','like',"%$name%");
+
+    }
 
 
 

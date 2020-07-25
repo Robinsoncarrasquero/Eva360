@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
     {
         //
 
-        $gradob=factory(Category::class,50)->create([
+        Factory(Category::class,50)->create([
 
         ]);
 

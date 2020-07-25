@@ -7,19 +7,14 @@
 
 <div class="container">
 
-    <div class="row">
+    <div class="panel panel-default">
 
-           <h1 class="display-5">Nueva Competencia</h1>
+        <h2 class="display-5">Nueva Competencia</h2>
 
-        @if ($errors->any())
-            <div class="alert alert-danger" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <div id="flash-message">
+            @include('flash-message')
+        </div>
+
 
         <form action="{{ route('competencia.store') }}" method="POST">
             @csrf
@@ -29,7 +24,7 @@
                     <td>
                         <div class="form-group">
                             <label for="name">Competencia</label>
-                            <input id="name" placeholder="Adaptabilidad" class="form-control" type="text" name="name" value="{{old('name')  }}">
+                            <input id="name" placeholder="Competencia" class="form-control" type="text" name="name" value="{{old('name')  }}">
                         </div>
                         <div class="form-group">
                             <label for="description">Descripcion</label>
@@ -38,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label for="nivelrequerido">Nivel Requerido</label>
-                            <input placeholder="Indique el margen requerido entre 0 y 100" id="nivelrequerido" class="form-control" type="text" name="nivelrequerido" value="{{ old('nivelrequerido') }}">
+                            <input placeholder="Indique el nivel requerido entre 0 y 100" id="nivelrequerido" class="form-control" type="text" name="nivelrequerido" value="{{ old('nivelrequerido') }}">
                         </div>
 
 

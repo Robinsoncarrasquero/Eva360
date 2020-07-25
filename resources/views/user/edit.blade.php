@@ -35,7 +35,7 @@
 
         <div class="row justify-content-start">
             <div class="col-6">
-                <label >Rol</label>
+                <label >Actual Rol</label>
                 <select class="form-control" id="roluser" name="roluser">
                     @foreach ($user->roles as $roluser)
                         <option  selected  value="{{ $roluser->id}}">{{ $roluser->name}}</option>
@@ -45,13 +45,16 @@
         </div>
         <div class="row justify-content-start">
             <div class="col-6">
-                <label >New Rol</label>
+                <label >Nuevo Rol</label>
                 <select  class="form-control" id="newrol" name="newrol">
                     @foreach ($roles as $rol)
                         @if ($rol->id==$roluser->id)
                             <option selected  value="{{$rol->id}}">{{ $rol->name}}</option>
                         @else
                             <option  value="{{$rol->id}}">{{ $rol->name}}</option>
+                        @endif
+                        @if(Auth::user()->admin() && $rol->id==$roluser->id))
+                            @break
                         @endif
                     @endforeach
                 </select>

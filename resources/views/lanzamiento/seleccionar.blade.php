@@ -7,8 +7,8 @@
 <div class="container">
 
     <div class="panel panel pb-3">
-        <h2 class="text text-md-center ">Seleccione las Competencias para la Evaluacion de</h2>
-        <h2 class="text text-md-center text-danger">{{ $evaluado->name }}</h2>
+        <h4 class="text text-md-center ">Seleccione las Competencias para la Evaluacion de</h4>
+        <h4 class="text text-md-center text-danger">{{ $evaluado->name }}</h4>
     </div>
 
     @if ($errors->any())
@@ -38,7 +38,6 @@
                     <th scope="col">#</th>
                     <th scope="col">Competencia</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Check</th>
                     <th scope="col">Seleccionar</th>
                 </tr>
                 </thead>
@@ -53,15 +52,12 @@
                            <div class="form-check">
                                 <input type="checkbox" class="check-select" id="{{"$competencia->id"}}"
                                 value="{{"$competencia->id"}}" name="competenciascheck[]">
-                                <label class="form-check-label" for="{{"$competencia->id"}}">Evaluar</label>
+                                <label class="form-check-label" for="{{"$competencia->id"}}">
+                                </label>
+
+
                             </div>
 
-
-                    </td>
-                    <td>
-                        <div class="form-check">
-                            <a href="#"><span><i class="material-icons check-select">add-box</i></span></a>
-                        </div>
 
                     </td>
 

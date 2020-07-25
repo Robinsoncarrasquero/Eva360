@@ -16,12 +16,10 @@
             </div>
 
             <div class="panel panel pb-3">
-
                 <div class="clearfix">
-
                     <form class="form-inline mt-2 mt-md-0 float-left">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="buscarWordKey">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <input class="form-control mr-sm-2" type="text" placeholder="Nombre" aria-label="Searh" name="buscarWordKey">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
 
                     <div class="text text-center">
@@ -30,6 +28,7 @@
 
                 </div>
             </div>
+
             <div class="text text-sm-right">
                 <a style="margin: 19px;" href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
             </div>
@@ -77,9 +76,9 @@
                         <td>
                             @if(Helper::estatus($evaluado->status)!='Finalizada')
                                 <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
-                                <span><i class="material-icons ">send</i></span></a>
+                                <span><i class="material-icons ">flight_takeoff</i></span></a>
                             @else
-                                <span><i class="material-icons">timer_off</i></span></a>
+                                <span><i class="material-icons">flight_land</i></span></a>
                             @endif
 
 
@@ -126,7 +125,7 @@
             @else
 
             <div class="alert alert-info">
-                <p>No hay usuarios registrados</p>
+                <p>No hay usuarios registrados para lanzar una evaluacion</p>
             <div>
 
             @endif

@@ -7,7 +7,7 @@
 <div class="container">
 
     <div class="col-sm-8 text text-center">
-        <h1 class="display-5">Actualizar Competencia</h1>
+        <h2 class="display-5">Actualizar Competencia</h2>
     </div>
     <div id="flash-message">
         @include('flash-message')
