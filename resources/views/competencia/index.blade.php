@@ -50,7 +50,10 @@
 
                 </tbody>
         </table>
+        <div class=" d-flex justify-content-center">
+            {{ $competencias->links() }}
 
+        </div>
     </div>
 
 </div>

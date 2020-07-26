@@ -93,6 +93,19 @@
         .radio-checkeado, .radio-no-checkeado{
             font-size: 2.5ex;
         }
+        .title-th-evaluador{
+            background-color:rgb(4, 39, 48);
+            color: white;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 20px;
+        }
+        .title-th-competencia{
+            background-color:rgb(73, 3, 3);
+            color:white;
+
+        }
+
+
 
 
     </style>

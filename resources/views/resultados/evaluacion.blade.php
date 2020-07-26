@@ -19,7 +19,7 @@
 
                 <div class="clearfix">
                     <div class="alert alert-info text-center">
-                        <h5>Evaluacion Detallada de la Prueba realizada sobre <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                        <h5>Evaluacion Detallada de la Prueba realizada a <span class="text-danger">{{ $evaluado->name }}</span></h5>
                     </div>
 
                     <div class="text text-center">
@@ -45,8 +45,8 @@
                         <th>Frecuencia</th>
                         <th>Resultado</th>
                         <tr>
-                            <th class="text text-center alert alert-warning" colspan="6">
-                            <mark>Evaluador :</mark> {{$evaluador->name}} <mark>( {{ $evaluador->relation }} )</mark>
+                            <th class="text text-center  title-th-evaluador" colspan="6">
+                            EVALUADOR : {{$evaluador->name}} <strong>( {{ $evaluador->relation }} )</strong>
                             </th>
                         </tr>
 

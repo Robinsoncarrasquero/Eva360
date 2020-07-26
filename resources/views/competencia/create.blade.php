@@ -54,32 +54,39 @@
                 </tr>
 
                 <tr>
-                    <table class="table table-light">
+
+                    <table  class="table table-dark">
                         <thead>
-                            <table class="table table-light">
+                            <table id="tablepreguntas" class="table table-dark">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>#</th>
                                         <th>Grado</th>
                                         <th>Pregunta</th>
                                         <th>Ponderacion</th>
+                                        <th>
+                                            <button type="button" class="btnponer btn btn-dark " ><i class=" material-icons">library_add</library-add></i></button>
+                                         </th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($filegrado['Grados'] as $key=>$value)
+                                    {{-- @foreach ($filegrado['Grados'] as $key=>$value)
                                     <tr>
-                                        <td>{{ $key }}</td>
                                         <td>
                                             <input type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">
                                         </td>
                                         <td>
-                                            <textarea cols="50" rows="4" name="gradoDescription[]">{{ old('gradoDescription.'.$key, $value->description)}}</textarea>
+                                            <textarea cols="50" rows="2" name="gradoDescription[]">{{ old('gradoDescription.'.$key, $value->description)}}</textarea>
                                         </td>
                                         <td>
                                             <input type="text" name="gradoPonderacion[]" value="{{ old('gradoPonderacion.'.$key, $value->ponderacion)}}">
                                         </td>
+                                        <td>
+                                            <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>
+                                        </td>
+
                                     </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
 
                         </thead>
@@ -102,5 +109,8 @@
     </div>
 
 </div>
+@section('scripts')
+    <script src="{{ asset('js/preguntacreate.js') }}"></script>
+@endsection
 
 @endsection

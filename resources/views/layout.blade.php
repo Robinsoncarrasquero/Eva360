@@ -90,8 +90,21 @@
         .radio-checkeado, .radio-no-checkeado{
             font-size: 2.5ex;
         }
+        .title-th-evaluador{
+            background-color:rgb(4, 39, 48);
+            color: white;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 20px;
+        }
+        .title-th-competencia{
+            background-color:rgb(73, 3, 3);
+            color:white;
 
+        }
 
+        nav.navbar{
+            color: azure;
+        }
 
     </style>
 
@@ -206,8 +219,8 @@
 
     <footer id="footer" class="footer">
       <div class="container">
-        <span class="text text-white-50 ">Sistema de Valoracion de Puestos por Competencias Basados en los Métodos o Sistemas de Vision 90, 180 y 360 Grados con resultados y graficas</span>
-      </div>
+        <span class="text text-white ">Sistema de Valoracion de Puestos por Competencias Basados en los Métodos o Sistemas de Vision 90, 180 y 360 Grados con resultados y graficas</span>
+    </div>
     </footer>
 
     <!-- Bootstrap core JavaScript

@@ -34,13 +34,11 @@
 
                 <form action="{{ route('evaluado.store',$fileName) }}" method="POST" id="frm-evaluado">
                     @csrf
-                        <div  class="card-header">
-                                <label  for="nameevaluado">Nombre Evaluado:</label>
-                                <input  class=" form-control" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}">
+                    <div  class="card-header">
+                            <label  for="nameevaluado">Nombre Evaluado:</label>
+                            <input  class=" form-control" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}">
 
-                        </div>
-
-
+                    </div>
 
                     <div class="table ">
                         <table id="tableevaluado" class="table">
@@ -116,8 +114,8 @@
     <dd class="col-sm-9">
         <p>Es la conexion directa entre Evaluador con respecto al Evaluado. Defina cualquier <strong>"Relacion"</strong>. Considere que es sensible a Mayuscula y Minusculas.</p>
         <dl class="row">
-            <dt class="col-sm-6">Las ponderaciones son calculadas agrupando la Relacion.</dt>
-            <dd class="col-sm-6">Jefe, Super, Par, Partner, Cliente, Boss, etc.</dd>
+            <dt class="col-sm-6">Las ponderacion es calculada agrupando la "Relacion".</dt>
+            <dd class="col-sm-6">Jefe, Super, Partner, Cliente, Boss, etc.</dd>
         </dl>
     </dd>
 </dl>

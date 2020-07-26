@@ -13,31 +13,30 @@ $(document).ready(function () {
     })
 
     $(".btnponer").on('click',function (e) {
-
         var input1 =$("<input/>",{
             type: "text",
-            name: "name[]",
-            maxlength:100,
-            placeholder: "Ingrese el Nombre del Evaluador"
+            name: "gradoName[]",
+            maxlength:1,
+            placeholder: "Grado "
         });
         var td1=$('<td/>');
         td1.append(input1);
 
-        var input2 =$("<input/>",{
-            type: "text",
-            name: "relation[]",
-            maxlength:10,
-            placeholder: "Relacion con el evaluado (Jefe,Partner,Cliente,XYZ)"
+        var input2 =$("<textarea/>",{
+            name: "gradoDescription[]",
+            rows:4,cols:50,
+            maxlength:1000,
+            placeholder: "Describa la pregunta"
         });
         var td2=$('<td/>');
         td2.append(input2);
 
         var input3=$("<input/>",{
-            type: "email",
-            name: "email[]",
-            value:'boss@example.com',
+            type: "text",
+            name: "gradoPonderacion[]",
+            value:'0',
             maxlength:100,
-            placeholder: "Ingrese un email valido"
+            placeholder: "Poderacion de 0 al 100"
         });
         var td3=$('<td/>');
         td3.append(input3);
@@ -52,7 +51,6 @@ $(document).ready(function () {
         });
         btn.append(icon);
         var td4=$('<td/>').append(btn);
-
         var tr=$('<tr/>',{
         });
 
@@ -61,10 +59,9 @@ $(document).ready(function () {
         tr.append(td3);
         tr.append(td4);
 
-        $('#tableevaluado tbody').append(tr);
+        $('#tablepreguntas tbody').append(tr);
 
     })
 
 
 });
-
