@@ -29,8 +29,10 @@
                 </div>
             </div>
 
-            <div class="text text-sm-right">
-                <a style="margin: 19px;" href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
+            <div class=" float-right">
+                <strong class="text text-bold"> New Evaluado</strong>
+                <a style="margin: 19px;" href="{{ route('json.fileindex')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
+                <a style="margin: 19px;" href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
             </div>
 
             @if($evaluados->count())

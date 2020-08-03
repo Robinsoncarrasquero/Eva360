@@ -211,8 +211,8 @@ Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
 
 
     Route::get('uploads', function () {
-        if (Storage::exists("uploads/eva360.json")){
-            return Storage::response("uploads/eva360.json");
+        if (Storage::exists("config/eva360.json")){
+            return Storage::response("config/eva360.json");
         }
          //si no se encuentra lanzamos un error 404.
          abort(404);

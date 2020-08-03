@@ -18,7 +18,7 @@
             <div class="panel panel pb-3">
 
                 <div class="clearfix">
-                    <div class="alert alert-info text-center">
+                    <div class=" text-center">
                         <h5>Evaluacion Detallada de la Prueba realizada a <span class="text-danger">{{ $evaluado->name }}</span></h5>
                     </div>
 

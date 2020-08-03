@@ -82,7 +82,7 @@ class ResultadosController extends Controller
             $datax[]=['name'=>$key,'data'=>$data];
 
         }
-        $dataSerie[]= ['name'=>'Eva360','data'=>$arrayEvaluacion];
+        $dataSerie[]= ['name'=>'Vision360','data'=>$arrayEvaluacion];
         $dataCategoria=$arrayCategoria;
 
         return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado"));

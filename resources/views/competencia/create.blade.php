@@ -70,7 +70,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($filegrado['Grados'] as $key=>$value)
+                                    @foreach ($filegrado['Grados'] as $key=>$value)
                                     <tr>
                                         <td>
                                             <input type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">
@@ -86,7 +86,7 @@
                                         </td>
 
                                     </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
 
                         </thead>

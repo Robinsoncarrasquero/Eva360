@@ -19,7 +19,7 @@
 
                 <div class="clearfix">
                     @if ($evaluado->status!==Helper::estatus('Finalizada'))
-                        <h4 class="alert alert-danger text text-center"><strong class=" text text-dark">La Prueba de {{ $evaluado->name }} aun no ha finalizado</strong></h4>
+                        <h4 class="alert alert-danger text-center">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h4>
                     @else
                         <div class="alert alert-info text-center">
                             <h5>Resultados Finales Ponderados de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
@@ -88,7 +88,6 @@
 
             @endif
 
-            {{-- {{ $competencias->links() }} --}}
 
         </div>
 

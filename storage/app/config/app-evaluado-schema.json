@@ -16,17 +16,17 @@
                 },
                 {
                     "name": "Maria Rodriguez",
-                    "relation": "Supervisor",
+                    "relation": "Super",
                     "email": "mr@eva360.com"
                 },
                 {
                     "name": "Jonh Doe",
-                    "relation": "Parner",
+                    "relation": "Partner",
                     "email": "jd@eva360.com"
                 },
                 {
                     "name": "Frank Aguilar",
-                    "relation": "Parner",
+                    "relation": "Partner",
                     "email": "faguilar@eva360.com"
                 }
             ]
@@ -92,12 +92,12 @@
                         },
                         {
                             "name": "Jonh Doe",
-                            "relation": "Parner",
+                            "relation": "Partner",
                             "email": "jd@eva360.com"
                         },
                         {
                             "name": "Frank Aguilar",
-                            "relation": "Parner",
+                            "relation": "Partner",
                             "email": "faguilar@eva360.com"
                         }
                     ]

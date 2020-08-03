@@ -130,15 +130,12 @@
 
                 @if (Auth::check())
                     <li class="nav-item ">
-                        <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluaciones<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
                     </li>
                 @endif
                 @if (Auth::check() && Auth::user()->admin())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('evaluado.index') }}">Evaluado</a>
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link" href="{{ route('tipo.index') }}">Tipo</a>
