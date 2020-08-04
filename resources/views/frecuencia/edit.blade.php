@@ -22,8 +22,12 @@
                 @method('PATCH' )
 
                 <div class="form-group">
-                    <label for="name">Descripcion</label>
+                    <label for="name">Frecuencia</label>
                     <input id="name" class="form-control" type="text" name="name" value="{{$frecuencia->name}}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripcion</label>
+                    <input id="description" class="form-control" maxlength="255" type="text" name="description" value="{{$frecuencia->description}}">
                 </div>
                 <div class="form-group">
                     <label for="valor">Valor</label>

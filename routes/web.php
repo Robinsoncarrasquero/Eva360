@@ -57,6 +57,11 @@ Route::resource('frecuencia', 'FrecuenciaController')
 Route::resource('evaluado', 'EvaluadoController')
 ->middleware('role:admin');
 
+
+/**Resource de tipo de competencia */
+Route::resource('grupocompetencia', 'GrupoCompetenciaController')
+->middleware('role:admin');
+
 /**
  * Resource de tipo de competencia
  *

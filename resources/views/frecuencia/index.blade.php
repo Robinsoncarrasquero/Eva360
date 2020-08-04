@@ -21,6 +21,7 @@
         <table class="table table-light table-striped ">
             <thead>
                 <th>#</th>
+                <th>Frecuencia</th>
                 <th>Descripcion</th>
                 <th>Valor</th>
                 <th></th>
@@ -31,6 +32,7 @@
                 <tr>
                     <td>{{ $frecuencia->id }}</td>
                     <td>{{ $frecuencia->name }}</td>
+                    <td>{{ $frecuencia->description}}</td>
                     <td>{{ $frecuencia->valor }}</td>
 
                     <td><a href="{{ route('frecuencia.edit',$frecuencia) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>

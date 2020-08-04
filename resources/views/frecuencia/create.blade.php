@@ -25,8 +25,12 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="name">Descripcion</label>
+                    <label for="name">Frecuencia</label>
                     <input id="name" placeholder="Ingrese una frecuencia" class="form-control" type="text" name="name" value="{{old('name')  }}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripcion</label>
+                    <input id="description"  placeholder="Ingrese una frecuencia" class="form-control" type="text" name="description" maxlength="255" value="{{old('description')  }}">
                 </div>
                 <div class="form-group">
                     <label for="valor">Valor</label>

@@ -7,8 +7,8 @@
 <div class="container">
 
     <div class="panel panel pb-3">
-        <h4 class="text text-md-center ">Competencias seleccionadas para Lanzar de: </h2>
-        <h4 class="text text-md-center text-danger">{{ $evaluado->name }}</h2>
+        <h4 class="text text-md-center alert alert-warning">Competencias seleccionadas para Lanzar de: {{ $evaluado->name }}</h2>
+
     </div>
 
     @if ($errors->any())
@@ -37,7 +37,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Competencia</th>
-                    <th scope="col">Descripcion</th>
                     <th scope="col">Check</th>
                 </tr>
                 </thead>
@@ -46,7 +45,6 @@
                 <tr>
                     <th scope="row">{{ $competencia->id }}</th>
                     <td>{{$competencia->name}}</td>
-                    <td>{{$competencia->description}}</td>
                     <td>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="{{"$competencia->id"}}"
@@ -64,7 +62,7 @@
             </table>
             <div class="clearfix">
                 <span class="float-left"><a href="{{route('lanzar.index')}}" class="btn btn-dark btn-lg">Back</a></span>
-                <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Lanzar</button>
+                <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Next</button>
 
             </div>
 

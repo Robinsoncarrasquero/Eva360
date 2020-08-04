@@ -178,7 +178,14 @@ class LanzarPruebaController extends Controller
             //$data->token=$evaluador->remember_token;
             $data->linkweb =$root."/evaluacion/$evaluador->remember_token/evaluacion";
             $data->nameEvaluado =$evaluado->name;
-            Mail::to($receivers)->send(new EvaluacionEnviada($data));
+            try {
+
+                Mail::to($receivers)->send(new EvaluacionEnviada($data));
+
+            }catch(QueryException $e) {
+                abort(404);
+            }
+
         }
 
         return \redirect()->route('lanzar.index')->with('success','Hurra!! La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');

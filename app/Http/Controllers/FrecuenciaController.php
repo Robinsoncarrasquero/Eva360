@@ -43,9 +43,11 @@ class FrecuenciaController extends Controller
     {
         $request->validate([
             'name'=>'required',
+            'description'=>'required|max:255',
             'valor'=>'required|integer|between:0,100',
             ],[
-                'name.required'=>'La descripcion de la Frecuencia es requerida',
+                'name.required'=>'Nombre de la Frecuencia es requerido',
+                'description.required'=>'La descripcion de la Frecuencia es requerida',
                 'valor.required'=>'El valor de la Frecuencia debe estar between:min,max',
             ],
         );
@@ -54,10 +56,12 @@ class FrecuenciaController extends Controller
 
             $frecuencia = new Frecuencia();
             $frecuencia->name = $request->name;
+            $frecuencia->description = $request->description;
             $frecuencia->valor= $request->valor;
             $frecuencia->save();
 
         } catch (QueryException $e) {
+            dd($e);
             return redirect()->back()
             ->withErrors('Error imposible Guardar este registro. La frecuencia debe ser unica, no se permite duplicados.');
         }
@@ -106,10 +110,12 @@ class FrecuenciaController extends Controller
        $request->validate([
             'name'=>'required|unique:frecuencias,name,'.$frecuencia,
             'valor'=>'required|integer|between:0,100',
+            'description'=>'required',
             ],[
                 'name.required'=>'La descripcion de la Frecuencia es requerida',
                 'name.unique'=>'El nombre ya esta registrado en la tabla.',
                 'valor.between'=>'El valor de la frecuencia debe estar  entre :min y :max.',
+                'description.required'=>'La descripcion de la Frecuencia es requerida',
             ],
         );
 
@@ -117,6 +123,7 @@ class FrecuenciaController extends Controller
 
             $frecuencia = Frecuencia::findOrFail($frecuencia);
             $frecuencia->name = $request->name;
+            $frecuencia->description = $request->description;
             $frecuencia->valor = $request->valor;
             $frecuencia->save();
 

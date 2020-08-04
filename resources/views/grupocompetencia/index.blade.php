@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Lista de Competencias eva360")
+@section('title',"Grupo de Competencias")
 
 @section('content')
 
@@ -9,13 +9,13 @@
 
     <div class="col-sm-12">
 
-        <h2 class="display-5">Lista de Competencias</h2>
+        <h2 class="display-5">Grupo de Competencias</h2>
         <div id="flash-message">
             @include('flash-message')
 
         </div>
         <div class="text text-sm-right">
-            <a style="margin: 19px;" href="{{ route('competencia.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
+            <a style="margin: 19px;" href="{{ route('grupocompetencia.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>
 
         <table class="table table-light table-striped ">
@@ -33,12 +33,12 @@
                 <tr>
                     <td>{{ $competencia->id }}</td>
                     <td>{{ $competencia->name }}</td>
-                    <td >{{ substr($competencia->description,0,100) }} ....</td>
+                    <td>{{ $competencia->description }}</td>
                     <td>{{ $competencia->nivelrequerido }}</td>
                     <td>{{ $competencia->tipo->tipo}}</td>
-                    <td><a href="{{ route('competencia.edit',$competencia) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
+                    <td><a href="{{ route('grupocompetencia.edit',$competencia) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                     <td>
-                        <form  action="{{ route('competencia.destroy',$competencia) }}" method="POST">
+                        <form  action="{{ route('grupocompetencia.destroy',$competencia) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>

@@ -36,12 +36,18 @@ class EvaluacionController extends Controller
     public function token($token)
     {
 
+
         //Filtramos el evaluador segun el token recibido
         $evaluador = Evaluador::all()->where('remember_token',$token)->first();
+        if($evaluador==\null){
+           abort(404);
+           return redirect('login');
+        }
         $user=Auth::loginUsingId($evaluador->user_id);
         if (!Auth::check()){
-            redirect('login');
+            return redirect('login');
         }
+        session(['token' => $token]);
 
         //Evaluacion del evaluado esta terminada es redirigido a la lista de usuarios
         if ($evaluador->status==Helper::estatus('Finalizada')){
@@ -60,6 +66,14 @@ class EvaluacionController extends Controller
     {
         $evaluador = Evaluador::find($evaluador_id);
         $evaluado = $evaluador->evaluado;
+        if($evaluador->user_id!=Auth::user()->id){
+            \abort(404);
+        }
+
+        // if(session()->has('token') &&  $evaluador->remember_token!=session('token')){
+        //     \abort(404);
+        // }
+
         $competencias = $evaluador->evaluaciones;
         return \view('evaluacion.competencias',\compact('competencias','evaluador','evaluado'));
 
@@ -69,7 +83,7 @@ class EvaluacionController extends Controller
      * Controlador para cargar las preguntas a la vista.
      */
     public function responder($competencia_id){
-
+        $user = Auth::user();
         $evaluacion=Evaluacion::find($competencia_id);
 
         //Evaluadors

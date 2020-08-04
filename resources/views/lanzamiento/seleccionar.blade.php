@@ -7,8 +7,7 @@
 <div class="container">
 
     <div class="panel panel pb-3">
-        <h4 class="text text-md-center ">Seleccione las Competencias para la Evaluacion de</h4>
-        <h4 class="text text-md-center text-danger">{{ $evaluado->name }}</h4>
+        <h4 class="text text-md-center alert alert-warning ">Seleccione las Competencias a evaluar de {{ $evaluado->name }}</h4>
     </div>
 
     @if ($errors->any())
@@ -38,6 +37,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Competencia</th>
                     <th scope="col">Descripcion</th>
+                    <th scope="col">Tipo</th>
                     <th scope="col">Seleccionar</th>
                 </tr>
                 </thead>
@@ -46,7 +46,9 @@
                 <tr data-id="{{" $competencia->id "}}">
                     <th scope="row">{{ $competencia->id }}</th>
                     <td>{{$competencia->name}}</td>
-                    <td>{{$competencia->description}}</td>
+                    <td>{{ substr($competencia->description,0,150)}}....</td>
+                    <td>{{$competencia->tipo->tipo}}</td>
+                    {{-- <td>{{$competencia->grupocompetencia->name}}</td> --}}
                     <td>
 
                            <div class="form-check">

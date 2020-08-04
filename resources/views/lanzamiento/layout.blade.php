@@ -221,7 +221,7 @@
 
     <footer id="footer" class="footer">
         <div class="container">
-          <span class="text text-white-50 ">Sistema de Valoracion de Puestos por Competencias Basados en los Métodos o Sistemas de Vision 90, 180 y 360 Grados con resultados y graficas</span>
+          <span class="text text-white-50 ">Sistema de Valoracion de Puestos por Competencias Basados en los Métodos o Sistemas de Vision 90&#176;, 180&#176; y 360&#176; con resultados y graficas</span>
         </div>
     </footer>
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompetenciasTable extends Migration
+class CreateGrupocompetenciasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateCompetenciasTable extends Migration
      */
     public function up()
     {
-        Schema::create('competencias', function (Blueprint $table) {
+        Schema::create('grupocompetencias', function (Blueprint $table) {
             $table->id();
             $table->string('name',50)->notnullable()->unique();
             $table->text('description',1000)->notnullable();
             $table->integer('nivelrequerido')->default(0);
-            $table->foreignId('tipo_id')->constrained();
-            $table->foreignId('grupocompetencia_id')->constrained();
-
             $table->timestamps();
         });
     }
@@ -32,7 +29,6 @@ class CreateCompetenciasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('competencias');
-        Schema::dropIfExists('evaluaciones');
+        Schema::dropIfExists('grupocompetencias');
     }
 }
