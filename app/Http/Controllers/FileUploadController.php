@@ -123,6 +123,7 @@ class FileUploadController extends Controller
             $evaluado->name=$evaluadoJson['Evaluado'];
             $evaluado->status=0;
             $evaluado->word_key=$fileName;
+            $evaluado->cargo=$evaluadoJson['Cargo'];
             $evaluado->save();
 
             for ($i=0; $i < count($name); $i++) {

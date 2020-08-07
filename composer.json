@@ -50,7 +50,7 @@
             "Tests\\": "tests/"
         },
 		"files" :[
-			"app/Helpers/Helper.php"
+			"app/Helpers/Helper.php","app/ModelBussiness/LanzarEvaluacion.php"
 		]
     },
     "minimum-stability": "dev",
@@ -67,5 +67,5 @@
             "@php artisan key:generate --ansi"
         ]
     }
-	
+
 }

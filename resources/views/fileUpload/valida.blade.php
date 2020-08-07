@@ -32,19 +32,24 @@
 
             @if($evaluadoArray)
 
-            <div class="panel-body">
+            <div class="panel">
 
                 <form action="{{ route('json.filesave',$fileName) }}" method="POST" id="form-jsonfile">
                     @csrf
+                    <div  class="card">
+                        <div  class="card-header">
+                            <label  for="nameevaluado">Nombre Evaluado:</label>
+                            <input  class=" form-control" maxlength="100" type="text" name="nameevaluado" value="{{ $evaluadoArray['Evaluado'] }}">
+
+                        </div>
+                        <div  class="card-header">
+                            <label  for="cargo">Cargo:</label>
+                            <input  class=" form-control" maxlength="30" type="text" name="cargoevaluado" value="{{ $evaluadoArray['Cargo'] }}">
+                        </div>
+                    </div>
                     <div class="table ">
                         <table id="evaluado" class="table  table-bordered">
                         <thead>
-                        <tr>
-                            <th class="text text-left alert-dark" colspan="3">
-                            <label for="nameevaluado">Nombre de Evaluado</label>
-                            <input  type="text" name="nameevaluado" value="{{ $evaluadoArray['Evaluado'] }}">
-                            </th>
-                        </tr>
                         <th>Evaluador</th>
                         <th>Relation</th>
                         <th>Email</th>

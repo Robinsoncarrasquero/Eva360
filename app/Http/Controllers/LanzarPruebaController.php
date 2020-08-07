@@ -5,17 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request ;
 use App\Evaluado;
-use App\EmailSend;
 use App\Competencia;
-use App\Evaluacion;
-use App\Evaluador;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\EvaluacionEnviada;
-use App\Http\Requests\EvaluacionCreateRequest;
-use Illuminate\Database\QueryException;
-use app\Helpers\Helper;
-use App\Role;
-use App\User;
+use app\ModelBussiness\LanzarEvaluacion;
+use App\Modelo;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +19,9 @@ class LanzarPruebaController extends Controller
         $this->middleware('auth');
     }
 
-    //Lista de personas para la evaluacion
+    /*
+     *Lista los candidatos para la evaluacion
+     */
     public function index(Request $request)
     {
         $title="Lista de Evaluados";
@@ -38,7 +32,7 @@ class LanzarPruebaController extends Controller
 
     }
 
-    //Selecciona las competencias a ser evaluadas
+    //Selecciona las competencias de la evaluacion
     public function seleccionar(Evaluado $evaluado)
     {
         $title="Competencias";
@@ -53,7 +47,9 @@ class LanzarPruebaController extends Controller
 
     }
 
-    //Filtra las competencias seleccionadas para confirmarlas
+    /**
+     * Presenta las competencias seleccionadas para confirmarlas antes de procesar la evaluacion
+    */
     public function confirmar(Request $request, $evaluado_id)
     {
 
@@ -67,17 +63,17 @@ class LanzarPruebaController extends Controller
 
         $competencias=$request->all('competenciascheck');
 
-
+        //Creamos una array de las competencias seleccionadas en el formulario
         $flattened = Arr::flatten($competencias);
 
-        //Filtramos las competencias seleccionadas en el check
+        //Obtenemos una coleccion de las competencias del array devuelto por flatten
         $datacompetencias = Competencia::all();
         $competencias = $datacompetencias->only($flattened);
 
-        //Traemos al evaluado
+        //Buscamos al evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
-        //Obtenemos los evaluadores del evaluador
+        //Obtenemos los evaluadores del evaluado
         $evaluadores = Evaluado::find($evaluado->id)->evaluadores;
 
         $title='Confirmar Evaluacion';
@@ -86,12 +82,11 @@ class LanzarPruebaController extends Controller
     }
 
     /**
-     * Genera las evaluaciones lanzadas
+     * Genera las evaluacion por competencias
      */
     public function procesar(Request $formrequest,$evaluado_id){
 
-        //$competencias= $formrequest->validated();
-        $competencias=$formrequest->validate(
+       $competencias=$formrequest->validate(
             [
             'competenciascheck'=>'required'],
 
@@ -104,93 +99,104 @@ class LanzarPruebaController extends Controller
         //Generamos un array sigle
         $flattened = Arr::flatten($competencias);
 
-        // Filtramos las competencias devueltas en el array genrado por Array flatten
-        // y creamos una coleccion nueva del modelo con el metodo collecction only
+        // Filtramos las competencias devueltas en el array con el metodo flatten
+        // y creamos una coleccion de competencias con el metodo only
         $datacompetencias = Competencia::all();
         $competencias = $datacompetencias->only($flattened);
 
-        //Obeteremos el evaluado
+        //Buscamos al evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
-        //Obtenemos los evaluadores
-        $evaluadores = Evaluado::find($evaluado->id)->evaluadores;
+        //Creamos un objeto para el lanzamiento de Evaluacion
+        $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado_id,$root);
 
-        //Recorremos los evaluadores y creamos la evaluacion para cada uno
-        foreach($evaluadores as $evaluador){
-
-            //Creamos la Evaluacion con los datos solo de las competencias
-            foreach($competencias as $key=>$competencia){
-                $evaluacion = new Evaluacion();
-                //$evaluacion->resultado=Helper::estatus('Inicio');
-                $evaluacion->competencia_id=$competencia->id;
-                try {
-                    //Salvamos a la evaluacion
-                    $eva360=$evaluador->evaluaciones()->save($evaluacion);
-
-                    //Cambiamos status de Evaluado
-                    $evaluadorx = Evaluador::find($evaluador->id);
-                    $evaluadorx->status=1; //0:Inicio, 1:Lanzada 2:finalizada
-                    $evaluadorx->save();
-
-                } catch (QueryException $e) {
-
-                    return \redirect()->route('lanzar.index')
-                    ->with('error',"Error, Esas competencias para el Evaluado $evaluado->name, ya habian sido lanzadas en la Prueba..");
-
-                }
-            }
-
+        if (!$objlanzaEvaluacion->crearEvaluacion()){
+            return \redirect()->route('lanzar.index')
+            ->with('error',"Error, Esas competencias para el Evaluado $evaluado->name, ya habian sido lanzadas en la Prueba..");
         }
 
-
-        // //Enviamos el correo a los evaluadores
-        foreach($evaluadores as $evaluador){
-
-            //Creamos un usuario para responder la prueba autenticado
-            try {
-                $user = User::firstOrCreate(
-                    ['email'=>$evaluador->email],[
-                    'name' => $evaluador->name,
-                    'password' => Hash::make('secret1234')
-                ]);
-                if (!$user->hasRole('user')){
-                    $userRole = Role::where('name','user')->first();
-                    $user->roles()->attach($userRole);
-                }
-                $evaluadorx = Evaluador::find($evaluador->id);
-                $evaluadorx->user_id = $user->id;
-                $evaluadorx->save();
-
-               // dd($user,$evaluadorx);
-
-            }catch(QueryException $e) {
-
-                abort(404);
-            }
-
-            $receivers = $evaluador->email;
-
-            //Creamos un objeto para pasarlo a la clase Mailable
-            $data = new EmailSend();
-            $data->nameEvaluador=$evaluador->name;
-            $data->relation =$evaluador->relation;
-
-            //$data->token=$evaluador->remember_token;
-            $data->linkweb =$root."/evaluacion/$evaluador->remember_token/evaluacion";
-            $data->nameEvaluado =$evaluado->name;
-            try {
-
-                Mail::to($receivers)->send(new EvaluacionEnviada($data));
-
-            }catch(QueryException $e) {
-                abort(404);
-            }
-
-        }
+        $objlanzaEvaluacion=null;
 
         return \redirect()->route('lanzar.index')->with('success','Hurra!! La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
+
     }
 
+    /*
+    * Seleccionar un modelo de evaluacion
+    */
+    public function seleccionarmodelo(Request $request,$evaluado){
+        $title="Modelos";
+        $evaluado = Evaluado::findOrFail($evaluado);
+
+        //Palabra de busqueda
+        $buscarWordKey = $request->get('buscarWordKey');
+        //Obtenemos los modelo
+        $modelos =  Modelo::name($buscarWordKey)->orderBy('id','DESC')->simplePaginate(25);
+
+        return \view('lanzamiento.seleccionarmodelo',compact("modelos","evaluado","title"));
+    }
+
+     /**
+      * Presenta la lista de candidatos para lanzar un modelo
+      */
+     public function lanzarmodelo(Request $request)
+     {
+         $title="Lista de Evaluados";
+         $buscarWordKey = $request->get('buscarWordKey');
+
+         $evaluados = Evaluado::name($buscarWordKey)->orderBy('id','DESC')->paginate(10);
+         return view('lanzamiento.modelo',compact('evaluados','title'));
+
+     }
+
+
+    /**
+     * Genera la evaluacion por modelo
+     */
+    public function procesarmodelo(Request $formrequest,$evaluado_id){
+
+            $modelo=$formrequest->validate(
+                [
+                'modeloradio'=>'required'],
+
+                ['modeloradio.required' => 'Debe seleccionar un modelo. Es requerido'],
+
+            );
+
+            $root=$formrequest->root();
+
+            //Creamos una array filtrando el modelo seleccionado en el formulario
+            $modeloflattened = Arr::flatten($modelo);
+
+            // Buscamos el modelo para obtener las competencias asociadas
+            $modelo = Modelo::find($modeloflattened)->first();
+
+            //Obtenemos la coleccion de competencias asociadas al modelo
+            $modelocompetencias = $modelo->competencias;
+
+            //Obtenemos una coleccion de competencias
+            $pluck = $modelocompetencias->pluck('competencia_id');
+
+            //Convertimos la coleccion de competencias pluck en un array con flatten
+            $flattened = Arr::flatten($pluck);
+
+            $datacompetencias = Competencia::all();
+            //Obtenemos una coleccion de competencias del array devuelto por flatten
+            $competencias = $datacompetencias->only($flattened);
+
+            //Buscamos el Evaluado
+            $evaluado = Evaluado::find($evaluado_id);
+
+            //Creamos un objeto de lanzamiento de Evaluacion
+            $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado_id,$root);
+            if (!$objlanzaEvaluacion->crearEvaluacion()){
+                return \redirect()->route('lanzar.modelo')
+                ->with('error',"Error, Esas competencias para el Evaluado $evaluado->name, ya habian sido lanzadas en la Prueba..");
+            }
+            $objlanzaEvaluacion=null;
+            return \redirect()->route('lanzar.modelo')->with('success','Hurra!! La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
+
+    }
 
 
 }

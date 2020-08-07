@@ -18,6 +18,7 @@ class CreateGrupocompetenciasTable extends Migration
             $table->string('name',50)->notnullable()->unique();
             $table->text('description',1000)->notnullable();
             $table->integer('nivelrequerido')->default(0);
+            $table->foreignId('tipo_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Lanzamiento de Prueba")
+@section('title',"Lanzamiento de Prueba por Modelo")
 
 @section('content')
 
@@ -79,7 +79,7 @@
                         </td>
                         <td>
                             @if(Helper::estatus($evaluado->status)!='Finalizada')
-                                <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
+                                <a href="{{route('lanzar.seleccionarmodelo', $evaluado->id)}}" >
                                 <span><i class="material-icons ">flight_takeoff</i></span></a>
                             @else
                                 <span><i class="material-icons">flight_land</i></span></a>

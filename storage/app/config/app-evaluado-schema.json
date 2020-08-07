@@ -7,7 +7,7 @@
     "default": {},
     "examples": [
         {
-            "Evaluado": "Pedro Perez",
+            "Evaluado": "Pedro Perez", "Cargo":"Cajero",
             "Evaluadores": [
                 {
                     "name": "Juan  Martinez",
@@ -34,6 +34,7 @@
     ],
     "required": [
         "Evaluado",
+		"Cargo",
         "Evaluadores"
     ],
     "additionalProperties": false,
@@ -48,6 +49,18 @@
             "default": "",
             "examples": [
                 "Pedro Perez"
+            ]
+        },
+		"Cargo": {
+            "$id": "#/properties/Cargo",
+            "type": "string",
+			"maxLength":30,
+			"minLength":4,
+            "title": "The Cargo schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "Cajero"
             ]
         },
         "Evaluadores": {

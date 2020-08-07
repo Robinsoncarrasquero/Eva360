@@ -1,5 +1,6 @@
 {
 	"Evaluado":"Pedro Perez",
+	"Cargo":"Cajero",
 	"Evaluadores":
 	[
 		{"name":"Juan  Martinez","relation":"Boss","email":"evaluador1@anotherdomain.com"},

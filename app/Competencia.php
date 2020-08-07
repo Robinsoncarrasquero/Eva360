@@ -12,6 +12,7 @@ class Competencia extends Model
 
     protected $fillable=['name','description','tipo_id'];
 
+    //Una competencia tiene uno o mas grados
     public function grados(){
 
         return $this->hasMany(Grado::class);
@@ -22,7 +23,7 @@ class Competencia extends Model
         return $this->hasMany(Evaluacion::class);
     }
 
-    //Una competencias tiene una o mas evaluaciones
+    //Una competencia pertenece a un tipo
     public function tipo(){
         return $this->belongsTo(Tipo::class);
     }
@@ -32,5 +33,7 @@ class Competencia extends Model
 
         return $this->belongsto(GrupoCompetencia::class);
     }
+
+
 
 }

@@ -58,6 +58,25 @@ Route::resource('evaluado', 'EvaluadoController')
 ->middleware('role:admin');
 
 
+/**Modelo de Prueba */
+Route::get('modelo', 'ModeloController@index')->name('modelo.index')
+->middleware('role:admin');
+
+Route::post('modelo/store', 'ModeloController@store')->name('modelo.store')
+->middleware('role:admin');
+
+Route::post('modelo/filtro', 'ModeloController@filtro')->name('modelo.filtro')
+->middleware('role:admin');
+
+Route::get('modelo/create', 'ModeloController@create')->name('modelo.create')
+->middleware('role:admin');
+
+Route::delete('modelo/destroy/{modelo}', 'ModeloController@destroy')->name('modelo.destroy')
+->middleware('role:admin');
+
+Route::get('modelo/{modelo}/show', 'ModeloController@show')->name('modelo.show')
+->middleware('role:admin');
+
 /**Resource de tipo de competencia */
 Route::resource('grupocompetencia', 'GrupoCompetenciaController')
 ->middleware('role:admin');
@@ -91,11 +110,23 @@ Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
 Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
 
 //Presentar la lista de evaluados para seleccionar
-
 Route::get('lanzar', "LanzarPruebaController@index")
         ->name('lanzar.index')
         ->middleware(['role:admin']);
+/**Lanzar un prueba mediante un modelo presentado las lista de candidatos*/
+Route::get('lanzar/modelo', "LanzarPruebaController@lanzarmodelo")
+->name('lanzar.modelo')
+->middleware(['role:admin']);
 
+/**Escoger el modelo a Lanzar */
+Route::get('lanzar/{evaluado}/modelo', "LanzarPruebaController@seleccionarmodelo")
+->name('lanzar.seleccionarmodelo')
+->middleware(['role:admin']);
+
+/**Lanzar el modelo procesando las competencias asociadas */
+Route::post('lanzar/{evaluado}/procesarmodelo', "LanzarPruebaController@procesarmodelo")
+->name('lanzar.procesarmodelo')
+->middleware(['role:admin']);
 
 //Seleccionar las competencias y evaluadores de la prueba paso1
 Route::get('lanzar/{evaluado}/seleccionar',"LanzarPruebaController@seleccionar")

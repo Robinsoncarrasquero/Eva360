@@ -1,0 +1,150 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Competencia;
+use App\Modelo;
+use App\ModeloCompetencia;
+use Exception;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+
+class ModeloController extends Controller
+{
+    //
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+    //Lista de personas para la evaluacion
+    public function index(Request $request)
+    {
+        $title="Modelos";
+        $buscarWordKey = $request->get('buscarWordKey');
+
+        $modelos = Modelo::name($buscarWordKey)->orderBy('id','DESC')->paginate(20);
+        return view('modelo.index',compact('modelos','title'));
+
+    }
+
+    //Selecciona las competencias a ser evaluadas
+    public function create()
+    {
+        $title="Modelos";
+
+
+        //Obtenemos las competencias
+        $competencias = Competencia::all();
+
+       return \view('modelo.create',compact("competencias","title"));
+
+    }
+
+    //Filtra las competencias seleccionadas para confirmarlas
+    public function filtro(Request $request)
+    {
+
+        $request->validate(
+            [
+                'competenciascheck'=>'required'
+            ],
+            [
+                'competenciascheck.required' => 'Debe seleccionar al menos una competencia. Es obligatorio'
+            ],
+
+        );
+
+        $competencias=$request->all('competenciascheck');
+
+
+        $flattened = Arr::flatten($competencias);
+
+        //Filtramos las competencias seleccionadas en el check
+        $datacompetencias = Competencia::all();
+        $competencias = $datacompetencias->only($flattened);
+
+
+        $title='Guardar Modelo';
+        return view('modelo.save',compact("competencias","title"));
+
+    }
+
+    public function store(Request $request)
+    {
+
+        $request->validate(
+            [
+                'name'=>'required',
+                'description'=>'required',
+                'competenciascheck'=>'required',
+            ],
+            [
+                'name.required'=>'Nombre del Modelo es Requerido',
+                'description.required'=>'Descripcion del Modelo es requerido',
+                'competenciascheck.required' => 'Debe seleccionar al menos una competencia. Es obligatorio'
+            ],
+
+        );
+        $competencias=$request->all('competenciascheck');
+
+        //Generamos un array sigle
+        $flattened = Arr::flatten($competencias);
+
+        // Filtramos las competencias selecctionadas en el array generado por Array flatten
+        // y creamos una coleccion nueva del modelo con el metodo collection only
+        $datacompetencias = Competencia::all();
+        $competencias = $datacompetencias->only($flattened);
+
+        //Creamos el Modelos
+        $modelo = Modelo::firstOrCreate(
+            ['name'=>$request->name],[
+            'description' => $request->description,
+        ]);
+
+        //Creamos el modelo con sus respectivas competencias
+        foreach($competencias as $key=>$competencia){
+            try {
+                $modeloCompetencia= new ModeloCompetencia();
+                $modeloCompetencia->competencia_id=$competencia->id;
+                $modelo->competencias()->save($modeloCompetencia);
+            }catch(QueryException $e) {
+                abort(404);
+            }
+
+
+        }
+
+        return \redirect()->route('modelo.index')->withSuccess("Modelo Registrado exitosamente");
+
+    }
+    public function destroy($modelo){
+
+        $modelo=Modelo::findOrFail($modelo);
+        try {
+            $modelo->delete();
+        } catch (QueryException $e) {
+             return \redirect()->back()
+             ->withErrors('Error Imposible de Eliminar este Modelo, tiene algunas competencias asociadas');
+        }
+
+        return redirect('modelo')->withSuccess('El Modelo ha sido eliminado con exito!!');
+
+
+    }
+
+    //Mostrar las competencias del modelo
+    public function show($modelo)
+    {
+        $title="Modelos";
+        //Obtenemos el modelo
+        $modelo = Modelo::findOrFail($modelo);
+       return \view('modelo.show',compact("modelo","title"));
+
+    }
+
+
+
+
+
+}

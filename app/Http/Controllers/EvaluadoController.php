@@ -67,6 +67,7 @@ class EvaluadoController extends Controller
             $evaluado->name=$fileJsonRequest->nameevaluado;
             $evaluado->status=0;
             $evaluado->word_key=$fileName;
+            $evaluado->cargo=$fileJsonRequest->cargoevaluado;
             $evaluado->save();
 
             for ($i=0; $i < count($name); $i++) {
@@ -84,7 +85,7 @@ class EvaluadoController extends Controller
         }
 
         return redirect()->route('lanzar.index')
-        ->withSuccess('Evaluado Procesado con exito!!. Ya estamos listo para lanzar una nueva Evaluacion, rapidamente.');
+        ->withSuccess('Evaluado Creado con exito!!. Ya estamos listo para lanzar una nueva Evaluacion, facilmente.');
     }
 
     /**

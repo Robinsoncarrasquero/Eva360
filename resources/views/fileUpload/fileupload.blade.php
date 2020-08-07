@@ -23,6 +23,7 @@
             <code>
             {<br>
                 "Evaluado":"Joe Doe",<br>
+                "Cargo":"Cajero",<br>
                 "Evaluadores":<br>
                 [
                     <br>{"name":"Juan  Martinez","relation":"Super","email":"jm@example.com"},

@@ -34,17 +34,24 @@
 
                 <form action="{{ route('evaluado.store',$fileName) }}" method="POST" id="frm-evaluado">
                     @csrf
-                    <div  class="card-header">
+                    <div  class="card">
+                        <div  class="card-header">
                             <label  for="nameevaluado">Nombre Evaluado:</label>
                             <input  class=" form-control" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}">
 
+                        </div>
+                        <div  class="card-header">
+                            <label  for="cargo">Cargo:</label>
+                            <input  class=" form-control" maxlength="30" type="text" name="cargoevaluado" value="{{old('cargoevaluado') }}">
+
+                        </div>
                     </div>
 
                     <div class="table ">
                         <table id="tableevaluado" class="table">
                         <thead>
                         <th>Evaluador</th>
-                        <th>Relation</th>
+                        <th>Relacion</th>
                         <th>Email</th>
                         <th>
                             <button type="button" class="btnponer btn btn-dark " ><i class=" material-icons">library_add</library-add></i></button>
