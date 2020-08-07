@@ -17,7 +17,7 @@ class ModeloController extends Controller
         $this->middleware('auth');
     }
 
-    //Lista de personas para la evaluacion
+    //Lista los modelos
     public function index(Request $request)
     {
         $title="Modelos";
@@ -28,7 +28,9 @@ class ModeloController extends Controller
 
     }
 
-    //Selecciona las competencias a ser evaluadas
+    /*
+    *Formulario para crear un modelo
+    */
     public function create()
     {
         $title="Modelos";
@@ -41,35 +43,8 @@ class ModeloController extends Controller
 
     }
 
-    //Filtra las competencias seleccionadas para confirmarlas
-    public function filtro(Request $request)
-    {
 
-        $request->validate(
-            [
-                'competenciascheck'=>'required'
-            ],
-            [
-                'competenciascheck.required' => 'Debe seleccionar al menos una competencia. Es obligatorio'
-            ],
-
-        );
-
-        $competencias=$request->all('competenciascheck');
-
-
-        $flattened = Arr::flatten($competencias);
-
-        //Filtramos las competencias seleccionadas en el check
-        $datacompetencias = Competencia::all();
-        $competencias = $datacompetencias->only($flattened);
-
-
-        $title='Guardar Modelo';
-        return view('modelo.save',compact("competencias","title"));
-
-    }
-
+    /**Crea el modelo  */
     public function store(Request $request)
     {
 
@@ -118,6 +93,10 @@ class ModeloController extends Controller
         return \redirect()->route('modelo.index')->withSuccess("Modelo Registrado exitosamente");
 
     }
+
+    /*
+    *Destruye un modelo
+    */
     public function destroy($modelo){
 
         $modelo=Modelo::findOrFail($modelo);
@@ -133,7 +112,9 @@ class ModeloController extends Controller
 
     }
 
-    //Mostrar las competencias del modelo
+    /*
+    *Muestra el modelo
+    */
     public function show($modelo)
     {
         $title="Modelos";

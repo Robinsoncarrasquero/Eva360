@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
+/**Route de presentacion del sistema */
 Route::get('/', function () {
     return view('vision360');
 });
@@ -104,29 +104,20 @@ Route::get('/contactar', 'EmailController@emailtest')->name('emailtest');
 
 Route::post('/contactar', 'EmailController@contact')->name('contact');
 
-
+/*
+ *Route de evaluaciones
+ */
 Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
 
 Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
 
-//Presentar la lista de evaluados para seleccionar
+/*
+ *Route de Lanzar prueba sin modelo
+ */
+/**Presentar la lista de evaluados para seleccionar*/
 Route::get('lanzar', "LanzarPruebaController@index")
         ->name('lanzar.index')
         ->middleware(['role:admin']);
-/**Lanzar un prueba mediante un modelo presentado las lista de candidatos*/
-Route::get('lanzar/modelo', "LanzarPruebaController@lanzarmodelo")
-->name('lanzar.modelo')
-->middleware(['role:admin']);
-
-/**Escoger el modelo a Lanzar */
-Route::get('lanzar/{evaluado}/modelo', "LanzarPruebaController@seleccionarmodelo")
-->name('lanzar.seleccionarmodelo')
-->middleware(['role:admin']);
-
-/**Lanzar el modelo procesando las competencias asociadas */
-Route::post('lanzar/{evaluado}/procesarmodelo', "LanzarPruebaController@procesarmodelo")
-->name('lanzar.procesarmodelo')
-->middleware(['role:admin']);
 
 //Seleccionar las competencias y evaluadores de la prueba paso1
 Route::get('lanzar/{evaluado}/seleccionar',"LanzarPruebaController@seleccionar")
@@ -134,37 +125,55 @@ Route::get('lanzar/{evaluado}/seleccionar',"LanzarPruebaController@seleccionar")
         ->where('evaluado','[0-9]+')
         ->middleware(['role:admin']);
 
-
-//Confirmacion de los datos seleccionado en le paso 1
+//Confirmacion de las competencias seleecionadas
 Route::post('lanzar/{evaluado}/confirmar',"LanzarPruebaController@confirmar")
 ->name('lanzar.confirmar')
 ->where('evaluado','[0-9]+')
 ->middleware(['role:admin']);
 
-
-//Lanzar la prueba creando los registros de la prueba y enviando los correso
+/**Lanzar la prueba creando los registros de la prueba y enviando los correos*/
 Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
         ->name('lanzar.procesar')
         ->middleware(['role:admin']);
 
-/**
- *Route de evaluaciones
+/*
+ *Route de Lanzar Modelos
  */
-//Evaluador entra por el token y loguea
+
+/**Lista de candidatos para la prueba desde un modelo*/
+Route::get('lanzar/modelo', "LanzarModeloController@index")
+->name('lanzar.modelo')
+->middleware(['role:admin']);
+
+/**Seleccion del modelo */
+Route::get('lanzar/{evaluado}/modelo', "LanzarModeloController@seleccionarmodelo")
+->name('lanzar.seleccionarmodelo')
+->middleware(['role:admin']);
+
+/**Lanzar el modelo procesando las competencias asociadas */
+Route::post('lanzar/{evaluado}/procesarmodelo', "LanzarModeloController@procesarmodelo")
+->name('lanzar.procesarmodelo')
+->middleware(['role:admin']);
+
+/*
+ *Route de evaluaciones
+*/
+
+/**Evaluador entra por el token y loguea*/
 Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@token")
         ->name('evaluacion.token');
 
-//Evaluador Responder las prueba
+/*Presenta las competencias al evaluador*/
 Route::get('competencias/{evaluador}/evaluacion',"EvaluacionController@competencias")
         ->name('evaluacion.competencias');
 
-
+/*Pregunta de la prueba*/
 Route::get('evaluacionget/{competencia}/preguntas',"EvaluacionController@responder")
 ->name('evaluacion.responder')
 ->where('evaluador','[0-9]+')
 ->middleware(['auth']);
 
-
+/*Evaluador Responde la pregunta*/
 Route::post('evaluacionpost/{competencia}/respuesta',"EvaluacionController@store")
 ->name('evaluacion.store')
 ->where('evaluador','[0-9]+')
@@ -185,7 +194,6 @@ Route::post('evaluacion/{evaluador}/finalizar',"EvaluacionController@finalizar")
 Route::get('evaluacion',"EvaluacionController@index")
         ->name('evaluacion.index');
         //->middleware(['auth']);
-
 
 /**
  * ajax prueba
@@ -221,65 +229,63 @@ Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
 ->name('resultados.graficas')
 ->middleware(['auth','role:admin']);
 
+/**Route subir archivo json */
+
+/*Presentan formulario para Subir archivo json*/
+Route::get('file-upload', 'FileUploadController@index')
+->name('json.fileindex')
+->middleware(['auth','role:admin']);
+
+/*Subir el archivo seleccionado*/
+Route::post('file-upload', 'FileUploadController@upload')
+->name('json.fileupload')
+->middleware(['auth','role:admin']);
+
+/*Presentar formulario con los datos del evaluado y los evaluadores subidos en el json*/
+Route::get('filevalida/{filename}/{fileOname}/valida',"FileUploadController@validar")
+->name('json.validar')
+->middleware(['auth','role:admin']);
+
+/*Salvar los datos del evaluado y evaluadores en el sistema*/
+Route::post('file-save/{data}/jsonsave','FileUploadController@save')
+->name('json.filesave')
+->middleware(['auth','role:admin']);
+
+/*Permite la descarga del archivo en formato json establecido para subir datos*/
+Route::get('uploads', function () {
+    if (Storage::exists("config/eva360.json")){
+        return Storage::response("config/eva360.json");
+    }
+        //si no se encuentra lanzamos un error 404.
+        abort(404);
+})->where([
+    'file' => '(.*?)\.(json|jpg|png|jpeg|gif)$'
+]);
+
+//Routes de prueba
+Route::post('file', function (Request $request,$fileName) {
+
+    $pathFile = $request->fileName->storeAs('uploads', $fileName);
+
+    if (Storage::exists("uploads/$fileName")){
+        return Storage::response("uploads/$fileName");
+    }
+        //si no se encuentra lanzamos un error 404.
+        abort(404);
+
+})->where([
+    'file' => '(.*?)\.(json|jpg|png|jpeg|gif)$'
+])->name('jsonfile');
 
 
-    /**
-     *Subir los archivo con los datos del evaluado y los evaluadores
-     */
+//How to delete multiple row with checkbox using Ajax
+Route::get('category', 'CategoryController@index');
 
-    Route::get('file-upload', 'FileUploadController@index')
-    ->name('json.fileindex')
-    ->middleware(['auth','role:admin']);
+//Route::delete('category/{id}', ['as'=>'category.destroy','uses'=>'CategoryController@destroy']);
 
-    Route::post('file-upload', 'FileUploadController@upload')
-    ->name('json.fileupload')
-    ->middleware(['auth','role:admin']);
+Route::delete('category/{id}', 'CategoryController@destroy')->name('category.destroy');
 
+Route::put('category/{id}', 'CategoryController@update')->name('category.update');
 
-    Route::get('filevalida/{filename}/{fileOname}/valida',"FileUploadController@validar")
-    ->name('json.validar')
-    ->middleware(['auth','role:admin']);
-
-
-    Route::post('file-save/{data}/jsonsave','FileUploadController@save')
-    ->name('json.filesave')
-    ->middleware(['auth','role:admin']);
-
-
-    Route::get('uploads', function () {
-        if (Storage::exists("config/eva360.json")){
-            return Storage::response("config/eva360.json");
-        }
-         //si no se encuentra lanzamos un error 404.
-         abort(404);
-
-    })->where([
-        'file' => '(.*?)\.(json|jpg|png|jpeg|gif)$'
-    ]);
-
-    Route::post('file', function (Request $request,$fileName) {
-
-        $pathFile = $request->fileName->storeAs('uploads', $fileName);
-
-        if (Storage::exists("uploads/$fileName")){
-            return Storage::response("uploads/$fileName");
-        }
-         //si no se encuentra lanzamos un error 404.
-         abort(404);
-
-    })->where([
-        'file' => '(.*?)\.(json|jpg|png|jpeg|gif)$'
-    ])->name('jsonfile');
-
-
-    //How to delete multiple row with checkbox using Ajax
-    Route::get('category', 'CategoryController@index');
-
-    //Route::delete('category/{id}', ['as'=>'category.destroy','uses'=>'CategoryController@destroy']);
-
-    Route::delete('category/{id}', 'CategoryController@destroy')->name('category.destroy');
-
-    Route::put('category/{id}', 'CategoryController@update')->name('category.update');
-
-    Route::delete('delete-multiple-category', ['as'=>'category.multiple-delete','uses'=>'CategoryController@deleteMultiple']);
+Route::delete('delete-multiple-category', ['as'=>'category.multiple-delete','uses'=>'CategoryController@deleteMultiple']);
 

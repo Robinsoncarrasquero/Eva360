@@ -49,8 +49,10 @@
         "psr-4": {
             "Tests\\": "tests/"
         },
-		"files" :[
-			"app/Helpers/Helper.php","app/ModelBussiness/LanzarEvaluacion.php"
+        "files" :[
+            "app/Helpers/Helper.php",
+            "app/CustomClass/LanzarEvaluacion.php",
+            "app/CustomClass/DataResultado.php"
 		]
     },
     "minimum-stability": "dev",

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\ModelBussiness;
+namespace app\CustomClass;
 
 use App\EmailSend;
 use App\Evaluacion;
