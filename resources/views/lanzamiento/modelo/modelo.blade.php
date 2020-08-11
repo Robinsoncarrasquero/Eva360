@@ -112,7 +112,8 @@
                                 <a href="{{route('resultados.graficas', $evaluado->id)}}" >
                                 <span><i class="material-icons md-24">pie_chart</i></span>
                             @else
-                               <span><i class="material-icons md-24 text-dark md-inactive">pie_chart</i></span>
+                                <a href="{{route('resultados.graficas', $evaluado->id)}}" >
+                                <span><i class="material-icons md-24 text-dark md-inactive">pie_chart</i></span>
                             @endif
 
                         </td>
