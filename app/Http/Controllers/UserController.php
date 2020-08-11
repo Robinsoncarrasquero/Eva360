@@ -134,7 +134,7 @@ class UserController extends Controller
             $user->delete();
         } catch (QueryException $e) {
             return redirect()->back()
-            ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas Competencias.');
+            ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas Evaluaciones.');
         }
 
         return redirect('user')->withSuccess('El usuario ha sido eliminado con exito!!');

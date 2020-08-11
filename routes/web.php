@@ -231,7 +231,7 @@ Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
 
 /**Route subir archivo json */
 
-/*Presentan formulario para Subir archivo json*/
+/*Presenta formulario para Subir archivo json*/
 Route::get('file-upload', 'FileUploadController@index')
 ->name('json.fileindex')
 ->middleware(['auth','role:admin']);
