@@ -9,7 +9,7 @@
 
     <link rel="icon" href="favicon.ico">
 
-    <title>@yield('title') - Vision360</title>
+    <title>@yield('title') - Vision 360</title>
     <!-- Iconos para bootstrap -->
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
@@ -117,7 +117,7 @@
 
    <!-- Fixed navbar -->
    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="{{ route('home') }}"><img src="{{('/logo/eva360.png') }}" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
+    <a class="navbar-brand" href="{{ route('home') }}"><img src="{{('/logo/vision360.jpg') }}" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -135,8 +135,16 @@
             </li>
         @endif
         @if (Auth::check() && Auth::user()->admin())
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('lanzar.index') }}">Lanzar</a>
+            <li class="dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    Lanzar Prueba<span class="caret"></span>
+                </a>
+                <ul class=" dropdown-menu">
+                    <li><a class="dropdown-item"  href="{{ route('lanzar.modelo') }}">Por Modelo</a></li>
+                    <li  class=" dropdown-divider"></li>
+                    <li><a class="dropdown-item"  href="{{ route('lanzar.index') }}">Por Competencias</a></li>
+                </ul>
+
             </li>
             <li class="nav-item">
                 <a  class="nav-link" href="{{ route('tipo.index') }}">Tipo</a>
@@ -170,7 +178,7 @@
         @else
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <i class="material-icons " style="color: green">person</i>{{ Auth::user()->name }} <span class="caret"></span>
+                    <i class="material-icons " style="font-size:1rem; color: green">person</i> <span style="font-size: .80rem" class="caret">{{ Auth::user()->name }}</span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

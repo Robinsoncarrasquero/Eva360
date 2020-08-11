@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Lanzamiento de Prueba")
+@section('title',"Lanzar Prueba por Competencias")
 
 @section('content')
 
@@ -23,7 +23,7 @@
                     </form>
 
                     <div class="text text-center">
-                        <h3>Lista de Evaluados</h3>
+                        <h3>Lanzar Prueba por competencias</h3>
                     </div>
 
                 </div>
@@ -112,7 +112,6 @@
                                 <a href="{{route('resultados.graficas', $evaluado->id)}}" >
                                 <span><i class="material-icons md-24">pie_chart</i></span>
                             @else
-                            <a href="{{route('resultados.graficas', $evaluado->id)}}" >
 
                                 <span><i class="material-icons md-24 text-dark md-inactive">pie_chart</i></span>
                             @endif
