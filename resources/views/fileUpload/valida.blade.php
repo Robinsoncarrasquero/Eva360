@@ -18,12 +18,12 @@
 
                 <div class="clearfix">
 
-                    <div class="alert alert-info text-center">
+                    <div class="text text-info">
                         <h5>Formulario para la Validacion de la Informacion subida en el archivo <span class="text-danger">{{ $fileOName }}</span></h5>
                     </div>
 
                     <div class="text text-left">
-                        <h4>Revise la informacion y actualice cualquier dato y presione Save para guardar la data.</h4>
+                        <h6>Revise la informacion y actualice cualquier dato y presione Save para guardar la data.</h6>
                     </div>
 
                 </div>

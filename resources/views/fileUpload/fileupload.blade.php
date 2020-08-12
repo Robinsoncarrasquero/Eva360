@@ -19,18 +19,18 @@
             <h5 >Subir un archivo en el formato JSON con los datos de un Evaluado y sus Evaluadores</h5>
         </div>
 
-        <div class="card-header small text-muted">Formato:<br>
-            <code>
+        <div class="card-header small text-muted" >Formato:<br>
+            <code style="font-size: 0.5rem">
             {<br>
                 "Evaluado":"Joe Doe",<br>
                 "Cargo":"Cajero",<br>
                 "Evaluadores":<br>
                 [
-                    <br>{"name":"Juan  Martinez","relation":"Super","email":"jm@example.com"},
-                    <br>{"name":"Maria Rodriguez","relation":"Super","email":"mr@example.com"},
-                    <br>{"name":"Jane Doe","relation":"Par","email":"jd@example.com"},
-                    <br>{"name":"Frank Aguilar","relation":"Sub","email":"faguilar@example.com"}
-                    <br>{"name":"Joe Doe","relation":"Auto","email":"pp@example.com"},
+                    <br>&nbsp{"name":"Juan  Martinez","relation":"Super","email":"jm@example.com"},
+                    <br>&nbsp{"name":"Maria Rodriguez","relation":"Super","email":"mr@example.com"},
+                    <br>&nbsp{"name":"Jane Doe","relation":"Par","email":"jd@example.com"},
+                    <br>&nbsp{"name":"Frank Aguilar","relation":"Sub","email":"faguilar@example.com"}
+                    <br>&nbsp{"name":"Joe Doe","relation":"Auto","email":"pp@example.com"},
                     <br>
                 ]<br>
             }<br>
@@ -50,7 +50,7 @@
                     <small id="fileHelp" class="form-text text-muted">Por favor seleccion un archivo</small>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Subir archivo</button>
+                    <button type="submit" class="btn btn-dark">Subir archivo</button>
 
                 </div>
             </form>

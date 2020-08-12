@@ -23,7 +23,7 @@
                     </form>
 
                     <div class="text text-center">
-                        <h3>Lista de Evaluados</h3>
+                        <h3>Lanzar Prueba por Competencias</h3>
                     </div>
 
                 </div>

@@ -12,19 +12,19 @@
                 @include('flash-message')
             </div>
 
-            <div class="alert alert-info text text-center">
-                <h5>Formulario para la creacion de un Evaluado y sus Evaluadores respectivamente para lanzar la prueba <span class="text-danger">Rapidamente</span></h5>
+            <div class="text text-info mt-1">
+                <h6>Formulario para la creacion de un Evaluado y sus Evaluadores para lanzar la prueba </h6>
             </div>
 
             <div class="panel pb-3">
 
-                <div class="clearfix">
+                {{-- <div class="clearfix">
 
                     <div class="text text-left">
                         <h4>Revise la informacion y actualice cualquier dato correctamente antes de guardar la informacion.</h4>
                     </div>
 
-                </div>
+                </div> --}}
 
             </div>
 
@@ -108,21 +108,21 @@
 
 @section('sidebar')
 
-<dl class="row">
-    <dt class="col-sm-3">Evaluado</dt>
-    <dd class="col-sm-9">Persona que ocupa un cargo con unas competencias y un nivel requerido para ejercer el puesto.</dd>
+<dl class="row terminos-definicion" style="font-size: 0.75rem">
+    <dt class="col-md-3">Evaluado</dt>
+    <dd class="col-md-9">Persona que ocupa un cargo con unas competencias y un nivel requerido para ejercer el puesto.</dd>
 
-    <dt class="col-sm-3">Evaluador</dt>
-    <dd class="col-sm-9">
+    <dt class="col-md-3">Evaluador</dt>
+    <dd class="col-md-9">
       <p>Persona encargada de evaluar las competencias del Evaluado en el puesto.</p>
     </dd>
 
-    <dt class="col-sm-3 text-truncate">Relacion</dt>
-    <dd class="col-sm-9">
+    <dt class="col-md-3 text-truncate">Relacion</dt>
+    <dd class="col-md-9">
         <p>Es la conexion directa entre Evaluador con respecto al Evaluado. Defina cualquier <strong>"Relacion"</strong>. Considere que es sensible a Mayuscula y Minusculas.</p>
         <dl class="row">
-            <dt class="col-sm-6">Las ponderacion es calculada agrupando la "Relacion".</dt>
-            <dd class="col-sm-6">Jefe, Super, Partner, Cliente, Boss, etc.</dd>
+            <dt class="col-md-6">Las ponderacion es calculada agrupando la "Relacion".</dt>
+            <dd class="col-md-6">Jefe, Super, Partner, Cliente, Boss, etc.</dd>
         </dl>
     </dd>
 </dl>
