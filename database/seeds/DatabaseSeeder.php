@@ -22,8 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CompetenciaSeeder::class);
         $this->call(FrecuenciaSeeder::class);
         $this->call(CategorySeeder::class);
-
-
     }
 
 

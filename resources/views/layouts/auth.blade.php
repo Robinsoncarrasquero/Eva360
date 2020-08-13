@@ -23,66 +23,6 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <style>
-        .spellcheck{
-        color:darkgreen;
-        }
-
-        .radio-checkeado,.radio-no-checkeado{
-            margin-left: 2px;
-        }
-
-        .radio-checkeado{
-        width: 1em;
-        height: 1em;
-        border-radius: 3ex;
-        top: -2px;
-        left: -3px;
-        position: relative;
-        background-color:green;
-        content: '';
-        visibility: visible;
-        border: 1px solid white;
-        display: inline-block;
-
-        }
-
-
-        .radio-no-checkeado{
-        width: 1em;
-        height: 1em;
-        border-radius: 3ex;
-        top: -2px;
-        left: -3px;
-        position: relative;
-        background-color:orange;
-        content: '';
-        visibility: visible;
-        border: 1px solid white;
-        display: inline-block;
-
-        }
-        .btnquitar{
-
-        }
-
-        Input:Focus {
-            Background-color: yellow;
-        }
-        input[type=text] {
-            width: 100%;
-            padding: 2px 10px;
-            margin: 4px 0;
-            box-sizing: border-box;
-        }
-        input[type=email] {
-            width: 100%;
-            padding: 2px 10px;
-            margin: 4px 0;
-            box-sizing: border-box;
-        }
-        .title-auth{
-            background-color:mediumaquamarine;
-        }
     </style>
 
   </head>

@@ -8,17 +8,12 @@
 <div class="container">
 
     <div class="col-sm-8">
-        <h1 class="display-5">Nuevo Tipo de Competencia</h1>
+        <h3>Nuevo Tipo de Competencia</h3>
 
-        @if ($errors->any())
-            <div class="alert alert-danger" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <div id="flash-message">
+            @include('flash-message')
+
+        </div>
 
         <div class=" card-header">
             <form action="{{ route('tipo.store') }}" method="POST">
@@ -31,7 +26,7 @@
 
                 <div class="clearfix">
                     <a href="{{route('tipo.index')}}" class="btn btn-dark float-left">Back</a>
-                    <button type="submit" class="btn btn-primary float-right">Crear</button>
+                    <button type="submit" class="btn btn-primary float-right btn-dark">Crear</button>
 
                 </div>
 

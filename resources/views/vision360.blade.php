@@ -8,16 +8,17 @@
 
     <div class="card text-center mb-5">
 
-        <div class="card-header">
-            SISTEMA DE VISION 360&#176;
+        <div class="card-header titulo360">
+            SISTEMA DE VISION 360&#176;<span><i class="material-icons">360</i></span></i>
         </div>
         <div class="card-body">
-             <h5 class="card-title">GESTION POR COMPETENCIAS VISION 360&#176;</h5>
+             <h5 class="card-title">GESTION POR COMPETENCIAS VISION 360&#176; </h5>
             <p class="card-text">Significa tomar en cuenta que los conocimientos, habilidades, experiencias y cualidades personales influyen en el rendimiento de las personas y aplicar esto, de manera sistemática y sistémica para conseguir los mejores resultados de la empresa y la mayor orientación profesional al empleado.</p>
             <p class="card-text">Una competencia es la capacidad desarrollada, demostrada y utilizada con el verdadero grado de dominio y responsabilidad para realizar las tareas o actividades requeridas para desempeñar un puesto de trabajo eficazmente.
                 Para valorar el desempeño por competencias, la organización define cuales son las competencias relacionadas con los puestos de trabajo. Estas son fijadas por área o nivel de posición (Unidades de negocio) y técnicas o ocupacionales.
             </p>
-            <a href="{{ route('lanzar.index') }}" class="btn btn-success">Vamos a Lanzar una evaluacion</a>
+            <a href="{{ route('lanzar.index') }}" class="btn btn-dark">  Vamos a Lanzar una evaluacion </a>
+
         </div>
 
     </div>
@@ -27,7 +28,7 @@
             <div class="col-sm-4">
                 <div class="card text-center">
 
-                    <div class="card-header">
+                    <div class="card-header subtitulo90">
                     VISION 90&#176;
                     </div>
                     <div class="card-body">
@@ -43,7 +44,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="card text-center">
-                    <div class="card-header">
+                    <div class="card-header subtitulo180">
                     VISION 180&#176;
                     </div>
                     <div class="card-body">
@@ -58,7 +59,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="card text-center">
-                    <div class="card-header">
+                    <div class="card-header subtitulo360">
                     VISION 360 &#176;
                     </div>
                     <div class="card-body">
@@ -66,7 +67,7 @@
                     <p class="card-text">Es cuando el empleado es evaluado por todo el entorno laboral, su jefe, los pares, los subordinados y la autoevaluacion(yo).</p>
                     </div>
                     <div class="card-footer text-muted">
-                        <i class="material-icons">people_alt group_add group_add</i>
+                        <i class="material-icons">people_alt  360</i>
                     </div>
                 </div>
 

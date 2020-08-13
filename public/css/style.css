@@ -35,8 +35,167 @@ body > .container {
   padding-left: 15px;
 
 }
-
-code {
-  font-size: 1rem;
+.footer{
+    text-align: center;
 }
+
+
+/* Presenta el formato para el archivo json que se encuentra en el formulario fileupload.blade.php */
+.formatojson{
+    font-size: 0.75rem;
+    color: tomato;
+
+
+  }
+  /* Titulo de formulario*/
+  .titulo{
+    font-size: 1rem;
+    background-color: burlywood;
+  }
+  /* Subtitulo de formulario*/
+  .subtitulo{
+    font-size: 0.75rem;
+  }
+  /* Notas de formularios*/
+  .nota{
+    font-size: 0.50rem;
+  }
+/* Navbar usuario logueado */
+  .username{
+    font-size: .80rem;
+  }
+
+  /* Titulo de formulario vision360*/
+  .titulo360{
+    font-size: 1rem;
+    background-color: burlywood;
+    font-weight: bold;
+
+  }
+
+  /* Subtitulo de formulario vision90*/
+  .subtitulo90{
+    font-size: 1rem;
+    background-color: lightgreen;
+    font-weight: bold;
+  }
+  /* Subtitulo de formulario vision180*/
+  .subtitulo180{
+    font-size: 1rem;
+    background-color: greenyellow;
+    font-weight: bold;
+  }
+  /* Subtitulo de formulario vision90*/
+  .subtitulo360{
+    font-size: 1rem;
+    background-color: khaki;
+    font-weight: bold;
+  }
+
+  /* Seleccion dinamica de competencias en formulario de creacion de modelos*/
+  .modelocompetenciasseleccionadas{
+    font-size: 0.50rem;
+    background-color: yellowgreen;
+   }
+   /* Tablas */
+   .table-table{
+    font-size: 0.75rem;
+   }
+   /*Tablas Titulo de encabezado*/
+   .table-thead{
+    font-size: 0.75rem;
+    background-color: yellowgreen;
+   }
+   /* Style de Layaout */
+   .spellcheck{
+    color:darkgreen;
+    }
+
+    .radio-checkeado,.radio-no-checkeado{
+        margin-left: 2px;
+    }
+
+    .radio-checkeado{
+    width: 1em;
+    height: 1em;
+    border-radius: 3ex;
+    top: -2px;
+    left: -3px;
+    position: relative;
+    background-color:green;
+    content: '';
+    visibility: visible;
+    border: 1px solid white;
+    display: inline-block;
+
+    }
+
+
+    .radio-no-checkeado{
+    width: 1em;
+    height: 1em;
+    border-radius: 3ex;
+    top: -2px;
+    left: -3px;
+    position: relative;
+    background-color:orange;
+    content: '';
+    visibility: visible;
+    border: 1px solid white;
+    display: inline-block;
+
+    }
+
+    Input:Focus {
+        Background-color: yellow;
+    }
+    input[type=text] {
+        width: 100%;
+        padding: 2px 10px;
+        margin: 4px 0;
+        box-sizing: border-box;
+    }
+    input[type=email] {
+        width: 100%;
+        padding: 2px 10px;
+        margin: 4px 0;
+        box-sizing: border-box;
+    }
+    /*Titulo de autenticacion de formulario login*/
+    .title-auth{
+        background-color: darkseagreen;
+    }
+
+    /*Layout Evaluado*/
+    a .material-icons {
+        color:chocolate;
+    }
+    .radio-checkeado, .radio-no-checkeado{
+        font-size: 2.5ex;
+    }
+    .title-th-evaluador{
+        background-color:rgb(4, 39, 48);
+        color: white;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 1rem;
+    }
+    .title-th-competencia{
+        background-color:rgb(73, 3, 3);
+        color:white;
+
+    }
+    .table-evaluado{
+        font-size: 0.75rem;
+
+    }
+    .thead-evaluado{
+        background-color: mediumaquamarine;
+    }
+
+    .material-icons {
+        font-size: 1rem;
+    }
+    .btn {
+        font-size: 1rem;
+    }
 

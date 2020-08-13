@@ -14,42 +14,31 @@
                 @include('flash-message')
             </div>
 
-            <div class="panel panel pb-3">
 
-                <div class="clearfix">
-
-                    <div class="text text-info">
-                        <h5>Formulario para la Validacion de la Informacion subida en el archivo <span class="text-danger">{{ $fileOName }}</span></h5>
-                    </div>
-
-                    <div class="text text-left">
-                        <h6>Revise la informacion y actualice cualquier dato y presione Save para guardar la data.</h6>
-                    </div>
-
-                </div>
-
+            <div class="text text-center mt-1 titulo">
+                <h5>Formulario para la Validacion de la Informacion subida en el archivo <span class="text-danger">{{ $fileOName }}</span></h5>
             </div>
+
 
             @if($evaluadoArray)
 
-            <div class="panel">
+            <div class="panel pb-3 ">
 
                 <form action="{{ route('json.filesave',$fileName) }}" method="POST" id="form-jsonfile">
                     @csrf
-                    <div  class="card">
+                    <div  class="card mb-1">
                         <div  class="card-header">
                             <label  for="nameevaluado">Nombre Evaluado:</label>
                             <input  class=" form-control" maxlength="100" type="text" name="nameevaluado" value="{{ $evaluadoArray['Evaluado'] }}">
 
-                        </div>
-                        <div  class="card-header">
                             <label  for="cargo">Cargo:</label>
                             <input  class=" form-control" maxlength="30" type="text" name="cargoevaluado" value="{{ $evaluadoArray['Cargo'] }}">
                         </div>
                     </div>
-                    <div class="table ">
+                    <div class="table  table-evaluado">
                         <table id="evaluado" class="table  table-bordered">
-                        <thead>
+                        <thead class="thead-evaluado">
+                        <th>#</th>
                         <th>Evaluador</th>
                         <th>Relation</th>
                         <th>Email</th>
@@ -59,6 +48,7 @@
                             @foreach ($evaluadoArray['Evaluadores'] as $key=>$value)
 
                                 <tr>
+                                    <td>{{ $key }}</td>
                                     <td><input maxlength="50" type="text" name="name[]" value="{{$value->name}}"></td>
                                     <td><input maxlength="10" type="text" name="relation[]" value="{{$value->relation}}"></td>
                                     <td><input maxlength="100" type="email" name="email[]" value="{{$value->email}}"></td>

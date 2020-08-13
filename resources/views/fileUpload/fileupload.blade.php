@@ -15,24 +15,24 @@
 
         </div>
 
-        <div class=" card-header">
+        <div class=" card-header titulo">
             <h5 >Subir un archivo en el formato JSON con los datos de un Evaluado y sus Evaluadores</h5>
         </div>
 
         <div class="card-header small text-muted" >Formato:<br>
-            <code style="font-size: 0.5rem">
+            <code  class="formatojson">
             {<br>
-                "Evaluado":"Joe Doe",<br>
-                "Cargo":"Cajero",<br>
-                "Evaluadores":<br>
-                [
-                    <br>&nbsp{"name":"Juan  Martinez","relation":"Super","email":"jm@example.com"},
-                    <br>&nbsp{"name":"Maria Rodriguez","relation":"Super","email":"mr@example.com"},
-                    <br>&nbsp{"name":"Jane Doe","relation":"Par","email":"jd@example.com"},
-                    <br>&nbsp{"name":"Frank Aguilar","relation":"Sub","email":"faguilar@example.com"}
-                    <br>&nbsp{"name":"Joe Doe","relation":"Auto","email":"pp@example.com"},
+                &nbsp"Evaluado":"Joe Doe",<br>
+                &nbsp"Cargo":"Developer",<br>
+                &nbsp"Evaluadores":<br>
+                &nbsp[
+                    <br>&nbsp&nbsp{"name":"Jonh Martinez","relation":"Super","email":"jm@example.com"},
+                    <br>&nbsp&nbsp{"name":"Mary Rodriguez","relation":"Super","email":"mr@example.com"},
+                    <br>&nbsp&nbsp{"name":"Jane Doe","relation":"Par","email":"jd@example.com"},
+                    <br>&nbsp&nbsp{"name":"Frank Aguilar","relation":"Sub","email":"faguilar@example.com"}
+                    <br>&nbsp&nbsp{"name":"Joe Doe","relation":"Auto","email":"pp@example.com"},
                     <br>
-                ]<br>
+                &nbsp]<br>
             }<br>
             </code>
             <p>Descargue el formato del archivo JSON requerido para subir la informacion y lanzar la Evaluacion 360
@@ -43,15 +43,14 @@
 
          <div class="card-body">
 
-            <form action="{{ route('json.fileupload') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('json.fileupload') }}" method="POST" enctype="multipart/form-data" id='myform'>
                 @csrf
                 <div class="form-group">
                     <input type="file" class="form-control-file" name="fileName" id="fileName" aria-describedby="fileHelp">
                     <small id="fileHelp" class="form-text text-muted">Por favor seleccion un archivo</small>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-dark">Subir archivo</button>
-
+                    <button type="submit" class="btn btn-dark btn-lg float-right btnsubmit" value="Next">Subir</button>
                 </div>
             </form>
          </div>
@@ -59,4 +58,24 @@
   </div>
 </div>
 
+
+@section('scripts')
+<script>
+$(document).ready(function () {
+
+    $("form").submit(function(e){
+        filename=$("#fileName").val().length;
+        if ($("#fileName").val().length==0){
+        e.preventDefault();
+        e.stopPropagation();
+        alert("Por favor seleccione un archivo");
+        }
+    });
+
+});
+</script>
 @endsection
+
+@endsection
+
+

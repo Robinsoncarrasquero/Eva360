@@ -3,8 +3,8 @@
 	"Cargo":"Cajero",
 	"Evaluadores":
 	[
-		{"name":"Juan  Martinez","relation":"Boss","email":"evaluador1@anotherdomain.com"},
-		{"name":"Maria Rodriguez","relation":"Super","email":"evaluador2@anotherdomain.com"}
+		{"name":"Juan  Martinez","relation":"Boss","email":"jm@example.com"},
+		{"name":"Maria Rodriguez","relation":"Super","email":"mm@example.com"}
 	]
 }
 

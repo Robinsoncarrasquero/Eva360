@@ -43,7 +43,6 @@
 
 <div class="mt-1 alert alert-danger">
     <button type="button" class="close" data-dismiss="alert">×</button>
-    <h6>Errores</h6>
     <ul>
         @foreach ($errors->all() as $error)
             <li> {{ $error }} </li>

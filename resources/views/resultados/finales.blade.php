@@ -21,7 +21,7 @@
                     @if ($evaluado->status!==Helper::estatus('Finalizada'))
                         <h4 class="alert alert-danger text-center">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h4>
                     @else
-                        <div class="alert alert-info text-center">
+                        <div class=" tex text-center titulo">
                             <h5>Resultados Finales Ponderados de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                         </div>
                     @endif
@@ -36,48 +36,44 @@
 
             @if($competencias)
 
-            <div class="panel-body">
+            <div class="row">
 
                 @foreach($competencias as $key=>$value)
-                    <div class="table ">
-                        <table id="{{$key}}" class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th class="text text-center title-th-competencia" colspan="2">
-                            <strong >{{ $value['competencia']}} (Margen Requerido {{ $value['nivelRequerido'] }})
-                            </strong> </th>
-                        </tr>
-                        <th>Grupo</th>
-                        <th>Ponderacion</th>
+                    <div class="table col-6 ">
+                        <table id="{{$key}}" class="table table-bordered table-table">
+                            <thead>
+                            <tr>
+                                <th class="text text-center title-th-competencia" colspan="2">
+                                <strong >{{ $value['competencia']}} (Margen Requerido {{ $value['nivelRequerido'] }})
+                                </strong> </th>
+                            </tr>
+                            <th>Grupo</th>
+                            <th>Ponderacion</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($value['data'] as $item)
 
-                        </thead>
-                        <tbody>
-                        @foreach ($value['data'] as $item)
+                                    <tr>
+                                        <td >{{ $item['name']}}</td>
+                                        <td>{{ number_format($item['average'],2)}}</td>
+                                    </tr>
 
-                        <tr>
-                            <td >{{ $item['name']}}</td>
-                            <td>{{ number_format($item['average'],2)}}</td>
-                        </tr>
+                                @endforeach
+                                <tr>
+                                    <td class="text text-center"><strong>Resultado Final( sobre {{ count($value['data']) }} Grupos)</strong></td>
+                                    <td class="text text-dark" ><a href=""><i class="material-icons">bar_chart</i></a>{{ number_format($value['eva360'],2)}}
+                                    </td>
+                                </tr>
 
-                       @endforeach
-                       <tr>
-                        <td class="text text-center"><strong>Resultado Final( sobre {{ count($value['data']) }} Grupos)</strong></td>
-                        <td class="text text-dark" ><a href=""><i class="material-icons">bar_chart</i></a>{{ number_format($value['eva360'],2)}}
-                        </td>
-                       </tr>
+                            </tbody>
 
-                      </tbody>
-
-                    </table>
-
+                        </table>
+                    </div>
                 @endforeach
 
             </div>
             <div class="clearfix">
                 <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-            </div>
-
-
             </div>
 
             @else

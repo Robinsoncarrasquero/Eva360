@@ -12,20 +12,8 @@
                 @include('flash-message')
             </div>
 
-            <div class="text text-info mt-1">
-                <h6>Formulario para la creacion de un Evaluado y sus Evaluadores para lanzar la prueba </h6>
-            </div>
-
-            <div class="panel pb-3">
-
-                {{-- <div class="clearfix">
-
-                    <div class="text text-left">
-                        <h4>Revise la informacion y actualice cualquier dato correctamente antes de guardar la informacion.</h4>
-                    </div>
-
-                </div> --}}
-
+            <div class="mt-1 titulo">
+                <h5>Formulario para la creacion de un Evaluado y sus Evaluadores.</h5>
             </div>
 
 
@@ -47,9 +35,10 @@
                         </div>
                     </div>
 
-                    <div class="table ">
+                    <div class="table">
                         <table id="tableevaluado" class="table">
-                        <thead>
+                        <thead class="thead-evaluado">
+                        <th>#</th>
                         <th>Evaluador</th>
                         <th>Relacion</th>
                         <th>Email</th>
@@ -62,6 +51,7 @@
                             @foreach ($evaluadoArray['Evaluadores'] as $key=>$evaluador)
 
                                 <tr id="{{ $key }}">
+                                    <td>{{ $key }}</td>
                                     <td><input class="form-control" type="text" maxlength="50" name="name[]" value="{{old('name.'.$key,$evaluador->name)}}"></td>
                                     <td><input class="form-control" type="text" maxlength="10" name="relation[]" value="{{old('relation.'.$key,$evaluador->relation)}}"></td>
                                     <td><input class="form-control" type="email" maxlength="100" name="email[]"  value="{{old('email.'.$key,$evaluador->email)}}" ></td>

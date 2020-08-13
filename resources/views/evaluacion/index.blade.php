@@ -15,17 +15,10 @@
 
             </div>
 
-            <div class="panel panel pb-3">
-
-                <div class="clearfix">
-
-
+            <div class="panel panel">
                     <div class="text text-center">
-                        <h2>Lista de Evaluados</h2>
+                        <h3>Lista de Mis Evaluados</h3>
                     </div>
-
-                </div>
-
             </div>
 
             @if($evaluadores->count())
@@ -99,8 +92,6 @@
         </div>
         <div class=" d-flex justify-content-center">
             {{ $evaluadores->links() }}
-            {{-- {{ $evaluados->appends(["name"=>$evaluado->name])  }} --}}
-
         </div>
 
 

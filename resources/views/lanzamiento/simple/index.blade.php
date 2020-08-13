@@ -17,29 +17,30 @@
 
             <div class="panel panel pb-3">
                 <div class="clearfix">
-                    <form class="form-inline mt-2 mt-md-0 float-left">
+
+                    <div class="text text-center col-sm-12 titulo">
+                        <h3>Lanzar Prueba por Seleccion de Competencias</h3>
+                    </div>
+
+                     <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
                         <input class="form-control mr-sm-2" type="text" placeholder="Nombre" aria-label="Searh" name="buscarWordKey">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
-
-                    <div class="text text-center">
-                        <h3>Lanzar Prueba por Competencias</h3>
-                    </div>
 
                 </div>
             </div>
 
             <div class=" float-right">
-                <strong class="text text-bold"> New Evaluado</strong>
-                <a style="margin: 19px;" href="{{ route('json.fileindex')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
-                <a style="margin: 19px;" href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
+                <strong class="text text-bold">New Evaluado</strong>
+                <a  href="{{ route('json.fileindex')}}" class="btn btn-dark"><i class="material-icons">attachment person_add</library-add></i> </a>
+                <a  href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
             </div>
 
             @if($evaluados->count())
 
             <div class="panel-body">
 
-                <div class="table">
+                <div class="table table-table">
                     <table id="mytable" class="table  table-bordred table-striped">
                     <thead>
                     <th>Nombre</th>

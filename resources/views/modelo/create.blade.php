@@ -6,8 +6,8 @@
 
 <div class="container">
 
-    <div class="panel panel pb-3">
-        <h4 class="text text-md-center text text-info ">Seleccione las Competencias para Crear un Nuevo Modelo de Evaluacion</h4>
+    <div class="panel panel titulo360">
+        <h3 class=" text text-center ">Seleccion de Competencias para crear un Nuevo Modelo de Evaluacion</h3>
     </div>
     <div id="flash-message">
         @include('flash-message')
@@ -15,7 +15,7 @@
     </div>
 
     @if ($competencias->isNotEmpty())
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <form action="{{ route('modelo.store') }}" method="POST" id="form-select">
                 {{-- {{ method_field('PUT') }} --}}
                 {{ csrf_field() }}
@@ -33,11 +33,11 @@
 
                 </div>
 
-            <div class="row col-sm-12">
+            <div class="row ">
                 <div class="col-sm-8">
 
-                    <table class="table " id="table1">
-                        <thead>
+                    <table class="table table-table" id="table1">
+                        <thead class="table-thead">
                             <th scope="col">#</th>
                             <th scope="col">Competencia</th>
                             <th scope="col">Descripcion</th>
@@ -75,8 +75,7 @@
                             <thead>
                                 <th colspan="4" scope="col">Competencias Seleccionadas</th>
                             </thead>
-                            <tbody >
-
+                            <tbody class="modelocompetenciasseleccionadas">
 
                             </tbody>
                         </table>

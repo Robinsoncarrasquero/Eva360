@@ -29,7 +29,8 @@ class FileJson extends FormRequest
                 'nameevaluado'=>'required',
                 'cargoevaluado'=>'required',
                 'name.*'       => 'required|max:50',
-                'relation.*' => 'required|max:20',
+                'relation.*' => 'required|max:10',
+                'email.*' => 'required',
                 'email.*' => [new CheckEmailDns()],
 
             ];
@@ -43,6 +44,8 @@ class FileJson extends FormRequest
             'name.*.required'=> 'El Nombre es requerido, debe indicarlo correctamente',
             'email.*.required'=> 'El Email is requerido, debe especificarlo correctamente',
             'relation.*.required' => 'La Relation es requerida, debe ingresar un tipo de relacion (parner, supervisor,externo,etc)',
+            'relation.*.max' => 'La Relacion (:attribute) debe tener un maximo de 10 caracteres',
+            'email.*.CheckEmailDns' => 'Email No valido debe ingresar un nombre de dominio correctamente',
         ];
     }
     public function save(){

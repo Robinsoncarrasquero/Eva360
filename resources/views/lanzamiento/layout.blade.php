@@ -29,89 +29,9 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <style>
-       .spellcheck{
-            color:darkgreen;
-        }
-
-        .radio-checkeado,.radio-no-checkeado{
-            margin-left: 2px;
-        }
-
-        .radio-checkeado{
-        width: 1em;
-        height: 1em;
-        border-radius: 3ex;
-        top: -2px;
-        left: -3px;
-        position: relative;
-        background-color:green;
-        content: '';
-        visibility: visible;
-        border: 1px solid white;
-        display: inline-block;
-
-        }
-
-
-        .radio-no-checkeado{
-        width: 1em;
-        height: 1em;
-        border-radius: 3ex;
-        top: -2px;
-        left: -3px;
-        position: relative;
-        background-color:orange;
-        content: '';
-        visibility: visible;
-        border: 1px solid white;
-        display: inline-block;
-
-        }
-
-        Input:Focus {
-            Background-color: yellow;
-        }
-        input[type=text] {
-            width: 100%;
-            padding: 2px 10px;
-            margin: 4px 0;
-            box-sizing: border-box;
-        }
-        input[type=email] {
-            width: 100%;
-            padding: 2px 10px;
-            margin: 4px 0;
-            box-sizing: border-box;
-        }
-        .title-auth{
-            background-color:chocolate;
-        }
-        a .material-icons {
-            color:chocolate;
-        }
-        .radio-checkeado, .radio-no-checkeado{
-            font-size: 2.5ex;
-        }
-        .title-th-evaluador{
-            background-color:rgb(4, 39, 48);
-            color: white;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            font-size: 20px;
-        }
-        .title-th-competencia{
-            background-color:rgb(73, 3, 3);
-            color:white;
-
-        }
-
-
-
-
-    </style>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-</head>
+  </head>
 
   <body>
 
@@ -155,6 +75,9 @@
             <li class="nav-item ">
                 <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('modelo.index') }}">Modelo</a>
+            </li>
             <li class="nav-item ">
                 <a  class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
             </li>
@@ -178,7 +101,7 @@
         @else
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <i class="material-icons " style="font-size:1rem; color: green">person</i> <span style="font-size: .80rem" class="caret">{{ Auth::user()->name }}</span>
+                    <i class="material-icons " style="font-size:1rem; color: green">person</i> <span  class="caret username">{{ Auth::user()->name }}</span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -217,7 +140,7 @@
 
             </div>
 
-            <div class=" col-md-4">
+            <div class="col-md-4">
                 @section('sidebar')
 
                 @show
@@ -229,7 +152,7 @@
 
     <footer id="footer" class="footer">
         <div class="container">
-          <span class="text text-white-50 ">Sistema de Valoracion de Puestos por Competencias Basados en los Métodos o Sistemas de Vision 90&#176;, 180&#176; y 360&#176; con resultados y graficas</span>
+           <span class="text text-white ">Sistema de Valoracion de Puestos por Competencias Basados en los Métodos de Vision 90&#176;, 180&#176; y 360&#176;</span>
         </div>
     </footer>
 
