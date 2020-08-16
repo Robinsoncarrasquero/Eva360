@@ -25,7 +25,7 @@
                     <div  class="card">
                         <div  class="card-header">
                             <label  for="nameevaluado">Nombre Evaluado:</label>
-                            <input  class=" form-control" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}">
+                            <input  class=" form-control" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}" autofocus>
 
                         </div>
                         <div  class="card-header">

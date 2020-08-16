@@ -54,8 +54,8 @@
                                     @foreach ($evaluador->evaluaciones as $evaluacion)
                                     <tr>
                                         <td>{{$evaluacion->competencia->name}}</td>
-                                        <td>{{$evaluacion->competencia->description}}</td>
-                                        <td>{{ $evaluacion->grado }}{{ $evaluacion->competencia_id }}</td>
+                                        <td>{{substr($evaluacion->competencia->description,0,50)}}</td>
+                                        <td>{{ $evaluacion->grado }}</td>
                                         <td class="text text-center">{{ $evaluacion->ponderacion}}</td>
                                         <td class="text text-center">{{ $evaluacion->frecuencia/100}}</td>
                                         <td class="text text-center"><span class="badge badge-dark">{{ $evaluacion->resultado}}</span></td>
@@ -71,8 +71,6 @@
                         <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
 
                     </div>
-
-
             @else
 
                 <div class="alert-info">

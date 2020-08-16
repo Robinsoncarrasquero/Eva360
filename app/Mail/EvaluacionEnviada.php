@@ -14,18 +14,18 @@ class EvaluacionEnviada extends Mailable
     use Queueable, SerializesModels;
 
     public $dataEvaluador;
-
+    public $the_view;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(EmailSend $dataEvaluador)
+    public function __construct(EmailSend $dataEvaluador,$view)
     {
         //
         $this->dataEvaluador=$dataEvaluador;
-
+        $this->the_view=$view;
     }
 
     /**
@@ -35,6 +35,6 @@ class EvaluacionEnviada extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.evaluacion-enviada');
+        return $this->view($this->the_view);
     }
 }

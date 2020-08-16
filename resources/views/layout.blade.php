@@ -47,14 +47,12 @@
                     <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
-                @if (Auth::check())
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
-                    </li>
-                @endif
 
                 @if (Auth::check() && Auth::user()->admin())
-                    <li class="dropdown">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('lanzar.index') }}">Panel<span class="sr-only">(current)</span></a>
+                    </li>
+                    {{-- <li class="dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             Lanzar Prueba<span class="caret"></span>
                         </a>
@@ -64,7 +62,7 @@
                             <li><a class="dropdown-item"  href="{{ route('lanzar.index') }}">Por Competencias</a></li>
                         </ul>
 
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a  class="nav-link" href="{{ route('tipo.index') }}">Tipo</a>
                     </li>
@@ -79,6 +77,12 @@
                     </li>
                     <li class="nav-item ">
                         <a  class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
+                    </li>
+                @endif
+
+                @if (Auth::check())
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
                     </li>
                 @endif
 

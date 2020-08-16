@@ -6,34 +6,22 @@
 
 <div class="container">
 
-    <div class="panel panel pb-3">
-        <h4 class="text text-md-center alert alert-warning">Competencias seleccionadas para Lanzar de: {{ $evaluado->name }}</h2>
+    <div class="panel pb-1">
+        <h4 class="text text-center">Lanzar la prueba de: {{ $evaluado->name }}</h2>
+    </div>
+
+    <div id="flash-message">
+        @include('flash-message')
 
     </div>
 
-    @if ($errors->any())
-
-        <div class="alert alert-danger">
-            <p>Errores encontrados:</p>
-
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li> {{ $error }} </li>
-                @endforeach
-
-            </ul>
-
-        </div>
-
-    @endif
-
     @if ($evaluadores->isNotEmpty())
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <form action="{{ route('lanzar.procesar',$evaluado) }}" method="POST">
                 {{ csrf_field() }}
 
-            <table class="table ">
-                <thead>
+            <table class="table table-table ">
+                <thead class="table-thead">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Competencia</th>
@@ -69,8 +57,11 @@
         </form>
 
         </div>
+
     @else
-        <p>No hay usuarios registrados</p>
+        <div class="clearfix">
+            <p>No competencias seleccionadas</p>
+        </div>
     @endif
     <div class="clearfix">
 
@@ -82,7 +73,7 @@
 @endsection
 
 @section('sidebar')
-<div class="col-md-12">
+<div class="col-sm-12">
     <form >
     {{ csrf_field() }}
 
@@ -117,8 +108,6 @@
     </form>
 
 </div>
-
-
 
 @endsection
 

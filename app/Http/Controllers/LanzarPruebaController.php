@@ -30,7 +30,7 @@ class LanzarPruebaController extends Controller
         $buscarWordKey = $request->get('buscarWordKey');
 
         $evaluados = Evaluado::name($buscarWordKey)->orderBy('id','DESC')->paginate(10);
-        return view('lanzamiento.simple.index',compact('evaluados','title'));
+        return view('lanzamiento.index',compact('evaluados','title'));
 
     }
 

@@ -7,7 +7,7 @@
 <div class="container">
 
     <div class="panel panel titulo360">
-        <h3 class=" text text-center ">Seleccion de Competencias para crear un Nuevo Modelo de Evaluacion</h3>
+        <h3 class=" text text-center ">Crear un Modelo de Evaluacion</h3>
     </div>
     <div id="flash-message">
         @include('flash-message')
@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <label for="name">Modelo</label>
-                            <input class="form-control" type="text" name="name" id="name" placeholder="Nombre">
+                            <input class="form-control" type="text" name="name" id="name" placeholder="Modelo" autofocus>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="description">Descripcion</label>
@@ -42,7 +42,7 @@
                             <th scope="col">Competencia</th>
                             <th scope="col">Descripcion</th>
                             <th scope="col">Tipo</th>
-                            <th scope="col">Seleccionar</th>
+                            <th scope="col">ok</th>
                         </thead>
                         <tbody>
                             @foreach ($competencias as $competencia)
@@ -80,10 +80,7 @@
                             </tbody>
                         </table>
 
-
-
                 </div>
-
 
             </div>
 

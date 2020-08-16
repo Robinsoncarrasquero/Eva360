@@ -77,6 +77,9 @@ Route::delete('modelo/destroy/{modelo}', 'ModeloController@destroy')->name('mode
 Route::get('modelo/{modelo}/show', 'ModeloController@show')->name('modelo.show')
 ->middleware('role:admin');
 
+Route::get('ajaxmodeloajax/data', 'ModeloController@ajaxCompetencias')->name('modelo.ajaxcompetencias')
+->middleware('role:admin');
+
 /**Resource de tipo de competencia */
 Route::resource('grupocompetencia', 'GrupoCompetenciaController')
 ->middleware('role:admin');
@@ -120,7 +123,7 @@ Route::get('lanzar', "LanzarPruebaController@index")
         ->middleware(['role:admin']);
 
 //Seleccionar las competencias y evaluadores de la prueba paso1
-Route::get('lanzar/{evaluado}/seleccionar',"LanzarPruebaController@seleccionar")
+Route::get('lanzar/{evaluado}/seleccionarcompetencias',"LanzarPruebaController@seleccionar")
         ->name('lanzar.seleccionar')
         ->where('evaluado','[0-9]+')
         ->middleware(['role:admin']);
@@ -141,12 +144,12 @@ Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
  */
 
 /**Lista de candidatos para la prueba desde un modelo*/
-Route::get('lanzar/modelo', "LanzarModeloController@index")
+Route::get('lanzar/modelo', "LanzarPruebaController@index")
 ->name('lanzar.modelo')
 ->middleware(['role:admin']);
 
 /**Seleccion del modelo */
-Route::get('lanzar/{evaluado}/modelo', "LanzarModeloController@seleccionarmodelo")
+Route::get('lanzar/{evaluado}/seleccionarmodelo', "LanzarModeloController@seleccionarmodelo")
 ->name('lanzar.seleccionarmodelo')
 ->middleware(['role:admin']);
 

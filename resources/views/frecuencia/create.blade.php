@@ -39,7 +39,7 @@
 
                 <div class="clearfix">
                     <a href="{{route('tipo.index')}}" class="btn btn-dark float-left">Back</a>
-                    <button type="submit" class="btn btn-primary float-right">Crear</button>
+                    <button type="submit" class="btn btn-dark float-right">Crear</button>
 
                 </div>
 

@@ -62,7 +62,7 @@ class LanzarEvaluacion
         return true;
     }
 
-    /** Envia los correos de invitacion a los evluadores */
+    /** Envia los correos de invitacion a los evaluadores */
     public function enviarEmailEvaluadores($evaluado_id,$root){
 
         //Buscamos el Evaluado
@@ -100,17 +100,46 @@ class LanzarEvaluacion
             $data = new EmailSend();
             $data->nameEvaluador=$evaluador->name;
             $data->relation =$evaluador->relation;
-
+            $data->email =$evaluador->email;
             $data->linkweb =$root."/evaluacion/$evaluador->remember_token/evaluacion";
             $data->nameEvaluado =$evaluado->name;
+            $data->enviado =false;
+            $data->save();
             try {
-
-                Mail::to($receivers)->send(new EvaluacionEnviada($data));
-
+                Mail::to($receivers)->send(new EvaluacionEnviada($data,'mails.evaluacion-enviada'));
+                $data->enviado =true;
+                $data->save();
             }catch(QueryException $e) {
                 abort(404);
             }
 
+        }
+
+    }
+
+    /** Envia el correo de finalizacion de la prueba al administrador */
+    public static function enviarEmailFinal($evaluado_id,$root){
+
+        //Buscamos el Evaluado
+        $evaluado = Evaluado::find($evaluado_id);
+
+        $receivers = env("MAIL_FROM_ADDRESS");
+
+        //Creamos un objeto para pasarlo a la clase Mailable
+        $data = new EmailSend();
+        $data->nameEvaluador="Administrador";
+        $data->relation ="Admin";
+        $data->email =env("MAIL_FROM_ADDRESS");
+        $data->linkweb =$root."/resultados/$evaluado_id/evaluacion";
+        $data->nameEvaluado =$evaluado->name;
+        $data->enviado =false;
+        $data->save();
+        try {
+            Mail::to($receivers)->send(new EvaluacionEnviada($data,'mails.evaluacion-finalizada'));
+            $data->enviado =true;
+            $data->save();
+        }catch(QueryException $e) {
+            abort(404);
         }
 
     }

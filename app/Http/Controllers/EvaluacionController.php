@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use app\CustomClass\LanzarEvaluacion;
 use App\Frecuencia;
 use App\Evaluador;
 use App\Evaluacion;
@@ -147,7 +148,7 @@ class EvaluacionController extends Controller
     /**
      * Controlador para indicar finalizaada la prueba del evaluador
      */
-    public function finalizar($evaluador_id ){
+    public function finalizar(Request $request,$evaluador_id ){
 
         $evaluador = Evaluador::findOrFail($evaluador_id);
         $evaluaciones = $evaluador->evaluaciones;
@@ -185,6 +186,12 @@ class EvaluacionController extends Controller
         if ($evaluacionesPendientes->count()==0){
             $evaluado->status= Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
             $evaluado->save();
+
+            $root=$request->root();
+
+            //Enviamos el correo de finalizacion al administrador
+            LanzarEvaluacion::enviarEmailFinal($evaluado->id,$root);
+
         }
 
         return \redirect()->route('evaluacion.index')

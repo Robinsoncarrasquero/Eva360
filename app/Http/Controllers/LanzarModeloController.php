@@ -14,16 +14,6 @@ use Illuminate\Support\Facades\Hash;
 
 class LanzarModeloController extends Controller
 {
-    /**
-     * Presenta la lista de candidatos para lanzar un modelo
-    */
-    public function index(Request $request){
-        $title="Lista de Evaluados";
-        $buscarWordKey = $request->get('buscarWordKey');
-
-        $evaluados = Evaluado::name($buscarWordKey)->orderBy('id','DESC')->paginate(10);
-        return view('lanzamiento.modelo.modelo',compact('evaluados','title'));
-    }
 
     /*
     * Seleccionar un modelo de evaluacion

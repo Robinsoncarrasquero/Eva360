@@ -20,6 +20,7 @@ class CreateEmailsendsTable extends Migration
             $table->string('linkweb',100)->notnualble();
             $table->string('relation',10)->notnualble();
             $table->string('nameEvaluado',50)->notnualble();
+            $table->boolean('enviado')->nullable()->default(false);
             $table->timestamps();
         });
     }

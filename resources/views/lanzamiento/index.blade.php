@@ -8,18 +8,18 @@
 
     <div class="panel panel-default">
 
-        <div class="col-md-12">
+        <div class="col-sm-12">
 
             <div id="flash-message">
                 @include('flash-message')
 
             </div>
 
-            <div class="panel panel pb-3">
+            <div class="panel panel pb-1">
                 <div class="clearfix">
 
-                    <div class="text text-center col-sm-12 titulo">
-                        <h3>Lanzar Prueba por Seleccion de Competencias</h3>
+                    <div class="text text-center col-sm-12">
+                        <h4>Listado de evaluados</h4>
                     </div>
 
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
@@ -46,8 +46,9 @@
                     <th>Nombre</th>
                     <th>Cargo</th>
                     <th>Status</th>
-                    <th>Lanzar</th>
-                    <th>Evaluacion</th>
+                    <th>Lanzar<br>Modelo</th>
+                    <th>Lanzar<br>Filtro</th>
+                    <th>Prueba</th>
                     <th>Resultado</th>
                     <th>Grafica</th>
                    </thead>
@@ -55,7 +56,7 @@
                     @foreach($evaluados as $evaluado)
                     <tr>
                         <td>{{$evaluado->name}}</td>
-                        <td>{{ $evaluado->cargo }}</td>
+                        <td>{{$evaluado->cargo}}</td>
                         <td>
                             <div class="status-progress">
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
@@ -80,41 +81,45 @@
                         </td>
                         <td>
                             @if(Helper::estatus($evaluado->status)!='Finalizada')
-                                <a href="{{route('lanzar.seleccionar', $evaluado->id)}}" >
-                                <span><i class="material-icons ">flight_takeoff</i></span></a>
+                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">select_all</i></span></a>
                             @else
-                                <span><i class="material-icons">flight_land</i></span></a>
+                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">select_all muted</i></span></a>
                             @endif
-
-
+                        </td>
+                        <td>
+                            @if(Helper::estatus($evaluado->status)!='Finalizada')
+                                <a href="{{route('lanzar.seleccionar',$evaluado->id)}}"><span><i class="material-icons">filter_list</i></span></a>
+                            @else
+                                <a href="{{route('lanzar.seleccionar',$evaluado->id)}}"><span><i class="material-icons">filter_list muted</i></span></a>
+                            @endif
                         </td>
                         <td>
                             @if(Helper::estatus($evaluado->status)=='Finalizada')
                                 <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24">question_answer</i></span>
+                                <span><i class="material-icons ">question_answer</i></span>
                             @else
                                 <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24 text-dark md-inactive">question_answer</i></span>
+                                <span><i class="material-icons text-dark ">question_answer</i></span>
                             @endif
 
                         </td>
                         <td>
                             @if(Helper::estatus($evaluado->status)=='Finalizada')
                                 <a href="{{route('resultados.finales', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24">score</i></span>
+                                <span><i class="material-icons ">score</i></span>
                             @else
                                 <a href="{{route('resultados.finales', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24 text-dark md-inactive">score</i></span>
+                                <span><i class="material-icons text-dark ">score</i></span>
                             @endif
 
                         </td>
                         <td>
                             @if(Helper::estatus($evaluado->status)=='Finalizada')
                                 <a href="{{route('resultados.graficas', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24">pie_chart</i></span>
+                                <span><i class="material-icons ">pie_chart</i></span>
                             @else
                               <a href="{{route('resultados.graficas', $evaluado->id)}}" >
-                                <span><i class="material-icons md-24 text-dark md-inactive">pie_chart</i></span>
+                                <span><i class="material-icons md-24 text-dark">pie_chart</i></span>
                             @endif
 
                         </td>

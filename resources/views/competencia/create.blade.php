@@ -22,19 +22,19 @@
 
                 <div class="col-sm-5">
                     <label for="name">Competencia</label>
-                    <input id="name" placeholder="Competencia" class="form-control" type="text" name="name" value="{{old('name')  }}">
+                    <input type="text" id="name" placeholder="Competencia" class="form-control"  name="name" value="{{old('name')  }}" autofocus>
                 </div>
 
                 <div class="col-sm-7">
                     <label for="description">Descripcion</label>
-                    <textarea placeholder="Describa la competencia sus objetivos" type="text" id="description" class="form-control" rows="6"
+                    <textarea placeholder="Descripcion de la competencia" type="text" id="description" class="form-control" rows="4"
                         maxlength="1000" name="description">{{ old('description') }}</textarea>
                 </div>
 
                 <div class="row col-sm-12">
                     <div class="col-sm-6">
                         <label for="nivelrequerido">Nivel Requerido</label>
-                        <input placeholder="Indique el nivel requerido entre 0 y 100" id="nivelrequerido" class="form-control" type="text" name="nivelrequerido" value="{{ old('nivelrequerido') }}">
+                        <input placeholder="Nivel entre 0 y 100" id="nivelrequerido" class="form-control" type="text" name="nivelrequerido" value="{{ old('nivelrequerido') }}">
                     </div>
 
                     <div class="col-sm-6">
@@ -76,7 +76,7 @@
                                             <input type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">
                                         </td>
                                         <td>
-                                            <textarea cols="50" rows="2" name="gradoDescription[]">{{ old('gradoDescription.'.$key, $value->description)}}</textarea>
+                                            <textarea cols="50" rows="3" name="gradoDescription[]">{{ old('gradoDescription.'.$key, $value->description)}}</textarea>
                                         </td>
                                         <td>
                                             <input type="text" name="gradoPonderacion[]" value="{{ old('gradoPonderacion.'.$key, $value->ponderacion)}}">

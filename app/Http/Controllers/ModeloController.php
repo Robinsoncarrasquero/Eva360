@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class ModeloController extends Controller
 {
@@ -121,6 +122,23 @@ class ModeloController extends Controller
         //Obtenemos el modelo
         $modelo = Modelo::findOrFail($modelo);
        return \view('modelo.show',compact("modelo","title"));
+
+    }
+
+    public function ajaxCompetencias(Request $request)
+    {
+
+
+        $id = $request->id;
+        Log::info($id);
+        $mcompetencias = Modelo::find($id)->competencias;
+        $filtered = $mcompetencias->only(['competencia_id']);
+        $plucked = $mcompetencias->pluck('competencia_id');
+
+        $tablaCompetencias = Competencia::all();
+        $competencias = $tablaCompetencias->only($plucked->toArray());
+        $data=$competencias->pluck('name');
+        return response()->json(['success'=>'Got Simple Ajax Request.','dataJson'=>$data->toArray()]);
 
     }
 
