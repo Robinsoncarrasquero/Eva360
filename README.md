@@ -1,5 +1,5 @@
-<p align="center" style="color:red">
-    SISTEMA DE GESTIONS POR COMPETENCIAS 360
+<p align="center">
+    SISTEMA DE GESTION POR COMPETENCIAS 360
 </p>
 
 ## About Vision 360°
