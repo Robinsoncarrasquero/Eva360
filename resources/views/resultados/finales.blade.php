@@ -19,10 +19,10 @@
 
                 <div class="clearfix">
                     @if ($evaluado->status!==Helper::estatus('Finalizada'))
-                        <h4 class="alert alert-danger text-center">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h4>
+                        <h4 class="alert-danger text-center">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h4>
                     @else
-                        <div class=" tex text-center titulo">
-                            <h5>Resultados Finales Ponderados de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                        <div class="text text-center titulo">
+                            <h5>Resultados Finales de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                         </div>
                     @endif
 
@@ -47,8 +47,8 @@
                                 <strong >{{ $value['competencia']}} (Margen Requerido {{ $value['nivelRequerido'] }})
                                 </strong> </th>
                             </tr>
-                            <th>Grupo</th>
-                            <th>Ponderacion</th>
+                            <th>Evaluador</th>
+                            <th>Ponderado</th>
                             </thead>
                             <tbody>
                                 @foreach ($value['data'] as $item)
@@ -60,7 +60,7 @@
 
                                 @endforeach
                                 <tr>
-                                    <td class="text text-center"><strong>Resultado Final( sobre {{ count($value['data']) }} Grupos)</strong></td>
+                                    <td class="text text-center"><strong>Resultado Final</strong></td>
                                     <td class="text text-dark" ><a href=""><i class="material-icons">bar_chart</i></a>{{ number_format($value['eva360'],2)}}
                                     </td>
                                 </tr>

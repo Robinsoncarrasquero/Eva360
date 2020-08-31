@@ -1,17 +1,17 @@
 @extends('layout')
 
-@section('title',"Creacion de Modelos de Evaluacion")
+@section('title',"Creacion Modelo de Evaluacion")
 
 @section('content')
 
 <div class="container">
 
-    <div class="panel panel titulo360">
-        <h3 class=" text text-center ">Crear un Modelo de Evaluacion</h3>
-    </div>
     <div id="flash-message">
         @include('flash-message')
+    </div>
 
+    <div class="mt-1">
+        <h4 class="text text-center">Crear un Modelo de Evaluacion</h4>
     </div>
 
     @if ($competencias->isNotEmpty())
@@ -33,7 +33,7 @@
 
                 </div>
 
-            <div class="row ">
+            <div class="row mt-2">
                 <div class="col-sm-8">
 
                     <table class="table table-table" id="table1">
@@ -71,11 +71,11 @@
 
                 <div class="col-sm-4 panel ">
 
-                        <table class="table " id="table2">
-                            <thead>
-                                <th colspan="4" scope="col">Competencias Seleccionadas</th>
+                        <table class="table" id="table2">
+                            <thead class="table-thead-lanzarmodelo">
+                                <th colspan="5" scope="col">Seleccionadas</th>
                             </thead>
-                            <tbody class="modelocompetenciasseleccionadas">
+                            <tbody class="tbody-competencias-seleccionar">
 
                             </tbody>
                         </table>

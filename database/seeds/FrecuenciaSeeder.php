@@ -26,22 +26,32 @@ class FrecuenciaSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
         factory(Frecuencia::class)->create([
-            'name'=>'Frecuentemente',
+            'name'=>'Siempre',
             'valor'=>100,
+            'description'=>'Representa el comportamiento habitual del evaluado',
         ]);
 
         factory(Frecuencia::class)->create([
-            'name'=>'Siempre',
+            'name'=>'Frecuente',
             'valor'=>75,
+            'description'=>'Representa el comportamiento frecuente.',
         ]);
         factory(Frecuencia::class)->create([
             'name'=>'Medio',
             'valor'=>50,
+            'description'=>'Representa el comportamiento en la mita de la veces u ocaciones.',
         ]);
 
         factory(Frecuencia::class)->create([
-            'name'=>'Ocacionalmente',
+            'name'=>'Ocasional',
             'valor'=>25,
+            'description'=>'Representa el comportamiento ocasional del evaluado.',
+        ]);
+
+        factory(Frecuencia::class)->create([
+            'name'=>'ND',
+            'valor'=>0,
+            'description'=>'Deficiente necesita significativas mejoras.',
         ]);
 
 

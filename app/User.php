@@ -40,6 +40,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    //Hacer busquedas por nombre
+    public function scopeName($query,$name){
+        $query->where('name','like',"%$name%");
+
+    }
+
     //Un Usuario(evaluador) realiza muchas evaluaciones(evaluador)
     public function evaluaciones(){
         return $this->hasMany(Evaluador::class);
@@ -100,12 +106,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
-    //Hacer busquedas por nombre
-    public function scopeName($query,$name){
-
-        $query->where('name','like',"%$name%");
-
-    }
 
 
 

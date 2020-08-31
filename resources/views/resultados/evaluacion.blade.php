@@ -39,7 +39,7 @@
                             <table id="{{ 'table'.$evaluador->id }}" class="table  table-bordered table-striped table-table">
                                 <thead>
                                     <th>Competencia</th>
-                                    <th>Descripcion</th>
+                                    {{-- <th>Descripcion</th> --}}
                                     <th>Grado</th>
                                     <th>%</th>
                                     <th>Frecuencia</th>
@@ -54,7 +54,7 @@
                                     @foreach ($evaluador->evaluaciones as $evaluacion)
                                     <tr>
                                         <td>{{$evaluacion->competencia->name}}</td>
-                                        <td>{{substr($evaluacion->competencia->description,0,50)}}</td>
+                                        {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
                                         <td>{{ $evaluacion->grado }}</td>
                                         <td class="text text-center">{{ $evaluacion->ponderacion}}</td>
                                         <td class="text text-center">{{ $evaluacion->frecuencia/100}}</td>

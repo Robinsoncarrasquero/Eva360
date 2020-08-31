@@ -19,7 +19,7 @@ class EvaluacionController extends Controller
 
     public function __construct()
     {
-    //Auth::logout();
+    //    Auth::logout();
     }
     /**
      * Muestra las evaluaciones del evaluador
@@ -58,7 +58,6 @@ class EvaluacionController extends Controller
         return \redirect()->route('evaluacion.competencias',$evaluador->id);
 
     }
-
 
     /**
      * El controlador recibe el token del evaluador y muestra la lista de competencias relacionadas.
@@ -135,7 +134,7 @@ class EvaluacionController extends Controller
         $evaluacion->frecuencia=$modelfrecuencia->valor->valor;
 
         //Obtenemos el resultado
-        $evaluacion->resultado=$modelfrecuencia->valor->valor * $modelgrado->grado->ponderacion/100;
+        $evaluacion->resultado=  $modelgrado->grado->ponderacion/100 * $modelfrecuencia->valor->valor ;
 
         $evaluacion->save();
 

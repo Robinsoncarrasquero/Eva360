@@ -8,17 +8,13 @@
 <div class="container">
 
     <div class="col-sm-8">
-        <h1 class="display-5">Nuevo Frecuencia</h1>
+        <div id="flash-message">
+            @include('flash-message')
 
-        @if ($errors->any())
-            <div class="alert alert-danger" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        </div>
+        <div class="mt-1 text-center">
+            <h3>Nueva Frecuencia</h3>
+        </div>
 
         <div class=" card-header">
             <form action="{{ route('frecuencia.store') }}" method="POST">

@@ -14,8 +14,6 @@ class TipoSeeder extends Seeder
     public function run()
     {
 
-                //
-
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;'); //DESACTIVA EL CHECKEO DE CLAVES FORANEAS
 
         DB::table('tipos')->truncate();

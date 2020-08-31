@@ -8,8 +8,6 @@
 
     <div class="panel panel-default">
 
-        <div class="col-md-12">
-
             <div id="flash-message">
                 @include('flash-message')
 
@@ -31,7 +29,6 @@
                     <th>Nombre</th>
                     <th>Status</th>
                     <th>Accion</th>
-                    <th>Resultados</th>
                     </thead>
                     <tbody>
                     @foreach($evaluadores as $evaluador)
@@ -70,8 +67,6 @@
                             @endif
 
                         </td>
-                        <td><i class="material-icons md-24">preview</i>
-                        </td>
                     </tr>
                     @endforeach
                     </tbody>
@@ -88,8 +83,6 @@
 
             @endif
 
-
-        </div>
         <div class=" d-flex justify-content-center">
             {{ $evaluadores->links() }}
         </div>

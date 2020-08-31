@@ -18,7 +18,7 @@
             <div class="panel panel pb-3">
                 <div class="clearfix">
                     <form class="form-inline mt-2 mt-md-0 float-left">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Nombre" aria-label="Searh" name="buscarWordKey">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Nombre" aria-label="Search" name="buscarWordKey">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
                     <div class="text text-center">

@@ -7,7 +7,7 @@
 <div class="container">
 
     <div class="panel panel pb-3">
-        <h4 class="text text-md-center text text-info">Modelo de Evaluacion</h2>
+        <h4 class="text text-center">Modelo de Evaluacion</h2>
     </div>
 
     <div id="flash-message">

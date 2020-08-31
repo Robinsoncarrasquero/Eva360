@@ -7,11 +7,13 @@
 <div class="container">
 
     <div class="col-sm-8">
-        <h1 class="display-5">Actualizar Tipo de Competencia</h1>
 
         <div id="flash-message">
             @include('flash-message')
 
+        </div>
+        <div class="mt-1 text-center">
+            <h3>Actualizar Tipo de Competencia</h3>
         </div>
 
         <div class="card-header">
@@ -28,7 +30,7 @@
 
                 <div class="clearfix">
                     <a href="{{route('tipo.index')}}" class="btn btn-dark float-left">Back</a>
-                    <button type="submit" class="btn btn-primary float-right">Save</button>
+                    <button type="submit" class="btn btn-dark float-right">Save</button>
 
                 </div>
 

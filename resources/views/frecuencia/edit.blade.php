@@ -7,7 +7,9 @@
 <div class="container">
 
     <div class="col-sm-8">
-        <h1 class="display-5">Actualizar Frecuencia</h1>
+        <div class="mt-1 text-center">
+            <h3>Actualizar Frecuencia</h3>
+        </div>
 
         <div id="flash-message">
             @include('flash-message')

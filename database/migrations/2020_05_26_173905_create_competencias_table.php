@@ -19,7 +19,6 @@ class CreateCompetenciasTable extends Migration
             $table->text('description',1000)->notnullable();
             $table->integer('nivelrequerido')->default(0);
             $table->foreignId('tipo_id')->constrained();
-            $table->foreignId('grupocompetencia_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

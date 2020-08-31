@@ -55,8 +55,9 @@ class ResultadosController extends Controller
         $objData->crearGrafica();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
+        $competencias = $objData->dataCompetencias();
         $title="Finales";
-        return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado"));
+        return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado","competencias"));
     }
 
 }

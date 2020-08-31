@@ -25,14 +25,14 @@
                 <div class="row ">
                     <div class="col-sm-8">
                         <div class="table table-table">
-                            <table id="table1" class="table  table-bordered table-striped ">
-                            <thead>
+                            <table id="table1" class="table table-bordered table-striped">
+                            <thead class="table-competencias-seleccionar">
                                 <th scope="col">#</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Descripcion</th>
                                 <th scope="col">Seleccione</th>
                             </thead>
-                            <tbody>
+                            <tbody  class="tbody-competencias-seleccionar">
                                 @foreach($modelos as $modelo)
                                 <tr id="{{$modelo->id}}">
                                     <td>{{$modelo->id}}</td>
@@ -63,7 +63,7 @@
                                 <thead class="table-thead-lanzarmodelo">
                                     <th>Competencias del Modelo</th>
                                 </thead>
-                                <tbody id="tbody-table2" class="table-tbody-lanzarmodelo" >
+                                <tbody id="tbody-table-seleccionado" class="table-tbody-lanzarmodelo" >
 
                                 </tbody>
                             </table>
@@ -93,22 +93,11 @@
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script type="text/javascript">
-
-    // $(".btnradio").click(function(e){
     $(document).on('click','.btnradio',function(e){
-
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     }
-        // });
-
         id=$(this).parents('tr').prop('id');
-        //e.preventDefault();
         td='<tr><td>No hay Informacion</td></tr>';
         $.ajax({
-           type:'GET',
-        //    url:"ajaxmodeloajax/"+ id +"/data",
+        type:'GET',
           url:"{{ route('modelo.ajaxcompetencias') }}",
           data:{id:id},
            success:function(data){
@@ -117,11 +106,10 @@
                    var datajson=data.dataJson;
                    datajson.forEach(logArrayElements);
                }
-               $("#tbody-table2").html(td);
+               $("#tbody-table-seleccionado").html(td);
             }
 
         });
-
 
     function logArrayElements(element, index, array) {
         td +="<tr><td>"+element+"</td></tr>";

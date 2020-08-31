@@ -15,15 +15,15 @@
 
             </div>
 
-            <div class="panel panel pb-3">
+            <div class="panel panel pb-1">
 
                 <div class="clearfix">
-                    <div class="alert alert-info text-center">
-                        <h5>Estimado {{ $evaluador->name }}!!, por favor evalue las competencias de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                    <div class="text text-center">
+                        <h5>Estimado evaluador {{ $evaluador->name }}, por favor evalue las competencias de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                     </div>
 
-                    <div class="text text-center text-danger">
-                        <h3>Competencias a Evaluar</h3>
+                    <div class="text text-center">
+                        <h4>Competencias a Evaluar</h4>
                     </div>
 
                 </div>
@@ -36,8 +36,8 @@
                 <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
                 @csrf
                 <div class="table">
-                    <table id="mytable" class="table  table-bordred table-striped">
-                    <thead>
+                    <table id="mytable-competencias" class="table  table-bordered table-striped table-table">
+                    <thead class="table-competencias">
                     <th>Competencia</th>
                     <th>Descripcion</th>
                     <th>Status</th>

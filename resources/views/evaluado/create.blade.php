@@ -16,27 +16,22 @@
                 <h5>Formulario para la creacion de un Evaluado y sus Evaluadores.</h5>
             </div>
 
-
             @if($evaluadoArray)
-
-
                 <form action="{{ route('evaluado.store',$fileName) }}" method="POST" id="frm-evaluado">
                     @csrf
                     <div  class="card">
                         <div  class="card-header">
                             <label  for="nameevaluado">Nombre Evaluado:</label>
-                            <input  class=" form-control" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}" autofocus>
+                            <input  class="form-control" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}" autofocus>
 
-                        </div>
-                        <div  class="card-header">
                             <label  for="cargo">Cargo:</label>
-                            <input  class=" form-control" maxlength="30" type="text" name="cargoevaluado" value="{{old('cargoevaluado') }}">
+                            <input  class="form-control" maxlength="30" type="text" name="cargoevaluado" value="{{old('cargoevaluado') }}">
 
                         </div>
                     </div>
 
-                    <div class="table">
-                        <table id="tableevaluado" class="table">
+                    <div class="mt-1">
+                        <table id="table-evaluado" >
                         <thead class="thead-evaluado">
                         <th>#</th>
                         <th>Evaluador</th>
@@ -51,7 +46,7 @@
                             @foreach ($evaluadoArray['Evaluadores'] as $key=>$evaluador)
 
                                 <tr id="{{ $key }}">
-                                    <td>{{ $key }}</td>
+                                    <td class="form-control">{{ $key }}</td>
                                     <td><input class="form-control" type="text" maxlength="50" name="name[]" value="{{old('name.'.$key,$evaluador->name)}}"></td>
                                     <td><input class="form-control" type="text" maxlength="10" name="relation[]" value="{{old('relation.'.$key,$evaluador->relation)}}"></td>
                                     <td><input class="form-control" type="email" maxlength="100" name="email[]"  value="{{old('email.'.$key,$evaluador->email)}}" ></td>
@@ -76,7 +71,6 @@
 
             </div>
 
-
         @else
 
             <div class="alert alert-info">
@@ -84,8 +78,6 @@
             <div>
 
         @endif
-
-
 
     </div>
 

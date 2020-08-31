@@ -65,6 +65,13 @@ body > .container {
     font-size: .80rem;
   }
 
+  /**
+  *Vision360
+  */
+  .vision360{
+    font-size: 1rem;
+
+  }
   /* Titulo de formulario vision360*/
   .titulo360{
     font-size: 1rem;
@@ -93,9 +100,9 @@ body > .container {
   }
 
   /* Seleccion dinamica de competencias en formulario de creacion de modelos*/
-  .modelocompetenciasseleccionadas{
+  .tbody-modelo-seleccionado{
     font-size: 0.50rem;
-    background-color: yellowgreen;
+    background-color: rgb(233, 240, 220);
    }
    /* Tablas */
    .table-table{
@@ -203,10 +210,50 @@ body > .container {
     /*Tablas lanzamiento por modelo competencias seleccionadas encabezado*/
     .table-thead-lanzarmodelo{
         font-size: 0.75rem;
+        background: rgb(58, 202, 188);
     }
     .table-tbody-lanzarmodelo{
         font-size: 0.50rem;
         padding: 1px;
     }
 
+    /*Descripcion de las preguntas de la evaluacion */
+    .table-descripcion{
+        font-size: 0.90rem;
+    }
+    .rango{
+        font-size: 0.75rem;
 
+    }
+    .description{
+        font-size: 1.25rem;
+        background-color: rgb(177, 236, 177);
+        color:black;
+    }
+
+
+
+    .table-preguntas{
+        font-size: 1rem;
+        background-color: rgb(168, 135, 222);
+    }
+    .tbody-preguntas{
+        font-size: 0.50rem;
+    }
+    .table-competencias{
+        font-size: 1rem;
+        background-color: rgb(2, 2, 37);
+        color:white;
+    }
+    .table-competencias-seleccionar{
+        font-size: 1rem;
+        background-color: rgb(2, 2, 37);
+        color:white;
+    }
+    .tbody-competencias-seleccionar{
+        font-size: 0.50rem;
+    }
+    .terminos-definicion{
+        font-size: 0.50rem;
+
+    }

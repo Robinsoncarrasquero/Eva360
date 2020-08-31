@@ -6,13 +6,12 @@
 
 <div class="container">
 
-    <div class="col-sm-8 text text-center">
-        <h1 class="display-5">Editar Usuario</h1>
-    </div>
     <div id="flash-message">
             @include('flash-message')
     </div>
-
+    <div class="col-sm-8 text text-center">
+        <h2 >Editar Usuario</h2>
+    </div>
 
     <form action="{{route('user.update',$user)  }}" method="post">
 
@@ -64,7 +63,7 @@
         <div class="clearfix">
             <div class="col-6">
                 <a href="{{route('user.index')}}" class="btn btn-dark float-left">Back</a>
-                <button type="submit" class="btn btn-primary float-right">Save</button>
+                <button type="submit" class="btn btn-dark float-right">Save</button>
 
             </div>
         </div>

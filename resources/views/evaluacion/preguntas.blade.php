@@ -7,36 +7,21 @@
 <div class="container">
 
     <div class="panel panel pb-3">
-        <h2 class="text text-md-centter">{{ $competencia->name}}</h2>
-        <h2 class="text text-md-center">{{ $competencia->description}}</h2>
+        <h2 class="text text-centter">{{ $competencia->name}}</h2>
+        <h2 class="text text-center">{{ $competencia->description}}</h2>
     </div>
     <div class="panel panel pb-3">
-        <h2 class="text text-md-centter">{{ $evaluador->name}}</h2>
-        <h2 class="text text-md-center">{{ $evaluado->name}}</h2>
+        <h2 class="text text-center">{{ $evaluado->name}}</h2>
+    </div>
+    <div id="flash-message">
+        @include('flash-message')
     </div>
 
-    @if ($errors->any())
-
-        <div class="alert alert-danger">
-            <p>Errores encontrados:</p>
-
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li> {{ $error }} </li>
-                @endforeach
-
-            </ul>
-
-        </div>
-
-    @endif
     @if ($grados->isNotEmpty())
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <form action="{{ route('evaluacion.responder',$evaluacion) }}" method="POST" id="form-select">
-                {{-- {{ method_field('PUT') }} --}}
-                {{ csrf_field() }}
-
-            <table class="table ">
+            @csrf
+            <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -46,32 +31,26 @@
                     <th scope="col">Seleccionar</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="tbody-preguntas" >
                 @foreach ($grados as $grado)
                 <tr data-id="{{" $grado->id "}}">
-                    <th scope="row">{{ $grado->id }}</th>
+                    <td scope="row">{{ $grado->id }}</td>
                     <td>{{$grado->grado}}</td>
                     <td>{{$grado->description}}</td>
                     <td>
-
-                           <div class="form-check">
-                                <input type="checkbox" class="check-select" id="{{"$grado->id"}}"
-                                value="{{"$grado->id"}}" name="gradoscheck[]"
-                                @if ($evaluacion==$grado->grado) selected  @endif >
-                                <label class="form-check-label" for="{{"$grado->id"}}">Evaluar</label>
-                            </div>
-
-
+                        <div class="form-check">
+                            <input type="checkbox" class="check-select" id="{{"$grado->id"}}"
+                            value="{{"$grado->id"}}" name="gradoscheck[]"
+                            @if ($evaluacion==$grado->grado) selected  @endif >
+                            <label class="form-check-label" for="{{"$grado->id"}}">Evaluar</label>
+                        </div>
                     </td>
                     <td>
                         <div class="form-check">
                             <a href="#"><span><i class="material-icons check-select">add-box</i></span></a>
                         </div>
-
                     </td>
-
-
-                </tr>
+               </tr>
 
                 @endforeach
 
@@ -82,15 +61,14 @@
                 <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Next</button>
 
             </div>
-
-        </form>
+            </form>
 
         </div>
-
-
-
     @else
-        <p>No hay usuarios registrados</p>
+        <div class="alert alert-info">
+            <p>No hay preguntas registradas</p>
+        </div>
+
     @endif
     <div class="clearfix">
 

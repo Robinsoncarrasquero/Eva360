@@ -1,11 +1,11 @@
 {
-	"Evaluado":"Pedro Perez",
+	"Evaluado":"Marcos Mora",
 	"Evaluadores":
 	[
-		{"name":"Juan  Martinez","relation":"Boss","email":"jm@eva360.com"},
+		{"name":"Luis  Martinez","relation":"Boss","email":"lm@eva360.com"},
 		{"name":"Maria Rodriguez","relation":"Supervisor","email":"mr@eva360.com"},
-		{"name":"Jonh Doe","relation":"Parner","email":"jd@eva360.com"},
-		{"name":"Frank Aguilar","relation":"Parner","email":"faguilar@eva360.com"}
+		{"name":"Jonh Doe","relation":"Par","email":"jd@eva360.com"},
+		{"name":"Frank Aguilar","relation":"Par","email":"faguilar@eva360.com"}
 	]
 }
 

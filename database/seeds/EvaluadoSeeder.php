@@ -28,6 +28,7 @@ class EvaluadoSeeder extends Seeder
         //Creamos un evaluado
         $evaluado = factory(App\Evaluado::class)->create([
             'name' => 'Robinson Carrasquero',
+            'cargo'=>'Developer',
         ]);
 
         //Cargamos los evaluadores a este evaluado

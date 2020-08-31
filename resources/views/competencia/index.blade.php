@@ -7,15 +7,16 @@
 
 <div class="container">
 
-    <div class="col-sm-12">
 
-        <h2 class="display-5">Lista de Competencias</h2>
         <div id="flash-message">
             @include('flash-message')
 
         </div>
+        <div class="mt-1 text-center">
+            <h3>Lista de Competencias</h3>
+        </div>
         <div class="text text-sm-right">
-            <a style="margin: 19px;" href="{{ route('competencia.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
+            <a  href="{{ route('competencia.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>
 
         <table class="table table-light table-striped ">
@@ -23,7 +24,7 @@
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>Nivel Requerido</th>
+                <th>Margen</th>
                 <th>Tipo</th>
                 <th></th>
                 <th></th>
@@ -43,19 +44,15 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
                         </form>
-
                     </td>
                 </tr>
                 @endforeach
-
                 </tbody>
         </table>
         <div class=" d-flex justify-content-center">
             {{ $competencias->links() }}
 
         </div>
-    </div>
-
 </div>
 
 @endsection

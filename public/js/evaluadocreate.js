@@ -13,6 +13,13 @@ $(document).ready(function () {
     })
 
     $(".btnponer").on('click',function (e) {
+        e.preventDefault();
+        var nFilas = $("#table-evaluado tr").length -1 ;
+
+        var td0 =$("<td/>",{
+            class:"form-control",
+        });
+        td0.append('*');
 
         var input1 =$("<input/>",{
             type: "text",
@@ -35,7 +42,7 @@ $(document).ready(function () {
         var input3=$("<input/>",{
             type: "email",
             name: "email[]",
-            value:'boss@example.com',
+            value:'email@example.com',
             maxlength:100,
             placeholder: "Ingrese un email valido"
         });
@@ -56,12 +63,13 @@ $(document).ready(function () {
         var tr=$('<tr/>',{
         });
 
+        tr.append(td0);
         tr.append(td1);
         tr.append(td2);
         tr.append(td3);
         tr.append(td4);
 
-        $('#tableevaluado tbody').append(tr);
+        $('#table-evaluado tbody').append(tr);
 
     })
 

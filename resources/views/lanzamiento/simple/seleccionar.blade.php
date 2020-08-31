@@ -67,7 +67,7 @@
                             <thead>
                                 <th colspan="4" scope="col">Competencias Seleccionadas</th>
                             </thead>
-                            <tbody class="modelocompetenciasseleccionadas">
+                            <tbody class="tbody-modelo-seleccionado">
 
                             </tbody>
                         </table>

@@ -1,10 +1,12 @@
 {
-	"Evaluado":"Pedro Perez",
-	"Cargo":"Cajero",
+	"Evaluado":"Hector Hernadez",
+	"Cargo":"Analista de Credito",
 	"Evaluadores":
 	[
-		{"name":"Juan  Martinez","relation":"Boss","email":"jm@example.com"},
-		{"name":"Maria Rodriguez","relation":"Super","email":"mm@example.com"}
+		{"name":"Jonh  Mora","relation":"Super","email":"jm@example.com"},
+		{"name":"Mary Rodriguez","relation":"Super","email":"mr@example.com"},
+		{"name":"Jane Doe","relation":"Partner","email":"jdoe@example.com"},
+		{"name":"Caty Perry","relation":"Partner","email":"cperry@example.com"},
+		{"name":"Dylan Person","relation":"Subdnado","email":"dperson@example.com"}
 	]
 }
-

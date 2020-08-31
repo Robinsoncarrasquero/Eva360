@@ -6,18 +6,21 @@
 
 <div class="container">
 
-    <div class="card text-center mb-5">
+    <div class="card mb-2 vision360">
 
-        <div class="card-header titulo360">
+        <div class="card-header text-center titulo360">
             SISTEMA DE VISION 360&#176;<span><i class="material-icons">360</i></span></i>
         </div>
-        <div class="card-body">
-             <h5 class="card-title">GESTION POR COMPETENCIAS VISION 360&#176; </h5>
+        <div class="card-body ">
+            <h5 class="card-title text-center">GESTION POR COMPETENCIAS VISION 360&#176; </h5>
             <p class="card-text">Significa tomar en cuenta que los conocimientos, habilidades, experiencias y cualidades personales influyen en el rendimiento de las personas y aplicar esto, de manera sistemática y sistémica para conseguir los mejores resultados de la empresa y la mayor orientación profesional al empleado.</p>
             <p class="card-text">Una competencia es la capacidad desarrollada, demostrada y utilizada con el verdadero grado de dominio y responsabilidad para realizar las tareas o actividades requeridas para desempeñar un puesto de trabajo eficazmente.
                 Para valorar el desempeño por competencias, la organización define cuales son las competencias relacionadas con los puestos de trabajo. Estas son fijadas por área o nivel de posición (Unidades de negocio) y técnicas o ocupacionales.
             </p>
-            <a href="{{ route('lanzar.index') }}" class="btn btn-dark">  Vamos a Lanzar una evaluacion </a>
+            <div class="text-center">
+                <a  href="{{ route('lanzar.index') }}" class="btn btn-dark">  Vamos a Lanzar una evaluacion </a>
+
+            </div>
 
         </div>
 

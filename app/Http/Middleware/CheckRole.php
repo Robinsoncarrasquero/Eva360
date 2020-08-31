@@ -17,8 +17,7 @@ class CheckRole
     public function handle($request, Closure $next,$role)
     {
 
-
-        return $next($request);
+        // return $next($request);
 
         if (!Auth::check()) // I included this check because you have it, but it really should be part of your 'auth' middleware, most likely added as part of a route group.
         return redirect('login');
@@ -27,7 +26,6 @@ class CheckRole
         if (! $request->user()->hasRole($role)) {
             return redirect('login');
         }
-
 
         return $next($request);
     }

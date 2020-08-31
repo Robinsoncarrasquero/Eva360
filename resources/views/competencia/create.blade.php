@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Creacion de Competencias")
+@section('title',"Creacion de Competencia")
 
 @section('content')
 
@@ -9,23 +9,24 @@
 
     <div class="panel panel-default">
 
-        <h3>Nueva Competencia</h3>
-
         <div id="flash-message">
             @include('flash-message')
         </div>
 
+        <div class="mt-1 text-center">
+            <h3>Nueva Competencia</h3>
+        </div>
 
         <form action="{{ route('competencia.store') }}" method="POST">
             @csrf
             <div class="row">
 
-                <div class="col-sm-5">
+                <div class="col-sm-12">
                     <label for="name">Competencia</label>
                     <input type="text" id="name" placeholder="Competencia" class="form-control"  name="name" value="{{old('name')  }}" autofocus>
                 </div>
 
-                <div class="col-sm-7">
+                <div class="col-sm-12">
                     <label for="description">Descripcion</label>
                     <textarea placeholder="Descripcion de la competencia" type="text" id="description" class="form-control" rows="4"
                         maxlength="1000" name="description">{{ old('description') }}</textarea>
@@ -73,13 +74,13 @@
                                     @foreach ($filegrado['Grados'] as $key=>$value)
                                     <tr>
                                         <td>
-                                            <input type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">
+                                            <input  type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">
                                         </td>
                                         <td>
-                                            <textarea cols="50" rows="3" name="gradoDescription[]">{{ old('gradoDescription.'.$key, $value->description)}}</textarea>
+                                            <textarea  cols="50" rows="3" name="gradoDescription[]">{{ old('gradoDescription.'.$key, $value->description)}}</textarea>
                                         </td>
                                         <td>
-                                            <input type="text" name="gradoPonderacion[]" value="{{ old('gradoPonderacion.'.$key, $value->ponderacion)}}">
+                                            <input  type="text" name="gradoPonderacion[]" value="{{ old('gradoPonderacion.'.$key, $value->ponderacion)}}">
                                         </td>
                                         <td>
                                             <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>

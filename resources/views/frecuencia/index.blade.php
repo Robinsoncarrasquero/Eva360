@@ -15,7 +15,7 @@
 
         </div>
         <div class="text text-sm-right">
-            <a style="margin: 19px;" href="{{ route('frecuencia.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
+            <a  href="{{ route('frecuencia.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>
 
         <table class="table table-light table-striped ">

@@ -15,11 +15,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $users= User::simplePaginate(4);
        // $users->withPath('list');
+       $buscarWordKey = $request->get('buscarWordKey');
+       $users = User::name($buscarWordKey)->orderBy('name','ASC')->paginate(5);
 
         return \view('user.index',compact('users'));
 

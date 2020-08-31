@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Lanzamiento de Prueba")
+@section('title',"Panel de control")
 
 @section('content')
 
@@ -18,8 +18,8 @@
             <div class="panel panel pb-1">
                 <div class="clearfix">
 
-                    <div class="text text-center col-sm-12">
-                        <h4>Listado de evaluados</h4>
+                    <div class="text text-center titulo">
+                        <h4>Panel de evaluados</h4>
                     </div>
 
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
@@ -31,7 +31,6 @@
             </div>
 
             <div class=" float-right">
-                <strong class="text text-bold">New Evaluado</strong>
                 <a  href="{{ route('json.fileindex')}}" class="btn btn-dark"><i class="material-icons">attachment person_add</library-add></i> </a>
                 <a  href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
             </div>
@@ -133,8 +132,8 @@
 
             @else
 
-            <div class="alert alert-info">
-                <p>No hay usuarios registrados para lanzar una evaluacion</p>
+            <div class="d-flex alert alert-info">
+                <p> hay usuarios registrados para lanzar una evaluacion</p>
             <div>
 
             @endif

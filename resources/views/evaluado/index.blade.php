@@ -9,13 +9,13 @@
 
     <div class="col-sm-12">
 
-        <h2 class="display-5">Lista de Evaluados</h2>
+        <h2>Lista de Evaluados</h2>
         <div id="flash-message">
             @include('flash-message')
 
         </div>
         <div class="text text-sm-right">
-            <a style="margin: 19px;" href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">library_add</i> </a>
+            <a  href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">library_add</i> </a>
         </div>
         @if ($evaluados->count())
 
