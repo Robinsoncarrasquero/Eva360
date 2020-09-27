@@ -37,6 +37,4 @@ class Evaluacion extends Model
 
     }
 
-
-
 }

@@ -52,8 +52,10 @@
         "files" :[
             "app/Helpers/Helper.php",
             "app/CustomClass/LanzarEvaluacion.php",
-            "app/CustomClass/DataResultado.php"
-		]
+            "app/CustomClass/DataResultado.php",
+            "app/CustomClass/DataPersonal.php",
+	        "app/CustomClass/DataEvaluacion.php"
+	]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

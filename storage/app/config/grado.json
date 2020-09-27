@@ -5,7 +5,6 @@
 		{"grado":"A","description":"Apoya e instrumenta las decisiones organizacionales comprometidas con el logro de los objetivos del negocio y la búsqueda constante del mejoramiento de la calidad y la eficiencia.","ponderacion":100},
 		{"grado":"B","description":"Cumple con los compromisos asumidos.","ponderacion":75},
 		{"grado":"C","description":"Se mantiene motivado y motiva a sus compañeros, para guiar su accionar según los objetivos pautados.","ponderacion":50},
-		{"grado":"D","description":"Comprende y se compromete con los objetivos que se le pautan, y trabaja para el logro de los mismos.","ponderacion":25},
-		{"grado":"E","description":"Tiene dificultades para lograr los objetivos que se le plantean.","ponderacion":0}
+		{"grado":"D","description":"Comprende y se compromete con los objetivos que se le pautan, y trabaja para el logro de los mismos.","ponderacion":25}
 	]
 }

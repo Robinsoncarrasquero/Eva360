@@ -240,10 +240,20 @@ Route::get('resultados/{evaluado_id}/finales',"ResultadosController@resumidos")
 ->name('resultados.finales')
 ->middleware(['auth','role:admin']);
 
-
+/**
+ * Presenta una grafica con resultados 360
+ */
 Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
 ->name('resultados.graficas')
 ->middleware(['auth','role:admin']);
+
+/**
+ * Presenta una grafica con resultados individuales por grupo
+ */
+Route::get('resultados/{evaluado_id}/graficaindividual',"ResultadosController@graficaIndividual")
+->name('resultados.graficaindividual')
+->middleware(['auth','role:admin']);
+
 
 /**
  * Route upload file json

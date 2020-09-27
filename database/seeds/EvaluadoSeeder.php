@@ -26,18 +26,43 @@ class EvaluadoSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
         //Creamos un evaluado
-        $evaluado = factory(App\Evaluado::class)->create([
-            'name' => 'Robinson Carrasquero',
-            'cargo'=>'Developer',
+        $evaluado1 = factory(App\Evaluado::class)->create([
+            'name' => 'Mary Doral',
+            'cargo'=>'Gerente',
+            'status'=>2,
+            'subproyectos_id'=>1,
         ]);
 
         //Cargamos los evaluadores a este evaluado
-        $evaluado->evaluadores()->createMany(
+        $evaluado1->evaluadores()->createMany(
             factory(Evaluador::class, 2)->make()->toArray()
         );
 
+        //Creamos un evaluado
+        $evaluado2 = factory(App\Evaluado::class)->create([
+            'name' => 'Jonhy Daza',
+            'cargo'=>'Analista',
+            'status'=>2,
+            'subproyectos_id'=>2,
+        ]);
 
+        //Cargamos los evaluadores a este evaluado
+        $evaluado2->evaluadores()->createMany(
+            factory(Evaluador::class, 2)->make()->toArray()
+        );
 
+        //Creamos un evaluado
+        $evaluado3 = factory(App\Evaluado::class)->create([
+            'name' => 'Marlon Brandon',
+            'cargo'=>'Analista',
+            'status'=>2,
+            'subproyectos_id'=>2,
+        ]);
+
+        //Cargamos los evaluadores a este evaluado
+        $evaluado3->evaluadores()->createMany(
+            factory(Evaluador::class, 2)->make()->toArray()
+        );
 
     }
 }

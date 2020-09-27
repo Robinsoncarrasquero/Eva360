@@ -20,6 +20,7 @@ class CreateEvaluadosTable extends Migration
             $table->string('word_key',20)->nullable();
             $table->boolean('status')->default(0);
             $table->string('filename')->nullable();
+            $table->foreignId('subproyectos_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

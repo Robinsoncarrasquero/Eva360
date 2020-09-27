@@ -10,6 +10,5 @@ $factory->define(Evaluado::class, function (Faker $faker) {
         'name'=>$faker->name(),
         'word_key'=>'12345',
         'status' => 0,
-
     ];
 });

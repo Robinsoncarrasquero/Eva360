@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use app\CustomClass\DataEvaluacion;
+use app\CustomClass\DataPersonal;
 use app\CustomClass\DataResultado;
 use Illuminate\Http\Request;
 use App\Evaluacion;
@@ -35,8 +37,8 @@ class ResultadosController extends Controller
         //Obtenemos los evaluadores del evaluador
         $evaluado = Evaluado::find($evaluado_id);
 
-        $objData = new DataResultado($evaluado_id);
-        $competencias = $objData->dataCompetencias();
+        $objDataEvaluacion = new DataEvaluacion($evaluado_id);
+        $competencias = $objDataEvaluacion->getDataEvaluacion();
 
         return \view('resultados.finales',compact("evaluado","competencias","title"));
 
@@ -50,14 +52,31 @@ class ResultadosController extends Controller
         //Buscamos el evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
-        //instaciamos un objeto de data resultados
-        $objData = new DataResultado($evaluado_id);
-        $objData->crearGrafica();
+        //instanciamos un objeto de data resultados
+        $objData = new DataResultado($evaluado_id,new DataEvaluacion(0));
+        $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
-        $competencias = $objData->dataCompetencias();
         $title="Finales";
-        return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado","competencias"));
+        return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado"));
+    }
+
+    /**
+     * Presenta la grafica individual por grupo de estudio
+     */
+    public function graficaIndividual($subproyecto_id)
+    {
+        //Buscamos el evaluado
+        $grupoevaluados = Evaluado::where('subproyectos_id',$subproyecto_id);
+        $loteEvaluados=$grupoevaluados->pluck('id');
+
+        //instanciamos un objeto de data personal
+        $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
+        $objData->procesarData();
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
+        $title="Resultados Individuales";
+        return \view('resultados.chartindividual',compact("dataSerie","dataCategoria","title"));
     }
 
 }
