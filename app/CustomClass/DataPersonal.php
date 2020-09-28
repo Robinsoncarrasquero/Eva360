@@ -9,31 +9,62 @@ class DataPersonal{
     private $dataCategoria;
     private $evaluados;
     private $objDataEvaluacion;
+    private $dataMeta;
+    private $dataBrecha;
 
     function __construct($evaluados,$dataEvaluacion) {
         $this->evaluados = $evaluados;
         $this->objDataEvaluacion=$dataEvaluacion;
     }
-    
+
     /**
      * Procesa los resultados individuales de forma masiva
      */
     public function procesarData()
     {
-        
         foreach ($this->evaluados as $evaluado) {
             $this->evaluado_id=$evaluado;
             $data[]=$this->crearData();
         }
-        
+
+        //Creamos un array con las competencias metas y su margen
+        $arrayCategoria[]='Modelo';
+        $dataMeta= $this->getDataMeta();
+        foreach ($dataMeta as $item) {
+            $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
+        }
+
+        $arraydataBrecha=[];
         foreach ($data as $key => $value) {
             $arrayCategoria[]=$value['categoria'];
-            
+
+            /**
+             * Creamos arreglos de control dinamico para manejar la data de opotunidad
+             * y calcular el promedio de resultado
+             *
+            */
+            $arraydataOportunidad=[];
+            $arrayCumplimiento=[];
+
             //Creamos una array con la data de las competencias
             foreach ($value['data'] as $item) {
-                $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
+                $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['eva360']];
+                $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
+                /**
+                 * Cuando el resultado es menos que nivel requerido se genera una oportunidad de mejora
+                 */
+                if ($item['eva360']<$item['nivel']){
+                    $arraydataOportunidad[]=['competencia'=> $item['name']];
+                }
             }
+            $cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
+            $brecha= 100 - $cumplimiento;
+
+            $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad];
+
         }
+
+
         $datacollection=collect($arrayCompetencias);
         $agrouped = $datacollection->mapToGroups(function ($item, $key) {
             return [$item['name']=>$item['data']];
@@ -41,10 +72,9 @@ class DataPersonal{
         foreach ($agrouped as $key => $datavalue) {
             $arraydataSerie[]=['name'=>$key,'data'=>$datavalue];
         }
-        
+        $this->dataBrecha=$arraydataBrecha;
         $this->dataCategoria=$arrayCategoria;;
         $this->dataSerie=$arraydataSerie;
-
     }
 
     /**
@@ -67,8 +97,10 @@ class DataPersonal{
             foreach ($value['data'] as $item) {
                 $arrayEvaluador[] =['name'=> $item['name'],'average'=>$item['average']];
             }
-            //Creamos los datos para la serie en datos individuales
-            $arrayDataSerie[] =['name'=> $value['competencia'],'data'=>$value['eva360']];
+            //Creamos los datos de las competencias con resultado para la serie individual
+            $arrayDataSerie[] =['name'=> $value['competencia'],'eva360'=>$value['eva360'],'nivel'=>$value['nivelRequerido']];
+            //Creamos los datos de las competencias con su margen para la serie meta
+            $arrayDataMeta[] =['name'=> $value['competencia'],'data'=>$value['nivelRequerido']];
 
         }
 
@@ -77,12 +109,13 @@ class DataPersonal{
         $evagrouped = $datacollection->mapToGroups(function ($item, $key) {
             return [$item['name']=>$item['average']];
         });
-        
+
         //Buscamos el evaluado
         $evaluado = Evaluado::find($this->evaluado_id);
 
-        $this->dataCategoria=$evaluado->name;
+        $this->dataMeta=$arrayDataMeta;
         $this->dataSerie=$arrayDataSerie;
+        $this->dataCategoria=$evaluado->name;
         return ['categoria'=>$evaluado->name,'data'=>$arrayDataSerie];
     }
 
@@ -95,5 +128,16 @@ class DataPersonal{
     public function getDataCategoria(){
         return $this->dataCategoria;
     }
+
+    /**Data Meta */
+    public function getDataMeta(){
+        return $this->dataMeta;
+    }
+
+   /**Data Brecha */
+   public function getDataBrecha(){
+    return $this->dataBrecha;
+   }
+
 
 }

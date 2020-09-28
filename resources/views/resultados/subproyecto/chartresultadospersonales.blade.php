@@ -38,94 +38,95 @@
     </div>
 </div>
 
+<div class="container2">
+
+    <div class="panel panel-default">
+
+        <div class="col-sm-12">
+
+
+            <div class="panel panel pb-3">
+
+                <div class="clearfix">
+                    <div class=" text-center titulo">
+                        <h5>Resultados de Competencias Personales</span></h5>
+                    </div>
+
+                </div>
+
+            </div>
+
+            @if($subProyecto)
+
+                <div class="row ">
+
+                        <div class="table col-12">
+                            <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                                <thead class="table-thead">
+                                    <tr>
+                                        <th>
+                                            Competencias/Participantes
+                                        </th>
+                                       @foreach ($dataCategoria as $key=>$value)
+                                        <th>
+                                            {{$value}}</strong>
+                                        </th>
+                                        @endforeach
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @foreach ($dataSerie as $key=>$dataValue)
+                                    <tr>
+                                        <td>{{$dataValue['name']}}</td>
+                                        {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
+                                        @foreach ($dataValue['data'] as $vdata)
+                                        <td>{{ $vdata}}</td>
+                                        @endforeach
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                </div>
+
+            @endif
+
+            {{-- {{ $competencias->links() }} --}}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
 <script src="{{ asset('js/hchar/highcharts.js') }}"></script>
 <script src="{{ asset('js/hchar/modules/series-label.js')}}"></script>
 <script src="{{ asset('js/hchar/modules/exporting.js') }}"></script>
 <script src="{{ asset('js/hchar/modules/export-data.js')}}"></script>
 <script src="{{ asset('js/hchar/modules/accessibility.js')}}"></script>
-
-
-{{-- <script type="text/javascript">
-
+<script type="text/javascript">
     var dataSerie =  @json($dataSerie);
     var categorias =  @json($dataCategoria);
-    var evaluado =  @json($evaluado->name);
-
-    
-    alert(dataSerie);
-    categorias.forEach(logArrayElements);
-
-    function logArrayElements(element, index, array) {
-        console.log("a[" + index + "] = " + element);
-    }
-
-    ['data1'].forEach(mychar);
-
-    function mychar(element,index,array)
-    {
-        // Highcharts.chart('container'+index, {
-    Highcharts.chart('container', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: "Resultado de Competencias Personales "
-            },
-            subtitle: {
-                text: 'Source code: https://github.com/Robinsoncarrasquero'
-
-            },
-            xAxis: {
-                categories: categorias,
-                crosshair: true
-            },
-            yAxis: {
-                min:0,
-                title: {
-                    text: 'Nivel de Dominio'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-
-            series: dataSerie
-
-    });
-
-}
-
-</script> --}}
-
-<script>
-    var dataSerie =  @json($dataSerie);
-    var categorias =  @json($dataCategoria);
-    
+    var subProyectoName = @json($subProyecto->name);
     Highcharts.chart('container', {
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Resultados Inviduales Por Grupo'
+            text: 'Resultados de Competencias Personales'
         },
         subtitle: {
-            text: 'Compare valores entre personas y competencias.'
+            text:  subProyectoName
 
         },
         xAxis: {
             categories:categorias,
-            
+
             crosshair: true
         },
         yAxis: {

@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Evaluacion;
+use Illuminate\Support\Arr;
 
 class EvaluacionSeeder extends Seeder
 {
@@ -40,37 +41,37 @@ class EvaluacionSeeder extends Seeder
         $eva1 = factory(Evaluacion::class)->create([
             'competencia_id' => 1,
             'evaluador_id'=>$evaluador,
-            'grado'=>'A',
-            'ponderacion'=>100,
-            'frecuencia'=>100,
-            'resultado'=>100,
+            'grado'=>Arr::random(['A','B','C','D']),
+            'ponderacion'=>Arr::random([100,75,50,25]),
+            'frecuencia'=>Arr::random([100,75,50,25]),
+            'resultado'=>Arr::random([100,75,50,25]),
         ]);
 
         $eva2 = factory(Evaluacion::class)->create([
             'competencia_id' => 2,
             'evaluador_id'=>$evaluador,
-            'grado'=>'B',
-            'ponderacion'=>75,
-            'frecuencia'=>100,
-            'resultado'=>75,
+            'grado'=>Arr::random(['A','B','C','D']),
+            'ponderacion'=>Arr::random([100,75,50,25]),
+            'frecuencia'=>Arr::random([100,75,50,25]),
+            'resultado'=>Arr::random([100,75,50,25]),
         ]);
 
         $eva3 = factory(Evaluacion::class)->create([
             'competencia_id' => 4,
             'evaluador_id'=>$evaluador,
-            'grado'=>'B',
-            'ponderacion'=>75,
-            'frecuencia'=>100,
-            'resultado'=>75,
+            'grado'=>Arr::random(['A','B','C','D']),
+            'ponderacion'=>Arr::random([100,75,50,25]),
+            'frecuencia'=>Arr::random([100,75,50,25]),
+            'resultado'=>Arr::random([100,75,50,25]),
         ]);
 
         $eva4 = factory(Evaluacion::class)->create([
             'competencia_id' => 5,
             'evaluador_id'=>$evaluador,
-            'grado'=>'A',
-            'ponderacion'=>100,
-            'frecuencia'=>50,
-            'resultado'=>50,
+            'grado'=>Arr::random(['A','B','C','D']),
+            'ponderacion'=>Arr::random([100,75,50,25]),
+            'frecuencia'=>Arr::random([100,75,50,25]),
+            'resultado'=>Arr::random([100,75,50,25]),
         ]);
     }
 
@@ -80,37 +81,37 @@ class EvaluacionSeeder extends Seeder
         $eva1 = factory(Evaluacion::class)->create([
             'competencia_id' => 1,
             'evaluador_id'=>$evaluador,
-            'grado'=>'A',
-            'ponderacion'=>100,
-            'frecuencia'=>100,
-            'resultado'=>100,
+            'grado'=>Arr::random(['A','B','C','D']),
+            'ponderacion'=>Arr::random([100,75,50,25]),
+            'frecuencia'=>Arr::random([100,75,50,25]),
+            'resultado'=>Arr::random([100,75,50,25]),
         ]);
 
         $eva2 = factory(Evaluacion::class)->create([
             'competencia_id' => 2,
             'evaluador_id'=>$evaluador,
-            'grado'=>'B',
-            'ponderacion'=>75,
-            'frecuencia'=>100,
-            'resultado'=>75,
+            'grado'=>Arr::random(['A','B','C','D']),
+            'ponderacion'=>Arr::random([100,75,50,25]),
+            'frecuencia'=>Arr::random([100,75,50,25]),
+            'resultado'=>Arr::random([100,75,50,25]),
         ]);
 
         $eva3 = factory(Evaluacion::class)->create([
             'competencia_id' => 3,
             'evaluador_id'=>$evaluador,
-            'grado'=>'B',
-            'ponderacion'=>75,
-            'frecuencia'=>100,
-            'resultado'=>75,
+            'grado'=>Arr::random(['A','B','C','D']),
+            'ponderacion'=>Arr::random([100,75,50,25]),
+            'frecuencia'=>Arr::random([100,75,50,25]),
+            'resultado'=>Arr::random([100,75,50,25]),
         ]);
 
         $eva4 = factory(Evaluacion::class)->create([
             'competencia_id' => 4,
             'evaluador_id'=>$evaluador,
-            'grado'=>'A',
-            'ponderacion'=>100,
-            'frecuencia'=>50,
-            'resultado'=>50,
+            'grado'=>Arr::random(['A','B','C','D']),
+            'ponderacion'=>Arr::random([100,75,50,25]),
+            'frecuencia'=>Arr::random([100,75,50,25]),
+            'resultado'=>Arr::random([100,75,50,25]),
         ]);
     }
 }

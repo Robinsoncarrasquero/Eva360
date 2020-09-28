@@ -248,12 +248,26 @@ Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
 ->middleware(['auth','role:admin']);
 
 /**
- * Presenta una grafica con resultados individuales por grupo
+ * Presenta una grafica de resultados personales por subproyecto
  */
-Route::get('resultados/{evaluado_id}/graficaindividual',"ResultadosController@graficaIndividual")
-->name('resultados.graficaindividual')
+Route::get('resultados/{evaluado_id}/graficaresultadospersonales',"ResultadosController@graficaPersonales")
+->name('resultados.graficaPersonales')
 ->middleware(['auth','role:admin']);
 
+/**
+ * Presenta una tabla de resultados personales tabulados por subproyecto
+ */
+Route::get('resultados/{evaluado_id}/resultadospersonalestable',"ResultadosController@resultadosPersonalesTable")
+->name('resultados.resultadospersonalestabulados')
+->middleware(['auth','role:admin']);
+
+
+/**
+ * Presenta una tabla de analisis personales tabulados por subproyecto
+ */
+Route::get('resultados/{evaluado_id}/analisispersonalestable',"ResultadosController@analisisPersonalesTable")
+->name('resultados.analisispersonalestabulados')
+->middleware(['auth','role:admin']);
 
 /**
  * Route upload file json

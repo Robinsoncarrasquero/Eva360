@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Evaluacion;
 use App\Evaluado;
 use App\Evaluador;
+use App\SubProyecto;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
@@ -62,11 +63,12 @@ class ResultadosController extends Controller
     }
 
     /**
-     * Presenta la grafica individual por grupo de estudio
+     * Presenta la grafica de resultados personales por subproyecto
      */
-    public function graficaIndividual($subproyecto_id)
+    public function graficaPersonales($subproyecto_id)
     {
-        //Buscamos el evaluado
+        $subProyecto = SubProyecto::find($subproyecto_id);
+        //Buscamos el grupo de evaluados relacionados al subproyecto
         $grupoevaluados = Evaluado::where('subproyectos_id',$subproyecto_id);
         $loteEvaluados=$grupoevaluados->pluck('id');
 
@@ -76,7 +78,46 @@ class ResultadosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $title="Resultados Individuales";
-        return \view('resultados.chartindividual',compact("dataSerie","dataCategoria","title"));
+        return \view('resultados.subproyecto.chartresultadospersonales',compact("dataSerie","dataCategoria","title","subProyecto"));
     }
+
+    /**
+     * Presenta informacion tabulada de Resultados personales por subproyecto
+     */
+    public function resultadosPersonalesTable($subproyecto_id)
+    {
+        $subProyecto = SubProyecto::find($subproyecto_id);
+        //Buscamos el grupo de evaluados relacionados al subproyecto
+        $grupoevaluados = Evaluado::where('subproyectos_id',$subproyecto_id);
+        $loteEvaluados=$grupoevaluados->pluck('id');
+
+        //instanciamos un objeto de data personal
+        $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
+        $objData->procesarData();
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
+        $title="Resultados Personales Tabulados";
+        return \view('resultados.subproyecto.tableresultadospersonales',compact("dataSerie","dataCategoria","title","subProyecto"));
+    }
+
+    /**
+     * Presenta informacion tabuladada de analisis personal por subproyecto
+     */
+    public function analisisPersonalesTable($subproyecto_id)
+    {
+        $subProyecto = SubProyecto::find($subproyecto_id);
+        //Buscamos el grupo de evaluados relacionados al subproyecto
+        $grupoevaluados = Evaluado::where('subproyectos_id',$subproyecto_id);
+        $loteEvaluados=$grupoevaluados->pluck('id');
+
+        //instanciamos un objeto de data personal
+        $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
+        $objData->procesarData();
+        $dataBrecha = $objData->getDataBrecha();
+        //dd($dataBrecha);
+        $title="Analisis de Resultados Personales";
+        return \view('resultados.subproyecto.tableanalisispersonales',compact("dataBrecha","title","subProyecto"));
+    }
+
 
 }
