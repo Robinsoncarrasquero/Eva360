@@ -54,7 +54,10 @@
             "app/CustomClass/LanzarEvaluacion.php",
             "app/CustomClass/DataResultado.php",
             "app/CustomClass/DataPersonal.php",
-	        "app/CustomClass/DataEvaluacion.php"
+	        "app/CustomClass/DataEvaluacion.php",
+            "app/CustomClass/DataEvaluacionGlobal.php",
+            "app/CustomClass/DataResultadoTipo.php",
+            "app/CustomClass/DataResultadoNivel.php"
 	]
     },
     "minimum-stability": "dev",

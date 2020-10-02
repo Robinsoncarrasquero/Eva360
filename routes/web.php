@@ -250,14 +250,14 @@ Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
 /**
  * Presenta una grafica de resultados personales por subproyecto
  */
-Route::get('resultados/{evaluado_id}/graficaresultadospersonales',"ResultadosController@graficaPersonales")
+Route::get('resultados/{subproyecto_id}/graficaresultadospersonales',"ResultadosController@graficaPersonales")
 ->name('resultados.graficaPersonales')
 ->middleware(['auth','role:admin']);
 
 /**
  * Presenta una tabla de resultados personales tabulados por subproyecto
  */
-Route::get('resultados/{evaluado_id}/resultadospersonalestable',"ResultadosController@resultadosPersonalesTable")
+Route::get('resultados/{subproyecto_id}/resultadospersonalestable',"ResultadosController@resultadosPersonalesTable")
 ->name('resultados.resultadospersonalestabulados')
 ->middleware(['auth','role:admin']);
 
@@ -265,9 +265,25 @@ Route::get('resultados/{evaluado_id}/resultadospersonalestable',"ResultadosContr
 /**
  * Presenta una tabla de analisis personales tabulados por subproyecto
  */
-Route::get('resultados/{evaluado_id}/analisispersonalestable',"ResultadosController@analisisPersonalesTable")
+Route::get('resultados/{subproyecto_id}/analisispersonalestable',"ResultadosController@analisisPersonalesTable")
 ->name('resultados.analisispersonalestabulados')
 ->middleware(['auth','role:admin']);
+
+
+/**
+ * Presenta la grafica de competencias por tipo
+ */
+Route::get('resultados/{proyecto_id}/resultadosgeneralestipo',"ResultadosController@resultadosGeneralesTipo")
+->name('resultados.resultadosgeneralestipo')
+->middleware(['auth','role:admin']);
+
+/**
+ * Presenta la grafica de competencias por niveles de cargos
+ */
+Route::get('resultados/{proyecto_id}/resultadosgeneralesnivel',"ResultadosController@resultadosGeneralesNivel")
+->name('resultados.resultadosgeneralesnivel')
+->middleware(['auth','role:admin']);
+
 
 /**
  * Route upload file json

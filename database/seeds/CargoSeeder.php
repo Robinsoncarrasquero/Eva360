@@ -26,22 +26,22 @@ class CargoSeeder extends Seeder
 
         $cargo=factory(Cargo::class)->create([
             'name'=>'Analista',
-            'nivel_cargos_id'=>2,
+            'nivel_cargos_id'=>3,
         ]);
 
         $cargo=factory(Cargo::class)->create([
             'name'=>'Operador',
-            'nivel_cargos_id'=>2,
+            'nivel_cargos_id'=>3,
         ]);
 
         $cargo=factory(Cargo::class)->create([
             'name'=>'Cajero',
-            'nivel_cargos_id'=>2,
+            'nivel_cargos_id'=>3,
         ]);
 
         $cargo=factory(Cargo::class)->create([
             'name'=>'Atencion al Cliente',
-            'nivel_cargos_id'=>2,
+            'nivel_cargos_id'=>3,
         ]);
 
     }

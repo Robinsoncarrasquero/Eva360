@@ -39,7 +39,7 @@ class DataPersonal{
             $arrayCategoria[]=$value['categoria'];
 
             /**
-             * Creamos arreglos de control dinamico para manejar la data de opotunidad
+             * Creamos arreglos de control dinamico para manejar la data de oportunidad
              * y calcular el promedio de resultado
              *
             */

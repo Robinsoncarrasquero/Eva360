@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use app\CustomClass\DataEvaluacion;
+use app\CustomClass\DataEvaluacionGlobal;
 use app\CustomClass\DataPersonal;
 use app\CustomClass\DataResultado;
+use app\CustomClass\DataResultadoNivel;
+use app\CustomClass\DataResultadoTipo;
 use Illuminate\Http\Request;
 use App\Evaluacion;
 use App\Evaluado;
 use App\Evaluador;
+use App\Proyecto;
 use App\SubProyecto;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -77,6 +81,7 @@ class ResultadosController extends Controller
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
+//        dd($dataCategoria,$dataSerie);
         $title="Resultados Individuales";
         return \view('resultados.subproyecto.chartresultadospersonales',compact("dataSerie","dataCategoria","title","subProyecto"));
     }
@@ -117,6 +122,45 @@ class ResultadosController extends Controller
         //dd($dataBrecha);
         $title="Analisis de Resultados Personales";
         return \view('resultados.subproyecto.tableanalisispersonales',compact("dataBrecha","title","subProyecto"));
+    }
+
+    /**
+     * Presenta grafica de columnas resultados generales por tipo de competencias agrupada por proyecto
+     */
+    public function resultadosGeneralesTipo($proyecto_id)
+    {
+        $subProyecto = Proyecto::find($proyecto_id);
+        //Buscamos el grupo de evaluados relacionados al subproyecto
+
+        //instanciamos un objeto de data por tipo
+        $objData = new DataResultadoTipo($proyecto_id,new DataEvaluacionGlobal(0));
+        $objData->procesarData();
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
+        $dataDofa = $objData->getDataFortalezaOptunidad();
+        //dd($dataFortalezaOportunidad);
+        //dd($dataSerie,$dataCategoria);
+        $title="Resultados Generales por Tipo de Competencias ";
+        return \view('resultados.subproyecto.chartresultadosgenerales_tipo',compact("dataSerie","dataCategoria","dataDofa","title","subProyecto"));
+    }
+
+     /**
+     * Presenta grafica lineal de competencias por niveles de cargos filtrada por proyecto
+     */
+    public function resultadosGeneralesNivel($proyecto_id)
+    {
+        $subProyecto = Proyecto::find($proyecto_id);
+        //Buscamos el grupo de evaluados relacionados al subproyecto
+
+        //instanciamos un objeto de data por tipo
+        $objData = new DataResultadoNivel ($proyecto_id,new DataEvaluacionGlobal(0));
+        $objData->procesarData();
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
+        $dataDofa = $objData->getDataFortalezaOptunidad();
+//        dd($dataDofa);
+        $title="Resultados Generales por Nivel de Cargo";
+        return \view('resultados.subproyecto.chartresultadosgenerales_nivel',compact("dataSerie","dataCategoria","dataDofa","title","subProyecto"));
     }
 
 

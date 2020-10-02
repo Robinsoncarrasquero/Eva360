@@ -25,11 +25,15 @@ class EvaluadoSeeder extends Seeder
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
+        //Cargos
+        $gerente=1;$coordinador=2;$nosupervisorio=3;
+
         //Creamos un evaluado
         $evaluado1 = factory(App\Evaluado::class)->create([
             'name' => 'Mary Doral',
             'cargo'=>'Gerente',
             'status'=>2,
+            'cargos_id'=>$gerente,
             'subproyectos_id'=>1,
         ]);
 
@@ -43,6 +47,7 @@ class EvaluadoSeeder extends Seeder
             'name' => 'Jonhy Daza',
             'cargo'=>'Analista',
             'status'=>2,
+            'cargos_id'=>$nosupervisorio,
             'subproyectos_id'=>2,
         ]);
 
@@ -56,6 +61,7 @@ class EvaluadoSeeder extends Seeder
             'name' => 'Marlon Brandon',
             'cargo'=>'Analista',
             'status'=>2,
+            'cargos_id'=>$nosupervisorio,
             'subproyectos_id'=>2,
         ]);
 
