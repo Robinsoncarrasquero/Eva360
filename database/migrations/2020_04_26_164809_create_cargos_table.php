@@ -17,7 +17,7 @@ class CreateCargosTable extends Migration
             $table->id();
             $table->string('name',50)->notnullable()->unique();
             $table->text('description',255)->notnullable();
-            $table->foreignId('nivel_cargos_id')->constrained()->onDelete('cascade');
+            $table->foreignId('nivel_cargo_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

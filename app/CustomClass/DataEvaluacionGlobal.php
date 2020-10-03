@@ -23,22 +23,20 @@ class DataEvaluacionGlobal{
 
         //Buscamos los evaluadores del evaluado
         $proyecto = Proyecto::find($this->proyecto_id);
-        $whereIn=$proyecto->pluck('id');
-
+        $whereIn=$proyecto->id;
         $competencias = DB::table('evaluaciones')
         ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
         ->join('tipos', 'competencias.tipo_id', '=', 'tipos.id')
         ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
         ->join('evaluados', 'evaluadores.evaluado_id', '=', 'evaluados.id')
-        ->join('subproyectos', 'evaluados.subproyectos_id', '=', 'subproyectos.id')
-        ->join('proyectos', 'subproyectos.proyectos_id', '=', 'proyectos.id')
+        ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
+        ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
         ->select('tipos.tipo','competencias.name','competencias.nivelrequerido',
         DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
         ->where('proyectos.id',$whereIn)
         ->groupBy('tipos.tipo','competencias.name','competencias.nivelrequerido')
         ->orderByRaw('tipos.tipo,competencias.name')
         ->get();
-
         //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
         $dataArray = json_decode(json_encode($competencias), true);
         $collection= collect($dataArray);
@@ -62,6 +60,7 @@ class DataEvaluacionGlobal{
             $this->join_fortaleza_oportunidad($tipo);
             $adata[]=['tipo'=>$tipo,'data'=>$record];
         }
+
         $this->dataCruda=$adata;
         return collect($adata);
     }
@@ -75,16 +74,16 @@ class DataEvaluacionGlobal{
 
         //Buscamos los evaluadores del evaluado
         $proyecto = Proyecto::find($this->proyecto_id);
-        $whereIn=$proyecto->pluck('id');
+        $whereIn=$proyecto->id;
 
         $competencias = DB::table('evaluaciones')
         ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
         ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
         ->join('evaluados', 'evaluadores.evaluado_id', '=', 'evaluados.id')
         ->join('cargos', 'evaluados.cargos_id', '=', 'cargos.id')
-        ->join('nivel_cargos', 'cargos.nivel_cargos_id', '=', 'nivel_cargos.id')
-        ->join('subproyectos', 'evaluados.subproyectos_id', '=', 'subproyectos.id')
-        ->join('proyectos', 'subproyectos.proyectos_id', '=', 'proyectos.id')
+        ->join('nivel_cargos', 'cargos.nivel_cargo_id', '=', 'nivel_cargos.id')
+        ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
+        ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
         ->select('nivel_cargos.name as nivelcargo','competencias.name','competencias.nivelrequerido',
         DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
         ->where('proyectos.id',$whereIn)

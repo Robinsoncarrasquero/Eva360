@@ -17,7 +17,6 @@ class TipoController extends Controller
     {
         $tipos=Tipo::all();
         return \view('tipo.index',compact('tipos'));
-
     }
 
     /**
@@ -102,18 +101,14 @@ class TipoController extends Controller
         );
 
         try {
-
             $tipo = Tipo::findOrFail($tipo);
             $tipo->tipo=$request->tipo;
             $tipo->save();
-
         } catch (QueryException $e) {
             return redirect()->back()
             ->withErrors('Error imposible Guardar este registro. El Tipo debe ser unico, no se permite duplicados.');
         }
-
         return \redirect('tipo')->withSuccess('Tipo de Competencia : '.$request->tipo.' Actualizado exitosamente');
-
     }
 
     /**
@@ -136,6 +131,4 @@ class TipoController extends Controller
         return redirect('tipo')->withSuccess('El tipo de Competencia ha sido eliminado con exito!!');
 
     }
-
-
 }

@@ -34,7 +34,7 @@ class EvaluadoSeeder extends Seeder
             'cargo'=>'Gerente',
             'status'=>2,
             'cargos_id'=>$gerente,
-            'subproyectos_id'=>1,
+            'subproyecto_id'=>1,
         ]);
 
         //Cargamos los evaluadores a este evaluado
@@ -48,7 +48,7 @@ class EvaluadoSeeder extends Seeder
             'cargo'=>'Analista',
             'status'=>2,
             'cargos_id'=>$nosupervisorio,
-            'subproyectos_id'=>2,
+            'subproyecto_id'=>2,
         ]);
 
         //Cargamos los evaluadores a este evaluado
@@ -62,7 +62,7 @@ class EvaluadoSeeder extends Seeder
             'cargo'=>'Analista',
             'status'=>2,
             'cargos_id'=>$nosupervisorio,
-            'subproyectos_id'=>2,
+            'subproyecto_id'=>2,
         ]);
 
         //Cargamos los evaluadores a este evaluado

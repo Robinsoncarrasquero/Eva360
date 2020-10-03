@@ -21,7 +21,7 @@ class CreateEvaluadosTable extends Migration
             $table->boolean('status')->default(0);
             $table->string('filename')->nullable();
             $table->foreignId('cargos_id')->constrained();
-            $table->foreignId('subproyectos_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subproyecto_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

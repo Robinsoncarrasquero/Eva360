@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Nivel_Cargo extends Model
+class NivelCargo extends Model
 {
-    //
     protected $table='nivel_cargos';
 
     protected $fillable=['name','description'];

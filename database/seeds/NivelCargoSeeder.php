@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-use App\Nivel_Cargo;
+use App\NivelCargo;
 
 
 class NivelCargoSeeder extends Seeder
@@ -24,15 +24,15 @@ class NivelCargoSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
         //GENERAL
-        $nivel=factory(Nivel_Cargo::class)->create([
+        $nivel=factory(NivelCargo::class)->create([
             'name'=>'Gerente',
         ]);
 
-        $nivel=factory(Nivel_Cargo::class)->create([
+        $nivel=factory(NivelCargo::class)->create([
             'name'=>'Coordinador',
         ]);
 
-        $nivel=factory(Nivel_Cargo::class)->create([
+        $nivel=factory(NivelCargo::class)->create([
             'name'=>'Personal No Supervisorio',
         ]);
 

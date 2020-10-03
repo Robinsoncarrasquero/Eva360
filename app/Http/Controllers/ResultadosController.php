@@ -73,7 +73,7 @@ class ResultadosController extends Controller
     {
         $subProyecto = SubProyecto::find($subproyecto_id);
         //Buscamos el grupo de evaluados relacionados al subproyecto
-        $grupoevaluados = Evaluado::where('subproyectos_id',$subproyecto_id);
+        $grupoevaluados = Evaluado::where('subproyecto_id',$subproyecto_id);
         $loteEvaluados=$grupoevaluados->pluck('id');
 
         //instanciamos un objeto de data personal
@@ -93,7 +93,7 @@ class ResultadosController extends Controller
     {
         $subProyecto = SubProyecto::find($subproyecto_id);
         //Buscamos el grupo de evaluados relacionados al subproyecto
-        $grupoevaluados = Evaluado::where('subproyectos_id',$subproyecto_id);
+        $grupoevaluados = Evaluado::where('subproyecto_id',$subproyecto_id);
         $loteEvaluados=$grupoevaluados->pluck('id');
 
         //instanciamos un objeto de data personal
@@ -112,7 +112,7 @@ class ResultadosController extends Controller
     {
         $subProyecto = SubProyecto::find($subproyecto_id);
         //Buscamos el grupo de evaluados relacionados al subproyecto
-        $grupoevaluados = Evaluado::where('subproyectos_id',$subproyecto_id);
+        $grupoevaluados = Evaluado::where('subproyecto_id',$subproyecto_id);
         $loteEvaluados=$grupoevaluados->pluck('id');
 
         //instanciamos un objeto de data personal
@@ -138,8 +138,9 @@ class ResultadosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
-        //dd($dataFortalezaOportunidad);
-        //dd($dataSerie,$dataCategoria);
+        if (!$dataDofa){
+            \abort(404);
+        }
         $title="Resultados Generales por Tipo de Competencias ";
         return \view('resultados.subproyecto.chartresultadosgenerales_tipo',compact("dataSerie","dataCategoria","dataDofa","title","subProyecto"));
     }
@@ -158,7 +159,9 @@ class ResultadosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
-//        dd($dataDofa);
+        if (!$dataDofa){
+            \abort(404);
+        }
         $title="Resultados Generales por Nivel de Cargo";
         return \view('resultados.subproyecto.chartresultadosgenerales_nivel',compact("dataSerie","dataCategoria","dataDofa","title","subProyecto"));
     }

@@ -17,7 +17,7 @@ class CreateSubproyectosTable extends Migration
             $table->id();
             $table->string('name',50)->notnullable()->unique();
             $table->text('description',255)->notnullable();
-            $table->foreignId('proyectos_id')->constrained()->onDelete('cascade');
+            $table->foreignId('proyecto_id')->constrained();
             $table->timestamps();
         });
     }

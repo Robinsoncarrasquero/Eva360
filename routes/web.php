@@ -25,6 +25,38 @@ Route::get('/', function () {
 
 
 /**
+* Resource de Proyecto
+*
+*/
+
+Route::resource('proyecto', 'ProyectoController')
+->middleware('role:admin');
+
+/**
+* Resource de Sub Proyecto
+*
+*/
+
+Route::resource('subproyecto', 'subProyectoController')
+->middleware('role:admin');
+
+/**
+* Resource de Nivel de cargo
+*
+*/
+
+Route::resource('nivelCargo', 'NivelCargoController')
+->middleware('role:admin');
+
+/**
+* Resource de Cargo
+*
+*/
+
+Route::resource('cargo', 'CargoController')
+->middleware('role:admin');
+
+/**
 * Route de User
 *
 */

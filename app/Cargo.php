@@ -9,11 +9,12 @@ class Cargo extends Model
     //
     protected $table='cargos';
 
-    protected $fillable=['name','description','nivel_cargos_id'];
+    protected $fillable=['name','description','nivel_cargo_id'];
+
     /**
      * Un cargo pertenece a un nivel de cargo
     */
-    public function nivel(){
+    public function nivel_cargo(){
         return $this->belongsTo(NivelCargo::class);
     }
 }

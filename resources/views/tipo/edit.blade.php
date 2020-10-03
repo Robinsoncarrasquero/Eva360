@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Editar Tipo de Competencia eva360")
+@section('title',"Editar Tipo de Competencia")
 
 @section('content')
 

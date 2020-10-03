@@ -17,13 +17,13 @@ class SubProyectoSeeder extends Seeder
         //Sub Proyecto 1
         $subproyecto=factory(SubProyecto::class)->create([
             'name'=>'Sub Proyecto Gerentes',
-            'proyectos_id'=>1,
+            'proyecto_id'=>1,
          ]);
 
          //Sub Proyecto 2
         $subproyecto=factory(SubProyecto::class)->create([
             'name'=>'Sub Proyecto Analistas',
-            'proyectos_id'=>1,
+            'proyecto_id'=>1,
          ]);
     }
 }

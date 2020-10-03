@@ -37,12 +37,12 @@ class DataResultadoNivel{
 
         $arrayDataSerie=[];
         $arrayDataCategoria=[];
-
+        $arrayData=[];
         foreach ($competencias as $key => $value) {
             //Creamos una array con la data de los averages
             foreach ($value['data'] as $vdata) {
                 $arrayData[] =[$vdata['average']];
-                $arrayDataCategoria[] =$vdata['competencia']."<br>".$value['nivel'];
+                $arrayDataCategoria[] =$value['nivel']."<br>".$vdata['competencia'];
             }
             //$arrayDataSerie[] =['name'=>$value['tipo'],'data'=>$arrayData];
 

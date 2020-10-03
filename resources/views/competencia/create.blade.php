@@ -45,7 +45,7 @@
                                 @if (old('tipo')==$tipo->id)
                                     <option selected value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
                                 @else
-                                    <option          value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
+                                    <option value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
                                 @endif
                             @endforeach
                         </select>

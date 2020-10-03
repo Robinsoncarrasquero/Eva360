@@ -30,10 +30,7 @@ class Competencia extends Model
 
     //Una competencia pertenece a un grupo
     public function grupocompetencia(){
-
         return $this->belongsto(GrupoCompetencia::class);
     }
-
-
 
 }

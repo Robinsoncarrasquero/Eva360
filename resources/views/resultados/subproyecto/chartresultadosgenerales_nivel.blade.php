@@ -42,10 +42,9 @@
             <div class="panel panel pb-3">
 
                 <div class="clearfix">
-                    <div class=" text-center titulo">
-                        <h5>Resultados Tipos de Competencias Fortalezas / Oportunidades</span></h5>
+                    <div class="text-left">
+                        <h6>Nivel de Cargo Fortalezas / Oportunidades</h6>
                     </div>
-
                 </div>
 
             </div>
