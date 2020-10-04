@@ -10,7 +10,14 @@ class Proyecto extends Model
 
      protected $fillable=['name','description'];
 
-     public function subproyectos(){
+    //Hacer busquedas por nombre
+    public function scopeName($query,$name){
+        $query->where('name','like',"%$name%");
+
+    }
+
+    /** Un Proyecto tiene subproyectos */
+    public function subproyecto(){
          return $this->hasMany(SubProyecto::class);
      }
 

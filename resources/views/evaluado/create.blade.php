@@ -20,15 +20,29 @@
                 <form action="{{ route('evaluado.store',$fileName) }}" method="POST" id="frm-evaluado">
                     @csrf
                     <div  class="card">
+                        <div class="card-header">
+                            <select id="subproyecto" class="form-control" name="subproyecto" >
+                                <option selected value="{{$subproyecto->id}}">{{ $subproyecto->proyecto->name }}({{ $subproyecto->name }}) </option>
+                            </select>
+                        </div>
                         <div  class="card-header">
-                            <label  for="nameevaluado">Nombre Evaluado:</label>
-                            <input  class="form-control" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}" autofocus>
 
-                            <label  for="cargo">Cargo:</label>
-                            <input  class="form-control" maxlength="30" type="text" name="cargoevaluado" value="{{old('cargoevaluado') }}">
+                            <select id="cargo"  class="form-control" name="cargo" >
+                                <label  for="cargo">Cargo:</label>
+                                @foreach ($cargos as $data)
+                                    @if (old('cargo')==$data->id)
+                                        <option selected value="{{$data->id}}">{{ $data->name }}</option>
+                                    @else
+                                        <option value="{{$data->id}}">{{ $data->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            <input  class="form-control" placeholder="Nombre" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado') }}" autofocus>
 
                         </div>
+
                     </div>
+
 
                     <div class="mt-1">
                         <table id="table-evaluado" >
@@ -62,7 +76,7 @@
                     </table>
 
                     <div class="clearfix">
-                        <span class="float-left"><a href="{{route('lanzar.index')}}" class="btn btn-dark btn-lg">Back</a></span>
+                        <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
                         <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Save</button>
 
                     </div>

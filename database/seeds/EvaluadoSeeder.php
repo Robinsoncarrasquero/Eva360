@@ -31,9 +31,8 @@ class EvaluadoSeeder extends Seeder
         //Creamos un evaluado
         $evaluado1 = factory(App\Evaluado::class)->create([
             'name' => 'Mary Doral',
-            'cargo'=>'Gerente',
             'status'=>2,
-            'cargos_id'=>$gerente,
+            'cargo_id'=>$gerente,
             'subproyecto_id'=>1,
         ]);
 
@@ -45,9 +44,8 @@ class EvaluadoSeeder extends Seeder
         //Creamos un evaluado
         $evaluado2 = factory(App\Evaluado::class)->create([
             'name' => 'Jonhy Daza',
-            'cargo'=>'Analista',
             'status'=>2,
-            'cargos_id'=>$nosupervisorio,
+            'cargo_id'=>$nosupervisorio,
             'subproyecto_id'=>2,
         ]);
 
@@ -59,9 +57,8 @@ class EvaluadoSeeder extends Seeder
         //Creamos un evaluado
         $evaluado3 = factory(App\Evaluado::class)->create([
             'name' => 'Marlon Brandon',
-            'cargo'=>'Analista',
             'status'=>2,
-            'cargos_id'=>$nosupervisorio,
+            'cargo_id'=>$nosupervisorio,
             'subproyecto_id'=>2,
         ]);
 

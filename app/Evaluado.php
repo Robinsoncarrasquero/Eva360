@@ -15,13 +15,23 @@ class Evaluado extends Model
     * The fillable fields
     */
     protected $fillable = [
-        'name', 'word_key', 'status',
+        'name', 'word_key', 'status','subproyecto_id','cargo_id'
     ];
 
 
-    //Relacion 1 a muchos
+    //Una evaluado tiene muchos evaluadores
     public function evaluadores(){
         return $this->hasMany(Evaluador::class);
+    }
+
+    //Un evaluado pertenece a un subproyecto
+    public function subProyecto(){
+        return $this->belongsTo(SubProyecto::class);
+    }
+
+    //Un evaluado pertenece a un cargo
+    public function cargo(){
+        return $this->belongsTo(Cargo::class);
     }
 
     //Hacer busquedas por nombre
@@ -36,6 +46,7 @@ class Evaluado extends Model
         $query->where('name','like',"%$name%",'and','id','=',$user_id);
 
     }
+
 
     public function setStatusAttribute($value)
     {

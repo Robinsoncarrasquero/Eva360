@@ -87,12 +87,27 @@ Route::get('vision360', 'HomeController@vision360')->name('vision360');
 Route::resource('frecuencia', 'FrecuenciaController')
 ->middleware('role:admin');
 
+
+/**
+* Resource de Proyecto Panel de Evaluado
+*
+*/
+
+Route::resource('proyectoevaluado', 'ProyectoPanelController')
+->middleware('role:admin');
+
+Route::get('proyectoevaluado/{subproyecto}/create', 'ProyectoPanelController@create')->name('proyectoevaluado.create')
+->middleware('role:admin');
+
 /**
 * Resource de Evaluado
 *
 */
 
 Route::resource('evaluado', 'EvaluadoController')
+->middleware('role:admin');
+
+Route::get('evaluado/{subproyecto}/create', 'EvaluadoController@create')->name('evaluado.create')
 ->middleware('role:admin');
 
 /**

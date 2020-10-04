@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class LanzarPruebaController extends Controller
+class ProyectoPanelController extends Controller
 {
 
     public function __construct(){
@@ -30,16 +30,15 @@ class LanzarPruebaController extends Controller
     {
         $title="Lista de Evaluados Por Proyecto";
         $buscarWordKey = $request->get('buscarWordKey');
+        $proyectos = Proyecto::name($buscarWordKey)->orderBy('id','DESC')->paginate(5);
+
+        //Creamos variable de session para controlar el ultimo proyecto apuntado
         if ($request->session()->exists('subproyecto')) {
             $subproyecto_id= $request->session('subproyecto');
-
         }else{
             $subproyecto_id=session('subproyecto', '1');
         }
-        $datasubproyecto= SubProyecto::find($subproyecto_id);
-
-        $evaluados = Evaluado::name($buscarWordKey)->orderBy('id','DESC')->paginate(10);
-        return view('lanzamiento.index',compact('evaluados','title'));
+        return view('lanzamiento.proyecto.index',compact('proyectos','title'));
 
     }
 

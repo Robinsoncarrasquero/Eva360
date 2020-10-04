@@ -27,7 +27,7 @@ class FileJson extends FormRequest
     {
         return [
                 'nameevaluado'=>'required',
-                'cargoevaluado'=>'required',
+                'cargo'=>'required',
                 'name.*'       => 'required|max:50',
                 'relation.*' => 'required|max:10',
                 'email.*' => 'required',

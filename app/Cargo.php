@@ -17,4 +17,10 @@ class Cargo extends Model
     public function nivel_cargo(){
         return $this->belongsTo(NivelCargo::class);
     }
+    /**
+     * Un cargo tiene muchos evaluados
+     */
+    public function evaluado(){
+        return $this->hasMany(Evaluado::class);
+    }
 }

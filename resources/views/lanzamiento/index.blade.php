@@ -15,6 +15,7 @@
 
             </div>
 
+
             <div class="panel panel pb-1">
                 <div class="clearfix">
 
@@ -28,12 +29,17 @@
                     </form>
 
                 </div>
+
+
             </div>
 
+            {{-- @if ($subproyecto>0)
             <div class=" float-right">
                 <a  href="{{ route('json.fileindex')}}" class="btn btn-dark"><i class="material-icons">attachment person_add</library-add></i> </a>
-                <a  href="{{ route('evaluado.create')}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
+                <a  href="{{ route('evaluado.create',$subproyecto)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
             </div>
+
+            @endif --}}
 
             @if($evaluados->count())
 

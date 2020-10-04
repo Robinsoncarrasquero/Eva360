@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Cargo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Http\Requests\FileJson;
 use App\Evaluado;
 use App\Evaluador;
+use App\SubProyecto;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
@@ -31,16 +33,21 @@ class EvaluadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($subproyecto_id)
     {
+
+        $subproyecto=SubProyecto::find($subproyecto_id);
+        if (!$subproyecto){
+            \abort(404);
+        }
         $pathFile = 'config/evaluado.json';
         if (Storage::exists($pathFile)){
            $json = Storage::disk('local')->get($pathFile);
            $fileName='evaluado.json';
            //Generamos un array
            $evaluadoArray=collect(json_decode($json));
-
-           return \view('evaluado.create',compact('evaluadoArray','fileName'));
+           $cargos = Cargo::all();
+           return \view('evaluado.create',compact('evaluadoArray','fileName','cargos','subproyecto'));
         }
         \abort(404);
 
@@ -59,7 +66,6 @@ class EvaluadoController extends Controller
         $relation=$fileJsonRequest->input('relation.*');
         $email=$fileJsonRequest->input('email.*');
 
-
         $fileName='evaluado.json';
         $pathFile = 'config/'.$fileName;
         if (Storage::exists($pathFile)){
@@ -68,6 +74,8 @@ class EvaluadoController extends Controller
             $evaluado->status=0;
             $evaluado->word_key=$fileName;
             $evaluado->cargo=$fileJsonRequest->cargoevaluado;
+            $evaluado->cargo_id=$fileJsonRequest->cargo;
+            $evaluado->subproyecto_id=$fileJsonRequest->subproyecto;
             $evaluado->save();
 
             for ($i=0; $i < count($name); $i++) {
@@ -85,7 +93,7 @@ class EvaluadoController extends Controller
         }
 
         return redirect()->route('lanzar.index')
-        ->withSuccess('Evaluado Creado con exito!!. Ya estamos listo para lanzar una nueva Evaluacion, facilmente.');
+        ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar una evaluacion.');
     }
 
     /**
