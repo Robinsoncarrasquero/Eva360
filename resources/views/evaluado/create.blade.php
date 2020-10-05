@@ -12,8 +12,8 @@
                 @include('flash-message')
             </div>
 
-            <div class="mt-1 titulo">
-                <h5>Formulario para la creacion de un Evaluado y sus Evaluadores.</h5>
+            <div class="mt-1 xtitulo">
+                <h5>Formulario para la creacion de una Evaluado y sus Evaluadores</h5>
             </div>
 
             @if($evaluadoArray)
@@ -43,7 +43,6 @@
 
                     </div>
 
-
                     <div class="mt-1">
                         <table id="table-evaluado" >
                         <thead class="thead-evaluado">
@@ -65,7 +64,7 @@
                                     <td><input class="form-control" type="text" maxlength="10" name="relation[]" value="{{old('relation.'.$key,$evaluador->relation)}}"></td>
                                     <td><input class="form-control" type="email" maxlength="100" name="email[]"  value="{{old('email.'.$key,$evaluador->email)}}" ></td>
                                     <td>
-                                        {{-- <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button> --}}
+                                        <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>
                                     </td>
                                 </tr>
 
@@ -117,8 +116,31 @@
     <dd class="col-md-9">
         <p>Es la conexion directa entre Evaluador con respecto al Evaluado. Defina cualquier <strong>"Relacion"</strong>. Considere que es sensible a Mayuscula y Minusculas.</p>
         <dl class="row">
-            <dt class="col-md-6">Las ponderacion es calculada agrupando la "Relacion".</dt>
+            <dt class="col-md-6">Las ponderacion es calculada por la "Relacion".</dt>
             <dd class="col-md-6">Jefe, Super, Partner, Cliente, Boss, etc.</dd>
+        </dl>
+
+    </dd>
+
+    <dt class="col-md-3 text-truncate">90°</dt>
+    <dd class="col-md-9">
+        <dl class="row">
+            <dt class="col-md-6">Las pruebas de 90°.</dt>
+            <dd class="col-md-6">Jefe, Supervisor.</dd>
+        </dl>
+    </dd>
+    <dt class="col-md-3 text-truncate">180°</dt>
+    <dd class="col-md-9">
+        <dl class="row">
+            <dt class="col-md-6">Las pruebas de 180° mayor 1 por relacion.</dt>
+            <dd class="col-md-6">Jefe > 1, Super > 1, Partner > 1.</dd>
+        </dl>
+    </dd>
+    <dt class="col-md-3 text-truncate">360°</dt>
+    <dd class="col-md-9">
+        <dl class="row">
+            <dt class="col-md-6">Las pruebas de 360 similar a 180 + autoevaluacion.</dt>
+            <dd class="col-md-6">Jefe > 1, Super > 1, Partner > 1 + autoevaluacion.</dd>
         </dl>
     </dd>
 </dl>

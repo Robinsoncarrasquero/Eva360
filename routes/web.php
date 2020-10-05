@@ -210,9 +210,9 @@ Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
  * Lista de candidatos para la prueba desde un modelo
  *
 */
-Route::get('lanzar/modelo', "LanzarPruebaController@index")
-->name('lanzar.modelo')
-->middleware(['role:admin']);
+// Route::get('lanzar/modelo', "LanzarPruebaController@index")
+// ->name('lanzar.modelo')
+// ->middleware(['role:admin']);
 
 /**
  * Seleccion del modelo

@@ -9,18 +9,19 @@ class DataResultado{
     private $dataSerie;
     private $dataCategoria;
     private $objDataEvaluacion;
-    
+
     function __construct($evaluado_id,$dataEvaluacion) {
         $this->evaluado_id = $evaluado_id;
         $this->objDataEvaluacion=$dataEvaluacion;
     }
-    
+
     /**Generamos la data para la grafica 360 */
     public function procesarData()
     {
         $dataEvaluacion = new $this->objDataEvaluacion($this->evaluado_id);
         $competencias = $dataEvaluacion->getDataEvaluacion();
-        
+        $arrayEvaluador =[];$arrayNivel=[];$arrayEvaluacion=[];$arrayCategoria=[];
+
         foreach ($competencias as $key => $value) {
             $arrayCategoria[]=$value['competencia'];
             $arrayNivel[]=(int) $value['nivelRequerido'];

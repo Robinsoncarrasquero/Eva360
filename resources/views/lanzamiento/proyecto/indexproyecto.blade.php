@@ -1,6 +1,6 @@
-@extends('lanzamiento.proyecto.layout')
+@extends('layout')
 
-@section('title',"Proyecto Panel de control")
+@section('title',"Panel de control")
 
 @section('content')
 
@@ -33,29 +33,23 @@
 
                     <div class="table col-12" >
                         <table id="table-proyectos" >
-                        <thead >
-                            <th >Proyecto</th>
-                            <th >Tipo</th>
-                            <th >Nivel</th>
+                        <thead>
+                            <th>Proyecto</th>
                         </thead>
                         <tbody>
 
                         @foreach ($proyectos as $proyecto)
                         <tr>
-                            <td class="titulo-proyecto" >{{$proyecto->name}}</td>
-                            <td>
-                                <a href="{{ route('resultados.resultadosgeneralestipo',$proyecto->id) }}"><span><i class="material-icons">analytics</i></span></a>
-                            </td>
-                            <td>
-                                <a href="{{ route('resultados.resultadosgeneralesnivel',$proyecto->id) }}"><span><i class="material-icons">leaderboard</i></span></a>
-                            </td>
+                            <td class="text text-danger" >{{$proyecto->name}}</td>
                             <td>
                             @foreach ($proyecto->subproyecto as $subproyecto)
+                                <ul>
+                                    <p >Sub Proyecto</p>
 
-                                    <span class="titulo-subproyecto"> {{$subproyecto->name}}</span>
+                                    <li class="panel panel-content">
+                                    {{$subproyecto->name}}
                                     <div class="float-right">
-                                        <a href="{{ route('resultados.graficaPersonales',$subproyecto->id) }}"><span><i class="material-icons">leaderboard</i></span></a>
-                                        <a href="{{ route('resultados.analisispersonalestabulados',$subproyecto->id) }}"><span><i class="material-icons">analytics</i></span></a>
+                                        {{-- <a  href="{{ route('json.fileindex')}}" class="btn btn-dark"><i class="material-icons">attachment person_add</library-add></i> </a> --}}
                                         <a  href="{{ route('evaluado.create',$subproyecto)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
                                     </div>
                                     <div class="data-evaluado">
@@ -73,7 +67,7 @@
                                         @foreach ($subproyecto->evaluado as $evaluado)
                                         <tr>
                                             <td>{{ $evaluado->name }}</td>
-                                            <td>{{ $evaluado->cargo->name}}</td>
+                                            <td>{{ $evaluado->cargo}}</td>
                                             <td>
                                                 <div class="status-progress">
                                                     @if(Helper::estatus($evaluado->status)=='Finalizada')
@@ -94,13 +88,13 @@
                                                        <span id="final" class="radio-no-checkeado"></span>
                                                     @endif
                                                 </div>
-                                                {{-- <span style="font-size: 1ex">{{ Helper::estatus($evaluado->status) }}</span> --}}
+                                                <span>{{ Helper::estatus($evaluado->status) }}</span>
                                             </td>
                                             <td>
                                                 @if(Helper::estatus($evaluado->status)!='Finalizada')
-                                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff</i></span></a>
+                                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">select_all</i></span></a>
                                                 @else
-                                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff muted</i></span></a>
+                                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">select_all muted</i></span></a>
                                                 @endif
                                             </td>
                                             <td>
@@ -140,7 +134,8 @@
                                         </tbody>
                                     </table>
                                     </div>
-
+                                </li>
+                                </ul>
                             @endforeach
                         </td>
                     </tr>

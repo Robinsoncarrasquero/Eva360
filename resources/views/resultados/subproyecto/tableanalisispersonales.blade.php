@@ -54,8 +54,8 @@
                                     @foreach ($dataBrecha as $key=>$value)
                                     <tr>
                                     <td>{{$value['categoria']}}</strong></td>
-                                    <td>{{ $value['cumplimiento'] }}</td>
-                                    <td>{{ $value['brecha'] }}</td>
+                                    <td>{{ number_format($value['cumplimiento'],2) }}</td>
+                                    <td>{{ number_format($value['brecha'],2) }}</td>
                                     <td>
                                     @foreach ($value['dataoportunidad'] as $vdata)
                                         {{$vdata['competencia']}},

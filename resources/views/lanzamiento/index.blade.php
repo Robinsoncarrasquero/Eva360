@@ -50,9 +50,10 @@
                     <thead>
                     <th>Nombre</th>
                     <th>Cargo</th>
+                    <th>sub-proyecto</th>
                     <th>Status</th>
-                    <th>Lanzar<br>Modelo</th>
-                    <th>Lanzar<br>Filtro</th>
+                    <th>Modelo</th>
+                    {{-- <th>Filtro</th> --}}
                     <th>Prueba</th>
                     <th>Resultado</th>
                     <th>Grafica</th>
@@ -61,7 +62,8 @@
                     @foreach($evaluados as $evaluado)
                     <tr>
                         <td>{{$evaluado->name}}</td>
-                        <td>{{$evaluado->cargo}}</td>
+                        <td>{{$evaluado->cargo->name}}</td>
+                        <td>{{$evaluado->subProyecto->name}}</td>
                         <td>
                             <div class="status-progress">
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
@@ -86,18 +88,18 @@
                         </td>
                         <td>
                             @if(Helper::estatus($evaluado->status)!='Finalizada')
-                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">select_all</i></span></a>
+                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff</i></span></a>
                             @else
-                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">select_all muted</i></span></a>
+                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff muted</i></span></a>
                             @endif
                         </td>
-                        <td>
+                        {{-- <td>
                             @if(Helper::estatus($evaluado->status)!='Finalizada')
                                 <a href="{{route('lanzar.seleccionar',$evaluado->id)}}"><span><i class="material-icons">filter_list</i></span></a>
                             @else
                                 <a href="{{route('lanzar.seleccionar',$evaluado->id)}}"><span><i class="material-icons">filter_list muted</i></span></a>
                             @endif
-                        </td>
+                        </td> --}}
                         <td>
                             @if(Helper::estatus($evaluado->status)=='Finalizada')
                                 <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
@@ -139,7 +141,7 @@
             @else
 
             <div class="d-flex alert alert-info">
-                <p> hay usuarios registrados para lanzar una evaluacion</p>
+                <p>No hay usuarios registrados para mostrar en esta lista</p>
             <div>
 
             @endif

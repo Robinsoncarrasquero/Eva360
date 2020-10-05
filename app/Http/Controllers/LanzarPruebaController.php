@@ -30,14 +30,6 @@ class LanzarPruebaController extends Controller
     {
         $title="Lista de Evaluados Por Proyecto";
         $buscarWordKey = $request->get('buscarWordKey');
-        if ($request->session()->exists('subproyecto')) {
-            $subproyecto_id= $request->session('subproyecto');
-
-        }else{
-            $subproyecto_id=session('subproyecto', '1');
-        }
-        $datasubproyecto= SubProyecto::find($subproyecto_id);
-
         $evaluados = Evaluado::name($buscarWordKey)->orderBy('id','DESC')->paginate(10);
         return view('lanzamiento.index',compact('evaluados','title'));
 

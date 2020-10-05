@@ -33,12 +33,6 @@
         <div class="col-lg-12 mb-1" id="container"></div>
     </div>
 
-    <div class="clearfix">
-        <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-    </div>
-</div>
-
-<div class="container2">
 
     <div class="panel panel-default">
 
@@ -98,11 +92,11 @@
         </div>
 
     </div>
+    <div class="clearfix">
+        <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+    </div>
 
 </div>
-
-
-
 
 <script src="{{ asset('js/hchar/highcharts.js') }}"></script>
 <script src="{{ asset('js/hchar/modules/series-label.js')}}"></script>

@@ -97,10 +97,10 @@
         Highcharts.chart('container'+index, {
         //Highcharts.chart('container', {
             title: {
-                text: "Vision 360 de "+evaluado
+                text: "Resultado de la Evaluacion"
             },
             subtitle: {
-                text: 'Source code: https://github.com/Robinsoncarrasquero'
+                text: evaluado
 
             },
             xAxis: {

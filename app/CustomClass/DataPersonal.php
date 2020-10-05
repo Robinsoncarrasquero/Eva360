@@ -30,11 +30,11 @@ class DataPersonal{
         //Creamos un array con las competencias metas y su margen
         $arrayCategoria[]='Modelo';
         $dataMeta= $this->getDataMeta();
+
         foreach ($dataMeta as $item) {
             $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
         }
 
-        $arraydataBrecha=[];
         foreach ($data as $key => $value) {
             $arrayCategoria[]=$value['categoria'];
 
@@ -43,10 +43,10 @@ class DataPersonal{
              * y calcular el promedio de resultado
              *
             */
-            $arraydataOportunidad=[];
-            $arrayCumplimiento=[];
-
             //Creamos una array con la data de las competencias
+            $arrayCumplimiento=[];
+            $arraydataOportunidad=[];
+
             foreach ($value['data'] as $item) {
                 $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
@@ -57,10 +57,12 @@ class DataPersonal{
                     $arraydataOportunidad[]=['competencia'=> $item['name']];
                 }
             }
-            $cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
-            $brecha= 100 - $cumplimiento;
 
-            $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad];
+            {
+                $cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
+                $brecha= 100 - $cumplimiento;
+                $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad];
+            }
 
         }
 
@@ -86,6 +88,7 @@ class DataPersonal{
 
         $dataEvaluacion = new $this->objDataEvaluacion($this->evaluado_id);
         $competencias = $dataEvaluacion->getDataEvaluacion();
+        $arrayEvaluador =[];$arrayNivel=[];$arrayEvaluacion=[];
 
         $arrayDataSerie=[];
         foreach ($competencias as $key => $value) {
@@ -116,6 +119,7 @@ class DataPersonal{
         $this->dataMeta=$arrayDataMeta;
         $this->dataSerie=$arrayDataSerie;
         $this->dataCategoria=$evaluado->name;
+
         return ['categoria'=>$evaluado->name,'data'=>$arrayDataSerie];
     }
 

@@ -26,6 +26,27 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <style>
+        .titulo-proyecto{
+            color:brown; font-family: 'Times New Roman', Times, serif;font-size: 2ex;
+        }
+        .titulo-subproyecto{
+            color:black;
+            background-color:lightsteelblue;
+        }
+
+        #grid {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            grid-template-rows: 50px 1fr 50px;
+        }
+
+        #item1 {
+            grid-column: 2;
+            grid-row-start: 1; grid-row-end: 4;
+        }
+
+    </style>
   </head>
 
   <body>
@@ -52,6 +73,7 @@
                     {{-- <li class="nav-item ">
                         <a class="nav-link" href="{{ route('lanzar.index') }}">Panel<span class="sr-only">(current)</span></a>
                     </li> --}}
+
                     <li class="dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             Paneles<span class="caret"></span>

@@ -25,7 +25,7 @@ class Evaluado extends Model
     }
 
     //Un evaluado pertenece a un subproyecto
-    public function subProyecto(){
+    public function subproyecto(){
         return $this->belongsTo(SubProyecto::class);
     }
 
@@ -40,22 +40,9 @@ class Evaluado extends Model
 
     }
 
-    //Hacer busquedas por nombre
-    public function scopeEvaluado($query,$name,$user_id){
-
-        $query->where('name','like',"%$name%",'and','id','=',$user_id);
-
-    }
-
-
     public function setStatusAttribute($value)
     {
-        # code...
-
         $this->attributes['status'] = is_string($value) ? intval($value) : $value;
-
-
     }
-
 
 }

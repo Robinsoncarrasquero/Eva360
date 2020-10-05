@@ -31,7 +31,7 @@
                 <tr>
                     <td>{{ $record->id }}</td>
                     <td>{{ $record->name }}</td>
-                    <td>{{ $record->nivel_cargo->name}}</td>
+                    <td>{{ $record->nivelCargo->name}}</td>
                     <td><a href="{{ route('cargo.edit',$record) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                     <td>
                         <form action="{{ route('cargo.destroy',$record) }}" method="POST">

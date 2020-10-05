@@ -63,6 +63,9 @@ class ResultadosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $title="Finales";
+        if (!$dataSerie){
+            \abort(404);
+        }
         return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado"));
     }
 
@@ -81,7 +84,7 @@ class ResultadosController extends Controller
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
-//        dd($dataCategoria,$dataSerie);
+
         $title="Resultados Individuales";
         return \view('resultados.subproyecto.chartresultadospersonales',compact("dataSerie","dataCategoria","title","subProyecto"));
     }
@@ -119,7 +122,9 @@ class ResultadosController extends Controller
         $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
         $objData->procesarData();
         $dataBrecha = $objData->getDataBrecha();
-        //dd($dataBrecha);
+        if (!$dataBrecha){
+            \abort(404);
+        }
         $title="Analisis de Resultados Personales";
         return \view('resultados.subproyecto.tableanalisispersonales',compact("dataBrecha","title","subProyecto"));
     }

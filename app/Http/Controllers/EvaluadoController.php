@@ -65,6 +65,7 @@ class EvaluadoController extends Controller
         $name=$fileJsonRequest->input('name.*');
         $relation=$fileJsonRequest->input('relation.*');
         $email=$fileJsonRequest->input('email.*');
+        $prueba=$fileJsonRequest->input('evaluacion');
 
         $fileName='evaluado.json';
         $pathFile = 'config/'.$fileName;
@@ -72,8 +73,7 @@ class EvaluadoController extends Controller
             $evaluado= new Evaluado();
             $evaluado->name=$fileJsonRequest->nameevaluado;
             $evaluado->status=0;
-            $evaluado->word_key=$fileName;
-            $evaluado->cargo=$fileJsonRequest->cargoevaluado;
+            $evaluado->word_key= $prueba;
             $evaluado->cargo_id=$fileJsonRequest->cargo;
             $evaluado->subproyecto_id=$fileJsonRequest->subproyecto;
             $evaluado->save();
@@ -82,7 +82,7 @@ class EvaluadoController extends Controller
                 $evaluador= new Evaluador();
                 $evaluador->name=$name[$i];
                 $evaluador->email=$email[$i];
-                $evaluador->relation=$relation[$i];
+                $evaluador->relation=Str::of($relation[$i])->ucfirst();
                 $evaluador->remember_token= Str::random(32);
                 $evaluador->status=0;
                 $evaluado->evaluadores()->save($evaluador);
@@ -92,7 +92,7 @@ class EvaluadoController extends Controller
             \abort(404);
         }
 
-        return redirect()->route('lanzar.index')
+        return redirect()->route('proyectoevaluado.index')
         ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar una evaluacion.');
     }
 

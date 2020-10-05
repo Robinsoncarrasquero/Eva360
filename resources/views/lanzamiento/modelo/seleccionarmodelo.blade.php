@@ -51,7 +51,7 @@
                             </table>
                         </div>
                         <div class="clearfix">
-                            <span class="float-left"><a href="{{ route('lanzar.modelo') }}" class="btn btn-dark btn-lg">Back</a></span>
+                            <span class="float-left"><a href="{{ url()->previous() }}" class="btn btn-dark btn-lg">Back</a></span>
                             <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Lanzar</button>
                         </div>
 

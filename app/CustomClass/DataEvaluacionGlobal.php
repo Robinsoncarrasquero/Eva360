@@ -80,7 +80,7 @@ class DataEvaluacionGlobal{
         ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
         ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
         ->join('evaluados', 'evaluadores.evaluado_id', '=', 'evaluados.id')
-        ->join('cargos', 'evaluados.cargos_id', '=', 'cargos.id')
+        ->join('cargos', 'evaluados.cargo_id', '=', 'cargos.id')
         ->join('nivel_cargos', 'cargos.nivel_cargo_id', '=', 'nivel_cargos.id')
         ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
         ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')

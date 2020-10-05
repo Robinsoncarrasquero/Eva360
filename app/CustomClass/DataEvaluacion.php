@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\DB;
 class DataEvaluacion{
     private $evaluado_id;
     private $dataCruda;
-       
+
     function __construct($evaluado_id) {
         $this->evaluado_id = $evaluado_id;
     }
 
     /**
      * Genera la data de la evaluacion con los resultados y los devuelve en una coleccion obtenida con querybuilder
-     * 
+     *
     **/
     public function getDataEvaluacion(){
 
@@ -22,7 +22,6 @@ class DataEvaluacion{
         $evaluadores = Evaluado::find($this->evaluado_id)->evaluadores;
 
         $whereIn=$evaluadores->pluck('id');
-
         $competencias = DB::table('evaluaciones')
         ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
         ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
@@ -40,6 +39,7 @@ class DataEvaluacion{
         $grouped = $collection->mapToGroups(function ($item, $key) {
             return [$item['name'] => [$item['average'],$item['relation'],$item['nivelrequerido']]];
         });
+
 
         //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
         $adata=[];
