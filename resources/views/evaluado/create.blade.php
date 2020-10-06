@@ -114,10 +114,10 @@
 
     <dt class="col-md-3 text-truncate">Relacion</dt>
     <dd class="col-md-9">
-        <p>Es la conexion directa entre Evaluador con respecto al Evaluado. Defina cualquier <strong>"Relacion"</strong>. Considere que es sensible a Mayuscula y Minusculas.</p>
+        <p>Es la conexion directa entre Evaluador y el Evaluado. Considere que es sensible a Mayuscula y Minusculas.</p>
         <dl class="row">
-            <dt class="col-md-6">Las ponderacion es calculada por la "Relacion".</dt>
-            <dd class="col-md-6">Jefe, Super, Partner, Cliente, Boss, etc.</dd>
+            <dt class="col-md-6">Las ponderacion es calculada basados en la "Relacion".</dt>
+            <dd class="col-md-6">Super,Par,Sub,Auto</dd>
         </dl>
 
     </dd>
@@ -125,22 +125,22 @@
     <dt class="col-md-3 text-truncate">90°</dt>
     <dd class="col-md-9">
         <dl class="row">
-            <dt class="col-md-6">Las pruebas de 90°.</dt>
-            <dd class="col-md-6">Jefe, Supervisor.</dd>
+            <dt class="col-md-6">Prueba de 90°</dt>
+            <dd class="col-md-6">Jefe, Super</dd>
         </dl>
     </dd>
     <dt class="col-md-3 text-truncate">180°</dt>
     <dd class="col-md-9">
         <dl class="row">
-            <dt class="col-md-6">Las pruebas de 180° mayor 1 por relacion.</dt>
-            <dd class="col-md-6">Jefe > 1, Super > 1, Partner > 1.</dd>
+            <dt class="col-md-6">Prueba de 180° grupos mayor 1</dt>
+            <dd class="col-md-6">Super, Par</dd>
         </dl>
     </dd>
     <dt class="col-md-3 text-truncate">360°</dt>
     <dd class="col-md-9">
         <dl class="row">
-            <dt class="col-md-6">Las pruebas de 360 similar a 180 + autoevaluacion.</dt>
-            <dd class="col-md-6">Jefe > 1, Super > 1, Partner > 1 + autoevaluacion.</dd>
+            <dt class="col-md-6">Prueba de 360 grupos mayor 1</dt>
+            <dd class="col-md-6">Super, Par, Sub, Auto</dd>
         </dl>
     </dd>
 </dl>

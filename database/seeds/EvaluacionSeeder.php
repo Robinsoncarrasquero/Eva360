@@ -21,97 +21,49 @@ class EvaluacionSeeder extends Seeder
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
-        //Evaluado 1 Gerente
-        $this->add_evaluacion_supervisor(1);
-        $this->add_evaluacion_supervisor(2);
 
-        //Evaluado 2 Analista
-        $this->add_evaluacion_general(3);
-        $this->add_evaluacion_general(4);
+        //Evaluador
+        for ($xevaluador=1; $xevaluador <21 ; $xevaluador++) {
+            $this->add_evaluacion($xevaluador);
+        }
 
-        //Evaluado 1 Analista
-        $this->add_evaluacion_general(5);
-        $this->add_evaluacion_general(6);
 
     }
 
-    public function add_evaluacion_supervisor($evaluador){
+    public function add_evaluacion($evaluador){
 
-        //Creamos una evaluacion
-        $eva1 = factory(Evaluacion::class)->create([
-            'competencia_id' => 1,
-            'evaluador_id'=>$evaluador,
-            'grado'=>Arr::random(['A','B','C','D']),
-            'ponderacion'=>Arr::random([100,75,50,25]),
-            'frecuencia'=>Arr::random([100,75,50,25]),
-            'resultado'=>Arr::random([100,75,50,25]),
-        ]);
+       //Creamos una evaluacion
+       for ($i=1; $i <5 ; $i++) {
+            $competencia=$i;
+            $this->add_competencia($evaluador,$competencia);
+       }
 
-        $eva2 = factory(Evaluacion::class)->create([
-            'competencia_id' => 2,
-            'evaluador_id'=>$evaluador,
-            'grado'=>Arr::random(['A','B','C','D']),
-            'ponderacion'=>Arr::random([100,75,50,25]),
-            'frecuencia'=>Arr::random([100,75,50,25]),
-            'resultado'=>Arr::random([100,75,50,25]),
-        ]);
 
-        $eva3 = factory(Evaluacion::class)->create([
-            'competencia_id' => 4,
-            'evaluador_id'=>$evaluador,
-            'grado'=>Arr::random(['A','B','C','D']),
-            'ponderacion'=>Arr::random([100,75,50,25]),
-            'frecuencia'=>Arr::random([100,75,50,25]),
-            'resultado'=>Arr::random([100,75,50,25]),
-        ]);
+    }
 
-        $eva4 = factory(Evaluacion::class)->create([
-            'competencia_id' => 5,
+    /** Obtenemos los resultados de la prueba en una array */
+    public function prueba()
+    {
+        $grado=Arr::random(['A','B','C','D']);
+        $pondera=Arr::get(['A'=>100,'B'=>75,'C'=>50,'D'=>25],$grado);
+        $frecuencia=Arr::random(['A'=>100,'B'=>75,'C'=>50,'D'=>25]);
+        $resultado=$pondera * $frecuencia /100;
+        return ['grado'=>$grado,'ponderacion'=>$pondera,'frecuencia'=>$frecuencia,'resultado'=>$resultado];
+    }
+    /** Generamos las competencias de cada evaluador */
+    public function add_competencia($evaluador,$competencia)
+    {
+        # code...
+       $prueba= $this->prueba();
+       $eva1 = factory(Evaluacion::class)->create([
+            'competencia_id' => $competencia,
             'evaluador_id'=>$evaluador,
-            'grado'=>Arr::random(['A','B','C','D']),
-            'ponderacion'=>Arr::random([100,75,50,25]),
-            'frecuencia'=>Arr::random([100,75,50,25]),
-            'resultado'=>Arr::random([100,75,50,25]),
+            'grado'=>Arr::get($prueba,'grado'),
+            'ponderacion'=>Arr::get($prueba,'ponderacion'),
+            'frecuencia'=>Arr::get($prueba,'frecuencia'),
+            'resultado'=>Arr::get($prueba,'resultado'),
         ]);
     }
 
-    public function add_evaluacion_general($evaluador){
 
-        //Creamos una evaluacion
-        $eva1 = factory(Evaluacion::class)->create([
-            'competencia_id' => 1,
-            'evaluador_id'=>$evaluador,
-            'grado'=>Arr::random(['A','B','C','D']),
-            'ponderacion'=>Arr::random([100,75,50,25]),
-            'frecuencia'=>Arr::random([100,75,50,25]),
-            'resultado'=>Arr::random([100,75,50,25]),
-        ]);
-
-        $eva2 = factory(Evaluacion::class)->create([
-            'competencia_id' => 2,
-            'evaluador_id'=>$evaluador,
-            'grado'=>Arr::random(['A','B','C','D']),
-            'ponderacion'=>Arr::random([100,75,50,25]),
-            'frecuencia'=>Arr::random([100,75,50,25]),
-            'resultado'=>Arr::random([100,75,50,25]),
-        ]);
-
-        $eva3 = factory(Evaluacion::class)->create([
-            'competencia_id' => 3,
-            'evaluador_id'=>$evaluador,
-            'grado'=>Arr::random(['A','B','C','D']),
-            'ponderacion'=>Arr::random([100,75,50,25]),
-            'frecuencia'=>Arr::random([100,75,50,25]),
-            'resultado'=>Arr::random([100,75,50,25]),
-        ]);
-
-        $eva4 = factory(Evaluacion::class)->create([
-            'competencia_id' => 4,
-            'evaluador_id'=>$evaluador,
-            'grado'=>Arr::random(['A','B','C','D']),
-            'ponderacion'=>Arr::random([100,75,50,25]),
-            'frecuencia'=>Arr::random([100,75,50,25]),
-            'resultado'=>Arr::random([100,75,50,25]),
-        ]);
-    }
 }

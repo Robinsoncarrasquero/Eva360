@@ -107,7 +107,7 @@ Route::get('proyectoevaluado/{subproyecto}/create', 'ProyectoPanelController@cre
 Route::resource('evaluado', 'EvaluadoController')
 ->middleware('role:admin');
 
-Route::get('evaluado/{subproyecto}/create', 'EvaluadoController@create')->name('evaluado.create')
+Route::get('evaluado/subproyecto/{subproyecto}/create', 'EvaluadoController@create')->name('evaluado.create')
 ->middleware('role:admin');
 
 /**

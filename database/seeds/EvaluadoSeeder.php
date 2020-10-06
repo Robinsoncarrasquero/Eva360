@@ -27,45 +27,29 @@ class EvaluadoSeeder extends Seeder
 
         //Cargos
         $gerente=1;$coordinador=2;$nosupervisorio=3;
+        $cargo=[$gerente,$coordinador,$nosupervisorio];
+        $subproyecto=[1,2];
+        $i=10;
+        for ($i=1; $i <11 ; $i++) {
+            $this->add_evaluado($cargo[rand(0,count($cargo)-1)],$subproyecto[rand(0,count($subproyecto)-1)]);
+        }
 
-        //Creamos un evaluado
-        $evaluado1 = factory(App\Evaluado::class)->create([
-            'name' => 'Mary Doral',
-            'status'=>2,
-            'cargo_id'=>$gerente,
-            'subproyecto_id'=>1,
-        ]);
-
-        //Cargamos los evaluadores a este evaluado
-        $evaluado1->evaluadores()->createMany(
-            factory(Evaluador::class, 2)->make()->toArray()
-        );
-
-        //Creamos un evaluado
-        $evaluado2 = factory(App\Evaluado::class)->create([
-            'name' => 'Jonhy Daza',
-            'status'=>2,
-            'cargo_id'=>$nosupervisorio,
-            'subproyecto_id'=>2,
-        ]);
-
-        //Cargamos los evaluadores a este evaluado
-        $evaluado2->evaluadores()->createMany(
-            factory(Evaluador::class, 2)->make()->toArray()
-        );
-
-        //Creamos un evaluado
-        $evaluado3 = factory(App\Evaluado::class)->create([
-            'name' => 'Marlon Brandon',
-            'status'=>2,
-            'cargo_id'=>$nosupervisorio,
-            'subproyecto_id'=>2,
-        ]);
-
-        //Cargamos los evaluadores a este evaluado
-        $evaluado3->evaluadores()->createMany(
-            factory(Evaluador::class, 2)->make()->toArray()
-        );
 
     }
+
+    public function add_evaluado($xcargo,$xsubproyecto)
+        {
+            //Creamos un evaluado
+            $evaluadox = factory(App\Evaluado::class)->create([
+                'status'=>2,
+                'cargo_id'=>$xcargo,
+                'subproyecto_id'=>$xsubproyecto,
+            ]);
+
+            //Cargamos los evaluadores a este evaluado
+            $evaluadox->evaluadores()->createMany(
+                factory(Evaluador::class, 2)->make()->toArray()
+            );
+
+        }
 }

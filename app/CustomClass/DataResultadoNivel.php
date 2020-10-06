@@ -34,7 +34,6 @@ class DataResultadoNivel{
         $dataEvaluacion = new $this->objDataEvaluacion($this->proyecto_id);
         $competencias = $dataEvaluacion->getDataEvaluacionNivel();
         $this->dataFortalezaOportunidad = $dataEvaluacion->getDataFortalezaOptunidad();
-
         $arrayDataSerie=[];
         $arrayDataCategoria=[];
         $arrayData=[];

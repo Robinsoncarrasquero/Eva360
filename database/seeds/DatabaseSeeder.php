@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
         $this->call(ProyectoSeeder::class);
         $this->call(SubProyectoSeeder::class);
         $this->call(NivelCargoSeeder::class);
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CompetenciaSeeder::class);
         $this->call(FrecuenciaSeeder::class);
         $this->call(EvaluacionSeeder::class);
+        $this->call(ModeloSeeder::class);
 
     }
 }

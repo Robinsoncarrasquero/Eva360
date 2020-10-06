@@ -20,7 +20,7 @@ class CreateEvaluadoresTable extends Migration
             $table->string('relation',10)->notnualble();
             $table->boolean('status')->default(0);
             $table->rememberToken();
-            $table->foreignId('evaluado_id')->constrained()->onDelete('cascade');
+            $table->foreignId('evaluado_id')->constrained('evaluadores')->onDelete('cascade');
             $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });

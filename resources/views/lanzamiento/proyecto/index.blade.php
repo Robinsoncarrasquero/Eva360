@@ -1,6 +1,6 @@
 @extends('lanzamiento.proyecto.layout')
 
-@section('title',"Proyecto Panel de control")
+@section('title',"Panel de Control de Proyectos")
 
 @section('content')
 
@@ -18,7 +18,7 @@
                 <div class="clearfix">
 
                     <div class="text text-center">
-                        <h5>Proyectos de Evaluacion</h5>
+                        <h5>Control de Proyectos de Evaluacion</h5>
                     </div>
 
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
@@ -31,8 +31,8 @@
 
             @if ($proyectos->count())
 
-                    <div class="table col-12" >
-                        <table id="table-proyectos" >
+                    <div class="table table-table">
+                        <table id="table-proyectos" class="table table-table" >
                         <thead >
                             <th >Proyecto</th>
                             <th >Tipo</th>
@@ -68,6 +68,7 @@
                                             <th>Prueba</th>
                                             <th>Resultado</th>
                                             <th>Grafica</th>
+                                            <th></th>
                                         </thead>
                                         <tbody>
                                         @foreach ($subproyecto->evaluado as $evaluado)
@@ -98,18 +99,16 @@
                                             </td>
                                             <td>
                                                 @if(Helper::estatus($evaluado->status)!='Finalizada')
-                                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff</i></span></a>
+                                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><i class="material-icons">flight_takeoff</i></a>
                                                 @else
-                                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff muted</i></span></a>
+                                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><i class="material-icons">flight_takeoff muted</i></a>
                                                 @endif
                                             </td>
                                             <td>
                                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
-                                                    <span><i class="material-icons ">question_answer</i></span>
+                                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}" ><i class="material-icons ">question_answer</i>
                                                 @else
-                                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
-                                                    <span><i class="material-icons text-dark ">question_answer</i></span>
+                                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}" ><i class="material-icons text-dark ">question_answer</i>
                                                 @endif
 
                                             </td>
@@ -133,7 +132,14 @@
                                                 @endif
 
                                             </td>
+                                            <td>
+                                                {{-- <form action="{{ route('evaluado.destroy',$evaluado->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
+                                                </form> --}}
 
+                                            </td>
                                         </tr>
                                         @endforeach
 
@@ -144,8 +150,8 @@
                             @endforeach
                         </td>
                     </tr>
-                        @endforeach
-                        </tbody>
+                     @endforeach
+                    </tbody>
                     </table>
                 </div>
 
@@ -166,7 +172,6 @@
             </div>
 
         </div>
-
 
 </div>
 

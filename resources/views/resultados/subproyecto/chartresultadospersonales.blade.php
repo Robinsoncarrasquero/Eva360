@@ -39,10 +39,10 @@
         <div class="col-sm-12">
 
 
-            <div class="panel panel pb-3">
+            <div class="panel panel">
 
                 <div class="clearfix">
-                    <div class=" text-center titulo">
+                    <div class=" text-center">
                         <h5>Resultados de Competencias Personales</span></h5>
                     </div>
 

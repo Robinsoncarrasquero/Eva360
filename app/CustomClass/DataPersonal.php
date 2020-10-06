@@ -22,11 +22,20 @@ class DataPersonal{
      */
     public function procesarData()
     {
+        $data=[];
         foreach ($this->evaluados as $evaluado) {
             $this->evaluado_id=$evaluado;
             $data[]=$this->crearData();
+
         }
 
+        if($data==[]){
+            $this->dataMeta=[];
+            $this->dataBrecha=[];
+            $this->dataCategoria=[];
+            $this->dataSerie=[];
+            return;
+        }
         //Creamos un array con las competencias metas y su margen
         $arrayCategoria[]='Modelo';
         $dataMeta= $this->getDataMeta();
@@ -59,8 +68,11 @@ class DataPersonal{
             }
 
             {
-                $cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
-                $brecha= 100 - $cumplimiento;
+                $brecha=100;$cumplimiento=0;
+                if (collect($dataMeta)->avg('data')!=0){
+                    $cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
+                    $brecha= 100 - $cumplimiento;
+                }
                 $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad];
             }
 
@@ -90,7 +102,7 @@ class DataPersonal{
         $competencias = $dataEvaluacion->getDataEvaluacion();
         $arrayEvaluador =[];$arrayNivel=[];$arrayEvaluacion=[];
 
-        $arrayDataSerie=[];
+        $arrayDataSerie=[];$arrayDataMeta=[];
         foreach ($competencias as $key => $value) {
             $arrayCompetencias[]=$value['competencia'];
             $arrayNivel[]=(int) $value['nivelRequerido'];
@@ -104,7 +116,6 @@ class DataPersonal{
             $arrayDataSerie[] =['name'=> $value['competencia'],'eva360'=>$value['eva360'],'nivel'=>$value['nivelRequerido']];
             //Creamos los datos de las competencias con su margen para la serie meta
             $arrayDataMeta[] =['name'=> $value['competencia'],'data'=>$value['nivelRequerido']];
-
         }
 
         $datacollection= collect($arrayEvaluador);

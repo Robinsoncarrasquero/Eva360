@@ -141,14 +141,14 @@ class EvaluadoController extends Controller
      */
     public function destroy($evaluado)
     {
-        $evaluado = Evaluado::find($evaluado);
-        try {
-             $evaluado->delete();
+       $evaluado = Evaluado::find($evaluado);
+       try {
+            $evaluado->delete();
         } catch (QueryException $e) {
             return redirect()->back()
-            ->withErrors('Error imposible Eliminar este registro, tiene restricciones asociadas');
+            ->withErrors('Error imposible Eliminar este registro, tiene un modelo de competencias lanzado');
         }
-        return redirect('evaluado')->withSuccess('El Evaluado ha sido eliminado con exito!!');
+        return redirect()->back()->withSuccess('El Evaluado ha sido eliminado con exito!!');
     }
 
 

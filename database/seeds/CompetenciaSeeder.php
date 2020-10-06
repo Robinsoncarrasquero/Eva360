@@ -99,7 +99,7 @@ class CompetenciaSeeder extends Seeder
         //GENERAL
         $comunicacion = factory(App\Competencia::class)->create([
             'name'=>'Comunicacion',
-            'tipo_id'=>4,
+            'tipo_id'=>1,
         ]);
 
         //Creamos Los grados de la competencias

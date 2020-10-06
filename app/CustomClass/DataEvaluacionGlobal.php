@@ -101,7 +101,7 @@ class DataEvaluacionGlobal{
 
         //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
         $adata=[];
-        foreach ($grouped as $nivel => $value) {
+        foreach ($grouped as $agrupa=> $value) {
 
             $record=[];
 
@@ -112,25 +112,26 @@ class DataEvaluacionGlobal{
                 $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
             }
 
-            $this->join_fortaleza_oportunidad($nivel);
-            $adata[]=['nivel'=>$nivel,'data'=>$record];
+            $data_join=collect($this->join_fortaleza_oportunidad($agrupa));
+            $adata[]=['nivel'=>$agrupa,'data'=>$record];
        }
+       //dd($adata,$join_fortaleza_oportunidad);
         $this->dataCruda=$adata;
         return collect($adata);
     }
 
     /** Fortaleza y Oportunidades */
-    private function add_fortaleza_oportunidad($competencia,$resultado,$nivel){
+    private function add_fortaleza_oportunidad($competencia,$resultado,$margen){
 
         //Cuando el average es menor al nivel requerido surge una
         //oportunidad de mejora en otro caso surge una fortaleza
 
-        if ($resultado<$nivel){
-            $this->dataOportunidad[]=['competencia'=> $competencia,'nivel'=>$nivel,'resultado'=>$resultado];
+        if ($resultado<$margen){
+            $this->dataOportunidad[]=['competencia'=> $competencia,'nivel'=>$margen,'resultado'=>$resultado];
         }
 
-        if ($resultado>=$nivel){
-            $this->dataFortaleza[]=['competencia'=> $competencia,'nivel'=>$nivel,'resultado'=>$resultado];
+        if ($resultado>=$margen){
+            $this->dataFortaleza[]=['competencia'=> $competencia,'nivel'=>$margen,'resultado'=>$resultado];
         }
     }
 
@@ -140,8 +141,10 @@ class DataEvaluacionGlobal{
         //Cuando el average es menor al nivel requerido surge una
         //oportunidad de mejora en otro caso surge una fortaleza
 
-        $this->dataOportunidadFortaleza[]=['agrupa'=>$agrupa,'datafortaleza'=>$this->dataFortaleza,'dataoportunidad'=>$this->dataOportunidad];
-    }
+         $this->dataOportunidadFortaleza[]=['agrupa'=>$agrupa,'datafortaleza'=>$this->dataFortaleza,'dataoportunidad'=>$this->dataOportunidad];
+         $this->dataFortaleza=[];$this->dataOportunidad=[];
+         return $this->dataOportunidadFortaleza;
+     }
 
     /**Obtenemos los datos de la evaluacion en un array asociativo */
     public function getDataCruda(){

@@ -93,13 +93,11 @@
                             <li><a class="dropdown-item"  href="{{ route('tipo.index') }}">Tipo</a></li>
                             <li  class=" dropdown-divider"></li>
                             <li><a class="dropdown-item"  href="{{ route('competencia.index') }}">Competencias</a></li>
+                            <li  class=" dropdown-divider"></li>
+                            <li><a class="dropdown-item"  href="{{ route('modelo.index') }}">Modelo</a></li>
                         </ul>
-
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{ route('modelo.index') }}">Modelo</a>
-                    </li>
                     <li class="nav-item ">
                         <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
                     </li>

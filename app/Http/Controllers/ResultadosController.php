@@ -84,7 +84,9 @@ class ResultadosController extends Controller
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
-
+        if (!$dataCategoria){
+            \abort(404);
+        }
         $title="Resultados Individuales";
         return \view('resultados.subproyecto.chartresultadospersonales',compact("dataSerie","dataCategoria","title","subProyecto"));
     }

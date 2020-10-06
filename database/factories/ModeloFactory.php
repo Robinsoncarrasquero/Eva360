@@ -2,13 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Evaluado;
+use App\Modelo;
 use Faker\Generator as Faker;
 
-$factory->define(Evaluado::class, function (Faker $faker) {
+$factory->define(Modelo::class, function (Faker $faker) {
     return [
         'name'=>$faker->name(),
-        'word_key'=>'12345',
-        'status' => 2,
+        'description' => $faker->text() ,
     ];
 });

@@ -16,7 +16,7 @@ class CreateModelosCompetenciasTable extends Migration
         Schema::create('modelos_competencias', function (Blueprint $table) {
             $table->id();
             $table->foreignId('modelo_id')->constrained()->onDelete('cascade');
-            $table->foreignId('competencia_id')->constrained()->onDelete('cascade');
+            $table->foreignId('competencia_id')->constrained();
             $table->timestamps();
         });
     }
