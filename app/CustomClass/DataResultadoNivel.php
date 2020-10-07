@@ -43,17 +43,12 @@ class DataResultadoNivel{
                 $arrayData[] =[$vdata['average']];
                 $arrayDataCategoria[] =$value['nivel']."<br>".$vdata['competencia'];
             }
-            //$arrayDataSerie[] =['name'=>$value['tipo'],'data'=>$arrayData];
-
-            //Creamos la categoria por tipo
         }
-        $arrayDataSerie[] =['name'=> 'Competencias','data'=>$arrayData];
-        //$arrayDataSerie[] =['name'=> 'Generales','data'=>$arrayData];
+        $arrayDataSerie[] =['name'=> 'Competencias','data'=>$arrayData,'color'=>'rgb(75,0,130)'];
 
         $this->dataSerie=$arrayDataSerie;
         $this->dataCategoria=$arrayDataCategoria;
         return ['categoria'=>$arrayDataCategoria,'data'=>$arrayDataSerie];
-
     }
 
     /**Data de la serie */
@@ -70,6 +65,5 @@ class DataResultadoNivel{
     public function getDataFortalezaOptunidad(){
         return $this->dataFortalezaOportunidad;
     }
-
 
 }

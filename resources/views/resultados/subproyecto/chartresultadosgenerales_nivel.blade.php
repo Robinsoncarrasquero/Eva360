@@ -56,7 +56,7 @@
                         <div class="table col-12">
                             <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                                 <thead class="table-thead">
-                                    <th>Tipo</th>
+                                    <th>Nivel</th>
                                     <th>Oportunidad</th>
                                     <th>Fortaleza</th>
                                 </thead>
