@@ -25,11 +25,13 @@ class DataEvaluacion{
         $competencias = DB::table('evaluaciones')
         ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
         ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
-        ->select('competencias.name','evaluadores.relation','competencias.nivelrequerido',
+        ->join('evaluados', 'evaluadores.evaluado_id', '=', 'evaluados.id')
+        ->select('competencias.name','evaluadores.relation','competencias.nivelrequerido','evaluados.status',
          DB::raw('AVG(resultado) as average,count(relation) as numevaluadores'))
         ->whereIn('evaluador_id',$whereIn)
-        ->groupBy('competencias.name','relation','competencias.nivelrequerido')
-        ->orderByRaw('competencias.name')
+        ->groupBy('competencias.name','relation','competencias.nivelrequerido','evaluados.status')
+        ->having('evaluados.status','>',1)
+       ->orderByRaw('competencias.name')
         ->get();
 
         //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
@@ -39,7 +41,6 @@ class DataEvaluacion{
         $grouped = $collection->mapToGroups(function ($item, $key) {
             return [$item['name'] => [$item['average'],$item['relation'],$item['nivelrequerido']]];
         });
-
 
         //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
         $adata=[];
@@ -61,7 +62,6 @@ class DataEvaluacion{
             ];
 
         }
-
         $this->dataCruda=$adata;
         return collect($adata);
     }

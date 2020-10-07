@@ -25,10 +25,12 @@ class DataPersonal{
         $data=[];
         foreach ($this->evaluados as $evaluado) {
             $this->evaluado_id=$evaluado;
-            $data[]=$this->crearData();
+            $evaluado = Evaluado::find($this->evaluado_id);
+            if ($evaluado->status==2){
+                $data[]=$this->crearData();
+            }
 
         }
-
         if($data==[]){
             $this->dataMeta=[];
             $this->dataBrecha=[];
@@ -39,7 +41,6 @@ class DataPersonal{
         //Creamos un array con las competencias metas y su margen
         $arrayCategoria[]='Modelo';
         $dataMeta= $this->getDataMeta();
-
         foreach ($dataMeta as $item) {
             $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
         }
@@ -78,7 +79,6 @@ class DataPersonal{
 
         }
 
-
         $datacollection=collect($arrayCompetencias);
         $agrouped = $datacollection->mapToGroups(function ($item, $key) {
             return [$item['name']=>$item['data']];
@@ -101,6 +101,16 @@ class DataPersonal{
         $dataEvaluacion = new $this->objDataEvaluacion($this->evaluado_id);
         $competencias = $dataEvaluacion->getDataEvaluacion();
         $arrayEvaluador =[];$arrayNivel=[];$arrayEvaluacion=[];
+
+        //Cuando no recibimos ningun record con datos de la evaluacion anulados el record
+        if ($competencias->count()==0){
+            $this->dataMeta=[];
+            $this->dataBrecha=[];
+            $this->dataCategoria=[];
+            $this->dataSerie=[];
+            dump($competencias,$this->evaluado_id);
+            return [];
+        }
 
         $arrayDataSerie=[];$arrayDataMeta=[];
         foreach ($competencias as $key => $value) {

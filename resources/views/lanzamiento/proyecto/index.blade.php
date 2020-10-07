@@ -133,11 +133,11 @@
 
                                             </td>
                                             <td>
-                                                {{-- <form action="{{ route('evaluado.destroy',$evaluado->id) }}" method="POST">
+                                                <form action="{{ route('evaluado.destroy',$evaluado->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
-                                                </form> --}}
+                                                </form>
 
                                             </td>
                                         </tr>

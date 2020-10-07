@@ -23,7 +23,7 @@ class EvaluacionSeeder extends Seeder
 
 
         //Evaluador
-        for ($xevaluador=1; $xevaluador <21 ; $xevaluador++) {
+        for ($xevaluador=1; $xevaluador <41 ; $xevaluador++) {
             $this->add_evaluacion($xevaluador);
         }
 

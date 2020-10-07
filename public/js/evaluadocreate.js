@@ -33,7 +33,7 @@ $(document).ready(function () {
         var input2 =$("<input/>",{
             type: "text",
             name: "relation[]",
-            maxlength:10,
+            maxlength:15,
             placeholder: "Relacion con el evaluado (Jefe,Partner,Cliente,XYZ)"
         });
         var td2=$('<td/>');

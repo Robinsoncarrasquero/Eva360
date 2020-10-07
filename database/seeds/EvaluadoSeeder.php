@@ -46,10 +46,17 @@ class EvaluadoSeeder extends Seeder
                 'subproyecto_id'=>$xsubproyecto,
             ]);
 
-            //Cargamos los evaluadores a este evaluado
-            $evaluadox->evaluadores()->createMany(
-                factory(Evaluador::class, 2)->make()->toArray()
-            );
+            $supervisores=factory(Evaluador::class, 2)->create([
+                'relation'=>'Supervisores',
+                'evaluado_id'=>$evaluadox,
+                ]);
+
+            $pares=factory(Evaluador::class, 2)->create([
+                'relation'=>'Pares',
+                'evaluado_id'=>$evaluadox,
+                ]);
+
+
 
         }
 }

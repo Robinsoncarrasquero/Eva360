@@ -61,7 +61,7 @@
                                 <tr id="{{ $key }}">
                                     <td class="form-control">{{ $key }}</td>
                                     <td><input class="form-control" type="text" maxlength="50" name="name[]" value="{{old('name.'.$key,$evaluador->name)}}"></td>
-                                    <td><input class="form-control" type="text" maxlength="10" name="relation[]" value="{{old('relation.'.$key,$evaluador->relation)}}"></td>
+                                    <td><input class="form-control" type="text" maxlength="15" name="relation[]" value="{{old('relation.'.$key,$evaluador->relation)}}"></td>
                                     <td><input class="form-control" type="email" maxlength="100" name="email[]"  value="{{old('email.'.$key,$evaluador->email)}}" ></td>
                                     <td>
                                         <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>

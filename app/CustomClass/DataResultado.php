@@ -52,7 +52,7 @@ class DataResultado{
 
         $dataSerie[]= ['name'=>'Nivel Requerido','data'=>$arrayNivel];
 
-        $dataSerie[]= ['name'=>'Vision360','data'=>$arrayEvaluacion];
+        $dataSerie[]= ['name'=>'Evaluacion','data'=>$arrayEvaluacion];
 
         $this->dataCategoria=$arrayCategoria;
         $this->dataSerie=$dataSerie;

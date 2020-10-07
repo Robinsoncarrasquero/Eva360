@@ -75,7 +75,7 @@
                                         <td>{{$dataValue['name']}}</td>
                                         {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
                                         @foreach ($dataValue['data'] as $vdata)
-                                        <td>{{ $vdata}}</td>
+                                        <td>{{ number_format($vdata,2)}}</td>
                                         @endforeach
                                     </tr>
                                     @endforeach

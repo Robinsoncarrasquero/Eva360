@@ -29,71 +29,53 @@
 <body>
 <div class="container">
 
-    <div class="mt-3">
-        <div class="col-lg-12 mb-1" id="container"></div>
+    <div class="col-lg-12 mt-3">
+        <div class="mb-1" id="container"></div>
     </div>
 
+    <div class="col-lg-12">
 
-
-    <div class="panel panel-default">
-
-        <div class="col-sm-12">
-
-
-            <div class="panel panel pb-3">
-
-                <div class="clearfix">
-                    <div class="text-left">
-                        <h6>Tipos de Competencias Fortalezas / Oportunidades</h6>
-                    </div>
-                </div>
-
+            <div class="text-left">
+                <h6>Tipos de Competencias Fortalezas / Oportunidades</h6>
             </div>
 
             @if($subProyecto)
 
-                <div class="row ">
+                <div class="table">
+                    <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                        <thead class="table-thead">
+                            <th>Tipo</th>
+                            <th>Oportunidad</th>
+                            <th>Fortaleza</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($dataDofa as $ddata)
+                            <tr>
+                            <td>{{$ddata['agrupa']}}</strong></td>
+                            <td>
+                                @if ($ddata['dataoportunidad'])
+                                @foreach ($ddata['dataoportunidad'] as $key=>$vdata)
+                                    {{$vdata['competencia']}},
+                                @endforeach
+                                @endif
+                            </td>
+                            <td>
+                                @if ($ddata['datafortaleza'])
+                                @foreach ($ddata['datafortaleza'] as $key=>$vdata)
+                                    {{$vdata['competencia']}},
+                                @endforeach
+                                @endif
 
-                        <div class="table col-12">
-                            <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                                <thead class="table-thead">
-                                    <th>Tipo</th>
-                                    <th>Oportunidad</th>
-                                    <th>Fortaleza</th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($dataDofa as $ddata)
-                                    <tr>
-                                    <td>{{$ddata['agrupa']}}</strong></td>
-                                    <td>
-                                        @if ($ddata['dataoportunidad'])
-                                        @foreach ($ddata['dataoportunidad'] as $key=>$vdata)
-                                            {{$vdata['competencia']}},
-                                        @endforeach
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($ddata['datafortaleza'])
-                                        @foreach ($ddata['datafortaleza'] as $key=>$vdata)
-                                            {{$vdata['competencia']}},
-                                        @endforeach
-                                        @endif
+                            </td>
 
-                                    </td>
-
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-
             @endif
 
             {{-- {{ $competencias->links() }} --}}
-
-        </div>
 
     </div>
     <div class="clearfix">
@@ -154,7 +136,7 @@
                 borderWidth: 0
             }
         },
-        series:dataSerie
+        series:dataSerie,
 
     });
 </script>
