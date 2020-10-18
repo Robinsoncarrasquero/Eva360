@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Competencia;
 use App\Grado;
+use Illuminate\Support\Arr;
 
 class CompetenciaSeeder extends Seeder
 {
@@ -30,25 +31,27 @@ class CompetenciaSeeder extends Seeder
             'description'=>'Es la capacidad para adaptarse y amoldarse a los cambios. Se referencia a la capacidad de modificar la propia conducta para alcanzar determinados objetivos cuando surgen dificultades o cambios en el medio. Se asocia con la versatilidad del comportamiento para adaptarse a distintos contextos, situaciones, medios y personas rápida y adecuadamente. Implica conducir a su grupo en función de la correcta comprensión de los escenarios cambiantes dentro de las políticas de la organización.',
         ]);
 
+        $nivel=40;
+        //$grado=['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25];
+
         //Creamos Los grados de la competencias
         $gradoa=factory(Grado::class)->create([
             'grado'=>'A',
-            'ponderacion'=>100,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'A'),
             'competencia_id'=>$competencia->id,
             'description'=>'Realiza adaptaciones organizacionales y estratégicas a corto, mediano y largo plazo en respuesta a los cambios del entorno o las necesidades de la situación considerando al especial dimensión del tiempo que se da en el entorno digital.',
         ]);
         //Creamos Los grados de la competencias
         $gradob=factory(Grado::class)->create([
             'grado'=>'B',
-            'ponderacion'=>75,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'B'),
             'competencia_id'=>$competencia->id,
             'description'=>'Adapta tácticas y objetivos para afrontar una situación o solucionar problemas. Revisa y evalúa sistemáticamente las consecuencias positivas y/o negativas de las acciones pasadas para agregar valor a la nueva solución. Utiliza el fracaso de otros en su propio beneficio.',
-
         ]);
         //Creamos Los grados de la competencias
         $gradob=factory(Grado::class)->create([
             'grado'=>'C',
-            'ponderacion'=>50,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'C'),
             'competencia_id'=>$competencia->id,
             'description'=>'Observa la situación objetivamente y puede reconocer la validez del punto de vista de otros, utilizando dicha información de manera selectiva para modificar sólo en ocasiones su forma de actuar.'
 
@@ -56,7 +59,7 @@ class CompetenciaSeeder extends Seeder
         //Creamos Los grados de la competencias
         $gradob=factory(Grado::class)->create([
             'grado'=>'D',
-            'ponderacion'=>25,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'D'),
             'competencia_id'=>$competencia->id,
             'description'=>'Suele aferrarse a sus propias opiniones. En ocasiones no reconoce la validez de la perspectiva de otras personas. Siempre sigue los procedimientos. No manifiesta una actitud crítica respecto a su actuación.'
 
@@ -71,28 +74,28 @@ class CompetenciaSeeder extends Seeder
         //Creamos Los grados de la competencias
         $gradoA=factory(Grado::class)->create([
             'grado'=>'A',
-            'ponderacion'=>100,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'A'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradob=factory(Grado::class)->create([
             'grado'=>'B',
-            'ponderacion'=>75,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'B'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradoc=factory(Grado::class)->create([
             'grado'=>'C',
-            'ponderacion'=>50,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'C'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradod=factory(Grado::class)->create([
             'grado'=>'D',
-            'ponderacion'=>25,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'D'),
             'competencia_id'=>$competencia1->id
         ]);
 
@@ -105,28 +108,28 @@ class CompetenciaSeeder extends Seeder
         //Creamos Los grados de la competencias
         $gradoa=factory(Grado::class)->create([
             'grado'=>'A',
-            'ponderacion'=>100,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'A'),
             'competencia_id'=>$comunicacion->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradob=factory(Grado::class)->create([
             'grado'=>'B',
-            'ponderacion'=>75,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'B'),
             'competencia_id'=>$comunicacion->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradoc=factory(Grado::class)->create([
             'grado'=>'C',
-            'ponderacion'=>50,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'C'),
             'competencia_id'=>$comunicacion->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradod=factory(Grado::class)->create([
             'grado'=>'D',
-            'ponderacion'=>25,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'D'),
             'competencia_id'=>$comunicacion->id
         ]);
 
@@ -140,28 +143,28 @@ class CompetenciaSeeder extends Seeder
         //Creamos Los grados de la competencias
         $gradoA=factory(Grado::class)->create([
             'grado'=>'A',
-            'ponderacion'=>100,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'A'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradob=factory(Grado::class)->create([
             'grado'=>'B',
-            'ponderacion'=>75,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'B'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradoc=factory(Grado::class)->create([
             'grado'=>'C',
-            'ponderacion'=>50,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'C'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradod=factory(Grado::class)->create([
             'grado'=>'D',
-            'ponderacion'=>25,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'D'),
             'competencia_id'=>$competencia1->id
         ]);
 
@@ -174,28 +177,28 @@ class CompetenciaSeeder extends Seeder
         //Creamos Los grados de la competencias
         $gradoA=factory(Grado::class)->create([
             'grado'=>'A',
-            'ponderacion'=>100,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'A'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradob=factory(Grado::class)->create([
             'grado'=>'B',
-            'ponderacion'=>75,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'B'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradoc=factory(Grado::class)->create([
             'grado'=>'C',
-            'ponderacion'=>50,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'C'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradod=factory(Grado::class)->create([
             'grado'=>'D',
-            'ponderacion'=>25,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'D'),
             'competencia_id'=>$competencia1->id
         ]);
 
@@ -208,28 +211,28 @@ class CompetenciaSeeder extends Seeder
         //Creamos Los grados de la competencias
         $gradoA=factory(Grado::class)->create([
             'grado'=>'A',
-            'ponderacion'=>100,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'A'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradob=factory(Grado::class)->create([
             'grado'=>'B',
-            'ponderacion'=>75,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'B'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradoc=factory(Grado::class)->create([
             'grado'=>'C',
-            'ponderacion'=>50,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'C'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradod=factory(Grado::class)->create([
             'grado'=>'D',
-            'ponderacion'=>25,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'D'),
             'competencia_id'=>$competencia1->id
         ]);
 
@@ -242,28 +245,28 @@ class CompetenciaSeeder extends Seeder
         //Creamos Los grados de la competencias
         $gradoA=factory(Grado::class)->create([
             'grado'=>'A',
-            'ponderacion'=>100,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'A'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradob=factory(Grado::class)->create([
             'grado'=>'B',
-            'ponderacion'=>75,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'B'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradoc=factory(Grado::class)->create([
             'grado'=>'C',
-            'ponderacion'=>50,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'C'),
             'competencia_id'=>$competencia1->id
         ]);
 
         //Creamos Los grados de la competencias
         $gradod=factory(Grado::class)->create([
             'grado'=>'D',
-            'ponderacion'=>25,
+            'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'D'),
             'competencia_id'=>$competencia1->id
         ]);
 
@@ -276,28 +279,28 @@ class CompetenciaSeeder extends Seeder
     //Creamos Los grados de la competencias
     $gradoA=factory(Grado::class)->create([
         'grado'=>'A',
-        'ponderacion'=>100,
+        'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'A'),
         'competencia_id'=>$competencia1->id
     ]);
 
     //Creamos Los grados de la competencias
     $gradob=factory(Grado::class)->create([
         'grado'=>'B',
-        'ponderacion'=>75,
+        'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'B'),
         'competencia_id'=>$competencia1->id
     ]);
 
     //Creamos Los grados de la competencias
     $gradoc=factory(Grado::class)->create([
         'grado'=>'C',
-        'ponderacion'=>50,
+        'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'C'),
         'competencia_id'=>$competencia1->id
     ]);
 
     //Creamos Los grados de la competencias
     $gradod=factory(Grado::class)->create([
         'grado'=>'D',
-        'ponderacion'=>25,
+        'ponderacion'=>Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],'D'),
         'competencia_id'=>$competencia1->id
     ]);
 

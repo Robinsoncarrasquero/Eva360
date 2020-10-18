@@ -44,10 +44,14 @@ class EvaluacionSeeder extends Seeder
     /** Obtenemos los resultados de la prueba en una array */
     public function prueba()
     {
+        $nivel=40;
         $grado=Arr::random(['A','B','C','D']);
-        $pondera=Arr::get(['A'=>100,'B'=>75,'C'=>50,'D'=>25],$grado);
-        $frecuencia=Arr::random(['A'=>100,'B'=>75,'C'=>50,'D'=>25]);
-        $resultado=$pondera * $frecuencia /100;
+        $gradofinal=Arr::get(['A'=>100,'B'=>75,'C'=>50,'D'=>25],$grado);
+        $gradofinal=Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],$grado);
+
+        $frecuencia=Arr::random(['A'=>100,'B'=>100,'C'=>100,'D'=>100]);
+        $pondera= $gradofinal;
+        $resultado=$pondera *  $frecuencia /100;
         return ['grado'=>$grado,'ponderacion'=>$pondera,'frecuencia'=>$frecuencia,'resultado'=>$resultado];
     }
     /** Generamos las competencias de cada evaluador */

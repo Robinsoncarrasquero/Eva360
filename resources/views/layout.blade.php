@@ -54,7 +54,7 @@
                     </li> --}}
                     <li class="dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Paneles<span class="caret"></span>
+                            Panel<span class="caret"></span>
                         </a>
                         <ul class=" dropdown-menu">
                             <li><a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Control de Proyecto</a></li>

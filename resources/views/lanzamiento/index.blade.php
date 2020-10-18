@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Panel de control")
+@section('title',"Panel de control de Evaluados")
 
 @section('content')
 
@@ -20,7 +20,7 @@
                 <div class="clearfix">
 
                     <div class="text text-center titulo">
-                        <h4>Panel de evaluados</h4>
+                        <h4>Panel de Evaluados</h4>
                     </div>
 
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">

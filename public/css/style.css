@@ -187,8 +187,8 @@ body > .container {
         font-size: 1rem;
     }
     .title-th-competencia{
-        background-color:rgb(73, 3, 3);
-        color:white;
+        background-color:rgb(133, 196, 248);
+        color:black;
 
     }
     .table-evaluado{
@@ -205,7 +205,6 @@ body > .container {
     .btn {
         font-size: 1rem;
     }
-
 
     /*Tablas lanzamiento por modelo competencias seleccionadas encabezado*/
     .table-thead-lanzarmodelo{

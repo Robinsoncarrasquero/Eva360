@@ -1,6 +1,6 @@
 @extends('lanzamiento.proyecto.layout')
 
-@section('title',"Panel de Control de Proyectos")
+@section('title',"Panel de Control de Proyectos de Evaluacion")
 
 @section('content')
 
@@ -106,29 +106,25 @@
                                             </td>
                                             <td>
                                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}" ><i class="material-icons ">question_answer</i>
+                                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><i class="material-icons">question_answer</i></a>
                                                 @else
-                                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}" ><i class="material-icons text-dark ">question_answer</i>
+                                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><i class="material-icons text-dark">question_answer</i></a>
                                                 @endif
 
                                             </td>
                                             <td>
                                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                                    <a href="{{route('resultados.finales', $evaluado->id)}}" >
-                                                    <span><i class="material-icons ">score</i></span>
+                                                    <a href="{{route('resultados.finales', $evaluado->id)}}" ><span><i class="material-icons ">score</i></span></a>
                                                 @else
-                                                    <a href="{{route('resultados.finales', $evaluado->id)}}" >
-                                                    <span><i class="material-icons text-dark ">score</i></span>
+                                                    <a href="{{route('resultados.finales', $evaluado->id)}}" ><span><i class="material-icons text-dark ">score</i></span></a>
                                                 @endif
 
                                             </td>
                                             <td>
                                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                                    <a href="{{route('resultados.graficas', $evaluado->id)}}" >
-                                                    <span><i class="material-icons ">pie_chart</i></span>
+                                                    <a href="{{route('resultados.graficas', $evaluado->id)}}"><span><i class="material-icons ">pie_chart</i></span></a>
                                                 @else
-                                                  <a href="{{route('resultados.graficas', $evaluado->id)}}" >
-                                                    <span><i class="material-icons md-24 text-dark">pie_chart</i></span>
+                                                  <a href="{{route('resultados.graficas', $evaluado->id)}}" ><span><i class="material-icons text-dark">pie_chart</i></span></a>
                                                 @endif
 
                                             </td>

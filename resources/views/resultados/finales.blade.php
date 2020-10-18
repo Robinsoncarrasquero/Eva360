@@ -22,7 +22,7 @@
                         <h4 class="alert-danger text-center">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h4>
                     @else
                         <div class="text text-center titulo">
-                            <h5>Resultados Finales de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                            <h5>Resultados de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                         </div>
                     @endif
 

@@ -25,7 +25,7 @@ class ModeloSeeder extends Seeder
 
            //GENERAL
         $modelo=factory(Modelo::class)->create([
-            'name'=>'Modelo General de Prueba',
+            'name'=>'Modelo para Gerentes',
         ]);
 
         for ($i=1; $i <5 ; $i++) {
