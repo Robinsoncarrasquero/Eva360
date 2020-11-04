@@ -37,7 +37,7 @@ Route::resource('proyecto', 'ProyectoController')
 *
 */
 
-Route::resource('subproyecto', 'subProyectoController')
+Route::resource('subproyecto', 'SubProyectoController')
 ->middleware('role:admin');
 
 /**
