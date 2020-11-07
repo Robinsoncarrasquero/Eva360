@@ -178,7 +178,7 @@
 
     <footer id="footer" class="footer">
         <div class="container">
-           <span class="text text-center text-white ">Sistema de Valoracion de Puestos por Competencias Basados en los Métodos de Vision 90&#176;, 180&#176; y 360&#176;</span>
+           <span class="text text-center text-white ">Sistema de Gestion por Competencias Talent360</span>
         </div>
     </footer>
 
