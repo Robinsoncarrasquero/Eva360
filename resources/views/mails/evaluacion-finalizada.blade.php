@@ -27,7 +27,7 @@
 
     </ul>
     <footer>
-        Sistema de Vision 360 desarrollado por Robinson Carrasquero <strong>robinson.carrasquero@gmail.com</strong>
+        Sistema de Evaluacion de Competencias del <strong>Talent 360</strong>
     </footer>
 
 </body>

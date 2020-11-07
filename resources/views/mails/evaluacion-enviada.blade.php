@@ -16,13 +16,9 @@
     </style>
 </head>
 <body>
-    <p>Estimado <b>{{ $dataEvaluador->nameEvaluador}}</b>! Le enviamos la siguiente comunicacion,
-     para que gestione ante esta plataforma la evaluacion de las competencias de:</p>
-    <ul>
-        <li >Nombre: <strong>{{ $dataEvaluador->nameEvaluado }} </strong></li>
-        <li >Relation: {{ $dataEvaluador->relation}}</li>
-    </ul>
-    <p>En el siguiente link podra acceder al cuestionario para que evalue las competencias relacionadas</p>
+    <p>Estimado <b>{{ $dataEvaluador->nameEvaluador}}</b>! Le invitamos para que gestione ante esta plataforma la evaluacion de las competencias de:</p>
+     de <strong>{{ $dataEvaluador->nameEvaluado }} </strong> en la cual usted cumple un rol de : {{ $dataEvaluador->relation}}
+     <p>En el siguiente link podra acceder directamente al cuestionario para que evalue las competencias de su evaluado</p>
     <ul>
         <li>
             <a href="{{ $dataEvaluador->linkweb}}">
@@ -32,7 +28,7 @@
 
     </ul>
     <footer>
-        Sistema de Vision 360 desarrollado por Robinson Carrasquero <strong>robinson.carrasquero@gmail.com Licencia MIT</strong>
+        Sistema de Evaluacion de Competencias del <strong>Talent 360</strong>
     </footer>
 </body>
 </html>

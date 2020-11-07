@@ -37,7 +37,7 @@
 
    <!-- Fixed navbar -->
    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="{{ route('home') }}"><img src="{{('/logo/vision360.jpg') }}" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
+    <a class="navbar-brand" href="{{ route('home') }}"><img src="{{storage::url('logo/vision360.jpg') }}" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
