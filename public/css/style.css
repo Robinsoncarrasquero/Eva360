@@ -42,14 +42,15 @@ body > .container {
 
 .title-modelo{
     font-size: 2ex;
-    color: indigo;
-    font-family: cursive;
+    color: dimgray;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 
 }
 .modelo-90,.modelo-180,.modelo-360{
     font-size: 2ex;
-    color: navy;
-    font-family: cursive;
+    color: rgb(4, 39, 48);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
 
 /* Presenta el formato para el archivo json que se encuentra en el formulario fileupload.blade.php */
