@@ -120,8 +120,8 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text text-muted">Sistema de Valoracion de Puestos por Competencias Basados en los Métodos o Sistemas de Vision 90 180 360 grados.</span>
-      </div>
+        <span class="text text-center text-white ">Sistema de Gestion por Competencias Talent360</span>
+     </div>
     </footer>
 
     <!-- Bootstrap core JavaScript
