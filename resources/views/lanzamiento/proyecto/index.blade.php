@@ -53,7 +53,7 @@
                     @foreach ($proyecto->subproyecto as $subproyecto)
                     <tr>
                         <td>
-                        <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span class="titulo-proyecto" >===> {{$proyecto->name}}</span>
+                        <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
                         <div class="float-right">
                             <a href="{{ route('resultados.graficaPersonales',$subproyecto->id) }}"><span><i class="material-icons">table_chart</i></span></a>
                             <a href="{{ route('resultados.analisispersonalestabulados',$subproyecto->id) }}"><span><i class="material-icons">dynamic_feed</i></span></a>
@@ -123,9 +123,9 @@
                             </td>
                             <td >
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                    <a href="{{route('resultados.graficas', $evaluado->id)}}"><span><i class="material-icons ">pie_chart</i></span></a>
+                                    <a href="{{route('resultados.graficas', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
                                 @else
-                                    <a href="{{route('resultados.graficas', $evaluado->id)}}" ><span><i class="material-icons text-dark">pie_chart</i></span></a>
+                                    <a href="{{route('resultados.graficas', $evaluado->id)}}" ><span><i class="material-icons text-dark">stacked_line_chart</i></span></a>
                                 @endif
                             </td>
                             <td>

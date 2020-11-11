@@ -15,10 +15,10 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: auto;
-  line-height: 3em; /* Vertically center the text there */
+  line-height: 3rem; /* Vertically center the text there */
   background-color:   rgb(29, 31, 29);
   color: white;
-  font-size: 1.5ex;
+  font-size: 1.5rem;
 
 }
 
@@ -222,7 +222,7 @@ body > .container {
     /*Tablas lanzamiento por modelo competencias seleccionadas encabezado*/
     .table-thead-lanzarmodelo{
         font-size: 0.75rem;
-        background: rgb(58, 202, 188);
+        background: rgb(18, 161, 147);
     }
     .table-tbody-lanzarmodelo{
         font-size: 0.50rem;
@@ -254,18 +254,27 @@ body > .container {
     }
     .table-competencias{
         font-size: 1rem;
-        background-color: rgb(2, 2, 37);
+        background-color: rgb(8, 8, 114);
         color:white;
     }
     .table-competencias-seleccionar{
-        font-size: 1rem;
-        background-color: rgb(2, 2, 37);
+        font-size: 0.50rem;
+        background-color: rgb(3, 14, 17);
         color:white;
     }
     .tbody-competencias-seleccionar{
-        font-size: 0.50rem;
+        font-size: 0.70rem;
     }
     .terminos-definicion{
         font-size: 0.50rem;
-
     }
+    .table-modelos{
+        font-size: 0.70rem;
+        background-color:  rgb(1, 46, 24);
+        color:white;
+    }
+    .btn{
+        font-size: 0.75rem;
+    }
+
+

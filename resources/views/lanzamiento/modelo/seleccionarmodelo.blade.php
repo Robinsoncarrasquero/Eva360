@@ -6,8 +6,8 @@
 
 <div class="container">
 
-    <div class="panel panel pb-3">
-        <h4 class="text text-md-center">Seleccione un Modelo para lanzar la evaluacion de: {{ $evaluado->name }}</h4>
+    <div class="panel pb-3">
+        <h5 class="text text-bold">Modelo para la evaluacion de: <span class="text text-alert">{{ $evaluado->name }}</span> </h5>
     </div>
     <div class="panel pb-3">
         <div class="clearfix">
@@ -25,12 +25,12 @@
                 <div class="row ">
                     <div class="col-sm-8">
                         <div class="table table-table">
-                            <table id="table1" class="table table-bordered table-striped">
-                            <thead class="table-competencias-seleccionar">
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Descripcion</th>
-                                <th scope="col">Seleccione</th>
+                            <table id="table1" class="table ">
+                            <thead class="table-modelos">
+                                <th >#</th>
+                                <th >Nombre</th>
+                                <th >Descripcion</th>
+                                <th >Seleccione</th>
                             </thead>
                             <tbody  class="tbody-competencias-seleccionar">
                                 @foreach($modelos as $modelo)
@@ -54,9 +54,7 @@
                             <span class="float-left"><a href="{{ url()->previous() }}" class="btn btn-dark btn-lg">Back</a></span>
                             <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Lanzar</button>
                         </div>
-
                     </div>
-
                     <div class="col-sm-4 panel">
                         <form  >
                             <table class="table table-light table-table">
