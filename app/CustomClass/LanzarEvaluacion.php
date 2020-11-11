@@ -57,6 +57,8 @@ class LanzarEvaluacion
             }
 
         }
+        $evaluado->status=1; //0:Inicio, 1:Lanzada 2:finalizada
+        $evaluado->save();
 
         $this->enviarEmailEvaluadores($this->evaluado_id,$this->root);
         return true;

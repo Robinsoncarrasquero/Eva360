@@ -98,14 +98,15 @@
                                     <span id="final" class="radio-no-checkeado"></span>
                                 @endif
                             </div>
-                                {{-- <span style="font-size: 1ex">{{ Helper::estatus($evaluado->status) }}</span> --}}
                             </td>
+
                             <td>
-                                @if(Helper::estatus($evaluado->status)!='Finalizada')
+                                @if(Helper::estatus($evaluado->status)=='Inicio')
                                     <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff</i></span></a>
                                 @else
-                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff muted</i></span></a>
+                                    <a ><span><i class="material-icons text-dark">flight_takeoff</i></span></a>
                                 @endif
+
                             </td>
                             <td >
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')

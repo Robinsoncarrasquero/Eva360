@@ -70,11 +70,11 @@ class LanzarModeloController extends Controller
         //Creamos un objeto de lanzamiento de Evaluacion
         $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado_id,$root);
         if (!$objlanzaEvaluacion->crearEvaluacion()){
-            return \redirect()->route('lanzar.index')
+            return \redirect()->route('proyectoevaluado.index')
             ->with('error',"Error, Esas competencias para el Evaluado $evaluado->name, ya habian sido lanzadas en la Prueba..");
         }
         $objlanzaEvaluacion=null;
-        return \redirect()->route('lanzar.index')->with('success','Hurra!! La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
+        return \redirect()->route('proyectoevaluado.index')->with('success','Hurra!! La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
 
     }
 
