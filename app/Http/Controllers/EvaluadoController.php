@@ -44,7 +44,7 @@ class EvaluadoController extends Controller
         if (Storage::exists($pathFile)){
            $json = Storage::disk('local')->get($pathFile);
            $fileName='evaluado.json';
-           //Generamos un array
+           //Generamos un arrayin
            $evaluadoArray=collect(json_decode($json));
            $cargos = Cargo::all();
            return \view('evaluado.create',compact('evaluadoArray','fileName','cargos','subproyecto'));
