@@ -44,7 +44,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-12 col-md-4 mt-3 p-2">
                 <div class="card text-center">
                     <div class="card-header subtitulo180">
@@ -60,7 +59,6 @@
                         <img class="img-fluid" src="{{asset('images/colaboracion.png') }}"  alt="Evaluacion 360 grados">
                     </div>
                 </div>
-
             </div>
 
             <div class="col-sm-12 col-md-4 mt-3 p-2 ">
