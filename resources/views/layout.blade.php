@@ -9,7 +9,7 @@
     <link rel="icon" href="favicon.ico">    <!-- Iconos para bootstrap -->
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
-    <title>@yield('title') - Vision360</title>
+    <title>@yield('title')</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 

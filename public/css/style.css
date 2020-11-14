@@ -23,6 +23,17 @@ body {
 }
 
 
+@media only screen and (min-width: 576px) {
+
+
+    /* Estos estilos solo se aplicarán hasta el tamaño indicado */
+    .iconos360{
+        width: 200%;
+        height: 200%;
+        color: seagreen;
+    }
+}
+
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
@@ -50,6 +61,7 @@ body > .container {
     font-size: 2ex;
     color: rgb(4, 39, 48);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 
 }
 
