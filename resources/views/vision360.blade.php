@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <img class="img-fluid" src="{{asset('images/comunicacion.png') }}" style="width:8rem; height:auto" alt="Evaluacion 180 grados">
+                        <img class="img-fluid" src="{{asset('images/comunicacion.png') }}"  alt="Evaluacion 180 grados">
                     </div>
                 </div>
 
@@ -60,7 +60,7 @@
                         <i class="material-icons">people_alt group_add </i>
                     </div> --}}
                     <div class="d-flex justify-content-center">
-                        <img class="img-fluid" src="{{asset('images/colaboracion.png') }}" style=" width:8rem; height:auto" alt="Evaluacion 360 grados">
+                        <img class="img-fluid" src="{{asset('images/colaboracion.png') }}"  alt="Evaluacion 360 grados">
                     </div>
                 </div>
 
@@ -78,7 +78,7 @@
                         <i class="material-icons">people_alt  360</i>
                     </div> --}}
                     <div class="d-flex justify-content-center">
-                        <img class="img-fluid" src="{{asset('images/grupo.png') }}" style=" width:8rem; height:auto" alt="Evaluacion 90 grados">
+                        <img class="img-fluid" src="{{asset('images/grupo.png') }}"  alt="Evaluacion 90 grados">
                     </div>
                 </div>
             </div>
