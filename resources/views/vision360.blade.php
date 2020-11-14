@@ -30,43 +30,40 @@
     </div>
 
     <section>
-        <div class="row d-flex justify-content-between ">
-            <div class="col-sm-12 col-md-4 mt-3 p-2">
-                <div class="card">
-
-                    <div class="card-header subtitulo90 text-center">
+        <div class="row d-flex justify-content-between">
+            <div class="col-sm-12 col-md-4 mt-3 p-2 text-center">
+                <div class="card ">
+                    <div class="card-header subtitulo90">
                     TALENT 90&#176;
                     </div>
-                    <div class="card-body text-center">
+                    <div class="card-body ">
                         <p class="title-modelo">El empleado es evaluado por su supervisor y el supervisor de su supervisor.</p>
                     </div>
-
-                    <div class="d-flex justify-content-center">
+                    <div class="cajaimagen300">
                         <img class="img-fluid" src="{{asset('images/comunicacion.png') }}"  alt="Evaluacion 180 grados">
                     </div>
                 </div>
-
             </div>
 
-            <div class="col-sm-12 col-md-4 mt-3 p-2">
+            <div class="col-sm-12 col-md-4 mt-3 p-2 text-center">
                 <div class="card text-center">
                     <div class="card-header subtitulo180">
                     TALENT 180&#176;
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                     <p class="card-text modelo-180">El empleado es evaluado por su jefe, sus pares y clientes en ausencia de pares.</p>
                     </div>
                     {{-- <div class="card-footer text-muted">
                         <i class="material-icons">people_alt group_add </i>
                     </div> --}}
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center cajaimagen300">
                         <img class="img-fluid" src="{{asset('images/colaboracion.png') }}"  alt="Evaluacion 360 grados">
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-sm-12 col-md-4 mt-3 p-2">
+            <div class="col-sm-12 col-md-4 mt-3 p-2 ">
                 <div class="card text-center">
                     <div class="card-header subtitulo360">
                     TALENT 360 &#176;
@@ -77,7 +74,7 @@
                     {{-- <div class="card-footer text-muted">
                         <i class="material-icons">people_alt  360</i>
                     </div> --}}
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center cajaimagen300">
                         <img class="img-fluid" src="{{asset('images/grupo.png') }}"  alt="Evaluacion 90 grados">
                     </div>
                 </div>

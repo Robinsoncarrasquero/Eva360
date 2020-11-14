@@ -26,19 +26,7 @@ img {
     height: auto;
     max-width: 100%;
 }
-    
-
-@media only screen and (max-width: 372) {
-
-
-    /* Estos estilos solo se aplicarán hasta el tamaño indicado */
-
-    .img-iconos-app{
-        max-width: 1rem;
-        background-color: springgreen;
-    }
-}
-
+ 
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
@@ -62,12 +50,16 @@ body > .container {
     font-family: Georgia, 'Times New Roman', Times, serif;
 
 }
+.cajaimagen300 img{
+    width: 256px;
+
+}
 .modelo-90,.modelo-180,.modelo-360{
     font-size: 2ex;
     color: rgb(4, 39, 48);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-family: Georgia, 'Times New Roman', Times, serif;
-
+       
 }
 
 /* Presenta el formato para el archivo json que se encuentra en el formulario fileupload.blade.php */
