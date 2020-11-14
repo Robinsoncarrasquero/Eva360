@@ -28,9 +28,8 @@ body {
 
     /* Estos estilos solo se aplicarán hasta el tamaño indicado */
     .img{
-        width: 1rem;
-        height: auto;
-        color: seagreen;
+        max-width: 1rem;
+        background-color: springgreen;
     }
 }
 
