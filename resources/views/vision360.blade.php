@@ -81,16 +81,8 @@
                         <img class="img-fluid" src="{{asset('images/grupo.png') }}" style=" width:8rem; height:auto" alt="Evaluacion 90 grados">
                     </div>
                 </div>
-
             </div>
-
         </div>
-
-    </section>
-    {{-- <div class="row">
-        <div>Iconos diseñados por <a href="https://www.flaticon.es/autores/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
-    </div> --}}
-
 </div>
 
 @endsection
