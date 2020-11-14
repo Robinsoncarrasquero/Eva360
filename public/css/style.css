@@ -23,11 +23,11 @@ body {
 }
 
 
-@media only screen and (min-width: 576px) {
+@media only screen and (max-width: 372) {
 
 
     /* Estos estilos solo se aplicarán hasta el tamaño indicado */
-    .iconos360{
+    .img{
         width: 1rem;
         height: auto;
         color: seagreen;

@@ -26,6 +26,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+
   </head>
 
   <body>

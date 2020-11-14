@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <img class="iconos360" src="{{asset('images/comunicacion.png') }}" style=" width:8rem; height:auto" alt="Evaluacion 180 grados">
+                        <img class="iconos360" src="{{asset('images/comunicacion.png') }}" style="width:8rem; height:auto" alt="Evaluacion 180 grados">
                     </div>
                 </div>
 
