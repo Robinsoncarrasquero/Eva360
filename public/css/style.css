@@ -28,8 +28,8 @@ body {
 
     /* Estos estilos solo se aplicarán hasta el tamaño indicado */
     .iconos360{
-        width: 200%;
-        height: 200%;
+        width: 50%;
+        height: auto;
         color: seagreen;
     }
 }
