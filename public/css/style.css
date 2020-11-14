@@ -28,7 +28,7 @@ body {
 
     /* Estos estilos solo se aplicarán hasta el tamaño indicado */
     .iconos360{
-        width: 50%;
+        width: 1rem;
         height: auto;
         color: seagreen;
     }

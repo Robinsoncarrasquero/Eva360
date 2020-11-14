@@ -77,7 +77,7 @@
                     {{-- <div class="card-footer text-muted">
                         <i class="material-icons">people_alt  360</i>
                     </div> --}}
-                    <div class="d-flex justify-content-center iconos360">
+                    <div class="d-flex justify-content-center">
                         <img src="{{asset('images/grupo.png') }}" style=" width:8rem; height:auto" alt="Evaluacion 90 grados">
                     </div>
                 </div>
