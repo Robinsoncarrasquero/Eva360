@@ -27,7 +27,11 @@ body {
 
 
     /* Estos estilos solo se aplicarán hasta el tamaño indicado */
-    .img{
+    img{
+        max-width: 1rem;
+        background-color: springgreen;
+    }
+    .img-iconos-app{
         max-width: 1rem;
         background-color: springgreen;
     }
