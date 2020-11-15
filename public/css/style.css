@@ -51,7 +51,11 @@ body > .container {
 
 }
 .cajaimagen300 img{
-    width: 256px;
+    width: 8rem;
+
+}
+.cajaimagen600 img{
+    width: 16rem;
 
 }
 .modelo-90,.modelo-180,.modelo-360{

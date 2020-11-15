@@ -11,14 +11,14 @@
         <div class="card-header text-center titulo360">
             GESTION POR COMPETENCIAS TALENT 360&#176;<span><i class="material-icons">360</i></span></i>
         </div>
-        <div class="card-body ">
-
+        <div class="card-body text-center ">
             <div class="d-flex justify-content-between">
                 <p class="title-modelo">El modelo de gestión por competencias busca alinear los talentos y habilidades de los colaboradores con la visión y el objetivo de la empresa, partiendo de la idea de identificar el perfil perfecto del colaborador para un cargo específico y, en base a ello, crear una dinámica de reclutamiento y capacitación.
                     Sin duda, se trata un punto clave para el éxito de muchas empresas, pues es capaz de identificar las mejores habilidades de un colaborador para después potencializarlas para el beneficio de la organización.
                 </p>
-
-
+           </div>
+            <div class="cajaimagen600">
+                <img class="img-fluid" src="{{asset('images/candidatos.png') }}"  alt="Evaluacion 180 grados">
             </div>
 
         </div>
