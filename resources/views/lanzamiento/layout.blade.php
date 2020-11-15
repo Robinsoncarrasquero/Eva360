@@ -9,7 +9,7 @@
 
     <link rel="icon" href="favicon.ico">
 
-    <title>@yield('title') - Vision 360</title>
+    <title>@yield('title')</title>
     <!-- Iconos para bootstrap -->
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">

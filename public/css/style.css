@@ -26,7 +26,7 @@ img {
     height: auto;
     max-width: 100%;
 }
- 
+
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
@@ -50,6 +50,10 @@ body > .container {
     font-family: Georgia, 'Times New Roman', Times, serif;
 
 }
+.cajaimagen1200 img{
+    width: 75rem;
+
+}
 .cajaimagen300 img{
     width: 8rem;
 
@@ -63,7 +67,7 @@ body > .container {
     color: rgb(4, 39, 48);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-family: Georgia, 'Times New Roman', Times, serif;
-       
+
 }
 
 /* Presenta el formato para el archivo json que se encuentra en el formulario fileupload.blade.php */
@@ -96,18 +100,21 @@ body > .container {
   */
   .vision360{
     font-size: 1rem;
-
   }
   /* Titulo de formulario vision360*/
   .titulo360{
     font-size: 1rem;
     background-color: burlywood;
     font-weight: bold;
-
   }
-
+  /* Titulo de formulario vision360*/
+  .maintitulo360{
+    font-size: 1rem;
+    background-color: darkslateblue;
+    font-weight: bold;
+  }
   /* Subtitulo de formulario vision90*/
-  .subtitulo90{
+    .subtitulo90{
     font-size: 1rem;
     background-color: lightgreen;
     font-weight: bold;

@@ -40,6 +40,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarCollapse">
 
             <ul class="navbar-nav mr-auto ">
@@ -161,6 +162,11 @@
 
     <!-- Begin page content -->
     <main role="main" class="container">
+        <div class="card-header text-center maintitulo360">
+            Sistema de Gestion por Competencias TALENT 360&#176;<span><i class="material-icons">360</i></span></i>
+        </div>
+
+
         <div class="row ">
             <div class="col-md-12">
 

@@ -6,7 +6,12 @@
 
 <div class="container">
 
-    <div class="card mt-4 mb-2 vision360">
+    <div class="cajaimagen1200 mt-2 ">
+        <img class="img-fluid" src="{{asset('images/AdobeStock_340828216.jpeg') }}"  alt="Equipo 360">
+    </div>
+
+
+    <div class="card mt-2 mb-2 vision360">
 
         <div class="card-header text-center titulo360">
             GESTION POR COMPETENCIAS TALENT 360&#176;<span><i class="material-icons">360</i></span></i>

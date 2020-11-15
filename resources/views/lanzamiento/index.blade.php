@@ -19,9 +19,9 @@
             <div class="panel panel pb-1">
                 <div class="clearfix">
 
-                    <div class="text text-center titulo">
+                    {{-- <div class="text text-center titulo">
                         <h4>Panel de Evaluados</h4>
-                    </div>
+                    </div> --}}
 
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
                         <input class="form-control mr-sm-2" type="text" placeholder="Nombre" aria-label="Searh" name="buscarWordKey">
