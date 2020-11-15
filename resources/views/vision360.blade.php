@@ -14,7 +14,7 @@
     <div class="card mt-2 mb-2 vision360">
 
         <div class="card-header text-center titulo360">
-            GESTION POR COMPETENCIAS TALENT 360&#176;<span><i class="material-icons">360</i></span></i>
+            Modelo de Gestion Por Competencias TALENT 360&#176;<span><i class="material-icons">360</i></span></i>
         </div>
         <div class="card-body text-center ">
             <div class="d-flex justify-content-between">
