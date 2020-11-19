@@ -162,10 +162,7 @@
 
     <!-- Begin page content -->
     <main role="main" class="container">
-        <div class="card-header text-center maintitulo360">
-            Sistema de Gestion por Competencias TALENT 360&#176;<span><i class="material-icons">360</i></span></i>
-        </div>
-
+      
 
         <div class="row ">
             <div class="col-md-12">

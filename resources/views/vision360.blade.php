@@ -6,9 +6,9 @@
 
 <div class="container">
 
-    <div class="cajaimagen1200 mt-2 ">
+    {{-- <div class="cajaimagen1200 mt-2 ">
         <img class="img-fluid" src="{{asset('images/AdobeStock_340828216.jpeg') }}"  alt="Equipo 360">
-    </div>
+    </div> --}}
 
 
     <div class="card mt-2 mb-2 vision360">
