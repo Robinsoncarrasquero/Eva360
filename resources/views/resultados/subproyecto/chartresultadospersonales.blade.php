@@ -30,7 +30,7 @@
 <div class="container">
 
     <div class="mt-3">
-        <div class="col-lg-12 mb-1" id="container"></div>
+        <div class="col-12 mb-1" id="container"></div>
     </div>
 
 
@@ -38,12 +38,11 @@
 
         <div class="col-sm-12">
 
-
             <div class="panel panel">
 
                 <div class="clearfix">
                     <div class=" text-center">
-                        <h5>Resultados de Competencias Personales</span></h5>
+                        <h5>Cuadro de resultados</span></h5>
                     </div>
 
                 </div>
@@ -51,49 +50,43 @@
             </div>
 
             @if($subProyecto)
+                <div class="table">
+                    <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                        <thead class="table-thead">
+                            <tr>
+                                <th>
+                                    Competencias/Participantes
+                                </th>
+                                @foreach ($dataCategoria as $key=>$value)
+                                <th>
+                                    {{$value}}</strong>
+                                </th>
+                                @endforeach
+                            </tr>
 
-                <div class="row ">
-
-                        <div class="table col-12">
-                            <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                                <thead class="table-thead">
-                                    <tr>
-                                        <th>
-                                            Competencias/Participantes
-                                        </th>
-                                       @foreach ($dataCategoria as $key=>$value)
-                                        <th>
-                                            {{$value}}</strong>
-                                        </th>
-                                        @endforeach
-                                    </tr>
-
-                                </thead>
-                                <tbody>
-                                    @foreach ($dataSerie as $key=>$dataValue)
-                                    <tr>
-                                        <td>{{$dataValue['name']}}</td>
-                                        {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
-                                        @foreach ($dataValue['data'] as $vdata)
-                                        <td>{{ number_format($vdata,2)}}</td>
-                                        @endforeach
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
+                        </thead>
+                        <tbody>
+                            @foreach ($dataSerie as $key=>$dataValue)
+                            <tr>
+                                <td>{{$dataValue['name']}}</td>
+                                {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
+                                @foreach ($dataValue['data'] as $vdata)
+                                <td>{{ number_format($vdata,2)}}</td>
+                                @endforeach
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-
             @endif
 
             {{-- {{ $competencias->links() }} --}}
 
         </div>
+        <div class="col-6">
+            <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+        </div>
 
-    </div>
-    <div class="clearfix">
-        <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
     </div>
 
 </div>
