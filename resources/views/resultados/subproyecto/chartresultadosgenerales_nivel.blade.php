@@ -33,72 +33,51 @@
         <div class="col-lg-12 mb-1" id="container"></div>
     </div>
 
-
-    <div class="panel panel-default">
-
-        <div class="col-lg-12">
-
-
-            <div class="panel panel pb-3">
-
-                <div class="clearfix">
-                    <div class="text-left">
-                        <h6>Nivel de Cargo Fortalezas / Oportunidades</h6>
-                    </div>
-                </div>
-
-            </div>
-
-            @if($subProyecto)
-
-                <div class="row ">
-
-                        <div class="table col-12">
-                            <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                                <thead class="table-thead">
-                                    <th>Nivel</th>
-                                    <th>Oportunidad</th>
-                                    <th>Fortaleza</th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($dataDofa as $ddata)
-                                    <tr>
-                                    <td>{{$ddata['agrupa']}}</strong></td>
-                                    <td>
-                                        @if ($ddata['dataoportunidad'])
-                                        @foreach ($ddata['dataoportunidad'] as $key=>$vdata)
-                                            {{$vdata['competencia']}},
-                                        @endforeach
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($ddata['datafortaleza'])
-                                        @foreach ($ddata['datafortaleza'] as $key=>$vdata)
-                                            {{$vdata['competencia']}},
-                                        @endforeach
-                                        @endif
-
-                                    </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
-                </div>
-
-            @endif
-
-            {{-- {{ $competencias->links() }} --}}
-
+    <div class="col-sm-12">
+        <div class="text-left">
+            <h6>Cuadro Nivel de Cargo Fortalezas / Oportunidades</h6>
         </div>
 
-    </div>
-    <div class="clearfix">
-        <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-    </div>
+        @if($subProyecto)
 
+            <div class="table">
+                <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                    <thead class="table-thead">
+                        <th>Nivel</th>
+                        <th>Oportunidad</th>
+                        <th>Fortaleza</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($dataDofa as $ddata)
+                        <tr>
+                        <td>{{$ddata['agrupa']}}</strong></td>
+                        <td>
+                            @if ($ddata['dataoportunidad'])
+                            @foreach ($ddata['dataoportunidad'] as $key=>$vdata)
+                                {{$vdata['competencia']}},
+                            @endforeach
+                            @endif
+                        </td>
+                        <td>
+                            @if ($ddata['datafortaleza'])
+                            @foreach ($ddata['datafortaleza'] as $key=>$vdata)
+                                {{$vdata['competencia']}},
+                            @endforeach
+                            @endif
+
+                        </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+        {{-- {{ $competencias->links() }} --}}
+        <div class="clearfix">
+            <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+        </div>
     </div>
+</div>
 
 
 

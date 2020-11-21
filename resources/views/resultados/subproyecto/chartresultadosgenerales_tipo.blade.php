@@ -28,60 +28,53 @@
 </head>
 <body>
 <div class="container">
-
-    <div class="col-lg-12 mt-3">
+    <div class="col-12 mt-3">
         <div class="mb-1" id="container"></div>
     </div>
+    <div class="col-sm-12">
+        <div class="text-left">
+            <h6>Cuadro Resultado de Fortalezas / Oportunidades</h6>
+        </div>
+        @if($subProyecto)
 
-    <div class="col-lg-12">
-
-            <div class="text-left">
-                <h6>Tipos de Competencias Fortalezas / Oportunidades</h6>
-            </div>
-
-            @if($subProyecto)
-
-                <div class="table">
-                    <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                        <thead class="table-thead">
-                            <th>Tipo</th>
-                            <th>Oportunidad</th>
-                            <th>Fortaleza</th>
-                        </thead>
-                        <tbody>
-                            @foreach ($dataDofa as $ddata)
-                            <tr>
-                            <td>{{$ddata['agrupa']}}</strong></td>
-                            <td>
-                                @if ($ddata['dataoportunidad'])
-                                @foreach ($ddata['dataoportunidad'] as $key=>$vdata)
-                                    {{$vdata['competencia']}},
-                                @endforeach
-                                @endif
-                            </td>
-                            <td>
-                                @if ($ddata['datafortaleza'])
-                                @foreach ($ddata['datafortaleza'] as $key=>$vdata)
-                                    {{$vdata['competencia']}},
-                                @endforeach
-                                @endif
-
-                            </td>
-
-                            </tr>
+            <div class="table">
+                <table id="{{ 'table'.$subProyecto->id }}" class="table table-bordered table-striped table-table">
+                    <thead class="table-thead">
+                        <th>Tipo</th>
+                        <th>Oportunidad</th>
+                        <th>Fortaleza</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($dataDofa as $ddata)
+                        <tr>
+                        <td>{{$ddata['agrupa']}}</strong></td>
+                        <td>
+                            @if ($ddata['dataoportunidad'])
+                            @foreach ($ddata['dataoportunidad'] as $key=>$vdata)
+                                {{$vdata['competencia']}},
                             @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @endif
+                            @endif
+                        </td>
+                        <td>
+                            @if ($ddata['datafortaleza'])
+                            @foreach ($ddata['datafortaleza'] as $key=>$vdata)
+                                {{$vdata['competencia']}},
+                            @endforeach
+                            @endif
 
-            {{-- {{ $competencias->links() }} --}}
+                        </td>
 
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+        {{-- {{ $competencias->links() }} --}}
+        <div class="clearfix">
+            <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+        </div>
     </div>
-    <div class="clearfix">
-        <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-    </div>
-
 </div>
 
 {{-- <script src="{{ asset('js/hchar/highcharts.js') }}"></script>
