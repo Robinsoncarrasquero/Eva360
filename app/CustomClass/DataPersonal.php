@@ -56,6 +56,7 @@ class DataPersonal{
             //Creamos una array con la data de las competencias
             $arrayCumplimiento=[];
             $arraydataOportunidad=[];
+            $arraydataFortaleza=[];
 
             foreach ($value['data'] as $item) {
                 $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['eva360']];
@@ -65,6 +66,8 @@ class DataPersonal{
                  */
                 if ($item['eva360']<$item['nivel']){
                     $arraydataOportunidad[]=['competencia'=> $item['name']];
+                }else{
+                    $arraydataFortaleza[]=['competencia'=> $item['name']];
                 }
             }
 
@@ -74,7 +77,7 @@ class DataPersonal{
                     $cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
                     $brecha= 100 - $cumplimiento;
                 }
-                $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad];
+                $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad,'datafortaleza'=>$arraydataFortaleza];
             }
 
         }
@@ -108,7 +111,6 @@ class DataPersonal{
             $this->dataBrecha=[];
             $this->dataCategoria=[];
             $this->dataSerie=[];
-            dump($competencias,$this->evaluado_id);
             return [];
         }
 

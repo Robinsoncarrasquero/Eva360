@@ -49,6 +49,9 @@
                                 <th>
                                     Oportunidades de Mejora
                                 </th>
+                                <th>
+                                    Fortalezas
+                                </th>
                                 </thead>
                                 <tbody>
                                     @foreach ($dataBrecha as $key=>$value)
@@ -61,6 +64,11 @@
                                         {{$vdata['competencia']}},
                                     @endforeach
                                     </td>
+                                    <td>
+                                        @foreach ($value['datafortaleza'] as $vdata)
+                                            {{$vdata['competencia']}},
+                                        @endforeach
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
