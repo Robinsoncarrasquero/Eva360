@@ -136,6 +136,19 @@ Route::get('ajaxmodeloajax/data', 'ModeloController@ajaxCompetencias')->name('mo
 ->middleware('role:admin');
 
 /**
+ * Ajax Controller para manejo de funcionalidades con ajax
+ */
+//Envio de correo a evaluador para responder el cuestionario
+Route::post('sendEmailEvaluador','AjaxController@sendEmailEvaluador')->name('ajaxsendemailevaluador')
+->middleware('role:admin');
+
+//Envio de correo a evaluador para responder el cuestionario
+Route::post('changeEmailEvaluador','AjaxController@changeEmailEvaluador')->name('ajaxchangeemailevaluador')
+->middleware('role:admin');
+
+
+
+/**
  * Resource de tipo de competencia
  *
  * */

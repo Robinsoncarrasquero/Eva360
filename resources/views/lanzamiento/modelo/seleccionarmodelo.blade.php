@@ -89,33 +89,31 @@
 
 @section('scripts')
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-<script type="text/javascript">
-    $(document).on('click','.btnradio',function(e){
-        id=$(this).parents('tr').prop('id');
-        td='<tr><td>No hay Informacion</td></tr>';
-        $.ajax({
+<script type = "text/javascript">
+$(document).on('click','.btnradio',function(e){
+    id=$(this).parents('tr').prop('id');
+    td='<tr><td>No hay Informacion</td></tr>';
+    $.ajax({
         type:'GET',
-          url:"{{ route('modelo.ajaxcompetencias') }}",
-          data:{id:id},
-           success:function(data){
-               if (data.success){
-                   td='';
-                   var datajson=data.dataJson;
-                   datajson.forEach(logArrayElements);
-               }
-               $("#tbody-table-seleccionado").html(td);
+        url:"{{ route('modelo.ajaxcompetencias') }}",
+        data:{id:id},
+        success:function(data){
+            if (data.success){
+                td='';
+                var datajson=data.dataJson;
+                datajson.forEach(logArrayElements);
             }
+            $("#tbody-table-seleccionado").html(td);
+        }
 
-        });
+    });
 
     function logArrayElements(element, index, array) {
         td +="<tr><td>"+element+"</td></tr>";
         console.log("a[" + index + "] = " + element);
     }
 
-	});
-
+});
 </script>
 @endsection
 

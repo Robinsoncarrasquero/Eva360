@@ -49,6 +49,7 @@ class ModeloController extends Controller
     public function store(Request $request)
     {
 
+
         $request->validate(
             [
                 'name'=>'required',
@@ -128,7 +129,6 @@ class ModeloController extends Controller
     public function ajaxCompetencias(Request $request)
     {
 
-
         $id = $request->id;
         Log::info($id);
         $mcompetencias = Modelo::find($id)->competencias;
@@ -141,9 +141,5 @@ class ModeloController extends Controller
         return response()->json(['success'=>'Got Simple Ajax Request.','dataJson'=>$data->toArray()]);
 
     }
-
-
-
-
 
 }

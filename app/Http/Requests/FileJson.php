@@ -31,7 +31,8 @@ class FileJson extends FormRequest
                 'name.*'       => 'required|max:50',
                 'relation.*' => 'required|max:10',
                 'email.*' => 'required',
-                'email.*' => [new CheckEmailDns()],
+                //'email.*' => [new CheckEmailDns()],
+                'email.*' => 'email:rfc,dns',
                 'evaluacion'=>'required'
 
             ];
@@ -45,9 +46,10 @@ class FileJson extends FormRequest
             'name.*.required'=> 'El Nombre es requerido, debe indicarlo correctamente',
             'email.*.required'=> 'El Email is requerido, debe especificarlo correctamente',
             'relation.*.required' => 'La Relation es requerida, debe ingresar un tipo de relacion (parner, supervisor,externo,etc)',
-            'relation.*.max' => 'La Relacion (:attribute) debe tener un maximo de 10 caracteres',
-            'email.*.CheckEmailDns' => 'Email No valido debe ingresar un nombre de dominio correctamente',
-            'evaluacion.required'=>'Error la evaluacion 360(Supervisores + Pares + Subordinados) 180(Supervisores + Pares) 90(Jefe + Supervisor)'
+            'relation.*.max' => 'La Relacion (:attribute) debe tener un maximo de 15 caracteres',
+            //'email.*.CheckEmailDns' => 'Debe especificar una direccion de correo valida',
+            'email.*' => 'Debe especificar una direccion de correo valida :attribute',
+            'evaluacion.required'=>'Error la evaluacion 360 (Supervisores + Pares + Subordinados) 180(Supervisores + Pares) 90(Jefe + Supervisor)'
         ];
     }
     public function save(){

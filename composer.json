@@ -57,7 +57,8 @@
 	        "app/CustomClass/DataEvaluacion.php",
             "app/CustomClass/DataEvaluacionGlobal.php",
             "app/CustomClass/DataResultadoTipo.php",
-            "app/CustomClass/DataResultadoNivel.php"
+            "app/CustomClass/DataResultadoNivel.php",
+            "app/CustomClass/EnviarEmail.php"
 	]
     },
     "minimum-stability": "dev",

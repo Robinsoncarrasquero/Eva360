@@ -34,11 +34,9 @@
                                             <input type="checkbox" class="btncheck"> Reenviar email
                                         </th>
                                     </tr>
-                                    <tr id="{{ $evaluador->id }}">
+                                    <tr>
                                         <th class="text text-left  title-th-evaluador" colspan="5">
                                         {{$evaluador->name}}({{ $evaluador->relation }}) {{$evaluador->email}}
-                                        <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
-                                        <button type="button"  class="btn btn-info btn-save-email">Guardar Email
                                         </th>
                                     </tr>
                                     <tr>
@@ -71,7 +69,7 @@
                 </div>
             @else
                 <div class="alert-info">
-                    <p>No hay preguntas disponibles para responder</p>
+                    <p>No Preguntas disponibles para responder</p>
                 <div>
             @endif
             {{-- {{ $competencias->links() }} --}}
@@ -103,41 +101,7 @@
                 data:{id:id},
                 type:'post',
                 success:  function (response) {
-                    alert(response.message);
-                },
-                statusCode: {
-                    404: function() {
-                        alert('web not found');
-                    }
-                },
-                error:function(x,xs,xt){
-                    //window.open(JSON.stringify(x));
-                    //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
-                }
-            });
-        }
-    });
-
-    //Save email
-    $('.btn-save-email').click(function(e){
-        e.preventDefault();
-        id=0;
-        {
-            id=$(this).parents('tr').prop('id');
-            var row= $(this).parents('tr').children('th');
-            var email= $("#email"+id).val();
-
-            //row.addClass('hidden').append('<i class="text text-success material-icons">send</i>');
-            // var f=null;
-            // f=$(this).closest('tr').clone(false);
-            // $('#table' + id +' tbody').append(f);
-            // $(this).parents("tr").remove();
-            $.ajax({
-                url:"{{ route('ajaxchangeemailevaluador') }}",
-                data:{id:id,email:email},
-                type:'post',
-                success:  function (response) {
-                    alert(response.message);
+                    alert(response);
                 },
                 statusCode: {
                     404: function() {

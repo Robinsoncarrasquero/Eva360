@@ -13,60 +13,14 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
-class LanzarEvaluacion
+class EnviarEmail
 {
-    private $competencias;
-    private $evaluado_id;
     private $root;
 
-    function __construct($competencias,$evaluado_id,$root) {
-        $this->competencias = $competencias;
-        $this->evaluado_id = $evaluado_id;
-        $this->root = $root;
-
-    }
-
-    /** Crea la evaluacion del evaluado */
-    public function crearEvaluacion(){
-
-        //Buscamos el Evaluado
-        $evaluado = Evaluado::find($this->evaluado_id);
-        //Buscamos los evaluadores del evaluado
-        $evaluadores = $evaluado->evaluadores;
-
-        //Recorremos los evaluadores y creamos la evaluacion para cada uno
-        foreach($evaluadores as $evaluador){
-
-            //Creamos la Evaluacion con los datos solo de las competencias
-            foreach($this->competencias as $key=>$this->competencia){
-                $evaluacion = new Evaluacion();
-                //$evaluacion->resultado=Helper::estatus('Inicio');
-                $evaluacion->competencia_id=$this->competencia->id;
-                try {
-                    //Salvamos a la evaluacion
-                    $eva360=$evaluador->evaluaciones()->save($evaluacion);
-
-                    //Cambiamos status de Evaluado
-                    $evaluadorx = Evaluador::find($evaluador->id);
-                    $evaluadorx->status=1; //0:Inicio, 1:Lanzada 2:finalizada
-                    $evaluadorx->save();
-
-                } catch (QueryException $e) {
-                    return false;
-                }
-            }
-
-        }
-        $evaluado->status=1; //0:Inicio, 1:Lanzada 2:finalizada
-        $evaluado->save();
-
-        $this->enviarEmailEvaluadores($this->evaluado_id,$this->root);
-        return true;
-    }
 
     /** Envia los correos de invitacion a los evaluadores */
     public function enviarEmailEvaluadores($evaluado_id,$root){
-
+        $this->root = $root;
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
@@ -75,6 +29,23 @@ class LanzarEvaluacion
 
         //Iteramos los evaluadores
         foreach($evaluadores as $evaluador){
+            $this->enviarEmailEvaluador($evaluador->id,$this->root);
+        }
+
+    }
+
+
+    /** Enviar email de invitacion a Evaluador para responder questionario */
+    public function enviarEmailEvaluador($evaluador_id,$root){
+
+        //Buscamos el evaluador
+        $evaluador = Evaluador::find($evaluador_id);
+
+        //Buscamos el evaluado del evaluador
+        $evaluado = Evaluado::find($evaluador->evaluado_id);
+
+        //Iteramos los evaluadores
+        {
 
             //Creamos un usuario para responder la prueba con autenticacion
             try {
@@ -87,12 +58,11 @@ class LanzarEvaluacion
                     $userRole =Role::where('name','user')->first();
                     $user->roles()->attach($userRole);
                 }
-                $evaluadorx = Evaluador::find($evaluador->id,['user_id']);
-                $evaluadorx->user_id = $user->id;
-                $evaluadorx->save();
+                $evaluador->user_id = $user->id;
+                $evaluador->save();
 
             }catch(QueryException $e) {
-
+                return \false;
                 abort(404,$e);
             }
 
@@ -112,7 +82,9 @@ class LanzarEvaluacion
                 $data->enviado =true;
                 $data->save();
             }catch(QueryException $e) {
+                return \false;
                 abort(404);
+
             }
 
         }
