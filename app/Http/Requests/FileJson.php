@@ -41,21 +41,17 @@ class FileJson extends FormRequest
     public function messages()
     {
         return [
-            'nameevaluado.required'=> 'El Nombre del evaluado es requerido, debe indicarlo correctamente',
-            'cargoevaluado.required'=> 'El Cargo del evaluado es requerido, debe indicarlo correctamente',
-            'name.*.required'=> 'El Nombre es requerido, debe indicarlo correctamente',
-            'email.*.required'=> 'El Email is requerido, debe especificarlo correctamente',
-            'relation.*.required' => 'La Relation es requerida, debe ingresar un tipo de relacion (parner, supervisor,externo,etc)',
+            'nameevaluado.required'=> 'El Nombre de Evaluado es requerido.',
+            'cargoevaluado.required'=> 'El Cargo de Evaluado es requerido.',
+            'name.*.required'=> 'El Nombre de Evaluador es requerido.',
+            'email.*.required'=> 'El e-mail es requerido, debe especificarlo correctamente',
+            'relation.*.required' => 'La Relation es requerida.',
             'relation.*.max' => 'La Relacion (:attribute) debe tener un maximo de 15 caracteres',
             //'email.*.CheckEmailDns' => 'Debe especificar una direccion de correo valida',
             'email.*' => 'Debe especificar una direccion de correo valida :attribute',
-            'evaluacion.required'=>'Error la evaluacion 360 (Supervisores + Pares + Subordinados) 180(Supervisores + Pares) 90(Jefe + Supervisor)'
+            'evaluacion.required'=>'E90(Jefe + Super) / E360 (Super + Pares + Subordinados) / E180(Super + Pares) / '
         ];
     }
-    public function save(){
-
-    }
-    //Validamos los tipos de pruebas
     protected function prepareForValidation()
     {
 

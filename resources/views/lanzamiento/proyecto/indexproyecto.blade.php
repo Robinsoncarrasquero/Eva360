@@ -56,8 +56,7 @@
                                     <table id="table-evaluado" class="table">
                                         <thead>
                                             <th>Nombre</th>
-                                            <th>Cargo</th>
-                                            <th>Status</th>
+                                            <th>Progreso</th>
                                             <th>Lanzar</th>
                                             <th>Prueba</th>
                                             <th>Resultado</th>
@@ -66,8 +65,9 @@
                                         <tbody>
                                         @foreach ($subproyecto->evaluado as $evaluado)
                                         <tr>
-                                            <td>{{ $evaluado->name }}</td>
-                                            <td>{{ $evaluado->cargo}}</td>
+                                            <td>
+                                            {{ substr($evaluado->name,1,30) }}<br>
+                                            {{ substr($evaluado->cargo,1,30)}}
                                             <td>
                                                 <div class="status-progress">
                                                     @if(Helper::estatus($evaluado->status)=='Finalizada')
