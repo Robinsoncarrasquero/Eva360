@@ -24,6 +24,7 @@ class AjaxController extends Controller
             $objEnviarEmailEvaluador=null;
             return response()->json(['message'=>'Questionario ha sido enviado al correo del Evaluador ...','errors'=>["email"=>"La evaluacion ha sido enviada"]]);
          }
+         return response()->json(['message'=>'Error correo no hasido enviado...','errors'=>["email"=>"No envio correo, tenemos un problema"]]);
 
      }
 

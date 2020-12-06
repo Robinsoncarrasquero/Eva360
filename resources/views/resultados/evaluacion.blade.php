@@ -14,12 +14,9 @@
                 @include('flash-message')
             </div>
 
-            <div class="panel panel mt-2 pb-2">
-                <div class=" text-center titulo">
-                    <h5>Prueba de <span class="text-danger">{{ $evaluado->name }}</span></h5>
-                </div>
+            <div class="card card-header mt-2 mb-4">
                 <div class="text text-center">
-                    <h5>Competencias y Evaluadores</span></h5>
+                    <h5>Competencias y evaluadores para la Prueba de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                 </div>
             </div>
 
