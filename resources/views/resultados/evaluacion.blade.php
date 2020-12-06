@@ -31,11 +31,11 @@
                                             <input type="checkbox" class="btncheck"> Reenviar email
                                         </th>
                                     </tr>
-                                    <tr id="{{ $evaluador->id }}">
+                                    <tr>
                                         <th class="text text-left  title-th-evaluador" colspan="5">
                                         {{$evaluador->name}}({{ $evaluador->relation }}) {{$evaluador->email}}
                                         <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
-                                        <button type="button"  class="btn btn-info btn-save-email">Guardar Email
+                                        <button type="button" data-id="{{$evaluador->id}}" class="btn btn-info btn-save-email">Guardar Email
                                         </th>
                                     </tr>
                                     <tr>
@@ -122,10 +122,10 @@
         e.preventDefault();
         id=0;
         {
-            id=$(this).parents('tr').prop('id');
+            //id=$(this).parents('tr').prop('id');
+            id=$(this).attr('data-id');
             var row= $(this).parents('tr').children('th');
             var email= $("#email"+id).val();
-
             //row.addClass('hidden').append('<i class="text text-success material-icons">send</i>');
             // var f=null;
             // f=$(this).closest('tr').clone(false);
