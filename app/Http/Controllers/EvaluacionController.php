@@ -37,7 +37,6 @@ class EvaluacionController extends Controller
     public function token($token)
     {
 
-
         //Filtramos el evaluador segun el token recibido
         $evaluador = Evaluador::all()->where('remember_token',$token)->first();
         if($evaluador==\null){
@@ -45,6 +44,7 @@ class EvaluacionController extends Controller
            return redirect('login');
         }
         $user=Auth::loginUsingId($evaluador->user_id);
+
         if (!Auth::check()){
             return redirect('login');
         }

@@ -87,10 +87,9 @@ class LanzarEvaluacion
                     $userRole =Role::where('name','user')->first();
                     $user->roles()->attach($userRole);
                 }
-                $evaluadorx = Evaluador::find($evaluador->id,['user_id']);
+                $evaluadorx = Evaluador::find($evaluador->id);
                 $evaluadorx->user_id = $user->id;
                 $evaluadorx->save();
-
             }catch(QueryException $e) {
 
                 abort(404,$e);
