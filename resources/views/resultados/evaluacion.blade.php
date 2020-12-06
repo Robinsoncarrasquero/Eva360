@@ -23,7 +23,7 @@
             @if($evaluadores)
                 <div class="row ">
                     @foreach($evaluadores as $evaluador)
-                        <div class="table col-xs-12 col-sm-6">
+                        <div class="table col-sm-12 col-md-6">
                             <table id="table{{ $evaluador->id }}" class="table  table-bordered table-striped table-table">
                                 <thead>
                                     <tr id="{{ $evaluador->id }}">
@@ -33,7 +33,7 @@
                                     </tr>
                                     <tr>
                                         <th class="text text-left  title-th-evaluador" colspan="5">
-                                        {{$evaluador->name}}({{ $evaluador->relation }}) {{$evaluador->email}}
+                                        {{$evaluador->name}}({{ $evaluador->relation }}) <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
                                         <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
                                         <button type="button" data-id="{{$evaluador->id}}" class="btn btn-info btn-save-email">Guardar Email
                                         </th>
@@ -79,7 +79,7 @@
 
 @section('scripts')
 {{-- <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> --}}
-{{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script>
     $.ajaxSetup({
@@ -92,8 +92,7 @@
         if($(this).is(':checked',true)){
             id=$(this).parents('tr').prop('id');
             var row= $(this).parents('tr').children('th');
-            row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
-            alert(id);
+            //row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
             // var f=null;
             // f=$(this).closest('tr').clone(false);
             // $('#table' + id +' tbody').append(f);
@@ -103,7 +102,12 @@
                 data:{id:id},
                 type:'post',
                 success:  function (response) {
-                    alert(response.message);
+                    if (response.success){
+                       row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
+                    }else{
+                        alert(response.message);
+                    }
+
                 },
                 statusCode: {
                     404: function() {
@@ -127,6 +131,8 @@
             id=$(this).attr('data-id');
             var row= $(this).parents('tr').children('th');
             var email= $("#email"+id).val();
+           // var eemail= $(this).parents('th').children('span').attr('id');
+            var eemail= $("#dataemail"+id).text();
             //row.addClass('hidden').append('<i class="text text-success material-icons">send</i>');
             // var f=null;
             // f=$(this).closest('tr').clone(false);
@@ -137,7 +143,14 @@
                 data:{id:id,email:email},
                 type:'post',
                 success:  function (response) {
-                    alert(response.message);
+                    if (!response.success){
+                        $("#email"+id).val(eemail).addClass('alert-danger');
+                        alert(response.message);
+                    }else{
+                        $("#email"+id).addClass('alert-success').removeClass('alert-danger');
+                        $("#dataemail"+id).text(email).addClass('alert-success');
+                    }
+
                 },
                 statusCode: {
                     404: function() {

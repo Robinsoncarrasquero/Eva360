@@ -51,7 +51,7 @@
                                 <span ><i class="material-icons">spellcheck</i></span>
                             @else
                                 <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                <span class="spinner-grow text-warning" role="status"><i class="material-icons spellcheck"></i></span></a>
+                                <span class="spinner-grow text-warning align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
                             @endif
                         </td>
                         <td>

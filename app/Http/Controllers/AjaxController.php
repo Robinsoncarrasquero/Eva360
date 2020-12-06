@@ -22,10 +22,9 @@ class AjaxController extends Controller
             $objEnviarEmailEvaluador = new EnviarEmail();
             $objEnviarEmailEvaluador->enviarEmailEvaluador($evaluador_id,$root);
             $objEnviarEmailEvaluador=null;
-            return response()->json(['message'=>"$evaluador_id y $root",'errors'=>["email"=>"Error la evaluacion no ha sido enviada"]]);
-            return response()->json(['message'=>'Questionario ha sido enviado al correo del Evaluador ...','errors'=>["email"=>"La evaluacion ha sido enviada"]]);
+            return response()->json(['success'=>true,'message'=>'Questionario ha sido enviado al correo del Evaluador ...','errors'=>["email"=>"La evaluacion ha sido enviada"]]);
          }
-         return response()->json(['message'=>"ERROR $evaluador_id y $root",'errors'=>["email"=>"ERROR NO SE ENVIO NADA"]]);
+         return response()->json(['success'=>false,'message'=>"ERROR No se envio el correo del cuestionario",'errors'=>["email"=>"ERROR Re-enviando el Questionario"]]);
 
 
      }
@@ -48,17 +47,17 @@ class AjaxController extends Controller
 
             if ($validator->fails()) {
                 $errors = $validator->errors();
-                return response()->json(['message'=>$errors->first('email'),'errors'=>["email"=>"El e-mail debe ser una direccion de correo valida"]]);
+                return response()->json(['success'=>false,'message'=>$errors->first('email'),'errors'=>["email"=>"El e-mail debe ser una direccion de correo valida"]]);
             }
 
             if ($user->email==$email_new){
-                return response()->json(['message'=>'No hay cambios que realizar...','errors'=>["email"=>"The email no ha sido modficado."]]);
+                return response()->json(['success'=>false,'message'=>'No hay cambios que realizar...','errors'=>["email"=>"The email no ha sido modficado."]]);
             }
             try {
                 $user->email = $email_new;
                 $user->save();
             }catch(QueryException $e) {
-                return response()->json(['message'=>'Error e-mail ya ha sido tomado por otro usuario ...','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
+                return response()->json(['success'=>false,'message'=>'Error e-mail ya ha sido tomado por otro usuario ...','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
                 abort(404,$e);
             }
 
@@ -72,11 +71,11 @@ class AjaxController extends Controller
                     $evaluadorx->email=$email_new;
                     $evaluadorx->save();
                 }catch(QueryException $e) {
-                    return response()->json(['message'=>'Error Fatal intentando modificar Email de Evaluador, reporte este incidente.','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
+                    return response()->json(['success'=>false,'message'=>'Error Fatal intentando modificar Email de Evaluador, reporte este incidente.','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
                     abort(404,$e);
                 }
             }
-            return response()->json(['message'=>'Email modificado con exitosamente....','errors'=>["email"=>"El e-mail ha sido modificado con exito."]]);
+            return response()->json(['success'=>true,'message'=>'Email modificado con exitosamente....','errors'=>["email"=>"El e-mail ha sido modificado con exito."]]);
         }
      }
 

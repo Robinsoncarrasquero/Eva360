@@ -47,41 +47,44 @@
                         <table class="table" id="{{ $subproyecto->id }}">
                             <thead>
                                 <th>Nombre</th>
-                                <th>Progreso</th>
+                                <th></th>
                                 <th>Lanzar</th>
                                 <th>Prueba</th>
                                 <th>Resultado</th>
                                 <th>Grafica</th>
-                                <th>Del</th>
+                                <th></th>
                             </thead>
                             <tbody>
                             @foreach ($subproyecto->evaluado as $evaluado)
                             <tr>
                             <td>{{ $evaluado->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p></td>
-                            <td class="status-progress">
+                            <td class="status-progress" >
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                    <span id="inicio" class="radio-checkeado" ></span>
+                                    {{-- <span id="inicio" class="radio-checkeado" ></span>
                                     <span id="medio" class="radio-checkeado" ></span>
-                                    <span id="final" class="radio-checkeado" ></span>
+                                    <span id="final" class="radio-checkeado" ></span> --}}
+                                    <i class="spinner-grow spinner-grow-sm text-success" role="status"></i>
                                 @endif
 
                                 @if(Helper::estatus($evaluado->status)=='Inicio')
-                                    <span id="inicio" class="radio-checkeado" ></span>
+                                    {{-- <span id="inicio" class="radio-checkeado" ></span>
                                     <span id="medio" class="radio-no-checkeado" ></span>
-                                    <span id="final" class="radio-no-checkeado"></span>
+                                    <span id="final" class="radio-no-checkeado"></span> --}}
+                                    <i class="spinner-grow spinner-grow-sm text-dark" role="status"></i>
                                 @endif
 
                                 @if(Helper::estatus($evaluado->status)=='Lanzada')
-                                    <span id="inicio" class="radio-checkeado"></span>
+                                    {{-- <span id="inicio" class="radio-checkeado"></span>
                                     <span id="medio" class="radio-checkeado"></span>
-                                    <span id="final" class="radio-no-checkeado"></span>
+                                    <span id="final" class="radio-no-checkeado"></span> --}}
+                                    <i class="spinner-grow spinner-grow-sm text-warning" role="status"></i>
                                 @endif
                             </td>
                             <td>
                                 @if(Helper::estatus($evaluado->status)=='Inicio')
                                     <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff</i></span></a>
                                 @else
-                                    <a ><span><i class="material-icons text-dark">flight_takeoff</i></span></a>
+                                    <a ><span><i class="material-icons text-dark m-0">flight_takeoff</i></span></a>
                                 @endif
 
                             </td>
