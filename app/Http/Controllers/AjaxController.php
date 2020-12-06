@@ -18,14 +18,15 @@ class AjaxController extends Controller
      {
         $evaluador_id=$request->id;
         $root=$request->root();
-        dd($request,$root);
         if ($request->id>0) {
             $objEnviarEmailEvaluador = new EnviarEmail();
             $objEnviarEmailEvaluador->enviarEmailEvaluador($evaluador_id,$root);
             $objEnviarEmailEvaluador=null;
+            return response()->json(['message'=>"$evaluador_id y $root",'errors'=>["email"=>"Error la evaluacion no ha sido enviada"]]);
             return response()->json(['message'=>'Questionario ha sido enviado al correo del Evaluador ...','errors'=>["email"=>"La evaluacion ha sido enviada"]]);
          }
-         return response()->json(['message'=>'Error correo no hasido enviado...','errors'=>["email"=>"No envio correo, tenemos un problema"]]);
+         return response()->json(['message'=>"ERROR $evaluador_id y $root",'errors'=>["email"=>"ERROR NO SE ENVIO NADA"]]);
+
 
      }
 
