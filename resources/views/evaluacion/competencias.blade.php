@@ -8,24 +8,21 @@
 
     <div class="panel panel-default">
 
-        <div class="col-md-12">
-
             <div id="flash-message">
                 @include('flash-message')
 
             </div>
 
-            <div class="panel panel pb-1">
+            <div class="panel panel pb-1 mt-2">
 
                 <div class="clearfix">
-                    <div class="text text-center">
-                        <h5>Estimado evaluador {{ $evaluador->name }}, por favor evalue las competencias de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                    <div class="card-header text text-center">
+                        <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                     </div>
 
-                    <div class="text text-center">
+                    <div class="text text-center mt-2">
                         <h4>Competencias a Evaluar</h4>
                     </div>
-
                 </div>
 
             </div>
@@ -41,20 +38,20 @@
                     <th>Competencia</th>
                     <th>Descripcion</th>
                     <th>Status</th>
-                    <th>Answer</th>
+                    <th>Responder</th>
                     </thead>
                     <tbody>
 
                     @foreach($competencias as $competencia)
-
                     <tr>
                         <td>{{$competencia->competencia->name}}</td>
                         <td>{{$competencia->competencia->description}}</td>
                         <td>
                             @if($competencia->grado)
-                                <span><i class="material-icons spellcheck">spellcheck</i></span></a>
+                                <span ><i class="material-icons">spellcheck</i></span>
                             @else
-                                <span><i class="material-icons ">av_timer</i></span></a>
+                                <a href="{{route('evaluacion.responder', $competencia->id)}}" >
+                                <span class="spinner-grow text-warning" role="status"><i class="material-icons spellcheck"></i></span></a>
                             @endif
                         </td>
                         <td>
@@ -64,11 +61,8 @@
                             @else
                                 <a href="{{route('evaluacion.responder',$competencia->id)}}" >
                                 <i class="material-icons">visibility</i></a>
-
-
                             @endif
                         </td>
-
                     </tr>
                     @endforeach
                     </tbody>
@@ -77,7 +71,7 @@
                 <div class="clearfix">
                     <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Back</a></span>
                     @if($evaluador->status!=2)
-                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalice</button>
+                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
                     @endif
                 </div>
 
@@ -97,7 +91,6 @@
 
         </div>
 
-    </div>
 
 </div>
 

@@ -146,7 +146,7 @@ class EvaluadoController extends Controller
             $evaluado->delete();
         } catch (QueryException $e) {
             return redirect()->back()
-            ->withErrors('Error imposible Eliminar este registro, tiene un modelo de competencias lanzado');
+            ->withErrors('Error imposible Eliminar este registro, tiene un modelo de competencias asociado');
         }
         return redirect()->back()->withSuccess('El Evaluado ha sido eliminado con exito!!');
     }
