@@ -93,6 +93,7 @@
             id=$(this).parents('tr').prop('id');
             var row= $(this).parents('tr').children('th');
             row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
+            alert(id);
             // var f=null;
             // f=$(this).closest('tr').clone(false);
             // $('#table' + id +' tbody').append(f);
