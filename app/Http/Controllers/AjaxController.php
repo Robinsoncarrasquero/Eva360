@@ -18,6 +18,7 @@ class AjaxController extends Controller
      {
         $evaluador_id=$request->id;
         $root=$request->root();
+        dd($request,$root);
         if ($request->id>0) {
             $objEnviarEmailEvaluador = new EnviarEmail();
             $objEnviarEmailEvaluador->enviarEmailEvaluador($evaluador_id,$root);
