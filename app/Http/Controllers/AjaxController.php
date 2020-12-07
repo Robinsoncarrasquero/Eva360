@@ -25,8 +25,6 @@ class AjaxController extends Controller
             return response()->json(['success'=>true,'message'=>'Questionario ha sido enviado al correo del Evaluador ...','errors'=>["email"=>"La evaluacion ha sido enviada"]]);
          }
          return response()->json(['success'=>false,'message'=>"ERROR No se envio el correo del cuestionario",'errors'=>["email"=>"ERROR Re-enviando el Questionario"]]);
-
-
      }
 
      /** Cambiar e-mail de Evaluador despues de lanzada una prueba*/

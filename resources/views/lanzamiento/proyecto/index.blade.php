@@ -34,7 +34,7 @@
                     </div>
 
                     @foreach ($proyecto->subproyecto as $subproyecto)
-                    <div class="card-header mt-2">
+                    <div class="panel panel mt-2">
                         <p>
                         <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
                         <span class="float-right">

@@ -6,9 +6,7 @@
 
 <div class="container">
 
-    <div class="panel panel-default">
 
-        <div class="col-sm-12">
 
             <div id="flash-message">
                 @include('flash-message')
@@ -23,7 +21,7 @@
             @if($evaluadores)
                 <div class="row ">
                     @foreach($evaluadores as $evaluador)
-                        <div class="table col-sm-12 col-md-6">
+                        <div class="table col-xs-12 col-sm-6">
                             <table id="table{{ $evaluador->id }}" class="table  table-bordered table-striped table-table">
                                 <thead>
                                     <tr id="{{ $evaluador->id }}">
@@ -72,8 +70,7 @@
                 <div>
             @endif
             {{-- {{ $competencias->links() }} --}}
-        </div>
-    </div>
+
 </div>
 @endsection
 
@@ -102,6 +99,7 @@
                 data:{id:id},
                 type:'post',
                 success:  function (response) {
+                    alert(response.message);
                     if (response.success){
                        row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
                     }else{
