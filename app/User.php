@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','active','codigo','departamento_id','cargo_id',
     ];
 
     /**
@@ -104,6 +104,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $this->hasRole('admin');
 
+    }
+
+    //Un Usuario(evaluador) pertenece a un cargo)
+    public function cargo(){
+        return $this->belongsTo(Cargo::class,'cargo_id');
     }
 
 

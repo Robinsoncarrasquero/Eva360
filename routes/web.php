@@ -110,6 +110,16 @@ Route::resource('evaluado', 'EvaluadoController')
 Route::get('evaluado/subproyecto/{subproyecto}/create', 'EvaluadoController@create')->name('evaluado.create')
 ->middleware('role:admin');
 
+/**Historico de Evaluado
+ *
+*/
+
+Route::get('historico/create/evaluado/{id}', 'HistoricoEvaluadoController@createevaluado')->name('historico.createevaluado')
+->middleware('role:admin');
+
+Route::post('historico/store/evaluado', 'HistoricoEvaluadoController@storeevaluado')->name('historico.storeevaluado')
+->middleware('role:admin');
+
 /**
  * Modelo de Prueba
  *

@@ -23,4 +23,9 @@ class Cargo extends Model
     public function evaluados(){
         return $this->hasMany(Evaluado::class,'cargo_id');
     }
+
+    public function users(){
+        return $this->hasMany(User::class,'cargo_id');
+    }
+
 }
