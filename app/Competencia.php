@@ -10,7 +10,7 @@ class Competencia extends Model
     //
     protected $table='competencias';
 
-    protected $fillable=['name','description','tipo_id'];
+    protected $fillable=['name','description','tipo_id','nivelrequerido'];
 
     //Una competencia tiene uno o mas grados
     public function grados(){

@@ -25,12 +25,12 @@
                 <div class="row ">
                     <div class="col-sm-8">
                         <div class="table table-table">
-                            <table id="table1" class="table ">
+                            <table id="table1" class="table table-condensed table-responsive ">
                             <thead class="table-modelos">
                                 <th >#</th>
                                 <th >Nombre</th>
-                                <th >Descripcion</th>
-                                <th >Seleccione</th>
+                                <th >Objetivo</th>
+                                <th >Accion</th>
                             </thead>
                             <tbody  class="tbody-competencias-seleccionar">
                                 @foreach($modelos as $modelo)
@@ -101,16 +101,19 @@ $(document).on('click','.btnradio',function(e){
             if (data.success){
                 td='';
                 var datajson=data.dataJson;
+
                 datajson.forEach(logArrayElements);
+
             }
             $("#tbody-table-seleccionado").html(td);
         }
 
     });
 
-    function logArrayElements(element, index, array) {
-        td +="<tr><td>"+element+"</td></tr>";
-        console.log("a[" + index + "] = " + element);
+    function logArrayElements(item, index, array) {
+        td +="<tr><td>"+item+"</td></tr>";
+
+        //console.log("a[" + index + "] = " + item);
     }
 
 });

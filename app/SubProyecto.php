@@ -19,7 +19,7 @@ class SubProyecto extends Model
     }
 
     public function evaluado(){
-        return $this->hasMany(Evaluado::class,'subproyecto_id');
+        return $this->hasMany(Evaluado::class,'subproyecto_id')->orderBy('status');
     }
 
 }

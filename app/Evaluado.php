@@ -26,7 +26,7 @@ class Evaluado extends Model
 
     //Un evaluado pertenece a un subproyecto
     public function subproyecto(){
-        return $this->belongsTo(SubProyecto::class);
+        return $this->belongsTo(SubProyecto::class)->orderBy('id');
     }
 
     //Un evaluado pertenece a un cargo

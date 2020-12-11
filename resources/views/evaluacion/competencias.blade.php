@@ -6,28 +6,27 @@
 
 <div class="container">
 
-    <div class="panel panel-default">
 
-            <div id="flash-message">
-                @include('flash-message')
+        <div id="flash-message">
+            @include('flash-message')
 
-            </div>
+        </div>
 
-            <div class="panel panel pb-1 mt-2">
+        <div class="panel panel pb-1 mt-2">
 
-                <div class="clearfix">
-                    <div class="card-header text text-center">
-                        <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <span class="text-danger">{{ $evaluado->name }}</span></h5>
-                    </div>
-
-                    <div class="text text-center mt-2">
-                        <h4>Competencias a Evaluar</h4>
-                    </div>
+            <div class="clearfix">
+                <div class="card-header text text-center">
+                    <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                 </div>
 
+                <div class="text text-center mt-2">
+                    <h4>Competencias a Evaluar</h4>
+                </div>
             </div>
 
-            @if($competencias)
+        </div>
+
+        @if($competencias)
 
             <div class="panel-body">
                 <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
@@ -37,8 +36,7 @@
                     <thead class="table-competencias">
                     <th>Competencia</th>
                     <th>Descripcion</th>
-                    <th>Status</th>
-                    <th>Responder</th>
+                    <th>Accion<th>
                     </thead>
                     <tbody>
 
@@ -79,18 +77,15 @@
 
             </div>
 
-            @else
+        @else
 
             <div class="alert-info">
-                <p>No Preguntas disponibles para responder</p>
+                <p>No hay informacion disponibles para responder</p>
             <div>
 
-            @endif
+        @endif
 
-            {{-- {{ $competencias->links() }} --}}
-
-        </div>
-
+        {{-- {{ $competencias->links() }} --}}
 
 </div>
 

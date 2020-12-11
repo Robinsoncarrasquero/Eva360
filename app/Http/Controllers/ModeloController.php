@@ -129,7 +129,7 @@ class ModeloController extends Controller
     public function ajaxCompetencias(Request $request)
     {
 
-        $id = $request->id;
+        $id =$request->id;
         Log::info($id);
         $mcompetencias = Modelo::find($id)->competencias;
         $filtered = $mcompetencias->only(['competencia_id']);
@@ -138,6 +138,8 @@ class ModeloController extends Controller
         $tablaCompetencias = Competencia::all();
         $competencias = $tablaCompetencias->only($plucked->toArray());
         $data=$competencias->pluck('name');
+       // dd(response()->json(['datajson'=>$data->toArray()]));
+
         return response()->json(['success'=>'Got Simple Ajax Request.','dataJson'=>$data->toArray()]);
 
     }

@@ -35,8 +35,8 @@
 
                     @foreach ($proyecto->subproyecto as $subproyecto)
                     <div class="panel panel mt-2">
-                        <p>
-                        <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
+
+                        <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span  style="font-size: 0.75rem" class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
                         <span class="float-right">
                             <a href="{{ route('resultados.graficaPersonales',$subproyecto->id) }}"><span><i class="material-icons">table_chart</i></span></a>
                             <a href="{{ route('resultados.analisispersonalestabulados',$subproyecto->id) }}"><span><i class="material-icons">dynamic_feed</i></span></a>
@@ -47,8 +47,8 @@
                         <table class="table" id="{{ $subproyecto->id }}">
                             <thead>
                                 <th>Nombre</th>
-                                <th></th>
-                                <th>Lanzar</th>
+                                <th>Status</th>
+                                {{-- <th>Lanzar</th> --}}
                                 <th>Prueba</th>
                                 <th>Resultado</th>
                                 <th>Grafica</th>
@@ -70,24 +70,24 @@
                                     {{-- <span id="inicio" class="radio-checkeado" ></span>
                                     <span id="medio" class="radio-no-checkeado" ></span>
                                     <span id="final" class="radio-no-checkeado"></span> --}}
-                                    <i class="spinner-grow spinner-grow-sm text-dark" role="status"></i>
+                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><i class="spinner-grow spinner-grow-sm text-warning" role="status"></i></a>
                                 @endif
 
                                 @if(Helper::estatus($evaluado->status)=='Lanzada')
                                     {{-- <span id="inicio" class="radio-checkeado"></span>
                                     <span id="medio" class="radio-checkeado"></span>
                                     <span id="final" class="radio-no-checkeado"></span> --}}
-                                    <i class="spinner-grow spinner-grow-sm text-warning" role="status"></i>
+                                    <i class="spinner-grow spinner-grow-sm text-info" role="status"></i>
                                 @endif
                             </td>
-                            <td>
+                            {{-- <td>
                                 @if(Helper::estatus($evaluado->status)=='Inicio')
                                     <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff</i></span></a>
                                 @else
                                     <a ><span><i class="material-icons text-dark m-0">flight_takeoff</i></span></a>
                                 @endif
 
-                            </td>
+                            </td> --}}
                             <td >
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
                                     <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
