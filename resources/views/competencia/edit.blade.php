@@ -10,10 +10,10 @@
     </div>
 
     <div class="text text-center">
-        <h3 >Actualizar Competencia</h3>
+        <h5 >Actualizar Competencia</h5>
     </div>
 
-    <form action="{{route('competencia.update',$competencia)  }}" method="post">
+    <form class="card-header" action="{{route('competencia.update',$competencia)  }}" method="post">
 
         @csrf
         @method('PATCH' )
@@ -78,8 +78,8 @@
             </tbody>
         </table>
 
-        <div class="clearfix">
-            <a href="{{route('competencia.index')}}" class="btn btn-dark float-left">Back</a>
+        <div class="clearfix col-sm-12 mt-2">
+            <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
             <button type="submit" class="btn btn-dark float-right">Save</button>
         </div>
     </form>

@@ -10,8 +10,8 @@
                 @include('flash-message')
             </div>
 
-            <div class="mt-1 titulo text-center">
-                <h6>Crear un Evaluado y sus Evaluadores</h6>
+            <div class="mt-1 alert alert-info text text-center ">
+                <h6>Crear un Evaluado con sus evaluadores</h6>
             </div>
 
             @if($evaluadores)
@@ -19,28 +19,28 @@
                 @csrf
                 <div class="card mb-3">
                     <div class="card-header">
-                            <select id="proyecto"  class="form-control" name="proyecto" >
-                                <label  for="proyecto">Proyectos:</label>
-                                @foreach ($proyectos as $data)
-                                    @if (old('proyecto')==$data->id)
-                                        <option selected value="{{$data->id}}">{{ $data->name }}</option>
+                        <label  for="proyecto">Proyectos</label>
+                        <select id="subproyecto"  class="form-control" name="subproyecto" >
+                            @foreach ($proyectos as $proyectodata)
+                                @foreach ( $proyectodata->subproyecto as $subpro )
+                                    @if (old('subproyecto')==$proyectodata->id)
+                                        <option selected value="{{ $subpro->id }}">{{ $proyectodata->name }} ({{ $subpro->name }})</option>
                                     @else
-                                        <option value="{{$data->id}}">{{ $data->name }}</option>
+                                        <option value="{{ $subpro->id }}">{{ $proyectodata->name }} ({{ $subpro->name }})</option>
                                     @endif
                                 @endforeach
-                            </select>
+                            @endforeach
                         </select>
                     </div>
                     <div class="card-header mb-3">
-                        <select id="cargo"  class="form-control" name="cargo" >
-                            <label  for="cargo">Cargo:</label>
-                            @foreach ($cargos as $data)
-                                @if ($empleado->cargo->id==$data->id)
-                                    <option selected value="{{$data->id}}">{{ $data->name }}</option>
-                                @endif
-                            @endforeach
+                        <label>Ficha administrativa</label>
+                        <select  class="form-control" name="departamento" id="{{ $empleado->departamento->id}}">
+                            <option readonly value=" {{ $empleado->departamento->id}}">{{ $empleado->departamento->name}}
                         </select>
-                        <input  class="form-control" placeholder="Nombre" maxlength="100" type="text" name="nameevaluado" value="{{old('nameevaluado',$empleado->name) }}" autofocus>
+                        <select  class="form-control" name="cargo" id="{{ $empleado->cargo->id}}">
+                            <option readonly value=" {{ $empleado->cargo->id}}">{{ $empleado->cargo->name}}
+                        </select>
+                        <input  readonly class="form-control" placeholder="Nombre" maxlength="100" type="text" name="nameevaluado" value="{{ $empleado->name }}" >
                     </div>
 
                     <table id="table-evaluado" >
@@ -62,17 +62,19 @@
                                     <td><input class="form-control" type="text" maxlength="15" name="relation[]" value="{{old('relation.'.$key,'Autoevaluacion')}}"></td>
                                @endif --}}
                                <td>
-                               <select id="relation"  class="form-control" name="relation[]" >
+                               <select id="relation"  class="form-control" name="relation[]">
                                 @foreach ($relations as $data)
                                     @if ($evaluador->id==$empleado->id)
                                         <option selected value="Autoevaluacion">Autoevaluacion</option>
-                                    @break
+                                        @break
                                     @else
-                                        @if (old('relation')==$data->relation)
-                                            <option selected value="{{$data->relation}}">{{ $data->relation }}</option>
+                                        @if (old('relation.'.$key)==$data->relation)
+                                        <option selected value="{{old('relation.'.$key,$data->relation)}}">{{old('relation.'.$key,$data->relation)}}</option>
                                         @else
                                             <option value="{{$data->relation}}">{{ $data->relation }}</option>
                                         @endif
+                                        {{-- <option value="{{$data->relation}}">{{ $data->relation }}</option> --}}
+
                                     @endif
                                 @endforeach
                                 </select>

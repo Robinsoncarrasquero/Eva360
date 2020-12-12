@@ -13,7 +13,7 @@
 
         </div>
         <div class="mt-1 text-center">
-            <h3>Actualizar Nivel de Cargo</h3>
+            <h5>Actualizar Nivel de Cargo</h5>
         </div>
 
         <div class="card-header">
@@ -34,8 +34,8 @@
                         maxlength="250" name="description">{{ $record->description }}</textarea>
                 </div>
 
-                <div class="clearfix">
-                    <a href="{{route('nivelCargo.index')}}" class="btn btn-dark float-left">Back</a>
+                <div class="clearfix col-sm-12 mt-2">
+                    <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right">Save</button>
                 </div>
             </form>

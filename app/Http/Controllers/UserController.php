@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Cargo;
+use App\Departamento;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -32,9 +36,14 @@ class UserController extends Controller
      */
     public function create()
     {
+
+        $cargos =Cargo::all();
+        $departamentos = Departamento::all();
+        $roles = Role::all();
+
+        return view('user.create',\compact('roles','cargos','departamentos'));
         return redirect()->back()
         ->withWarning('Los usuarios pueden autoregistrarse por el sistema de autenticacion integrado y verificar su correo.');
-        //
     }
 
     /**
@@ -46,6 +55,46 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'email' => 'email:rfc,dns',
+            'departamento' => 'required',
+            'cargo' => 'required',
+            'roluser' => 'required',
+            ],
+            [
+            'name.required'=> 'El Nombre es requerido.',
+            'cargo.required'=> 'El Cargo es requerido.',
+            'departamento.required'=> 'El Departamento es requerido.',
+            'roluser.required' => "Rol del usuario es requerido.",
+            'email.email' => "Este email es requerido con el formato correcto."
+        ]);
+
+        try {
+            $record = new User();
+            $record->name=$request->name;
+            $record->email=$request->email;
+            $record->departamento_id=$request->departamento;
+            $record->cargo_id = $request->cargo;
+            $record->codigo=$request->codigo;
+            $record->email_verified_at= now();
+            $record->password = bcrypt('secret1234');
+            $record->remember_token=Str::random(10);
+            $record->save();
+
+            //Agredamos el nuevo rol
+            $new_rol = Role::find($request->roluser);
+            $record->roles()->attach($new_rol);
+
+
+        } catch (QueryException $e) {
+            return redirect()->back()
+            ->withErrors('Error imposible crear este registro. correo ya fue tomado por otro usuario.');
+        }
+        return \redirect('user')->withSuccess('Usuario : '.$request->name.' Registrado exitosamente');
+
+
     }
 
     /**
@@ -70,7 +119,6 @@ class UserController extends Controller
         //
         $user = User::findOrFail($user);
         $roles = Role::all();
-
         return \view('user.edit',\compact('user','roles'));
 
     }
@@ -112,7 +160,6 @@ class UserController extends Controller
         //Agredamos el nuevo rol
         $new_rol = Role::find($request->newrol);
         $user->roles()->attach($new_rol);
-
         return redirect()->route('user.index')->withSuccess('Usuario Modificado con exito');
     }
 

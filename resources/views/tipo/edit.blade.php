@@ -13,7 +13,7 @@
 
         </div>
         <div class="mt-1 text-center">
-            <h3>Actualizar Tipo de Competencia</h3>
+            <h5>Actualizar Tipo de Competencia</h5>
         </div>
 
         <div class="card-header">
@@ -28,8 +28,8 @@
                     <input id="tipo" class="form-control" type="text" name="tipo" value="{{$tipo->tipo}}">
                 </div>
 
-                <div class="clearfix">
-                    <a href="{{route('tipo.index')}}" class="btn btn-dark float-left">Back</a>
+                <div class="clearfix col-sm-12 mt-2">
+                    <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right">Save</button>
 
                 </div>

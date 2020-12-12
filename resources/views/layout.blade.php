@@ -51,7 +51,6 @@
                     <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
-
                 @if (Auth::check() && Auth::user()->admin())
                     {{-- <li class="nav-item ">
                         <a class="nav-link" href="{{ route('lanzar.index') }}">Panel<span class="sr-only">(current)</span></a>
@@ -87,7 +86,6 @@
                             <li  class=" dropdown-divider"></li>
                             <li><a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a></li>
                         </ul>
-
                     </li>
                     <li class="dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -165,14 +163,12 @@
     <!-- Begin page content -->
     <main role="main" class="container">
 
-        <div class="row ">
-            <div class="col-md-12">
-
+        <div class="row">
+            <div class="col-sm-12">
                 @yield('content')
-
             </div>
 
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 @section('sidebar')
                 @show
             </div>

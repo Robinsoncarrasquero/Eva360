@@ -8,7 +8,7 @@
 
     <div class="col-sm-8">
         <div class="mt-1 text-center">
-            <h3>Actualizar Frecuencia</h3>
+            <h5>Actualizar Frecuencia</h5>
         </div>
 
         <div id="flash-message">
@@ -36,9 +36,9 @@
                     <input id="valor" class="form-control" type="text" name="valor" value="{{$frecuencia->valor}}">
                 </div>
 
-                <div class="clearfix">
-                    <a href="{{route('frecuencia.index')}}" class="btn btn-dark float-left">Back</a>
-                    <button type="submit" class="btn btn-primary float-right">Save</button>
+                <div class="clearfix col-sm-12 mt-2">
+                    <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
+                    <button type="submit" class="btn btn-dark float-right">Save</button>
 
                 </div>
 

@@ -20,11 +20,9 @@
                     <input class="form-control mr-sm-2" type="text" placeholder="Nombre" aria-label="Search" name="buscarWordKey">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
-
-                <div class="text text-center">
-                    <h3>Lista de Usuarios</h3>
-                </div>
-
+            </div>
+            <div class="text text-center">
+                <h3>Lista de Usuarios</h3>
             </div>
         </div>
 
@@ -32,7 +30,7 @@
             <a  href="{{ route('user.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>
 
-        <table class="table table-light table-striped ">
+        <table class="table table-light table-striped table-condensed">
             <thead>
                 <th>#</th>
                 <th>User</th>

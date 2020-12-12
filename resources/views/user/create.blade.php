@@ -1,33 +1,84 @@
 @extends('layout')
 
-@section('title',"Editar Tipo de Competencia eva360")
+@section('title',"Crear Usuario")
 
 @section('content')
 
 <div class="container">
 
-    <div class="col-sm-8">
-        <h2>Actualizar Tipo de Competencia</h2>
-
-        <div id="flash-message">
+    <div id="flash-message">
             @include('flash-message')
+    </div>
+    <div class="col-sm-8 text text-center">
+        <h3 >Editar Usuario</h3>
+    </div>
+
+    <form action="{{route('user.store')  }}" method="post">
+        @csrf
+        <div class="justify-content-start">
+            <div class="col-6">
+                <label for="name">Nombre</label>
+                <input id="name" class="form-control" type="text" name="name" value="{{old('name')}}">
+            </div>
         </div>
 
-        <div class="card-header">
-            <form action="{{route('tipo.update',$tipo)  }}" method="post">
-                @csrf
-                @method('PATCH' )
-                <div class="form-group">
-                    <label for="tipo">Tipo</label>
-                    <input id="tipo" class="form-control" type="text" name="tipo" value="{{$tipo->tipo}}">
-                </div>
-                <div class="clearfix">
-                    <a href="{{route('tipo.index')}}" class="btn btn-dark float-left">Back</a>
-                    <button type="submit" class="btn btn-dark float-right">Save</button>
-                </div>
-            </form>
-        <div>
-    </div>
+        <div class="justify-content-start">
+            <div class="col-6">
+                <label for="email">Email</label>
+                <input id="email" class="form-control"  name="email"  value="{{ old('email')}}">
+            </div>
+        </div>
+
+        <div class="justify-content-start">
+            <div class="col-6">
+                <label >Cargo</label>
+                <select class="form-control" id="cargo" name="cargo">
+                    @foreach ($cargos as $cargo)
+                        <option  value="{{ $cargo->id }}">{{ $cargo->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="justify-content-start">
+            <div class="col-6">
+                <label >Departamento</label>
+                <select class="form-control" id="departamento" name="departamento">
+                    @foreach ($departamentos as $departamento)
+                        <option  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="justify-content-start">
+            <div class="col-6">
+                <label for="name">Codigo</label>
+                <input type="text" class="form-control"  id="codigo" name="codigo" value="{{old('codigo')}}">
+            </div>
+        </div>
+
+        <div class="justify-content-start">
+            <div class="col-6">
+                <label >Roles de Usuario</label>
+                <select class="form-control" id="roluser" name="roluser">
+                    @foreach ($roles as $roluser)
+                        <option  value="{{ $roluser->id }}">{{ $roluser->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <div class="col-6">
+                <a href="{{route('user.index')}}" class="btn btn-dark float-left">Back</a>
+                <button type="submit" class="btn btn-dark float-right">Save</button>
+
+            </div>
+        </div>
+
+    </form>
+
 </div>
 
 @endsection

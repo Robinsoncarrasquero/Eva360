@@ -13,16 +13,14 @@
 
         </div>
         <div class="mt-1 text-center">
-            <h3>Actualizar Cargo</h3>
+            <h5>Actualizar Cargo</h5>
         </div>
 
         <div class="card-header">
 
             <form action="{{route('cargo.update',$record)  }}" method="post">
-
                 @csrf
                 @method('PATCH' )
-
                 <div class="col-sm-12">
                     <label for="name">Nombre</label>
                     <input id="name" class="form-control" type="text" name="name" value="{{$record->name}}">
@@ -47,8 +45,8 @@
                     </select>
                 </div>
 
-                <div class="clearfix">
-                    <a href="{{route('cargo.index')}}" class="btn btn-dark float-left">Back</a>
+                <div class="clearfix col-sm-12 mt-2">
+                    <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right">Save</button>
                 </div>
             </form>

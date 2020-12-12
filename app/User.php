@@ -106,12 +106,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
-    //Un Usuario(evaluador) pertenece a un cargo)
-    public function cargo(){
-        return $this->belongsTo(Cargo::class,'cargo_id');
+    //Un usuario / empleado pertenece a un departamento)
+    public function departamento(){
+        return $this->belongsTo(Departamento::class);
     }
 
-
-
+    //Un usuario pertenece a un cargo
+    public function cargo(){
+        return $this->belongsTo(Cargo::class);
+    }
 
 }

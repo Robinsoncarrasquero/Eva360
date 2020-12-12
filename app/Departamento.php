@@ -14,8 +14,11 @@ class Departamento extends Model
      /**
      * Un cargo tiene muchos Empleados Usuarios
      */
-    public function empleados(){
+    public function users(){
         return $this->hasMany(User::class,'departamento_id');
     }
+
+
+
 
 }
