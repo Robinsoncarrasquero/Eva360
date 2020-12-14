@@ -60,6 +60,7 @@
                             Panel<span class="caret"></span>
                         </a>
                         <ul class=" dropdown-menu">
+                            <li><a class="dropdown-item"  href="{{ route('empleado.index') }}">Control de Empleados</a></li>
                             <li><a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Control de Proyecto</a></li>
                             <li  class=" dropdown-divider"></li>
                             <li><a class="dropdown-item"  href="{{ route('lanzar.index') }}">Control de Evaluado</a></li>

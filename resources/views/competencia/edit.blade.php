@@ -14,7 +14,6 @@
     </div>
 
     <form class="card-header" action="{{route('competencia.update',$competencia)  }}" method="post">
-
         @csrf
         @method('PATCH' )
 
@@ -28,7 +27,6 @@
             <textarea id="description" class="form-control"  name="description" rows="4" >{{$competencia->description }}</textarea>
         </div>
 
-
         <div class="col-sm-6">
             <label for="nivelrequerido">Nivel Requerido</label>
             <input id="nivelrequerido" class="form-control" type="text" name="nivelrequerido" value="{{ $competencia->nivelrequerido}}">
@@ -37,16 +35,13 @@
         <div class="col-sm-6">
             <label for="tipo">Tipo</label>
             <select id="tipo" class="form-control" name="tipo">
-
-                @foreach ($tipos as $tipo)
+               @foreach ($tipos as $tipo)
                     @if ($competencia->tipo==$tipo)
                         <option selected value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
                     @else
                         <option          value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
-
                     @endif
                 @endforeach
-
             </select>
         </div>
 
@@ -62,7 +57,7 @@
                 <tr>
                     <td>
                         {{ $key }}
-                        <input class="col-sm-2" hidden type="text" name="gradoid[]" value="{{ $value->id }}">
+                        {{-- <input class="col-sm-2" hidden type="text" name="gradoid[]" value="{{ $value->id }}"> --}}
                     </td>
                     <td>
                         <input class="col-sm-2" type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">
@@ -82,6 +77,7 @@
             <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
             <button type="submit" class="btn btn-dark float-right">Save</button>
         </div>
+
     </form>
 </div>
 

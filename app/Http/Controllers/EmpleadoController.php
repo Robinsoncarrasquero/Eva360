@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class HistoricoEvaluadoController extends Controller
+class EmpleadoController extends Controller
 {
     /**Lista los empleados */
     public function indexevaluado(Request $request)
@@ -23,12 +23,18 @@ class HistoricoEvaluadoController extends Controller
         $title="Lista de empleados por Departamentos";
         $buscarWordKey = $request->get('buscarWordKey');
         $departamentos = Departamento::name($buscarWordKey)->orderBy('id','DESC')->paginate(5);
-        return \view('historico.index',compact('departamentos','title'));
+        return \view('empleado.index',compact('departamentos','title'));
     }
 
     /**Lista el historico de evaluaciones del empleado */
     public function historicolista($empleado_id)
     {
+        $title="Historico de evaluaciones";
+        $empleado = User::find($empleado_id);
+        $evaluaciones = $empleado->evaluaciones;
+        //dd($evaluaciones);
+        return \view('empleado.historicoevaluaciones',compact('evaluaciones','title','empleado'));
+
         return \redirect()->back()->withErrors('Falta programar este control');
     }
     /**Crear una evaluado con los datos de los evaluadores
@@ -53,11 +59,11 @@ class HistoricoEvaluadoController extends Controller
         $proyectos = Proyecto::all();
         $subproyectos = SubProyecto::all();
         $relations = Relation::all();
-        return \view('historico.evaluado.historicoevaluadocreate',compact('empleado','evaluadores','cargos','proyectos','subproyectos','relations'));
+        return \view('empleado.crearevaluado',compact('empleado','evaluadores','cargos','proyectos','subproyectos','relations'));
     }
 
    /**Crea los datos del evaluado */
-    public function storeevaluado(FileJson $fileJsonRequest)
+    public function storeevaluado(FileJson $fileJsonRequest,$empleado_id)
     {
         //
         $name=$fileJsonRequest->input('name.*');
@@ -73,6 +79,7 @@ class HistoricoEvaluadoController extends Controller
             $evaluado->word_key= $prueba;
             $evaluado->cargo_id=$fileJsonRequest->cargo;
             $evaluado->subproyecto_id=$fileJsonRequest->subproyecto;
+            $evaluado->user_id = $empleado_id;
             $evaluado->save();
 
             for ($i=0; $i < count($name); $i++) {
@@ -96,8 +103,7 @@ class HistoricoEvaluadoController extends Controller
     public function destroy($empleado_id)
     {
 
-        return redirect()->route('historico.index')
+        return redirect()->route('empleado.index')
         ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar una evaluacion.');
     }
-
 }

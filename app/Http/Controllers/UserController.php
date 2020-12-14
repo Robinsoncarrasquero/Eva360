@@ -57,7 +57,7 @@ class UserController extends Controller
         //
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email,1',
             'email' => 'email:rfc,dns',
             'departamento' => 'required',
             'cargo' => 'required',
@@ -68,7 +68,9 @@ class UserController extends Controller
             'cargo.required'=> 'El Cargo es requerido.',
             'departamento.required'=> 'El Departamento es requerido.',
             'roluser.required' => "Rol del usuario es requerido.",
-            'email.email' => "Este email es requerido con el formato correcto."
+            'email.email' => "Este email es requerido y debe tener el formato correcto.",
+            'email.required' => "Email del usuario es unico y obligatorio.",
+
         ]);
 
         try {
@@ -118,8 +120,10 @@ class UserController extends Controller
     {
         //
         $user = User::findOrFail($user);
+        $cargos= Cargo::all();
+        $departamentos= Departamento::all();
         $roles = Role::all();
-        return \view('user.edit',\compact('user','roles'));
+        return \view('user.edit',\compact('user','roles','departamentos','cargos'));
 
     }
 
@@ -138,19 +142,24 @@ class UserController extends Controller
                 'email' => 'required|unique:users,email,'.$id,
                 'roluser' => 'required',
                 'newrol' => 'required',
-
+                'departamento' => 'required',
+                'cargo' => 'required',
             ],
             [
                 'name.required'=>'El nombre es requerido.',
                 'email.required' => "Email del usuario es unico y obligatorio.",
-                'roluser.required' => "Rol del usuario es requerido.",
+                'roluser.required' => "Debe especificar el Rol del usuario.",
                 'newrol.required' => "Nuevo Rol es requerido.",
-                'email.unique' => "Este email ya ha sido tomado por otro Usuario."
+                'email.unique' => "Este email ya ha sido tomado por otro Usuario.",
+                'departamento.required' => "Departamento es Requerido.",
+                'cargo.required' => "Cargo es Requerido.",
 
             ]);
         $user =User::findOrFail($id);
         $user->email=$request['email'];
         $user->name = $request['name'];
+        $user->cargo_id = $request['cargo'];
+        $user->departamento_id = $request['departamento'];
         $user->save();
 
         //Eliminamos el rol anterior
@@ -184,7 +193,7 @@ class UserController extends Controller
             ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas Evaluaciones.');
         }
 
-        return redirect('user')->withSuccess('El usuario ha sido eliminado con exito!!');
+        return redirect()->back()->withSuccess('El usuario ha sido eliminado con exito!!');
 
     }
 }

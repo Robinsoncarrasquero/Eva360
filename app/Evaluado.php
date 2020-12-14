@@ -34,6 +34,11 @@ class Evaluado extends Model
         return $this->belongsTo(Cargo::class);
     }
 
+    //Un evaluado pertenece a un usuario
+    public function evaluado(){
+        return $this->belongsTo(User::class);
+    }
+
     //Hacer busquedas por nombre
     public function scopeName($query,$name){
         $query->where('name','like',"%$name%");

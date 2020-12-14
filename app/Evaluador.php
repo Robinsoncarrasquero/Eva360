@@ -29,7 +29,7 @@ class Evaluador extends Model
         return $this->hasManyThrough('App\Competencia', 'App\Evaluacion','evaluador_id','id','id','competencia_id');
     }
 
-    //Un evaluador(evaluacion) pertenece a un usuario
+    //Un evaluador pertenece a un usuario
     public function user(){
         return $this->belongsTo(User::class);
     }

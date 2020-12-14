@@ -46,10 +46,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
-    //Un Usuario(evaluador) realiza muchas evaluaciones(evaluador)
-    public function evaluaciones(){
-        return $this->hasMany(Evaluador::class);
-    }
 
     public function roles() {
         return $this
@@ -114,6 +110,16 @@ class User extends Authenticatable implements MustVerifyEmail
     //Un usuario pertenece a un cargo
     public function cargo(){
         return $this->belongsTo(Cargo::class);
+    }
+
+    //Un Evaluador(user) tiene 1 o muchas evaluados
+    public function evaluadores(){
+       return $this->hasMany(Evaluador::class);
+    }
+
+    //Un usuario puede tener varias evaluaciones
+    public function evaluaciones(){
+        return $this->hasMany(Evaluado::class);
     }
 
 }

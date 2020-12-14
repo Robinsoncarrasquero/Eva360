@@ -110,14 +110,20 @@ Route::resource('evaluado', 'EvaluadoController')
 Route::get('evaluado/subproyecto/{subproyecto}/create', 'EvaluadoController@create')->name('evaluado.create')
 ->middleware('role:admin');
 
-/**Historico de Evaluado
+/**Panel de Empleados
  *
 */
 
-Route::get('historico/create/evaluado/{id}', 'HistoricoEvaluadoController@createevaluado')->name('historico.createevaluado')
+Route::get('empleado', 'EmpleadoController@indexevaluado')->name('empleado.index')
 ->middleware('role:admin');
 
-Route::post('historico/store/evaluado', 'HistoricoEvaluadoController@storeevaluado')->name('historico.storeevaluado')
+Route::get('empleado/lista/{id}', 'EmpleadoController@historicolista')->name('empleado.lista')
+->middleware('role:admin');
+
+Route::get('empleado/create/evaluado/{id}', 'EmpleadoController@createevaluado')->name('empleado.createevaluado')
+->middleware('role:admin');
+
+Route::post('empleado/store/evaluado/{id}', 'EmpleadoController@storeevaluado')->name('empleado.storeevaluado')
 ->middleware('role:admin');
 
 /**

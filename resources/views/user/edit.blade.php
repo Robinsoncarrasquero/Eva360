@@ -31,6 +31,34 @@
 
         <div class="justify-content-start">
             <div class="col-sm-6">
+                <label >Cargo</label>
+                <select class="form-control" id="cargo" name="cargo">
+                    @foreach ($cargos as $cargo)
+                        @if ($cargo->id==$user->cargo_id)
+                            <option selected  value="{{ $cargo->id }}">{{ $cargo->name}}</option>
+                        @else
+                            <option  value="{{ $cargo->id }}">{{ $cargo->name}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="justify-content-start">
+            <div class="col-sm-6">
+                <label >Departamento</label>
+                <select class="form-control" id="departamento" name="departamento">
+                    @foreach ($departamentos as $departamento)
+                        @if ($departamento->id==$user->departamento_id)
+                            <option selected  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                        @else
+                            <option  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="justify-content-start">
+            <div class="col-sm-6">
                 <label >Actual Rol</label>
                 <select class="form-control" id="roluser" name="roluser">
                     @foreach ($user->roles as $roluser)
