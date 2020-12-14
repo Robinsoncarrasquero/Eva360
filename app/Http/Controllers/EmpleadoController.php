@@ -27,7 +27,7 @@ class EmpleadoController extends Controller
     }
 
     /**Lista el historico de evaluaciones del empleado */
-    public function historicolista($empleado_id)
+    public function historicoevaluaciones($empleado_id)
     {
         $title="Historico de evaluaciones";
         $empleado = User::find($empleado_id);

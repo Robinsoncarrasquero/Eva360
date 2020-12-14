@@ -14,7 +14,7 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h3>Nueva Competencia</h3>
+            <h5>Nueva Competencia</h5>
         </div>
 
         <form action="{{ route('competencia.store') }}" method="POST">
@@ -56,7 +56,7 @@
 
             <div class="table">
 
-                    <table  class="table table-dark">
+                    <table  class="table">
                         <thead>
                             <table id="tablepreguntas" class="table table-dark">
                                 <thead class="thead-light">

@@ -10,25 +10,36 @@
                 @include('flash-message')
             </div>
 
-            <div class="card mt-2 p-2 alert-info">
-                <div class="text text-center pb-2">
-                    <h5>Historico de Evaluaciones de {{ $empleado->name }}</h5>
+            <div class="card mt-3 ">
+                <div class="text text-center p-3">
+                    <h5>Historico de Evaluaciones</h5>
                 </div>
             </div>
+
             <div class="panel panel">
 
             @if ($evaluaciones->count())
-                <div class="table ">
-                <table class="table table-table">
+
+                <div class="text text-center mt-2">
+                    <h5> {{ $empleado->name }}</h5>
+                </div>
+
+                <div class="table mt-4">
+                <table class="table table-light">
                     <thead>
-                        <th>Proyecto</th>
-                        <th>Inicio</th>
-                        <th>Final</th>
+                        <th style="background-color:darkseagreen;width:40%" class="text-dark">Proyecto</th>
+                        <th style="background-color:gray;width:15%" class="text-white">Inicio</th>
+                        <th style="background-color:gray;width:15%" class="text-white">Final</th>
+                        <th style="background-color:lawngreen;width:10%" class="text-dark">Status</th>
+                        <th style="background-color:darkkhaki;width:10%" class="text-dark">Prueba</th>
+                        <th style="background-color:rgb(144, 142, 158);width:10%" class="text-dark">Resultado</th>
+                        <th style="background-color:gold;width:10%" class="text-dark">Grafica</th>
+
                     </thead>
                     <tbody>
                     @foreach ($evaluaciones as $key=>$evaluado)
                     <tr>
-                        <td>{{ $evaluado->subproyecto->name }} <p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->work_key}}</p></td>
+                        <td>{{ $evaluado->subproyecto->name }} <br><strong class="text-dark">{{ $evaluado->word_key }}</strong>  <p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->work_key}}</p></td>
                         <td>{{ $evaluado->created_at }}</td>
                         <td>{{ $evaluado->updated_at }}</td>
                         <td class="status-progress" >

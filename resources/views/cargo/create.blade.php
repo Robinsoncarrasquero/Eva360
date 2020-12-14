@@ -11,8 +11,9 @@
         <div id="flash-message">
             @include('flash-message')
         </div>
+
         <div class="mt-1 text-center">
-            <h3>Nuevo Cargo</h3>
+            <h5>Nuevo Cargo</h5>
         </div>
 
         <div class=" card-header">
@@ -43,9 +44,9 @@
                     </select>
                 </div>
 
-                <div class="clearfix">
+                <div class="clearfix col-sm-12 mt-2">
                     <a href="{{route('cargo.index')}}" class="btn btn-dark float-left">Back</a>
-                    <button type="submit" class="btn btn-dark float-right btn-dark">Crear</button>
+                    <button type="submit" class="btn btn-dark float-right">Save</button>
                 </div>
 
             </form>

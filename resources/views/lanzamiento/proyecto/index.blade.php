@@ -1,6 +1,6 @@
-@extends('lanzamiento.proyecto.layout')
+@extends('layout')
 
-@section('title',"Panel de Control de Proyectos de Evaluacion")
+@section('title',"Control de Proyectos de Evaluacion")
 
 @section('content')
 
@@ -10,10 +10,10 @@
                 @include('flash-message')
             </div>
 
-            <div class="card pb-1">
-                <div class="clearfix">
-                    <div class="text text-center">
-                        <h5>Control de Proyectos de Evaluacion</h5>
+            <div class="card pb-2 mt-2">
+                <div class="clearfix ">
+                    <div class="text text-center mt-2">
+                        <h5>Control de Evaluaciones</h5>
                     </div>
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
                         <input class="form-control mr-sm-2" type="text" placeholder="Proyecto" aria-label="Searh" name="buscarWordKey">
@@ -24,8 +24,8 @@
 
             @if ($proyectos->count())
                 @foreach ($proyectos as $proyecto)
-                    <div class="mt-2 card card-header">
-                        <p class="text text-bold titulo-proyecto">{{$proyecto->name}}
+                    <div class="card-header mt-5">
+                        <span class="titulo-proyecto text-dark">{{$proyecto->name }} </span>
                         <span class="float-right">
                             <a href="{{ route('resultados.resultadosgeneralestipo',$proyecto->id) }}"><span><i class="material-icons">leaderboard</i></span></a>
                             <a href="{{ route('resultados.resultadosgeneralesnivel',$proyecto->id) }}"><span><i class="material-icons">assessment</i></span></a>
@@ -34,7 +34,7 @@
                     </div>
 
                     @foreach ($proyecto->subproyecto as $subproyecto)
-                    <div class="panel panel mt-2">
+                    <div class="panel mt-2">
 
                         <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span  style="font-size: 0.75rem" class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
                         <span class="float-right">
@@ -46,13 +46,15 @@
                     <div class="table-table">
                         <table class="table" id="{{ $subproyecto->id }}">
                             <thead>
-                                <th>Nombre</th>
-                                <th>Status</th>
+                                <th style="width: 30%">Nombre</th>
+                                <th style="width: 5%">Status</th>
+                                <th style="width: 15%">Inicio</th>
+                                <th style="width: 15%">Update</th>
                                 {{-- <th>Lanzar</th> --}}
-                                <th>Prueba</th>
-                                <th>Resultado</th>
-                                <th>Grafica</th>
-                                <th></th>
+                                <th style="width: 10%">Prueba</th>
+                                <th style="width: 10%">Resultado</th>
+                                <th style="width: 10%">Grafica</th>
+                                <th style="width: 5%"></th>
                             </thead>
                             <tbody>
                             @foreach ($subproyecto->evaluado as $evaluado)
@@ -80,6 +82,8 @@
                                     <i class="spinner-grow spinner-grow-sm text-info" role="status"></i>
                                 @endif
                             </td>
+                            <td>{{ $evaluado->created_at }}</td>
+                            <td>{{ $evaluado->updated_at }}</td>
                             {{-- <td>
                                 @if(Helper::estatus($evaluado->status)=='Inicio')
                                     <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff</i></span></a>

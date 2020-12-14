@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Editar Cargo")
+@section('title',"Editar Departamanto")
 
 @section('content')
 
@@ -13,14 +13,15 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Actualizar Cargo</h5>
+            <h5>Actualizar Departamento</h5>
         </div>
 
         <div class="card-header">
 
-            <form action="{{route('cargo.update',$record)  }}" method="post">
+            <form action="{{route('departamento.update',$record)  }}" method="post">
                 @csrf
                 @method('PATCH' )
+
                 <div class="col-sm-12">
                     <label for="name">Nombre</label>
                     <input id="name" class="form-control" type="text" name="name" value="{{$record->name}}">
@@ -32,23 +33,11 @@
                         maxlength="250" name="description">{{ $record->description }}</textarea>
                 </div>
 
-                <div class="col-sm-12">
-                    <label for="nivel">Nivel de Cargo</label>
-                    <select id="nivel" class="form-control" name="nivel" >
-                        @foreach ($nivel_cargos as $data)
-                            @if ($record->nivel_cargo_id==$data->id)
-                                <option selected value="{{$data->id}}">{{ $data->name }}</option>
-                            @else
-                                <option value="{{$data->id}}">{{ $data->name }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-
                 <div class="clearfix col-sm-12 mt-2">
-                    <a href="{{route('cargo.index')}}" class="btn btn-dark float-left">Back</a>
+                    <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right">Save</button>
                 </div>
+
             </form>
         <div>
     </div>

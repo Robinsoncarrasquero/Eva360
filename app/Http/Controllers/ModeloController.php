@@ -48,8 +48,6 @@ class ModeloController extends Controller
     /**Crea el modelo  */
     public function store(Request $request)
     {
-
-
         $request->validate(
             [
                 'name'=>'required',
@@ -74,10 +72,15 @@ class ModeloController extends Controller
         $competencias = $datacompetencias->only($flattened);
 
         //Creamos el Modelos
-        $modelo = Modelo::firstOrCreate(
-            ['name'=>$request->name],[
-            'description' => $request->description,
-        ]);
+        try {
+            $modelo = new Modelo();
+            $modelo->name=$request->name;
+            $modelo->description=$request->description;
+            $modelo->save();
+         } catch (QueryException $e) {
+            return redirect()->back()
+            ->withErrors('Error imposible Guardar este Modelo. El Nombre del Modelo debe ser unico, no se permite duplicados.');
+        }
 
         //Creamos el modelo con sus respectivas competencias
         foreach($competencias as $key=>$competencia){
@@ -88,12 +91,9 @@ class ModeloController extends Controller
             }catch(QueryException $e) {
                 abort(404);
             }
-
-
         }
 
         return \redirect()->route('modelo.index')->withSuccess("Modelo Registrado exitosamente");
-
     }
 
     /*

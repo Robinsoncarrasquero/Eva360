@@ -1,8 +1,9 @@
 @extends('layout')
 
-@section('title',"Lista de Proyectos")
+@section('title',"Lista de Departamentos")
 
 @section('content')
+
 
 <div class="container">
 
@@ -10,20 +11,22 @@
 
         <div id="flash-message">
             @include('flash-message')
+
         </div>
 
-        <div class="text text-center mt-2">
-            <h5>Lista de Proyectos</h5>
+        <div class="mt-1 text-center">
+            <h5>Lista de Departamentos</h5>
         </div>
+
         <div class="text text-sm-right">
-            <a href="{{ route('proyecto.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
+            <a href="{{ route('departamento.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>
 
         <table class="table table-light table-striped ">
             <thead>
                 <th>#</th>
-                <th>Proyecto</th>
-                <th></th>
+                <th>Departamento</th>
+                <th>Descripcion</th>
                 <th></th>
             </thead>
             <tbody>
@@ -31,9 +34,10 @@
                 <tr>
                     <td>{{ $record->id }}</td>
                     <td>{{ $record->name }}</td>
-                    <td><a href="{{ route('proyecto.edit',$record) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
+                    <td>{{ $record->description}}</td>
+                    <td><a href="{{ route('departamento.edit',$record) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                     <td>
-                        <form action="{{ route('proyecto.destroy',$record) }}" method="POST">
+                        <form action="{{ route('departamento.destroy',$record) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
@@ -46,6 +50,9 @@
                 </tbody>
         </table>
 
+    </div>
+    <div class=" d-flex justify-content-center">
+        {{ $records->links() }}
     </div>
 
 </div>

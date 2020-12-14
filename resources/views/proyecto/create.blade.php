@@ -11,8 +11,9 @@
         <div id="flash-message">
             @include('flash-message')
         </div>
+
         <div class="mt-1 text-center">
-            <h3>Nuevo Proyecto</h3>
+            <h5>Nuevo Proyecto</h5>
         </div>
 
         <div class=" card-header">
@@ -30,10 +31,9 @@
                         maxlength="250" name="description">{{ old('description') }}</textarea>
                 </div>
 
-                <div class="clearfix">
+                <div class="clearfix col-sm-12 mt-2">
                     <a href="{{route('proyecto.index')}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right btn-dark">Crear</button>
-
                 </div>
 
             </form>

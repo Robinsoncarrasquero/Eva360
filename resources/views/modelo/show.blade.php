@@ -7,7 +7,7 @@
 <div class="container">
 
     <div class="panel panel pb-3">
-        <h4 class="text text-center">Modelo de Evaluacion</h2>
+        <h5 class="text text-center">Modelo de Evaluacion</h5>
     </div>
 
     <div id="flash-message">
@@ -29,8 +29,8 @@
                         <input class="form-control" type="text" name="name" id="name" placeholder="Nombre" value="{{ $modelo->name }}">
                     </div>
                     <div class="col-sm-12 col-md-6">
-                        <label for="description">Descripcion</label>
-                        <textarea class="form-control" rows="2"  type="text" name="description" id="description" placeholder="Describa el modelo">{{ $modelo->description}}</textarea>
+                        <label for="description">Objetivo</label>
+                        <textarea class="form-control" rows="2"  type="text" name="description" id="description" placeholder="Objetivo del modelo">{{ $modelo->description}}</textarea>
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Competencia</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">Objetivo</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>

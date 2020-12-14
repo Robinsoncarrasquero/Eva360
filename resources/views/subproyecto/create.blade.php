@@ -12,7 +12,7 @@
             @include('flash-message')
         </div>
         <div class="mt-1 text-center">
-            <h3>Nuevo Sub Proyecto</h3>
+            <h5>Nuevo Sub Proyecto</h5>
         </div>
 
         <div class=" card-header">
@@ -43,7 +43,7 @@
                     </select>
                 </div>
 
-                <div class="clearfix">
+                <div class="clearfix col-sm-12 mt-2">
                     <a href="{{route('subproyecto.index')}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right btn-dark">Crear</button>
                 </div>

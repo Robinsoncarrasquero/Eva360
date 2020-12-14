@@ -21,9 +21,10 @@
                         <input class="form-control mr-sm-2" type="text" placeholder="Nombre" aria-label="Search" name="buscarWordKey">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
-                    <div class="text text-center">
-                        <h3>Modelos de Evaluacion</h3>
-                    </div>
+
+                </div>
+                <div class="text text-center">
+                    <h5>Modelos de Evaluacion</h5>
                 </div>
             </div>
             <div class="clearfix">
@@ -43,7 +44,7 @@
                     <thead>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Descripcion</th>
+                        <th scope="col">Objetivo</th>
                         <th>Ver</th>
                         <th>Borrar</th>
                    </thead>

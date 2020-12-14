@@ -9,11 +9,14 @@
 
     <div class="col-sm-12">
 
-        <h5>Lista de Tipos de Competencias</h5>
         <div id="flash-message">
             @include('flash-message')
 
         </div>
+        <div class="text text-center mt-2">
+            <h5>Tipos de Competencias</h5>
+        </div>
+
         <div class="text text-sm-right">
             <a href="{{ route('tipo.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>

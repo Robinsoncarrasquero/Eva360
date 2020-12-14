@@ -28,6 +28,27 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <style>
+        .titulo-proyecto{
+            color:brown; font-family: 'Times New Roman', Times, serif;font-size: 2ex;
+        }
+        .titulo-subproyecto{
+            color:black;
+            background-color:lightsteelblue;
+        }
+
+        #grid {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            grid-template-rows: 50px 1fr 50px;
+        }
+
+        #item1 {
+            grid-column: 2;
+            grid-row-start: 1; grid-row-end: 4;
+        }
+
+    </style>
 
   </head>
 
@@ -60,13 +81,29 @@
                             Panel<span class="caret"></span>
                         </a>
                         <ul class=" dropdown-menu">
-                            <li><a class="dropdown-item"  href="{{ route('empleado.index') }}">Control de Empleados</a></li>
-                            <li><a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Control de Proyecto</a></li>
+                            <li><a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a></li>
                             <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('lanzar.index') }}">Control de Evaluado</a></li>
+                            <li><a class="dropdown-item"  href="{{ route('empleado.index') }}">Empleados</a></li>
+                            <li  class=" dropdown-divider"></li>
+                            <li><a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a></li>
                         </ul>
 
                     </li>
+
+                    <li class="dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Administrativos<span class="caret"></span>
+                        </a>
+
+                        <ul class=" dropdown-menu">
+                            <li><a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a></li>
+                            <li  class=" dropdown-divider"></li>
+                            <li><a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a></li>
+                            <li  class=" dropdown-divider"></li>
+                            <li><a class="dropdown-item"  href="{{ route('departamento.index') }}">Departamento</a></li>
+                        </ul>
+                    </li>
+
                     <li class="dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             Proyectos<span class="caret"></span>
@@ -76,18 +113,8 @@
                             <li  class=" dropdown-divider"></li>
                             <li><a class="dropdown-item"  href="{{ route('subproyecto.index') }}">Sub proyecto</a></li>
                         </ul>
+                    </li>
 
-                    </li>
-                    <li class="dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Cargos<span class="caret"></span>
-                        </a>
-                        <ul class=" dropdown-menu">
-                            <li><a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a></li>
-                            <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a></li>
-                        </ul>
-                    </li>
                     <li class="dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             Competencias<span class="caret"></span>

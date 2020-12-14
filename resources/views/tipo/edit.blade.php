@@ -29,9 +29,8 @@
                 </div>
 
                 <div class="clearfix col-sm-12 mt-2">
-                    <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
+                    <a href="{{route('tipo')}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right">Save</button>
-
                 </div>
 
             </form>

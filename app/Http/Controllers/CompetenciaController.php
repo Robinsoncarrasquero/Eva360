@@ -54,12 +54,17 @@ class CompetenciaController extends Controller
      */
     public function store(CompetenciaCreateRequest  $formrequest)
     {
-        $competencia = new Competencia();
-        $competencia->name=$formrequest->name;
-        $competencia->description=$formrequest->description;
-        $competencia->nivelrequerido = $formrequest->nivelrequerido;
-        $competencia->tipo_id = $formrequest->tipo;
-        $competencia->save();
+        try {
+            $competencia = new Competencia();
+            $competencia->name=$formrequest->name;
+            $competencia->description=$formrequest->description;
+            $competencia->nivelrequerido = $formrequest->nivelrequerido;
+            $competencia->tipo_id = $formrequest->tipo;
+            $competencia->save();
+         } catch (QueryException $e) {
+            return redirect()->back()
+            ->withErrors('Error imposible Guardar este registro. El Nombre de la competencia debe ser unico, no se permite duplicados.');
+        }
 
         //Creamos los grados con las preguntas
         $gName=$formrequest->input('gradoName.*');
@@ -73,8 +78,8 @@ class CompetenciaController extends Controller
             $grado->ponderacion=$gPonderacion[$i];
             $competencia->grados()->save($grado);
         }
-        return \redirect('competencia')->withSuccess('Competencia creada exitosamente');
 
+        return \redirect('competencia')->withSuccess('Competencia creada exitosasmente : '.$formrequest->name.' Registrado exitosamente');
     }
 
     /**

@@ -5,12 +5,13 @@
 @section('content')
 
 <div class="container">
+
     <div id="flash-message">
         @include('flash-message')
     </div>
 
     <div class="text text-center">
-        <h5 >Actualizar Competencia</h5>
+        <h5>Actualizar Competencia</h5>
     </div>
 
     <form class="card-header" action="{{route('competencia.update',$competencia)  }}" method="post">

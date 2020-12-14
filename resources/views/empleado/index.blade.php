@@ -26,7 +26,7 @@
 
                 @foreach ($departamentos as $departamento)
                     <div class="panel panel mt-2">
-                        <span class="titulo-subproyecto">{{ $departamento->name }} </span>
+                        <span class="titulo-subproyecto text-dark">{{ $departamento->name }} </span>
                         <span  style="font-size: 0.75rem" class="titulo-proyecto" >
                         <i class="material-icons">east</i> {{ $departamento->name }}</span>
                     </div>
@@ -34,9 +34,9 @@
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                <th>Nombre</th>
-                                <th>Historico</th>
-                                <th>Evaluacion</th>
+                                <th style="width:40%" class="alert-success">Nombre</th>
+                                <th style="width:30%" class="alert-warning">Historico</th>
+                                <th style="width:30%" class="alert-dark">Evaluacion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,7 @@
                                 <td>{{ ($empleado->name) }}</td>
                                 <td>
                                     @if ($empleado->evaluaciones->count()>0)
-                                        <a href="{{route('empleado.lista', $empleado->id)}}"><i class="material-icons">question_answer</i></a></td>
+                                        <a href="{{route('empleado.historicoevaluaciones', $empleado->id)}}"><i class="material-icons">question_answer</i></a></td>
                                     @else
                                         <a><i class="material-icons text-dark">question_answer</i></a></td>
                                     @endif

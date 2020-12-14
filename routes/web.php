@@ -57,6 +57,14 @@ Route::resource('cargo', 'CargoController')
 ->middleware('role:admin');
 
 /**
+* Resource de Departamento
+*
+*/
+
+Route::resource('departamento', 'DepartamentoController')
+->middleware('role:admin');
+
+/**
 * Route de User
 *
 */
@@ -117,7 +125,7 @@ Route::get('evaluado/subproyecto/{subproyecto}/create', 'EvaluadoController@crea
 Route::get('empleado', 'EmpleadoController@indexevaluado')->name('empleado.index')
 ->middleware('role:admin');
 
-Route::get('empleado/lista/{id}', 'EmpleadoController@historicolista')->name('empleado.lista')
+Route::get('empleado/historico/evaluaciones/{id}', 'EmpleadoController@historicoevaluaciones')->name('empleado.historicoevaluaciones')
 ->middleware('role:admin');
 
 Route::get('empleado/create/evaluado/{id}', 'EmpleadoController@createevaluado')->name('empleado.createevaluado')

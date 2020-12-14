@@ -15,22 +15,16 @@
 
             </div>
 
-
-            <div class="panel panel pb-1">
+            <div class="panel panel pb-2">
                 <div class="clearfix">
-
-                    {{-- <div class="text text-center titulo">
-                        <h4>Panel de Evaluados</h4>
-                    </div> --}}
-
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
                         <input class="form-control mr-sm-2" type="text" placeholder="Nombre" aria-label="Searh" name="buscarWordKey">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
-
                 </div>
-
-
+                <div class="text text-center  mt-2">
+                    <h5>Panel de Evaluados</h5>
+                </div>
             </div>
 
             {{-- @if ($subproyecto>0)
@@ -43,16 +37,18 @@
 
             @if($evaluados->count())
 
-            <div class="panel-body">
+            <div class="panel">
 
                 <div class="table table-table">
                     <table id="mytable" class="table  table-bordred table-striped">
                     <thead>
                     <th>Nombre</th>
-                    <th>Cargo</th>
-                    <th>sub-proyecto</th>
+                    <th>Subproyecto</th>
                     <th>Status</th>
-                    <th>Modelo</th>
+                    <th>Progreso</th>
+                    <th>Inicio</th>
+                    <th>Update</th>
+                    {{-- <th>Modelo</th> --}}
                     {{-- <th>Filtro</th> --}}
                     <th>Prueba</th>
                     <th>Resultado</th>
@@ -61,9 +57,32 @@
                     <tbody>
                     @foreach($evaluados as $evaluado)
                     <tr>
-                        <td>{{$evaluado->name}}</td>
-                        <td>{{$evaluado->cargo->name}}</td>
+                        {{-- <td>{{$evaluado->name}} <br>{{$evaluado->cargo->name}}</td> --}}
+                        <td>{{ $evaluado->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p></td>
                         <td>{{$evaluado->subProyecto->name}}</td>
+                        <td class="status-progress" >
+                            @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                {{-- <span id="inicio" class="radio-checkeado" ></span>
+                                <span id="medio" class="radio-checkeado" ></span>
+                                <span id="final" class="radio-checkeado" ></span> --}}
+                                <i class="spinner-grow spinner-grow-sm text-success" role="status"></i>
+
+                            @endif
+
+                            @if(Helper::estatus($evaluado->status)=='Inicio')
+                                {{-- <span id="inicio" class="radio-checkeado" ></span>
+                                <span id="medio" class="radio-no-checkeado" ></span>
+                                <span id="final" class="radio-no-checkeado"></span> --}}
+                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><i class="spinner-grow spinner-grow-sm text-warning" role="status"></i></a>
+                            @endif
+
+                            @if(Helper::estatus($evaluado->status)=='Lanzada')
+                                {{-- <span id="inicio" class="radio-checkeado"></span>
+                                <span id="medio" class="radio-checkeado"></span>
+                                <span id="final" class="radio-no-checkeado"></span> --}}
+                                <i class="spinner-grow spinner-grow-sm text-info" role="status"></i>
+                            @endif
+                        </td>
                         <td>
                             <div class="status-progress">
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
@@ -86,14 +105,17 @@
                             </div>
                             <span>{{ Helper::estatus($evaluado->status) }}</span>
                         </td>
-                        <td>
+                        <td>{{ $evaluado->created_at }}</td>
+                        <td>{{ $evaluado->updated_at }}</td>
+                        {{-- <td>
                             @if(Helper::estatus($evaluado->status)=='Inicio')
                                 <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff</i></span></a>
                             @else
                                 <a ><span><i class="material-icons text-dark">flight_takeoff</i></span></a>
                             @endif
 
-                        </td>                        {{-- <td>
+                        </td>   --}}
+                        {{-- <td>
                             @if(Helper::estatus($evaluado->status)!='Finalizada')
                                 <a href="{{route('lanzar.seleccionar',$evaluado->id)}}"><span><i class="material-icons">filter_list</i></span></a>
                             @else

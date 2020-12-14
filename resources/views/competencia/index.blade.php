@@ -12,9 +12,11 @@
             @include('flash-message')
 
         </div>
+
         <div class="mt-1 text-center">
-            <h3>Lista de Competencias</h3>
+            <h5>Lista de Competencias</h5>
         </div>
+
         <div class="text text-sm-right">
             <a  href="{{ route('competencia.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>
