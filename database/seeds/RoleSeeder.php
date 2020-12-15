@@ -16,9 +16,9 @@ class RoleSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;'); //DESACTIVA EL CHECKEO DE CLAVES FORANEAS
 
-        DB::table('users')->truncate();
-        DB::table('roles')->truncate();
         DB::table('role_user')->truncate();
+        DB::table('roles')->truncate();
+        DB::table('users')->truncate();
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 

@@ -44,7 +44,7 @@ class EvaluacionSeeder extends Seeder
     /** Obtenemos los resultados de la prueba en una array */
     public function prueba()
     {
-        $nivel=40;
+        $nivel=75;
         $grado=Arr::random(['A','B','C','D']);
         $gradofinal=Arr::get(['A'=>100,'B'=>75,'C'=>50,'D'=>25],$grado);
         $gradofinal=Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],$grado);

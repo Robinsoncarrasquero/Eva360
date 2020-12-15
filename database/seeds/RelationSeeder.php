@@ -2,6 +2,7 @@
 
 use App\Relation;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RelationSeeder extends Seeder
 {
@@ -12,7 +13,13 @@ class RelationSeeder extends Seeder
      */
     public function run()
     {
-        //
+
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0;'); //DESACTIVA EL CHECKEO DE CLAVES FORANEAS
+
+        DB::table('relations')->truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
+
         //Relacion
         $dpto=factory(Relation::class)->create([
             'relation'=>'Manager',

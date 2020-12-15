@@ -1,6 +1,8 @@
 <?php
 use App\Evaluado;
 use App\Evaluador;
+use App\Role;
+use App\User;
 use Faker\Calculator\Ean;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
@@ -21,42 +23,49 @@ class EvaluadoSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;'); //DESACTIVA EL CHECKEO DE CLAVES FORANEAS
 
         DB::table('evaluados')->truncate();
-        DB::table('evaluadores')->truncate();
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
-        //Cargos
-        $gerente=1;$coordinador=2;$nosupervisorio=3;
-        $cargo=[$gerente,$coordinador,$nosupervisorio];
+        $users = User::select("*")
+        ->where("id", ">", 1)
+        ->get();
         $subproyecto=[1,2];
-        $i=10;
-        for ($i=1; $i <11 ; $i++) {
-            $this->add_evaluado($cargo[rand(0,count($cargo)-1)],$subproyecto[rand(0,count($subproyecto)-1)]);
+        foreach ($users as $key => $user) {
+            $evaluado =  new Evaluado();
+            $evaluado->name = $user->name;
+            $evaluado->subproyecto_id= $subproyecto[rand(0,count($subproyecto)-1)];
+            $evaluado->departamento_id = $user->departamento_id;
+            $evaluado->cargo_id = $user->cargo_id;
+            $evaluado->user_id = $user->id;
+            $evaluado->status=2;
+            $evaluado->save();
         }
 
 
     }
 
-    public function add_evaluado($xcargo,$xsubproyecto)
+    public function add_evaluado($xcargo,$xsubproyecto,$xdpto)
         {
             //Creamos un evaluado
             $evaluadox = factory(App\Evaluado::class)->create([
                 'status'=>2,
                 'cargo_id'=>$xcargo,
+                'departamento_id'=>$xdpto,
                 'subproyecto_id'=>$xsubproyecto,
             ]);
 
-            $supervisores=factory(Evaluador::class, 2)->create([
-                'relation'=>'Supervisores',
-                'evaluado_id'=>$evaluadox,
-                ]);
+            // $supervisores=factory(Evaluador::class, 2)->create([
+            //     'relation'=>'Supervisores',
+            //     'evaluado_id'=>$evaluadox,
+            //     ]);
 
-            $pares=factory(Evaluador::class, 2)->create([
-                'relation'=>'Pares',
-                'evaluado_id'=>$evaluadox,
-                ]);
+            // $this->add_user_evaluador($supervisores,$xdpto);
+            // $pares=factory(Evaluador::class, 2)->create([
+            //     'relation'=>'Pares',
+            //     'evaluado_id'=>$evaluadox,
+            //     ]);
+            // $this->add_user_evaluador($pares,$xdpto);
 
+    }
 
-
-        }
 }

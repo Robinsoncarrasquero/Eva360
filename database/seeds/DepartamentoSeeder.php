@@ -2,6 +2,7 @@
 
 use App\Departamento;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DepartamentoSeeder extends Seeder
 {
@@ -12,6 +13,13 @@ class DepartamentoSeeder extends Seeder
      */
     public function run()
     {
+
+
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0;'); //DESACTIVA EL CHECKEO DE CLAVES FORANEAS
+
+        DB::table('departamentos')->truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
         //Departamento
         $dpto=factory(Departamento::class)->create([
             'name'=>'Presidencia',
