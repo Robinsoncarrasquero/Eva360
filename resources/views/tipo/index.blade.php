@@ -30,17 +30,13 @@
             </thead>
             <tbody>
                 @foreach ($tipos as $tipo)
-                <tr>
+                <tr id="{{ $tipo->id }}">
                     <td>{{ $tipo->id }}</td>
                     <td>{{ $tipo->tipo }}</td>
                     <td><a href="{{ route('tipo.edit',$tipo) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
-                    <td>
-                        <form action="{{ route('tipo.destroy',$tipo) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
-                        </form>
 
+                    <td>
+                        <button class="btn btn-danger" onclick="deleteConfirmation({{$tipo->id}},'{{route('tipo.delete',$tipo->id)}}')">Delete</button>
                     </td>
                 </tr>
                 @endforeach
@@ -51,5 +47,9 @@
     </div>
 
 </div>
+
+@section('scripts')
+    <script src="{{ asset('js/deleteConfirmation.js') }}"></script>
+@endsection
 
 @endsection

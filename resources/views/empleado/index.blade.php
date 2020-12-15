@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Panel de Empleados")
+@section('title',"Panel de Talentos")
 
 @section('content')
 
@@ -18,7 +18,7 @@
                     </form>
                 </div>
                 <div class="text text-center">
-                    <h5>Lista de Empleados</h5>
+                    <h5>Lista de Talentos</h5>
                 </div>
             </div>
 

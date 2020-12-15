@@ -31,18 +31,13 @@
             </thead>
             <tbody>
                 @foreach ($records as $record)
-                <tr>
+                <tr id="{{ $record->id }}">
                     <td>{{ $record->id }}</td>
                     <td>{{ $record->name }}</td>
                     <td>{{ $record->description}}</td>
                     <td><a href="{{ route('departamento.edit',$record) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                     <td>
-                        <form action="{{ route('departamento.destroy',$record) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
-                        </form>
-
+                        <button class="btn btn-danger" onclick="deleteConfirmation({{$record->id}},'{{route('departamento.delete',$record->id)}}')">Delete</button>
                     </td>
                 </tr>
                 @endforeach
@@ -56,5 +51,9 @@
     </div>
 
 </div>
+
+@section('scripts')
+    <script src="{{ asset('js/deleteConfirmation.js') }}"></script>
+@endsection
 
 @endsection

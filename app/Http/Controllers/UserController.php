@@ -183,17 +183,29 @@ class UserController extends Controller
         //
         $user = User::find($user);
         if ($user->admin()){
-            return redirect()->back()
-            ->withError('No esta permitido Eliminar Un Administrador del Sistema');
-        }
-        try {
-            $user->delete();
-        } catch (QueryException $e) {
-            return redirect()->back()
-            ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas Evaluaciones.');
+            $success = false;
+            $message = "No esta permitido Eliminar Un Administrador del Sistema";
+            // return redirect()->back()
+            // ->withError('No esta permitido Eliminar Un Administrador del Sistema');
+        }else {
+            # code...
+            try {
+                $user->delete();
+                $success = true;
+                $message = "Usuario eliminado exitosamente";
+            } catch (QueryException $e) {
+                $success = false;
+                $message = "No se puede borrar este usuario, data restringida";
+                // return redirect()->back()
+                // ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas Evaluaciones.');
+            }
         }
 
-        return redirect()->back()->withSuccess('El usuario ha sido eliminado con exito!!');
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
 
     }
 }

@@ -148,12 +148,19 @@ class FrecuenciaController extends Controller
         $frecuencia = Frecuencia::find($frecuencia);
         try {
             $frecuencia->delete();
+            $success = true;
+            $message = "Frecuencia eliminada exitosamente";
         } catch (QueryException $e) {
-            return redirect()->back()
-            ->withErrors('Error imposible eliminar la frecuencia, tiene restricciones con las evaluaciones.');
+            $success = false;
+            $message = "No se puede eliminar esta Frecuencia, data restringida";
+            // return redirect()->back()
+            // ->withErrors('Error imposible eliminar la frecuencia, tiene restricciones con las evaluaciones.');
         }
-
-        return redirect('frecuencia')->withSuccess('La frecuencia ha sido eliminada con exito!!');
-
+         //Return response
+         return \response()->json([
+            'success'=>$success,
+            'message'=>$message,
+        ]);
+        // return redirect('frecuencia')->withSuccess('La frecuencia ha sido eliminada con exito!!');
     }
 }

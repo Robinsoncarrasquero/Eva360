@@ -44,7 +44,7 @@
                         </span>
                     </div>
                     <div class="table-table">
-                        <table class="table" id="{{ $subproyecto->id }}">
+                        <table class="table" id="p{{ $subproyecto->id }}">
                             <thead>
                                 <th style="width: 30%">Nombre</th>
                                 <th style="width: 5%">Status</th>
@@ -58,7 +58,7 @@
                             </thead>
                             <tbody>
                             @foreach ($subproyecto->evaluado as $evaluado)
-                            <tr>
+                            <tr id="{{ $evaluado->id }}">
                             <td>{{ $evaluado->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p></td>
                             <td class="status-progress" >
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
@@ -113,12 +113,9 @@
                                     <a href="{{route('resultados.graficas', $evaluado->id)}}" ><span><i class="material-icons text-dark">stacked_line_chart</i></span></a>
                                 @endif
                             </td>
+
                             <td>
-                                <form action="{{ route('evaluado.destroy',$evaluado->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
-                                </form>
+                                <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')">Delete</button>
                             </td>
                             </tr>
                             @endforeach
@@ -130,7 +127,6 @@
 
                 <div class=" d-flex justify-content-center">
                     {{ $proyectos->links() }}
-                    {{-- {{ $evaluados->appends(["name"=>$evaluado->name])  }} --}}
                 </div>
 
             @else
@@ -139,8 +135,10 @@
                 <div>
             @endif
 
-
-
     </div>
+
+    @section('scripts')
+        <script src="{{ asset('js/deleteConfirmation.js') }}"></script>
+    @endsection
 
 @endsection

@@ -123,12 +123,22 @@ class TipoController extends Controller
         $tipo = Tipo::find($tipo);
         try {
             $tipo->delete();
+            $success = true;
+            $message = "Tipo de Competencia eliminado exitosamente";
         } catch (QueryException $e) {
-            return redirect()->back()
-            ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas Competencias.');
+            $success = false;
+            $message = "No se puede eliminar este tipo de Competencia, data restringida";
+            // return redirect()->back()
+            // ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas Competencias.');
         }
 
-        return redirect('tipo')->withSuccess('El tipo de Competencia ha sido eliminado con exito!!');
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
+        // return redirect('tipo')->withSuccess('El tipo de Competencia ha sido eliminado con exito!!');
 
     }
 }

@@ -32,6 +32,8 @@ Route::get('/', function () {
 Route::resource('proyecto', 'ProyectoController')
 ->middleware('role:admin');
 
+Route::post('proyecto/delete/{id}','ProyectoController@destroy')->name('proyecto.delete');
+
 /**
 * Resource de Sub Proyecto
 *
@@ -40,13 +42,16 @@ Route::resource('proyecto', 'ProyectoController')
 Route::resource('subproyecto', 'SubProyectoController')
 ->middleware('role:admin');
 
+Route::post('subproyecto/delete/{id}','SubProyectoController@destroy')->name('subproyecto.delete');
+
+
 /**
 * Resource de Nivel de cargo
 *
 */
+Route::resource('nivelCargo', 'NivelCargoController')->middleware('role:admin');
+Route::post('nivelcargo/delete/{id}','NivelCargoController@destroy')->name('nivelcargo.delete');
 
-Route::resource('nivelCargo', 'NivelCargoController')
-->middleware('role:admin');
 
 /**
 * Resource de Cargo
@@ -56,6 +61,8 @@ Route::resource('nivelCargo', 'NivelCargoController')
 Route::resource('cargo', 'CargoController')
 ->middleware('role:admin');
 
+Route::post('cargo/delete/{id}','CargoController@destroy')->name('cargo.delete');
+
 /**
 * Resource de Departamento
 *
@@ -64,12 +71,14 @@ Route::resource('cargo', 'CargoController')
 Route::resource('departamento', 'DepartamentoController')
 ->middleware('role:admin');
 
+Route::post('departamento/delete/{id}','DepartamentoController@destroy')->name('departamento.delete');
 /**
 * Route de User
 *
 */
 Route::get('/user/list', 'UserController@index')->name('index');
-Route::resource('user', 'UserController');
+Route::post('user/delete/{id}', 'UserController@destroy')->name('user.delete')->middleware('role:admin');
+Route::resource('user', 'UserController')->middleware('role:admin');
 
 /**
  * Autenticacion full
@@ -95,6 +104,7 @@ Route::get('vision360', 'HomeController@vision360')->name('vision360');
 Route::resource('frecuencia', 'FrecuenciaController')
 ->middleware('role:admin');
 
+Route::post('frecuencia/delete/{id}','FrecuenciaController@destroy')->name('frecuencia.delete');
 
 /**
 * Resource de Proyecto Panel de Evaluado
@@ -114,6 +124,8 @@ Route::get('proyectoevaluado/{subproyecto}/create', 'ProyectoPanelController@cre
 
 Route::resource('evaluado', 'EvaluadoController')
 ->middleware('role:admin');
+
+Route::post('evaluado/delete/{id}', 'EvaluadoController@destroy')->name('evaluado.delete');
 
 Route::get('evaluado/subproyecto/{subproyecto}/create', 'EvaluadoController@create')->name('evaluado.create')
 ->middleware('role:admin');
@@ -187,7 +199,13 @@ Route::resource('grupocompetencia', 'GrupoCompetenciaController')
 Route::resource('competencia', 'CompetenciaController')
 ->middleware('role:admin');
 
+Route::post('competencia/delete/{id}', 'CompetenciaController@destroy')->name('competencia.delete')
+->middleware('role:admin');
+
 Route::resource('tipo', 'TipoController')
+->middleware('role:admin');
+
+Route::post('tipo/delete/{id}', 'TipoController@destroy')->name('tipo.delete')
 ->middleware('role:admin');
 
 /**

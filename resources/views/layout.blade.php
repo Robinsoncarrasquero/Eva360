@@ -24,6 +24,11 @@
     <script src = {{asset('bs40/core/css/jq/2.1.3/jquery.min.js')  }}></script>
     <link rel="stylesheet" href="{{ asset('bs40/core/css/open-iconic/1.1.1/font/open-iconic-bootstrap.min.css')  }}"/> --}}
 
+
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- Custom styles for this template -->
@@ -81,9 +86,9 @@
                             Panel<span class="caret"></span>
                         </a>
                         <ul class=" dropdown-menu">
-                            <li><a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a></li>
+                            <li><a class="dropdown-item"  href="{{ route('empleado.index') }}">Talento</a></li>
                             <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('empleado.index') }}">Empleados</a></li>
+                            <li><a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a></li>
                             <li  class=" dropdown-divider"></li>
                             <li><a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a></li>
                         </ul>

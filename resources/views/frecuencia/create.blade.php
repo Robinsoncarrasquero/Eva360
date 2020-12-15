@@ -13,13 +13,12 @@
 
         </div>
         <div class="mt-1 text-center">
-            <h3>Nueva Frecuencia</h3>
+            <h5>Nueva Frecuencia</h5>
         </div>
 
         <div class=" card-header">
             <form action="{{ route('frecuencia.store') }}" method="POST">
                 @csrf
-
                 <div class="form-group">
                     <label for="name">Frecuencia</label>
                     <input id="name" placeholder="Ingrese una frecuencia" class="form-control" type="text" name="name" value="{{old('name')  }}">
@@ -33,10 +32,9 @@
                     <input id="valor" placeholder="Ingrese una valor entre 0 y 100" class="form-control" type="text" name="valor" value="{{old('valor')  }}">
                 </div>
 
-                <div class="clearfix">
+                <div class="clearfix col-sm-12 mt-2">
                     <a href="{{route('tipo.index')}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right">Crear</button>
-
                 </div>
 
             </form>

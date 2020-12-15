@@ -55,8 +55,7 @@
                             <td>{{$modelo->name}}</td>
                             <td>{{$modelo->description}}</td>
                             <td>
-                                <a href="{{ route('modelo.show',$modelo->id) }}" class="btn bg-dark-gray"> <i class="material-icons">edit</i></a>
-
+                             <a href="{{ route('modelo.show',$modelo->id) }}" class="btn bg-dark-gray"> <i class="material-icons">edit</i></a>
                             </td>
                             <td>
                                 <form  action="{{ route('modelo.destroy',$modelo->id) }}" method="POST">
@@ -64,7 +63,6 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
                                 </form>
-
                             </td>
                         </tr>
                         @endforeach

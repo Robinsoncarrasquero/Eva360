@@ -25,7 +25,7 @@
                     <input id="tipo" placeholder="General" class="form-control" type="text" name="tipo" value="{{old('tipo')  }}">
                 </div>
 
-                <div class="clearfix">
+                <div class="clearfix col-sm-12 mt-2">
                     <a href="{{route('tipo.index')}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right btn-dark">Crear</button>
 

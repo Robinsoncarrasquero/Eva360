@@ -134,10 +134,19 @@ class SubProyectoController extends Controller
         $record = SubProyecto::find($id);
         try {
             $record->delete();
+            $success = true;
+            $message = "Sub Proyecto eliminado exitosamente";
         } catch (QueryException $e) {
-            return redirect()->back()
-            ->withErrors('Error imposible Eliminar este registro, tiene restricciones con otros datos asociados.');
+            $success = false;
+            $message = "No se puede eliminar este sub proyecto, data restringida";
+            // return redirect()->back()
+            // ->withErrors('Error imposible Eliminar este registro, tiene restricciones con otros datos asociados.');
         }
-        return redirect('subproyecto')->withSuccess('Registro ha sido eliminado con exito!!');
+        //Return response
+        return \response()->json([
+            'success'=>$success,
+            'message'=>$message,
+        ]);
+        // return redirect('subproyecto')->withSuccess('Registro ha sido eliminado con exito!!');
     }
 }

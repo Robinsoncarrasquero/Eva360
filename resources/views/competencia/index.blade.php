@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title',"Lista de Competencias eva360")
+@section('title',"Lista de Competencias")
 
 @section('content')
 
@@ -33,7 +33,7 @@
             </thead>
             <tbody>
                 @foreach ($competencias as $competencia)
-                <tr>
+                <tr id="{{ $competencia->id }}">
                     <td>{{ $competencia->id }}</td>
                     <td>{{ $competencia->name }}</td>
                     <td >{{ substr($competencia->description,0,100) }} ....</td>
@@ -41,12 +41,9 @@
                     <td>{{ $competencia->tipo->tipo}}</td>
                     <td><a href="{{ route('competencia.edit',$competencia) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                     <td>
-                        <form  action="{{ route('competencia.destroy',$competencia) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
-                        </form>
+                        <button class="btn btn-danger" onclick="deleteConfirmation({{$competencia->id}},'{{route('competencia.delete',$competencia->id)}}')">Delete</button>
                     </td>
+
                 </tr>
                 @endforeach
                 </tbody>
@@ -56,5 +53,10 @@
 
         </div>
 </div>
+
+@section('scripts')
+    <script src="{{ asset('js/deleteConfirmation.js') }}"></script>
+@endsection
+
 
 @endsection

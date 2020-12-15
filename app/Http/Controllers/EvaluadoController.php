@@ -141,14 +141,23 @@ class EvaluadoController extends Controller
      */
     public function destroy($evaluado)
     {
-       $evaluado = Evaluado::find($evaluado);
-       try {
+        try {
+            $evaluado = Evaluado::find($evaluado);
             $evaluado->delete();
+            $success = true;
+            $message = "Evaluacion borrada exitosamente";
         } catch (QueryException $e) {
-            return redirect()->back()
-            ->withErrors('Error imposible Eliminar este registro, tiene un modelo de competencias asociado');
+            $success = false;
+            $message = "No se puede eliminar esta evaluacion, data restringida";
+            // return redirect()->back()
+            // ->withErrors('Error imposible Eliminar este registro, tiene un modelo de competencias asociado');
         }
-        return redirect()->back()->withSuccess('El Evaluado ha sido eliminado con exito!!');
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    //     return redirect()->back()->withSuccess('El Evaluado ha sido eliminado con exito!!');
     }
 
 

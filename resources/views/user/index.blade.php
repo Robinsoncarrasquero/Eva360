@@ -40,18 +40,13 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                <tr>
+                <tr id="{{ $user->id }}">
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email}}</td>
                     <td><a href="{{ route('user.edit',$user) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                     <td>
-                        <form action="{{ route('user.destroy',$user) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
-                        </form>
-
+                        <button class="btn btn-danger" onclick="deleteConfirmation({{$user->id}},'{{route('user.delete',$user->id)}}')">Delete</button>
                     </td>
                 </tr>
                 @endforeach
@@ -65,5 +60,9 @@
     </div>
 
 </div>
+
+@section('scripts')
+    <script src="{{ asset('js/deleteConfirmation.js') }}"></script>
+@endsection
 
 @endsection

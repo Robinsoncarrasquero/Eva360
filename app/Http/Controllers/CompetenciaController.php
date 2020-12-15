@@ -146,11 +146,21 @@ class CompetenciaController extends Controller
         $competencia = Competencia::find($competencia);
         try {
             $competencia->delete();
+            $success = true;
+            $message = "Competencia eliminada exitosamente";
         } catch (QueryException $e) {
-            return redirect()->back()
-            ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas evaluaciones realizadas.');
+            $success = false;
+      	    $message = "No se puede eliminar esta Competencia, data restringida";
+            // return redirect()->back()
+            // ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas evaluaciones realizadas.');
         }
 
-        return redirect('competencia')->withSuccess('La Competencia ha sido eliminada con exito!!');
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
+        // return redirect('competencia')->withSuccess('La Competencia ha sido eliminada con exito!!');
     }
 }

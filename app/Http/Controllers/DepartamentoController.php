@@ -123,10 +123,19 @@ class DepartamentoController extends Controller
         $record = Departamento::find($id);
         try {
             $record->delete();
+            $success = true;
+            $message = "Departamento eliminado exitosamente";
         } catch (QueryException $e) {
-            return redirect()->back()
-            ->withErrors('Error imposible Eliminar este registro, tiene restricciones con otros datos asociados.');
+            $success = false;
+            $message = "No se puede eliminar este departamento, data restringida";
+            // return redirect()->back()
+            // ->withErrors('Error imposible Eliminar este registro, tiene restricciones con otros datos asociados.');
         }
-        return redirect('departamento')->withSuccess('Registro ha sido eliminado con exito!!');
+        //Return response
+        return \response()->json([
+            'success'=>$success,
+            'message'=>$message,
+        ]);
+        // return redirect('departamento')->withSuccess('Registro ha sido eliminado con exito!!');
     }
 }
