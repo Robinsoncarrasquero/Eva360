@@ -83,10 +83,10 @@
                     </li> --}}
                     <li class="dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Panel<span class="caret"></span>
+                            Talento<span class="caret"></span>
                         </a>
                         <ul class=" dropdown-menu">
-                            <li><a class="dropdown-item"  href="{{ route('empleado.index') }}">Talento</a></li>
+                            <li><a class="dropdown-item"  href="{{ route('talent.index') }}">Talento</a></li>
                             <li  class=" dropdown-divider"></li>
                             <li><a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a></li>
                             <li  class=" dropdown-divider"></li>

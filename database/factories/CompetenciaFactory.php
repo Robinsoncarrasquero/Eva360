@@ -10,6 +10,6 @@ $factory->define(Competencia::class, function (Faker $faker) {
     return [
         'name'=>$faker->name(),
         'description' => $faker->text() ,
-        'nivelrequerido'=>Arr::random([30,30])
+        'nivelrequerido'=>Arr::random([75,80])
     ];
 });

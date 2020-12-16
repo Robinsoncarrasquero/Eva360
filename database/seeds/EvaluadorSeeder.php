@@ -37,8 +37,9 @@ class EvaluadorSeeder extends Seeder
             $user1 = factory(User::class)->create([
                 'cargo_id'=>$cargo[rand(0,count($cargo)-1)],
                 'departamento_id'=>$evaluado->departamento_id,
-                'password' => bcrypt('secret'),
+                'password' => bcrypt('secret1234'),
             ]);
+            $user1->roles()->attach($role_user);
 
 
             $super1=factory(Evaluador::class)->create([
@@ -58,6 +59,8 @@ class EvaluadorSeeder extends Seeder
                 'password' => bcrypt('secret'),
             ]);
 
+            $user2->roles()->attach($role_user);
+
             $super2=factory(Evaluador::class)->create([
                 'relation'=>'Supervisor',
                 'evaluado_id'=>$evaluado,
@@ -75,6 +78,8 @@ class EvaluadorSeeder extends Seeder
                 'password' => bcrypt('secret'),
             ]);
 
+            $user3->roles()->attach($role_user);
+
             $par1=factory(Evaluador::class)->create([
                 'relation'=>'Par',
                 'evaluado_id'=>$evaluado,
@@ -91,6 +96,8 @@ class EvaluadorSeeder extends Seeder
                 'departamento_id'=>$evaluado->departamento_id,
                 'password' => bcrypt('secret'),
             ]);
+
+            $user4->roles()->attach($role_user);
 
             $par2=factory(Evaluador::class)->create([
                 'relation'=>'Par',

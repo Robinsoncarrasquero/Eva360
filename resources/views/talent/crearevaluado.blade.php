@@ -15,7 +15,7 @@
             </div>
 
             @if($evaluadores)
-                <form action="{{ route('empleado.storeevaluado',$empleado->id) }}" method="POST" id="frm-evaluado">
+                <form action="{{ route('talent.storeevaluado',$empleado->id) }}" method="POST" id="frm-evaluado">
                 @csrf
                 <div class="card mb-3">
                     <div class="card-header">
@@ -89,7 +89,7 @@
                     </table>
 
                     <div class="clearfix">
-                        <span class="float-left"><a href=" {{route('empleado.index') }}" class="btn btn-dark btn-lg">Back</a></span>
+                        <span class="float-left"><a href=" {{route('talent.index') }}" class="btn btn-dark btn-lg">Back</a></span>
                         <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Save</button>
                     </div>
                 </form>
@@ -112,7 +112,7 @@
 
 <dl class="terminos-definicion  md-hide" style="font-size: 0.60rem">
     <dt class="col-md-3">Evaluado</dt>
-    <dd class="col-md-9">Persona que ocupa un cargo con unas competencias y un nivel de requisito para ejercer el puesto.</dd>
+    <dd class="col-md-9">Persona que ocupa un cargo con unas competencias y un nivel para ejercer el puesto.</dd>
 
     <dt class="col-md-3">Evaluador</dt>
     <dd class="col-md-9">
@@ -124,7 +124,7 @@
         <p>Es la relacion laboral entre Evaluado y el Evaluador.</p>
         <dl class="row">
             <dt class="col-md-6">La ponderacion es calculada basados en la "Relacion".</dt>
-            <dd class="col-md-6">Supervisor,Par,Subordinado,Autoevaluacion</dd>
+            <dd class="col-md-6">Supervisor, Par, Subordinado, Autoevaluacion</dd>
         </dl>
     </dd>
 

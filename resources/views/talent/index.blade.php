@@ -18,14 +18,14 @@
                     </form>
                 </div>
                 <div class="text text-center">
-                    <h5>Lista de Talentos</h5>
+                    <h5 style="color:royalblue">TALENTOS</h5>
                 </div>
             </div>
 
             @if ($departamentos->count())
 
                 @foreach ($departamentos as $departamento)
-                    <div class="panel panel mt-2">
+                    <div class="panel panel mt-4">
                         <span class="titulo-subproyecto text-dark">{{ $departamento->name }} </span>
                         <span  style="font-size: 0.75rem" class="titulo-proyecto" >
                         <i class="material-icons">east</i> {{ $departamento->name }}</span>
@@ -34,9 +34,9 @@
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                <th style="width:40%" class="alert-success">Nombre</th>
-                                <th style="width:30%" class="alert-warning">Historico</th>
-                                <th style="width:30%" class="alert-dark">Evaluacion</th>
+                                <th style="width:60%" class="alert-success">Nombre</th>
+                                <th style="width:20%" class="alert-warning">Historico</th>
+                                <th style="width:20%" class="alert-dark">Crear Evaluacion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,16 +44,17 @@
                             <tr>
                                 {{-- <td>{{ substr($empleado->name,0,50) }}<span style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)"><br>{{ $empleado->cargo->name}}</span></td> --}}
                                 <td>{{ ($empleado->name) }}</td>
-                                <td>
+                                <td class="justify-content-center" >
                                     @if ($empleado->evaluaciones->count()>0)
-                                        <a href="{{route('empleado.historicoevaluaciones', $empleado->id)}}"><i class="material-icons">question_answer</i></a></td>
+                                        <a href="{{route('talent.historicoevaluaciones', $empleado->id)}}"><span class="badge badge-warning">{{ $empleado->evaluaciones->count() }}</span></a></td>
+
                                     @else
                                         <a><i class="material-icons text-dark">question_answer</i></a></td>
                                     @endif
                                 </td>
-                                <td >
-                                    <span class="float-center">
-                                        <a href="{{ route('empleado.createevaluado',$empleado->id)}}" class="btn btn-dark "><i class="material-icons">person_add</library-add></i> </a>
+                                <td class="justify-content-center" >
+                                    <span class="text-center">
+                                        <a href="{{ route('talent.createevaluado',$empleado->id)}}" class="btn btn-dark "><i class="material-icons">person_add</library-add></i> </a>
                                     </span>
                                 </td>
                                 {{-- <td>

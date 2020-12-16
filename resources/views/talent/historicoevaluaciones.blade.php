@@ -20,8 +20,8 @@
 
             @if ($evaluaciones->count())
 
-                <div class="text text-center mt-2">
-                    <h5> {{ $empleado->name }}</h5>
+                <div  class="text text-center mt-2 d-flex justify-content-center" >
+                    <h4 style="color:brown;width:100%"class="p-2 col-6"> {{ $empleado->name }}</h4>
                 </div>
 
                 <div class="table mt-4">
@@ -83,7 +83,7 @@
                 </table>
                 </div>
                 <div class="clearfix">
-                    <span class="float-left"><a href=" {{route('empleado.index') }}" class="btn btn-dark btn-lg">Back</a></span>
+                    <span class="float-left"><a href=" {{route('talent.index') }}" class="btn btn-dark btn-lg">Back</a></span>
                 </div>
 
                 <div class=" d-flex justify-content-center">

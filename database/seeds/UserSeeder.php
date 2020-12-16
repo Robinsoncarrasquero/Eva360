@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
         $user = factory(App\User::class)->create([
             'cargo_id'=>$xcargo,
             'departamento_id'=>$xdpto,
-            'password' => bcrypt('secret'),
+            'password' => bcrypt('secret1234'),
         ])->roles()->attach($role_user);
 
     }

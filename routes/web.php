@@ -130,20 +130,21 @@ Route::post('evaluado/delete/{id}', 'EvaluadoController@destroy')->name('evaluad
 Route::get('evaluado/subproyecto/{subproyecto}/create', 'EvaluadoController@create')->name('evaluado.create')
 ->middleware('role:admin');
 
-/**Panel de Empleados
+
+/**Panel de Talent
  *
 */
 
-Route::get('empleado', 'EmpleadoController@indexevaluado')->name('empleado.index')
+Route::get('talent', 'TalentController@indexevaluado')->name('talent.index')
 ->middleware('role:admin');
 
-Route::get('empleado/historico/evaluaciones/{id}', 'EmpleadoController@historicoevaluaciones')->name('empleado.historicoevaluaciones')
+Route::get('talent/historico/evaluaciones/{id}', 'TalentController@historicoevaluaciones')->name('talent.historicoevaluaciones')
 ->middleware('role:admin');
 
-Route::get('empleado/create/evaluado/{id}', 'EmpleadoController@createevaluado')->name('empleado.createevaluado')
+Route::get('talent/create/evaluado/{id}', 'TalentController@createevaluado')->name('talent.createevaluado')
 ->middleware('role:admin');
 
-Route::post('empleado/store/evaluado/{id}', 'EmpleadoController@storeevaluado')->name('empleado.storeevaluado')
+Route::post('talent/store/evaluado/{id}', 'TalentController@storeevaluado')->name('talent.storeevaluado')
 ->middleware('role:admin');
 
 /**

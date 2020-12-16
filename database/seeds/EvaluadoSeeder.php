@@ -38,6 +38,7 @@ class EvaluadoSeeder extends Seeder
             $evaluado->cargo_id = $user->cargo_id;
             $evaluado->user_id = $user->id;
             $evaluado->status=2;
+            $evaluado->word_key='eva180';
             $evaluado->save();
         }
 
