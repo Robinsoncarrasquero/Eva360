@@ -28,10 +28,11 @@ class CompetenciaSeeder extends Seeder
         $competencia=factory(Competencia::class)->create([
             'name'=>'Adaptabilidad al Cambio',
             'tipo_id'=>1,
+            'nivelrequerido'=>100,
             'description'=>'Es la capacidad para adaptarse y amoldarse a los cambios. Se referencia a la capacidad de modificar la propia conducta para alcanzar determinados objetivos cuando surgen dificultades o cambios en el medio. Se asocia con la versatilidad del comportamiento para adaptarse a distintos contextos, situaciones, medios y personas rápida y adecuadamente. Implica conducir a su grupo en función de la correcta comprensión de los escenarios cambiantes dentro de las políticas de la organización.',
         ]);
 
-        $nivel=40;
+        $nivel=100;
         //$grado=['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25];
 
         //Creamos Los grados de la competencias

@@ -25,8 +25,9 @@ class ModeloSeeder extends Seeder
 
            //GENERAL
         $modelo=factory(Modelo::class)->create([
-            'name'=>'Modelo para Gerentes',
+            'name'=>'Talento Base',
         ]);
+        $competencias=[12,13,14,15,16,3];
 
         for ($i=1; $i <5 ; $i++) {
             factory(ModeloCompetencia::class)->create([
@@ -34,5 +35,6 @@ class ModeloSeeder extends Seeder
                 'modelo_id'=>$modelo,
             ]);
         }
+
     }
 }

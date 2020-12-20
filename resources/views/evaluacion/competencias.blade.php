@@ -16,7 +16,7 @@
 
             <div class="clearfix">
                 <div class="card-header text text-center">
-                    <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                    <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <br><span class="text-danger">{{ $evaluado->name }}</span></h5>
                 </div>
 
                 <div class="text text-center mt-2">

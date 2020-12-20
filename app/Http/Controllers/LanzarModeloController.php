@@ -6,11 +6,13 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request ;
 use App\Evaluado;
 use App\Competencia;
+use app\CustomClass\EnviarEmail;
 use app\CustomClass\LanzarEvaluacion;
 use App\Modelo;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LanzarModeloController extends Controller
 {
@@ -68,13 +70,20 @@ class LanzarModeloController extends Controller
         $evaluado = Evaluado::find($evaluado_id);
 
         //Creamos un objeto de lanzamiento de Evaluacion
-        $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado_id,$root);
+        $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado_id);
+
         if (!$objlanzaEvaluacion->crearEvaluacion()){
             return \redirect()->route('proyectoevaluado.index')
             ->with('error',"Error, Esas competencias para el Evaluado $evaluado->name, ya habian sido lanzadas en la Prueba..");
         }
+
         $objlanzaEvaluacion=null;
-        return \redirect()->route('proyectoevaluado.index')->with('success','Hurra!! La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
+
+        EnviarEmail::enviarEmailEvaluadores($evaluado->id);
+
+        Alert::success('Modelo fue lanzado',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
+
+        return \redirect()->route('proyectoevaluado.index')->withSucess('success','Muy Bien, La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
 
     }
 

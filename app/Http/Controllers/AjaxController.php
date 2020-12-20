@@ -17,14 +17,13 @@ class AjaxController extends Controller
     public function sendEmailEvaluador(Request $request)
      {
         $evaluador_id=$request->id;
-        $root=$request->root();
         if ($request->id>0) {
             $objEnviarEmailEvaluador = new EnviarEmail();
-            $objEnviarEmailEvaluador->enviarEmailEvaluador($evaluador_id,$root);
+            $objEnviarEmailEvaluador->enviarEmailEvaluador($evaluador_id);
             $objEnviarEmailEvaluador=null;
-            return response()->json(['success'=>true,'message'=>'Questionario ha sido enviado al correo del Evaluador ...','errors'=>["email"=>"La evaluacion ha sido enviada"]]);
+            return response()->json(['success'=>true,'message'=>'Cuestionario ha sido enviado ...','errors'=>["email"=>"Email ha sido enviado"]]);
          }
-         return response()->json(['success'=>false,'message'=>"ERROR No se envio el correo del cuestionario",'errors'=>["email"=>"ERROR Re-enviando el Questionario"]]);
+         return response()->json(['success'=>false,'message'=>"ERROR, no se envio el cuestionario ",'errors'=>["email"=>"ERROR Re-enviando email"]]);
      }
 
      /** Cambiar e-mail de Evaluador despues de lanzada una prueba*/

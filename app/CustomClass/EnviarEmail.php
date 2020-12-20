@@ -10,17 +10,16 @@ use App\Mail\EvaluacionEnviada;
 use App\Role;
 use App\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class EnviarEmail
 {
-    private $root;
-
 
     /** Envia los correos de invitacion a los evaluadores */
-    public function enviarEmailEvaluadores($evaluado_id,$root){
-        $this->root = $root;
+    public static function enviarEmailEvaluadores($evaluado_id){
+
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
@@ -29,14 +28,14 @@ class EnviarEmail
 
         //Iteramos los evaluadores
         foreach($evaluadores as $evaluador){
-            $this->enviarEmailEvaluador($evaluador->id,$this->root);
+            EnviarEmail::enviarEmailEvaluador($evaluador->id);
         }
 
     }
 
 
     /** Enviar email de invitacion a Evaluador para responder questionario */
-    public function enviarEmailEvaluador($evaluador_id,$root){
+    public static function enviarEmailEvaluador($evaluador_id){
 
         //Buscamos el evaluador
         $evaluador = Evaluador::find($evaluador_id);
@@ -73,7 +72,8 @@ class EnviarEmail
             $data->nameEvaluador=$evaluador->name;
             $data->relation =$evaluador->relation;
             $data->email =$evaluador->email;
-            $data->linkweb =$root."/evaluacion/$evaluador->remember_token/evaluacion";
+            //$data->linkweb =$root."/evaluacion/$evaluador->remember_token/evaluacion";
+            $data->linkweb =Route('evaluacion.token',$evaluador->remember_token);
             $data->nameEvaluado =$evaluado->name;
             $data->enviado =false;
             $data->save();
@@ -92,19 +92,25 @@ class EnviarEmail
     }
 
     /** Envia el correo de finalizacion de la prueba al administrador */
-    public static function enviarEmailFinal($evaluado_id,$root){
+    public static function enviarEmailFinal($evaluado_id){
 
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
         $receivers = env("MAIL_FROM_ADDRESS");
+        $x=env('MAIL_FROM_ADDRESS', false);
 
+        // $environment =  App::environment();
+        // $receivers=App::environment("MAIL_FROM_ADDRESS");
+        // dd($receivers);
         //Creamos un objeto para pasarlo a la clase Mailable
         $data = new EmailSend();
         $data->nameEvaluador="Administrador";
         $data->relation ="Admin";
         $data->email =env("MAIL_FROM_ADDRESS");
-        $data->linkweb =$root."/resultados/$evaluado_id/evaluacion";
+
+        //$data->linkweb =$root."/resultados/$evaluado_id/finales";
+        $data->linkweb =Route('resultados.graficas',$evaluado_id);
         $data->nameEvaluado =$evaluado->name;
         $data->enviado =false;
         $data->save();

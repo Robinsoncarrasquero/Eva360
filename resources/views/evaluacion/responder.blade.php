@@ -11,7 +11,7 @@
 
     <div class="card-header mb-3">
         <h5 class="text text-center">Estimado evaluador {{  $evaluacion->evaluador->name }}, analice con criterio y determinacion la competencia de
-        <span class="text text-danger">{{ $evaluacion->evaluador->evaluado->name }}</span> relacionada con</h5>
+        <span class="text text-danger"><br>{{ $evaluacion->evaluador->evaluado->name }}</span> relacionada con</h5>
     </div>
 
     <div class="panel">
@@ -103,7 +103,6 @@
 
     </form>
 
-
     @else
         <div class="col-md-12">
             <p>No hay datos disponible para evaluacion</p>
@@ -116,14 +115,8 @@
 @endsection
 
 
-@section('sidebar')
-
-
-@endsection
-
-
 @section('scripts')
-<script src="{{ asset('js/responder.js') }}">
-
-</script>
+    <script src="{{ asset('js/responder.js') }}"></script>
 @endsection
+
+

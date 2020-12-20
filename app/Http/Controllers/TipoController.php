@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Tipo;
+use Illuminate\Support\Arr;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TipoController extends Controller
 {
@@ -52,11 +54,15 @@ class TipoController extends Controller
             $tipo->save();
 
         } catch (QueryException $e) {
+            Alert::error($request->tipo,Arr::random(['Duplicada','Registro Ya existe']));
+
             return redirect()->back()
             ->withErrors('Error imposible Guardar este registro. El Tipo debe ser unico, no se permite duplicados.');
         }
 
-        return \redirect('tipo')->withSuccess('Tipo de Competencia : '.$request->tipo.' Registrado exitosamente');
+        Alert::success('Registro '.$request->tipo,Arr::random(['Exitoso','Excelente','Perfecto','Muy Bien']));
+
+        return redirect('tipo')->withSuccess('Tipo de Competencia : '.$request->tipo.' Registrado exitosamente');
 
     }
 
@@ -105,9 +111,12 @@ class TipoController extends Controller
             $tipo->tipo=$request->tipo;
             $tipo->save();
         } catch (QueryException $e) {
+            Alert::error($request->tipo,Arr::random(['Duplicada','Registro Ya existe']));
             return redirect()->back()
             ->withErrors('Error imposible Guardar este registro. El Tipo debe ser unico, no se permite duplicados.');
         }
+        Alert::success($request->tipo,Arr::random(['Registro actualizado','Excelente actualizado']));
+
         return \redirect('tipo')->withSuccess('Tipo de Competencia : '.$request->tipo.' Actualizado exitosamente');
     }
 

@@ -17,7 +17,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "laravelcollective/html": "^6.1",
-        "opis/json-schema": "^1.0"
+        "opis/json-schema": "^1.0",
+        "realrashid/sweet-alert": "^3.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

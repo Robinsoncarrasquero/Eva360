@@ -12,8 +12,10 @@ use App\Relation;
 use App\SubProyecto;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TalentController extends Controller
 {
@@ -97,14 +99,11 @@ class TalentController extends Controller
             \abort(404);
         }
 
+        Alert::success('Evaluacion creada ..',Arr::random(['Good','Excelente','Magnifico','Exito']));
+
         return redirect()->route('proyectoevaluado.index')
         ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar una evaluacion.');
     }
 
-    public function destroy($empleado_id)
-    {
 
-        return redirect()->route('talent.index')
-        ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar una evaluacion.');
-    }
 }

@@ -176,7 +176,7 @@ Route::get('ajaxmodeloajax/data', 'ModeloController@ajaxCompetencias')->name('mo
  * Ajax Controller para manejo de funcionalidades con ajax
  */
 //Envio de correo a evaluador para responder el cuestionario
-Route::post('sendEmailEvaluador','AjaxController@sendEmailEvaluador')->name('ajaxsendemailevaluador')
+Route::post('sendEmailEvaluador/{id}','AjaxController@sendEmailEvaluador')->name('ajaxsendemailevaluador')
 ->middleware('role:admin');
 
 //Envio de correo a evaluador para responder el cuestionario
@@ -206,9 +206,11 @@ Route::post('competencia/delete/{id}', 'CompetenciaController@destroy')->name('c
 Route::resource('tipo', 'TipoController')
 ->middleware('role:admin');
 
-Route::post('tipo/delete/{id}', 'TipoController@destroy')->name('tipo.delete')
+Route::get('tipo/edit/{id}', 'TipoController@edit')->name('tipo.edit')
 ->middleware('role:admin');
 
+Route::post('tipo/delete/{id}', 'TipoController@destroy')->name('tipo.delete')
+->middleware('role:admin');
 /**
  * Route test error abort
  *

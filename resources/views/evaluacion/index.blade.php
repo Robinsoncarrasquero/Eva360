@@ -13,10 +13,10 @@
 
             </div>
 
-            <div class="panel panel">
-                    <div class="text text-center">
-                        <h3>Lista de Mis Evaluados</h3>
-                    </div>
+            <div class="panel panel mt-4">
+                <div class="text text-center">
+                    <h5>Mis Evaluados</h5>
+                </div>
             </div>
 
             @if($evaluadores->count())
@@ -28,12 +28,30 @@
                     <thead>
                     <th>Nombre</th>
                     <th>Status</th>
+                    <th>Progreso</th>
                     <th>Accion</th>
                     </thead>
                     <tbody>
                     @foreach($evaluadores as $evaluador)
                     <tr>
                         <td>{{$evaluador->evaluado->name}}</td>
+
+                        <td class="status-progress" >
+                            @if(Helper::estatus($evaluador->status)=='Finalizada')
+                                <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
+                                <i class="spinner-grow spinner-grow-sm text-success" role="status"></i></a>
+
+                            @endif
+
+                            @if(Helper::estatus($evaluador->status)=='Inicio')
+                                <a href="{{route('evaluacion.competencias',$evaluador->id)}}"><i class="spinner-grow spinner-grow-sm text-danger " role="status"></i></a><span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
+                            @endif
+
+                            @if(Helper::estatus($evaluador->status)=='Lanzada')
+                                <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
+                                <i class="spinner-grow spinner-grow-sm text-warning role="status"></i></a>
+                            @endif
+                        </td>
                         <td>
                             <div class="status-progress">
                                 @if(Helper::estatus($evaluador->status)=='Finalizada')

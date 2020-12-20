@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use app\CustomClass\EnviarEmail;
 use app\CustomClass\LanzarEvaluacion;
 use App\Frecuencia;
 use App\Evaluador;
@@ -12,7 +13,12 @@ use Illuminate\Http\Request;
 use app\Helpers\Helper;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Env;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class EvaluacionController extends Controller
 {
@@ -139,8 +145,29 @@ class EvaluacionController extends Controller
         $evaluacion->save();
 
         //redirigimos al usuario a ruta de sus competencias con el token del evaluador
-        $token=$evaluacion->evaluador->remember_token;
+        $evaluador=$evaluacion->evaluador;
+
+        //Preguntas de la prueba
+        $preguntas=$evaluador->evaluaciones->count();
+
+        //Coleccion de preguntas
+        $respuestas=$evaluador->evaluaciones;
+
+        $respondidas=0;
+        //Contamos las preguntas que faltan
+        foreach ($respuestas as $key => $value) {
+
+            if ($value->grado){
+                $respondidas ++;
+            }
+        }
+        $falta= $preguntas - $respondidas;
+        $mensaje=[0=>'Terminastes buen trabajo',1=>'Excelente, solo quedan '.$falta,2=>'Magnifico, ya llevas '.$respondidas, 3=>'Muy Bien, te restan '.$falta,3=>'Iniciastes muy bien, te restan '.$falta];
+
+        Alert::success($evaluacion->competencia->name,Arr::get($mensaje,$falta));
+
         return \redirect()->route('evaluacion.competencias',$evaluacion->evaluador->id);
+
 
     }
 
@@ -162,7 +189,8 @@ class EvaluacionController extends Controller
 
         //Revisamos cuantas estan pendientes por realizar
         if ($evaluaciones->count()>$competencias->count()){
-            return \redirect()->back()->withDanger('Aun tiene evaluaciones pendientes');
+            Alert::error('Prueba inconclusa',Arr::random(['Culmínela','Finalícela','Terminála']));
+            return \redirect()->back()->withDanger('Aun tiene compentencias pendientes');
         }
 
         $evaluado= $evaluador->evaluado;
@@ -182,16 +210,13 @@ class EvaluacionController extends Controller
         });
 
         //Cambia el status del evaluador finalizada(2) la evaluacion
-        if ($evaluacionesPendientes->count()==0){
-            $evaluado->status= Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
-            $evaluado->save();
+        if ($evaluacionesPendientes->count()!==0){
 
-            $root=$request->root();
-
-            //Enviamos el correo de finalizacion al administrador
-            LanzarEvaluacion::enviarEmailFinal($evaluado->id,$root);
-
+           //Enviamos el correo de finalizacion al administrador
+            EnviarEmail::enviarEmailFinal($evaluado->id);
         }
+
+        Alert::success('Prueba Finalizada',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
 
         return \redirect()->route('evaluacion.index')
         ->withSuccess("Evaluacion de $evaluado->name finalizada exitosamente");

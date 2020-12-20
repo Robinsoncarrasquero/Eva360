@@ -58,7 +58,7 @@
                 <tr>
                     <td>
                         {{ $key }}
-                        {{-- <input class="col-sm-2" hidden type="text" name="gradoid[]" value="{{ $value->id }}"> --}}
+                        <input class="col-sm-2" hidden type="text" name="gradoid[]" value="{{ $value->id }}">
                     </td>
                     <td>
                         <input class="col-sm-2" type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">

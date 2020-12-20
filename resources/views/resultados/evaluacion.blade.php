@@ -25,10 +25,16 @@
                             <table id="table{{ $evaluador->id }}" class="table  table-bordered table-striped table-table">
                                 <thead>
                                     <tr id="{{ $evaluador->id }}">
-                                        <th class="btn-warning chk-enviar-prueba" colspan="5">
-                                            <input type="checkbox" class="btncheck"> Reenviar email
+                                        <th class="chk-enviar-prueba" colspan="5">
+                                            <input type="checkbox" class="btncheck" > Reenviar email
                                         </th>
+
                                     </tr>
+                                    {{-- <tr id="send{{ $evaluador->id }}">
+                                        <th colspan="5">
+                                            <button class="btn btn-warning" onclick="sendEmail({{$evaluador->id}})">Reenviar Email</button>
+                                        </th>
+                                    </tr> --}}
                                     <tr>
                                         <th class="text text-left  title-th-evaluador" colspan="5">
                                         {{$evaluador->name}}({{ $evaluador->relation }}) <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
@@ -84,7 +90,38 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    function sendEmail(id) {
+
+        //id=$(this).parents('tr').prop('id');
+        //var row= $(this).parents('tr').children('th');
+        $.ajax({
+            type:'post',
+            url:"{{ route('ajaxsendemailevaluador',"+id+") }}",
+            data:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),id:id},
+            dataType: 'JSON',
+            success:  function (response) {
+                if (response.success){
+                    alert(response.message);
+                    row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
+                }else{
+                    alert(response.message);
+                }
+
+            },
+            statusCode: {
+                404: function() {
+                    alert('web not found');
+                }
+            },
+            error:function(x,xs,xt){
+                //window.open(JSON.stringify(x));
+                //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+            }
+        });
+    }
+
     $('.btncheck').click(function(e){
+
         id=0;
         if($(this).is(':checked',true)){
             id=$(this).parents('tr').prop('id');
@@ -95,11 +132,10 @@
             // $('#table' + id +' tbody').append(f);
             // $(this).parents("tr").remove();
             $.ajax({
-                url:"{{ route('ajaxsendemailevaluador') }}",
-                data:{id:id},
+                url:"{{ route('ajaxsendemailevaluador',"+id+") }}",
+                data:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),id:id},
                 type:'post',
                 success:  function (response) {
-                    alert(response.message);
                     if (response.success){
                        row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
                     }else{

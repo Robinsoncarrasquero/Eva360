@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
+        //$this->call(CompetenciaBaseSeeeder::class);
         $this->call(ProyectoSeeder::class);
         $this->call(SubProyectoSeeder::class);
         $this->call(NivelCargoSeeder::class);

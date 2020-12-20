@@ -50,38 +50,39 @@ body > .container {
     font-family: Georgia, 'Times New Roman', Times, serif;
 
 }
+#logo{
+    width:75rem;
+}
+
 .cajaimagen1200 img{
     width: 75rem;
-
 }
+
 .cajaimagen300 img{
     width: 8rem;
-
 }
+
 .cajaimagen600 img{
     width: 16rem;
-
 }
+
 .modelo-90,.modelo-180,.modelo-360{
     font-size: 2ex;
     color: rgb(4, 39, 48);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-family: Georgia, 'Times New Roman', Times, serif;
-
 }
 
 /* Presenta el formato para el archivo json que se encuentra en el formulario fileupload.blade.php */
 .formatojson{
     font-size: 0.75rem;
     color: tomato;
-
-
-  }
-  /* Titulo de formulario*/
-  .titulo{
+}
+/* Titulo de formulario*/
+.titulo{
     font-size: 1rem;
     background-color: burlywood;
-  }
+}
   /* Subtitulo de formulario*/
   .subtitulo{
     font-size: 0.75rem;
@@ -290,7 +291,7 @@ body > .container {
     }
     .table-modelos{
         font-size: 0.70rem;
-        background-color:  rgb(1, 46, 24);
+        background-color:  rgb(105, 248, 179);
         color:white;
     }
     .btn{

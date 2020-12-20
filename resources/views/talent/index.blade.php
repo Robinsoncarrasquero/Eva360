@@ -9,8 +9,7 @@
             <div id="flash-message">
                 @include('flash-message')
             </div>
-
-            <div class="card pb-1">
+            <div class="card pb-0 ">
                 <div class="clearfix">
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
                         <input class="form-control mr-sm-2" type="text" placeholder="Departamento" aria-label="Searh" name="buscarWordKey">

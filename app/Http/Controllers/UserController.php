@@ -9,8 +9,10 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -94,6 +96,9 @@ class UserController extends Controller
             return redirect()->back()
             ->withErrors('Error imposible crear este registro. correo ya fue tomado por otro usuario.');
         }
+
+        Alert::success('Registro exitoso',Arr::random(['Good','Excelente','Magnifico','Muy bien']));
+
         return \redirect('user')->withSuccess('Usuario : '.$request->name.' Registrado exitosamente');
 
 
