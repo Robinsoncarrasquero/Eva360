@@ -65,7 +65,7 @@
     <header>
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" style="width:2em" src="{{asset('logo/logo2.jpg') }}"  alt="Talent 360"></a>
+        <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" style="width:2em" src="{{asset('logo/logox150x50.jpg') }}"  alt="Talent 360"></a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -107,7 +107,7 @@
                             <li  class=" dropdown-divider"></li>
                             <li><a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a></li>
                             <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('departamento.index') }}">Departamento</a></li>
+                            <li><a class="dropdown-item"  href="{{ route('ubicacion.index') }}">Ubicacion</a></li>
                         </ul>
                     </li>
 
@@ -199,7 +199,7 @@
     <main role="main" class="container">
 
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12 col-md-12">
                 @yield('content')
             </div>
 
@@ -209,6 +209,8 @@
             </div>
 
         </div>
+
+
 
     </main>
 

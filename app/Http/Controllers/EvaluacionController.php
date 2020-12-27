@@ -210,7 +210,7 @@ class EvaluacionController extends Controller
         });
 
         //Cambia el status del evaluador finalizada(2) la evaluacion
-        if ($evaluacionesPendientes->count()!==0){
+        if ($evaluacionesPendientes->count()==0){
 
            //Enviamos el correo de finalizacion al administrador
             EnviarEmail::enviarEmailFinal($evaluado->id);

@@ -103,7 +103,7 @@
 </div>
 
 @section('scripts')
-<script src="{{ asset('js/evaluadocreate.js') }}"></script>
+<script src="{{ asset('js/evaluadocreate2.js') }}"></script>
 
 @endsection
 

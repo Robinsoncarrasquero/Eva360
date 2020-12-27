@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('master')
 
 @section('title',"Creacion Modelo de Evaluacion")
 
@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="description">Objetivo</label>
-                            <textarea class="form-control" rows="2"  type="text" name="description" id="description" placeholder="Describa un objetivo del modelo"></textarea>
+                            <textarea class="form-control" rows="2"  type="text" name="description" id="description" placeholder="Objetivo"></textarea>
                         </div>
                     </div>
                 </div>

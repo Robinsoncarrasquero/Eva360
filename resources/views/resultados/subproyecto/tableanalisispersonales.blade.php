@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('master')
 
 @section('title',"Analisis de Resultados Personales")
 
@@ -19,7 +19,7 @@
 
                 <div class="clearfix">
                     <div class=" text-center titulo">
-                        <h5>Analisis de Resultados de Competencias Personales</span></h5>
+                        <h5>Analisis de resultados de cumplimiento por grupo</span></h5>
                     </div>
 
                     <div class="text text-center">
@@ -31,7 +31,7 @@
             </div>
 
             @if($subProyecto)
-                    <div class="table col-6">
+                    <div class="table col-sm-12">
                         <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                             <thead class="table-thead">
                             <th>

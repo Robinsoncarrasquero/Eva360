@@ -68,10 +68,10 @@ Route::post('cargo/delete/{id}','CargoController@destroy')->name('cargo.delete')
 *
 */
 
-Route::resource('departamento', 'DepartamentoController')
+Route::resource('ubicacion', 'DepartamentoController')
 ->middleware('role:admin');
 
-Route::post('departamento/delete/{id}','DepartamentoController@destroy')->name('departamento.delete');
+Route::post('ubicacion/delete/{id}','DepartamentoController@destroy')->name('departamento.delete');
 /**
 * Route de User
 *
@@ -94,7 +94,7 @@ Route::post('/logout', 'HomeController@logout')->name('logout');
  * Entrada al modulo de Vision 360
  *
  */
-Route::get('vision360', 'HomeController@vision360')->name('vision360');
+Route::get('talent', 'HomeController@vision360')->name('vision360');
 
 /**
 * Resource de Frecuencia de la evaluacion
@@ -135,16 +135,16 @@ Route::get('evaluado/subproyecto/{subproyecto}/create', 'EvaluadoController@crea
  *
 */
 
-Route::get('talent', 'TalentController@indexevaluado')->name('talent.index')
+Route::get('talent360', 'TalentController@indexevaluado')->name('talent.index')
 ->middleware('role:admin');
 
-Route::get('talent/historico/evaluaciones/{id}', 'TalentController@historicoevaluaciones')->name('talent.historicoevaluaciones')
+Route::get('talent360/historico/evaluaciones/{id}', 'TalentController@historicoevaluaciones')->name('talent.historicoevaluaciones')
 ->middleware('role:admin');
 
-Route::get('talent/create/evaluado/{id}', 'TalentController@createevaluado')->name('talent.createevaluado')
+Route::get('talent360/{id}/create/evaluado', 'TalentController@createevaluado')->name('talent.createevaluado')
 ->middleware('role:admin');
 
-Route::post('talent/store/evaluado/{id}', 'TalentController@storeevaluado')->name('talent.storeevaluado')
+Route::post('talent360/store/evaluado/{id}', 'TalentController@storeevaluado')->name('talent.storeevaluado')
 ->middleware('role:admin');
 
 /**
@@ -176,7 +176,7 @@ Route::get('ajaxmodeloajax/data', 'ModeloController@ajaxCompetencias')->name('mo
  * Ajax Controller para manejo de funcionalidades con ajax
  */
 //Envio de correo a evaluador para responder el cuestionario
-Route::post('sendEmailEvaluador/{id}','AjaxController@sendEmailEvaluador')->name('ajaxsendemailevaluador')
+Route::post('sendemailevaluador/{id}','AjaxController@sendEmailEvaluador')->name('ajaxsendemailevaluador')
 ->middleware('role:admin');
 
 //Envio de correo a evaluador para responder el cuestionario

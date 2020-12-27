@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Modelos de Prueba")
+@section('title',"Modelos")
 
 @section('content')
 

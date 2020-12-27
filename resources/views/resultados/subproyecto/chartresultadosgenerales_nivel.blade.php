@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Resultados Generales Por Nivel de Cargo")
+@section('title',"Resultados Generales nivel de cargo")
 
 @section('content')
 

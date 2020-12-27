@@ -1,6 +1,6 @@
-@extends('lanzamiento.proyecto.layout')
+@extends('master')
 
-@section('title',"Historico de Evaluaciones")
+@section('title',"Historico de evaluaciones")
 
 @section('content')
 

@@ -21,7 +21,7 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        return view('departamento.create');
+        return view('ubicacion.create');
     }
 
     /**
@@ -50,7 +50,7 @@ class DepartamentoController extends Controller
             return redirect()->back()
             ->withErrors('Error imposible Guardar este registro. El Nombre debe ser unico, no se permite duplicados.');
         }
-        return \redirect('departamento')->withSuccess('Departamento : '.$request->name.' Registrado exitosamente');
+        return \redirect('ubicacion')->withSuccess('Ubicacion : '.$request->name.' Registrada exitosamente');
 
     }
 
@@ -109,7 +109,7 @@ class DepartamentoController extends Controller
             ->withErrors('Error imposible Guardar este registro. El Nombre debe ser unico, no se permite duplicados.');
         }
 
-        return \redirect('departamento')->withSuccess('Departamento : '.$request->name.' Actualizado exitosamente');
+        return \redirect('ubicacion')->withSuccess('Ubicacion : '.$request->name.' Actualizado exitosamente');
     }
 
     /**
@@ -124,10 +124,10 @@ class DepartamentoController extends Controller
         try {
             $record->delete();
             $success = true;
-            $message = "Departamento eliminado exitosamente";
+            $message = "Ubicacion eliminada exitosamente";
         } catch (QueryException $e) {
             $success = false;
-            $message = "No se puede eliminar este departamento, data restringida";
+            $message = "No se puede eliminar esta Ubicacion, data restringida";
             // return redirect()->back()
             // ->withErrors('Error imposible Eliminar este registro, tiene restricciones con otros datos asociados.');
         }

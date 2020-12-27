@@ -1,4 +1,4 @@
-@extends('lanzamiento.layout')
+@extends('master')
 
 @section('title',"Crear un Evaluado")
 

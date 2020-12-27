@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Creacion de Departamento")
+@section('title',"Creacion de ubicacion")
 
 @section('content')
 
@@ -13,15 +13,15 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Nuevo Departamento</h5>
+            <h5>Nueva ubicacion</h5>
         </div>
 
         <div class=" card-header">
-            <form action="{{ route('departamento.store') }}" method="POST">
+            <form action="{{ route('ubicacion.store') }}" method="POST">
                 @csrf
                 <div class="col-sm-12">
                     <label for="name">Nombre</label>
-                    <input id="name" placeholder="General" class="form-control" type="text" name="name" value="{{old('name')  }}">
+                    <input id="name" placeholder="Ubicacion" class="form-control" type="text" name="name" value="{{old('name')  }}">
                 </div>
 
                 <div class="col-sm-12">
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="clearfix col-sm-12 mt-2">
-                    <a href="{{route('departamento.index')}}" class="btn btn-dark float-left">Back</a>
+                    <a href="{{route('ubicacion.index')}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right">Save</button>
                 </div>
 

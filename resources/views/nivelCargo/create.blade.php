@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('master')
 
 @section('title',"Creacion de Nivel de Cargo")
 

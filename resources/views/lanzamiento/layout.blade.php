@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="favicon.ico">
-
-    <title>@yield('title')</title>
-    <!-- Iconos para bootstrap -->
+    <link rel="icon" href="favicon.ico">    <!-- Iconos para bootstrap -->
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
+    <title>@yield('title')</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
@@ -21,120 +18,183 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" /> --}}
 
-    <link rel="stylesheet" href="{{asset('bs40/core/css/bootstrap.min.css')  }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    {{-- <link rel="stylesheet" href="{{asset('bs40/core/css/bootstrap.min.css')  }}" >
     <script src = {{asset('bs40/core/css/jq/2.1.3/jquery.min.js')  }}></script>
-    <link rel="stylesheet" href="{{ asset('bs40/core/css/open-iconic/1.1.1/font/open-iconic-bootstrap.min.css')  }}"  />
+    <link rel="stylesheet" href="{{ asset('bs40/core/css/open-iconic/1.1.1/font/open-iconic-bootstrap.min.css')  }}"/> --}}
+
+
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+
+    {{-- <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script> --}}
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <style>
+        .titulo-proyecto{
+            color:brown; font-family: 'Times New Roman', Times, serif;font-size: 2ex;
+        }
+        .titulo-subproyecto{
+            color:black;
+            background-color:lightsteelblue;
+        }
+
+        #grid {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            grid-template-rows: 50px 1fr 50px;
+        }
+
+        #item1 {
+            grid-column: 2;
+            grid-row-start: 1; grid-row-end: 4;
+        }
+
+    </style>
 
   </head>
 
   <body>
 
-   <!-- Fixed navbar -->
-   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('logo/vision360.jpg') }}" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" style="width:2em" src="{{asset('logo/logox150x50.jpg') }}"  alt="Talent 360"></a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <li class="nav-item ">
-            <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
-        </li>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+
+          <ul class="navbar-nav mr-auto ">
+
+              <li class="nav-item ">
+                  <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
+              </li>
+
+              @if (Auth::check() && Auth::user()->admin())
+                  {{-- <li class="nav-item ">
+                      <a class="nav-link" href="{{ route('lanzar.index') }}">Panel<span class="sr-only">(current)</span></a>
+                  </li> --}}
+                  <li class="dropdown">
+                      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          Talento<span class="caret"></span>
+                      </a>
+                      <ul class=" dropdown-menu">
+                          <li><a class="dropdown-item"  href="{{ route('talent.index') }}">Talento</a></li>
+                          <li  class=" dropdown-divider"></li>
+                          <li><a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a></li>
+                          <li  class=" dropdown-divider"></li>
+                          <li><a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a></li>
+                      </ul>
+
+                  </li>
+
+                  <li class="dropdown">
+                      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          Administrativos<span class="caret"></span>
+                      </a>
+
+                      <ul class=" dropdown-menu">
+                          <li><a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a></li>
+                          <li  class=" dropdown-divider"></li>
+                          <li><a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a></li>
+                          <li  class=" dropdown-divider"></li>
+                          <li><a class="dropdown-item"  href="{{ route('ubicacion.index') }}">Ubicacion</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="dropdown">
+                      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          Proyectos<span class="caret"></span>
+                      </a>
+                      <ul class=" dropdown-menu">
+                          <li><a class="dropdown-item"  href="{{ route('proyecto.index') }}">Proyecto</a></li>
+                          <li  class=" dropdown-divider"></li>
+                          <li><a class="dropdown-item"  href="{{ route('subproyecto.index') }}">Sub proyecto</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="dropdown">
+                      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          Competencias<span class="caret"></span>
+                      </a>
+                      <ul class=" dropdown-menu">
+                          <li><a class="dropdown-item"  href="{{ route('tipo.index') }}">Tipo</a></li>
+                          <li  class=" dropdown-divider"></li>
+                          <li><a class="dropdown-item"  href="{{ route('competencia.index') }}">Competencias</a></li>
+                          <li  class=" dropdown-divider"></li>
+                          <li><a class="dropdown-item"  href="{{ route('modelo.index') }}">Modelo</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="nav-item ">
+                      <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
+                  </li>
+                  <li class="nav-item ">
+                      <a  class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
+                  </li>
+              @endif
+
+              @if (Auth::check())
+                  <li class="nav-item ">
+                      <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
+                  </li>
+              @endif
+
+          </ul>
 
 
-        @if (Auth::check() && Auth::user()->admin())
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ route('lanzar.index') }}">Panel<span class="sr-only">(current)</span></a>
-            </li>
-            {{-- <li class="dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    Lanzar Prueba<span class="caret"></span>
-                </a>
-                <ul class=" dropdown-menu">
-                    <li><a class="dropdown-item"  href="{{ route('lanzar.modelo') }}">Por Modelo</a></li>
-                    <li  class=" dropdown-divider"></li>
-                    <li><a class="dropdown-item"  href="{{ route('lanzar.index') }}">Por Competencias</a></li>
-                </ul>
+          <!-- Right Side Of Navbar -->
+          <ul class="navbar-nav ml-auto">
+              <!-- Authentication Links -->
+              @guest
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}  </a>
+                  </li>
+                  @if (Route::has('register'))
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                      </li>
+                  @endif
+              @else
+                  <li class="nav-item dropdown">
+                      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          <i class="material-icons " style="font-size:1rem; color: green">person</i> <span   class="caret username">{{ Auth::user()->name }}</span>
+                      </a>
 
-            </li> --}}
-            <li class="nav-item">
-                <a  class="nav-link" href="{{ route('tipo.index') }}">Tipo</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{{ route('competencia.index') }}">Competencias</a>
-            </li>
-            <li class="nav-item ">
-                <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{{ route('modelo.index') }}">Modelo</a>
-            </li>
-            <li class="nav-item ">
-                <a  class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
-            </li>
-        @endif
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ route('logout') }}"
+                          onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                              <i class="material-icons" style="color:red">logout</i>
+                              {{-- {{ __('Logout') }} --}}
+                          </a>
 
-        @if (Auth::check())
-            <li class="nav-item ">
-            <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
-            </li>
-        @endif
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              @csrf
+                          </form>
+                      </div>
+                  </li>
+              @endguest
+          </ul>
 
+        {{-- <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> --}}
 
-      </ul>
+      </div>
+    </nav>
+  </header>
 
-      <!-- Right Side Of Navbar -->
-      <ul class="navbar-nav ml-auto">
-        <!-- Authentication Links -->
-        @guest
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}  </a>
-            </li>
-            @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-            @endif
-        @else
-            <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <i class="material-icons " style="font-size:1rem; color: green">person</i> <span  class="caret username">{{ Auth::user()->name }}</span>
-                </a>
-
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        <i class="material-icons" style="color:red">logout</i>
-                        {{-- {{ __('Logout') }} --}}
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
-            </li>
-        @endguest
-    </ul>
-
-      {{-- <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form> --}}
-
-    </div>
-  </nav>
-</header>
-
-    <!-- Begin page content -->
+  <!-- Begin page content -->
     <main role="main" class="container">
 
         <div class="row ">
@@ -145,9 +205,8 @@
 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-sm-4">
                 @section('sidebar')
-
                 @show
             </div>
 
@@ -166,6 +225,14 @@
     <script src={{ asset('bs40/core/js/jquery-3.2.1.slim.min.js') }}> </script>
     <script src={{ asset('bs40/core/js/popper.min.js') }}> </script>
     <script src={{ asset('bs40/core/js/bootstrap.min.js') }}> </script>
+
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script> --}}
+
     @yield('scripts')
+
+    @include('sweetalert::alert')
+
   </body>
 </html>

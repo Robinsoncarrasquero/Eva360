@@ -45,8 +45,8 @@ body > .container {
 }
 
 .title-modelo{
-    font-size: 2ex;
-    color: dimgray;
+    font-size: 3ex;
+    color: rgb(27, 27, 29);
     font-family: Georgia, 'Times New Roman', Times, serif;
 
 }
@@ -69,8 +69,7 @@ body > .container {
 .modelo-90,.modelo-180,.modelo-360{
     font-size: 2ex;
     color: rgb(4, 39, 48);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif,Georgia, 'Times New Roman', Times, serif;
 }
 
 /* Presenta el formato para el archivo json que se encuentra en el formulario fileupload.blade.php */

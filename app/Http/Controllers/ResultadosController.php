@@ -145,6 +145,7 @@ class ResultadosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
+        //dd($dataSerie);
         if (!$dataDofa){
             \abort(404);
         }

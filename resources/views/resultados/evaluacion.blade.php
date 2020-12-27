@@ -1,12 +1,10 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Resultados")
+@section('title',"Prueba")
 
 @section('content')
 
 <div class="container">
-
-
 
             <div id="flash-message">
                 @include('flash-message')
@@ -14,7 +12,7 @@
 
             <div class="card card-header mt-2 mb-4">
                 <div class="text text-center">
-                    <h5>Competencias y evaluadores para la Prueba de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                    <h5>Competencias y evaluadores de la prueba de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                 </div>
             </div>
 

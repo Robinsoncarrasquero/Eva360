@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Resultados Resumido")
+@section('title',"Resultados ")
 
 @section('content')
 
@@ -19,15 +19,15 @@
 
                 <div class="clearfix">
                     @if ($evaluado->status!==Helper::estatus('Finalizada'))
-                        <h4 class="alert-danger text-center">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h4>
+                        <h5 class="alert-danger text-center">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h5>
                     @else
-                        <div class="text text-center titulo">
-                            <h5>Resultados de la Evaluacion de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+                        <div class="text text-center">
+                            <h5>Competencias evaluadas y resultados finales</span></h5>
                         </div>
                     @endif
 
                     <div class="text text-center">
-                        <h4>Competencias evaluadas y resultados finales</span></h4>
+                        <h5><span class="text-danger" style="font-size:1.5rem">{{ $evaluado->name }}</span></h5>
                     </div>
 
                 </div>
@@ -60,7 +60,7 @@
 
                                 @endforeach
                                 <tr>
-                                    <td class="text text-center"><strong>Resultado Final</strong></td>
+                                    <td class="text text-center"><strong>Obtenido</strong></td>
                                     <td class="text text-dark" ><a href=""><i class="material-icons">bar_chart</i></a>{{ number_format($value['eva360'],2)}}
                                     </td>
                                 </tr>

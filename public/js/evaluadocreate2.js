@@ -25,7 +25,7 @@ $(document).ready(function () {
             type: "text",
             name: "name[]",
             maxlength:100,
-            placeholder: "Ingrese el Nombre del Evaluador"
+            placeholder: "Nombre del evaluador"
         });
         var td1=$('<td/>');
         td1.append(input1);
@@ -34,17 +34,28 @@ $(document).ready(function () {
             type: "text",
             name: "relation[]",
             maxlength:15,
-            placeholder: "Relacion con el evaluado (Jefe,Partner,Cliente,XYZ)"
+            placeholder: "Relacion con el evaluado",
+            value: "Par"
         });
         var td2=$('<td/>');
         td2.append(input2);
+
+        // var input2 =$("<select/>",{
+        //      type:"option",
+        //      name: "relation[]",
+        //      value="Par"
+        //  });
+        // <option selected value="Autoevaluacion">Autoevaluacion</option>
+
+        // var td2=$('<td/>');
+        // td2.append(input2);
 
         var input3=$("<input/>",{
             type: "email",
             name: "email[]",
             value:'email@example.com',
             maxlength:100,
-            placeholder: "Ingrese un email valido"
+            placeholder: "Email"
         });
         var td3=$('<td/>');
         td3.append(input3);

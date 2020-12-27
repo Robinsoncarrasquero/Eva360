@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Editar Departamanto")
+@section('title',"Editar Ubicacion")
 
 @section('content')
 
@@ -13,18 +13,18 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Actualizar Departamento</h5>
+            <h5>Actualizar Ubicacion</h5>
         </div>
 
         <div class="card-header">
 
-            <form action="{{route('departamento.update',$record)  }}" method="post">
+            <form action="{{route('ubicacion.update',$record)  }}" method="post">
                 @csrf
                 @method('PATCH' )
 
                 <div class="col-sm-12">
                     <label for="name">Nombre</label>
-                    <input id="name" class="form-control" type="text" name="name" value="{{$record->name}}">
+                    <input id="name" class="form-control" type="text" name="name" placeholder="ubicacion" value="{{$record->name}}">
                 </div>
 
                 <div class="col-sm-12">

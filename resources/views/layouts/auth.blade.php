@@ -9,7 +9,7 @@
     <link rel="icon" href="favicon.ico">    <!-- Iconos para bootstrap -->
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
-    <title>@yield('title') - Vision360</title>
+    <title>@yield('title')</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
@@ -32,7 +32,7 @@
     <header>
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="{{ route('home') }}"><img src="logo/vision360.jpg" style=" width: 10ex; height:3ex" alt="Vision 360"></a>
+        <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" style="width:2em" src="{{asset('logo/logox150x50.jpg') }}"  alt="Talent 360"></a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -120,7 +120,7 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text text-center text-white ">Sistema de Gestion por Competencias Talent360</span>
+        <span class="text text-center text-white ">Sistema de Gestion por Competencias Talent 360</span>
      </div>
     </footer>
 

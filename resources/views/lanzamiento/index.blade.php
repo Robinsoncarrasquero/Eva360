@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Panel de control de Evaluados")
+@section('title',"Control de evaluados")
 
 @section('content')
 
@@ -22,8 +22,9 @@
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
                 </div>
-                <div class="text text-center  mt-2">
-                    <h5>Panel de Evaluados</h5>
+
+                <div class="text text-center">
+                    <h5 style="color:royalblue; font-size:1.5rem">Evaluados</h5>
                 </div>
             </div>
 
@@ -161,15 +162,13 @@
             @else
 
             <div class="d-flex alert alert-info">
-                <p>No hay usuarios registrados para mostrar en esta lista</p>
+                <p>No hay usuarios registrados</p>
             <div>
 
             @endif
 
             <div class=" d-flex justify-content-center">
                 {{ $evaluados->links() }}
-                {{-- {{ $evaluados->appends(["name"=>$evaluado->name])  }} --}}
-
             </div>
 
         </div>

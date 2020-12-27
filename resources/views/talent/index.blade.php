@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Panel de Talentos")
+@section('title',"Control de talentos")
 
 @section('content')
 
@@ -12,12 +12,12 @@
             <div class="card pb-0 ">
                 <div class="clearfix">
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Departamento" aria-label="Searh" name="buscarWordKey">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Ubicacion" aria-label="Searh" name="buscarWordKey">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
                 </div>
                 <div class="text text-center">
-                    <h5 style="color:royalblue">TALENTOS</h5>
+                    <h5 style="color:royalblue; font-size:1.5rem">Talentos</h5>
                 </div>
             </div>
 

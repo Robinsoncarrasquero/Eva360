@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Resultados Generales Por Tipo de Competencias")
+@section('title',"Resultados generales por tipo")
 
 @section('content')
 
@@ -28,12 +28,12 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-12 mt-3">
+    <div class="col-sm-12 mt-3">
         <div class="mb-1" id="container"></div>
     </div>
     <div class="col-sm-12">
         <div class="text-left">
-            <h6>Cuadro Resultado de Fortalezas / Oportunidades</h6>
+            <h6>Cuadro de resultados Fortalezas / Oportunidades</h6>
         </div>
         @if($subProyecto)
 
@@ -112,7 +112,7 @@
         yAxis: {
             min: 0,
             title: {
-                text: 'Nivel de Dominio'
+                text: 'Nivel de dominio'
             }
         },
         tooltip: {

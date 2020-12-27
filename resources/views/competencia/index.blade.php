@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('master')
 
 @section('title',"Lista de Competencias")
 

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('master')
 
 @section('title',"Lista de Evaluados")
 
@@ -9,44 +9,45 @@
 
     <div class="col-sm-12">
 
-        <h2>Lista de Evaluados</h2>
         <div id="flash-message">
             @include('flash-message')
+        </div>
 
+        <div class="mt-2 text text-center">
+            <h5>Lista de Evaluados</h5>
         </div>
 
         @if ($evaluados->count())
 
+            <table class="table table-light table-striped ">
+                <thead>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    @foreach ($evaluados as $evaluado)
+                    <tr>
+                        <td>{{ $evaluado->id }}</td>
+                        <td>{{ $evaluado->name }}</td>
+                        <td>
+                            <form action="{{ route('evaluado.destroy',$evaluado) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
+                            </form>
 
-        <table class="table table-light table-striped ">
-            <thead>
-                <th>#</th>
-                <th>Nombre</th>
-                <th></th>
-            </thead>
-            <tbody>
-                @foreach ($evaluados as $evaluado)
-                <tr>
-                    <td>{{ $evaluado->id }}</td>
-                    <td>{{ $evaluado->name }}</td>
-                    <td>
-                        <form action="{{ route('evaluado.destroy',$evaluado) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"> <i class="material-icons">delete</i></button>
-                        </form>
+                        </td>
+                    </tr>
+                    @endforeach
 
-                    </td>
-                </tr>
-                @endforeach
+                    </tbody>
+            </table>
 
-                </tbody>
-        </table>
+            <div class=" d-flex justify-content-center">
+                {{ $evaluados->links() }}
 
-        <div class=" d-flex justify-content-center">
-            {{ $evaluados->links() }}
-
-        </div>
+            </div>
 
         @endif
 

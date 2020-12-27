@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Control de Proyectos de Evaluacion")
+@section('title',"Control de evaluaciones")
 
 @section('content')
 
@@ -12,23 +12,25 @@
 
             <div class="card pb-2 mt-2">
                 <div class="clearfix ">
-                    <div class="text text-center mt-2">
-                        <h5>Control de Evaluaciones</h5>
-                    </div>
+
                      <form class="form-inline mt-2 mt-md-0 float-left col-sm-6">
                         <input class="form-control mr-sm-2" type="text" placeholder="Proyecto" aria-label="Searh" name="buscarWordKey">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
                 </div>
+
+                <div class="text text-center">
+                    <h5 style="color:royalblue; font-size:1.5rem">Evaluaciones</h5>
+                </div>
             </div>
 
             @if ($proyectos->count())
                 @foreach ($proyectos as $proyecto)
-                    <div class="card-header mt-5">
+                    <div class="card-header mt-4">
                         <span class="titulo-proyecto text-dark">{{$proyecto->name }} </span>
-                        <span class="float-right">
-                            <a href="{{ route('resultados.resultadosgeneralestipo',$proyecto->id) }}"><span><i class="material-icons">leaderboard</i></span></a>
-                            <a href="{{ route('resultados.resultadosgeneralesnivel',$proyecto->id) }}"><span><i class="material-icons">assessment</i></span></a>
+                        <span class="float-right d-flex flex-column ">
+                            <a href="{{ route('resultados.resultadosgeneralestipo',$proyecto->id) }}" style="color:green;"><span style="font-size: 0.75rem">Tipo <i class="material-icons">leaderboard</i></span></a>
+                            <a href="{{ route('resultados.resultadosgeneralesnivel',$proyecto->id) }}" style="color:green;"><span style="font-size: 0.75rem">Nivel <i class="material-icons">assessment</i></span></a>
                         </span>
                         </p>
                     </div>
@@ -36,12 +38,13 @@
                     @foreach ($proyecto->subproyecto as $subproyecto)
                     <div class="panel mt-2">
 
-                        <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span  style="font-size: 0.75rem" class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
-                        <span class="float-right">
-                            <a href="{{ route('resultados.graficaPersonales',$subproyecto->id) }}"><span><i class="material-icons">table_chart</i></span></a>
-                            <a href="{{ route('resultados.analisispersonalestabulados',$subproyecto->id) }}"><span><i class="material-icons">dynamic_feed</i></span></a>
-                            <a href="{{ route('evaluado.create',$subproyecto)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
+                        <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span  style="font-size: 0.75rem;" class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
+                        <span class="float-right d-flex justify-content-around">
+                            <a href="{{ route('resultados.graficaPersonales',$subproyecto->id) }}" style="color:black"><span style="font-size: 0.75rem">Grupos <i class="material-icons">table_chart</i></span></a>
+                            <a href="{{ route('resultados.analisispersonalestabulados',$subproyecto->id) }}" style="color: black"><span style="font-size: 0.75rem">Cumplimiento <i class="material-icons">dynamic_feed</i></span></a>
+                            {{-- <a href="{{ route('evaluado.create',$subproyecto)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a> --}}
                         </span>
+
                     </div>
                     <div class="table-table">
                         <table class="table" id="p{{ $subproyecto->id }}">

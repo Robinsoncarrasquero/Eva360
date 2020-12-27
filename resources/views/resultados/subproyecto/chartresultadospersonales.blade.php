@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('master')
 
-@section('title',"Resultados Personales")
+@section('title',"Resultados personales")
 
 @section('content')
 
@@ -42,7 +42,7 @@
 
                 <div class="clearfix">
                     <div class=" text-center">
-                        <h5>Cuadro de resultados</span></h5>
+                        <h5>Cuadro detallado</span></h5>
                     </div>
 
                 </div>
@@ -105,7 +105,7 @@
             type: 'column'
         },
         title: {
-            text: 'Resultados de Competencias Personales'
+            text: 'Resultados de competencias por grupo'
         },
         subtitle: {
             text:  subProyectoName

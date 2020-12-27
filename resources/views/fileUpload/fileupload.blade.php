@@ -1,5 +1,5 @@
 
-@extends('layout')
+@extends('master')
 
 @section('title',"Upload Fila de Evaluacion")
 

@@ -1,4 +1,6 @@
-@extends('lanzamiento.proyecto.layout')
+{{-- @extends('lanzamiento.proyecto.layout') --}}
+
+@extends('master')
 
 @section('title',"Panel de Empleados")
 
