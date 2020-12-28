@@ -23,6 +23,20 @@ Route::get('/', function () {
     return view('vision360');
 });
 
+/**
+ * Route de notificaciones de evaluaciones
+ *
+ */
+
+Route::get('notificaciones/all/{id}', 'NotificacionesController@all')->name('notificaciones.all')
+->middleware('role:admin');
+
+Route::get('notificaciones/unread/{id}', 'NotificacionesController@unread')->name('notificaciones.unread')
+->middleware('role:admin');
+
+Route::get('notificaciones/markasread/{id}', 'NotificacionesController@markasread')->name('notificaciones.markasread')
+->middleware('role:admin');
+
 
 /**
 * Resource de Proyecto
