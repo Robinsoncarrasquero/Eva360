@@ -28,32 +28,31 @@ class FrecuenciaSeeder extends Seeder
         factory(Frecuencia::class)->create([
             'name'=>'Siempre',
             'valor'=>100,
-            'description'=>'Representa el comportamiento habitual del evaluado',
+            'description'=>'Representa el comportamiento habitual',
         ]);
 
         factory(Frecuencia::class)->create([
             'name'=>'Frecuente',
             'valor'=>75,
-            'description'=>'Representa el comportamiento frecuente.',
+            'description'=>'Representa el comportamiento frecuentemente.',
         ]);
         factory(Frecuencia::class)->create([
             'name'=>'Medio',
             'valor'=>50,
-            'description'=>'Representa el comportamiento en la mita de la veces u ocaciones.',
+            'description'=>'Representa el comportamiento en la mitad de la veces.',
         ]);
 
         factory(Frecuencia::class)->create([
             'name'=>'Ocasional',
             'valor'=>25,
-            'description'=>'Representa el comportamiento ocasional del evaluado.',
+            'description'=>'Representa el comportamiento ocasionamente.',
         ]);
 
-        factory(Frecuencia::class)->create([
-            'name'=>'ND',
-            'valor'=>0,
-            'description'=>'Deficiente necesita significativas mejoras.',
-        ]);
-
+        // factory(Frecuencia::class)->create([
+        //     'name'=>'ND',
+        //     'valor'=>0,
+        //     'description'=>'Deficiente necesita significativas mejoras.',
+        // ]);
 
     }
 }

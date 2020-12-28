@@ -37,7 +37,7 @@ class EvaluadorSeeder extends Seeder
             $user1 = factory(User::class)->create([
                 'cargo_id'=>$cargo[rand(0,count($cargo)-1)],
                 'departamento_id'=>$evaluado->departamento_id,
-                'password' => bcrypt('secret1234'),
+                'password' => bcrypt('secret'),
             ]);
             $user1->roles()->attach($role_user);
 

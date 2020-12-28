@@ -26,42 +26,33 @@ class CompetenciaBaseSeeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
         $jsoncompetencias = Storage::disk('local')->get('config/seeder_competencias.json');
-        $competencias=json_decode($jsoncompetencias);
+        $jscompetencias=json_decode($jsoncompetencias);
 
         $jsongrados = Storage::disk('local')->get('config/seeder_grados.json');
-        $grados=json_decode($jsongrados);
+        $jsgrados=json_decode($jsongrados);
 
-        foreach ($competencias as $key=>$data) {
+        foreach ($jscompetencias[2]->data as $kc=>$c){
 
-            foreach($data as $kdata=>$dc)
-            {
-         //          dump($datacompetencia);
-                // alguna otra acción
+            $new_competencia=factory(Competencia::class)->create([
+                'name'=>$c->name,
+                'tipo_id'=>$c->tipo_id,
+                'description'=>$c->description,
+                'nivelrequerido'=>$c->nivelrequerido,
+            ]);
 
-                $competencia=factory(Competencia::class)->create([
-                    'name'=>$dc->name,
-                    'tipo_id'=>$dc['tipo_id'],
-                    'description'=>$dc['description'],
-                    'nivelrequerido'=>$dc['nivelrequerido'],
-                ]);
-
-                // //Creamos Los grados de la competencias
-                // foreach ($grados['data'] as $key => $value) {
-                //     # code...
-                //     if ($value->competencia_id == $datacompetencia->id){
-                //         factory(Grado::class)->create([
-                //             'grado'=>$key['grado',
-                //             'ponderacion'=>$value->ponderacion,
-                //             'competencia_id'=>$competencia->id,
-                //             'description'=>$value->description,
-                //         ]);
-                //     }
-
-                // }
+            foreach ($jsgrados[2]->data as $kg => $g) {
+                # code...
+                if ($g->competencia_id == $c->id){
+                    factory(Grado::class)->create([
+                        'grado'=>$g->grado,
+                        'description'=>$g->description,
+                        'ponderacion'=>$g->ponderacion,
+                        'competencia_id'=>$new_competencia->id,
+                    ]);
+                }
 
             }
         }
-
 
     }
 }

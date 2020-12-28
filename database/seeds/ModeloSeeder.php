@@ -27,7 +27,6 @@ class ModeloSeeder extends Seeder
         $modelo=factory(Modelo::class)->create([
             'name'=>'Talento Base',
         ]);
-        $competencias=[12,13,14,15,16,3];
 
         for ($i=1; $i <5 ; $i++) {
             factory(ModeloCompetencia::class)->create([
