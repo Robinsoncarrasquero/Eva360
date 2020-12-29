@@ -6,8 +6,6 @@
 
 <div class="container">
 
-    <div class="col-sm-8">
-
         <div id="flash-message">
             @include('flash-message')
         </div>
@@ -40,7 +38,7 @@
 
             </form>
         <div>
-    </div>
+
 </div>
 
 @endsection

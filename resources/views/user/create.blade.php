@@ -10,7 +10,7 @@
             @include('flash-message')
     </div>
     <div class="col-sm-8 text text-center">
-        <h3 >Editar Usuario</h3>
+        <h5 >Editar Usuario</h5>
     </div>
 
     <form action="{{route('user.store')  }}" method="post">

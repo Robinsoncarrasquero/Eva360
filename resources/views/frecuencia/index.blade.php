@@ -7,7 +7,6 @@
 
 <div class="container">
 
-    <div class="col-sm-12">
 
         <div id="flash-message">
             @include('flash-message')
@@ -47,9 +46,6 @@
 
                 </tbody>
         </table>
-
-    </div>
-
 </div>
 
 @section('scripts')

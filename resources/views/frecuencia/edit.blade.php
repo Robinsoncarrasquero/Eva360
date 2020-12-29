@@ -6,7 +6,6 @@
 
 <div class="container">
 
-    <div class="col-sm-8">
         <div class="mt-1 text-center">
             <h5>Actualizar Frecuencia</h5>
         </div>
@@ -44,7 +43,6 @@
 
             </form>
         <div>
-    </div>
 </div>
 
 @endsection

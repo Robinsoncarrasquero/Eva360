@@ -7,7 +7,6 @@
 
 <div class="container">
 
-    <div class="col-sm-12">
 
         <div id="flash-message">
             @include('flash-message')
@@ -45,10 +44,9 @@
                 </tbody>
         </table>
 
-    </div>
-    <div class=" d-flex justify-content-center">
-        {{ $records->links() }}
-    </div>
+        <div class=" d-flex justify-content-center">
+            {{ $records->links() }}
+        </div>
 
 </div>
 

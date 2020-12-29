@@ -7,7 +7,6 @@
 
 <div class="container">
 
-
         <div id="flash-message">
             @include('flash-message')
 
@@ -48,9 +47,9 @@
                 @endforeach
                 </tbody>
         </table>
+
         <div class=" d-flex justify-content-center">
             {{ $competencias->links() }}
-
         </div>
 </div>
 

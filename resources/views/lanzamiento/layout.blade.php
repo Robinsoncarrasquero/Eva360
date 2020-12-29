@@ -199,13 +199,13 @@
 
         <div class="row ">
 
-            <div class="col-sm-12 col-md-8">
+            <div class="col-sm-8 col-md-8">
 
                 @yield('content')
 
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-md-4">
                 @section('sidebar')
                 @show
             </div>

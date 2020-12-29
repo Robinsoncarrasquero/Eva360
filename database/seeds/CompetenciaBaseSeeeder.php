@@ -31,6 +31,7 @@ class CompetenciaBaseSeeeder extends Seeder
         $jsongrados = Storage::disk('local')->get('config/seeder_grados.json');
         $jsgrados=json_decode($jsongrados);
 
+        //comenzamos a recorrer el array desde la posicion 2
         foreach ($jscompetencias[2]->data as $kc=>$c){
 
             $new_competencia=factory(Competencia::class)->create([

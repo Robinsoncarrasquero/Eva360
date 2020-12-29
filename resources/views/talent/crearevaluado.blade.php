@@ -131,22 +131,22 @@
     <dt class="col-md-3 text-truncate">E90°</dt>
     <dd class="col-md-9">
         <dl class="row">
-            <dt class="col-md-6">Prueba de E90°</dt>
-            <dd class="col-md-6">Manager, Supervisor</dd>
+            <dt class="col-md-6">Prueba de E90° para 2 grupos</dt>
+            <dd class="col-md-6">Manager y Supervisor</dd>
         </dl>
     </dd>
     <dt class="col-md-3 text-truncate">E180°</dt>
     <dd class="col-md-9">
         <dl class="row">
             <dt class="col-md-6">Prueba de E180° para 2 grupos</dt>
-            <dd class="col-md-6">Supervisor, Par</dd>
+            <dd class="col-md-6">Supervisores, Pares</dd>
         </dl>
     </dd>
     <dt class="col-md-3 text-truncate">E360°</dt>
     <dd class="col-md-9">
         <dl class="row">
             <dt class="col-md-6">Prueba de E360° para 3 grupos</dt>
-            <dd class="col-md-6">Supervisor, Par, Subordinado, Autoevaluacion</dd>
+            <dd class="col-md-6">Supervisors, Pars, Subordinados, Autoevaluacion</dd>
         </dl>
     </dd>
 </dl>

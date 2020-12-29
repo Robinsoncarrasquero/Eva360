@@ -45,8 +45,6 @@ class LanzarModeloController extends Controller
 
         );
 
-        $root=$formrequest->root();
-
         //Creamos una array filtrando el modelo seleccionado en el formulario
         $modeloflattened = Arr::flatten($modelo);
 

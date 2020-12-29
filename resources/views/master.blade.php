@@ -199,14 +199,14 @@
     <main role="main" class="container">
 
         <div class="row">
-            <div class="col-sm-12 col-md-12">
+            <div class="col-12">
                 @yield('content')
             </div>
 
-            <div class="col-sm-12">
+            {{-- <div class="col-sm-4 col-md-2">
                 @section('sidebar')
                 @show
-            </div>
+            </div> --}}
 
         </div>
 

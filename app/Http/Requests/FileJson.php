@@ -129,59 +129,6 @@ class FileJson extends FormRequest
                 break;
         }
 
-        // if ($grouped->count()>2){
-
-        //     //Evaluacion de 90
-        //     $eva90=true;
-        //     $array_eva90 = ['AUTOEVALUACION'=>'AUTOEVALUACION','SUBORDINADO' => 'SUBORDINADO','PAR'=>'PAR'];
-        //     foreach ($grouped as $key => $value) {
-        //         if ($value->count()>1 || $grouped->count()>3 || (Arr::exists($array_eva90,$key))){
-        //             $eva90=false;
-        //             break;
-        //         }
-        //     }
-        //     $prueba="eva90";
-        //     //Evaluacion de 360
-        //     $array_eva360 = ['MANAGER' => 'MANAGER'];
-        //     if (!$eva90){
-        //         $eva360=true;
-        //         foreach ($grouped as $key => $value) {
-        //             if (($value->count()<2 && $key!='AUTOEVALUACION')  || (Arr::exists($array_eva360,$key))){
-        //                 $eva360=false;
-        //                 break;
-        //             }
-        //         }
-        //         $prueba="eva360";
-        //     }
-
-
-        // }elseif ($grouped->count()>1){
-        //     //Evaluacion de 180
-        //     $eva180=true;
-        //     $array_eva180 = ['MANAGER' => 'MANAGER'];
-        //     foreach ($grouped as $key => $value) {
-        //         if (($value->count()<2 && $key!='AUTOEVALUACION') || (Arr::exists($array_eva180,$key))){
-        //             $eva180=false;
-        //             break;
-        //         }
-        //     }
-        //     $prueba="eva180";
-        //     //Evaluacion de 90
-        //     if (!$eva180){
-        //         $eva90=true;
-        //         $array_eva90 = ['SUBORDINADO' => 'SUBORDINADO','PAR'=>'PAR'];
-        //         foreach ($grouped as $key => $value) {
-        //             if ($value->count()>1 || $grouped->count()>3 || (Arr::exists($array_eva90,$key))){
-        //                 $eva90=false;
-        //                 break;
-        //             }
-        //         }
-        //         $prueba="eva90";
-        //     }
-
-
-        // }
-
         if ($eva90 || $eva180 || $eva360){
             $this->merge([
                 'evaluacion' =>$prueba ,

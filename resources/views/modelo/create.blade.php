@@ -11,7 +11,7 @@
     </div>
 
     <div class="mt-1">
-        <h5 class="text text-center">Nuevo Modelo de Evaluacion</h5>
+        <h5 class="text text-center">Nuevo Modelo de evaluacion</h5>
     </div>
 
     @if ($competencias->isNotEmpty())
