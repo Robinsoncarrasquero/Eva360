@@ -23,15 +23,15 @@ class AjaxController extends Controller
             $objEnviarEmailEvaluador=null;
             return response()->json(['success'=>true,'message'=>'Cuestionario ha sido enviado ...','errors'=>["email"=>"Email ha sido enviado"]]);
          }
-         return response()->json(['success'=>false,'message'=>"ERROR, no se envio el cuestionario ",'errors'=>["email"=>"ERROR Re-enviando email"]]);
+         return response()->json(['success'=>false,'message'=>"Error, no se envio el cuestionario ",'errors'=>["email"=>"ERROR Re-enviando email"]]);
      }
 
      /** Cambiar e-mail de Evaluador despues de lanzada una prueba*/
      public function changeEmailEvaluador(Request $request)
      {
         $evaluador_id=$request->id;
-        $root=$request->root();
         $email_new=$request->email;
+
         if ($request->id>0) {
             $evaluador = Evaluador::find($evaluador_id,['id','email','user_id']);
             $user = User::find($evaluador->user_id, ['id', 'email']);
@@ -58,8 +58,8 @@ class AjaxController extends Controller
                 abort(404,$e);
             }
 
-            //Buscamos los evaluadores del evaluado
-            $evaluadores = User::find($evaluador->user_id)->evaluaciones;
+            //Buscamos todas las evaluaciones de un usuario evaluador
+            $evaluadores = User::find($evaluador->user_id)->evaluadores;
 
             //Iteramos los evaluadores
             foreach($evaluadores as $evaluadorx){

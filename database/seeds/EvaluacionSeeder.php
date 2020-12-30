@@ -32,6 +32,8 @@ class EvaluacionSeeder extends Seeder
 
     public function add_evaluacion($evaluador){
 
+        $this->call(CompetenciaBaseSeeeder::class);
+
        //Creamos una evaluacion
        for ($i=1; $i <5 ; $i++) {
             $competencia=$i;

@@ -28,7 +28,7 @@
 
         </div>
         <div class="d-flex justify-content-center">
-            <a  href="{{ route('lanzar.index') }}" class="btn btn-dark">  Lanzar una evaluacion </a>
+            <a  href="{{ route('talent.index') }}" class="btn btn-dark">  Lanzar una evaluacion </a>
 
         </div>
 

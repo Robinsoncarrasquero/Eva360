@@ -26,7 +26,6 @@
                                         <th class="chk-enviar-prueba" colspan="5">
                                             <input type="checkbox" class="btncheck" > Reenviar email
                                         </th>
-
                                     </tr>
                                     {{-- <tr id="send{{ $evaluador->id }}">
                                         <th colspan="5">
@@ -130,14 +129,26 @@
             // $('#table' + id +' tbody').append(f);
             // $(this).parents("tr").remove();
             $.ajax({
-                url:"{{ route('ajaxsendemailevaluador',"+id+") }}",
+                url:"{{ route('ajaxsendemailevaluador') }}",
                 data:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),id:id},
                 type:'post',
                 success:  function (response) {
                     if (response.success){
                        row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
+                       swal({
+                            title: "Exito, bien hecho!",
+                            text: response.message,
+                            type: "success",
+                            reverseButtons: !0
+                        });
+
                     }else{
-                        alert(response.message);
+                        swal({
+                            title: "Error, algo no esta bien!",
+                            text: response.message,
+                            type: "warning",
+                            reverseButtons: !0
+                        });
                     }
 
                 },
@@ -156,31 +167,38 @@
 
     //Save email
     $('.btn-save-email').click(function(e){
-        e.preventDefault();
+        //e.preventDefault();
         id=0;
         {
-            //id=$(this).parents('tr').prop('id');
             id=$(this).attr('data-id');
             var row= $(this).parents('tr').children('th');
             var email= $("#email"+id).val();
-           // var eemail= $(this).parents('th').children('span').attr('id');
             var eemail= $("#dataemail"+id).text();
-            //row.addClass('hidden').append('<i class="text text-success material-icons">send</i>');
-            // var f=null;
-            // f=$(this).closest('tr').clone(false);
-            // $('#table' + id +' tbody').append(f);
-            // $(this).parents("tr").remove();
             $.ajax({
-                url:"{{ route('ajaxchangeemailevaluador') }}",
-                data:{id:id,email:email},
                 type:'post',
+                url:"{{ route('ajaxchangeemailevaluador') }}",
+                data:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),id:id,email:email},
+                dataType: 'JSON',
                 success:  function (response) {
                     if (!response.success){
                         $("#email"+id).val(eemail).addClass('alert-danger');
-                        alert(response.message);
+                        swal({
+                            title: "Error, algo no esta bien!",
+                            text: response.message,
+                            type: "warning",
+                            reverseButtons: !0
+                        });
+
+                        // alert(response.message);
                     }else{
                         $("#email"+id).addClass('alert-success').removeClass('alert-danger');
                         $("#dataemail"+id).text(email).addClass('alert-success');
+                        swal({
+                            title: "Exito, bien hecho!",
+                            text: response.message,
+                            type: "success",
+                            reverseButtons: !0
+                        });
                     }
 
                 },

@@ -190,11 +190,11 @@ Route::get('ajaxmodeloajax/data', 'ModeloController@ajaxCompetencias')->name('mo
  * Ajax Controller para manejo de funcionalidades con ajax
  */
 //Envio de correo a evaluador para responder el cuestionario
-Route::post('sendemailevaluador/{id}','AjaxController@sendEmailEvaluador')->name('ajaxsendemailevaluador')
+Route::post('sendemailevaluador','AjaxController@sendEmailEvaluador')->name('ajaxsendemailevaluador')
 ->middleware('role:admin');
 
 //Envio de correo a evaluador para responder el cuestionario
-Route::post('changeEmailEvaluador','AjaxController@changeEmailEvaluador')->name('ajaxchangeemailevaluador')
+Route::post('/changeemailevaluador','AjaxController@changeEmailEvaluador')->name('ajaxchangeemailevaluador')
 ->middleware('role:admin');
 
 
@@ -234,9 +234,6 @@ Route::get('/error', function () {
     return abort(500);
 });
 
-/**
- * Route de Lanzar prueba sin modelo
- */
 
 /**
  * Presentar la lista de evaluados para seleccionar
@@ -278,13 +275,6 @@ Route::post('lanzar/{evaluado}',"LanzarPruebaController@procesar")
  *
 */
 
-/**
- * Lista de candidatos para la prueba desde un modelo
- *
-*/
-// Route::get('lanzar/modelo', "LanzarPruebaController@index")
-// ->name('lanzar.modelo')
-// ->middleware(['role:admin']);
 
 /**
  * Seleccion del modelo

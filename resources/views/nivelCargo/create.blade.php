@@ -11,7 +11,7 @@
     </div>
 
     <div class="mt-1 text-center">
-        <h3>Nuevo Nivel de Cargo</h3>
+        <h5>Nuevo Nivel de Cargo</h5>
     </div>
 
     <div class=" card-header">

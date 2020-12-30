@@ -11,7 +11,7 @@
         @include('flash-message')
     </div>
     <div class="mt-1 text-center">
-        <h3>Nuevo Tipo de Competencia</h3>
+        <h5>Nuevo Tipo de Competencia</h5>
     </div>
 
     <div class=" card-header">
