@@ -61,96 +61,78 @@
 
   <body>
 
+    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-lightxx" style="background-color: #e3f2fd;""> --}}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <header>
-      <!-- Fixed navbar -->
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" style="width:2em" src="{{asset('logo/logox150x50.jpg') }}"  alt="Talent 360"></a>
+        <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" style="width:2em" src="{{asset('logo/logo170x60.png') }}"  alt="Talent 360"></a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-
-            <ul class="navbar-nav mr-auto ">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
 
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 @if (Auth::check() && Auth::user()->admin())
-                    {{-- <li class="nav-item ">
-                        <a class="nav-link" href="{{ route('lanzar.index') }}">Panel<span class="sr-only">(current)</span></a>
-                    </li> --}}
-                    <li class="dropdown">
-                        <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Talento<span class="caret"></span>
-                        </a>
-                        <ul class=" dropdown-menu">
-                            <li><a class="dropdown-item"  href="{{ route('talent.index') }}">Talento</a></li>
-                            <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a></li>
-                            <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a></li>
-                        </ul>
+                <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Talento
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
+                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Talento</a>
+                        <a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a>
+                        <a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a>
+                    </div>
+                </li>
 
-                    </li>
+                <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Administrativos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu2">
+                        <a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a>
+                        <a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a>
+                        <a class="dropdown-item"  href="{{ route('ubicacion.index') }}">Ubicacion</a>
+                    </div>
+                </li>
 
-                    <li class="dropdown">
-                        <a id="navbarDropdown2" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Administrativos<span class="caret"></span>
-                        </a>
+                <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Proyectos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu3">
+                        <a class="dropdown-item"  href="{{ route('proyecto.index') }}">Proyecto</a>
+                        <a class="dropdown-item"  href="{{ route('subproyecto.index') }}">Sub proyecto</a>
+                    </div>
+                </li>
 
-                        <ul class=" dropdown-menu">
-                            <li><a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a></li>
-                            <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a></li>
-                            <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('ubicacion.index') }}">Ubicacion</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Modelos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu4">
+                        <a class="dropdown-item"  href="{{ route('tipo.index') }}">Tipo</a>
+                        <a class="dropdown-item"  href="{{ route('competencia.index') }}">Competencias</a>
+                        <a class="dropdown-item"  href="{{ route('modelo.index') }}">Modelo</a>
+                        <a class="dropdown-item"  href="{{ route('frecuencia.index') }}">Frecuencia</a>
+                    </div>
+                </li>
 
-                    <li class="dropdown">
-                        <a id="navbarDropdown3" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Proyectos<span class="caret"></span>
-                        </a>
-                        <ul class=" dropdown-menu">
-                            <li><a class="dropdown-item"  href="{{ route('proyecto.index') }}">Proyecto</a></li>
-                            <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('subproyecto.index') }}">Sub proyecto</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a id="navbarDropdown4" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Competencias<span class="caret"></span>
-                        </a>
-                        <ul class=" dropdown-menu">
-                            <li><a class="dropdown-item"  href="{{ route('tipo.index') }}">Tipo</a></li>
-                            <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('competencia.index') }}">Competencias</a></li>
-                            <li  class=" dropdown-divider"></li>
-                            <li><a class="dropdown-item"  href="{{ route('modelo.index') }}">Modelo</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a  class="nav-link" href="{{ route('frecuencia.index') }}">Frecuencia</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a  class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
-                    </li>
+                <li class="nav-item ">
+                    <a  class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
+                </li>
                 @endif
 
                 @if (Auth::check())
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
-                    </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
+                </li>
                 @endif
-
             </ul>
-
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -166,11 +148,11 @@
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown5" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <i class="material-icons " style="font-size:1rem; color: green">person</i> <span   class="caret username">{{ Auth::user()->name }}</span>
+                        <a id="navbarDropdownMenu5" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons " style="font-size:1rem; color: green">person</i> <span class="username">{{ Auth::user()->name }}</span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenu5">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -186,19 +168,14 @@
                 @endguest
             </ul>
 
-          {{-- <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form> --}}
-
         </div>
-      </nav>
-    </header>
 
-    <!-- Begin page content -->
+    </nav>
+
     <main role="main" class="container">
 
         <div class="row">
+
             <div class="col-12">
                 @yield('content')
             </div>
@@ -209,8 +186,6 @@
             </div> --}}
 
         </div>
-
-
 
     </main>
 

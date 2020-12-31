@@ -32,7 +32,7 @@ class EvaluacionSeeder extends Seeder
 
     public function add_evaluacion($evaluador){
 
-        $this->call(CompetenciaBaseSeeeder::class);
+        //$this->call(CompetenciaBaseSeeeder::class);
 
        //Creamos una evaluacion
        for ($i=1; $i <5 ; $i++) {
@@ -48,10 +48,10 @@ class EvaluacionSeeder extends Seeder
     {
         $nivel=75;
         $grado=Arr::random(['A','B','C','D']);
-        $gradofinal=Arr::get(['A'=>100,'B'=>75,'C'=>50,'D'=>25],$grado);
-        $gradofinal=Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],$grado);
+        $gradofinal=Arr::get(['A'=>100,'B'=>75,'C'=>100,'D'=>100],$grado);
+        //$gradofinal=Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],$grado);
 
-        $frecuencia=Arr::random(['A'=>100,'B'=>100,'C'=>100,'D'=>100]);
+        $frecuencia=Arr::random(['A'=>100,'B'=>100,'C'=>75,'D'=>75]);
         $pondera= $gradofinal;
         $resultado=$pondera *  $frecuencia /100;
         return ['grado'=>$grado,'ponderacion'=>$pondera,'frecuencia'=>$frecuencia,'resultado'=>$resultado];
