@@ -1,4 +1,4 @@
-@extends('master')
+{{-- @extends('master') --}}
 
 @section('title',"Resultados generales por tipo")
 
@@ -11,9 +11,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Resultados Personales</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
-
+    <title>Resultados generales por tipo</title>
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
 

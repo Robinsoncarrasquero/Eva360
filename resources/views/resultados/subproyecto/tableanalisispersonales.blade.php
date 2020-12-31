@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Analisis de Resultados Personales")
+@section('title',"Analisis de Cumplimiento")
 
 @section('content')
 
@@ -18,8 +18,8 @@
             <div class="panel panel pb-3">
 
                 <div class="clearfix">
-                    <div class=" text-center titulo">
-                        <h5>Analisis de resultados de cumplimiento por grupo</span></h5>
+                    <div class=" text-center">
+                        <h5>Analisis de Cumplimiento</span></h5>
                     </div>
 
                     <div class="text text-center">

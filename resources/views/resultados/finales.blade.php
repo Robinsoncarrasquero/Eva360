@@ -8,7 +8,6 @@
 
     <div class="panel panel-default">
 
-        <div class="col-sm-12">
 
             <div id="flash-message">
                 @include('flash-message')
@@ -85,7 +84,7 @@
             @endif
 
 
-        </div>
+
 
     </div>
 

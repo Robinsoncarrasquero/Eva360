@@ -1,6 +1,6 @@
-@extends('master')
+{{-- @extends('master') --}}
 
-@section('title',"Resultados Finales")
+@section('title',"Grafica Individual")
 
 @section('content')
 
@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vision360</title>
+
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
@@ -97,7 +97,7 @@
         Highcharts.chart('container'+index, {
         //Highcharts.chart('container', {
             title: {
-                text: "Resultado de la Evaluacion"
+                text: "Resultado de la evaluacion"
             },
             subtitle: {
                 text: evaluado

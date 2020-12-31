@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Resultados Personales Tabulado")
+@section('title',"Analisis de Cumplimiento")
 
 @section('content')
 
@@ -8,7 +8,6 @@
 
     <div class="panel panel-default">
 
-        <div class="col-sm-12">
 
             <div id="flash-message">
                 @include('flash-message')
@@ -79,7 +78,6 @@
 
         </div>
 
-    </div>
 
 </div>
 
