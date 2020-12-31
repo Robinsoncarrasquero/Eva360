@@ -210,7 +210,10 @@ class EvaluacionController extends Controller
         });
 
         //Cambia el status del evaluador finalizada(2) la evaluacion
-        if ($evaluacionesPendientes->count()!==0){
+        if ($evaluacionesPendientes->count()==0){
+            //Flag para indicar que le evaluado ha culminado la prueba
+            $evaluado->status=Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
+            $evaluado->save();
 
            //Enviamos el correo de finalizacion al administrador
             EnviarEmail::enviarEmailFinal($evaluado->id);
