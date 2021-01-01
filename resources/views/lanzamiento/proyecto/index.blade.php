@@ -18,10 +18,10 @@
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
                 </div>
-
                 <div class="text text-center">
                     <h5 style="color:royalblue; font-size:1.5rem">Evaluaciones</h5>
                 </div>
+
             </div>
 
             @if ($proyectos->count())
@@ -46,7 +46,7 @@
                         </span>
 
                     </div>
-                    <div class="table-table">
+                    <div class="table table-table table-responsive">
                         <table class="table" id="p{{ $subproyecto->id }}">
                             <thead>
                                 <th style="width: 30%">Nombre</th>

@@ -6,9 +6,6 @@
 
 <div class="container">
 
-    <div class="panel panel-default">
-
-        <div class="col-sm-12">
 
             <div id="flash-message">
                 @include('flash-message')
@@ -40,8 +37,8 @@
 
             <div class="panel">
 
-                <div class="table table-table">
-                    <table id="mytable" class="table  table-bordred table-striped">
+                <div class="table table-table table-responsive">
+                    <table id="table-evaluados" class="table  table-bordred table-striped">
                     <thead>
                     <th>Nombre</th>
                     <th>Subproyecto</th>
@@ -171,9 +168,6 @@
                 {{ $evaluados->links() }}
             </div>
 
-        </div>
-
-    </div>
 
 </div>
 

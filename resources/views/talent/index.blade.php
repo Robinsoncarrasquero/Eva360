@@ -29,13 +29,14 @@
                         <span  style="font-size: 0.75rem" class="titulo-proyecto" >
                         <i class="material-icons">east</i> {{ $departamento->name }}</span>
                     </div>
-                    <div class="table">
-                        <table class="table table-condensed">
+                    <div class="table table-table table-responsive">
+
+                        <table class="table">
                             <thead>
                                 <tr>
-                                <th style="width:60%" class="alert-success">Nombre</th>
-                                <th style="width:20%" class="alert-warning">Historico</th>
-                                <th style="width:20%" class="alert-dark">Crear Evaluacion</th>
+                                <th style="width:50%" class="alert-success text-center">Nombre</th>
+                                <th style="width:20%" class="alert-warning text-center">Historico</th>
+                                <th style="width:30%" class="alert-dark text-center">Evaluacion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,7 +44,7 @@
                             <tr>
                                 {{-- <td>{{ substr($empleado->name,0,50) }}<span style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)"><br>{{ $empleado->cargo->name}}</span></td> --}}
                                 <td>{{ ($empleado->name) }}</td>
-                                <td class="justify-content-center" >
+                                <td class="d-flex justify-content-center" >
                                     @if ($empleado->evaluaciones->count()>0)
                                         <a href="{{route('talent.historicoevaluaciones', $empleado->id)}}"><span class="badge badge-warning">{{ $empleado->evaluaciones->count() }}</span></a></td>
 
@@ -51,9 +52,10 @@
                                         <a><i class="material-icons text-dark">question_answer</i></a></td>
                                     @endif
                                 </td>
-                                <td class="justify-content-center" >
-                                    <span class="text-center">
-                                        <a href="{{ route('talent.createevaluado',$empleado->id)}}" class="btn btn-dark "><i class="material-icons">person_add</library-add></i> </a>
+                                <td>
+                                    <span class="d-flex justify-content-end">
+                                        <a href="{{ route('talent.createevaluado',$empleado->id)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
+
                                     </span>
                                 </td>
                                 {{-- <td>
