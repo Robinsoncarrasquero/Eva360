@@ -14,10 +14,10 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Lista de Ubicaciones</h5>
+            <h5>Lista de Ubicacionesx</h5>
         </div>
 
-        <div class="text text-sm-right">
+        <div class="d-flex justify-content-end">
             <a href="{{ route('ubicacion.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
         </div>
 

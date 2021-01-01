@@ -13,7 +13,8 @@
     <div class="text text-center mt-2">
         <h5>Lista de Proyectos</h5>
     </div>
-    <div class="text text-sm-right">
+
+    <div class="d-flex justify-content-end">
         <a href="{{ route('proyecto.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
     </div>
 

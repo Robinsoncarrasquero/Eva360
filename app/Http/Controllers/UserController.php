@@ -26,7 +26,7 @@ class UserController extends Controller
     {
        // $users->withPath('list');
        $buscarWordKey = $request->get('buscarWordKey');
-       $users = User::name($buscarWordKey)->orderBy('name','ASC')->paginate(5);
+       $users = User::name($buscarWordKey)->orderBy('name','ASC')->paginate(25);
 
         return \view('user.index',compact('users'));
 

@@ -27,12 +27,8 @@
                     <h5>Modelos de Evaluacion</h5>
                 </div>
             </div>
-            <div class="clearfix">
-                <div class=" float-right">
-                    <strong class="text text-bold"></strong>
-                    <a style="margin: 19px;" href="{{ route('modelo.create')}}" class="btn btn-dark"><i class="material-icons">add</library-add></i> </a>
-
-                </div>
+            <div class="d-flex justify-content-end">
+                <a style="margin: 19px;" href="{{ route('modelo.create')}}" class="btn btn-dark"><i class="material-icons">add</library-add></i> </a>
             </div>
 
             @if($modelos->count())

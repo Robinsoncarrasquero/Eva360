@@ -14,7 +14,7 @@
         <h5>Tipos de Competencias</h5>
     </div>
 
-    <div class="text text-sm-right">
+    <div class="d-flex justify-content-end">
         <a href="{{ route('tipo.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
     </div>
 

@@ -84,18 +84,21 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
                         <a class="dropdown-item"  href="{{ route('talent.index') }}">Talento</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a>
                     </div>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Administrativos
+                        Admon
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu2">
                         <a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a>
                         <a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('ubicacion.index') }}">Ubicacion</a>
                     </div>
                 </li>
@@ -106,6 +109,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu3">
                         <a class="dropdown-item"  href="{{ route('proyecto.index') }}">Proyecto</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('subproyecto.index') }}">Sub proyecto</a>
                     </div>
                 </li>
@@ -118,6 +122,7 @@
                         <a class="dropdown-item"  href="{{ route('tipo.index') }}">Tipo</a>
                         <a class="dropdown-item"  href="{{ route('competencia.index') }}">Competencias</a>
                         <a class="dropdown-item"  href="{{ route('modelo.index') }}">Modelo</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('frecuencia.index') }}">Frecuencia</a>
                     </div>
                 </li>
@@ -193,11 +198,13 @@
 
     </main>
 
+
     <footer id="footer" class="footer">
-        <div class="container">
-            <span class="text text-center text-white ">Sistema de Gestion por Competencias Talent360</span>
-         </div>
+        <div class="xcontainer">
+           <span class="text-white d-flex justify-content-center">Sistema de Gestion por Competencias Talent360</span>
+        </div>
     </footer>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
