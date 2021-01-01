@@ -23,7 +23,7 @@
     @if ($evaluacion->competencia->grados->isNotEmpty())
         <form action="{{ route('evaluacion.store',$evaluacion) }}" method="POST" id="form-select">
         @csrf
-            <div class="form-group">
+            <div class="table table-responsive">
                 <table class="table  table-striped table-table">
                     <thead class="table-preguntas border-warning">
                         <th scope="col">#</th>

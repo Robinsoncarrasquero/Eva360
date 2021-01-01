@@ -30,7 +30,8 @@
         <a  href="{{ route('user.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
     </div>
 
-    <div class="table table-responsive">
+
+        <div class="table table-responsive">
         <table class="table table-light table-striped">
             <thead>
                 <th>#</th>

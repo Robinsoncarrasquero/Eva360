@@ -18,52 +18,51 @@
     </div>
 
     @if ($grados->isNotEmpty())
-        <div class="col-sm-12">
+
             <form action="{{ route('evaluacion.responder',$evaluacion) }}" method="POST" id="form-select">
             @csrf
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Grado</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Check</th>
-                    <th scope="col">Seleccionar</th>
-                </tr>
-                </thead>
-                <tbody class="tbody-preguntas" >
-                @foreach ($grados as $grado)
-                <tr data-id="{{" $grado->id "}}">
-                    <td scope="row">{{ $grado->id }}</td>
-                    <td>{{$grado->grado}}</td>
-                    <td>{{$grado->description}}</td>
-                    <td>
-                        <div class="form-check">
-                            <input type="checkbox" class="check-select" id="{{"$grado->id"}}"
-                            value="{{"$grado->id"}}" name="gradoscheck[]"
-                            @if ($evaluacion==$grado->grado) selected  @endif >
-                            <label class="form-check-label" for="{{"$grado->id"}}">Evaluar</label>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-check">
-                            <a href="#"><span><i class="material-icons check-select">add-box</i></span></a>
-                        </div>
-                    </td>
-               </tr>
+            <div class="table table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Grado</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Check</th>
+                        <th scope="col">Seleccionar</th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody-preguntas" >
+                    @foreach ($grados as $grado)
+                    <tr data-id="{{" $grado->id "}}">
+                        <td scope="row">{{ $grado->id }}</td>
+                        <td>{{$grado->grado}}</td>
+                        <td>{{$grado->description}}</td>
+                        <td>
+                            <div class="form-check">
+                                <input type="checkbox" class="check-select" id="{{"$grado->id"}}"
+                                value="{{"$grado->id"}}" name="gradoscheck[]"
+                                @if ($evaluacion==$grado->grado) selected  @endif >
+                                <label class="form-check-label" for="{{"$grado->id"}}">Evaluar</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                <a href="#"><span><i class="material-icons check-select">add-box</i></span></a>
+                            </div>
+                        </td>
+                   </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-                @endforeach
-
-                </tbody>
-            </table>
             <div class="clearfix">
                 <span class="float-left"><a href="{{ back() }}" class="btn btn-dark btn-lg">Back</a></span>
                 <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Next</button>
-
             </div>
-            </form>
 
-        </div>
+        </form>
     @else
         <div class="alert alert-info">
             <p>No hay preguntas registradas</p>

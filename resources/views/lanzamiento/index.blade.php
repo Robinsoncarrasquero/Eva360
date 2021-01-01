@@ -38,7 +38,7 @@
             <div class="panel">
 
                 <div class="table table-table table-responsive">
-                    <table id="table-evaluados" class="table  table-bordred table-striped">
+                    <table id="table-evaluados" class="table  table-striped">
                     <thead>
                     <th>Nombre</th>
                     <th>Subproyecto</th>

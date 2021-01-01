@@ -35,8 +35,8 @@
 
             <div class="panel-body">
 
-                <div class="table">
-                    <table id="mytable" class="table  table-bordered table-striped">
+                <div class="table table-responsive">
+                    <table id="mytable" class="table  table-striped">
                     <thead>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
