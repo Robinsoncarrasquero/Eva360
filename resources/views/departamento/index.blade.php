@@ -14,7 +14,7 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Lista de Ubicacionesx</h5>
+            <h5>Lista de Ubicaciones</h5>
         </div>
 
         <div class="d-flex justify-content-end">
