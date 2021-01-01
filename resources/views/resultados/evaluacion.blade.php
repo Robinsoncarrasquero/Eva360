@@ -19,7 +19,7 @@
             @if($evaluadores)
                 <div class="row ">
                     @foreach($evaluadores as $evaluador)
-                        <div class="table col-xs-12 col-sm-6">
+                        <div class="table col-sm-12 col-md-6">
                             <table id="table{{ $evaluador->id }}" class="table  table-bordered table-striped table-table">
                                 <thead>
                                     <tr id="{{ $evaluador->id }}">
