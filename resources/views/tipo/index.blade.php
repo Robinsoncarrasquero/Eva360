@@ -27,21 +27,19 @@
                 <th></th>
             </thead>
             <tbody>
-                @foreach ($tipos as $tipo)
-                <tr id="{{ $tipo->id }}">
-                    <td>{{ $tipo->id }}</td>
-                    <td>{{ $tipo->tipo }}</td>
-                    <td><a href="{{ route('tipo.edit',$tipo) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
+            @foreach ($tipos as $tipo)
+            <tr id="{{ $tipo->id }}">
+                <td>{{ $tipo->id }}</td>
+                <td>{{ $tipo->tipo }}</td>
+                <td><a href="{{ route('tipo.edit',$tipo) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
 
-                    <td>
-                        <button class="btn btn-danger" onclick="deleteConfirmation({{$tipo->id}},'{{route('tipo.delete',$tipo->id)}}')">Delete</button>
-                    </td>
-                </tr>
-                @endforeach
-
-                </tbody>
+                <td>
+                    <button class="btn btn-danger" onclick="deleteConfirmation({{$tipo->id}},'{{route('tipo.delete',$tipo->id)}}')">Delete</button>
+                </td>
+            </tr>
+            @endforeach
+            </tbody>
         </table>
-
     </div>
 
 </div>

@@ -12,7 +12,7 @@
     </div>
 
     <div class="text text-center mt-2">
-        <h5>Lista de SubProyectos</h5>
+        <h5>Lista de Sub Proyectos</h5>
     </div>
 
     <div class="d-flex justify-content-end">
@@ -29,21 +29,19 @@
                 <th></th>
             </thead>
             <tbody>
-                @foreach ($records as $record)
-                <tr id="{{ $record->id }}">
-                    <td>{{ $record->id }}</td>
-                    <td>{{ $record->name }}</td>
-                    <td>{{ $record->proyecto->name}}</td>
-                    <td><a href="{{ route('subproyecto.edit',$record) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
-                    <td>
-                        <button class="btn btn-danger" onclick="deleteConfirmation({{$record->id}},'{{route('subproyecto.delete',$record->id)}}')">Delete</button>
-                    </td>
-                </tr>
-                @endforeach
-
-                </tbody>
+            @foreach ($records as $record)
+            <tr id="{{ $record->id }}">
+                <td>{{ $record->id }}</td>
+                <td>{{ $record->name }}</td>
+                <td>{{ $record->proyecto->name}}</td>
+                <td><a href="{{ route('subproyecto.edit',$record) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
+                <td>
+                    <button class="btn btn-danger" onclick="deleteConfirmation({{$record->id}},'{{route('subproyecto.delete',$record->id)}}')">Delete</button>
+                </td>
+            </tr>
+            @endforeach
+            </tbody>
         </table>
-
     </div>
 
     <div class=" d-flex justify-content-center">
