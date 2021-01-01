@@ -18,6 +18,7 @@
     <div class="d-flex justify-content-end">
         <a href="{{ route('subproyecto.create')}}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
     </div>
+
     <div class="table table-responsive">
         <table class="table table-light table-striped ">
             <thead>
