@@ -179,11 +179,11 @@
 
     <main role="main" class="container">
 
-        <div class="xrow">
+        <div class="row">
 
-            <div class="col-12">
-                @yield('content')
-            </div>
+            {{-- <div class="col-md-12">
+            </div> --}}
+            @yield('content')
 
             {{-- <div class="col-sm-4 col-md-2">
                 @section('sidebar')

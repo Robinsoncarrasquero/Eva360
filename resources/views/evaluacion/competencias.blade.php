@@ -12,16 +12,14 @@
 
         </div>
 
-        <div class="panel panel pb-1 mt-2">
+        <div class="pb-1 mt-2">
 
-            <div class="clearfix">
-                <div class="xcard-header text text-center">
-                    <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <br><span class="text-danger">{{ $evaluado->name }}</span></h5>
-                </div>
+            <div class="text text-center">
+                <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <br><span class="text-danger">{{ $evaluado->name }}</span></h5>
+            </div>
 
-                <div class="text-center text-success mt-3">
-                    <h4>Competencias a evaluar</h4>
-                </div>
+            <div class="text-center mt-3">
+                <h4>Competencias a evaluar</h4>
             </div>
 
         </div>

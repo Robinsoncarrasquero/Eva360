@@ -14,9 +14,9 @@
         <span class="text text-danger"><br>{{ $evaluacion->evaluador->evaluado->name }}</span> relacionada con</h5>
     </div>
 
-    <div class="panel">
+    <div class="mb-2">
         <h4 class="text text-center mt-2 border-primary "><strong> {{ $evaluacion->competencia->name }}</strong></h4>
-        <h6 class="card card-header description mb-2" >{{ $evaluacion->competencia->description}}</h6>
+        <h6 class="card card-header description" >{{ $evaluacion->competencia->description}}</h6>
     </div>
 
 
