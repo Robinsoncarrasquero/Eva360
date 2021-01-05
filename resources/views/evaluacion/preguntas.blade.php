@@ -58,7 +58,7 @@
             </div>
 
             <div class="clearfix">
-                <span class="float-left"><a href="{{ back() }}" class="btn btn-dark btn-lg">Back</a></span>
+                <span class="float-left"><a href="{{ url()->back() }}" class="btn btn-dark btn-lg">Back</a></span>
                 <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Next</button>
             </div>
 

@@ -27,8 +27,8 @@
                 <table class="table  table-striped table-table">
                     <thead class="table-preguntas border-warning">
                         <th scope="col">#</th>
-                        <th scope="col">Pregunta</th>
                         <th scope="col">Opcion</th>
+                        <th scope="col">Seleccion</th>
                         <th scope="col">Frecuencia</th>
                     </thead>
                     <tbody>
@@ -94,7 +94,7 @@
 
 
         <div class="clearfix">
-            <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+            <span class="float-left"><a href="{{ url()->previous() }}" class="btn btn-dark btn-lg">Back</a></span>
             @if ($evaluacion->evaluador->status!=2)
             <button type="submit" class="btn btn-dark btn-lg float-right" value="Next" >Next</button>
             @endif
