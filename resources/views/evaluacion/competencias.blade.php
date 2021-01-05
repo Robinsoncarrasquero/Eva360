@@ -15,12 +15,12 @@
         <div class="panel panel pb-1 mt-2">
 
             <div class="clearfix">
-                <div class="card-header text text-center">
+                <div class="xcard-header text text-center">
                     <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <br><span class="text-danger">{{ $evaluado->name }}</span></h5>
                 </div>
 
-                <div class="text text-center mt-2 p-2">
-                    <h4>Competencias a Evaluar</h4>
+                <div class="text-center text-success mt-3">
+                    <h4>Competencias a evaluar</h4>
                 </div>
             </div>
 
@@ -28,49 +28,36 @@
 
         @if($competencias)
 
-            <div class="mt-2 col-12">
                 <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
                 @csrf
 
-                <div class="table table-responsive">
-
-                    <table id="mytable-competencias" class="table  table-bordered table-striped table-table">
-                    <thead class="table-competencias">
-                    <th>Competencia</th>
-                    <th>Descripcion</th>
-                    <th>status</th>
-                    </thead>
-                    <tbody>
 
                     @foreach($competencias as $competencia)
-                    <tr>
-                        <td><a href="{{route('evaluacion.responder', $competencia->id)}}" style="text-decoration:none; color:black" ><h6>{{$competencia->competencia->name}}</h6></a></td>
-                        <td><h6>{{$competencia->competencia->description}}</h6> </td>
-                        <td>
+                    <div class="xcard mt-4">
+
+                    <div class="card-header mb-2">
+                        <div class="d-flex justify-content-center">
+                            <a href="{{route('evaluacion.responder', $competencia->id)}}" style="color: rgb(16, 17, 17)" >
+                            <h3 >{{$competencia->competencia->name}}</h3></a>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
                             @if($competencia->grado)
                                 <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                <span ><i class="material-icons"> thumb_up_alt</i></span></a>
+                                    <span ><i class="material-icons text-success">thumb_up_alt check_box</i></span></a>
                             @else
                                 <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                <span class="spinner-grow text-warning align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
+                                <span class="spinner-grow spinner-grow-sm text-warning align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
                             @endif
-                        </td>
-                        <!-- <td>
-                            {{-- @if($evaluador->status!=2)
-                                <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                <span><i class="material-icons ">create</i></span></a>
-                            @else
-                                <a href="{{route('evaluacion.responder',$competencia->id)}}" >
-                                <i class="material-icons">visibility</i></a>
-                            @endif --}}
-                        </td> -->
-                    </tr>
+                        </div>
+                    </div>
+                   </div>
+
                     @endforeach
-                    </tbody>
-                    </table>
-                </div>
-                <div class="clearfix">
-                    <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Back</a></span>
+
+
+                <div class="clearfix mt-3">
+                    <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
                     @if($evaluador->status!=2)
                         <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
                     @endif
@@ -78,7 +65,6 @@
 
                 </form>
 
-            </div>
 
         @else
 
