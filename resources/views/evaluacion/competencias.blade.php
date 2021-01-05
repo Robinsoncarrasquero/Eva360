@@ -28,7 +28,7 @@
 
         @if($competencias)
 
-            <div class="panel-body mt-2">
+            <div class="mt-2 col-12">
                 <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
                 @csrf
 
