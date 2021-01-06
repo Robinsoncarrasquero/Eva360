@@ -40,8 +40,8 @@
 
                         <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span  style="font-size: 0.75rem;" class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
                         <span class="float-right d-flex justify-content-around">
-                            <a href="{{ route('resultados.graficaPersonales',$subproyecto->id) }}" style="color:black"><span style="font-size: 0.75rem">Grupos <i class="material-icons">table_chart</i></span></a>
-                            <a href="{{ route('resultados.analisispersonalestabulados',$subproyecto->id) }}" style="color: black"><span style="font-size: 0.75rem">Cumplimiento <i class="material-icons">dynamic_feed</i></span></a>
+                            <a href="{{ route('resultados.charpersonalporgrupo',$subproyecto->id) }}" style="color:black"><span style="font-size: 0.75rem">Grupos <i class="material-icons">table_chart</i></span></a>
+                            <a href="{{ route('resultados.analisiscumplimiento',$subproyecto->id) }}" style="color: black"><span style="font-size: 0.75rem">Cumplimiento <i class="material-icons">dynamic_feed</i></span></a>
                             {{-- <a href="{{ route('evaluado.create',$subproyecto)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a> --}}
                         </span>
 
@@ -111,9 +111,9 @@
                             </td>
                             <td >
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                    <a href="{{route('resultados.graficas', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
+                                    <a href="{{route('resultados.charindividual', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
                                 @else
-                                    <a href="{{route('resultados.graficas', $evaluado->id)}}" ><span><i class="material-icons text-dark">stacked_line_chart</i></span></a>
+                                    <a href="{{route('resultados.charindividual', $evaluado->id)}}" ><span><i class="material-icons text-dark">stacked_line_chart</i></span></a>
                                 @endif
                             </td>
 

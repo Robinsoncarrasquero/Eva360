@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Prueba")
+@section('title',"Prueba por evaluador")
 
 @section('content')
 
@@ -17,6 +17,7 @@
             </div>
 
             @if($evaluadores)
+
             <div class="row">
 
                 @foreach($evaluadores as $evaluador)

@@ -352,30 +352,23 @@ Route::get('resultados/{evaluado_id}/finales',"ResultadosController@resumidos")
 /**
  * Presenta una grafica con resultados 360
  */
-Route::get('resultados/{evaluado_id}/graficas',"ResultadosController@graficas")
-->name('resultados.graficas')
+Route::get('resultados/{evaluado_id}/charindividual',"ResultadosController@charindividual")
+->name('resultados.charindividual')
 ->middleware(['auth','role:admin']);
 
 /**
  * Presenta una grafica de resultados personales por subproyecto
  */
-Route::get('resultados/{subproyecto_id}/graficaresultadospersonales',"ResultadosController@graficaPersonales")
-->name('resultados.graficaPersonales')
-->middleware(['auth','role:admin']);
-
-/**
- * Presenta una tabla de resultados personales tabulados por subproyecto
- */
-Route::get('resultados/{subproyecto_id}/resultadospersonalestable',"ResultadosController@resultadosPersonalesTable")
-->name('resultados.resultadospersonalestabulados')
+Route::get('resultados/{subproyecto_id}/charpersonalporgrupo',"ResultadosController@charpersonalporgrupo")
+->name('resultados.charpersonalporgrupo')
 ->middleware(['auth','role:admin']);
 
 
 /**
  * Presenta una tabla de analisis personales tabulados por subproyecto
  */
-Route::get('resultados/{subproyecto_id}/analisispersonalestable',"ResultadosController@analisisPersonalesTable")
-->name('resultados.analisispersonalestabulados')
+Route::get('resultados/{subproyecto_id}/cumplimiento',"ResultadosController@analisiscumplimiento")
+->name('resultados.analisiscumplimiento')
 ->middleware(['auth','role:admin']);
 
 

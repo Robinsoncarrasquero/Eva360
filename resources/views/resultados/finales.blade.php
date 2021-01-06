@@ -1,36 +1,25 @@
 @extends('master')
 
-@section('title',"Resultados ")
+@section('title',"Resultado final")
 
 @section('content')
 
 <div class="container">
-
-    <div class="panel panel-default">
-
 
             <div id="flash-message">
                 @include('flash-message')
 
             </div>
 
-            <div class="panel panel pb-3">
 
-                <div class="clearfix">
-                    @if ($evaluado->status!==Helper::estatus('Finalizada'))
-                        <h5 class="alert-danger text-center">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h5>
-                    @else
-                        <div class="text text-center">
-                            <h5>Competencias evaluadas y resultados finales</span></h5>
-                        </div>
-                    @endif
-
-                    <div class="text text-center">
-                        <h5><span class="text-danger" style="font-size:1.5rem">{{ $evaluado->name }}</span></h5>
-                    </div>
-
+            <div class="card-header mt-2 mb-4">
+                @if ($evaluado->status!==Helper::estatus('Finalizada'))
+                    <h5 class="text-center text-danger">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h5>
+                @else
+                <div class="text text-center">
+                    <h5>Resultado final de la prueba de <span class="text-danger">{{ $evaluado->name }}</span></h5>
                 </div>
-
+                @endif
             </div>
 
             @if($competencias)
@@ -78,11 +67,6 @@
             <div>
 
             @endif
-
-
-
-
-    </div>
 
 </div>
 
