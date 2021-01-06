@@ -27,40 +27,41 @@
 
 
             @if($subProyecto)
-                    <div class="table table-responsive">
-                        <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                            <thead class="table-thead">
-                            <th>Participante</th>
-                            <th>% Cumplimiento</th>
-                            <th>% Brecha</th>
-                            <th>Oportunidades</th>
-                            <th>Fortalezas</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($dataBrecha as $key=>$value)
-                                <tr>
-                                <td>{{$value['categoria']}}</strong></td>
-                                <td>{{ number_format($value['cumplimiento'],2) }}</td>
-                                <td>{{ number_format($value['brecha'],2) }}</td>
-                                <td>
-                                    @foreach ($value['dataoportunidad'] as $vdata)
-                                        {{$vdata['competencia']}},
-                                    @endforeach
-                                </td>
-                                <td>
-                                    @foreach ($value['datafortaleza'] as $vdata)
-                                        {{$vdata['competencia']}},
-                                    @endforeach
-                                </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="table table-responsive">
+                <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                    <thead class="table-thead">
+                    <th>Participante</th>
+                    <th>% Cumplimiento</th>
+                    <th>% Brecha</th>
+                    <th>Oportunidades</th>
+                    <th>Fortalezas</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($dataBrecha as $key=>$value)
+                        <tr>
+                        <td>{{$value['categoria']}}</strong></td>
+                        <td>{{ number_format($value['cumplimiento'],2) }}</td>
+                        <td>{{ number_format($value['brecha'],2) }}</td>
+                        <td>
+                            @foreach ($value['dataoportunidad'] as $vdata)
+                                {{$vdata['competencia']}},
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($value['datafortaleza'] as $vdata)
+                                {{$vdata['competencia']}},
+                            @endforeach
+                        </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-                    <div class="float-left">
-                        <span><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-                    </div>
+            <div class="float-left">
+                <span><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+            </div>
+
             @else
                 <div class="alert-info">
                     <p>No hay informacion disponible</p>
@@ -68,7 +69,6 @@
             @endif
 
             {{-- {{ $competencias->links() }} --}}
-
 
 </div>
 

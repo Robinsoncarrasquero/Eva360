@@ -49,7 +49,7 @@
                     @endif
                 </td>
                 <td>
-                    <div class="status-progress">
+                    {{-- <div class="status-progress">
                         @if(Helper::estatus($evaluador->status)=='Finalizada')
                             <span id="inicio" class="radio-checkeado" ></span>
                             <span id="medio" class="radio-checkeado" ></span>
@@ -67,7 +67,7 @@
                             <span id="medio" class="radio-checkeado"></span>
                             <span id="final" class="radio-no-checkeado"></span>
                         @endif
-                    </div>
+                    </div> --}}
                     <span>{{ Helper::estatus($evaluador->status) }}</span>
                 </td>
                 <td>

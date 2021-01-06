@@ -6,76 +6,77 @@
 
 <div class="container">
 
-            <div id="flash-message">
-                @include('flash-message')
-            </div>
+    <div id="flash-message">
+        @include('flash-message')
+    </div>
 
-            <div class="card card-header mt-2 mb-4">
-                <div class="text text-center">
-                    <h5>Competencias y evaluadores de la prueba de <span class="text-danger">{{ $evaluado->name }}</span></h5>
-                </div>
-            </div>
+    <div class="card card-header mt-2 mb-4">
+        <div class="text text-center">
+            <h5>Competencias y evaluadores de la prueba de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+        </div>
+    </div>
 
-            @if($evaluadores)
+    @if($evaluadores)
 
-            <div class="row">
+    <div class="row">
 
-                @foreach($evaluadores as $evaluador)
-                <div class="table table-responsive col-sm-12 col-md-6 mt-1">
-                    <table id="table{{ $evaluador->id }}" class="table table-striped table-table">
-                        <thead>
-                        <tr id="{{ $evaluador->id }}">
-                            <th class="chk-enviar-prueba" colspan="5">
-                                <input type="checkbox" class="btncheck" > Reenviar email
-                            </th>
-                        </tr>
-                        {{-- <tr id="send{{ $evaluador->id }}">
-                            <th colspan="5">
-                                <button class="btn btn-warning" onclick="sendEmail({{$evaluador->id}})">Reenviar Email</button>
-                            </th>
-                        </tr> --}}
-                        <tr>
-                            <th class="text text-left  title-th-evaluador" colspan="5">
-                            {{$evaluador->name}}({{ $evaluador->relation }}) <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
-                            <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
-                            <button type="button" data-id="{{$evaluador->id}}" class="btn btn-info btn-save-email">Guardar Email
-                            </th>
-                        </tr>
-                        <tr>
-                        <th>Competencia</th>
-                        {{-- <th>Descripcion</th> --}}
-                        <th>Grado</th>
-                        <th>%</th>
-                        <th>Frecuencia</th>
-                        <th>Resultado</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($evaluador->evaluaciones as $evaluacion)
-                        <tr>
-                            <td>{{$evaluacion->competencia->name}}</td>
-                            {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
-                            <td>{{ $evaluacion->grado }}</td>
-                            <td class="text text-center">{{ $evaluacion->ponderacion}}</td>
-                            <td class="text text-center">{{ $evaluacion->frecuencia/100}}</td>
-                            <td class="text text-center"><span class="badge badge-dark">{{ $evaluacion->resultado}}</span></td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
+        @foreach($evaluadores as $evaluador)
+        <div class="table table-responsive col-sm-12 col-md-6 mt-1">
+            <table id="table{{ $evaluador->id }}" class="table table-striped table-table">
+                <thead>
+                <tr id="{{ $evaluador->id }}">
+                    <th class="chk-enviar-prueba" colspan="5">
+                        <input type="checkbox" class="btncheck">Reenviar email
+                    </th>
+                </tr>
+                {{-- <tr id="send{{ $evaluador->id }}">
+                    <th colspan="5">
+                        <button class="btn btn-warning" onclick="sendEmail({{$evaluador->id}})">Reenviar Email</button>
+                    </th>
+                </tr> --}}
+                <tr>
+                    <th class="text text-left  title-th-evaluador" colspan="5">
+                    {{$evaluador->name}}({{ $evaluador->relation }}) <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
+                    <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
+                    <button type="button" data-id="{{$evaluador->id}}" class="btn btn-info btn-save-email">Guardar Email
+                    </th>
+                </tr>
+                <tr>
+                <th>Competencia</th>
+                {{-- <th>Descripcion</th> --}}
+                <th>Grado</th>
+                <th>%</th>
+                <th>Frecuencia</th>
+                <th>Resultado</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($evaluador->evaluaciones as $evaluacion)
+                <tr>
+                    <td>{{$evaluacion->competencia->name}}</td>
+                    {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
+                    <td>{{ $evaluacion->grado }}</td>
+                    <td class="text text-center">{{ $evaluacion->ponderacion}}</td>
+                    <td class="text text-center">{{ $evaluacion->frecuencia/100}}</td>
+                    <td class="text text-center"><span class="badge badge-dark">{{ $evaluacion->resultado}}</span></td>
+                </tr>
                 @endforeach
+                </tbody>
+            </table>
+        </div>
+        @endforeach
+    </div>
 
-                <div class="clearfix">
-                    <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-                </div>
-            </div>
-            @else
-                <div class="alert-info">
-                    <p>No hay preguntas disponibles para responder</p>
-                <div>
-            @endif
-            {{-- {{ $competencias->links() }} --}}
+    <div class="clearfix">
+        <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+    </div>
+
+    @else
+        <div class="alert-info">
+            <p>No hay preguntas disponibles para responder</p>
+        <div>
+    @endif
+
 </div>
 @endsection
 
