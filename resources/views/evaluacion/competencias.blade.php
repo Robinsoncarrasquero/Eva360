@@ -18,9 +18,9 @@
                 <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <br><span class="text-danger">{{ $evaluado->name }}</span></h5>
             </div>
 
-            <div class="text-center mt-3">
+            {{-- <div class="text-center mt-3">
                 <h4>Competencias a evaluar</h4>
-            </div>
+            </div> --}}
 
         </div>
 
@@ -45,7 +45,7 @@
                                     <span ><i class="material-icons text-success">thumb_up_alt check_box</i></span></a>
                             @else
                                 <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                <span class="spinner-grow spinner-grow-sm text-warning align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
+                                <span class="spinner-grow spinner-grow-sm text-danger align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
                             @endif
                         </div>
                     </div>

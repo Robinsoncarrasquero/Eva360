@@ -101,10 +101,10 @@
             dataType: 'JSON',
             success:  function (response) {
                 if (response.success){
-                    alert(response.message);
+                    //alert(response.message);
                     row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
                 }else{
-                    alert(response.message);
+                    //alert(response.message);
                 }
 
             },
@@ -138,20 +138,22 @@
                 success:  function (response) {
                     if (response.success){
                        row.removeClass('btn-warning').append('<i class="text text-success material-icons">email</i>');
-                       swal({
-                            title: "Exito, bien hecho!",
-                            text: response.message,
-                            type: "success",
-                            reverseButtons: !0
-                        });
+                       //alert(response.message);
+                    //    swal({
+                    //         title: "Exito, bien hecho!",
+                    //         text: response.message,
+                    //         type: "success",
+                    //         reverseButtons: !0
+                    //     });
 
                     }else{
-                        swal({
-                            title: "Error, algo no esta bien!",
-                            text: response.message,
-                            type: "warning",
-                            reverseButtons: !0
-                        });
+                        // swal({
+                        //     title: "Error, algo no esta bien!",
+                        //     text: response.message,
+                        //     type: "warning",
+                        //     reverseButtons: !0
+                        // });
+                        //alert(response.message);
                     }
 
                 },
@@ -185,23 +187,23 @@
                 success:  function (response) {
                     if (!response.success){
                         $("#email"+id).val(eemail).addClass('alert-danger');
-                        swal({
-                            title: "Error, algo no esta bien!",
-                            text: response.message,
-                            type: "warning",
-                            reverseButtons: !0
-                        });
+                        // swal({
+                        //     title: "Error, algo no esta bien!",
+                        //     text: response.message,
+                        //     type: "warning",
+                        //     reverseButtons: !0
+                        // });
 
                         // alert(response.message);
                     }else{
                         $("#email"+id).addClass('alert-success').removeClass('alert-danger');
                         $("#dataemail"+id).text(email).addClass('alert-success');
-                        swal({
-                            title: "Exito, bien hecho!",
-                            text: response.message,
-                            type: "success",
-                            reverseButtons: !0
-                        });
+                        // swal({
+                        //     title: "Exito, bien hecho!",
+                        //     text: response.message,
+                        //     type: "success",
+                        //     reverseButtons: !0
+                        // });
                     }
 
                 },

@@ -45,11 +45,11 @@
                         @endif
 
                         @if(Helper::estatus($evaluado->status)=='Inicio')
-                            <span><a ><i class="spinner-grow spinner-grow-sm text-warning" role="status"></i></a></span>
+                            <span><a ><i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a></span>
                         @endif
 
                         @if(Helper::estatus($evaluado->status)=='Lanzada')
-                            <span><i class="spinner-grow spinner-grow-sm text-info" role="status"></i></span>
+                            <span><i class="spinner-grow spinner-grow-sm text-warning" role="status"></i></span>
                         @endif
                     </td>
                     <td >

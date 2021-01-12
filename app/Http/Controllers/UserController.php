@@ -168,7 +168,7 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->cargo_id = $request['cargo'];
         $user->departamento_id = $request['departamento'];
-        $user->phone_number=$request['phone_number'];
+        $user->phone_number = $request['phone_number'];
 
         $user->save();
 

@@ -99,7 +99,7 @@ class TalentController extends Controller
             \abort(404);
         }
 
-        Alert::success('Evaluacion creada ..',Arr::random(['Good','Excelente','Magnifico','Exito']));
+       // Alert::success('Evaluacion creada ..',Arr::random(['Good','Excelente','Magnifico','Exito']));
 
         return redirect()->route('proyectoevaluado.index')
         ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar una evaluacion.');

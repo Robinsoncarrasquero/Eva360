@@ -34,7 +34,7 @@
 
                 <div class="row col-sm-12">
                     <div class="col-sm-6">
-                        <label for="nivelrequerido">Nivel Requerido</label>
+                        <label for="nivelrequerido">Nivel requerido</label>
                         <input placeholder="Nivel entre 0 y 100" id="nivelrequerido" class="form-control" type="text" name="nivelrequerido" value="{{ old('nivelrequerido') }}">
                     </div>
 
@@ -62,7 +62,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>Grado</th>
-                                        <th>Pregunta</th>
+                                        <th>Nivel</th>
                                         <th>Ponderacion</th>
                                         <th>
                                             <button type="button" class="btnponer btn btn-dark " ><i class=" material-icons">library_add</library-add></i></button>

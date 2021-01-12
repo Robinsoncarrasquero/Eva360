@@ -71,14 +71,14 @@
                                 {{-- <span id="inicio" class="radio-checkeado" ></span>
                                 <span id="medio" class="radio-no-checkeado" ></span>
                                 <span id="final" class="radio-no-checkeado"></span> --}}
-                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><i class="spinner-grow spinner-grow-sm text-warning" role="status"></i></a>
+                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
                             @endif
 
                             @if(Helper::estatus($evaluado->status)=='Lanzada')
                                 {{-- <span id="inicio" class="radio-checkeado"></span>
                                 <span id="medio" class="radio-checkeado"></span>
                                 <span id="final" class="radio-no-checkeado"></span> --}}
-                                <i class="spinner-grow spinner-grow-sm text-info" role="status"></i>
+                                <i class="spinner-grow spinner-grow-sm text-warning" role="status"></i>
                             @endif
                         </td>
                         <td>

@@ -40,12 +40,12 @@
                     @endif
 
                     @if(Helper::estatus($evaluador->status)=='Inicio')
-                        <a href="{{route('evaluacion.competencias',$evaluador->id)}}"><i class="spinner-grow spinner-grow-sm text-danger " role="status"></i></a><span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
+                        <a href="{{route('evaluacion.competencias',$evaluador->id)}}"><i class="spinner-grow spinner-grow-sm text-warning " role="status"></i></a><span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
                     @endif
 
                     @if(Helper::estatus($evaluador->status)=='Lanzada')
                         <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
-                        <i class="spinner-grow spinner-grow-sm text-warning role="status"></i></a>
+                        <i class="spinner-grow spinner-grow-sm text-danger role="status"></i></a>
                     @endif
                 </td>
                 <td>

@@ -131,7 +131,7 @@ class ProyectoPanelController extends Controller
 
         $objlanzaEvaluacion=null;
 
-        return \redirect()->route('lanzar.index')->with('success','Hurra!! La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
+        return \redirect()->route('lanzar.index')->withSuccess('Hurra!! La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
 
     }
 

@@ -86,7 +86,7 @@ class LanzarModeloController extends Controller
 
         //Alert::success('Modelo fue lanzado',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
 
-        return \redirect()->route('proyectoevaluado.index')->withSucess('success','Muy Bien, La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
+        return \redirect()->route('proyectoevaluado.index')->withSuccess('Excelente, La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
 
     }
 

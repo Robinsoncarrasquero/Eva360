@@ -27,7 +27,7 @@
                 <table class="table  table-striped table-table">
                     <thead class="table-preguntas border-warning">
                         <th scope="col">#</th>
-                        <th scope="col">Opcion</th>
+                        <th scope="col">Descripcion</th>
                         <th scope="col">Seleccion</th>
                         <th scope="col">Frecuencia</th>
                     </thead>
