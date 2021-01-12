@@ -1,8 +1,11 @@
 <?php
+
+use App\Notifications\Nexmosms;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Nexmo\Laravel\Facade\Nexmo;
 
 /*
 |--------------------------------------------------------------------------
@@ -452,3 +455,10 @@ Route::post('file', function (Request $request,$fileName) {
 })->where([
     'file' => '(.*?)\.(json|jpg|png|jpeg|gif)$'
 ])->name('jsonfile');
+
+
+/**Route para sms */
+Route::get('sms/welcome','SendSMSController@welcome')->middleware(['auth']);
+
+Route::get('sms/welcomeFacade','SendSMSController@welcomeFacade')->middleware(['auth']);
+

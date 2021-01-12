@@ -45,7 +45,7 @@
         </div>
         <div class="justify-content-start">
             <div class="col-sm-6">
-                <label >Departamento</label>
+                <label >Ubicacion</label>
                 <select class="form-control" id="departamento" name="departamento">
                     @foreach ($departamentos as $departamento)
                         @if ($departamento->id==$user->departamento_id)
@@ -82,6 +82,13 @@
                         @endif
                     @endforeach
                 </select>
+            </div>
+        </div>
+
+        <div class="justify-content-start">
+            <div class="col-sm-6">
+                <label for="phone_number">Movil</label>
+                <input id="phone_number" class="form-control"  name="phone_number"  value="{{ $user->phone_number }}">
             </div>
         </div>
 

@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','active','codigo','departamento_id','cargo_id',
+        'name', 'email', 'password','active','codigo','departamento_id','cargo_id','phone_number',
     ];
 
     /**
@@ -121,6 +121,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public function evaluaciones(){
         return $this->hasMany(Evaluado::class);
     }
+
+    /**
+     * Route notifications for the Nexmo channel.
+     *
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return string
+     */
+    public function routeNotificationForNexmo($notification)
+    {
+        return $this->phone_number;
+    }
+
 
 
 

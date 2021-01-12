@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use app\CustomClass\EnviarEmail;
-use app\CustomClass\LanzarEvaluacion;
+
 use App\Frecuencia;
 use App\Evaluador;
 use App\Evaluacion;
-use App\Evaluado;
-use App\User;
 use Illuminate\Http\Request;
 use app\Helpers\Helper;
 use Illuminate\Support\Facades\Auth;

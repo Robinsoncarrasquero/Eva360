@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\Nexmosms;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class NotificacionesController extends Controller
 {
@@ -77,5 +81,7 @@ class NotificacionesController extends Controller
         $user = User::find(1);
         $user->unreadNotifications()->update(['read_at' => now()]);
     }
+
+
 
 }

@@ -14,9 +14,11 @@
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
+        "laravel/nexmo-notification-channel": "^2.5",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "laravelcollective/html": "^6.1",
+        "nexmo/laravel": "^2.4",
         "opis/json-schema": "^1.0",
         "realrashid/sweet-alert": "^3.2"
     },
@@ -59,7 +61,8 @@
             "app/CustomClass/DataEvaluacionGlobal.php",
             "app/CustomClass/DataResultadoTipo.php",
             "app/CustomClass/DataResultadoNivel.php",
-            "app/CustomClass/EnviarEmail.php"
+            "app/CustomClass/EnviarEmail.php",
+            "app/CustomClass/EnviarSMS.php"
 	]
     },
     "minimum-stability": "dev",

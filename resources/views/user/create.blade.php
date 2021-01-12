@@ -42,7 +42,7 @@
 
         <div class="justify-content-start">
             <div class="col-6">
-                <label >Departamento</label>
+                <label >Ubicacion</label>
                 <select class="form-control" id="departamento" name="departamento">
                     @foreach ($departamentos as $departamento)
                         <option  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
@@ -66,6 +66,13 @@
                         <option  value="{{ $roluser->id }}">{{ $roluser->name}}</option>
                     @endforeach
                 </select>
+            </div>
+        </div>
+
+        <div class="justify-content-start">
+            <div class="col-sm-6">
+                <label for="phone_number">Movil</label>
+                <input id="phone_number" class="form-control"  name="phone_number"  value="{{ old('phone_number') }}">
             </div>
         </div>
 

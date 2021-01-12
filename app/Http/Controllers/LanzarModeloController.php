@@ -7,8 +7,10 @@ use Illuminate\Http\Request ;
 use App\Evaluado;
 use App\Competencia;
 use app\CustomClass\EnviarEmail;
+use app\CustomClass\EnviarSMS;
 use app\CustomClass\LanzarEvaluacion;
 use App\Modelo;
+use App\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -67,6 +69,8 @@ class LanzarModeloController extends Controller
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
+        $user = User::find($evaluado->user_id);
+
         //Creamos un objeto de lanzamiento de Evaluacion
         $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado_id);
 
@@ -78,6 +82,7 @@ class LanzarModeloController extends Controller
         $objlanzaEvaluacion=null;
 
         EnviarEmail::enviarEmailEvaluadores($evaluado->id);
+        EnviarSMS::SendSMSFacade($evaluado_id);
 
         Alert::success('Modelo fue lanzado',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
 

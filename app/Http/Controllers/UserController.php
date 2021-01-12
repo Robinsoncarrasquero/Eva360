@@ -65,14 +65,15 @@ class UserController extends Controller
             'departamento' => 'required',
             'cargo' => 'required',
             'roluser' => 'required',
+
             ],
             [
             'name.required'=> 'El Nombre es requerido.',
             'cargo.required'=> 'El Cargo es requerido.',
-            'departamento.required'=> 'El Departamento es requerido.',
+            'departamento.required'=> 'La ubicacion es requerido.',
             'roluser.required' => "Rol del usuario es requerido.",
             'email.email' => "Este email es requerido y debe tener el formato correcto.",
-            'email.required' => "Email del usuario es unico y obligatorio.",
+            'email.required' => "Email de usuario debe ser unico y obligatorio.",
 
         ]);
 
@@ -86,6 +87,7 @@ class UserController extends Controller
             $record->email_verified_at= now();
             $record->password = bcrypt('secret1234');
             $record->remember_token=Str::random(10);
+            $record->phone_number=$request->phone_number;
             $record->save();
 
             //Agredamos el nuevo rol
@@ -154,10 +156,10 @@ class UserController extends Controller
             [
                 'name.required'=>'El nombre es requerido.',
                 'email.required' => "Email del usuario es unico y obligatorio.",
-                'roluser.required' => "Debe especificar el Rol del usuario.",
-                'newrol.required' => "Nuevo Rol es requerido.",
-                'email.unique' => "Este email ya ha sido tomado por otro Usuario.",
-                'departamento.required' => "Departamento es Requerido.",
+                'roluser.required' => "Debe especificar un rol de usuario.",
+                'newrol.required' => "Nuevo rol es requerido.",
+                'email.unique' => "Este email ya ha sido tomado por otro usuario.",
+                'departamento.required' => "Ubicacion es Requerida.",
                 'cargo.required' => "Cargo es Requerido.",
 
             ]);
@@ -166,6 +168,8 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->cargo_id = $request['cargo'];
         $user->departamento_id = $request['departamento'];
+        $user->phone_number=$request['phone_number'];
+
         $user->save();
 
         //Eliminamos el rol anterior
