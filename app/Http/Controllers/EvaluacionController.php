@@ -162,7 +162,7 @@ class EvaluacionController extends Controller
         $falta= $preguntas - $respondidas;
         $mensaje=[0=>'Terminastes buen trabajo',1=>'Excelente, solo quedan '.$falta,2=>'Magnifico, ya llevas '.$respondidas, 3=>'Muy Bien, te restan '.$falta,3=>'Iniciastes muy bien, te restan '.$falta];
 
-        Alert::success($evaluacion->competencia->name,Arr::get($mensaje,$falta));
+       // Alert::success($evaluacion->competencia->name,Arr::get($mensaje,$falta));
 
         return \redirect()->route('evaluacion.competencias',$evaluacion->evaluador->id);
 
@@ -187,7 +187,7 @@ class EvaluacionController extends Controller
 
         //Revisamos cuantas estan pendientes por realizar
         if ($evaluaciones->count()>$competencias->count()){
-            Alert::error('Prueba inconclusa',Arr::random(['Culmínela','Finalícela','Terminála']));
+           // Alert::error('Prueba inconclusa',Arr::random(['Culmínela','Finalícela','Terminála']));
             return \redirect()->back()->withDanger('Aun tiene compentencias pendientes');
         }
 
@@ -217,7 +217,7 @@ class EvaluacionController extends Controller
             EnviarEmail::enviarEmailFinal($evaluado->id);
         }
 
-        Alert::success('Prueba Finalizada',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
+        //Alert::success('Prueba Finalizada',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
 
         return \redirect()->route('evaluacion.index')
         ->withSuccess("Evaluacion de $evaluado->name finalizada exitosamente");

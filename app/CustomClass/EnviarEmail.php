@@ -110,7 +110,7 @@ class EnviarEmail
         $data->email =env("MAIL_FROM_ADDRESS");
 
         //$data->linkweb =$root."/resultados/$evaluado_id/finales";
-        $data->linkweb =Route('resultados.graficas',$evaluado_id);
+        $data->linkweb =Route('resultados.charindividual',$evaluado_id);
         $data->nameEvaluado =$evaluado->name;
         $data->enviado =false;
         $data->save();
