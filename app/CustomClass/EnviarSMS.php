@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Nexmo\Laravel\Facade\Nexmo;
-use LaraCrafts\UrlShortener\UrlShortenerServiceProvider;
 
 class EnviarSMS
 {
