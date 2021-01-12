@@ -82,9 +82,9 @@ class LanzarModeloController extends Controller
         $objlanzaEvaluacion=null;
 
         EnviarEmail::enviarEmailEvaluadores($evaluado->id);
-        EnviarSMS::SendSMSFacade($evaluado_id);
+        // EnviarSMS::SendSMSFacade($evaluado_id);
 
-        Alert::success('Modelo fue lanzado',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
+        //Alert::success('Modelo fue lanzado',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
 
         return \redirect()->route('proyectoevaluado.index')->withSucess('success','Muy Bien, La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
 
