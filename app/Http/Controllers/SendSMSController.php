@@ -17,13 +17,13 @@ class SendSMSController extends Controller
         $this->middleware('auth');
     }
 
-    public function welcome()
+    public function welcome($id)
     {
 
         $user =  Auth::user();
 
         //EnviarSMS::SendSMSFacade(18);
-        $evaluador= Evaluador::find(58);
+        $evaluador= Evaluador::find($id);
         EnviarSMS::SendtoEvaluador($evaluador);
         // $r=Nexmo::message()->send([
         //     'to'   => '584166123809',

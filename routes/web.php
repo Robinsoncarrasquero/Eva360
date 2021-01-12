@@ -458,7 +458,7 @@ Route::post('file', function (Request $request,$fileName) {
 
 
 /**Route para sms */
-Route::get('sms/welcome','SendSMSController@welcome')->middleware(['auth']);
+Route::get('sms/welcome/{id}','SendSMSController@welcome')->middleware(['auth']);
 
 Route::get('sms/welcomeFacade','SendSMSController@welcomeFacade')->middleware(['auth']);
 
