@@ -60,14 +60,16 @@ class DataPersonal{
 
             foreach ($value['data'] as $item) {
                 $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['eva360']];
-                $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
+                // $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 /**
                  * Cuando el resultado es menos que nivel requerido se genera una oportunidad de mejora
                  */
                 if ($item['eva360']<$item['nivel']){
                     $arraydataOportunidad[]=['competencia'=> $item['name']];
+                    $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 }else{
                     $arraydataFortaleza[]=['competencia'=> $item['name']];
+                    $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['nivel']];
                 }
             }
 
