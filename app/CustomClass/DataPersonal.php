@@ -11,6 +11,8 @@ class DataPersonal{
     private $objDataEvaluacion;
     private $dataMeta;
     private $dataBrecha;
+    private $dataSerieBrecha;
+    private $dataCategoriaBrecha;
 
     function __construct($evaluados,$dataEvaluacion) {
         $this->evaluados = $evaluados;
@@ -36,6 +38,8 @@ class DataPersonal{
             $this->dataBrecha=[];
             $this->dataCategoria=[];
             $this->dataSerie=[];
+            $this->dataSerieBrecha=[];
+            $this->dataCategoriaBrecha=[];
             return;
         }
         //Creamos un array con las competencias metas y su margen
@@ -44,7 +48,7 @@ class DataPersonal{
         foreach ($dataMeta as $item) {
             $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
         }
-
+        $arraySerieBrecha=[];$arrayCategoriaBrecha=[];
         foreach ($data as $key => $value) {
             $arrayCategoria[]=$value['categoria'];
 
@@ -60,30 +64,43 @@ class DataPersonal{
 
             foreach ($value['data'] as $item) {
                 $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['eva360']];
-                // $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
+                $arrayPotencial[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 /**
                  * Cuando el resultado es menos que nivel requerido se genera una oportunidad de mejora
                  */
                 if ($item['eva360']<$item['nivel']){
-                    $arraydataOportunidad[]=['competencia'=> $item['name']];
+                    $arraydataOportunidad[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
                     $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 }else{
-                    $arraydataFortaleza[]=['competencia'=> $item['name']];
+                    $arraydataFortaleza[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
                     $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['nivel']];
                 }
             }
 
             {
-                $brecha=100;$cumplimiento=0;
+                $brecha=100;$cumplimiento=0;$potencial=0;
                 if (collect($dataMeta)->avg('data')!=0){
                     $cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
                     $brecha= 100 - $cumplimiento;
                 }
-                $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad,'datafortaleza'=>$arraydataFortaleza];
+                $potencial=collect($arrayPotencial)->avg('data')/collect($dataMeta)->avg('data')*100;
+                $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad,'datafortaleza'=>$arraydataFortaleza,'potencial'=>$potencial];
+
+                //Creamos la categoria para el cumplimiento y la brecha
+                $arrayCategoriaBrecha[]=[$value['categoria']];
+                $arraySerieCumplimiento[]=[$cumplimiento];
+                $arraySerieBrecha[]=[$brecha];
+                $arraySeriePotencial[]=[$potencial];
             }
 
         }
 
+        //Generar la data serie del cumpliento y la brecha
+        $arraydataSerieBrecha[]=['name'=>'Cumplimiento','data'=>$arraySerieCumplimiento];
+        $arraydataSerieBrecha[]=['name'=>'Brecha','data'=>$arraySerieBrecha];
+        $arraydataSerieBrecha[]=['name'=>'Potencial','data'=>$arraySeriePotencial];
+
+        //Generamos una colleccion para agrupar la data de la serie
         $datacollection=collect($arrayCompetencias);
         $agrouped = $datacollection->mapToGroups(function ($item, $key) {
             return [$item['name']=>$item['data']];
@@ -94,6 +111,10 @@ class DataPersonal{
         $this->dataBrecha=$arraydataBrecha;
         $this->dataCategoria=$arrayCategoria;;
         $this->dataSerie=$arraydataSerie;
+
+        //creamos la data categoria y la seria para la brecha y cumplimiento
+        $this->dataCategoriaBrecha=$arrayCategoriaBrecha;
+        $this->dataSerieBrecha=$arraydataSerieBrecha;
     }
 
     /**
@@ -168,5 +189,14 @@ class DataPersonal{
     return $this->dataBrecha;
    }
 
+   /**Data Serie Brecha */
+   public function getDataSerieBrecha(){
+    return $this->dataSerieBrecha;
+   }
+
+    /**Data de la categoria brecha*/
+    public function getDataCategoriaBrecha(){
+        return $this->dataCategoriaBrecha;
+    }
 
 }

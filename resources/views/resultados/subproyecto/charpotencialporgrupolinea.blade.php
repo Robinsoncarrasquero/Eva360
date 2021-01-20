@@ -1,6 +1,6 @@
 {{-- @extends('master') --}}
 
-@section('title',"Resultados por grupos")
+@section('title',"Resultado cumplimiento")
 
 @section('content')
 
@@ -33,57 +33,6 @@
     <div class="mt-3">
         <div class="col-12 mb-1" id="container"></div>
     </div>
-
-
-    <div class="panel panel-default">
-
-        <div class="col-sm-12">
-
-            <div class="panel panel">
-
-                <div class="clearfix">
-                    <div class=" text-center">
-                        <h5>Indicadores por competencias</span></h5>
-                    </div>
-
-                </div>
-
-            </div>
-
-            @if($subProyecto)
-                <div class="table">
-                    <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                        <thead class="table-thead">
-                            <tr>
-                                <th>
-
-                                </th>
-                                @foreach ($dataCategoria as $key=>$value)
-                                <th>
-                                    {{$value}}</strong>
-                                </th>
-                                @endforeach
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            @foreach ($dataSerie as $key=>$dataValue)
-                            <tr>
-                                <td>{{$dataValue['name']}}</td>
-                                {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
-                                @foreach ($dataValue['data'] as $vdata)
-                                <td>{{ number_format($vdata,2)}}</td>
-                                @endforeach
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @endif
-
-            {{-- {{ $competencias->links() }} --}}
-
-        </div>
 
 
 
@@ -143,6 +92,58 @@
             </div>
         </div>
 
+        <div class="panel panel-default">
+
+            <div class="col-sm-12">
+
+                <div class="panel panel">
+
+                    <div class="clearfix">
+                        <div class=" text-center">
+                            <h5>Indicadores por competencias</span></h5>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @if($subProyecto)
+                    <div class="table">
+                        <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                            <thead class="table-thead">
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    @foreach ($dataCategoria as $key=>$value)
+                                    <th>
+                                        {{$value}}</strong>
+                                    </th>
+                                    @endforeach
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @foreach ($dataSerie as $key=>$dataValue)
+                                <tr>
+                                    <td>{{$dataValue['name']}}</td>
+                                    {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
+                                    @foreach ($dataValue['data'] as $vdata)
+                                    <td>{{ number_format($vdata,2)}}</td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+
+                {{-- {{ $competencias->links() }} --}}
+
+            </div>
+
+
+
         <div class="col-6">
             <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
         </div>
@@ -157,15 +158,15 @@
 <script src="{{ asset('js/hchar/modules/export-data.js')}}"></script>
 <script src="{{ asset('js/hchar/modules/accessibility.js')}}"></script>
 <script type="text/javascript">
-    var dataSerie =  @json($dataSerie);
-    var categorias =  @json($dataCategoria);
+    var dataSerie =  @json($dataSerieBrecha);
+    var categorias =  @json($dataCategoriaBrecha);
     var subProyectoName = @json($subProyecto->name);
     Highcharts.chart('container', {
-        chart: {
-            type: 'column'
-        },
+        // chart: {
+        //     type: 'column'
+        // },
         title: {
-            text: 'Resultados de competencias por grupo'
+            text: 'Analisis de cumplimiento'
         },
         subtitle: {
             text:  subProyectoName
@@ -196,6 +197,16 @@
                 borderWidth: 0
             }
         },
+        legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true
+                }
+            },
         series:dataSerie,
     });
 </script>

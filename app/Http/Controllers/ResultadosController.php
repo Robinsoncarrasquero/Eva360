@@ -84,11 +84,12 @@ class ResultadosController extends Controller
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
+        $dataBrecha = $objData->getDataBrecha();
         if (!$dataCategoria){
             \abort(404);
         }
         $title="Resultado personal por grupo";
-        return \view('resultados.subproyecto.charpersonalporgrupo',compact("dataSerie","dataCategoria","title","subProyecto"));
+        return \view('resultados.subproyecto.charpersonalporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha'));
     }
 
     /**
@@ -104,12 +105,19 @@ class ResultadosController extends Controller
         //instanciamos un objeto de data personal
         $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
         $objData->procesarData();
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
+        $dataSerieBrecha = $objData->getDataSerieBrecha();
+        $dataCategoriaBrecha = $objData->getDataCategoriaBrecha();
+
+        //dd($dataCategoriaBrecha,$dataSerieBrecha);
         if (!$dataBrecha){
             \abort(404);
         }
         $title="Analisis de cumplimiento";
-        return \view('resultados.subproyecto.cumplimiento',compact("dataBrecha","title","subProyecto"));
+        return \view('resultados.subproyecto.charpotencialporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha"));
+  //      return \view('resultados.subproyecto.cumplimiento',compact("dataSerieBrecha","dataCategoriaBrecha","title","subProyecto",'dataBrecha'));
     }
 
     /**
