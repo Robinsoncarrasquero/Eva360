@@ -35,36 +35,30 @@
     </div>
 
 
-    <div class="panel panel-default">
-
+    <div class="col-lg-12">
         <div class="col-sm-12">
 
-            <div class="panel panel">
 
-                <div class="clearfix">
-                    <div class=" text-center">
-                        <h5>Indicadores por competencias</span></h5>
-                    </div>
-
+            <div class="clearfix">
+                <div class=" text-center">
+                    <h5>Indicadores por competencias</span></h5>
                 </div>
 
             </div>
 
+
             @if($subProyecto)
-                <div class="table">
+                <div class="table table-responsive">
                     <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                         <thead class="table-thead">
                             <tr>
-                                <th>
-
-                                </th>
+                                <th>Competencias</th>
                                 @foreach ($dataCategoria as $key=>$value)
                                 <th>
                                     {{$value}}</strong>
                                 </th>
                                 @endforeach
                             </tr>
-
                         </thead>
                         <tbody>
                             @foreach ($dataSerie as $key=>$dataValue)
@@ -85,19 +79,12 @@
 
         </div>
 
-
-
         <div class="col-sm-12">
 
-            <div class="panel panel">
-
-                <div class="clearfix">
-                    <div class=" text-center">
-                        <h5>Indicadores de Cumplimiento</span></h5>
-                    </div>
-
+            <div class="clearfix">
+                <div class=" text-center">
+                    <h5>Indicadores de Cumplimiento</span></h5>
                 </div>
-
             </div>
 
             <div class="table table-responsive">
