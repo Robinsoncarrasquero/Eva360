@@ -133,6 +133,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->phone_number;
     }
 
+     /**Indica si el usuario es manager*/
+     public function manager(){
+
+        if ($this->departamento()->where('manager_id',$this->id)->first()) {
+
+            return true;
+        }
+        return false;
+
+    }
+
 
 
 

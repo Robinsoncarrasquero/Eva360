@@ -31,6 +31,21 @@
                         maxlength="250" name="description">{{ $record->description }}</textarea>
                 </div>
 
+                <div class="justify-content-start">
+                    <div class="col-sm-12">
+                        <label >Manager</label>
+                        <select class="form-control" id="manager_id" name="manager_id">
+                            @foreach ($users as $user)
+                                @if ($user->id==$record->manager_id)
+                                    <option selected  value="{{ $user->id }}">{{ $user->name}}</option>
+                                @else
+                                    <option  value="{{ $user->id }}">{{ $user->name}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <div class="clearfix col-sm-12 mt-2">
                     <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
                     <button type="submit" class="btn btn-dark float-right">Save</button>

@@ -137,6 +137,12 @@
                     <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
                 </li>
                 @endif
+
+                @if (Auth::check() && Auth::user()->manager())
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('talent.manager') }}">FeedBack<span class="sr-only">(current)</span></a>
+                </li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->

@@ -85,6 +85,7 @@ class ResultadosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
+
         if (!$dataCategoria){
             \abort(404);
         }

@@ -9,16 +9,39 @@ use App\Evaluador;
 use App\Http\Requests\FileJson;
 use App\Proyecto;
 use App\Relation;
+use App\Role;
 use App\SubProyecto;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TalentController extends Controller
 {
+
+    //
+    /**Lista los empleados */
+    public function indexmanager(Request $request)
+    {
+        $title="Lista de empleados por Departamentos";
+        $user=Auth::user();
+         //Ubicamos el rol
+            $record = Departamento::findOrFail($user->departamento_id);
+            $users = User::where('departamento_id', $record->id)->get();
+            if ($user->id==$record->manager_id){
+                $departamentos=Departamento::where('id',$user->departamento_id)->orderBy('id','DESC')->paginate(5);
+            }else{
+                $departamentos=Departamento::where('id',0)->orderBy('id','DESC')->paginate(5);
+            }
+
+
+        return \view('talent.index',compact('departamentos','title'));
+    }
+
+
     //
     /**Lista los empleados */
     public function indexevaluado(Request $request)

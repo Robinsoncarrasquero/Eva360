@@ -9,7 +9,7 @@ class Departamento extends Model
     //
     protected $table='departamentos';
 
-    protected $fillable=['name','description'];
+    protected $fillable=['name','description','manager_id'];
 
     //Hacer busquedas por nombre
     public function scopeName($query,$name){

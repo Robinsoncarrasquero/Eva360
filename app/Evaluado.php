@@ -15,7 +15,7 @@ class Evaluado extends Model
     * The fillable fields
     */
     protected $fillable = [
-        'name', 'word_key', 'status','subproyecto_id','cargo_id'
+        'name', 'word_key', 'status','subproyecto_id','cargo_id','feedback'
     ];
 
 

@@ -16,7 +16,7 @@
             <h5 class="text-center text-danger">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h5>
         @else
         <div class="text text-center">
-            <h5>Resultado final de la prueba de <span class="text-danger">{{ $evaluado->name }}</span></h5>
+            <h5>Resultado final de <span class="text-danger">{{ $evaluado->name }}</span></h5>
         </div>
         @endif
     </div>

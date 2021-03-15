@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Control de talentos")
+@section('title',"Modulo de talentos")
 
 @section('content')
 
@@ -43,7 +43,12 @@
                             @foreach ($departamento->empleados as $empleado)
                             <tr>
                                 {{-- <td>{{ substr($empleado->name,0,50) }}<span style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)"><br>{{ $empleado->cargo->name}}</span></td> --}}
-                                <td>{{ ($empleado->name) }}</td>
+                                <td>{{ ($empleado->name) }}
+                                    @if ($empleado->id==$departamento->manager_id)
+                                        <br>
+                                        <a><i class="material-icons text-danger">person</i></a>
+                                    @endif
+                                </td>
                                 <td class="d-flex justify-content-center" >
                                     @if ($empleado->evaluaciones->count()>0)
                                         <a href="{{route('talent.historicoevaluaciones', $empleado->id)}}"><span class="badge badge-warning">{{ $empleado->evaluaciones->count() }}</span></a></td>

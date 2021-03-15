@@ -23,9 +23,12 @@ class CheckRole
         return redirect('login');
 
 
+
         if (! $request->user()->hasRole($role)) {
             return redirect('login');
         }
+
+
 
         return $next($request);
     }

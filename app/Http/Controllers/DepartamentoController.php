@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Departamento;
+use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -74,7 +75,9 @@ class DepartamentoController extends Controller
     public function edit($id)
     {
         $record = Departamento::findOrFail($id);
-        return \view('departamento.edit',\compact('record'));
+        $users = User::where('departamento_id', $record->id)->get();
+
+        return \view('departamento.edit',\compact('record','users'));
     }
 
     /**
@@ -102,6 +105,7 @@ class DepartamentoController extends Controller
             $record = Departamento::findOrFail($id);
             $record->name=$request->name;
             $record->description= $request->description;
+            $record->manager_id= $request->manager_id;
             $record->save();
 
         } catch (QueryException $e) {

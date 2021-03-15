@@ -27,6 +27,16 @@ Route::get('/', function () {
 });
 
 /**
+ * Route de Feedback de evaluacion
+ *
+ */
+Route::get('feedback/edit/{id}', 'FeedBackController@edit')
+->name('feedback.edit');
+// ->middleware('role:user');
+
+Route::post('feedback/update/{id}', 'FeedBackController@update')->name('feedback.update');
+// ->middleware('role:user');
+/**
  * Route de notificaciones de evaluaciones
  *
  */
@@ -155,14 +165,19 @@ Route::get('evaluado/subproyecto/{subproyecto}/create', 'EvaluadoController@crea
 Route::get('talent360', 'TalentController@indexevaluado')->name('talent.index')
 ->middleware('role:admin');
 
-Route::get('talent360/historico/evaluaciones/{id}', 'TalentController@historicoevaluaciones')->name('talent.historicoevaluaciones')
-->middleware('role:admin');
+Route::get('talent360/manager', 'TalentController@indexmanager')->name('talent.manager')
+->middleware('manager:manager','role:user');
+
+Route::get('talent360/historico/evaluaciones/{id}', 'TalentController@historicoevaluaciones')
+->name('talent.historicoevaluaciones');
+// ->middleware('role:user');
 
 Route::get('talent360/{id}/create/evaluado', 'TalentController@createevaluado')->name('talent.createevaluado')
 ->middleware('role:admin');
 
 Route::post('talent360/store/evaluado/{id}', 'TalentController@storeevaluado')->name('talent.storeevaluado')
-->middleware('role:admin');
+->middleware('role:user');
+
 
 /**
  * Modelo de Prueba
@@ -346,49 +361,50 @@ Route::get('evaluacion',"EvaluacionController@index")
 */
 Route::get('resultados/{evaluado_id}/evaluacion',"ResultadosController@resultados")
 ->name('resultados.evaluacion')
-->middleware(['auth','role:admin']);
-
+->middleware(['auth']);
+//->middleware(['auth','role:admin']);
 Route::get('resultados/{evaluado_id}/finales',"ResultadosController@resumidos")
 ->name('resultados.finales')
-->middleware(['auth','role:admin']);
-
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
 /**
  * Presenta una grafica con resultados 360
  */
 Route::get('resultados/{evaluado_id}/charindividual',"ResultadosController@charindividual")
 ->name('resultados.charindividual')
-->middleware(['auth','role:admin']);
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
 
 /**
  * Presenta una grafica de resultados personales por subproyecto
  */
 Route::get('resultados/{subproyecto_id}/charpersonalporgrupo',"ResultadosController@charpersonalporgrupo")
 ->name('resultados.charpersonalporgrupo')
-->middleware(['auth','role:admin']);
-
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
 
 /**
  * Presenta una tabla de analisis personales tabulados por subproyecto
  */
 Route::get('resultados/{subproyecto_id}/cumplimiento',"ResultadosController@analisiscumplimiento")
 ->name('resultados.analisiscumplimiento')
-->middleware(['auth','role:admin']);
-
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
 
 /**
  * Presenta la grafica de competencias por tipo
  */
 Route::get('resultados/{proyecto_id}/resultadosgeneralestipo',"ResultadosController@resultadosGeneralesTipo")
 ->name('resultados.resultadosgeneralestipo')
-->middleware(['auth','role:admin']);
-
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
 /**
  * Presenta la grafica de competencias por niveles de cargos
  */
 Route::get('resultados/{proyecto_id}/resultadosgeneralesnivel',"ResultadosController@resultadosGeneralesNivel")
 ->name('resultados.resultadosgeneralesnivel')
-->middleware(['auth','role:admin']);
-
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
 
 /**
  * Route upload file json
