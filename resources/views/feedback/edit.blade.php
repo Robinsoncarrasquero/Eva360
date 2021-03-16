@@ -37,9 +37,9 @@
                     @endif
                     @foreach ($dataValue['data'] as $vdata)
                         @if ($dataValue['data'][0]>($dataValue['data'][1]))
-                            <td class="text text-danger">{{ number_format($vdata,2)}}</td>
+                            <td class="text text-danger text-center">{{ number_format($vdata,2)}}</td>
                         @else
-                            <td>{{ number_format($vdata,2)}}</td>
+                            <td class="text text-center">{{ number_format($vdata,2)}}</td>
                         @endif
                     @endforeach
                 </tr>
@@ -51,11 +51,11 @@
         <table id="{{ 'table'.$evaluado->id }}" class="table  table-bordered table-striped table-table">
             <thead class="table-thead" style="text-align: center;background:rgb(68, 0, 255);color:white">
 
-            <th>% Cumplimiento</th>
+            <th>% Cumpmto</th>
             <th>% Brecha</th>
             <th>% Potencial</th>
-            <th>Oportunidades</th>
-            <th>Fortalezas</th>
+            <th>Oport.</th>
+            <th>Forta.</th>
             </thead>
             <tbody>
                 @foreach ($dataBrecha as $key=>$value)
