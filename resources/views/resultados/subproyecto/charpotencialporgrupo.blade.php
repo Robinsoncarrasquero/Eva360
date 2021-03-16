@@ -118,9 +118,12 @@
                         @foreach ($dataSerie as $key=>$dataValue)
                         <tr>
                             <td>{{$dataValue['name']}}</td>
-                            {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
                             @foreach ($dataValue['data'] as $vdata)
-                            <td>{{ number_format($vdata,2)}}</td>
+                                @if ($dataValue['data'][0]>($vdata))
+                                    <td class="text text-danger">{{ number_format($vdata,2)}}</td>
+                                @else
+                                    <td>{{ number_format($vdata,2)}}</td>
+                                @endif
                             @endforeach
                         </tr>
                         @endforeach

@@ -11,16 +11,18 @@
     </div>
 
     <div class="mt-2 pb-2 text text-center col-lg-12">
-        <h4>feedback {{ $evaluado->name }}</h4>
+        <h4>FEEDBACK</h4>
+        <h4>{{ $evaluado->name }}</h4>
     </div>
+
     <div class="table table-responsive">
         <table id="{{ 'tablex' }}" class="table  table-bordered table-striped table-table">
-            <thead class="table-thead">
+            <thead class="table-thead" style="text-align: center;background:rgb(2, 54, 2);color:rgba(247, 240, 240, 0.932)">
                 <tr>
                     <th>Competencias</th>
                     @foreach ($dataCategoria as $key=>$value)
                     <th>
-                        {{$value}}</strong>
+                        <strong>{{$value}}</strong>
                     </th>
                     @endforeach
                 </tr>
@@ -28,10 +30,17 @@
             <tbody>
                 @foreach ($dataSerie as $key=>$dataValue)
                 <tr>
-                    <td>{{$dataValue['name']}}</td>
-                    {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
+                    @if ($dataValue['data'][0]>($dataValue['data'][1]))
+                        <td class="text text-danger">{{$dataValue['name']}}</td>
+                    @else
+                        <td >{{$dataValue['name']}}</td>
+                    @endif
                     @foreach ($dataValue['data'] as $vdata)
-                    <td>{{ number_format($vdata,2)}}</td>
+                        @if ($dataValue['data'][0]>($dataValue['data'][1]))
+                            <td class="text text-danger">{{ number_format($vdata,2)}}</td>
+                        @else
+                            <td>{{ number_format($vdata,2)}}</td>
+                        @endif
                     @endforeach
                 </tr>
                 @endforeach
