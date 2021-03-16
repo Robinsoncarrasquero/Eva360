@@ -34,9 +34,10 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                <th style="width:50%" class="alert-success text-center">Nombre</th>
+                                <th style="width:30%" class="alert-success text-center">Nombre</th>
+                                <th style="width:30%" class="alert-dark text-center">Email</th>
                                 <th style="width:20%" class="alert-warning text-center">Historico</th>
-                                <th style="width:30%" class="alert-dark text-center">Evaluacion</th>
+                                <th style="width:20%" class="alert-dark text-center">+</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,6 +50,7 @@
                                         <a><i class="material-icons text-danger">person</i></a>
                                     @endif
                                 </td>
+                                <td>{{ ($empleado->email) }}</td>
                                 <td class="d-flex justify-content-center" >
                                     @if ($empleado->evaluaciones->count()>0)
                                         <a href="{{route('talent.historicoevaluaciones', $empleado->id)}}"><span class="badge badge-warning">{{ $empleado->evaluaciones->count() }}</span></a></td>
@@ -58,7 +60,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <span class="d-flex justify-content-end">
+                                    <span class="d-flex justify-content-center">
                                         <a href="{{ route('talent.createevaluado',$empleado->id)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
 
                                     </span>
