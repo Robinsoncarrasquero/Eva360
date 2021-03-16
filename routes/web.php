@@ -176,7 +176,7 @@ Route::get('talent360/{id}/create/evaluado', 'TalentController@createevaluado')-
 ->middleware('role:admin');
 
 Route::post('talent360/store/evaluado/{id}', 'TalentController@storeevaluado')->name('talent.storeevaluado')
-->middleware('role:user');
+->middleware('role:admin');
 
 
 /**

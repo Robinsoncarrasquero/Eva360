@@ -92,6 +92,7 @@ class TalentController extends Controller
     public function storeevaluado(FileJson $fileJsonRequest,$empleado_id)
     {
         //
+
         $name=$fileJsonRequest->input('name.*');
         $relation=$fileJsonRequest->input('relation.*');
         $email=$fileJsonRequest->input('email.*');
@@ -106,6 +107,7 @@ class TalentController extends Controller
             $evaluado->cargo_id=$fileJsonRequest->cargo;
             $evaluado->subproyecto_id=$fileJsonRequest->subproyecto;
             $evaluado->user_id = $empleado_id;
+            $evaluado->fb_status='No_Cumplida';
             $evaluado->save();
 
             for ($i=0; $i < count($name); $i++) {
@@ -115,6 +117,7 @@ class TalentController extends Controller
                 $evaluador->relation= Str::of($relation[$i])->ucfirst();
                 $evaluador->remember_token= Str::random(32);
                 $evaluador->status=0;
+
                 $evaluado->evaluadores()->save($evaluador);
             }
 
