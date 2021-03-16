@@ -55,13 +55,13 @@ class TalentController extends Controller
     /**Lista el historico de evaluaciones del empleado */
     public function historicoevaluaciones($empleado_id)
     {
+
         $title="Historico de evaluaciones";
         $empleado = User::find($empleado_id);
         $evaluaciones = $empleado->evaluaciones;
-        //dd($evaluaciones);
         return \view('talent.historicoevaluaciones',compact('evaluaciones','title','empleado'));
 
-        return \redirect()->back()->withErrors('Falta programar este control');
+        //return \redirect()->back()->withErrors('Falta programar este control');
     }
     /**Crear una evaluado con los datos de los evaluadores
      * de su entorno departamental

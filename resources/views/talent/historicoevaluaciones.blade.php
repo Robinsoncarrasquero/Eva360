@@ -78,7 +78,7 @@
                         @if(Helper::estatus($evaluado->status)=='Finalizada')
                             <a href="{{route('feedback.edit', $evaluado->id)}}"><span><i class="material-icons ">comment</i></span></a>
                         @else
-                            <a href="{{route('resultados.edit', $evaluado->id)}}" ><span><i class="material-icons text-dark">comment</i></span></a>
+                            <a href="{{route('feedback.edit', $evaluado->id)}}" ><span><i class="material-icons text-dark">comment</i></span></a>
                         @endif
                     </td>
                 </tr>
