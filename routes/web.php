@@ -36,6 +36,7 @@ Route::get('feedback/edit/{id}', 'FeedBackController@edit')
 
 Route::post('feedback/update/{id}', 'FeedBackController@update')->name('feedback.update');
 // ->middleware('role:user');
+
 /**
  * Route de notificaciones de evaluaciones
  *

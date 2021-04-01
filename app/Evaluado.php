@@ -39,6 +39,11 @@ class Evaluado extends Model
         return $this->belongsTo(User::class);
     }
 
+    //Una evaluado tiene muchos feedback
+    public function feedback(){
+        return $this->hasMany(FeedBack::class);
+    }
+
     //Hacer busquedas por nombre
     public function scopeName($query,$name){
         $query->where('name','like',"%$name%");

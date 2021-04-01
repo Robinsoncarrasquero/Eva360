@@ -26,7 +26,7 @@ class TalentController extends Controller
     /**Lista los empleados */
     public function indexmanager(Request $request)
     {
-        $title="Lista de empleados por Departamentos";
+        $title="Lista de empleados por Ubicacion";
         $user=Auth::user();
          //Ubicamos el rol
             $record = Departamento::findOrFail($user->departamento_id);

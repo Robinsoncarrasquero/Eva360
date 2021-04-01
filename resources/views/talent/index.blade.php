@@ -17,7 +17,7 @@
                     </form>
                 </div>
                 <div class="text text-center">
-                    <h5 style="color:royalblue; font-size:1.5rem">Talentos</h5>
+                    <h5 style="color:royalblue; font-size:1.5rem">Lista de Talentos</h5>
                 </div>
             </div>
 
@@ -35,8 +35,8 @@
                             <thead>
                                 <tr>
                                 <th style="width:30%" class="alert-success text-center">Nombre</th>
-                                <th style="width:30%" class="alert-dark text-center">Email</th>
                                 <th style="width:20%" class="alert-warning text-center">Historico</th>
+                                <th style="width:30%" class="alert-dark text-center">Email</th>
                                 <th style="width:20%" class="alert-dark text-center">+</th>
                                 </tr>
                             </thead>
@@ -50,7 +50,7 @@
                                         <a><i class="material-icons text-danger">person</i></a>
                                     @endif
                                 </td>
-                                <td>{{ ($empleado->email) }}</td>
+
                                 <td class="d-flex justify-content-center" >
                                     @if ($empleado->evaluaciones->count()>0)
                                         <a href="{{route('talent.historicoevaluaciones', $empleado->id)}}"><span class="badge badge-warning">{{ $empleado->evaluaciones->count() }}</span></a></td>
@@ -59,6 +59,7 @@
                                         <a><i class="material-icons text-dark">question_answer</i></a></td>
                                     @endif
                                 </td>
+                                <td>{{ ($empleado->email) }}</td>
                                 <td>
                                     <span class="d-flex justify-content-center">
                                         <a href="{{ route('talent.createevaluado',$empleado->id)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
