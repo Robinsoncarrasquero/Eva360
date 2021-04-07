@@ -35,7 +35,7 @@
                         </p>
                     </div>
 
-                    @foreach ($proyecto->subproyecto as $subproyecto)
+                    @foreach ($proyecto->subproyectos as $subproyecto)
                     <div class="panel mt-2">
 
                         <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span  style="font-size: 0.75rem;" class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
@@ -54,13 +54,13 @@
                                 <th style="width: 15%">Inicio</th>
                                 <th style="width: 15%">Update</th>
                                 {{-- <th>Lanzar</th> --}}
-                                <th style="width: 10%">Prueba</th>
+                                <th style="width: 10%">Evaluadores</th>
                                 <th style="width: 10%">Resultado</th>
                                 <th style="width: 10%">Grafica</th>
                                 <th style="width: 5%"></th>
                             </thead>
                             <tbody>
-                            @foreach ($subproyecto->evaluado as $evaluado)
+                            @foreach ($subproyecto->evaluados as $evaluado)
                             <tr id="{{ $evaluado->id }}">
                             <td>{{ $evaluado->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p></td>
                             <td class="status-progress" >

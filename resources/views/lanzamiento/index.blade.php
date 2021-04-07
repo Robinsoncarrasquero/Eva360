@@ -48,7 +48,7 @@
                     <th>Update</th>
                     {{-- <th>Modelo</th> --}}
                     {{-- <th>Filtro</th> --}}
-                    <th>Prueba</th>
+                    <th>Evaluadores</th>
                     <th>Resultado</th>
                     <th>Grafica</th>
                    </thead>

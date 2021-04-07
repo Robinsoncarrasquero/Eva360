@@ -6,7 +6,7 @@
 
 <div class="container">
 
-           <div id="flash-message">
+        <div id="flash-message">
             @include('flash-message')
         </div>
 

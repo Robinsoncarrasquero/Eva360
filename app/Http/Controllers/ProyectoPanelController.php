@@ -32,12 +32,6 @@ class ProyectoPanelController extends Controller
         $buscarWordKey = $request->get('buscarWordKey');
         $proyectos = Proyecto::name($buscarWordKey)->orderBy('id','DESC')->paginate(5);
 
-        //Creamos variable de session para controlar el ultimo proyecto apuntado
-        if ($request->session()->exists('subproyecto')) {
-            $subproyecto_id= $request->session('subproyecto');
-        }else{
-            $subproyecto_id=session('subproyecto', '1');
-        }
         return view('lanzamiento.proyecto.index',compact('proyectos','title'));
 
     }

@@ -26,6 +26,36 @@ Route::get('/', function () {
     return view('vision360');
 });
 
+
+Route::get('/plantillas/userimport', 'PlantillasController@userimport');
+
+Route::get('/plantillas/index', 'PlantillasController@index')->name('plantillas.index');
+
+Route::post('/plantillas/{id}/procesar', 'PlantillasController@procesar')->name('plantillas.procesar');
+
+Route::get('/plantillas/verproyecto/{id}', 'PlantillasController@verproyecto')->name('plantillas.verproyecto');
+
+Route::post('/plantillas/upload', 'PlantillasController@upload')->name('plantillas.upload');
+
+Route::get('/plantillas/fileupload', 'PlantillasController@fileupload')->name('plantillas.fileupload');
+
+Route::get('/plantillas/{id}/lanzar', 'PlantillasController@lanzar')->name('plantillas.lanzar');
+
+Route::post('/plantillas/{id}/crearevaluaciones', 'PlantillasController@crearevaluaciones')->name('plantillas.crearevaluaciones');
+
+/**
+ * Permite la descarga del archivo en formato json establecido para subir datos
+ *
+ */
+Route::get('/plantillas/downloads', function () {
+    return Storage::download("plantilla.xlsx");
+
+    abort(404);
+})->where([
+    'file' => '(.*?)\.(xlsx|json|jpg|png|jpeg|gif)$'
+])->name('plantillas.downloads')
+->middleware(['auth']);
+
 /**
  * Route de Feedback de evaluacion
  *

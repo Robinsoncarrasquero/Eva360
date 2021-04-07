@@ -80,17 +80,28 @@
                 @if (Auth::check() && Auth::user()->admin())
                 <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Carga masiva
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
+                        <a class="dropdown-item"  href="{{ route('plantillas.index') }}">Plantillas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"  href="{{ route('plantillas.fileupload') }}">Importar</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Talento
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
-                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Talento</a>
+
+                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Personal</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a>
                     </div>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Admon

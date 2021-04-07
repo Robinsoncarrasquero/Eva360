@@ -25,5 +25,11 @@ class Modelo extends Model
 
     }
 
+    //Un modelo tiene una muchas carga masivas
+    public function cargamasiva(){
+
+        return $this->hasMany(CargaMasiva::class);
+
+    }
 
 }

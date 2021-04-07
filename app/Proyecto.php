@@ -8,7 +8,7 @@ class Proyecto extends Model
 {
      protected $table='proyectos';
 
-     protected $fillable=['name','description'];
+     protected $fillable=['name','description','carga_masivas_id'];
 
     //Hacer busquedas por nombre
     public function scopeName($query,$name){
@@ -16,9 +16,16 @@ class Proyecto extends Model
 
     }
 
-    /** Un Proyecto tiene subproyectos */
-    public function subproyecto(){
-         return $this->hasMany(SubProyecto::class);
-     }
+     /**
+     * Una Proyecto pertenece a una carga masiva
+    */
+    public function carga_masiva(){
+        return $this->belongsTo(CargaMasiva::class,'carga_masivas_id');
+    }
+
+    public function subproyectos(){
+        return $this->hasMany(subProyecto::class);
+    }
+
 
 }

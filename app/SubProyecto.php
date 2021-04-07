@@ -18,7 +18,7 @@ class SubProyecto extends Model
         return $this->belongsTo(Proyecto::class);
     }
 
-    public function evaluado(){
+    public function evaluados(){
         return $this->hasMany(Evaluado::class,'subproyecto_id')->orderBy('status');
     }
 
