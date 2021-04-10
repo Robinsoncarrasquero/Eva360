@@ -7,17 +7,24 @@ use app\CustomClass\DataPersonal;
 use app\CustomClass\DataResultado;
 use App\Departamento;
 use App\Evaluado;
+use App\Exports\FeedBackExport;
+use App\Exports\UsersExport;
 use App\FeedBack;
+use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
+
+
 
 class FeedBackController extends Controller
 {
 
     /*
-    * Edit el Feedback de la evaluacion
+    * Edit Feedback de una evaluacion
     */
     public function edit($evaluado_id)
     {
@@ -32,26 +39,19 @@ class FeedBackController extends Controller
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
 
+
         //Generamos las competencias del Feedback
         foreach ($dataSerie as $key=>$dataValue){
 
             $competencia=$dataValue['name'];
-             //Creamos un usuario para responder la prueba con autenticacion
+             //Modelo > resultado genera feedback
              if ($dataValue['data'][0]>($dataValue['data'][1])){
-                try {
+
                     $feedbacks = FeedBack::firstOrCreate(
-                        ['competencia'=> $competencia],[
-                        'evaluado_id' => $evaluado_id,
+                        ['competencia'=> $competencia,
+                        'evaluado_id' => $evaluado_id],[
                         'fb_status' => 'No_Cumplida',
-
                     ]);
-                    $feedbacks->save();
-
-                }catch(QueryException $e) {
-                    return \false;
-                    abort(404,$e);
-                }
-
              }
 
         }
@@ -62,6 +62,8 @@ class FeedBackController extends Controller
         if (!$dataSerie){
             \abort(404);
         }
+
+
         return \view('feedback.edit',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks'));
 
     }
@@ -76,15 +78,10 @@ class FeedBackController extends Controller
      */
     public function update(Request $formrequest, $id)
     {
-        //
-
         $evaluado = Evaluado::find($id);
-        $user= $evaluado->evaluado;
 
         try {
-
-
-            //Creamos los grados con las preguntas
+            //Update a los feeedback
             $fb_competencia=$formrequest->input('fb_competencia.*');
             $fb_feedback=$formrequest->input('fb_feedback.*');
             $fb_finicio=$formrequest->input('fb_finicio.*');
@@ -98,7 +95,6 @@ class FeedBackController extends Controller
                 $fb->fb_ffinal=$fb_ffinal[$i];
                 $fb->fb_nota=$fb_nota[$i];
                 $fb->fb_status=$fb_status[$i];
-
                 $fb->save();
             }
 
@@ -109,40 +105,22 @@ class FeedBackController extends Controller
             ->withErrors('Error imposible Guardar este registro. Revise los datos del formulario e intente nuevamante.');
         }
 
+        if (Auth::user()->is_manager){
 
-
+            return \redirect()->route('manager.staff',$evaluado->subproyecto_id)->withSuccess('FeedBack Actualizado con exito');
+        }
         return \redirect()->route('talent.historicoevaluaciones',$evaluado->user_id)->withSuccess('FeedBack Actualizado con exito');
     }
 
     /**
-     * Remove el feedback de la tabla.
+     * Exportar feedback en Excel de un evaluado.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$fb_id)
+
+   public function exportFeedBack(Evaluado $evaluado)
     {
-        $feedback = FeedBack::find($fb_id);
-        //dd($fb_id,$feedback);
-        try {
-            $feedback->delete();
-            $success = true;
-            $message = "Feedback eliminado exitosamente";
-        } catch (QueryException $e) {
-            $success = false;
-      	    $message = "No se puede eliminar este Feedback, data restringida";
-            return redirect()->back()
-            ->withErrors('Error imposible Eliminar este Feedback, tiene restricciones con la Evaluacion realizada.');
-        }
-
-        // //  Return response
-        // return response()->json([
-        //     'success' => $success,
-        //     'message' => $message,
-        // ]);
-
-        return \redirect()->route('feedback.edit',$feedback->evaluado_id)->withSuccess('FeedBack eliminado con exito');
-
+        return Excel::download(new FeedBackExport($evaluado), 'FeedBackExport.xlsx');
     }
+
 
 }

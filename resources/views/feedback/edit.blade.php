@@ -11,12 +11,19 @@
     </div>
 
     <div class="mt-2 pb-2 text text-center col-lg-12">
-        <h4 style="color:blue" >FEEDBACK</h4>
-        <h4>{{ $evaluado->name }}</h4>
+        <h3 style="color:blue" >FEEDBACK</h3>
+        <h3>{{ $evaluado->name }}</h3>
     </div>
-    <div class="text text-center" style="color:silver">
-        <h3>Resultados Logrados</h3>
-    </div>
+
+    @if ($feedbacks->count()>0)
+        <div class="justify-content-start">
+            <div class="col-lg-12 text text-center">
+                <a href=" {{route('feedBack->exportfeedback',$evaluado)  }} "><h3 style="color:orange"> Exportar Feedback a Excel </h3></a>
+            </div>
+        </div>
+
+    @endif
+
     <div class="table table-responsive">
         <table id="{{ 'tablex' }}" class="table  table-bordered table-striped table-table">
             <thead class="table-thead" style="text-align: center;background:rgb(2, 54, 2);color:rgba(247, 240, 240, 0.932)">
@@ -92,6 +99,7 @@
 
         {{-- @method('PATCH') --}}
 
+
         @foreach ( $feedbacks as $feedback )
         <div class="clearfix">
 
@@ -166,7 +174,11 @@
 
             <div class="clearfix col-lg-12 ">
                 <div class="col-lg-12">
+                    @if (Auth::user()->is_manager))
+                    <a href="{{ route('manager.staff',$evaluado->subproyecto_id)}}" class="btn btn-dark float-left">Back</a>
+                    @else
                     <a href="{{ route('talent.historicoevaluaciones',$evaluado->user_id)}}" class="btn btn-dark float-left">Back</a>
+                    @endif
                     <button type="submit" class="btn btn-dark float-right">Save</button>
                 </div>
             </div>

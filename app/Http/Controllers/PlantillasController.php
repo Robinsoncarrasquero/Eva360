@@ -90,6 +90,9 @@ class PlantillasController extends Controller
 
         $carga_masiva_name='Carga_Masiva_'.$dt->toDayDateTimeString();
 
+        $headings = (new HeadingRowImport)->toArray($pathFile);
+
+        $data_excel_array = (new PlantillasImport)->toArray($pathFile);
 
         $carga_masiva= CargaMasiva::firstOrCreate(['name'=>$carga_masiva_name],
         [
@@ -123,9 +126,9 @@ class PlantillasController extends Controller
             }
 
         }
-        //Obtenemos los modelo
+
         $modelos =  Modelo::all();
-        return \view('plantillas.edit',compact('carga_masiva','metodos','modelos'));
+        return \view('plantillas.edit',compact('carga_masiva','metodos','modelos','pathFile'));
 
     }
 
@@ -133,6 +136,7 @@ class PlantillasController extends Controller
 
     public function procesar(Request $request,$id)
     {
+
 
         $request->validate([
             'name'=>'required',
@@ -147,6 +151,10 @@ class PlantillasController extends Controller
 
         );
 
+        //
+
+        //Obtenemos los modelo
+        //
         $modelo = Arr::get($request->modeloradio, '0', 0);
 
         try {
@@ -409,9 +417,21 @@ class PlantillasController extends Controller
 
         $metodos=['90','180','360'];
         $carga_masiva= CargaMasiva::orderBy('created_at','DESC')->simplePaginate(25);
+
         return \view('plantillas.index',compact('carga_masiva','metodos'));
     }
 
+    public function delete($carga_masiva)
+    {
+
+        $carga_masiva= CargaMasiva::findOrFail();
+        $carga_masiva->delete;
+
+        $metodos=['90','180','360'];
+        $carga_masiva= CargaMasiva::orderBy('created_at','DESC')->simplePaginate(25);
+
+        return \view('plantillas.index',compact('carga_masiva','metodos'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -422,7 +442,7 @@ class PlantillasController extends Controller
     {
         $proyectos = Proyecto::where('carga_masivas_id',$id)->simplePaginate(10);
 
-        return \view('plantillas.verproyecto',\compact('proyectos'));
+        return \view('plantillas.evaluaciones',\compact('proyectos'));
     }
 
 

@@ -83,21 +83,20 @@
                         Carga masiva
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
-                        <a class="dropdown-item"  href="{{ route('plantillas.index') }}">Plantillas</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('plantillas.fileupload') }}">Importar</a>
                     </div>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Talento
+                        Evaluacion
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
 
-                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Personal</a>
+                        <a class="dropdown-item"  href="{{ route('plantillas.index') }}">Masivas</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Evaluaciones</a>
+
+                        <a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Proyectos</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a>
                     </div>
@@ -107,6 +106,8 @@
                         Admon
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu2">
+                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Plantilla</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a>
                         <a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a>
                         <div class="dropdown-divider"></div>
@@ -149,9 +150,9 @@
                 </li>
                 @endif
 
-                @if (Auth::check() && Auth::user()->manager())
+                @if (Auth::check() && Auth::user()->is_manager())
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('talent.manager') }}">FeedBack<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('manager.index') }}">FeedBack<span class="sr-only">(current)</span></a>
                 </li>
                 @endif
             </ul>

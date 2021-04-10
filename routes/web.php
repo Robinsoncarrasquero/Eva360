@@ -4,6 +4,7 @@ use App\Notifications\Nexmosms;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 use Nexmo\Laravel\Facade\Nexmo;
 
@@ -26,22 +27,45 @@ Route::get('/', function () {
     return view('vision360');
 });
 
+/**
+ * Route de plantillas de personal con la carga masiva
+ *
+ */
+Route::middleware(['auth', 'role:admin'])->group( function() {
 
-Route::get('/plantillas/userimport', 'PlantillasController@userimport');
+    Route::get('/plantillas/userimport', 'PlantillasController@userimport');
 
-Route::get('/plantillas/index', 'PlantillasController@index')->name('plantillas.index');
+    Route::get('/plantillas/index', 'PlantillasController@index')->name('plantillas.index');
 
-Route::post('/plantillas/{id}/procesar', 'PlantillasController@procesar')->name('plantillas.procesar');
+    Route::post('/plantillas/{id}/procesar', 'PlantillasController@procesar')->name('plantillas.procesar');
 
-Route::get('/plantillas/verproyecto/{id}', 'PlantillasController@verproyecto')->name('plantillas.verproyecto');
+    Route::get('/plantillas/{id}/delete', 'PlantillasController@delete')->name('plantillas.delete');
 
-Route::post('/plantillas/upload', 'PlantillasController@upload')->name('plantillas.upload');
 
-Route::get('/plantillas/fileupload', 'PlantillasController@fileupload')->name('plantillas.fileupload');
+    Route::get('/plantillas/verproyecto/{id}', 'PlantillasController@verproyecto')->name('plantillas.verproyecto');
 
-Route::get('/plantillas/{id}/lanzar', 'PlantillasController@lanzar')->name('plantillas.lanzar');
+    Route::post('/plantillas/upload', 'PlantillasController@upload')->name('plantillas.upload');
 
-Route::post('/plantillas/{id}/crearevaluaciones', 'PlantillasController@crearevaluaciones')->name('plantillas.crearevaluaciones');
+    Route::get('/plantillas/fileupload', 'PlantillasController@fileupload')->name('plantillas.fileupload');
+
+    Route::get('/plantillas/{id}/lanzar', 'PlantillasController@lanzar')->name('plantillas.lanzar');
+
+    Route::post('/plantillas/{id}/crearevaluaciones', 'PlantillasController@crearevaluaciones')->name('plantillas.crearevaluaciones');
+});
+
+//Routes para control de evaluaciones del manager
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/manager/index', 'ManagerController@index')->name('manager.index');
+    Route::get('/manager/staff/{id}', 'ManagerController@staff')->name('manager.staff');
+
+    Route::get('/plantillas/downloads', function () {
+        return Storage::download("plantilla.xlsx");
+        abort(404);
+    })->where(['file' => '(.*?)\.(xlsx|json|jpg|png|jpeg|gif)$'])->name('plantillas.downloads');
+
+});
+
+
 
 /**
  * Permite la descarga del archivo en formato json establecido para subir datos
@@ -56,21 +80,36 @@ Route::get('/plantillas/downloads', function () {
 ])->name('plantillas.downloads')
 ->middleware(['auth']);
 
+
 /**
  * Route de Feedback de evaluacion
  *
  */
-Route::get('feedback/edit/{id}', 'FeedBackController@edit')
-->name('feedback.edit');
-// ->middleware('role:user');
+Route::middleware(['auth', 'role:user'])->group( function() {
 
-Route::post('feedback/update/{id}', 'FeedBackController@update')->name('feedback.update');
-// ->middleware('role:user');
+
+    Route::get('feedback/edit/{id}', 'FeedBackController@edit')
+    ->name('feedback.edit');
+    // ->middleware('role:user');
+
+    Route::post('feedback/update/{id}', 'FeedBackController@update')->name('feedback.update');
+    // ->middleware('role:user');
+
+    /**
+     * Permite la exportar del feedback en archivo en excel xlsx
+     *
+     */
+
+    Route::get('feedback/export/{evaluado}', 'FeedBackController@exportFeedBack')->name('feedBack->exportfeedback');
+
+
+});
 
 /**
- * Route de notificaciones de evaluaciones
- *
- */
+* Route de notificaciones de evaluaciones
+*
+*/
+Route::middleware(['auth', 'role:admin'])->group( function() {
 
 Route::get('notificaciones/all/{id}', 'NotificacionesController@all')->name('notificaciones.all')
 ->middleware('role:admin');
@@ -81,62 +120,68 @@ Route::get('notificaciones/unread/{id}', 'NotificacionesController@unread')->nam
 Route::get('notificaciones/markasread/{id}', 'NotificacionesController@markasread')->name('notificaciones.markasread')
 ->middleware('role:admin');
 
-
-/**
-* Resource de Proyecto
-*
-*/
-
-Route::resource('proyecto', 'ProyectoController')
-->middleware('role:admin');
-
-Route::post('proyecto/delete/{id}','ProyectoController@destroy')->name('proyecto.delete');
-
-/**
-* Resource de Sub Proyecto
-*
-*/
-
-Route::resource('subproyecto', 'SubProyectoController')
-->middleware('role:admin');
-
-Route::post('subproyecto/delete/{id}','SubProyectoController@destroy')->name('subproyecto.delete');
+});
 
 
-/**
-* Resource de Nivel de cargo
-*
-*/
-Route::resource('nivelCargo', 'NivelCargoController')->middleware('role:admin');
-Route::post('nivelcargo/delete/{id}','NivelCargoController@destroy')->name('nivelcargo.delete');
+Route::middleware(['auth', 'role:admin'])->group( function() {
+
+    /**
+    * Resource de Proyecto
+    *
+    */
+
+    Route::resource('proyecto', 'ProyectoController')
+    ->middleware('role:admin');
+
+    Route::post('proyecto/delete/{id}','ProyectoController@destroy')->name('proyecto.delete');
+
+    /**
+    * Resource de Sub Proyecto
+    *
+    */
+
+    Route::resource('subproyecto', 'SubProyectoController')
+    ->middleware('role:admin');
+
+    Route::post('subproyecto/delete/{id}','SubProyectoController@destroy')->name('subproyecto.delete');
 
 
-/**
-* Resource de Cargo
-*
-*/
+    /**
+    * Resource de Nivel de cargo
+    *
+    */
+    Route::resource('nivelCargo', 'NivelCargoController')->middleware('role:admin');
+    Route::post('nivelcargo/delete/{id}','NivelCargoController@destroy')->name('nivelcargo.delete');
 
-Route::resource('cargo', 'CargoController')
-->middleware('role:admin');
 
-Route::post('cargo/delete/{id}','CargoController@destroy')->name('cargo.delete');
+    /**
+    * Resource de Cargo
+    *
+    */
 
-/**
-* Resource de Departamento
-*
-*/
+    Route::resource('cargo', 'CargoController')
+    ->middleware('role:admin');
 
-Route::resource('ubicacion', 'DepartamentoController')
-->middleware('role:admin');
+    Route::post('cargo/delete/{id}','CargoController@destroy')->name('cargo.delete');
 
-Route::post('ubicacion/delete/{id}','DepartamentoController@destroy')->name('departamento.delete');
-/**
-* Route de User
-*
-*/
-Route::get('/user/list', 'UserController@index')->name('index');
-Route::post('user/delete/{id}', 'UserController@destroy')->name('user.delete')->middleware('role:admin');
-Route::resource('user', 'UserController')->middleware('role:admin');
+    /**
+    * Resource de Departamento
+    *
+    */
+
+    Route::resource('ubicacion', 'DepartamentoController')
+    ->middleware('role:admin');
+
+    Route::post('ubicacion/delete/{id}','DepartamentoController@destroy')->name('departamento.delete');
+    /**
+    * Route de User
+    *
+    */
+    Route::get('/user/list', 'UserController@index')->name('index');
+    Route::post('user/delete/{id}', 'UserController@destroy')->name('user.delete')->middleware('role:admin');
+    Route::resource('user', 'UserController')->middleware('role:admin');
+
+});
 
 /**
  * Autenticacion full
@@ -200,8 +245,8 @@ Route::get('talent360/manager', 'TalentController@indexmanager')->name('talent.m
 ->middleware('manager:manager','role:user');
 
 Route::get('talent360/historico/evaluaciones/{id}', 'TalentController@historicoevaluaciones')
-->name('talent.historicoevaluaciones');
-// ->middleware('role:user');
+->name('talent.historicoevaluaciones')
+->middleware('role:admin');
 
 Route::get('talent360/{id}/create/evaluado', 'TalentController@createevaluado')->name('talent.createevaluado')
 ->middleware('role:admin');

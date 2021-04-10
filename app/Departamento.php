@@ -23,6 +23,11 @@ class Departamento extends Model
         return $this->hasMany(User::class,'departamento_id');
     }
 
+     //Un usuario es manager
+     public function user(){
+        return $this->hasOne(User::class,'manager_id');
+    }
+
 
 
 

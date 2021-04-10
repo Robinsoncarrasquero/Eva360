@@ -11,12 +11,19 @@
     </div>
 
     <div class="mt-2 pb-2 text text-center col-lg-12">
-        <h4 style="color:blue" >FEEDBACK</h4>
-        <h4>{{ $evaluado->name }}</h4>
+        <h3 style="color:blue" >FEEDBACK</h3>
+        <h3>{{ $evaluado->name }}</h3>
     </div>
-    <div class="text text-center" style="color:silver">
-        <h3>Resultados Logrados</h3>
-    </div>
+
+    @if ($feedbacks->count()>0){
+        <div class="justify-content-start">
+            <div class="col-lg-12 text text-center">
+                <a href=" {{route('feedBack->exportfeedback',$evaluado)  }} "><h3 style="color:orange"> Exportar Feedback a Excel </h3></a>
+            </div>
+        </div>
+
+    @endif
+
     <div class="table table-responsive">
         <table id="{{ 'tablex' }}" class="table  table-bordered table-striped table-table">
             <thead class="table-thead" style="text-align: center;background:rgb(2, 54, 2);color:rgba(247, 240, 240, 0.932)">
@@ -90,59 +97,25 @@
         </table>
     </div>
 
-    <form  class="card-header" action="{{route('feedback.update',$evaluado)  }}" method="post">
-        @csrf
         {{-- @method('PATCH') --}}
-        <table class="table table-table" id={{ $feedback }}>
-            <thead>
-                <th class="text text-center">{{ $feedback->competencia }}</th>
-            </thead>
-            <tbody>
 
-                <tr>
-                    <td>
-                        {{ $feedback->id }}
-                        <input class="col-sm-12" hidden type="text" name="competencia[]" value="{{ $feedback->competencia }}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    <label for="feedback" style="font-size:1em">Escriba un FeedBack</label>
-                    <textarea placeholder="Indique su feedback" type="text" id="feedback" class="form-control" rows="6"
-                        maxlength="1000" name="feedback[]">{{ $feedback->feedback }}</textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input class="col-sm-2" type="text" name="gradoName[]" value="{{ old('fb_finicio.'.$feedback->id, $feedback->fb_finicio) }}">
-                    </td>
-                </tr>
-                <tr>
 
-                    <td>
-                        <textarea class="col-sm-12" cols="50" rows="4" name="gradoDescription[]">{{ old('fb_final.'.$feedback->id, $feedback->fb_ffinal)}}</textarea>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>
-                        <input class="col-sm-4" type="text" name="gradoPonderacion[]" value="{{ old('gradoPonderacion.'.$feedback->id, $feedback->fb_nota)}}">
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
         @foreach ( $feedbacks as $feedback )
+        <div class="clearfix">
 
 
-            <fieldset >
-            <legend class="text text-center" style="color:rgb(248, 166, 12); font-size:2em">{{ $feedback->competencia }}</legend>
-            <p>
+        <form  class="card-header" action="{{route('feedback.update',$evaluado->id)  }}" method="post" name="frm{{ $feedback->id }}">
+        @csrf
+
+
+        <fieldset >
+            <legend class="text text-center" style="color:#f3a10a; font-size:2em;">{{ $feedback->competencia }}</legend>
 
             <div class="justify-content-start">
 
                 <div class="col-lg-12 text text-center">
-                    <label for="competencia" style="font-size:2em" >{{ $feedback->competencia }}</label>
+
+                    <input type="text" hidden   class="form-control"  name="fb_competencia[]"  value="{{ $feedback->id }}">
                 </div>
 
             </div>
@@ -151,28 +124,28 @@
 
                 <div class="col-lg-12 d-flex p-2">
                     <label for="feedback" style="font-size:1em">Escriba un FeedBack</label>
-                    <textarea placeholder="Indique su feedback" type="text" id="feedback" class="form-control" rows="6"
-                        maxlength="1000" name="feedback[]">{{ $feedback->feedback }}</textarea>
+                    <textarea placeholder="Indique su feedback" type="text" id="fb_feedback{{ $feedback->id }}" class="form-control" rows="6"
+                        maxlength="1000" name="fb_feedback[]">{{ old('fb_feedback'.$feedback->id,  $feedback->feedback) }}</textarea>
                 </div>
 
             </div>
             <div class="justify-content-start">
                 <div class="col-lg-6">
                     <label for="fb_finicio">Fecha Inicio</label>
-                    <input type="date" id="fb_finicio" class="form-control"  name="fb_finicio"  value="{{ $feedback->fb_finicio }}">
+                    <input type="date" id="fb_finicio{{ $feedback->id }}" class="form-control"  name="fb_finicio[]"  value="{{ old('fb_finicio'.$feedback->id, $feedback->fb_finicio) }}">
                 </div>
             </div>
             <div class="justify-content-end">
             <div class="col-lg-6">
                     <label for="fb_ffinal">Fecha Final</label>
-                    <input type="date" id="fb_ffinal" class="form-control"  name="fb_ffinal"  value="{{ $feedback->fb_ffinal }}">
+                    <input type="date" id="fb_ffinal{{ $feedback->id }}" class="form-control"  name="fb_ffinal[]"  value="{{ old('fb_ffinal'.$feedback->id, $feedback->fb_ffinal) }}">
                 </div>
             </div>
 
             <div class="justify-content-start">
                 <div class="col-sm-6">
                     <label >Estatus</label>
-                    <select class="form-control" id="fb_status" name="fb_status">
+                    <select class="form-control" id="fb_status{{ $feedback->id }}" name="fb_status[]">
                         @foreach ($fb_status as $status)
                             @if ($feedback->fb_status==$status)
                                 <option  selected  value="{{ $status}}">{{ $status}}</option>
@@ -188,8 +161,8 @@
 
                 <div class="col-lg-12 d-flex p-2">
                     <label for="fb_nota">Nota de Observacion</label>
-                    <textarea placeholder="Observacion" type="text" id="fb_nota" class="form-control" rows="4"
-                        maxlength="500" name="fb_nota">{{ $feedback->fb_nota }}</textarea>
+                    <textarea placeholder="Escriba alguna observacion" type="text" id="fb_nota{{ $feedback->id }}" class="form-control" rows="4"
+                        maxlength="500" name="fb_nota[]">{{ old('fb_nota'.$feedback->id, $feedback->fb_nota) }}</textarea>
                 </div>
 
             </div>
@@ -198,22 +171,30 @@
 
             </fieldset>
 
-        @endforeach
 
-
-
-        <div class="clearfix col-lg-12 ">
-            <div class="col-lg-12">
-                <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
-                <button type="submit" class="btn btn-dark float-right">Save</button>
+            <div class="clearfix col-lg-12 ">
+                <div class="col-lg-12">
+                    <a href="{{ route('manager.staff',$evaluado->subproyecto_id)}}" class="btn btn-dark float-left">Back</a>
+                    <button type="submit" class="btn btn-dark float-right">Save</button>
+                </div>
             </div>
-        </div>
 
+            {{-- <td>
+                <button class="btn btn-danger" onclick="deleteConfirmation({{$feedback->id}},'{{route('feedback.delete',$feedback->id)}}')">Delete</button>
+            </td> --}}
 
-
+    </fieldset>
     </form>
-
+    </div>
+    <br><br>
+    @endforeach
 
 </div>
+
+{{-- @section('scripts')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <script src="{{ asset('js/deleteConfirmation.js') }}"></script>
+@endsection --}}
 
 @endsection

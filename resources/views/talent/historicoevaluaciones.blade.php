@@ -12,7 +12,7 @@
 
     <div class="card mt-3 ">
         <div class="text text-center p-3">
-            <h5>Historias de evaluado</h5>
+            <h4>HISTORIAS DE EVALUACIONES</h5>
         </div>
     </div>
 

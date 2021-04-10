@@ -28,14 +28,14 @@ class TalentController extends Controller
     {
         $title="Lista de empleados por Ubicacion";
         $user=Auth::user();
-         //Ubicamos el rol
-            $record = Departamento::findOrFail($user->departamento_id);
-            $users = User::where('departamento_id', $record->id)->get();
-            if ($user->id==$record->manager_id){
-                $departamentos=Departamento::where('id',$user->departamento_id)->orderBy('id','DESC')->paginate(5);
-            }else{
-                $departamentos=Departamento::where('id',0)->orderBy('id','DESC')->paginate(5);
-            }
+
+        //Ubicamos el rol
+        $dpto = Departamento::findOrFail($user->departamento_id);
+        if ($user->is_manager){
+            $departamentos=Departamento::where('id',$user->departamento_id)->orderBy('id','DESC')->paginate(5);
+        }else{
+            $departamentos=Departamento::where('id',0)->orderBy('id','DESC')->paginate(5);
+        }
 
 
         return \view('talent.index',compact('departamentos','title'));
@@ -82,9 +82,10 @@ class TalentController extends Controller
         });
 
         $cargos = Cargo::all();
-        $proyectos = Proyecto::all();
+        $proyectos = Proyecto::where('carga_masivas_id','=',null)->get();
         $subproyectos = SubProyecto::all();
         $relations = Relation::all();
+
         return \view('talent.crearevaluado',compact('empleado','evaluadores','cargos','proyectos','subproyectos','relations'));
     }
 
@@ -107,7 +108,6 @@ class TalentController extends Controller
             $evaluado->cargo_id=$fileJsonRequest->cargo;
             $evaluado->subproyecto_id=$fileJsonRequest->subproyecto;
             $evaluado->user_id = $empleado_id;
-            $evaluado->fb_status='No_Cumplida';
             $evaluado->save();
 
             for ($i=0; $i < count($name); $i++) {

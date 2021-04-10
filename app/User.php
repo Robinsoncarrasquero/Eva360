@@ -102,6 +102,28 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
+    //Rleacion usuario es manager
+    public function is_manager(){
+        return $this->hasOne(Departamento::class,'manager_id');
+    }
+
+    /**Indica si el usuario es manager*/
+    public function isss_manager(){
+
+        // if ($this->manager->manager_id){
+        //     //dd($this->manager->manager_id);
+        //     return true;
+        // }
+        // return false;
+
+        if ($this->departamento()->where('manager_id',$this->id)->first()) {
+
+            return true;
+        }
+        return false;
+
+    }
+
     //Un usuario / empleado pertenece a un departamento)
     public function departamento(){
         return $this->belongsTo(Departamento::class);
@@ -122,6 +144,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Evaluado::class);
     }
 
+
     /**
      * Route notifications for the Nexmo channel.
      *
@@ -133,16 +156,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->phone_number;
     }
 
-     /**Indica si el usuario es manager*/
-     public function manager(){
 
-        if ($this->departamento()->where('manager_id',$this->id)->first()) {
 
-            return true;
-        }
-        return false;
-
-    }
 
 
 

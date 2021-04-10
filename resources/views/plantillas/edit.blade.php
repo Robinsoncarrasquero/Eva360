@@ -44,7 +44,7 @@
                     </select>
                 </div>
                 <div class="col-lg-12">
-                    <h2>Seleccione un Modelo</h2>
+                    <h2 class="text-center">Seleccione un Modelo</h2>
 
                 </div>
                 <div class="row ">

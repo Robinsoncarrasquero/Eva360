@@ -10,6 +10,7 @@ use app\CustomClass\LanzarEvaluacion;
 use App\Modelo;
 use App\Proyecto;
 use App\SubProyecto;
+use App\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,9 +18,6 @@ use Illuminate\Support\Facades\Hash;
 class ProyectoPanelController extends Controller
 {
 
-    public function __construct(){
-        $this->middleware('auth');
-    }
 
     /**
      * Lista los candidatos para la evaluacion
@@ -30,8 +28,7 @@ class ProyectoPanelController extends Controller
     {
         $title="Lista de Evaluados Por Proyecto";
         $buscarWordKey = $request->get('buscarWordKey');
-        $proyectos = Proyecto::name($buscarWordKey)->orderBy('id','DESC')->paginate(5);
-
+        $proyectos = Proyecto::name($buscarWordKey)->where('carga_masivas_id',null)->orderBy('id','DESC')->paginate(5);
         return view('lanzamiento.proyecto.index',compact('proyectos','title'));
 
     }

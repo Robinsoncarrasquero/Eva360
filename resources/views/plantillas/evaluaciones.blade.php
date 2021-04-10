@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Administracion de Evaluaciones Importadas")
+@section('title',"Control de evaluaciones")
 
 @section('content')
 
@@ -8,6 +8,14 @@
 
             <div id="flash-message">
                 @include('flash-message')
+            </div>
+
+            <div class="card pb-2 mt-2">
+
+                <div class="text text-center">
+                    <h5 style="color:royalblue; font-size:1.5rem">EVALUACIONES DE CARGA MASIVA</h5>
+                </div>
+
             </div>
 
             @if ($proyectos->count())
@@ -40,7 +48,7 @@
                                 <th style="width: 15%">Inicio</th>
                                 <th style="width: 15%">Update</th>
                                 {{-- <th>Lanzar</th> --}}
-                                <th style="width: 10%">Evaluadores<th>
+                                <th style="width: 10%">Evaluadores</th>
                                 <th style="width: 10%">Resultado</th>
                                 <th style="width: 10%">Grafica</th>
                                 <th style="width: 5%"></th>

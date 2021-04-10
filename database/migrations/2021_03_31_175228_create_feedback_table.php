@@ -16,7 +16,7 @@ class CreateFeedbackTable extends Migration
 
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->string('competencia',50)->notnullable()->unique();
+            $table->string('competencia',50)->notnullable();
             $table->text('feedback',1000)->nullable();
             $table->date('fb_finicio')->nullable();
             $table->date('fb_ffinal')->nullable();

@@ -16,11 +16,20 @@
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
                 </div>
-                <div class="text text-center">
-                    <h5 style="color:royalblue; font-size:1.5rem">Plantilla</h5>
-                </div>
-            </div>
 
+
+            </div>
+            <div class="card pb-2 mt-2">
+
+                <div class="text text-center">
+
+                    <h4 style="color:royalblue; font-size:1.5rem">PLANTILLA DE PERSONAL POR UBICACION</h4>
+                </div>
+
+            </div>
+            <div class=" d-flex justify-content-center mt-2">
+                {{ $departamentos->links() }}
+            </div>
             @if ($departamentos->count())
 
                 @foreach ($departamentos as $departamento)
@@ -81,11 +90,8 @@
                     </div>
                 @endforeach
 
-
-    </div>
                 <div class=" d-flex justify-content-center">
                     {{ $departamentos->links() }}
-                    {{-- {{ $evaluados->appends(["name"=>$evaluado->name])  }} --}}
                 </div>
 
             @else
@@ -93,6 +99,7 @@
                     <p>No hay informacion disponible</p>
                 <div>
             @endif
+
     </div>
 
 @endsection

@@ -26,7 +26,7 @@ class Evaluado extends Model
 
     //Un evaluado pertenece a un subproyecto
     public function subproyecto(){
-        return $this->belongsTo(SubProyecto::class)->orderBy('id');
+        return $this->belongsTo(SubProyecto::class)->orderBy('created_at','DESC');
     }
 
     //Un evaluado pertenece a un cargo
@@ -39,6 +39,10 @@ class Evaluado extends Model
         return $this->belongsTo(User::class);
     }
 
+    //Un evaluado pertenece a un usuario
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     //Una evaluado tiene muchos feedback
     public function feedback(){
         return $this->hasMany(FeedBack::class);

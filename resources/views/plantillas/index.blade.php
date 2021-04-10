@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Importacion de Plantilla de Personal")
+@section('title',"Manager Evaluaciones")
 
 @section('content')
 
@@ -9,10 +9,11 @@
     <div id="flash-message">
         @include('flash-message')
     </div>
-    <div class="card pb-0 ">
+
+    <div class="card pb-0 mb-3">
 
         <div class="text text-center">
-            <h5 style="color:rgb(131, 132, 136); font-size:1.5rem">PLANTILLAS DE PERSONAL</h5>
+            <h5 style="color:royalblue; font-size:1.5rem">EVALUACION DE PERSONAL CARGA MASIVA</h5>
         </div>
     </div>
 
@@ -29,7 +30,7 @@
                     <th style="width:20%" class="alert-dark text-center">Nombre</th>
                     <th style="width:10%" class="alert-warning text-center">Metodo</th>
                     <th style="width:10%" class="alert-warning text-center">Modelo</th>
-                    <th style="width:10%" class="alert-dark text-center">Registros</th>
+                    <th style="width:10%" class="alert-dark text-center">Plantilla</th>
                     <th style="width:10%" class="alert-warning text-center">ver</th>
                     <th style="width:10%" class="alert-dark text-center">Lanzar</th>
                 </thead>
@@ -44,7 +45,9 @@
 
                     <td class="text text-center" >{{ ($cargamasiva->metodo) }}</td>
                     <td class="text text-center">
-                        {{ $cargamasiva->modelo->name }}
+                        @if($cargamasiva->modelo_id)
+                            {{ $cargamasiva->modelo->name }}
+                         @endif
                     </td>
                     <td class="text text-center">
                         <a><span class="badge badge-warning">{{ $cargamasiva->plantillas->count() }}</span></a>

@@ -22,7 +22,7 @@
                         <label  for="proyecto">Proyectos</label>
                         <select id="subproyecto"  class="form-control" name="subproyecto" >
                             @foreach ($proyectos as $proyectodata)
-                                @foreach ( $proyectodata->subproyecto as $subpro )
+                                @foreach ( $proyectodata->subproyectos as $subpro )
                                     @if (old('subproyecto')==$proyectodata->id)
                                         <option selected value="{{ $subpro->id }}">{{ $proyectodata->name }} ({{ $subpro->name }})</option>
                                     @else

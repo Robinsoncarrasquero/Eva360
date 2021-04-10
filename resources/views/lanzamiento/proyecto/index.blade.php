@@ -19,7 +19,7 @@
                     </form>
                 </div>
                 <div class="text text-center">
-                    <h5 style="color:royalblue; font-size:1.5rem">Evaluaciones</h5>
+                    <h5 style="color:royalblue; font-size:1.5rem">EVALUACIONES POR PROYECTOS</h5>
                 </div>
 
             </div>

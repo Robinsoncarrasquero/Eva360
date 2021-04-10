@@ -12,21 +12,26 @@
 
         </div>
 
-        <div class="panel panel mt-2">
+        <div class="card pb-2 mt-2">
+
             <div class="text text-center">
-                <h5>Mis Evaluados</h5>
+                <h4 style="color:rgb(4, 44, 165); font-size:1.5rem">MIS EVALUADOS</h4>
+
             </div>
+
         </div>
 
         @if($evaluadores->count())
 
         <div class="table table-responsive">
             <table id="mytable" class="table  table-bordred table-striped">
+
             <thead>
-            <th>Nombre</th>
-            <th>Status</th>
-            <th>Progreso</th>
-            <th>Accion</th>
+                <th style="width: 30%">Nombre</th>
+                <th style="width: 15%">Status</th>
+                <th style="width: 15%">Lectura</th>
+                <th style="width: 15%">Accion</th>
+
             </thead>
             <tbody>
             @foreach($evaluadores as $evaluador)
