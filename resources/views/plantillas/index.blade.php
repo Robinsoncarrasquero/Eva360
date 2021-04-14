@@ -26,12 +26,13 @@
                 <thead>
 
                     <th style="width:10%" class="alert-dark text-center">Fecha</th>
-                    <th style="width:30%" class="alert-success text-center">Descripcion</th>
+                    <th style="width:25%" class="alert-success text-center">Descripcion</th>
                     <th style="width:20%" class="alert-dark text-center">Nombre</th>
                     <th style="width:10%" class="alert-warning text-center">Metodo</th>
                     <th style="width:10%" class="alert-warning text-center">Modelo</th>
-                    <th style="width:10%" class="alert-dark text-center">Plantilla</th>
-                    <th style="width:10%" class="alert-warning text-center">ver</th>
+                    <th style="width:5%" class="alert-success text-center">Plantilla</th>
+                    <th style="width:10%" class="alert-dark text-center">Registros</th>
+                    <th style="width:10%" class="alert-warning text-center">Evaluaciones</th>
                     <th style="width:10%" class="alert-dark text-center">Lanzar</th>
                 </thead>
                 <tbody>
@@ -49,6 +50,13 @@
                             {{ $cargamasiva->modelo->name }}
                          @endif
                     </td>
+
+                    <td class="text text-center">
+
+                        <a href="{{url('organigrama')}}"><span><i class="material-icons">question_answer</i></span></a>
+
+                    </td>
+
                     <td class="text text-center">
                         <a><span class="badge badge-warning">{{ $cargamasiva->plantillas->count() }}</span></a>
                     </td>
