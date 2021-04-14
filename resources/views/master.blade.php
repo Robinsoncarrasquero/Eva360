@@ -144,13 +144,13 @@
                 </li>
                 @endif
 
-                @if (Auth::check())
+                @if (Auth::check() && Auth::user()->is_manager)
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
                 </li>
                 @endif
 
-                @if (Auth::check() && Auth::user()->is_manager())
+                @if (Auth::check() && Auth::user()->is_manager)
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('manager.index') }}">FeedBack<span class="sr-only">(current)</span></a>
                 </li>

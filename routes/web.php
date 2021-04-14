@@ -27,11 +27,22 @@ Route::get('/', function () {
     return view('vision360');
 });
 
+
+Route::get('/organigrama', function () {
+    return view('plantillas.organigrama');
+});
+
+Route::get('/verorganigrama', function () {
+    return view('plantillas.organigrama')->name('plantillas.ver');
+});
+
 /**
  * Route de plantillas de personal con la carga masiva
  *
  */
 Route::middleware(['auth', 'role:admin'])->group( function() {
+
+
 
     Route::get('/plantillas/userimport', 'PlantillasController@userimport');
 
@@ -85,7 +96,7 @@ Route::get('/plantillas/downloads', function () {
  * Route de Feedback de evaluacion
  *
  */
-Route::middleware(['auth', 'role:user'])->group( function() {
+Route::middleware(['auth'])->group( function() {
 
 
     Route::get('feedback/edit/{id}', 'FeedBackController@edit')

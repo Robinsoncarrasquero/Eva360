@@ -24,7 +24,7 @@ class Proyecto extends Model
     }
 
     public function subproyectos(){
-        return $this->hasMany(subProyecto::class);
+        return $this->hasMany(SubProyecto::class);
     }
 
 

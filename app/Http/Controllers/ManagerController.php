@@ -30,7 +30,6 @@ class ManagerController extends Controller
 
         $departamento_id=$manager->departamento_id;
 
-
         $subproyectos = SubProyecto::with(['evaluados.evaluado' => function($query) use ($departamento_id) {
         $query->where('departamento_id', $departamento_id);
         }])->get();

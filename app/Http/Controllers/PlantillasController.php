@@ -11,6 +11,7 @@ use app\CustomClass\LanzarEvaluacion;
 use App\Departamento;
 use App\Evaluado;
 use App\Evaluador;
+use App\Exceptions\Handler;
 use App\Imports\PlantillasImport;
 use App\Imports\UsersImport;
 use App\Modelo;
@@ -271,19 +272,19 @@ class PlantillasController extends Controller
                     # code...
                     $staff= User::where('email',$persona->email)->first();
 
-                    //Subordinados quienes tiene el email_super con el email actual del registro
+                    //Subordinados quienes tiene su email_super identico con el email actual de la plantilla
                     if ($persona->email_super==$plantilla->email ){
-                        $subor[]=['name'=>$persona->name,'email'=>$persona->email,'user_id=>'=>$staff->id];
+                        $subor[]=['name'=>$persona->name,'email'=>$persona->email,'user_id'=>$staff->id];
                     }
                     //Pares quienes tienen el mismos email_supervisor al registro actual
                     if ($persona->email_super==$plantilla->email_super && $persona->email!=$plantilla->email_super && $persona->email!=$plantilla->email){
-                        $pares[]=['name'=>$persona->name,'email'=>$persona->email,'user_id=>'=>$staff->id];
+                        $pares[]=['name'=>$persona->name,'email'=>$persona->email,'user_id'=>$staff->id];
                     }
 
                     //Cuando el supervisor reporta al correo del manager
                     if ($persona->email==$supervisor->email){
                         $manager= User::where('email',$persona->email_super)->first();
-                        $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id=>'=>$manager->id];
+                        $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id'=>$manager->id];
                     }
 
                 }
@@ -331,14 +332,18 @@ class PlantillasController extends Controller
 
                 if($cm->metodo=='180' && count($evaluadores)>1 && count($pares)>1){
                     foreach ($pares as $key => $par) {
-                        $par_evaluador= new Evaluador();
-                        $par_evaluador->name=$par['name'];
-                        $par_evaluador->email=$par['email'];
-                        $par_evaluador->relation= 'Par';
-                        $par_evaluador->remember_token= Str::random(32);
-                        $par_evaluador->status=0;
-                        $par_evaluador->user_id=$par['user_id'];
-                        $evaluado->evaluadores()->save($par_evaluador);
+                         {
+                            $par_evaluador= new Evaluador();
+                            $par_evaluador->name=$par['name'];
+                            $par_evaluador->email=$par['email'];
+                            $par_evaluador->relation= 'Par';
+                            $par_evaluador->remember_token= Str::random(32);
+                            $par_evaluador->status=0;
+                            $par_evaluador->user_id=$par['user_id'];
+                            $evaluado->evaluadores()->save($par_evaluador);
+                            //code...
+
+                        }
                     }
                 }
 
