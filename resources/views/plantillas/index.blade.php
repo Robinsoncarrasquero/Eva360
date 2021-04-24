@@ -53,7 +53,7 @@
 
                     <td class="text text-center">
 
-                        <a href="{{url('organigrama')}}"><span><i class="material-icons">question_answer</i></span></a>
+                        <a href="{{route('plantillas.organigrama',$cargamasiva->id)}}"><span><i class="material-icons">question_answer</i></span></a>
 
                     </td>
 

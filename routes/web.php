@@ -42,7 +42,7 @@ Route::get('/verorganigrama', function () {
  */
 Route::middleware(['auth', 'role:admin'])->group( function() {
 
-
+    Route::get('/plantillas/{plantilla}/organigrama', 'PlantillasController@organigrama')->name('plantillas.organigrama');
 
     Route::get('/plantillas/userimport', 'PlantillasController@userimport');
 

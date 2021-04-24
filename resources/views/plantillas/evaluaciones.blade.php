@@ -128,7 +128,7 @@
 
             @else
                 <div class="d-flex alert alert-info">
-                    <p>No hay informacion de proyectos registrado</p>
+                    <p>No hay informacion de evaluaciones registradas o disponibles</p>
                 <div>
             @endif
 

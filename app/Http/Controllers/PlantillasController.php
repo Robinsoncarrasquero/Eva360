@@ -311,37 +311,48 @@ class PlantillasController extends Controller
                 //Metodo de 90 grados
                 if(count($evaluadores)>1){
 
-                    $manager_evaluador= new Evaluador();
-                    $manager_evaluador->name=$manager->name;
-                    $manager_evaluador->email=$manager->email;
-                    $manager_evaluador->relation= ($cm->metodo=='90' ? 'Manager' :'Supervisor');
-                    $manager_evaluador->remember_token= Str::random(32);
-                    $manager_evaluador->status=0;
-                    $manager_evaluador->user_id=$manager->id;
-                    $evaluado->evaluadores()->save($manager_evaluador);
+                    $emanager = new Evaluador();
+                    $emanager->name = $manager->name;
+                    $emanager->email = $manager->email;
+                    $emanager->relation = ($cm->metodo=='90' ? 'Manager' :'Supervisor');
+                    $emanager->remember_token = Str::random(32);
+                    $emanager->status = 0;
+                    $emanager->user_id = $manager->id;
+                    $evaluado->evaluadores()->save($emanager);
 
-                    $supervisor_evaluador= new Evaluador();
-                    $supervisor_evaluador->name=$supervisor->name;
-                    $supervisor_evaluador->email=$supervisor->email;
-                    $supervisor_evaluador->relation= ($cm->metodo=='90' ? 'Supervisor' :'Supervisor');
-                    $supervisor_evaluador->remember_token= Str::random(32);
-                    $supervisor_evaluador->status=0;
-                    $supervisor_evaluador->user_id=$supervisor->id;
-                    $evaluado->evaluadores()->save($supervisor_evaluador);
+                    $esuper= new Evaluador();
+                    $esuper->name = $supervisor->name;
+                    $esuper->email = $supervisor->email;
+                    $esuper->relation = ($cm->metodo=='90' ? 'Supervisor' :'Supervisor');
+                    $esuper->remember_token = Str::random(32);
+                    $esuper->status = 0;
+                    $esuper->user_id = $supervisor->id;
+                    $evaluado->evaluadores()->save($esuper);
+
+                    //Autooevaluacion
+                    if ($request->autoevaluacion){
+                        $autoeva= new Evaluador();
+                        $autoeva->name = $user->name;
+                        $autoeva->email = $user->email;
+                        $autoeva->relation = 'Autoevaluacion';
+                        $autoeva->remember_token = Str::random(32);
+                        $autoeva->status = 0;
+                        $autoeva->user_id = $user->id;
+                        $evaluado->evaluadores()->save($autoeva);
+                    }
                 }
 
                 if($cm->metodo=='180' && count($evaluadores)>1 && count($pares)>1){
                     foreach ($pares as $key => $par) {
                          {
-                            $par_evaluador= new Evaluador();
-                            $par_evaluador->name=$par['name'];
-                            $par_evaluador->email=$par['email'];
-                            $par_evaluador->relation= 'Par';
-                            $par_evaluador->remember_token= Str::random(32);
-                            $par_evaluador->status=0;
-                            $par_evaluador->user_id=$par['user_id'];
-                            $evaluado->evaluadores()->save($par_evaluador);
-                            //code...
+                            $par= new Evaluador();
+                            $par->name = $par['name'];
+                            $par->email = $par['email'];
+                            $par->relation = 'Par';
+                            $par->remember_token = Str::random(32);
+                            $par->status = 0;
+                            $par->user_id = $par['user_id'];
+                            $evaluado->evaluadores()->save($par);
 
                         }
                     }
@@ -349,15 +360,16 @@ class PlantillasController extends Controller
 
                 if($cm->metodo=='360' && count($evaluadores)>1 && count($pares)>1 && count($subor)>1){
                     foreach ($subor as $key => $sub) {
-                        $sub_evaluador= new Evaluador();
-                        $sub_evaluador->name=$sub['name'];
-                        $sub_evaluador->email=$sub['email'];
-                        $sub_evaluador->relation= 'Subordinados';
-                        $sub_evaluador->remember_token= Str::random(32);
-                        $sub_evaluador->status=0;
-                        $sub_evaluador->user_id=$sub['user_id'];
-                        $evaluado->evaluadores()->save($sub_evaluador);
+                        $sub= new Evaluador();
+                        $sub->name = $sub['name'];
+                        $sub->email = $sub['email'];
+                        $sub->relation = 'Subordinados';
+                        $sub->remember_token = Str::random(32);
+                        $sub->status = 0;
+                        $sub->user_id = $sub['user_id'];
+                        $evaluado->evaluadores()->save($sub);
                     }
+
                 }
                 $cm->procesado= true;
                 $cm->save();
@@ -449,7 +461,10 @@ class PlantillasController extends Controller
 
         return \view('plantillas.evaluaciones',\compact('proyectos'));
     }
-
+    public function organigrama($plantilla)
+    {
+        return \view('plantillas.organigrama');
+    }
 
 
 }

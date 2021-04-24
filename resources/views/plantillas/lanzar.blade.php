@@ -44,6 +44,12 @@
                     </select>
                 </div>
                 <br>
+
+                <div class="col-lg-12 form-check">
+                    <label class="form-check-label " for="autoevaluacion[]" style="color: rgb(255, 165, 0);font-size:1.5em"> Autoevaluacion</label>
+                    <input type="checkbox" class="check-select "  name="autoevaluacion[]" >
+                </div>
+
                 <div class="col-lg-12 form-check">
                     <label class="form-check-label " for="sendmail[]" style="color: orange;font-size:1.5em"> Enviar Emails</label>
                     <input type="checkbox" class="check-select "   name="sendmail[]">
