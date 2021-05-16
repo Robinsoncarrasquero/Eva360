@@ -82,11 +82,12 @@ class TalentController extends Controller
         });
 
         $cargos = Cargo::all();
-        $proyectos = Proyecto::where('carga_masivas_id','=',null)->get();
+        $proyectos = Proyecto::where('carga_masivas_id',null)->get();
+
         $subproyectos = SubProyecto::all();
         $relations = Relation::all();
 
-        return \view('talent.crearevaluado',compact('empleado','evaluadores','cargos','proyectos','subproyectos','relations'));
+        return \view('talent.crearevaluado',compact('empleado','evaluadores','cargos','proyectos','relations'));
     }
 
    /**Crea los datos del evaluado */

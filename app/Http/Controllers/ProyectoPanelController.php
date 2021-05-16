@@ -26,9 +26,11 @@ class ProyectoPanelController extends Controller
 
     public function index(Request $request)
     {
-        $title="Lista de Evaluados Por Proyecto";
+        $title="Lista de Evaluados por Proyecto";
         $buscarWordKey = $request->get('buscarWordKey');
-        $proyectos = Proyecto::name($buscarWordKey)->where('carga_masivas_id',null)->orderBy('id','DESC')->paginate(5);
+        //$proyectos = Proyecto::name($buscarWordKey)->where('carga_masivas_id',null)->orderBy('id','DESC')->paginate(5);
+        $proyectos = Proyecto::name($buscarWordKey)->where('tipo','=','Competencias')->orderBy('id','DESC')->paginate(5);
+
         return view('lanzamiento.proyecto.index',compact('proyectos','title'));
 
     }

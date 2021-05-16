@@ -23,7 +23,7 @@ class Evaluacion extends Model
         return $this->belongsTo(Evaluador::class);
     }
 
-    //Una Evaluacion esta relacionada con una competencias
+    //Una Evaluacion esta relacionada con una competencia
     public function competencia(){
         return $this->belongsTo(Competencia::class);
     }

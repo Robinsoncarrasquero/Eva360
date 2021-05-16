@@ -34,4 +34,15 @@ class Evaluador extends Model
         return $this->belongsTo(User::class);
     }
 
+
+
+    public function metas()
+    {
+        return $this->hasManyThrough('App\Meta', 'App\Objetivo','evaluador_id','id','id','meta_id');
+    }
+
+       //Un evaluador tiene uno o muchas evaluaciones por objetivos asociados
+       public function objetivos(){
+        return $this->hasMany(Objetivo::class);
+    }
 }

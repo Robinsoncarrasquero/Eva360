@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use app\CustomClass\DataEvaluacion;
+use app\CustomClass\DataObjetivo;
 use app\CustomClass\DataPersonal;
 use App\Evaluado;
 use App\FeedBack;
@@ -25,7 +26,7 @@ class FeedBackExport implements FromView
         $feedbacks=  $this->evaluado->feedback;
         $evaluado= $this->evaluado;
         $loteEvaluados[]=$evaluado->id;
-        $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
+        $objData = new DataPersonal($loteEvaluados,$evaluado->word_key=="Objetivos" ? new DataObjetivo(0) : new DataEvaluacion(0));
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
 

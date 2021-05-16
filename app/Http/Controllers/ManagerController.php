@@ -19,6 +19,7 @@ class ManagerController extends Controller
 
     }
 
+    /**Presenta la evaluaciones por proyectos del departamento del manager  */
     public function index()
     {
 
@@ -30,9 +31,11 @@ class ManagerController extends Controller
 
         $departamento_id=$manager->departamento_id;
 
-        $subproyectos = SubProyecto::with(['evaluados.evaluado' => function($query) use ($departamento_id) {
-        $query->where('departamento_id', $departamento_id);
-        }])->get();
+        $subproyectos = SubProyecto::has('evaluados.user')->with(['evaluados.user' => function($query) use ($departamento_id) {
+            $query->where('users.departamento_id', $departamento_id)->latest('created_at');
+
+            }])->simplePaginate(25);
+
 
         return \view('manager.index',compact('subproyectos'));
     }
@@ -51,12 +54,13 @@ class ManagerController extends Controller
 
     $departamento_id=Auth::user()->departamento_id;
 
-    $subproyecto = SubProyecto::with(['evaluados.evaluado' => function($query) use ($departamento_id) {
-        $query->where('departamento_id', $departamento_id);
-    }])->findOrFail($subproyecto);
+    // $subproyecto = SubProyecto::with(['evaluados.user' => function($query) use ($departamento_id) {
+    //     $query->where('users.departamento_id', $departamento_id)->latest();
+    // }])->findOrFail($subproyecto);
 
-    $subproyecto_id=$subproyecto->id;
-    $col_evaluados = Evaluado::whereSubproyecto_id($subproyecto_id)->get();
+    $subproyecto = SubProyecto::findOrFail($subproyecto);
+
+    $col_evaluados = Evaluado::whereSubproyecto_id($subproyecto->id)->get();
 
     $evaluados= $col_evaluados->filter(function($item) use($departamento_id)
     {
@@ -66,9 +70,63 @@ class ManagerController extends Controller
         }
     });
 
+
     return \view('manager.staff',\compact('subproyecto','departamento_id','evaluados'));
 
    }
+
+
+    /**Lista los empleados */
+    public function personal(Request $request)
+    {
+        if (!Auth::user()->is_manager && !Auth::admin()){
+            return redirect('login');
+        }
+        $title="Lista de empleados por Departamentos";
+        // $buscarWordKey = $request->get('buscarWordKey');
+        // $departamentos = Departamento::name($buscarWordKey)->orderBy('id','DESC')->paginate(5);
+        $departamento_id=Auth::user()->departamento_id;
+        $departamentos=Departamento::where('id',$departamento_id)->orderBy('id','DESC')->paginate(25);
+        return \view('manager.personal',compact('departamentos','title'));
+    }
+
+    /**Lista el historico de evaluaciones del empleado */
+    public function historicoevaluaciones($empleado_id)
+    {
+
+        $title="Historico de evaluaciones";
+        $empleado = User::find($empleado_id);
+        $evaluaciones = $empleado->evaluaciones;
+        return \view('manager.historicoevaluaciones',compact('evaluaciones','title','empleado'));
+
+        //return \redirect()->back()->withErrors('Falta programar este control');
+    }
+
+    public function objetivosporproyecto(Request $request)
+    {
+
+        $buscarWordKey = $request->get('buscarWordKey');
+        $proyectos = Proyecto::name($buscarWordKey)->where('tipo','Objetivos')->orderBy('id','DESC')->paginate(5);
+
+        $departamento_id=Auth::user()->departamento_id;
+        // $subproyectos = SubProyecto::has('evaluados')->with(['evaluados.evaluado' => function($query) use ($departamento_id) {
+        // $query->where('departamento_id', $departamento_id)->latest('created_at');
+        // }])->simplePaginate(25);
+        $subproyectos = SubProyecto::has('evaluados')->with(['evaluados.user' => function($query) use ($departamento_id) {
+            $query->where('departamento_id', $departamento_id)->latest('created_at');
+            }])->simplePaginate(25);
+
+        $proyectos = Proyecto::has('subproyectos')->with(['subproyectos.evaluados.user' => function($query) use ($departamento_id) {
+            $query->where('users.departamento_id', $departamento_id)->latest('created_at');
+            }])->simplePaginate(25);
+
+        // dd($proyectos);
+        // $subproyectos = SubProyecto::has('evaluados')->with(['evaluados'=>function($query){
+        //     $query->latest();
+        //    }])->whereDepartamento_id($manager->departamento_id)->simplePaginate(25);
+        return view('lanzarobjetivo.index',compact('proyectos'));
+
+    }
 
 
 

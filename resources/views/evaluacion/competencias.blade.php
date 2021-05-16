@@ -29,7 +29,6 @@
                 <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
                 @csrf
 
-
                     @foreach($competencias as $competencia)
                     <div class="xcard mt-4">
 
@@ -55,10 +54,15 @@
 
 
                 <div class="clearfix mt-3">
-                    <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
-                    @if($evaluador->status!=2)
-                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
+                    @if (Auth::user()->admin())
+                        {{-- <span class="float-left"><a href="{{route('talent.historicoevaluaciones',$evaluador->evaluado->user_id)}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
+                    @else
+                        <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
+                        @if($evaluador->status!=2)
+                            <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
+                        @endif
                     @endif
+
                 </div>
 
                 </form>

@@ -24,7 +24,7 @@ class Departamento extends Model
     }
 
      //Un usuario es manager
-     public function user(){
+     public function manager(){
         return $this->hasOne(User::class,'manager_id');
     }
 

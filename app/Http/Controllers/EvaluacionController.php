@@ -9,6 +9,8 @@ use App\Evaluador;
 use App\Evaluacion;
 use Illuminate\Http\Request;
 use app\Helpers\Helper;
+use App\Role;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination;
 use Illuminate\Support\Arr;
@@ -32,8 +34,11 @@ class EvaluacionController extends Controller
     {
         $title="Lista de Evaluados";
         $user = Auth::user();
-        //$evaluadores =  $user->evaluaciones;
-        $evaluadores = Evaluador::where('user_id',$user->id)->orderBy('created_at','DESC')->simplePaginate(10);
+
+        $evaluadores = Evaluador::has('evaluaciones')->with(['evaluaciones'=>function($query){
+            $query->latest();
+           }])->whereUser_id($user->id)->simplePaginate(25);
+
         return view('evaluacion.index',compact('evaluadores','title'));
 
     }
@@ -70,7 +75,12 @@ class EvaluacionController extends Controller
     {
         $evaluador = Evaluador::find($evaluador_id);
         $evaluado = $evaluador->evaluado;
-        if($evaluador->user_id!=Auth::user()->id){
+        $user =Auth::user();
+        $userroles=$user->roles->first();
+        //$roles = User::find($user)->roles()->orderBy('name')->get();
+
+        $admin= Role::where('name','admin')->first();
+        if ($evaluador->user_id != $user->id && !Auth::user()->is_manager && $userroles->name!==$admin->name){
             \abort(404);
         }
 

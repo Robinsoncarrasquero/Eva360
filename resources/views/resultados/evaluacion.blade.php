@@ -25,10 +25,14 @@
             <table id="table{{ $evaluador->id }}" class="table table-striped table-table">
                 <thead>
                 <tr id="{{ $evaluador->id }}">
-                    <th class="chk-enviar-prueba" colspan="5">
+                    <th class="chk-enviar-prueba" colspan="4">
                         <input type="checkbox" class="btncheck">Reenviar email
                     </th>
+                    <th>
+                        <span><a class="btn btn-success btn-sm" href="{{ route('evaluacion.competencias',$evaluador) }}">Ver</a></span>
+                    </th>
                 </tr>
+
                 {{-- <tr id="send{{ $evaluador->id }}">
                     <th colspan="5">
                         <button class="btn btn-warning" onclick="sendEmail({{$evaluador->id}})">Reenviar Email</button>

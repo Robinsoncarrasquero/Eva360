@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use app\CustomClass\DataEvaluacion;
+use app\CustomClass\DataObjetivo;
 use app\CustomClass\DataPersonal;
 use app\CustomClass\DataResultado;
 use App\Departamento;
@@ -23,50 +24,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class FeedBackController extends Controller
 {
 
-    /*
-    * Edit Feedback de una evaluacion
-    */
-    public function edit($evaluado_id)
-    {
-        //Buscamos el evaluado
-        $evaluado = Evaluado::find($evaluado_id);
 
-        //instanciamos un objeto de data personal
-        $loteEvaluados[]=$evaluado_id;
-        $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
-        $objData->procesarData();
-        $dataSerie = $objData->getDataSerie();
-        $dataCategoria = $objData->getDataCategoria();
-        $dataBrecha = $objData->getDataBrecha();
-
-
-        //Generamos las competencias del Feedback
-        foreach ($dataSerie as $key=>$dataValue){
-
-            $competencia=$dataValue['name'];
-             //Modelo > resultado genera feedback
-             if ($dataValue['data'][0]>($dataValue['data'][1])){
-
-                    $feedbacks = FeedBack::firstOrCreate(
-                        ['competencia'=> $competencia,
-                        'evaluado_id' => $evaluado_id],[
-                        'fb_status' => 'No_Cumplida',
-                    ]);
-             }
-
-        }
-
-        $fb_status=['Cumplida','No_Cumplida'];
-        $feedbacks= $evaluado->feedback()->get();
-
-        if (!$dataSerie){
-            \abort(404);
-        }
-
-
-        return \view('feedback.edit',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks'));
-
-    }
 
 
     /**
@@ -121,6 +79,54 @@ class FeedBackController extends Controller
     {
         return Excel::download(new FeedBackExport($evaluado), 'FeedBackExport.xlsx');
     }
+
+     /*
+    * Edit Feedback de una evaluacion
+    */
+    public function edit($evaluado_id)
+    {
+        //Buscamos el evaluado
+        $evaluado = Evaluado::find($evaluado_id);
+
+        //instanciamos un objeto de data personal
+        $loteEvaluados[]=$evaluado_id;
+        $objData = new DataPersonal($loteEvaluados,$evaluado->word_key=="Objetivos" ? new DataObjetivo(0) : new DataEvaluacion(0));
+        $objData->procesarData();
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
+        $dataBrecha = $objData->getDataBrecha();
+
+
+        //Generamos las competencias del Feedback
+        foreach ($dataSerie as $key=>$dataValue){
+
+            $competencia=$dataValue['name'];
+             //Modelo > resultado genera feedback
+             //if ($dataValue['data'][0]>($dataValue['data'][1]))
+
+             {
+
+                    $feedbacks = FeedBack::firstOrCreate(
+                        ['competencia'=> $competencia,
+                        'evaluado_id' => $evaluado_id],[
+                        'fb_status' => ($dataValue['data'][0]>($dataValue['data'][1]) ? 'No_Cumplida' : 'Cumplida')
+                    ]);
+             }
+
+        }
+
+        $fb_status=['Cumplida','No_Cumplida'];
+        $feedbacks= $evaluado->feedback()->get();
+
+        if (!$dataSerie){
+            \abort(404);
+        }
+
+
+        return \view('feedback.fbedit',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks'));
+
+    }
+
 
 
 }

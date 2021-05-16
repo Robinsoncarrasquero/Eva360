@@ -16,6 +16,7 @@ class ProyectoController extends Controller
     public function index()
     {
         $records=Proyecto::all();
+        $proyectos = Proyecto::where('tipo','<>',null)->orderBy('id','ASC')->paginate(25);
         return \view('proyecto.index',compact('records'));
     }
 
@@ -26,7 +27,8 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        return view('proyecto.create');
+        $tipos=['Competencias','Objetivos'];
+        return view('proyecto.create',compact('tipos'));
     }
 
     /**
@@ -50,6 +52,7 @@ class ProyectoController extends Controller
             $record = new Proyecto();
             $record->name=$request->name;
             $record->description=$request->description;
+            $record->tipo= $request->tipo;
             $record->save();
         } catch (QueryException $e) {
             return redirect()->back()
@@ -79,7 +82,8 @@ class ProyectoController extends Controller
     public function edit($id)
     {
         $record = Proyecto::findOrFail($id);
-        return \view('proyecto.edit',\compact('record'));
+        $tipos=['Competencias','Objetivos'];
+        return \view('proyecto.edit',\compact('record','tipos'));
     }
 
     /**
@@ -107,6 +111,7 @@ class ProyectoController extends Controller
             $record = Proyecto::findOrFail($id);
             $record->name=$request->name;
             $record->description= $request->description;
+            $record->tipo= $request->tipo;
             $record->save();
 
         } catch (QueryException $e) {

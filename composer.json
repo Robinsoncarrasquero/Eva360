@@ -63,7 +63,10 @@
             "app/CustomClass/DataResultadoTipo.php",
             "app/CustomClass/DataResultadoNivel.php",
             "app/CustomClass/EnviarEmail.php",
-            "app/CustomClass/EnviarSMS.php"
+            "app/CustomClass/EnviarSMS.php",
+            "app/CustomClass/LanzarObjetivo.php",
+            "app/CustomClass/DataObjetivo.php",
+            "app/CustomClass/DataObjetivoGlobal.php"
 	]
     },
     "minimum-stability": "dev",

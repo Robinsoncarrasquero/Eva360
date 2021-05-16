@@ -44,9 +44,10 @@
                             <thead>
                                 <tr>
                                 <th style="width:30%" class="alert-success text-center">Nombre</th>
-                                <th style="width:20%" class="alert-warning text-center">Historico</th>
-                                <th style="width:30%" class="alert-dark text-center">Email</th>
-                                <th style="width:20%" class="alert-dark text-center">+</th>
+                                <th style="width:20%" class="alert-warning text-center">Historico <br>Evaluaciones</th>
+                                <th style="width:20%" class="alert-warning text-center">Evaluacion <br>Competencias</th>
+                                <th style="width:10%" class="alert-dark text-center">Email</th>
+                                <th style="width:20%" class="alert-danger text-center">Evaluacion <br>Objetivos</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,11 +69,19 @@
                                         <a><i class="material-icons text-dark">question_answer</i></a></td>
                                     @endif
                                 </td>
-                                <td>{{ ($empleado->email) }}</td>
+
                                 <td>
                                     <span class="d-flex justify-content-center">
                                         <a href="{{ route('talent.createevaluado',$empleado->id)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
 
+                                    </span>
+                                </td>
+
+                                <td>{{ ($empleado->email) }}</td>
+
+                                <td>
+                                    <span class="d-flex justify-content-center">
+                                        <a href="{{ route('lanzarobjetivo.seleccionar',$empleado->id)}}" class="btn btn-dark"><i class="material-icons">person_add</library-add></i> </a>
                                     </span>
                                 </td>
                                 {{-- <td>

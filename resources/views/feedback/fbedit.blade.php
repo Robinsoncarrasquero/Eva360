@@ -76,9 +76,14 @@
                     {{ number_format($value['brecha'],2) }}
                 @endif
                 </td>
-                <td style="font-size:1.5em; color:white;background:green">
+                {{-- <td style="font-size:1.5em; color:white;background:green">
                     @if ($value['potencial']>100)
                     {{ number_format($value['potencial'],2) }}
+                    @endif
+                </td> --}}
+                <td>
+                    @if ($value['potencial']>100)
+                    <p style="font-size:1.5em; color:white;background:green">{{ number_format($value['potencial'],2) }}</p>
                     @endif
                 </td>
                 <td>
@@ -100,16 +105,20 @@
         {{-- @method('PATCH') --}}
 
 
-        @foreach ( $feedbacks as $feedback )
         <div class="clearfix">
 
 
-        <form  class="card-header" action="{{route('feedback.update',$evaluado->id)  }}" method="post" name="frm{{ $feedback->id }}">
+        <form  class="card-header" action="{{route('feedback.update',$evaluado->id)  }}" method="post" name="frmfb">
         @csrf
 
+        @foreach ( $feedbacks as $feedback )
 
         <fieldset >
-            <legend class="text text-center" style="color:#f3a10a; font-size:2em;">{{ $feedback->competencia }}</legend>
+            @if ($feedback->fb_status=='Cumplida')
+                <legend class="text text-center" style="background-color:green ;color:white; font-size:2em;">{{ $feedback->competencia }}</legend>
+            @else
+                <legend class="text text-center" style="background-color:red ;color:white; font-size:2em;">{{ $feedback->competencia }}</legend>
+            @endif
 
             <div class="justify-content-start">
 
@@ -169,29 +178,28 @@
 
             <hr class="text text-dark">
 
-            </fieldset>
 
-
-            <div class="clearfix col-lg-12 ">
-                <div class="col-lg-12">
-                    @if (Auth::user()->is_manager))
-                    <a href="{{ route('manager.staff',$evaluado->subproyecto_id)}}" class="btn btn-dark float-left">Back</a>
-                    @else
-                    <a href="{{ route('talent.historicoevaluaciones',$evaluado->user_id)}}" class="btn btn-dark float-left">Back</a>
-                    @endif
-                    <button type="submit" class="btn btn-dark float-right">Save</button>
-                </div>
-            </div>
 
             {{-- <td>
                 <button class="btn btn-danger" onclick="deleteConfirmation({{$feedback->id}},'{{route('feedback.delete',$feedback->id)}}')">Delete</button>
             </td> --}}
 
     </fieldset>
+    @endforeach
+    <div class="row">
+        <div class="col-lg-12">
+            @if (Auth::user()->is_manager))
+            <a href="{{ route('manager.staff',$evaluado->subproyecto_id)}}" class="btn btn-dark float-left">Back </a>
+            @else
+            <a href="{{ route('talent.historicoevaluaciones',$evaluado->user_id)}}" class="btn btn-dark float-left">Back</a>
+            @endif
+            <button type="submit" class="btn btn-dark float-right">Save</button>
+        </div>
+    </div>
     </form>
     </div>
     <br><br>
-    @endforeach
+
 
 </div>
 

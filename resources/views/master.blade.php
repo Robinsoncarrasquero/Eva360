@@ -76,7 +76,16 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
+                </li>
 
+                @if (Auth::check() && !Auth::user()->admin())
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('objetivo.index') }}">Mis Metas</span></a>
+                </li>
+
+                @endif
                 @if (Auth::check() && Auth::user()->admin())
                 <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -95,8 +104,9 @@
 
                         <a class="dropdown-item"  href="{{ route('plantillas.index') }}">Masivas</a>
                         <div class="dropdown-divider"></div>
-
-                        <a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Proyectos</a>
+                        <a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Competencias</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"  href="{{ route('lanzarobjetivo.index') }}">Objetivos</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a>
                     </div>
@@ -131,11 +141,22 @@
                         Modelos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu4">
-                        <a class="dropdown-item"  href="{{ route('tipo.index') }}">Tipo</a>
+                        <a class="dropdown-item"  href="{{ route('tipo.index') }}">Tipos</a>
                         <a class="dropdown-item"  href="{{ route('competencia.index') }}">Competencias</a>
                         <a class="dropdown-item"  href="{{ route('modelo.index') }}">Modelo</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('frecuencia.index') }}">Frecuencia</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Metas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu4">
+                        <a class="dropdown-item"  href="{{ route('meta.index') }}">Metas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"  href="{{ route('medida.index') }}">Medicion</a>
                     </div>
                 </li>
 
@@ -145,15 +166,16 @@
                 @endif
 
                 @if (Auth::check() && Auth::user()->is_manager)
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
-                </li>
-                @endif
 
-                @if (Auth::check() && Auth::user()->is_manager)
+
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('manager.index') }}">FeedBack<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('manager.index') }}">Proyectos<span class="sr-only">(current)</span></a>
                 </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link"  href="{{ route('manager.personal') }}">Team</span></a>
+                 </li>
+
                 @endif
             </ul>
 
@@ -214,7 +236,7 @@
 
     <footer id="footer" class="footer">
         <div class="xcontainer">
-           <span class="text-white d-flex justify-content-center">Sistema de Gestion por Competencias Talent360</span>
+           <span class="text-white d-flex justify-content-center">Sistema de Evaluacion de Desempeño Talent360</span>
         </div>
     </footer>
 

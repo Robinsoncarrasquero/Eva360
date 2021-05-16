@@ -37,11 +37,10 @@ class LanzarEvaluacion
             //Creamos la Evaluacion con los datos solo de las competencias
             foreach($this->competencias as $key=>$this->competencia){
                 $evaluacion = new Evaluacion();
-                //$evaluacion->resultado=Helper::estatus('Inicio');
                 $evaluacion->competencia_id=$this->competencia->id;
                 try {
                     //Salvamos a la evaluacion
-                    $eva360=$evaluador->evaluaciones()->save($evaluacion);
+                    $evaluador->evaluaciones()->save($evaluacion);
 
                     //Cambiamos status de Evaluado
                     $evaluadorx = Evaluador::find($evaluador->id);

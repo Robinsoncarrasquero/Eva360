@@ -43,7 +43,7 @@
                     <th>Nombre</th>
                     <th>Subproyecto</th>
                     <th>Status</th>
-                    <th>Progreso</th>
+                    {{-- <th>Progreso</th> --}}
                     <th>Inicio</th>
                     <th>Update</th>
                     {{-- <th>Modelo</th> --}}
@@ -56,7 +56,7 @@
                     @foreach($evaluados as $evaluado)
                     <tr>
                         {{-- <td>{{$evaluado->name}} <br>{{$evaluado->cargo->name}}</td> --}}
-                        <td>{{ $evaluado->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p></td>
+                        <td>{{ $evaluado->user->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p></td>
                         <td>{{$evaluado->subProyecto->name}}</td>
                         <td class="status-progress" >
                             @if(Helper::estatus($evaluado->status)=='Finalizada')
@@ -81,7 +81,7 @@
                                 <i class="spinner-grow spinner-grow-sm text-warning" role="status"></i>
                             @endif
                         </td>
-                        <td>
+                        {{-- <td>
                             <div class="status-progress">
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
                                     <span id="inicio" class="radio-checkeado" ></span>
@@ -102,25 +102,18 @@
                                 @endif
                             </div>
                             <span>{{ Helper::estatus($evaluado->status) }}</span>
-                        </td>
+                        </td> --}}
                         <td>{{ $evaluado->created_at }}</td>
                         <td>{{ $evaluado->updated_at }}</td>
-                        {{-- <td>
-                            @if(Helper::estatus($evaluado->status)=='Inicio')
-                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><span><i class="material-icons">flight_takeoff</i></span></a>
-                            @else
-                                <a ><span><i class="material-icons text-dark">flight_takeoff</i></span></a>
-                            @endif
 
-                        </td>   --}}
-                        {{-- <td>
-                            @if(Helper::estatus($evaluado->status)!='Finalizada')
-                                <a href="{{route('lanzar.seleccionar',$evaluado->id)}}"><span><i class="material-icons">filter_list</i></span></a>
+                        <td >
+                            @if($evaluado->word_key=='Objetivos')
+                                <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
                             @else
-                                <a href="{{route('lanzar.seleccionar',$evaluado->id)}}"><span><i class="material-icons">filter_list muted</i></span></a>
+                                <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-info">question_answer</i></span></a>
                             @endif
-                        </td> --}}
-                        <td>
+                        </td>
+                        {{-- <td>
                             @if(Helper::estatus($evaluado->status)=='Finalizada')
                                 <a href="{{route('resultados.evaluacion', $evaluado->id)}}" >
                                 <span><i class="material-icons ">question_answer</i></span>
@@ -129,23 +122,19 @@
                                 <span><i class="material-icons text-dark ">question_answer</i></span>
                             @endif
 
-                        </td>
+                        </td> --}}
                         <td>
-                            @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                <a href="{{route('resultados.finales', $evaluado->id)}}" >
-                                <span><i class="material-icons ">score</i></span>
+                            @if($evaluado->word_key=='Objetivos')
+                                <a href="{{route('objetivo.resultado', $evaluado->id)}}" ><span><i class="material-icons ">score</i></span></a>
                             @else
-                                <a href="{{route('resultados.finales', $evaluado->id)}}" >
-                                <span><i class="material-icons text-dark ">score</i></span>
+                                <a href="{{route('resultados.finales', $evaluado->id)}}" ><span><i class="material-icons text-info">score</i></span></a>
                             @endif
-
                         </td>
-
                         <td >
-                            @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                <a href="{{route('resultados.charindividual', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
+                            @if($evaluado->word_key=='Objetivos')
+                                <a href="{{route('objetivo.charindividual', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
                             @else
-                                <a href="{{route('resultados.charindividual', $evaluado->id)}}" ><span><i class="material-icons text-dark">stacked_line_chart</i></span></a>
+                                <a href="{{route('resultados.charindividual', $evaluado->id)}}" ><span><i class="material-icons text-info">stacked_line_chart</i></span></a>
                             @endif
                         </td>
                     </tr>

@@ -46,13 +46,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
+    public function roles()
+    {
 
-    public function roles() {
-        return $this
-            ->belongsToMany('App\Role')
-            ->withTimestamps();
+        return $this->belongsToMany(Role::class)->withTimestamps();
+
     }
-
 
     public function authorizeRoles($roles) {
         if ($this->hasAnyRole($roles)) {
@@ -102,26 +101,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
-    //Rleacion usuario es manager
+    // public function roles_user()
+    // {
+    //     return $this->hasManyThrough('App\Role', 'App\Role_User','user_id','id','id','role_id');
+
+    // }
+
+    //Relacion usuario es manager
     public function is_manager(){
         return $this->hasOne(Departamento::class,'manager_id');
-    }
-
-    /**Indica si el usuario es manager*/
-    public function isss_manager(){
-
-        // if ($this->manager->manager_id){
-        //     //dd($this->manager->manager_id);
-        //     return true;
-        // }
-        // return false;
-
-        if ($this->departamento()->where('manager_id',$this->id)->first()) {
-
-            return true;
-        }
-        return false;
-
     }
 
     //Un usuario / empleado pertenece a un departamento)

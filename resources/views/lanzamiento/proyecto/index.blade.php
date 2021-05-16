@@ -19,7 +19,7 @@
                     </form>
                 </div>
                 <div class="text text-center">
-                    <h5 style="color:royalblue; font-size:1.5rem">EVALUACIONES POR PROYECTOS</h5>
+                    <h5 style="color:royalblue; font-size:1.5rem">EVALUACIONES POR COMPETENCIAS</h5>
                 </div>
 
             </div>
@@ -62,7 +62,7 @@
                             <tbody>
                             @foreach ($subproyecto->evaluados as $evaluado)
                             <tr id="{{ $evaluado->id }}">
-                            <td>{{ $evaluado->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p></td>
+                            <td>{{ $evaluado->user->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p></td>
                             <td class="status-progress" >
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
                                     {{-- <span id="inicio" class="radio-checkeado" ></span>

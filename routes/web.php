@@ -37,6 +37,141 @@ Route::get('/verorganigrama', function () {
 });
 
 /**
+ * Route de evaluaciones de objetivos competencias duras
+*/
+
+/**
+ * Evaluador con logueo con token a la prueba
+*/
+Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('objetivo/{token}/evaluacion',"ObjetivosController@token")
+    ->name('objetivo.token');
+
+    /**
+     * Presenta las competencias por objetivos al evaluador
+    */
+    Route::get('competenciasporobjetivos/{evaluador}/objetivos',"ObjetivosController@metas")
+    ->name('objetivo.metas');
+
+    /**
+     * Pregunta de la prueba
+    */
+    Route::get('objetivoget/{competencia}/responder',"ObjetivosController@responder")
+    ->name('objetivo.responder');
+
+    /**
+     * Evaluador Responde la pregunta
+    */
+    Route::post('objetivopost/{competencia}/respuesta',"ObjetivosController@store")
+    ->name('objetivo.store');
+
+    /**
+     * Evaluador finaliza la prueba
+    */
+    Route::post('objetivo/{evaluador}/finalizar',"ObjetivosController@finalizar")
+    ->name('objetivo.finalizar');
+
+
+    /**
+     * Lista de evaluaciones del Evaluador
+    */
+    Route::get('objetivo',"ObjetivosController@index")
+    ->name('objetivo.index');
+
+
+    /**
+     * Presenta el evaluador con las competencias a evaluar
+    */
+    Route::get('objetivoevaluadores/{evaluado}/evaluadores',"ObjetivosController@evaluacion")
+    ->name('objetivo.evaluacion');
+
+ /**
+  * Presenta los resultados de la evaluacion por objetivos
+   */
+    Route::get('objetivoresultado/{evaluado}/resultadon',"ObjetivosController@resultado")
+    ->name('objetivo.resultado');
+
+    /**
+ * Presenta una grafica de linea con los resultados de la evaluacion por objetivos
+ */
+Route::get('objetivografica/{evaluado_id}/charindividual',"ObjetivosController@charindividual")
+->name('objetivo.charindividual')
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
+
+/**
+ * Presenta una grafica de resultados personales por subproyecto
+ */
+Route::get('objetivosporsubproyecto/{subproyecto_id}/charpersonalporgrupo',"ObjetivosController@charpersonalporgrupo")
+->name('objetivo.charpersonalporgrupo')
+->middleware(['auth']);
+
+
+/**
+ * Presenta una tabla de analisis personales tabulados por subproyecto
+ */
+Route::get('objetivoscumplimiento/{subproyecto_id}/cumplimiento',"ObjetivosController@analisiscumplimiento")
+->name('objetivo.analisiscumplimiento')
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
+
+/**
+ * Presenta la grafica de competencias por tipo
+ */
+Route::get('objetivosresultadosportipo/{proyecto_id}/resultadosgeneralestipo',"ObjetivosController@resultadosGeneralesTipo")
+->name('objetivo.resultadosgeneralestipo')
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
+/**
+ * Presenta la grafica de competencias por niveles de cargos
+ */
+Route::get('objetivosresultadospornivel/{proyecto_id}/resultadosgeneralesnivel',"ObjetivosController@resultadosGeneralesNivel")
+->name('objetivo.resultadosgeneralesnivel')
+->middleware(['auth']);
+// ->middleware(['auth','role:admin']);
+
+});
+
+
+//Routes para lanzamiento de evaluaciones por objetivos del manager
+Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('/lanzarobjetivo/index', 'LanzarObjetivoController@index')->name('lanzarobjetivo.index');
+
+    Route::get('/lanzarobjetivo/{user}/seleccionarmetas',"LanzarObjetivoController@seleccionar")
+    ->name('lanzarobjetivo.seleccionar')
+    ->where('evaluado','[0-9]+');
+    //->middleware(['role:admin']);
+
+    Route::post('/lanzarobjetivo/{user}/procesar', 'LanzarObjetivoController@procesar')->name('lanzarobjetivo.procesar');
+
+
+
+});
+
+
+//Routes para control de metas
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('meta', 'MetasController')
+    ->middleware('role:admin');
+
+    Route::post('meta/{id}/delete', 'MetasController@destroy')->name('metas.delete')
+    ->middleware('role:admin');
+
+});
+
+
+//Routes para control de mediciones
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('medida', 'MedidaController')
+    ->middleware('role:admin');
+
+    Route::post('medida/{id}/delete', 'MedidaController@destroy')->name('medida.delete')
+    ->middleware('role:admin');
+
+});
+/**
  * Route de plantillas de personal con la carga masiva
  *
  */
@@ -68,6 +203,13 @@ Route::middleware(['auth', 'role:admin'])->group( function() {
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/manager/index', 'ManagerController@index')->name('manager.index');
     Route::get('/manager/staff/{id}', 'ManagerController@staff')->name('manager.staff');
+    Route::get('/manager/personal', 'ManagerController@personal')->name('manager.personal');
+    Route::get('manager/historico/evaluaciones/{id}', 'ManagerController@historicoevaluaciones')
+    ->name('manager.historicoevaluaciones'); // Manager
+    Route::get('managerobjetivosporproyecto', 'ManagerController@objetivosporproyecto')
+    ->name('manager.objetivosporproyecto'); // Manager
+
+
 
     Route::get('/plantillas/downloads', function () {
         return Storage::download("plantilla.xlsx");
@@ -248,7 +390,7 @@ Route::get('evaluado/subproyecto/{subproyecto}/create', 'EvaluadoController@crea
 /**Panel de Talent
  *
 */
-
+Route::middleware(['auth'])->group( function() {
 Route::get('talent360', 'TalentController@indexevaluado')->name('talent.index')
 ->middleware('role:admin');
 
@@ -256,15 +398,14 @@ Route::get('talent360/manager', 'TalentController@indexmanager')->name('talent.m
 ->middleware('manager:manager','role:user');
 
 Route::get('talent360/historico/evaluaciones/{id}', 'TalentController@historicoevaluaciones')
-->name('talent.historicoevaluaciones')
-->middleware('role:admin');
+->name('talent.historicoevaluaciones'); //Administrador y Manager
 
 Route::get('talent360/{id}/create/evaluado', 'TalentController@createevaluado')->name('talent.createevaluado')
 ->middleware('role:admin');
 
 Route::post('talent360/store/evaluado/{id}', 'TalentController@storeevaluado')->name('talent.storeevaluado')
 ->middleware('role:admin');
-
+});
 
 /**
  * Modelo de Prueba
@@ -397,50 +538,52 @@ Route::post('lanzar/{evaluado}/procesarmodelo', "LanzarModeloController@procesar
 ->middleware(['role:admin']);
 
 /**
- * Route de evaluaciones
+ * Route de evaluaciones de competencias blandas
 */
 
 /**
  * Evaluador con logueo con token a la prueba
 */
-Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@token")
-->name('evaluacion.token');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@token")
+    ->name('evaluacion.token');
 
-/**
- * Presenta las competencias al evaluador
-*/
-Route::get('competencias/{evaluador}/evaluacion',"EvaluacionController@competencias")
-->name('evaluacion.competencias');
+    /**
+     * Presenta las competencias al evaluador
+    */
+    Route::get('competencias/{evaluador}/evaluacion',"EvaluacionController@competencias")
+    ->name('evaluacion.competencias');
 
-/**
- * Pregunta de la prueba
-*/
-Route::get('evaluacionget/{competencia}/preguntas',"EvaluacionController@responder")
-->name('evaluacion.responder')
-->where('evaluador','[0-9]+')
-->middleware(['auth']);
+    /**
+     * Pregunta de la prueba
+    */
+    Route::get('evaluacionget/{competencia}/responder',"EvaluacionController@responder")
+    ->name('evaluacion.responder')
+    ->where('evaluador','[0-9]+')
+    ->middleware(['auth']);
 
-/**
- * Evaluador Responde la pregunta
-*/
-Route::post('evaluacionpost/{competencia}/respuesta',"EvaluacionController@store")
-->name('evaluacion.store')
-->where('evaluador','[0-9]+')
-->middleware(['auth']);
+    /**
+     * Evaluador Responde la pregunta
+    */
+    Route::post('evaluacionpost/{competencia}/respuesta',"EvaluacionController@store")
+    ->name('evaluacion.store')
+    ->where('evaluador','[0-9]+')
+    ->middleware(['auth']);
 
-/**
- * Evaluador finaliza la prueba
-*/
-Route::post('evaluacion/{evaluador}/finalizar',"EvaluacionController@finalizar")
-->name('evaluacion.finalizar')
-->middleware(['auth']);
+    /**
+     * Evaluador finaliza la prueba
+    */
+    Route::post('evaluacion/{evaluador}/finalizar',"EvaluacionController@finalizar")
+    ->name('evaluacion.finalizar')
+    ->middleware(['auth']);
 
-/**
- * Lista de evaluados del Evaluador
-*/
-Route::get('evaluacion',"EvaluacionController@index")
-->name('evaluacion.index')
-->middleware(['auth']);
+    /**
+     * Lista de evaluados del Evaluador
+    */
+    Route::get('evaluacion',"EvaluacionController@index")
+    ->name('evaluacion.index')
+    ->middleware(['auth']);
+});
 
 
 /**

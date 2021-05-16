@@ -76,9 +76,9 @@
                     {{ number_format($value['brecha'],2) }}
                 @endif
                 </td>
-                <td style="font-size:1.5em; color:white;background:green">
+                <td>
                     @if ($value['potencial']>100)
-                    {{ number_format($value['potencial'],2) }}
+                    <p style="font-size:1.5em; color:white;background:green">{{ number_format($value['potencial'],2) }}</p>
                     @endif
                 </td>
                 <td>

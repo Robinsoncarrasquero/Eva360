@@ -96,6 +96,9 @@
     {
         Highcharts.chart('container'+index, {
         //Highcharts.chart('container', {
+            chart: {
+            type: 'column'
+        },
             title: {
                 text: "Resultado de la evaluacion"
             },

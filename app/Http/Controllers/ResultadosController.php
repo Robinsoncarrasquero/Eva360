@@ -82,6 +82,7 @@ class ResultadosController extends Controller
         //instanciamos un objeto de data personal
         $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
         $objData->procesarData();
+
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();

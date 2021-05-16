@@ -73,7 +73,11 @@ class EnviarEmail
             $data->relation =$evaluador->relation;
             $data->email =$evaluador->email;
             //$data->linkweb =$root."/evaluacion/$evaluador->remember_token/evaluacion";
-            $data->linkweb =Route('evaluacion.token',$evaluador->remember_token);
+            if ($evaluado->word_key=='Objetivos'){
+                $data->linkweb =Route('objetivo.token',$evaluador->remember_token);
+            }else {
+                $data->linkweb =Route('evaluacion.token',$evaluador->remember_token);
+            }
             $data->nameEvaluado =$evaluado->name;
             $data->enviado =false;
             $data->save();

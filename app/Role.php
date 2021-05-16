@@ -7,12 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     //
+    protected $table='roles';
 
-    public function users() {
-        return $this
-            ->belongsToMany('App\User')
-            ->withTimestamps();
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withPivot('name');
+
     }
+    public function userss()
+    {
+        return $this->belongsToMany(User::class)->using(RoleUser::class);
+    }
+
+
 
 
 }
