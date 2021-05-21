@@ -6,6 +6,7 @@ use app\CustomClass\DataEvaluacion;
 use app\CustomClass\DataEvaluacionGlobal;
 use app\CustomClass\DataObjetivo;
 use app\CustomClass\DataObjetivoGlobal;
+use app\CustomClass\DataObjetivoPersonal;
 use app\CustomClass\DataPersonal;
 use app\CustomClass\DataResultado;
 use app\CustomClass\DataResultadoNivel;
@@ -43,11 +44,10 @@ class ObjetivosController extends Controller
         $title="Lista de Evaluados por Objetivos";
         $user = Auth::user();
 
-        $userroles=$user->roles->first();
-        $admin= Role::where('name','admin')->first();
-        if ($userroles->name==$admin->name){
-           return redirect()->route('lanzarobjetivo.index');
-        }
+
+        // if ($userroles->name==$admin->name){
+        //    return redirect()->route('lanzarobjetivo.index');
+        // }
 
         $evaluadores = Evaluador::has('objetivos')->with(['objetivos'=>function($query){
         $query->latest();
@@ -119,16 +119,17 @@ class ObjetivosController extends Controller
 
         $validate = $request->validate(
             [
-                'cumplida'=>'required|numeric|between:0,100',
+                'montocumplido'=>'required|numeric',
+                'montoasignado'=>'required|numeric',
                 'medidacheck'=>'required',
                 'submeta'=>'required',
-                'requerido'=>'required|numeric|between:0,100',
-
+                // 'cumplida'=>'required|numeric|between:0,100',
+                // 'requerido'=>'required|numeric|between:0,100',
             ],
             [
-                'cumplida.required'=>'Debe indicar un valor numerico',
-                'requerido.required'=>'Debe indicar un valor numerico',
-                'medidacheck.required'=>'Debe indicar una unidad de medida'
+                'montocumplido.required'=>'Cantidad de la Meta Cumplida es requerida. Debe indicar un valor numerico',
+                'montoasignado.required'=>'Cantidad de la Meta Asignada es requerida. Debe indicar un valor numerico',
+                'medidacheck.required'=>'La Unidad de Medida es requerida. Debe seleccionar una unidad de medida'
             ]);
 
 
@@ -146,14 +147,19 @@ class ObjetivosController extends Controller
         //Actualizamos la submeta o pregunta de la evaluacion
         $evaluacion->submeta=$modelsubmeta->submeta;
 
-        //Actualizamos el valor requerido de la submeta
-        $evaluacion->requerido= $request->requerido;
+
+        //Actualizamos el valor de la montocumplido y asignados
+        $evaluacion->montoasignado=$request->montoasignado;
+        $evaluacion->montocumplido=$request->montocumplido;
+
+        //Actualizamos el porcentaje de valor requerido por el supervisor
+        $evaluacion->requerido= 100;
 
         //Actualizamos el valor de la meta cumplida
-        $evaluacion->cumplida=$request->cumplida;
+        $evaluacion->cumplida=$request->montocumplido / $request->montoasignado * 100;
 
         //Obtenemos el resultado
-        $evaluacion->resultado=   $request->cumplida / $request->requerido * 100 ;
+        $evaluacion->resultado=  $request->montocumplido / $request->montoasignado * 100;
 
         $evaluacion->save();
 
@@ -190,20 +196,20 @@ class ObjetivosController extends Controller
     public function finalizar(Request $request,$evaluador_id ){
 
         $evaluador = Evaluador::findOrFail($evaluador_id);
-        $evaluaciones = $evaluador->evaluaciones;
+        $evaluaciones = $evaluador->objetivos;
 
         //Excluimos las competencias ya evaluadas
         $competencias = $evaluaciones->reject(function ($eva) {
-            return $eva->frecuencia==0;
+            return $eva->resultado==0;
         })
         ->map(function ($eva) {
-            return $eva->grado;
+            return $eva->submeta;
         });
 
         //Revisamos cuantas estan pendientes por realizar
         if ($evaluaciones->count()>$competencias->count()){
            // Alert::error('Prueba inconclusa',Arr::random(['Culmínela','Finalícela','Terminála']));
-            return \redirect()->back()->withDanger('Aun tiene compentencias pendientes');
+            return \redirect()->back()->withDanger('Aun tiene competencias pendientes');
         }
 
         $evaluado= $evaluador->evaluado;
@@ -305,15 +311,16 @@ class ObjetivosController extends Controller
         $loteEvaluados=$grupoevaluados->pluck('id');
 
         //instanciamos un objeto de data personal
-        $objData = new DataPersonal($loteEvaluados,new DataObjetivo(0));
+        $objData = new DataObjetivoPersonal($loteEvaluados,new DataObjetivo(0));
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
-       // dd($dataSerie,$dataBrecha,$dataCategoria);
+        //dd($dataSerie,$dataBrecha,$dataCategoria);
         if (!$dataCategoria){
             \abort(404);
         }
+
         $title="Resultado personal por grupo";
         return \view('objetivos.resultados.subproyectos.charpersonalporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha'));
     }
@@ -328,7 +335,7 @@ class ObjetivosController extends Controller
         $loteEvaluados=$grupoevaluados->pluck('id');
 
         //instanciamos un objeto de data personal
-        $objData = new DataPersonal($loteEvaluados,new DataObjetivo(0));
+        $objData = new DataObjetivoPersonal($loteEvaluados,new DataObjetivo(0));
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
@@ -358,7 +365,7 @@ class ObjetivosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
-       // dd($dataSerie);
+
         if (!$dataDofa){
             \abort(404);
         }

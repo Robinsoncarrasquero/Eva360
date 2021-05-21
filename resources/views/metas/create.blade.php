@@ -34,8 +34,8 @@
 
                 <div class="row col-sm-12">
                     <div class="col-sm-4">
-                        <label for="nivelrequerido">Requerido</label>
-                        <input placeholder="Margen entre 0 y 100" id="nivelrequerido" class="form-control" type="text" name="nivelrequerido" value="{{ old('nivelrequerido') }}">
+                        <label for="nivelrequerido">Minimo Alcanzar</label>
+                        <input placeholder="Mimimo esperado entre 0 y 100" id="nivelrequerido" class="form-control" type="text" name="nivelrequerido" value="{{ old('nivelrequerido') }}">
                     </div>
 
                     <div class="col-sm-8">
@@ -63,7 +63,7 @@
                                     <tr>
                                         <th>Submeta</th>
                                         <th>Descripcion</th>
-                                        <th>Cumplimiento</th>
+                                        <th>Minimo Esperado</th>
                                         {{-- <th>
                                             <button type="button" class="btnponer btn btn-dark " ><i class=" material-icons">library_add</library-add></i></button>
                                          </th> --}}

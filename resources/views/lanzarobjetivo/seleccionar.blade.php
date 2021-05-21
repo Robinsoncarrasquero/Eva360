@@ -84,11 +84,11 @@
                     </div>
 
                     <div class="col-sm-8 clearfix">
-                        @if (Auth::user()->is_manager){
+                        @if (Auth::user()->is_manager)
                             <span class="float-left"><a href="{{ route('manager.personal') }}" class="btn btn-dark btn-lg">Back</a></span>
-                       @else
-                        <span class="float-left"><a href="{{ route('lanzarobjetivo.index') }}" class="btn btn-dark btn-lg">Back</a></span>
-                       @endif
+                        @else
+                            <span class="float-left"><a href="{{ route('lanzarobjetivo.index') }}" class="btn btn-dark btn-lg">Back</a></span>
+                        @endif
                         <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Next</button>
 
                     </div>

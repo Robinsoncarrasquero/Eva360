@@ -15,7 +15,7 @@
         <div class="pb-1 mt-2">
 
             <div class="text text-center">
-                <h5>Actualice cada meta de acuerdo a sus logros e intrucciones dadas por su supervisor
+                <h5> <span class="text text-danger">{{  $evaluado->user->name }}</span>, Actualice cada meta de acuerdo a sus logros e intrucciones dadas por su supervisor
             </div>
 
             {{-- <div class="text-center mt-3">
@@ -55,12 +55,14 @@
 
 
                 <div class="clearfix mt-3">
-                    @if (!Auth::user()->admin())
+                    @if (Auth::user()->is_manager)
 
                         <span class="float-left"><a href="{{route('objetivo.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
                         @if($evaluador->status!=2)
                             <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
                         @endif
+                    @else
+
                     @endif
 
                 </div>

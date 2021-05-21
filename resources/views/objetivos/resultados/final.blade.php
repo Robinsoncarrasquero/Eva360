@@ -31,21 +31,29 @@
                 <thead>
                 <tr>
                     <th class="text text-center title-th-competencia" colspan="2">
-                    <strong >{{ $value['competencia']}} (Margen Requerido {{ $value['nivelRequerido'] }})
+                    <strong >{{ $value['competencia']}} (Nivel minimo requerido {{ $value['nivelRequerido'] }})
                     </strong> </th>
+
                 </tr>
-                <th>Evaluador</th>
-                <th>Ponderado</th>
+                <th>Objetivos</th>
+                <th>Lograda</th>
                 </thead>
                 <tbody>
                 @foreach ($value['data'] as $item)
                 <tr>
                     <td >{{ $item['name']}}</td>
+                    @if ($item['average']< $value['nivelRequerido']))
+                    <td>
+                    <span style="background-color: red; color:white">{{ number_format($item['average'],2)}}</span>
+                    </td>
+                    @else
                     <td>{{ number_format($item['average'],2)}}</td>
+                    @endif
+
                 </tr>
                 @endforeach
                 <tr>
-                    <td class="text text-center"><strong>Obtenido</strong></td>
+                    <td class="text text-center"><strong>Resultado</strong></td>
                     <td class="text text-dark" ><a href=""><i class="material-icons">bar_chart</i></a>{{ number_format($value['eva360'],2)}}
                     </td>
                 </tr>

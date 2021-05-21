@@ -86,7 +86,7 @@ class DataObjetivoGlobal{
         ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
         ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
         ->select('nivel_cargos.name as nivelcargo','metas.name','metas.nivelrequerido','evaluados.status',
-        DB::raw('AVG(resultado) as average,count(objetivos.resultado) as records'))
+        DB::raw('avg(objetivos.resultado) as average,count(objetivos.resultado) as records'))
         ->where('proyectos.id',$whereIn)
         ->groupBy('nivel_cargos.name','metas.name','metas.nivelrequerido','evaluados.status')
         ->having('evaluados.status','>',1)
@@ -95,6 +95,7 @@ class DataObjetivoGlobal{
 
         //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
         $dataArray = json_decode(json_encode($competencias), true);
+
         $collection= collect($dataArray);
         //Agrupamos la coleccion por nombre de competencia
         $grouped = $collection->mapToGroups(function ($item, $key) {

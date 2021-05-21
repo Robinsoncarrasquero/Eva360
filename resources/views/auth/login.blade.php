@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header title-auth"><span><i class="material-icons">vpn_key</i></span> </div>
+                <div class="card-header title-auth alert-dark "><span ><i class="material-icons ">vpn_key</i></span><strong class="d-flex justify-content-center">TALENT360</strong> </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

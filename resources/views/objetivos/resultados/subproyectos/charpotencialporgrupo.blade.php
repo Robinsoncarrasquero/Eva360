@@ -55,9 +55,9 @@
                     <th>Evaluado</th>
                     <th>% Cumplimiento</th>
                     <th>% Brecha</th>
-                    <th>% Potencial</th>
-                    <th>Oportunidades</th>
-                    <th>Fortalezas</th>
+                    <th>% Excedentes</th>
+                    <th>Sin Lograr</th>
+                    <th>Lograda</th>
                     </thead>
                     <tbody>
                         @foreach ($dataBrecha as $key=>$value)

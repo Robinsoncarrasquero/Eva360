@@ -28,7 +28,7 @@
         <table id="{{ 'tablex' }}" class="table  table-bordered table-striped table-table">
             <thead class="table-thead" style="text-align: center;background:rgb(2, 54, 2);color:rgba(247, 240, 240, 0.932)">
                 <tr>
-                    <th>Competencias</th>
+                    <th>Metas</th>
                     @foreach ($dataCategoria as $key=>$value)
                     <th>
                         <strong>{{$value}}</strong>
@@ -60,11 +60,11 @@
         <table id="{{ 'table'.$evaluado->id }}" class="table  table-bordered table-striped table-table">
             <thead class="table-thead" style="text-align: center;background:rgb(68, 0, 255);color:white">
 
-            <th>% <br>Cumpmto</th>
+            <th>% <br>Cumplido</th>
             <th>% <br> Brecha</th>
-            <th>% <br> Potencial</th>
-            <th>Oportunidad</th>
-            <th>Fortaleza</th>
+            <th>% <br> Excedente</th>
+            <th>No Logrado</th>
+            <th>Logrado</th>
             </thead>
             <tbody>
                 @foreach ($dataBrecha as $key=>$value)
@@ -188,7 +188,11 @@
     @endforeach
     <div class="row">
         <div class="col-lg-12">
+            @if (Auth::user()->is_manager))
+            <a href="{{ route('manager.staff',$evaluado->subproyecto_id)}}" class="btn btn-dark float-left">Back </a>
+            @else
             <a href="{{ route('talent.historicoevaluaciones',$evaluado->user_id)}}" class="btn btn-dark float-left">Back</a>
+            @endif
             <button type="submit" class="btn btn-dark float-right">Save</button>
         </div>
     </div>

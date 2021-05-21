@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use app\CustomClass\DataEvaluacion;
 use app\CustomClass\DataObjetivo;
+use app\CustomClass\DataObjetivoPersonal;
 use app\CustomClass\DataPersonal;
 use app\CustomClass\DataResultado;
 use App\Departamento;
@@ -85,16 +86,23 @@ class FeedBackController extends Controller
     */
     public function edit($evaluado_id)
     {
+
         //Buscamos el evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
         //instanciamos un objeto de data personal
         $loteEvaluados[]=$evaluado_id;
-        $objData = new DataPersonal($loteEvaluados,$evaluado->word_key=="Objetivos" ? new DataObjetivo(0) : new DataEvaluacion(0));
+        if ($evaluado->word_key=="Objetivos"){
+            $objData = new DataObjetivoPersonal($loteEvaluados,new DataObjetivo(0));
+        }
+        else {
+            $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
+        }
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
+        //dd($dataSerie,$dataBrecha,$dataCategoria);
 
 
         //Generamos las competencias del Feedback
@@ -122,8 +130,15 @@ class FeedBackController extends Controller
             \abort(404);
         }
 
+        switch ($evaluado->word_key) {
+            case 'Objetivos':
+                return \view('feedback.fbeditobjetivo',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks'));
+                break;
 
-        return \view('feedback.fbedit',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks'));
+            default:
+                return \view('feedback.fbedit',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks'));
+            break;
+        }
 
     }
 

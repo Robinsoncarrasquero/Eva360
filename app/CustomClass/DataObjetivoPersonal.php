@@ -4,7 +4,7 @@ namespace app\CustomClass;
 use App\Evaluado;
 use Illuminate\Support\Facades\DB;
 
-class DataPersonal{
+class DataObjetivoPersonal{
     private $dataSerie;
     private $dataCategoria;
     private $evaluados;
@@ -46,7 +46,7 @@ class DataPersonal{
             return;
         }
         //Creamos un array con las competencias metas y su margen
-        $arrayCategoria[]='Modelo';
+        $arrayCategoria[]='Meta Minima';
         $dataMeta= $this->getDataMeta();
         foreach ($dataMeta as $item) {
             $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
@@ -76,7 +76,7 @@ class DataPersonal{
                     $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 }else{
                     $arraydataFortaleza[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
-                    $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['nivel']];
+                    $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 }
             }
 

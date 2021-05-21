@@ -76,11 +76,12 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
+
+
+                @if (Auth::check() && !Auth::user()->admin())
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
                 </li>
-
-                @if (Auth::check() && !Auth::user()->admin())
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('objetivo.index') }}">Mis Metas</span></a>
                 </li>

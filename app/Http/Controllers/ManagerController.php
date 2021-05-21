@@ -19,26 +19,35 @@ class ManagerController extends Controller
 
     }
 
-    /**Presenta la evaluaciones por proyectos del departamento del manager  */
+    /*
+    * Presenta los proyectos de evaluaciones del manager.
+    *
+    */
     public function index()
     {
-
-        if (!Auth::user()->is_manager){
-            return redirect('login');
-        }
 
         $manager = Auth::user();
 
         $departamento_id=$manager->departamento_id;
 
-        $subproyectos = SubProyecto::has('evaluados.user')->with(['evaluados.user' => function($query) use ($departamento_id) {
-            $query->where('users.departamento_id', $departamento_id)->latest('created_at');
+        $evaluados = DB::table('evaluados')
+            ->whereExists(function ($query) use($departamento_id) {
+               $query->select(DB::raw('1'))
+                     ->from('users')
+                     ->whereRaw("evaluados.user_id = users.id and users.departamento_id=$departamento_id");
+            })->get();
 
-            }])->simplePaginate(25);
+        $unique=collect($evaluados)->pluck('subproyecto_id')->unique();
+        $subproyectos= SubProyecto::WhereIn('id',$unique)->simplePaginate(25);
 
+        // $subproyectos = SubProyecto::has('evaluados.user')->with(['evaluados.user' => function($query) use ($departamento_id) {
+        // $query->where('users.departamento_id', $departamento_id)->latest('created_at');
+
+        // }])->simplePaginate(25);
 
         return \view('manager.index',compact('subproyectos'));
     }
+
 
     /*
     * Presenta las evaluaciones del staff del manager.

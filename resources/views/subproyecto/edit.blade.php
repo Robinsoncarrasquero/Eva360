@@ -32,7 +32,7 @@
             </div>
 
             <div class="col-sm-12">
-                <label for="proyecto">Proyecto</label>
+                <label for="proyecto">Proyecto de pertenencia</label>
                 <select id="proyecto" class="form-control" name="proyecto" >
                     @foreach ($proyectos as $data)
                         @if ($record->proyecto_id==$data->id)

@@ -40,7 +40,7 @@
                 <table id="{{ 'table'.$subProyecto->id }}" class="table table-bordered table-striped table-table">
                     <thead class="table-thead">
                         <th>Tipo</th>
-                        <th>Oportunidad</th>
+                        <th>Debilidad</th>
                         <th>Fortaleza</th>
                     </thead>
                     <tbody>

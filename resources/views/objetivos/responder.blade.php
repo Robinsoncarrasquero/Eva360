@@ -10,7 +10,7 @@
     </div>
 
     <div class="card-header mb-3">
-        <h5 class="text text-center">Actualice la meta de acuerdo a sus logros e intrucciones dadas por su supervisor
+        <h5 class="text text-center"> <span class="text text-danger">{{  $objetivo->evaluador->evaluado->user->name }} </span>, Actualice la meta de acuerdo a sus logros e intrucciones dadas por su supervisor
         <span class="text text-danger"><br></span> relacionada con</h5>
     </div>
 
@@ -28,8 +28,9 @@
                     <thead class="table-preguntas border-warning">
                         <th scope="col">#</th>
                         <th scope="col">Descripcion</th>
-                        <th scope="col">Meta</th>
-                        <th scope="col">Cumplida</th>
+                        <th scope="col">% Meta Minima</th>
+                        <th scope="col">Cantidad de la Meta 100%</th>
+                        <th scope="col">Cantidad de la Meta Cumplida</th>
                         <th scope="col">Medida</th>
                     </thead>
                     <tbody>
@@ -41,15 +42,21 @@
                             </td>
                             <td>{{$submeta->description}}</td>
                             <td>
-                                <input type="text" readonly class="form-control" id="requerido" value= "{{ $objetivo->meta->nivelrequerido }} " name="requerido"
+                                <input type="text" readonly class="form-control" id="nivelrequerido" value= "{{ $objetivo->meta->nivelrequerido }} " name="nivelrequerido"
                                 @if ($objetivo->evaluador->status==2)
                                     disabled
                                 @endif>
 
                             </td>
-
                             <td>
-                                <input type="text" class="form-control" id="cumplida" value="{{ $objetivo->cumplida }}" name="cumplida"
+                                <input type="text" class="form-control" id="montoasignado" value= "{{ $objetivo->montoasignado }} " name="montoasignado"
+                                @if ($objetivo->evaluador->status==2)
+                                    disabled
+                                @endif>
+
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="montocumplido" value="{{ $objetivo->montocumplido }}" name="montocumplido"
                                 @if ($objetivo->evaluador->status==2)
                                     disabled
                                 @endif>

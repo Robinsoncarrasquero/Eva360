@@ -89,7 +89,7 @@ Route::group(['middleware' => 'auth'], function() {
  /**
   * Presenta los resultados de la evaluacion por objetivos
    */
-    Route::get('objetivoresultado/{evaluado}/resultadon',"ObjetivosController@resultado")
+    Route::get('objetivoresultado/{evaluado}/resultado',"ObjetivosController@resultado")
     ->name('objetivo.resultado');
 
     /**

@@ -23,11 +23,9 @@ class CreateObjetivosTable extends Migration
             $table->float('requerido',5,2)->default(0);
             $table->float('cumplida',5,2)->default(0);
             $table->float('resultado',5,2)->default(0);
-            $table->date('finicio')->nullable();
-            $table->date('ffinal')->nullable();
+            $table->float('montoasignado',12,2)->default(0);
+            $table->float('montocumplido',12,2)->default(0);
             $table->set('status', ['Cumplida', 'No_Cumplida']);
-            $table->string('description',100)->nullable();
-            $table->string('nota',1000)->nullable();
             $table->timestamps();
         });
     }

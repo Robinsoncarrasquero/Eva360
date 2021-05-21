@@ -93,12 +93,12 @@
             <div class="table table-responsive">
                 <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                     <thead class="table-thead" style="text-align: center">
-                    <th>Evaluado</th>
-                    <th>% Cumplimiento</th>
-                    <th>% Brecha</th>
-                    <th>% Potencial</th>
-                    <th>Oportunidades</th>
-                    <th>Fortalezas</th>
+                        <th>Evaluado</th>
+                        <th>% Cumplimiento</th>
+                        <th>% Brecha</th>
+                        <th>% Excedentes</th>
+                        <th>Sin Lograr</th>
+                        <th>Lograda</th>
                     </thead>
                     <tbody>
                         @foreach ($dataBrecha as $key=>$value)

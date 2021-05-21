@@ -30,7 +30,7 @@
             </div>
 
             <div class="col-sm-12">
-                <label for="proyecto">Nivel de Cargo</label>
+                <label for="proyecto">Proyecto de pertenencia</label>
                 <select id="proyecto" class="form-control" name="proyecto" >
                     @foreach ($proyectos as $data)
                         @if (old('proyecto')==$data->id)
