@@ -1,0 +1,10 @@
+{
+	"Evaluado":"Joe Doe",
+	"Cargo":"Cajero",
+	"Evaluadores":
+	[
+		{"name":"Jonh Mora","relation":"Super","email":"jm@example.com"},
+		{"name":"Jane Duque","relation":"Super","email":"janed@example.com"}
+	]
+}
+

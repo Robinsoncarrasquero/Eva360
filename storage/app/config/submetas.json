@@ -1,0 +1,7 @@
+{
+	"Submeta":"Tabla de Submetas",
+	"submetas":
+	[
+		{"meta":"1","description":"Realizar la tarea asignada del periodo","requerido":100}
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"Evaluado":"Hector Hernadez",
+	"Cargo":"Analista de Credito",
+	"Evaluadores":
+	[
+		{"name":"Jonh  Mora","relation":"Super","email":"jm@example.com"},
+		{"name":"Mary Rodriguez","relation":"Super","email":"mr@example.com"},
+		{"name":"Jane Doe","relation":"Partner","email":"jdoe@example.com"},
+		{"name":"Caty Perry","relation":"Partner","email":"cperry@example.com"},
+		{"name":"Dylan Person","relation":"Subdnado","email":"dperson@example.com"},
+		{"name":"Paul Duque","relation":"Subdnado","email":"pduque@example.com"}
+	]
+}

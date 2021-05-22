@@ -1,0 +1,10 @@
+{
+	"Evaluado":"Maritza Duque",
+	"Cargo":"Cajera",
+	"Evaluadores":
+	[
+		{"name":"Luis  Mora","relation":"Super","email":"lm@example.com"},
+		{"name":"Maria Rodriguez","relation":"Super","email":"mr@example.com"}
+	]
+}
+
