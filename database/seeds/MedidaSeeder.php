@@ -19,7 +19,6 @@ class MedidaSeeder extends Seeder
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
-
         factory(Medida::class)->create([
             'name'=>'USD',
             'description'=>'Dolares Americanos',
@@ -38,56 +37,48 @@ class MedidaSeeder extends Seeder
             'name'=>'MXN',
             'description'=>'Pesos Mexico',
             'medida'=>'MXN',
-
         ]);
 
         factory(Medida::class)->create([
             'name'=>'BS',
             'description'=>'Bolivares Venezuela',
             'medida'=>'BS',
-
         ]);
 
         factory(Medida::class)->create([
             'name'=>'HRS',
             'description'=>'Horas',
             'medida'=>'HRS',
-
         ]);
 
         factory(Medida::class)->create([
             'name'=>'SEM',
             'description'=>'Semanas',
             'medida'=>'SEM',
-
         ]);
 
         factory(Medida::class)->create([
             'name'=>'MESES',
             'description'=>'Meses',
             'medida'=>'MESES',
-
         ]);
 
         factory(Medida::class)->create([
             'name'=>'DIAS',
             'description'=>'Dias',
-            'medida'=>'DIAS',
-
+           'medida'=>'DIAS',
         ]);
 
         factory(Medida::class)->create([
             'name'=>'TON',
             'description'=>'Toneladas',
             'medida'=>'TON',
-
         ]);
 
         factory(Medida::class)->create([
             'name'=>'KG',
             'description'=>'Kilos',
             'medida'=>'KG',
-
         ]);
 
 

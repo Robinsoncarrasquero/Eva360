@@ -21,7 +21,6 @@ class MetaSeeder extends Seeder
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
-
         $competencia=factory(Meta::class)->create([
             'name'=>'Ventas cobradas',
             'tipo_id'=>1,
