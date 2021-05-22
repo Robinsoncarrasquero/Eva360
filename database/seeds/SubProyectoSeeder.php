@@ -25,5 +25,17 @@ class SubProyectoSeeder extends Seeder
             'name'=>'Sub Proyecto Analistas',
             'proyecto_id'=>1,
          ]);
+
+        //Sub Proyecto 1
+        $subproyecto=factory(SubProyecto::class)->create([
+            'name'=>'Contabilidad Vendedor',
+            'proyecto_id'=>2,
+         ]);
+
+        //Sub Proyecto 2
+        $subproyecto=factory(SubProyecto::class)->create([
+            'name'=>'Contabilidad Analista',
+            'proyecto_id'=>2,
+         ]);
     }
 }

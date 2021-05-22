@@ -102,9 +102,9 @@ class DataObjetivoPersonal{
         }
 
         //Generar la data serie del cumpliento y la brecha
-        $arraydataSerieBrecha[]=['name'=>'Cumplimiento','data'=>$arraySerieCumplimiento];
+        $arraydataSerieBrecha[]=['name'=>'Cumplido','data'=>$arraySerieCumplimiento];
         $arraydataSerieBrecha[]=['name'=>'Brecha','data'=>$arraySerieBrecha];
-        $arraydataSerieBrecha[]=['name'=>'Potencial','data'=>$arraySeriePotencial];
+        $arraydataSerieBrecha[]=['name'=>'Excedente','data'=>$arraySeriePotencial];
 
         //Generamos una colleccion para agrupar la data de la serie
         $datacollection=collect($arrayCompetencias);

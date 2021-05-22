@@ -15,9 +15,8 @@
     </style>
 </head>
 <body>
-    <p>Estimado Administrador le informamos que la evaluacion de <strong>{{ $dataEvaluador->nameEvaluado }} </strong> ha finalizado, lo cual ya puede revisar los resultados
-     de los evaluadores</p>
-    <p>En el siguiente link podra acceder al formulario con los resultados finales de la respectiva Evaluacion.</p>
+    <p>Estimado Administrador le informamos que la evaluacion de <strong>{{ $dataEvaluador->nameEvaluado }} </strong> ha finalizado.</p>
+    <p>Puede revisar los resultados en el siguiente link.</p>
     <ul>
         <li>
             <a href="{{ $dataEvaluador->linkweb}}">
@@ -27,7 +26,7 @@
 
     </ul>
     <footer>
-        Sistema de Evaluacion de Competencias del <strong>Talent 360</strong>
+        Sistema de Evaluacion de Desempe&ntilde;o por Competencias <strong>TALENT360</strong>
     </footer>
 
 </body>

@@ -23,7 +23,14 @@ class ProyectoSeeder extends Seeder
 
         //Proyecto
         $proyecto=factory(Proyecto::class)->create([
-            'name'=>'Proyecto XYZ',
+            'name'=>'Proyecto Competencias',
+            'tipo'=>'Competencias',
+        ]);
+
+         //Proyecto
+         $proyecto=factory(Proyecto::class)->create([
+            'name'=>'Proyecto Objetivos',
+            'tipo'=>'Objetivos',
         ]);
 
 

@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
             $user =  new User();
             $user->name = $evaluador->name;
             $user->email = $evaluador->email;
-            $user->password = bcrypt('secret');
+            $user->password = bcrypt('secret1234');
             $user->cargo_id=rand(1,5);
             $user->departamento_id=$evaluado->departamento_id;
             $user->save();
