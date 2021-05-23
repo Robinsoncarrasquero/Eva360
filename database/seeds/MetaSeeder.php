@@ -1,9 +1,11 @@
 <?php
 
+use App\Meta;
+use App\SubMeta;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class MetasSeeder extends Seeder
+class MetaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +18,7 @@ class MetasSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;'); //DESACTIVA EL CHECKEO DE CLAVES FORANEAS
 
         DB::table('metas')->truncate();
+        DB::table('submetas')->truncate();
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
