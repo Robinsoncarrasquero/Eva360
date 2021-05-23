@@ -16,7 +16,7 @@ class CreateObjetivosTable extends Migration
         Schema::create('objetivos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meta_id')->constrained();
-            $table->foreignId('evaluador_id')->constrained('evaluadores');
+            $table->foreignId('evaluador_id')->constrained('evaluadores')->onDelete('cascade');;
             $table->unique(['meta_id', 'evaluador_id']);
             $table->foreignId('medida_id')->nullable()->constrained();
             $table->string('submeta',1)->nullable();
