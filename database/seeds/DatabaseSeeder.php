@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
+        $this->call(MetasSeeder::class);
+        $this->call(MedidaSeeder::class);
         $this->call(TipoSeeder::class);
         $this->call(CompetenciaBaseSeeeder::class);
         $this->call(FrecuenciaSeeder::class);
@@ -29,8 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EvaluadoSeeder::class);
         $this->call(EvaluadorSeeder::class);
         $this->call(EvaluacionSeeder::class);
-        $this->call(MetaSeeder::class);
-        $this->call(MedidaSeeder::class);
+
     }
 
     public function truncate_table($table)

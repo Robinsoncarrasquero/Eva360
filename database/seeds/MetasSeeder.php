@@ -1,11 +1,9 @@
 <?php
 
-use App\Meta;
-use App\SubMeta;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class MetaSeeder extends Seeder
+class MetasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +12,7 @@ class MetaSeeder extends Seeder
      */
     public function run()
     {
-
+        //
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;'); //DESACTIVA EL CHECKEO DE CLAVES FORANEAS
 
         DB::table('metas')->truncate();
@@ -35,6 +33,5 @@ class MetaSeeder extends Seeder
             'meta_id'=>$competencia->id,
             'description'=>'Monto de las ventas cobradas',
         ]);
-
     }
 }

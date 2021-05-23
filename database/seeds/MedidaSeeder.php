@@ -66,7 +66,7 @@ class MedidaSeeder extends Seeder
         factory(Medida::class)->create([
             'name'=>'DIAS',
             'description'=>'Dias',
-           'medida'=>'DIAS',
+            'medida'=>'DIAS',
         ]);
 
         factory(Medida::class)->create([
