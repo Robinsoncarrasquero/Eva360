@@ -8,6 +8,7 @@ use App\Competencia;
 use app\CustomClass\EnviarEmail;
 use app\CustomClass\EnviarSMS;
 use app\CustomClass\LanzarEvaluacion;
+use app\CustomClass\UserRelaciones;
 use App\Departamento;
 use App\Evaluado;
 use App\Evaluador;
@@ -134,10 +135,11 @@ class PlantillasController extends Controller
     }
 
 
-
+    /**
+     * Procesa los datos de la plantilla importada
+     */
     public function procesar(Request $request,$id)
     {
-
 
         $request->validate([
             'name'=>'required',
@@ -152,10 +154,7 @@ class PlantillasController extends Controller
 
         );
 
-        //
-
-        //Obtenemos los modelo
-        //
+        //Obtenemos el modelo
         $modelo = Arr::get($request->modeloradio, '0', 0);
 
         try {
@@ -186,7 +185,7 @@ class PlantillasController extends Controller
                 ]);
 
                 //Crea o actualizada usuario
-                $user = User::firstOrCreate(['email'=>$plantilla->email],
+                $user = User::updateOrCreate(['email'=>$plantilla->email],
                 [
                 'departamento_id'=>$ubicacion->id,
                 'name'=>$plantilla->name,
@@ -194,7 +193,9 @@ class PlantillasController extends Controller
                 'cargo_id'=>$cargo->id,
                 'phone_number'=>$plantilla->celular,
                 'password'=>bcrypt('secret'),
+                'email_super'=>$plantilla->email_super,
                 ]);
+
                 // $role_user = Role::where('name', 'user')->first();
                 // $user->roles()->attach($role_user);
                 // $user->save();
@@ -226,6 +227,9 @@ class PlantillasController extends Controller
         return \redirect()->route('plantillas.index')->withSuccess('Importacion de Plantilla : '.$request->name.' Procesada exitosamente');
     }
 
+    /**
+     * Lanza las evaluaciones de una plantilla importada
+     */
     public function lanzar($id)
     {
 
@@ -235,9 +239,12 @@ class PlantillasController extends Controller
         return view('plantillas.lanzar',\compact('carga_masiva','metodos','modelos'));
 
     }
+
+    /**
+     * Genera la evaluaciones de la carga masiva
+     */
     public function crearevaluaciones(Request $request,$id)
     {
-
 
         $modelo = Arr::get($request->modeloradio, '0', 0);
 
@@ -251,43 +258,8 @@ class PlantillasController extends Controller
 
         foreach ($plantillas as $plantilla) {
 
-            //Usuario
+            //Un empleado no manager
             if (!$plantilla->manager){
-
-                $user = User::where('email',$plantilla->email)->first();
-
-                $supervisor= User::where('email',$plantilla->email_super)->first();
-                $evaluadores[]=['name'=>$supervisor->name,'email'=>$supervisor->email,'user_id=>'=>$supervisor->id];
-
-
-                $team = DB::table('plantillas')->where([
-                    ['carga_masivas_id', '=', $plantilla->carga_masivas_id],
-                    ['ubicacion', '=', $plantilla->ubicacion],
-                ])->get();
-
-                $subor=[];
-                $pares=[];
-
-                foreach ($team as $persona) {
-                    # code...
-                    $staff= User::where('email',$persona->email)->first();
-
-                    //Subordinados quienes tiene su email_super identico con el email actual de la plantilla
-                    if ($persona->email_super==$plantilla->email ){
-                        $subor[]=['name'=>$persona->name,'email'=>$persona->email,'user_id'=>$staff->id];
-                    }
-                    //Pares quienes tienen el mismos email_supervisor al registro actual
-                    if ($persona->email_super==$plantilla->email_super && $persona->email!=$plantilla->email_super && $persona->email!=$plantilla->email){
-                        $pares[]=['name'=>$persona->name,'email'=>$persona->email,'user_id'=>$staff->id];
-                    }
-
-                    //Cuando el supervisor reporta al correo del manager
-                    if ($persona->email==$supervisor->email){
-                        $manager= User::where('email',$persona->email_super)->first();
-                        $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id'=>$manager->id];
-                    }
-
-                }
 
                 //Sub proyecto
                 $proyecto = Proyecto::where('carga_masivas_id',$cm->id)->first();
@@ -297,82 +269,18 @@ class PlantillasController extends Controller
                     'proyecto_id'=>$proyecto->id,
                 ],['description'=>$plantilla->ubicacion]);
 
+                $user = User::where('email',$plantilla->email)->first();
 
-                //Creamos el evaluado
-                $evaluado= new Evaluado();
-                $evaluado->name=$user->name;
-                $evaluado->status=0;
-                $evaluado->word_key= $cm->metodo;
-                $evaluado->cargo_id=$user->cargo_id;
-                $evaluado->subproyecto_id=$subproyecto->id;
-                $evaluado->user_id=$user->id;
-                $evaluado->save();
+                $userR= new UserRelaciones();
+                $userR->Crear($user);
 
-                //Metodo de 90 grados
-                if(count($evaluadores)>1){
-
-                    $emanager = new Evaluador();
-                    $emanager->name = $manager->name;
-                    $emanager->email = $manager->email;
-                    $emanager->relation = ($cm->metodo=='90' ? 'Manager' :'Supervisor');
-                    $emanager->remember_token = Str::random(32);
-                    $emanager->status = 0;
-                    $emanager->user_id = $manager->id;
-                    $evaluado->evaluadores()->save($emanager);
-
-                    $esuper= new Evaluador();
-                    $esuper->name = $supervisor->name;
-                    $esuper->email = $supervisor->email;
-                    $esuper->relation = ($cm->metodo=='90' ? 'Supervisor' :'Supervisor');
-                    $esuper->remember_token = Str::random(32);
-                    $esuper->status = 0;
-                    $esuper->user_id = $supervisor->id;
-                    $evaluado->evaluadores()->save($esuper);
-
-                    //Autooevaluacion
-                    if ($request->autoevaluacion){
-                        $autoeva= new Evaluador();
-                        $autoeva->name = $user->name;
-                        $autoeva->email = $user->email;
-                        $autoeva->relation = 'Autoevaluacion';
-                        $autoeva->remember_token = Str::random(32);
-                        $autoeva->status = 0;
-                        $autoeva->user_id = $user->id;
-                        $evaluado->evaluadores()->save($autoeva);
-                    }
+                if (!$userR->CreaEvaluacion($request->metodo,$subproyecto->id,$request->autoevaluacion)){
+                    \abort(404);
                 }
 
-                if($cm->metodo=='180' && count($evaluadores)>1 && count($pares)>1){
-                    foreach ($pares as $key => $par) {
-                         {
-                            $par= new Evaluador();
-                            $par->name = $par['name'];
-                            $par->email = $par['email'];
-                            $par->relation = 'Par';
-                            $par->remember_token = Str::random(32);
-                            $par->status = 0;
-                            $par->user_id = $par['user_id'];
-                            $evaluado->evaluadores()->save($par);
-
-                        }
-                    }
-                }
-
-                if($cm->metodo=='360' && count($evaluadores)>1 && count($pares)>1 && count($subor)>1){
-                    foreach ($subor as $key => $sub) {
-                        $sub= new Evaluador();
-                        $sub->name = $sub['name'];
-                        $sub->email = $sub['email'];
-                        $sub->relation = 'Subordinados';
-                        $sub->remember_token = Str::random(32);
-                        $sub->status = 0;
-                        $sub->user_id = $sub['user_id'];
-                        $evaluado->evaluadores()->save($sub);
-                    }
-
-                }
                 $cm->procesado= true;
                 $cm->save();
+
             }
         }
 
@@ -392,6 +300,7 @@ class PlantillasController extends Controller
         $flattened = Arr::flatten($pluck);
 
         $datacompetencias = Competencia::all();
+
         //Obtenemos una coleccion de competencias del array devuelto por flatten
         $competencias = $datacompetencias->only($flattened);
 
@@ -405,7 +314,7 @@ class PlantillasController extends Controller
 
                 $user = User::find($evaluado->user_id);
 
-                //Creamos un objeto de lanzamiento de Evaluacion
+                //Creamos un objeto para el lanzamiento de la Evaluacion
                 $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado->id);
 
                 if (!$objlanzaEvaluacion->crearEvaluacion()){
@@ -414,13 +323,14 @@ class PlantillasController extends Controller
                 }
 
                 $objlanzaEvaluacion=null;
+                //Inyectamos dependencia para enviar email
                 if ($request->sendmail){
                     EnviarEmail::enviarEmailEvaluadores($evaluado->id);
-
                 }
+
+                //Inyesctamos dependencia para enviar sms
                 if ($request->sendsms){
                      EnviarSMS::SendSMSFacade($evaluado->id);
-
                 }
 
             }
@@ -429,6 +339,9 @@ class PlantillasController extends Controller
         return \redirect()->route('plantillas.verproyecto',$cm->id)->withSuccess('Importacion de Plantilla : '.$request->name.' Procesada exitosamente');
     }
 
+    /**
+     * Muestra las plantillas de carga masivas importadas
+     */
     public function index()
     {
 
@@ -438,6 +351,9 @@ class PlantillasController extends Controller
         return \view('plantillas.index',compact('carga_masiva','metodos'));
     }
 
+    /**
+     * Elimina una carga masiva
+     */
     public function delete($carga_masiva)
     {
 
@@ -449,11 +365,9 @@ class PlantillasController extends Controller
 
         return \view('plantillas.index',compact('carga_masiva','metodos'));
     }
+
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Muestra las evaluaciones de carga masiva
      */
     public function verproyecto($id)
     {
@@ -461,6 +375,10 @@ class PlantillasController extends Controller
 
         return \view('plantillas.evaluaciones',\compact('proyectos'));
     }
+
+    /**
+     * Muestra el organigrama dinamicamente
+     */
     public function organigrama($plantilla)
     {
         return \view('plantillas.organigrama');

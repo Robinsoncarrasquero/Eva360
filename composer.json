@@ -67,7 +67,8 @@
             "app/CustomClass/LanzarObjetivo.php",
             "app/CustomClass/DataObjetivo.php",
             "app/CustomClass/DataObjetivoGlobal.php",
-            "app/CustomClass/DataObjetivoPersonal.php"
+            "app/CustomClass/DataObjetivoPersonal.php",
+            "app/CustomClass/UserRelaciones.php"
 	]
     },
     "minimum-stability": "dev",

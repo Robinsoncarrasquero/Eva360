@@ -42,47 +42,36 @@
                         </select>
                         <input  readonly class="form-control" placeholder="Nombre" maxlength="100" type="text" name="nameevaluado" value="{{ $empleado->name }}" >
                     </div>
-
+                    <div class="card-header mb-3">
+                        <label for="metodo">Metodos</label>
+                        <select id="metodo" class="form-control" name="metodo" >
+                            @foreach ($metodos as $metodo)
+                                <option value="{{$metodo}}">{{ $metodo }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-lg-12 ">
+                        <label class="form-check-label " for="autoevaluacion" style="color: rgb(255, 165, 0);font-size:1.5em"> Autoevaluacion</label>
+                        <input type="checkbox" class="check-select  "  name="autoevaluacion" >
+                    </div>
                     <table id="table-evaluado" >
-                        <thead class="thead-evaluado">
+                        <thead class="thead-evaluado" style="color:black">
                         <th>#</th>
                         <th>Evaluador</th>
                         <th>Relacion</th>
-                        <th>Email</th>
-                        <th>
+                        {{-- <th>
                         <button type="button" class="btnponer btn btn-dark " ><i class=" material-icons">library_add</library-add></i></button>
-                        </th>
+                        </th> --}}
                         </thead>
                         <tbody>
                         @foreach ($evaluadores as $key=>$evaluador)
                             <tr id="{{$key}}">
                                 <td class="form-control">{{ $key }}</td>
-                                <td><input class="form-control" type="text" maxlength="50" name="name[]" value="{{old('name.'.$key,$evaluador->name)}}"></td>
-                                {{-- @if ($evaluador->id=$empleado->id)
-                                    <td><input class="form-control" type="text" maxlength="15" name="relation[]" value="{{old('relation.'.$key,'Autoevaluacion')}}"></td>
-                               @endif --}}
-                               <td>
-                               <select id="relation"  class="form-control" name="relation[]">
-                                @foreach ($relations as $data)
-                                    @if ($evaluador->id==$empleado->id)
-                                        <option selected value="Autoevaluacion">Autoevaluacion</option>
-                                        @break
-                                    @else
-                                        @if (old('relation.'.$key)==$data->relation)
-                                        <option selected value="{{old('relation.'.$key,$data->relation)}}">{{old('relation.'.$key,$data->relation)}}</option>
-                                        @else
-                                            <option value="{{$data->relation}}">{{ $data->relation }}</option>
-                                        @endif
-                                        {{-- <option value="{{$data->relation}}">{{ $data->relation }}</option> --}}
-
-                                    @endif
-                                @endforeach
-                                </select>
-                               </td>
-                                <td><input class="form-control" type="email" maxlength="100" name="email[]"  value="{{old('email.'.$key,$evaluador->email)}}" ></td>
-                                <td>
+                                <td><input disabled class="form-control" type="text" maxlength="50" name="name[]" value="{{$evaluador['name']}}"></td>
+                                <td><input disabled class="form-control" type="text" maxlength="50" name="relation[]" value="{{ $evaluador['relations'] }}"></td>
+                               {{-- <td>
                                 <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>
-                                </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>

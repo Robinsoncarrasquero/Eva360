@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cargo;
+use app\CustomClass\UserRelaciones;
 use App\Departamento;
 use App\Evaluado;
 use App\Evaluador;
@@ -63,7 +64,9 @@ class TalentController extends Controller
 
         //return \redirect()->back()->withErrors('Falta programar este control');
     }
-    /**Crear una evaluado con los datos de los evaluadores
+
+    /**
+     * Crear una evaluado con los datos de los evaluadores
      * de su entorno departamental
      */
     public function createevaluado($empleado_id)
@@ -73,60 +76,45 @@ class TalentController extends Controller
         if (!$empleado){
             \abort(404);
         }
-        /**
-         * Representa los evaluadores del Empleado que estan en su departamento
-         */
-        $evaluadores= User::where('departamento_id',$empleado->departamento_id)->get();
-        $evaluadores = $evaluadores->reject(function ($user) {
-            return $user->active === false;
-        });
+
+        $userR= new UserRelaciones();
+        $userR->Crear($empleado);
+
+        $evaluadores = $userR->getEvaluadores();
+        $metodos= $userR->getMetodos();
 
         $cargos = Cargo::all();
-        $proyectos = Proyecto::where('carga_masivas_id',null)->get();
+        $proyectos = Proyecto::where('tipo','<>','Objetivos')->get();
 
-        $subproyectos = SubProyecto::all();
         $relations = Relation::all();
 
-        return \view('talent.crearevaluado',compact('empleado','evaluadores','cargos','proyectos','relations'));
+        return \view('talent.crearevaluado',compact('empleado','evaluadores','cargos','proyectos','relations','metodos'));
     }
 
-   /**Crea los datos del evaluado */
-    public function storeevaluado(FileJson $fileJsonRequest,$empleado_id)
+
+    /**Crea los datos del evaluado */
+    public function storeevaluado(Request $request,$empleado_id)
     {
-        //
+        request()->validate(
+            [
+                'metodo' => 'required',
+                'subproyecto' => 'required',
+            ],
+            [
+                'metodo.required'=>'Debe seleccionar un metodo.',
+                'subproyecto.required'=>'Debe seleccionar un Subproyecto.',
+            ]
+        );
 
-        $name=$fileJsonRequest->input('name.*');
-        $relation=$fileJsonRequest->input('relation.*');
-        $email=$fileJsonRequest->input('email.*');
-        $prueba=$fileJsonRequest->input('evaluacion');
-        $fileName='evaluado.json';
-        $pathFile = 'config/'.$fileName;
-        if (Storage::exists($pathFile)){
-            $evaluado= new  Evaluado();
-            $evaluado->name=$fileJsonRequest->nameevaluado;
-            $evaluado->status=0;
-            $evaluado->word_key= $prueba;
-            $evaluado->cargo_id=$fileJsonRequest->cargo;
-            $evaluado->subproyecto_id=$fileJsonRequest->subproyecto;
-            $evaluado->user_id = $empleado_id;
-            $evaluado->save();
+        $user= User::find($empleado_id);
+        $userR = new UserRelaciones();
+        $userR->Crear($user);
 
-            for ($i=0; $i < count($name); $i++) {
-                $evaluador= new Evaluador();
-                $evaluador->name=$name[$i];
-                $evaluador->email=$email[$i];
-                $evaluador->relation= Str::of($relation[$i])->ucfirst();
-                $evaluador->remember_token= Str::random(32);
-                $evaluador->status=0;
-
-                $evaluado->evaluadores()->save($evaluador);
-            }
-
-        }else{
+        if (!$userR->CreaEvaluacion($request->metodo,$request->subproyecto,$request->autoevaluacion)){
             \abort(404);
         }
 
-       // Alert::success('Evaluacion creada ..',Arr::random(['Good','Excelente','Magnifico','Exito']));
+        // Alert::success('Evaluacion creada ..',Arr::random(['Good','Excelente','Magnifico','Exito']));
 
         return redirect()->route('proyectoevaluado.index')
         ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar una evaluacion.');

@@ -16,7 +16,7 @@
 </head>
 <body>
     <p>Estimado Administrador le informamos que la evaluacion de <strong>{{ $dataEvaluador->nameEvaluado }} </strong> ha finalizado.</p>
-    <p>Puede revisar los resultados en el siguiente link.</p>
+    <p>Loss resultados estan disponibles en el siguiente link.</p>
     <ul>
         <li>
             <a href="{{ $dataEvaluador->linkweb}}">

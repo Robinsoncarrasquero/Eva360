@@ -19,7 +19,7 @@
 <body>
     <p>Estimado <b>{{ $dataEvaluador->nameEvaluador}}</b>! Le invitamos para que gestione ante esta plataforma la evaluacion de las competencias de:</p>
      de <strong>{{ $dataEvaluador->nameEvaluado }} </strong> en la cual usted cumple un rol de : {{ $dataEvaluador->relation}}
-     <p>En el siguiente link podra acceder directamente al cuestionario para que evalue las competencias de su evaluado</p>
+     <p>En el siguiente link podra acceder directamente al cuestionario.</p>
     <ul>
         <li>
             <a href="{{ $dataEvaluador->linkweb}}">
@@ -29,7 +29,7 @@
 
     </ul>
     <footer>
-        Sistema de Evaluacion de Competencias del <strong>Talent 360</strong>
+        Sistema de Evaluacion de Desempe&ntilde;o por Competencias <strong>TALENT360</strong>
     </footer>
 </body>
 </html>
