@@ -84,8 +84,6 @@ class DataPersonal{
                 $brecha=100;$cumplimiento=0;$potencial=0;
                 if (collect($dataMeta)->avg('data')!=0){
                     $cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
-
-                    $cumplimiento=collect($arrayCumplimiento)->sum('data')/count($arrayCumplimiento);
                     $brecha= 100 - $cumplimiento;
                 }
 
