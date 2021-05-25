@@ -149,7 +149,7 @@ class UserController extends Controller
                 'email' => 'required|unique:users,email,'.$id,
                 'email_super' => 'required',
                 'roluser' => 'required',
-                //'newrol' => 'required',
+
                 'departamento' => 'required',
                 'cargo' => 'required',
             ],
@@ -157,7 +157,6 @@ class UserController extends Controller
                 'name.required'=>'El nombre es requerido.',
                 'email.required' => "Email del usuario es unico y obligatorio.",
                 'roluser.required' => "Debe especificar un rol de usuario.",
-                //'newrol.required' => "Nuevo rol es requerido.",
                 'email.unique' => "Este email ya ha sido tomado por otro usuario.",
                 'departamento.required' => "Ubicacion es Requerida.",
                 'cargo.required' => "Cargo es Requerido.",
@@ -180,12 +179,9 @@ class UserController extends Controller
 
         //Eliminamos el rol anterior
         if(!$user->hasRole('admin')){
-            // $userRol = Role::find($request->roluser);
-            // $user->roles($userRol)->detach();
-
-            // //Agredamos el nuevo rol
-            // $new_rol = Role::find($request->newrol);
-            // $user->roles()->attach($new_rol);
+            $userRol = Role::find($request->roluser);
+            $user->roles($userRol)->detach();
+            $user->roles()->attach($userRol);
         }
         return redirect()->route('user.index')->withSuccess('Usuario Modificado con exito');
     }

@@ -103,7 +103,7 @@ class PlantillasController extends Controller
         'file'=>$pathFile
         ]);
 
-        Proyecto::firstOrCreate(['name'=>$carga_masiva_name],['description'=>$carga_masiva_name, 'carga_masivas_id'=> $carga_masiva->id]);
+        Proyecto::firstOrNew(['name'=>$carga_masiva_name],['description'=>$carga_masiva_name, 'carga_masivas_id'=> $carga_masiva->id]);
 
         foreach ($data_excel_array as $datarow)
         {
@@ -127,6 +127,38 @@ class PlantillasController extends Controller
                 }
             }
 
+        }
+        $errores=[];
+
+
+        $plantillas= Plantilla::where('carga_masivas_id',$carga_masiva->id)->get();
+
+        foreach ($plantillas as $plantilla) {
+
+
+            //Crea o actualizada usuario
+            $user = User::where('email',$plantilla->email)->first();
+            if($user!==null){
+
+               if ($user->hasRole('admin') ){
+                    $errores[] = $user;
+                    $errores2[] = ['name'=>$plantilla->name,
+                    'email'=>$plantilla->email,
+                    'email_super'=>$plantilla->email_super,
+                    'ubicacion'=>$plantilla->ubicacion,
+                    'usuario'=>'admin',
+                    'error'=>'El usuario admin es exclusivo y no tiene dependientes funcionales',
+                ];
+               }
+            }
+
+        }
+        if ($errores)
+        {
+            $errores2= collect($errores2);
+            $carga_masiva->delete();
+
+            return \view('plantillas.errores',compact('errores','errores2','carga_masiva'));
         }
 
         $modelos =  Modelo::all();

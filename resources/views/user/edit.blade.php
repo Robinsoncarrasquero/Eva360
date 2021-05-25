@@ -80,33 +80,30 @@
                 </select>
             </div>
         </div>
+
         <div class="justify-content-start">
             <div class="col-sm-6">
                 <label >Rol de usuario</label>
-                <select class="form-control" id="roluser" name="roluser">
-                    @foreach ($user->roles as $roluser)
-                        <option  selected  value="{{ $roluser->id}}">{{ $roluser->name}}</option>
+                <select  class="form-control" id="roluser" name="roluser">
+
+                    @foreach ($roles as $rol)
+
+                        @if($user_admin)
+                            <option selected  value="0">Admin</option>
+                            @break
+                        @endif
+
+                        @foreach ($user->roles as $roluser)
+                            @if ($rol->id=$roluser->id)
+                                <option  selected  value="{{ $rol->id}}">{{ $rol->name}}</option>
+                            @else
+                                <option            value="{{ $rol->id}}">{{ $rol->name}}</option>
+                            @endif
+                        @endforeach
                     @endforeach
                 </select>
             </div>
         </div>
-        {{-- <div class="justify-content-start">
-            <div class="col-sm-6">
-                <label >Nuevo Rol</label>
-                <select  class="form-control" id="newrol" name="newrol">
-                    @foreach ($roles as $rol)
-                        @if ($rol->id==$roluser->id)
-                            <option selected  value="{{$rol->id}}">{{ $rol->name}}</option>
-                        @else
-                            <option  value="{{$rol->id}}">{{ $rol->name}}</option>
-                        @endif
-                        @if($user_admin && $rol->id==$roluser->id))
-                            @break
-                        @endif
-                    @endforeach
-                </select>
-            </div>
-        </div> --}}
 
         <div class="justify-content-start">
             <div class="col-sm-6">
