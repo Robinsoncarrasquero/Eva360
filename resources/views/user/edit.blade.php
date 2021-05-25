@@ -23,6 +23,13 @@
         </div>
 
         <div class="justify-content-start">
+            <div class="col-6">
+                <label for="codigo">Codigo</label>
+                <input type="text" class="form-control"  id="codigo" name="codigo" value="{{$user->codigo}}">
+            </div>
+        </div>
+
+        <div class="justify-content-start">
             <div class="col-sm-6">
                 <label for="email">Email</label>
                 <input id="email" class="form-control"  name="email"  value="{{ $user->email }}">
@@ -31,9 +38,21 @@
 
         <div class="justify-content-start">
             <div class="col-sm-6">
+                <label for="email_super">Email Supervisor</label>
+                <input id="email_super" class="form-control"  name="email_super"
+                value="@if($user_admin) {{ $user->email}}@else {{ $user->email_super }}@endif">
+            </div>
+        </div>
+
+        <div class="justify-content-start">
+            <div class="col-sm-6">
                 <label >Cargo</label>
                 <select class="form-control" id="cargo" name="cargo">
                     @foreach ($cargos as $cargo)
+                        @if($user_admin)
+                            <option selected  value="0">Administrator</option>
+                            @break
+                        @endif
                         @if ($cargo->id==$user->cargo_id)
                             <option selected  value="{{ $cargo->id }}">{{ $cargo->name}}</option>
                         @else
@@ -48,6 +67,10 @@
                 <label >Ubicacion</label>
                 <select class="form-control" id="departamento" name="departamento">
                     @foreach ($departamentos as $departamento)
+                        @if($user_admin)
+                            <option selected  value="0">Administrator</option>
+                            @break
+                        @endif
                         @if ($departamento->id==$user->departamento_id)
                             <option selected  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
                         @else
@@ -59,7 +82,7 @@
         </div>
         <div class="justify-content-start">
             <div class="col-sm-6">
-                <label >Actual Rol</label>
+                <label >Rol de usuario</label>
                 <select class="form-control" id="roluser" name="roluser">
                     @foreach ($user->roles as $roluser)
                         <option  selected  value="{{ $roluser->id}}">{{ $roluser->name}}</option>
@@ -67,7 +90,7 @@
                 </select>
             </div>
         </div>
-        <div class="justify-content-start">
+        {{-- <div class="justify-content-start">
             <div class="col-sm-6">
                 <label >Nuevo Rol</label>
                 <select  class="form-control" id="newrol" name="newrol">
@@ -77,18 +100,25 @@
                         @else
                             <option  value="{{$rol->id}}">{{ $rol->name}}</option>
                         @endif
-                        @if(Auth::user()->admin() && $rol->id==$roluser->id))
+                        @if($user_admin && $rol->id==$roluser->id))
                             @break
                         @endif
                     @endforeach
                 </select>
             </div>
-        </div>
+        </div> --}}
 
         <div class="justify-content-start">
             <div class="col-sm-6">
                 <label for="phone_number">Movil</label>
                 <input id="phone_number" class="form-control"  name="phone_number"  value="{{ $user->phone_number }}">
+            </div>
+        </div>
+
+        <div class="justify-content-start">
+            <div class="col-sm-6">
+                <label class="form-check-label " for="active" style="color: rgb(255, 165, 0);font-size:1.5em">Activo</label>
+                <input type="checkbox" class="check-select "  name="active" @if($user->active) checked @endif>
             </div>
         </div>
 

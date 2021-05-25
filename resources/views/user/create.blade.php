@@ -13,7 +13,7 @@
         <h5 >Editar Usuario</h5>
     </div>
 
-    <form action="{{route('user.store')  }}" method="post">
+    <form class="card-header" action="{{route('user.store')  }}" method="post">
         @csrf
         <div class="justify-content-start">
             <div class="col-6">
@@ -30,9 +30,17 @@
         </div>
 
         <div class="justify-content-start">
+            <div class="col-sm-6">
+                <label for="email_super">Email Supervisor</label>
+                <input id="email_super" class="form-control"  name="email_super" value="{{ old('email')}}">
+            </div>
+        </div>
+
+        <div class="justify-content-start">
             <div class="col-6">
                 <label >Cargo</label>
                 <select class="form-control" id="cargo" name="cargo">
+                    <option  value="0">Usuario Admin</option>
                     @foreach ($cargos as $cargo)
                         <option  value="{{ $cargo->id }}">{{ $cargo->name}}</option>
                     @endforeach
@@ -44,6 +52,7 @@
             <div class="col-6">
                 <label >Ubicacion</label>
                 <select class="form-control" id="departamento" name="departamento">
+                    <option  value="0">Usuario Admin</option>
                     @foreach ($departamentos as $departamento)
                         <option  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
                     @endforeach
@@ -53,14 +62,14 @@
 
         <div class="justify-content-start">
             <div class="col-6">
-                <label for="name">Codigo</label>
+                <label for="codigo">Codigo</label>
                 <input type="text" class="form-control"  id="codigo" name="codigo" value="{{old('codigo')}}">
             </div>
         </div>
 
         <div class="justify-content-start">
             <div class="col-6">
-                <label >Roles de Usuario</label>
+                <label >Rol de Usuario</label>
                 <select class="form-control" id="roluser" name="roluser">
                     @foreach ($roles as $roluser)
                         <option  value="{{ $roluser->id }}">{{ $roluser->name}}</option>

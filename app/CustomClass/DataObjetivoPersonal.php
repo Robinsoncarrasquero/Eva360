@@ -82,9 +82,8 @@ class DataObjetivoPersonal{
 
             {
                 $brecha=100;$cumplimiento=0;$potencial=0;
-                if (collect($dataMeta)->avg('data')!=0){
-                    $cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
 
+                if (collect($dataMeta)->avg('data')!=0){
                     $cumplimiento=collect($arrayCumplimiento)->avg('data');
                     $brecha= 100 - $cumplimiento;
                 }

@@ -77,22 +77,27 @@ class UserController extends Controller
 
         ]);
 
+        //Agredamos el nuevo rol
+        $user_role = Role::find($request->roluser);
+
         try {
             $record = new User();
             $record->name=$request->name;
             $record->email=$request->email;
-            $record->departamento_id=$request->departamento;
-            $record->cargo_id = $request->cargo;
-            $record->codigo=$request->codigo;
+            if ($user_role->name=="user"){
+                $record->departamento_id=$request->departamento;
+                $record->cargo_id = $request->cargo;
+                $record->codigo=$request->codigo;
+                $record->email_super=$request->email_super;
+            }
             $record->email_verified_at= now();
             $record->password = bcrypt('secret1234');
             $record->remember_token=Str::random(10);
             $record->phone_number=$request->phone_number;
             $record->save();
 
-            //Agredamos el nuevo rol
-            $new_rol = Role::find($request->roluser);
-            $record->roles()->attach($new_rol);
+            //Agregammos el nuevo rol
+            $record->roles()->attach($user_role);
 
 
         } catch (QueryException $e) {
@@ -100,23 +105,13 @@ class UserController extends Controller
             ->withErrors('Error imposible crear este registro. correo ya fue tomado por otro usuario.');
         }
 
-        Alert::success('Registro exitoso',Arr::random(['Good','Excelente','Magnifico','Muy bien']));
+        //Alert::success('Registro exitoso',Arr::random(['Good','Excelente','Magnifico','Muy bien']));
 
         return \redirect('user')->withSuccess('Usuario : '.$request->name.' Registrado exitosamente');
 
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -124,14 +119,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($user)
+    public function edit(User $user)
     {
         //
-        $user = User::findOrFail($user);
+
+
+        //$user = User::findOrFail($user);
         $cargos= Cargo::all();
         $departamentos= Departamento::all();
+        $user_admin= $user->hasRole('admin') ;
+
         $roles = Role::all();
-        return \view('user.edit',\compact('user','roles','departamentos','cargos'));
+        return \view('user.edit',\compact('user','roles','departamentos','cargos', 'user_admin'));
 
     }
 
@@ -148,8 +147,9 @@ class UserController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required|unique:users,email,'.$id,
+                'email_super' => 'required',
                 'roluser' => 'required',
-                'newrol' => 'required',
+                //'newrol' => 'required',
                 'departamento' => 'required',
                 'cargo' => 'required',
             ],
@@ -157,28 +157,36 @@ class UserController extends Controller
                 'name.required'=>'El nombre es requerido.',
                 'email.required' => "Email del usuario es unico y obligatorio.",
                 'roluser.required' => "Debe especificar un rol de usuario.",
-                'newrol.required' => "Nuevo rol es requerido.",
+                //'newrol.required' => "Nuevo rol es requerido.",
                 'email.unique' => "Este email ya ha sido tomado por otro usuario.",
                 'departamento.required' => "Ubicacion es Requerida.",
                 'cargo.required' => "Cargo es Requerido.",
+                'email_super' => "Email del supervisor es requerido.",
 
             ]);
+
+
         $user =User::findOrFail($id);
         $user->email=$request['email'];
-        $user->name = $request['name'];
-        $user->cargo_id = $request['cargo'];
-        $user->departamento_id = $request['departamento'];
-        $user->phone_number = $request['phone_number'];
-
+        if(!$user->hasRole('admin')){
+            $user->name = $request['name'];
+            $user->departamento_id = $request['departamento'];
+            $user->cargo_id = $request['cargo'];
+            $user->email_super=$request['email_super'];
+            $user->phone_number = $request['phone_number'];
+            $user->active = $request['active'] ? 1 : 0;
+        }
         $user->save();
 
         //Eliminamos el rol anterior
-        $userRol = Role::find($request->roluser);
-        $user->roles($userRol)->detach();
+        if(!$user->hasRole('admin')){
+            // $userRol = Role::find($request->roluser);
+            // $user->roles($userRol)->detach();
 
-        //Agredamos el nuevo rol
-        $new_rol = Role::find($request->newrol);
-        $user->roles()->attach($new_rol);
+            // //Agredamos el nuevo rol
+            // $new_rol = Role::find($request->newrol);
+            // $user->roles()->attach($new_rol);
+        }
         return redirect()->route('user.index')->withSuccess('Usuario Modificado con exito');
     }
 
