@@ -38,7 +38,6 @@ class TalentController extends Controller
             $departamentos=Departamento::where('id',0)->orderBy('id','DESC')->paginate(5);
         }
 
-
         return \view('talent.index',compact('departamentos','title'));
     }
 

@@ -33,6 +33,8 @@
             @if ($departamentos->count())
 
                 @foreach ($departamentos as $departamento)
+                @if ($departamento->empleados->count()>0)
+
                     <div class="panel panel mt-4">
                         <span class="titulo-subproyecto text-dark">{{ $departamento->name }} </span>
                         <span  style="font-size: 0.75rem" class="titulo-proyecto" >
@@ -97,6 +99,8 @@
                             </tbody>
                         </table>
                     </div>
+                    @endif
+
                 @endforeach
 
                 <div class=" d-flex justify-content-center">
