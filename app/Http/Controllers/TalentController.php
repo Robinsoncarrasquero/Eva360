@@ -77,6 +77,11 @@ class TalentController extends Controller
             \abort(404);
         }
 
+        if ($empleado->email_super===null){
+            return redirect()->back()
+            ->withError('Evaluado No tiene supervisor designado!!.');
+        }
+
         $userR= new UserRelaciones();
         $userR->Crear($empleado);
 

@@ -30,11 +30,17 @@ class UserRelaciones
     public function Crear(User $user)
     {
 
+
         $this->user = $user;
+
+        if ($user->email_super===null){
+            return false;
+        }
 
         //$user = User::where('email',$user->email)->first();
 
         $supervisor= User::where('email',$user->email_super)->first();
+
         $evaluadores[]=['name'=>$supervisor->name,'email'=>$supervisor->email,'user_id=>'=>$supervisor->id];
         $this->supervisor=$supervisor;
 
