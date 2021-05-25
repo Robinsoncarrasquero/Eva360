@@ -196,9 +196,11 @@ class PlantillasController extends Controller
                 'email_super'=>$plantilla->email_super,
                 ]);
 
-                // $role_user = Role::where('name', 'user')->first();
-                // $user->roles()->attach($role_user);
-                // $user->save();
+                if(!$user->hasRole('user')){
+                    $role_user = Role::where('name', 'user')->first();
+                    $user->roles()->attach($role_user);
+                    $user->save();
+                }
 
                 //Actulaizad manager
                 if ($plantilla->manager){
