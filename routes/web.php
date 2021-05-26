@@ -185,7 +185,7 @@ Route::middleware(['auth', 'role:admin'])->group( function() {
 
     Route::post('/plantillas/{id}/procesar', 'PlantillasController@procesar')->name('plantillas.procesar');
 
-    Route::get('/plantillas/{id}/delete', 'PlantillasController@delete')->name('plantillas.delete');
+    Route::post('/plantillasdelete/{id}/delete', 'PlantillasController@destroy')->name('plantillas.delete');
 
 
     Route::get('/plantillas/verproyecto/{id}', 'PlantillasController@verproyecto')->name('plantillas.verproyecto');

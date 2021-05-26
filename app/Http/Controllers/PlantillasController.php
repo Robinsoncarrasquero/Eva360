@@ -181,11 +181,11 @@ class PlantillasController extends Controller
             'name'=>'required',
             'description'=>'required',
             // 'metodo'=>'required',
-            'modeloradio'=>'required',
+            // 'modeloradio'=>'required',
             ],[
                 'name.required'=>'Nombre es requerido',
                 'description.required'=>'Descripcion es requerida',
-                'modeloradio.required' => 'Debe seleccionar un modelo. Es mandatorio'
+                // 'modeloradio.required' => 'Debe seleccionar un modelo. Es mandatorio'
             ],
 
         );
@@ -199,7 +199,7 @@ class PlantillasController extends Controller
             $cm->name=$request->name;
             $cm->description= $request->description;
             //$cm->metodo= $request->metodo;
-            $cm->modelo_id= $modelo;
+            // $cm->modelo_id= $modelo;
             $cm->save();
 
             $plantillas= $cm->plantillas;
@@ -260,9 +260,7 @@ class PlantillasController extends Controller
             ->withErrors('Error imposible Procesar esta Plantilla tiene errores. Revise que los datos este correctos en la hoja de Excel.');
         }
 
-
-
-        return \redirect()->route('plantillas.index')->withSuccess('Importacion de Plantilla : '.$request->name.' Procesada exitosamente');
+       return \redirect()->route('plantillas.index')->withSuccess('Importacion de Plantilla : '.$request->name.' Procesada exitosamente');
     }
 
     /**
@@ -390,18 +388,33 @@ class PlantillasController extends Controller
     }
 
     /**
-     * Elimina una carga masiva
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function delete($carga_masiva)
+    public function destroy($carga_masiva)
     {
+        try {
+            $record= CargaMasiva::find($carga_masiva);
+            $record->delete();
+            $success = true;
+            $message = "Carga masiva eliminada exitosamente";
+        } catch (QueryException $e) {
+            $success = false;
+            $message = "No se puede eliminar este registro, data restringida";
+            // return redirect()->back()
+            // ->withErrors('Error imposible Eliminar este registro, tiene un modelo de competencias asociado');
+        }
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
 
-        $carga_masiva= CargaMasiva::findOrFail();
-        $carga_masiva->delete;
 
-        $metodos=['90','180','360'];
-        $carga_masiva= CargaMasiva::orderBy('created_at','DESC')->simplePaginate(25);
-
-        return \view('plantillas.index',compact('carga_masiva','metodos'));
+        // return  redirect()->route('plantillas.index')->withSuccess('Carga masiva eliminada con exito');
     }
 
     /**

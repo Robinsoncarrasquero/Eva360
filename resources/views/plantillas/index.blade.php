@@ -30,15 +30,16 @@
                     <th style="width:20%" class="alert-dark text-center">Nombre</th>
                     <th style="width:10%" class="alert-warning text-center">Metodo</th>
                     <th style="width:10%" class="alert-warning text-center">Modelo</th>
-                    {{-- <th style="width:5%" class="alert-success text-center">Plantilla</th> --}}
+                    <th style="width:5%" class="alert-success text-center">Organigarma</th>
                     <th style="width:10%" class="alert-dark text-center">Registros</th>
                     <th style="width:10%" class="alert-warning text-center">Evaluaciones</th>
                     <th style="width:10%" class="alert-dark text-center">Lanzar</th>
+                    <th style="width:10%" class="alert-dark text-center">delete</th>
                 </thead>
                 <tbody>
                 @foreach ($carga_masiva as $cargamasiva )
 
-                <tr >
+                <tr id="{{ $cargamasiva->id }}">
                     {{-- <td>{{ substr($empleado->name,0,50) }}<span style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)"><br>{{ $empleado->cargo->name}}</span></td> --}}
                     <td class="text text-center">{{ $cargamasiva->updated_at }} </td>
                     <td>{{ ($cargamasiva->description) }} </td>
@@ -51,11 +52,11 @@
                          @endif
                     </td>
 
-                    {{-- <td class="text text-center">
+                    <td class="text text-center">
 
                         <a href="{{route('plantillas.organigrama',$cargamasiva->id)}}"><span><i class="material-icons">question_answer</i></span></a>
 
-                    </td> --}}
+                    </td>
 
                     <td class="text text-center">
                         <a><span class="badge badge-warning">{{ $cargamasiva->plantillas->count() }}</span></a>
@@ -84,6 +85,10 @@
                             <a ><span><i class="material-icons text-dark">library_add</i></span></a>
                         @endif
                     </td>
+
+                    <td>
+                        <button class="btn btn-danger" onclick="deleteConfirmation({{$cargamasiva->id}},'{{route('plantillas.delete',$cargamasiva->id)}}')">Delete</button>
+                    </td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -102,4 +107,9 @@
 
 </div>
 
+    @section('scripts')
+        <script src="{{ asset('js/deleteConfirmation.js') }}"></script>
+    @endsection
+
 @endsection
+

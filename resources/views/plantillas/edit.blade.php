@@ -15,7 +15,7 @@
             <h5>Importacion de Plantilla de Personal</h5>
         </div>
 
-        {{-- <div id="container" ></div> --}}
+        <div id="container" ></div>
 
         <div class="card-header">
 
@@ -47,7 +47,7 @@
                     </select>
                 </div> --}}
 
-                <div class="col-lg-12 text-center">
+                {{-- <div class="col-lg-12 text-center">
                     <h2>Seleccione un Modelo</h2>
                 </div>
 
@@ -80,7 +80,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="clearfix col-lg-12 mt-2">
                     <a href="{{route('plantillas.index')}}" class="btn btn-dark float-left">Regresar</a>
