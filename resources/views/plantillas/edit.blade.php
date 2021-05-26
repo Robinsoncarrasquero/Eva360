@@ -34,7 +34,7 @@
                         maxlength="250" name="description">{{ $carga_masiva->description }}</textarea>
                 </div>
 
-                <div class="col-lg-12">
+                {{-- <div class="col-lg-12">
                     <label for="metodo">Metodos</label>
                     <select id="metodo" class="form-control" name="metodo" >
                         @foreach ($metodos as $metodo)
@@ -45,7 +45,7 @@
                             @endif
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="col-lg-12 text-center">
                     <h2>Seleccione un Modelo</h2>

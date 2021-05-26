@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Editar Carga Masiva")
+@section('title',"Lanzar Carga Masiva")
 
 @section('content')
 
@@ -11,7 +11,7 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Lanzar Evaluacion Masiva desde la Plantilla de Personal</h5>
+            <h5>Lanzar una Evaluacion Masiva desde la Plantilla de Personal Importada</h5>
         </div>
 
         <div class="card-header">
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <label for="metodo">Metodos</label>
+                    <label for="metodo">Metodos disponibles en la data importada</label>
                     <select id="metodo" class="form-control" name="metodo" >
                         @foreach ($metodos as $metodo)
                             @if ($carga_masiva->metodo==$metodo)
@@ -61,7 +61,7 @@
                 </div>
                 <br>
                 <div class="col-lg-12 text-center">
-                    <h2>Seleccione un Modelo</h2>
+                    <h2>Seleccione un Modelo de Competencias</h2>
                 </div>
 
                 <div class="row ">

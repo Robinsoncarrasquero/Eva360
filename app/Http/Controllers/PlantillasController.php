@@ -103,7 +103,11 @@ class PlantillasController extends Controller
         'file'=>$pathFile
         ]);
 
-        Proyecto::firstOrNew(['name'=>$carga_masiva_name],['description'=>$carga_masiva_name, 'carga_masivas_id'=> $carga_masiva->id]);
+        Proyecto::firstOrCreate(['name'=>$carga_masiva_name],
+        [
+            'description'=>$carga_masiva_name,
+            'carga_masivas_id'=> $carga_masiva->id
+        ]);
 
         foreach ($data_excel_array as $datarow)
         {
@@ -176,7 +180,7 @@ class PlantillasController extends Controller
         $request->validate([
             'name'=>'required',
             'description'=>'required',
-            'metodo'=>'required',
+            // 'metodo'=>'required',
             'modeloradio'=>'required',
             ],[
                 'name.required'=>'Nombre es requerido',
@@ -194,7 +198,7 @@ class PlantillasController extends Controller
             $cm = CargaMasiva::findOrFail($id);
             $cm->name=$request->name;
             $cm->description= $request->description;
-            $cm->metodo= $request->metodo;
+            //$cm->metodo= $request->metodo;
             $cm->modelo_id= $modelo;
             $cm->save();
 
