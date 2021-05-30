@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 class DataPersonal{
     private $dataSerie;
     private $dataCategoria;
-    private $evaluados;
+    private $evaluados ;
     private $objDataEvaluacion;
     private $dataMeta;
     private $dataBrecha;
@@ -50,10 +50,16 @@ class DataPersonal{
         $dataMeta= $this->getDataMeta();
         foreach ($dataMeta as $item) {
             $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
+            $arrayPromedio []=['name'=> $item['name'],'data'=>$item['data']];
         }
+
+        //Promedio de las competencias del Modelo
+
+        $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
+
         $arraySerieBrecha=[];$arrayCategoriaBrecha=[];
         foreach ($data as $key => $value) {
-            $arrayCategoria[]=$value['categoria'];
+            $arrayCategoria[]=$value['categoria']; //El nombre del evaluado es la categoria
 
             /**
              * Creamos arreglos de control dinamico para manejar la data de oportunidad
@@ -65,9 +71,15 @@ class DataPersonal{
             $arraydataOportunidad=[];
             $arraydataFortaleza=[];
             $arrayPotencial=[];
+            $arrayPromedio=[];
             foreach ($value['data'] as $item) {
                 $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['eva360']];
+
                 $arrayPotencial[] =['name'=> $item['name'],'data'=>$item['eva360']];
+
+                //Promedio del Modelo
+                $arrayPromedio[]=['name'=>$value['categoria'],'data'=>$item['eva360']];
+
                 /**
                  * Cuando el resultado es menos que nivel requerido se genera una oportunidad de mejora
                  */
@@ -79,6 +91,7 @@ class DataPersonal{
                     $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['nivel']];
                 }
             }
+            $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
 
             {
                 $brecha=100;$cumplimiento=0;$potencial=0;
@@ -111,9 +124,24 @@ class DataPersonal{
         $agrouped = $datacollection->mapToGroups(function ($item, $key) {
             return [$item['name']=>$item['data']];
         });
+
         foreach ($agrouped as $key => $datavalue) {
             $arraydataSerie[]=['name'=>$key,'data'=>$datavalue];
         }
+
+        //Tomamos el promedio del modelo y promedio de cada evaluado
+        //Generamos una colleccion para agrupar la data de la serie
+        $dataPromedioModelocollection=collect($arrayPromedioModelo);
+
+        $agrouped = $dataPromedioModelocollection->mapToGroups(function ($item, $key) {
+            return [$item['name']=>$item['data']];
+        });
+        //Agregamos el promedio en la serie para presentaros en la grafica
+        foreach ($agrouped as $key => $datavalue) {
+            $arraydataSerie[]=['name'=>$key,'data'=>$datavalue];
+        }
+
+
         $this->dataBrecha=$arraydataBrecha;
         $this->dataCategoria=$arrayCategoria;;
         $this->dataSerie=$arraydataSerie;
@@ -157,13 +185,17 @@ class DataPersonal{
             $arrayDataSerie[] =['name'=> $value['competencia'],'eva360'=>$value['eva360'],'nivel'=>$value['nivelRequerido']];
             //Creamos los datos de las competencias con su margen para la serie meta
             $arrayDataMeta[] =['name'=> $value['competencia'],'data'=>$value['nivelRequerido']];
+
+
         }
+
 
         $datacollection= collect($arrayEvaluador);
         //Agrupamos la data de evaluadores para obtener una coleccion
         $evagrouped = $datacollection->mapToGroups(function ($item, $key) {
             return [$item['name']=>$item['average']];
         });
+
 
         //Buscamos el evaluado
         $evaluado = Evaluado::find($this->evaluado_id);

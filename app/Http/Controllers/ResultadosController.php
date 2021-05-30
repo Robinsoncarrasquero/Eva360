@@ -66,6 +66,7 @@ class ResultadosController extends Controller
         if (!$dataSerie){
             \abort(404);
         }
+        //dd($dataSerie,$dataCategoria);
         return \view('resultados.charteva360',compact("dataSerie","dataCategoria","title","evaluado"));
     }
 

@@ -38,11 +38,6 @@ class DataResultado{
         $evagrouped = $collection->mapToGroups(function ($item, $key) {
             return [$item['name']=>$item['average']];
         });
-        //filtramos para un solo grupo de evaluadores
-        // $relation='Boss';
-        // $filtro = $evagrouped->reject(function ($item, $key) use ($relation){
-        //     return  $key!=$relation ;
-        // });
 
         //Creamos un array con la data de cada serie
 
@@ -52,7 +47,7 @@ class DataResultado{
 
         $dataSerie[]= ['name'=>'Nivel Requerido','data'=>$arrayNivel];
 
-       // $dataSerie[]= ['name'=>'Evaluacion','data'=>$arrayEvaluacion];
+        $dataSerie[]= ['name'=>'Evaluacion','data'=>$arrayEvaluacion];
 
         $this->dataCategoria=$arrayCategoria;
         $this->dataSerie=$dataSerie;

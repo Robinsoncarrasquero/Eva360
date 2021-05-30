@@ -30,7 +30,7 @@
                     <th style="width:20%" class="alert-dark text-center">Nombre</th>
                     <th style="width:10%" class="alert-warning text-center">Metodo</th>
                     <th style="width:10%" class="alert-warning text-center">Modelo</th>
-                    <th style="width:5%" class="alert-success text-center">Organigarma</th>
+                    <th style="width:5%" class="alert-success text-center">Organigrama</th>
                     <th style="width:10%" class="alert-dark text-center">Registros</th>
                     <th style="width:10%" class="alert-warning text-center">Evaluaciones</th>
                     <th style="width:10%" class="alert-dark text-center">Lanzar</th>
