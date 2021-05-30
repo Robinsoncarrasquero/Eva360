@@ -30,44 +30,10 @@
 <div class="container">
 
     <div class="mt-3">
-        <div class="col-lg-12 mb-1" id="container0"></div>
+        <div class="col-lg-12 mb-1" id="container-column"></div>
+        <div class="col-lg-12 mb-1" id="container-line"></div>
     </div>
 
-    {{-- <div class="mt-3">
-
-        @if($competencias)
-
-            <div class="row">
-                @foreach($competencias as $key=>$value)
-                    <div class="table col-6 ">
-                        <table id="{{$key}}" class="table table-bordered table-table">
-                            <thead>
-                            <tr>
-                                <th class="text text-center title-th-competencia" colspan="2">
-                                <strong >{{ $value['competencia']}} (Margen Requerido {{ $value['nivelRequerido'] }})
-                                </strong> </th>
-                            </tr>
-                            <th>Evaluador</th>
-                            <th>Poderado</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($value['data'] as $item)
-                                <tr>
-                                    <td >{{ $item['name']}}</td>
-                                    <td>{{ number_format($item['average'],2)}}</td>
-                                </tr>
-                                @endforeach
-                                <tr>
-                                    <td class="text text-center"><strong>Resultado Final</strong></td>
-                                    <td class="text text-dark" ><a href=""><i class="material-icons">bar_chart</i></a>{{ number_format($value['eva360'],2)}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                @endforeach
-            </div>
-        @endif
-    </div> --}}
     <div class="clearfix">
         <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
     </div>
@@ -84,23 +50,22 @@
     var categorias =  @json($dataCategoria);
     var evaluado =  @json($evaluado->name);
 
-    categorias.forEach(logArrayElements);
+    // categorias.forEach(logArrayElements);
 
-    function logArrayElements(element, index, array) {
-        console.log("a[" + index + "] = " + element);
-    }
+    // function logArrayElements(element, index, array) {
+    //     console.log("a[" + index + "] = " + element);
+    // }
 
-    ['data1'].forEach(mychar);
+    ['column','line'].forEach(mychar);
 
     function mychar(element,index,array)
     {
-        Highcharts.chart('container'+index, {
+        Highcharts.chart('container-'+element, {
             chart: {
-            type: 'column'
-        },
-        //Highcharts.chart('container', {
+                type: element
+            },
             title: {
-                text: "Resultado de la evaluacion"
+                text: "Resultado de la evaluacion :"+element
             },
             subtitle: {
                 text: evaluado
@@ -139,10 +104,9 @@
                     }
                 }]
 
-        }
+            }
 
-
-    });
+        });
 
     }
 

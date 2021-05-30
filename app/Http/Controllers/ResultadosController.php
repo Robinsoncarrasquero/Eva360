@@ -119,8 +119,7 @@ class ResultadosController extends Controller
             \abort(404);
         }
         $title="Analisis de cumplimiento";
-        return \view('resultados.subproyecto.charpotencialporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha"));
-  //      return \view('resultados.subproyecto.cumplimiento',compact("dataSerieBrecha","dataCategoriaBrecha","title","subProyecto",'dataBrecha'));
+        return \view('resultados.subproyecto.charcumplimientoporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha"));
     }
 
     /**

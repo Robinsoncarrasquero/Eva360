@@ -31,7 +31,8 @@
 <div class="container">
 
     <div class="mt-3">
-        <div class="col-12 mb-1" id="container"></div>
+        <div class="col-12 mb-1" id="container-line"></div>
+        <div class="col-12 mb-1" id="container-column"></div>
     </div>
 
 
@@ -41,7 +42,7 @@
 
             <div class="clearfix">
                 <div class=" text-center">
-                    <h5>Indicadores por competencias</span></h5>
+                    <h5>Indicadores por Competencias</span></h5>
                 </div>
 
             </div>
@@ -63,13 +64,22 @@
                         <tbody>
                             @foreach ($dataSerie as $key=>$dataValue)
                             <tr>
-                                <td>{{$dataValue['name']}}</td>
-                                @foreach ($dataValue['data'] as $vdata)
-                                    @if ($dataValue['data'][0]>($vdata))
-                                        <td class="text text-danger">{{ number_format($vdata,2)}}</td>
+                                <td>{{$dataValue['name']}} </td>
+
+                                @foreach ($dataValue['data'] as $key2=>$vdata)
+
+                                {{-- <td class="text text-danger">{{ number_format($vdata,2)}} key {{ $key2}} {{ $dataValue['data'][0] }}</td> --}}
+
+
+                                    @if($dataValue['data'][0]>($vdata) && $key2>0)
+                                        <td style="font-size:1.5em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
+
                                     @else
-                                        <td>{{ number_format($vdata,2)}}</td>
+                                    <td style="font-size:1.5em; color:green;" class="text text-center">{{ number_format($vdata,2)}}</td>
+
+                                        {{-- <td style="font-size:1.5em; color:white;background:green" class="text text-center">{{ number_format($vdata,2)}}</td> --}}
                                     @endif
+
                                 @endforeach
                             </tr>
                             @endforeach
@@ -105,15 +115,18 @@
                         <tr style="text-align: center">
 
                         <td style="text-align: left">{{$value['categoria']}}</strong></td>
-                        <td>{{ number_format($value['cumplimiento'],2) }}</td>
+                        <td>
+                            <span style="font-size:1.5em; color:green">{{ number_format($value['cumplimiento'],2) }}</span>
+                        </td>
                         <td>
                         @if ($value['cumplimiento']!=100)
-                            {{ number_format($value['brecha'],2) }}
+                        <span style="font-size:1.5em; color:red">{{ number_format($value['brecha'],2) }}</span>
                         @endif
                         </td>
                         <td>
                             @if ($value['potencial']>100)
-                            {{ number_format($value['potencial'],2) }}
+                            <span style="font-size:1.5em; color:white;background:green">{{ number_format($value['potencial'],2) }}</span>
+
                             @endif
                         </td>
                         <td>
@@ -150,44 +163,50 @@
     var dataSerie =  @json($dataSerie);
     var categorias =  @json($dataCategoria);
     var subProyectoName = @json($subProyecto->name);
-    Highcharts.chart('container', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Resultados de competencias por grupo'
-        },
-        subtitle: {
-            text:  subProyectoName
 
-        },
-        xAxis: {
-            categories:categorias,
+    ['column','line'].forEach(mychar);
 
-            crosshair: true
-        },
-        yAxis: {
-            min: 0,
+    function mychar(element,index,array)
+    {
+            Highcharts.chart('container-'+element, {
+                chart: {
+                type: element
+            },
             title: {
-                text: 'Nivel de Dominio'
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        series:dataSerie,
-    });
+                text: 'Resultados de competencias por grupo :'+element
+            },
+            subtitle: {
+                text:  subProyectoName
+
+            },
+            xAxis: {
+                categories:categorias,
+
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Nivel de Dominio'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series:dataSerie,
+        });
+    }
 </script>
 
 </body>

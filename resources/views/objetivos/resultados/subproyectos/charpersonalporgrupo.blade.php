@@ -31,9 +31,12 @@
 <div class="container">
 
     <div class="mt-3">
-        <div class="col-12 mb-1" id="container"></div>
+        <div class="col-lg-12 mb-1" id="container-line"></div>
     </div>
 
+    <div class="mt-3">
+        <div class="col-lg-12 mb-1" id="container-column"></div>
+    </div>
 
     <div class="col-lg-12">
         <div class="col-sm-12">
@@ -41,7 +44,7 @@
 
             <div class="clearfix">
                 <div class=" text-center">
-                    <h5>Indicadores por competencias</span></h5>
+                    <h5>Indicadores por Objetivos</span></h5>
                 </div>
 
             </div>
@@ -52,7 +55,7 @@
                     <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                         <thead class="table-thead">
                             <tr>
-                                <th>Competencias</th>
+                                <th>Objetivos</th>
                                 @foreach ($dataCategoria as $key=>$value)
                                 <th>
                                     {{$value}}</strong>
@@ -66,9 +69,13 @@
                                 <td>{{$dataValue['name']}}</td>
                                 @foreach ($dataValue['data'] as $vdata)
                                     @if ($dataValue['data'][0]>($vdata))
-                                        <td class="text text-danger">{{ number_format($vdata,2)}}</td>
+                                        <td>
+                                            @if ($value['potencial']>100)
+                                            <span style="font-size:1.5em; color:red">{{ number_format($vdata,2) }}</span>
+                                            @endif
+                                        </td>
                                     @else
-                                        <td>{{ number_format($vdata,2)}}</td>
+                                        <td><span style="font-size:1.5em; color:green">{{ number_format($vdata,2)}}</span> </td>
                                     @endif
                                 @endforeach
                             </tr>
@@ -108,12 +115,12 @@
                         <td>{{ number_format($value['cumplimiento'],2) }}</td>
                         <td>
                         @if ($value['cumplimiento']!=100)
-                            {{ number_format($value['brecha'],2) }}
+                            <span style="font-size:1.5em; color:red"> {{ number_format($value['brecha'],2) }}</span>
                         @endif
                         </td>
                         <td>
                             @if ($value['potencial']>100)
-                            {{ number_format($value['potencial'],2) }}
+                            <span style="font-size:1.5em; color:white;background:green"> {{ number_format($value['potencial'],2) }}</span>
                             @endif
                         </td>
                         <td>
@@ -150,12 +157,24 @@
     var dataSerie =  @json($dataSerie);
     var categorias =  @json($dataCategoria);
     var subProyectoName = @json($subProyecto->name);
-    Highcharts.chart('container', {
+
+    // categorias.forEach(logArrayElements);
+
+    // function logArrayElements(element, index, array) {
+    //     console.log("a[" + index + "] = " + element);
+
+    // }
+
+    ['column','line'].forEach(mychar);
+
+    function mychar(element,index,array)
+    {
+        Highcharts.chart('container-'+element, {
         chart: {
-            type: 'column'
+            type: element
         },
         title: {
-            text: 'Resultados de competencias por grupo'
+            text: 'Resultados de objetivos por grupo :'+element
         },
         subtitle: {
             text:  subProyectoName
@@ -188,6 +207,7 @@
         },
         series:dataSerie,
     });
+    }
 </script>
 
 </body>
