@@ -125,7 +125,7 @@
                             @foreach ($dataValue['data'] as $vdata)
                                 @if ($dataValue['data'][0]>($vdata))
                                     <td>
-                                        @if ($value['potencial']>100)
+                                        @if ($vdata>100)
                                         <span style="font-size:1.5em; color:red">{{ number_format($vdata,2) }}</span>
                                         @endif
                                     </td>
