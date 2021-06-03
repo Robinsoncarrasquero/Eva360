@@ -17,7 +17,15 @@ class ConfiguracionController extends Controller
      */
     public function edit(Request $request)
     {
-        $record = Configuracion::first();
+        $record = Configuracion::firstOrCreate(
+            ['name'=>'talent360'],
+            [
+            'sms'=>0,
+            'email'=>0,
+            'promediarautoevaluacion'=>0
+            ]
+
+        );
 
         return \view('configuracion.edit',\compact('record'));
     }

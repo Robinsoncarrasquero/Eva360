@@ -13,7 +13,6 @@ use Nexmo\Laravel\Facade\Nexmo;
 class EnviarSMS
 {
 
-
     /** Envia los sms a los evaluadores de un evaluado */
     public static function SendSMSFacade($evaluado_id){
 
@@ -39,6 +38,12 @@ class EnviarSMS
 
     /** Envia el sms a un evaluador  */
     public static function SendtoEvaluador($evaluador){
+
+         //Obtenemos la configuracion particular
+         $configuraciones = Configuracion::first();
+         if (!$configuraciones->sms){
+             return false;
+         }
 
         $user = $evaluador->user;
         $evaluado = $evaluador->evaluado;

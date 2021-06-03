@@ -38,11 +38,19 @@ class EnviarEmail
             EnviarEmail::enviarEmailEvaluador($evaluador->id);
         }
 
+        return true;
+
     }
 
 
     /** Enviar email de invitacion a Evaluador para responder questionario */
     public static function enviarEmailEvaluador($evaluador_id){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if (!$configuraciones->email){
+            return false;
+        }
 
         //Buscamos el evaluador
         $evaluador = Evaluador::find($evaluador_id);
@@ -50,56 +58,51 @@ class EnviarEmail
         //Buscamos el evaluado del evaluador
         $evaluado = Evaluado::find($evaluador->evaluado_id);
 
-        //Iteramos los evaluadores
-        {
-
-            //Creamos un usuario para responder la prueba con autenticacion
-            try {
-                $user = User::firstOrCreate(
-                    ['email'=>$evaluador->email],[
-                    'name' => $evaluador->name,
-                    'password' => Hash::make('secret1234')
-                ]);
-                if (!$user->hasRole('user')){
-                    $userRole =Role::where('name','user')->first();
-                    $user->roles()->attach($userRole);
-                }
-                $evaluador->user_id = $user->id;
-                $evaluador->save();
-
-            }catch(QueryException $e) {
-                return \false;
-                abort(404,$e);
+        //Creamos un usuario para responder la prueba con autenticacion
+        try {
+            $user = User::firstOrCreate(
+                ['email'=>$evaluador->email],[
+                'name' => $evaluador->name,
+                'password' => Hash::make('secret1234')
+            ]);
+            if (!$user->hasRole('user')){
+                $userRole =Role::where('name','user')->first();
+                $user->roles()->attach($userRole);
             }
+            $evaluador->user_id = $user->id;
+            $evaluador->save();
 
-            $receivers = $evaluador->email;
-
-            //Creamos un objeto para pasarlo a la clase Mailable
-            $data = new EmailSend();
-            $data->nameEvaluador=$evaluador->name;
-            $data->relation =$evaluador->relation;
-            $data->email =$evaluador->email;
-            //$data->linkweb =$root."/evaluacion/$evaluador->remember_token/evaluacion";
-            if ($evaluado->word_key=='Objetivos'){
-                $data->linkweb =Route('objetivo.token',$evaluador->remember_token);
-            }else {
-                $data->linkweb =Route('evaluacion.token',$evaluador->remember_token);
-            }
-            $data->nameEvaluado =$evaluado->name;
-            $data->enviado =false;
-            $data->save();
-            try {
-                Mail::to($receivers)->send(new EvaluacionEnviada($data,'mails.evaluacion-enviada'));
-                $data->enviado =true;
-                $data->save();
-            }catch(QueryException $e) {
-                return \false;
-                abort(404);
-
-            }
-
+        }catch(QueryException $e) {
+            return \false;
+            abort(404,$e);
         }
 
+        $receivers = $evaluador->email;
+
+        //Creamos un objeto para pasarlo a la clase Mailable
+        $data = new EmailSend();
+        $data->nameEvaluador=$evaluador->name;
+        $data->relation =$evaluador->relation;
+        $data->email =$evaluador->email;
+        //$data->linkweb =$root."/evaluacion/$evaluador->remember_token/evaluacion";
+        if ($evaluado->word_key=='Objetivos'){
+            $data->linkweb =Route('objetivo.token',$evaluador->remember_token);
+        }else {
+            $data->linkweb =Route('evaluacion.token',$evaluador->remember_token);
+        }
+        $data->nameEvaluado =$evaluado->name;
+        $data->enviado =false;
+        $data->save();
+        try {
+            Mail::to($receivers)->send(new EvaluacionEnviada($data,'mails.evaluacion-enviada'));
+            $data->enviado =true;
+            $data->save();
+        }catch(QueryException $e) {
+            return \false;
+            abort(404);
+        }
+
+        return true;
     }
 
     /** Envia el correo de finalizacion de la prueba al administrador */
@@ -129,9 +132,11 @@ class EnviarEmail
             Mail::to($receivers)->send(new EvaluacionEnviada($data,'mails.evaluacion-finalizada'));
             $data->enviado =true;
             $data->save();
+
         }catch(QueryException $e) {
             abort(404);
         }
+        return true;
 
     }
 

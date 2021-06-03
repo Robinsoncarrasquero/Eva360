@@ -18,11 +18,11 @@ class AjaxController extends Controller
      {
         $evaluador_id=$request->id;
         if ($request->id>0) {
-            // $objEnviarEmailEvaluador = new EnviarEmail();
-            // $objEnviarEmailEvaluador->enviarEmailEvaluador($evaluador_id);
-            // $objEnviarEmailEvaluador=null;
-            EnviarEmail::enviarEmailEvaluador($evaluador_id);
-            return response()->json(['success'=>true,'message'=>'Cuestionario ha sido enviado ...','errors'=>["email"=>"Email ha sido enviado"]]);
+            if (EnviarEmail::enviarEmailEvaluador($evaluador_id)){
+                return response()->json(['success'=>true,'message'=>'Cuestionario ha sido enviado ...','errors'=>["email"=>"Email ha sido enviado"]]);
+            }
+            return response()->json(['success'=>false,'message'=>"Error, no se envio el cuestionario ",'errors'=>["email"=>"ERROR no ha sido enviado email"]]);
+
          }
          return response()->json(['success'=>false,'message'=>"Error, no se envio el cuestionario ",'errors'=>["email"=>"ERROR Re-enviando email"]]);
      }

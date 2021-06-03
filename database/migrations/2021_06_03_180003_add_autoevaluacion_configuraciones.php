@@ -16,6 +16,7 @@ class AddAutoevaluacionConfiguraciones extends Migration
         Schema::table('configuraciones', function (Blueprint $table) {
             //
             $table->boolean('promediarautoevaluacion');
+            $table->string('name',10)->unique();
         });
     }
 
@@ -28,7 +29,7 @@ class AddAutoevaluacionConfiguraciones extends Migration
     {
         Schema::table('configuraciones', function (Blueprint $table) {
             //
-            $table->dropColumn(['promediarautoevaluacion']);
+            $table->dropColumn(['promediarautoevaluacion','name']);
         });
     }
 }
