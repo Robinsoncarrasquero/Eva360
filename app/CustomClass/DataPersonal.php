@@ -91,6 +91,7 @@ class DataPersonal{
                     $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['nivel']];
                 }
             }
+
             $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
 
             {

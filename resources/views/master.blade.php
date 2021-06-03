@@ -89,11 +89,24 @@
                 @endif
                 @if (Auth::check() && Auth::user()->admin())
                 <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admon
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu2">
+                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Nomina</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a>
+                        <a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"  href="{{ route('ubicacion.index') }}">Ubicacion</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Carga masiva
+                        Importar
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
-                        <a class="dropdown-item"  href="{{ route('plantillas.fileupload') }}">Importar</a>
+                        <a class="dropdown-item"  href="{{ route('plantillas.fileupload') }}">Plantilla</a>
                     </div>
                 </li>
 
@@ -103,28 +116,16 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
 
-                        <a class="dropdown-item"  href="{{ route('plantillas.index') }}">Masivas</a>
+                        <a class="dropdown-item"  href="{{ route('plantillas.index') }}">Importadas</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Competencias</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('lanzarobjetivo.index') }}">Objetivos</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('lanzar.index') }}">Evaluados</a>
+                        <a class="dropdown-item"  href="{{ route('lanzar.index') }}">Individual</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Admon
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu2">
-                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Plantilla</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a>
-                        <a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('ubicacion.index') }}">Ubicacion</a>
-                    </div>
-                </li>
+
 
                 <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -160,10 +161,23 @@
                         <a class="dropdown-item"  href="{{ route('medida.index') }}">Medicion</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Config
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu4">
+                        <a  class="dropdown-item"   href="{{ route('user.index') }}">Users</a>
+                        <div class="dropdown-divider"></div>
+                        <a  class="dropdown-item"   href="{{ route('configuracion.edit') }}">Config</a>
+                    </div>
+                </li>
+                {{-- <li class="nav-item ">
+                    <a  class="nav-link" href="{{ route('user.index') }}">Users</a>
+                </li>
 
                 <li class="nav-item ">
-                    <a  class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
-                </li>
+                    <a  class="nav-link" href="{{ route('configuracion.edit') }}">Config</a>
+                </li> --}}
                 @endif
 
                 @if (Auth::check() && Auth::user()->is_manager)

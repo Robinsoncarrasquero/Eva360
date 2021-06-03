@@ -27,7 +27,19 @@ Route::get('/', function () {
     return view('vision360');
 });
 
+/**
+ * Configuracion del sistema
+ */
+Route::middleware(['auth', 'role:admin'])->group( function() {
+    Route::get('configuracion/config',"ConfiguracionController@edit")
+    ->name('configuracion.edit');
 
+    Route::post('configuracion/update',"ConfiguracionController@update")
+    ->name('configuracion.update');
+});
+/**
+ * Route de plantilla de organigrama fija
+ */
 Route::get('/organigrama', function () {
     return view('plantillas.organigrama');
 });

@@ -1,6 +1,7 @@
 <?php
 namespace app\CustomClass;
 
+use App\Configuracion;
 use App\Evaluado;
 use Illuminate\Support\Facades\DB;
 
@@ -10,13 +11,18 @@ class DataEvaluacion{
 
     function __construct($evaluado_id) {
         $this->evaluado_id = $evaluado_id;
+
     }
+
 
     /**
      * Genera la data de la evaluacion con los resultados y los devuelve en una coleccion obtenida con querybuilder
      *
     **/
     public function getDataEvaluacion(){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
 
         //Buscamos los evaluadores del evaluado
         $evaluadores = Evaluado::find($this->evaluado_id)->evaluadores;
@@ -44,24 +50,35 @@ class DataEvaluacion{
 
         //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
         $adata=[];
+
+
         foreach ($grouped as $key => $value) {
 
             $sumaAverage=0;
             $evaluador=[];
             $nivelRequerido=0;
-
+            $contador=0;
             foreach ($value as $item) {
+
                 $evaluador[] = ['name'=>$item[1],'average'=>$item[0]];
-                $sumaAverage += $item[0];
+
+                if ($configuraciones->promediarautoevaluacion){
+                    $sumaAverage += $item[0];
+                    $contador ++;
+                }elseif ($item[1]!='Autoevaluacion'){
+                    $sumaAverage += $item[0];
+                    $contador ++;
+                }
                 $nivelRequerido=$item[2];
             }
             $adata[]=
             [
-                'competencia'=>$key,'eva360'=>$sumaAverage/$value->count(),
+                'competencia'=>$key,'eva360'=>$sumaAverage/$contador,
                 'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador
             ];
 
         }
+
         $this->dataCruda=$adata;
         return collect($adata);
     }

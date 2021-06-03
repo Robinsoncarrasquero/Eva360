@@ -2,6 +2,7 @@
 
 namespace app\CustomClass;
 
+use App\Configuracion;
 use App\Evaluado;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\App;
@@ -15,6 +16,12 @@ class EnviarSMS
 
     /** Envia los sms a los evaluadores de un evaluado */
     public static function SendSMSFacade($evaluado_id){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if (!$configuraciones->sms){
+            return false;
+        }
 
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);

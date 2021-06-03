@@ -31,6 +31,7 @@ class DataResultado{
             foreach ($value['data'] as $item) {
                 $arrayEvaluador[] =['name'=> $item['name'],'average'=>$item['average']];
             }
+
         }
 
         $collection= collect($arrayEvaluador);
@@ -40,7 +41,6 @@ class DataResultado{
         });
 
         //Creamos un array con la data de cada serie
-
         foreach ($evagrouped as $key => $data) {
             $dataSerie[]=['name'=>$key,'data'=>$data];
         }

@@ -2,6 +2,7 @@
 
 namespace app\CustomClass;
 
+use App\Configuracion;
 use App\EmailSend;
 use App\Evaluacion;
 use App\Evaluado;
@@ -19,6 +20,12 @@ class EnviarEmail
 
     /** Envia los correos de invitacion a los evaluadores */
     public static function enviarEmailEvaluadores($evaluado_id){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if (!$configuraciones->email){
+            return false;
+        }
 
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);

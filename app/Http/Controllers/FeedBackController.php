@@ -112,13 +112,14 @@ class FeedBackController extends Controller
              //Modelo > resultado genera feedback
              //if ($dataValue['data'][0]>($dataValue['data'][1]))
 
-             {
+             if ($dataValue['name']!=='Promedio'){
+                //dd($competencia);
+                $feedbacks = FeedBack::updateOrCreate(
+                    ['competencia'=> $competencia,
+                    'evaluado_id' => $evaluado_id],[
+                    'fb_status' => ($dataValue['data'][0]>($dataValue['data'][1]) ? 'No_Cumplida' : 'Cumplida')
+                ]);
 
-                    $feedbacks = FeedBack::firstOrCreate(
-                        ['competencia'=> $competencia,
-                        'evaluado_id' => $evaluado_id],[
-                        'fb_status' => ($dataValue['data'][0]>($dataValue['data'][1]) ? 'No_Cumplida' : 'Cumplida')
-                    ]);
              }
 
         }
