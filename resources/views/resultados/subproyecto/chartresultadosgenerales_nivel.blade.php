@@ -35,7 +35,7 @@
 
     <div class="col-sm-12">
         <div class="text-left">
-            <h6>Cuadro Nivel de Cargo Fortalezas / Oportunidades</h6>
+            <h6>Cuadro Nivel de Cargo Fortalezas / Debilidades</h6>
         </div>
 
         @if($subProyecto)
@@ -44,7 +44,7 @@
                 <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                     <thead class="table-thead">
                         <th>Nivel</th>
-                        <th>Oportunidad</th>
+                        <th>Debilidad</th>
                         <th>Fortaleza</th>
                     </thead>
                     <tbody>

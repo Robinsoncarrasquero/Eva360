@@ -61,6 +61,7 @@ class DataObjetivo{
                 'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador
             ];
 
+
         }
         $this->dataCruda=$adata;
         return collect($adata);

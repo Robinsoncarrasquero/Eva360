@@ -1,6 +1,7 @@
 <?php
 namespace app\CustomClass;
 
+use App\Configuracion;
 use App\Proyecto;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,14 @@ class DataEvaluacionGlobal{
     **/
     public function getDataEvaluacionTipo(){
 
+         //Obtenemos la configuracion particular
+         $configuraciones = Configuracion::first();
+         if ($configuraciones->promediarautoevaluacion){
+             $autoevaluacion=' ';
+         }else {
+             $autoevaluacion='Autoevaluacion';
+         }
+
         //Buscamos los evaluadores del evaluado
         $proyecto = Proyecto::find($this->proyecto_id);
         $whereIn=$proyecto->id;
@@ -33,7 +42,7 @@ class DataEvaluacionGlobal{
         ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
         ->select('tipos.tipo','competencias.name','competencias.nivelrequerido','evaluados.status',
         DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
-        ->where('proyectos.id',$whereIn)
+        ->where([['proyectos.id',$whereIn],['relation','<>',$autoevaluacion]])
         ->groupBy('tipos.tipo','competencias.name','competencias.nivelrequerido','evaluados.status')
         ->having('evaluados.status','>',1)
         ->orderByRaw('tipos.tipo,competencias.name')
@@ -73,6 +82,13 @@ class DataEvaluacionGlobal{
     **/
     public function getDataEvaluacionNivel(){
 
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if ($configuraciones->promediarautoevaluacion){
+            $autoevaluacion=' ';
+        }else {
+            $autoevaluacion='Autoevaluacion';
+        }
         //Buscamos los evaluadores del evaluado
         $proyecto = Proyecto::find($this->proyecto_id);
         $whereIn=$proyecto->id;
@@ -87,7 +103,7 @@ class DataEvaluacionGlobal{
         ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
         ->select('nivel_cargos.name as nivelcargo','competencias.name','competencias.nivelrequerido','evaluados.status',
         DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
-        ->where('proyectos.id',$whereIn)
+        ->where([['proyectos.id','=',$whereIn],['relation','<>',$autoevaluacion]])
         ->groupBy('nivel_cargos.name','competencias.name','competencias.nivelrequerido','evaluados.status')
         ->having('evaluados.status','>',1)
         ->orderByRaw('nivel_cargos.name','competencias.name')
@@ -96,6 +112,7 @@ class DataEvaluacionGlobal{
         //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
         $dataArray = json_decode(json_encode($competencias), true);
         $collection= collect($dataArray);
+
         //Agrupamos la coleccion por nombre de competencia
         $grouped = $collection->mapToGroups(function ($item, $key) {
             return [$item['nivelcargo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido']]];
@@ -110,7 +127,6 @@ class DataEvaluacionGlobal{
             foreach ($value as $item) {
                 $competencia=$item[0];
                 $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3]];
-
                 $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
             }
 

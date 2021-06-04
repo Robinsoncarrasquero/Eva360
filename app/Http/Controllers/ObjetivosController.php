@@ -288,12 +288,13 @@ class ObjetivosController extends Controller
         //Buscamos el evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
-        //instanciamos un objeto de data resultados
-        $objData = new DataResultado($evaluado_id,new DataObjetivo(0));
+        $loteEvaluados[]=$evaluado_id;
+        $objData = new DataObjetivoPersonal($loteEvaluados,new DataObjetivo(0));
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $title="Finales";
+        // dd($dataSerie,$dataCategoria);
         if (!$dataSerie){
             \abort(404);
         }

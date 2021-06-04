@@ -147,7 +147,7 @@ class DataObjetivoPersonal{
             $arrayCompetencias[]=$value['competencia'];
             $arrayNivel[]=(int) $value['nivelRequerido'];
             $arrayEvaluacion[]=$value['eva360'];
-
+           // dd($competencias,$value['data']);
             //Creamos una array con la data de los evaluadores
             foreach ($value['data'] as $item) {
                 $arrayEvaluador[] =['name'=> $item['name'],'average'=>$item['average']];
