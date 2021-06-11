@@ -33,6 +33,7 @@ class CompetenciaCreateRequest extends FormRequest
             'gradoName.*'=>'required',
             'gradoDescription.*'=>'required',
             'gradoPonderacion.*'=>'required',
+            'seleccionmultiple'=>'required',
         ];
     }
     public function messages()
@@ -45,6 +46,8 @@ class CompetenciaCreateRequest extends FormRequest
             'gradoName.*.required'=>'Los grados de las competencias son requeridos',
             'gradoDescription.*.required'=>'Las preguntas de la competencias son requerida',
             'gradoPonderacion.*.required'=>'Las ponderaciones de cada grado son requeridas',
+            'seleccionmultiple.required'=>'Debe indicar si los comportamientos son de seleccion multiple',
+
         ];
     }
 

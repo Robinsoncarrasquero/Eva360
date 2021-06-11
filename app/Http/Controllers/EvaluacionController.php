@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Competencia;
+use App\Comportamiento;
 use app\CustomClass\EnviarEmail;
 
 use App\Frecuencia;
 use App\Evaluador;
 use App\Evaluacion;
+use App\Grado;
 use Illuminate\Http\Request;
 use app\Helpers\Helper;
 use App\Role;
@@ -100,24 +103,102 @@ class EvaluacionController extends Controller
         $user = Auth::user();
         $evaluacion=Evaluacion::find($competencia_id);
 
-        //Evaluadors
-        $evaluador=$evaluacion->evaluador;
-
-        //Competencia
-        $competencia=$evaluacion->competencia;
-
-        //Grado
-        $grados=$competencia->grados;
-
         $frecuencias =Frecuencia::all();
 
-        return \view('evaluacion.responder',\compact('evaluacion','frecuencias'));
+        return \view('evaluacion.comportamientos',\compact('evaluacion','frecuencias'));
+
     }
 
     /**
      * El controlador Guardar la evaluacion con los resultados directamente
      */
     public function store(Request $request,$evaluacion_id){
+
+        $validate = $request->validate(
+            [
+                'gradocheck.*'=>'required',
+                'frecuenciacheck.*'=>'required'
+            ],
+            [
+                'gradocheck.*.required'=>'Debe seleccionar una opcion',
+                'frecuenciacheck.*.required'=>'Debe indicar una frecuencia, este dato es requerido'
+            ]);
+
+        $gradocheck=$request->input('gradocheck.*');
+        $frecuenciacheck=$request->input('frecuenciacheck.*');
+
+        $evaluacion=Evaluacion::findOrFail($evaluacion_id);
+
+        //seleccion multiple
+        if ($evaluacion->competencia->seleccionmultiple){
+            for ($i=0; $i < count($frecuenciacheck); $i++) {
+                $datafrecuencia = explode(",", $frecuenciacheck[$i]);
+
+                $frecuencia_id=$datafrecuencia[1];
+                $frecuencia = Frecuencia::find($frecuencia_id);
+
+                $grado_id= $datafrecuencia[0];
+                $grado = Grado::find($grado_id);
+
+                Comportamiento::updateOrCreate(['evaluacion_id'=>$evaluacion->id,'grado_id'=>$grado_id],
+                ['frecuencia'=>$frecuencia->valor,
+                'ponderacion'=>$grado->ponderacion,
+                'resultado'=>$grado->ponderacion / 100 * $frecuencia->valor,
+                ]);
+
+            }
+        }else{
+            for ($i=0; $i < count($gradocheck); $i++) {
+                $grado_id=$gradocheck[$i];
+                $grado = Grado::find($grado_id);
+
+                Comportamiento::updateOrCreate(['evaluacion_id'=>$evaluacion->id,'grado_id'=>$grado_id],
+                ['frecuencia'=>100,
+                'ponderacion'=>$grado->ponderacion,
+                'resultado'=>$grado->ponderacion,
+                ]);
+            }
+
+        }
+
+        $evaluacion->resultado= $evaluacion->comportamientos->avg('resultado');
+        $evaluacion->save();
+        //redirigimos al usuario a ruta de sus competencias con el token del evaluador
+        $evaluador=$evaluacion->evaluador;
+
+        //Preguntas de la prueba
+        $preguntas=$evaluador->evaluaciones->count();
+
+        //Coleccion de preguntas
+        $respuestas=$evaluador->evaluaciones;
+
+        $respondidas=0;
+        //Contamos las preguntas que faltan
+        foreach ($respuestas as $key => $value) {
+
+            if ($value->resultado){
+                $respondidas ++;
+            }
+
+        }
+
+
+        $falta= $preguntas - $respondidas;
+
+        $mensaje=[0=>'Terminastes buen trabajo',1=>'Excelente, solo quedan '.$falta,2=>'Magnifico, ya llevas '.$respondidas, 3=>'Muy Bien, te restan '.$falta,3=>'Iniciastes muy bien, te restan '.$falta];
+
+       // Alert::success($evaluacion->competencia->name,Arr::get($mensaje,$falta));
+
+        return \redirect()->route('evaluacion.competencias',$evaluacion->evaluador->id);
+
+
+    }
+
+
+     /**
+     * El controlador Guardar la evaluacion con los resultados directamente
+     */
+    public function Xstore(Request $request,$evaluacion_id){
 
         $validate = $request->validate(
             [
@@ -189,10 +270,10 @@ class EvaluacionController extends Controller
 
         //Excluimos las competencias ya evaluadas
         $competencias = $evaluaciones->reject(function ($eva) {
-            return $eva->frecuencia==0;
+            return $eva->resultado==0;
         })
         ->map(function ($eva) {
-            return $eva->grado;
+            return $eva->resultado;
         });
 
         //Revisamos cuantas estan pendientes por realizar

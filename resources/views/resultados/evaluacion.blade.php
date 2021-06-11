@@ -47,10 +47,8 @@
                 </tr>
                 <tr>
                 <th>Competencia</th>
-                {{-- <th>Descripcion</th> --}}
-                <th>Grado</th>
-                <th>%</th>
-                <th>Frecuencia</th>
+                <th>Descripcion</th>
+                <th>Requerido</th>
                 <th>Resultado</th>
                 </tr>
                 </thead>
@@ -58,10 +56,8 @@
                 @foreach ($evaluador->evaluaciones as $evaluacion)
                 <tr>
                     <td>{{$evaluacion->competencia->name}}</td>
-                    {{-- <td>{{substr($evaluacion->competencia->description,0,50)}}</td> --}}
-                    <td>{{ $evaluacion->grado }}</td>
-                    <td class="text text-center">{{ $evaluacion->ponderacion}}</td>
-                    <td class="text text-center">{{ $evaluacion->frecuencia/100}}</td>
+                    <td>{{substr($evaluacion->competencia->description,0,200)}}</td>
+                    <td class="text text-center">{{$evaluacion->competencia->nivelrequerido}}</td>
                     <td class="text text-center"><span class="badge badge-dark">{{ $evaluacion->resultado}}</span></td>
                 </tr>
                 @endforeach

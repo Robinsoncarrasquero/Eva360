@@ -10,7 +10,7 @@ class Grado extends Model
     protected $table='grados';
     protected $fillable=['grado','description','ponderacion','frecuencia','competencia_id'];
 
-    public function competencias(){
+    public function competencia(){
 
         return $this->belongsTo(Competencia::class);
     }

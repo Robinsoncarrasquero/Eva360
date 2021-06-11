@@ -62,9 +62,10 @@ class CompetenciaController extends Controller
             $competencia->description=$formrequest->description;
             $competencia->nivelrequerido = $formrequest->nivelrequerido;
             $competencia->tipo_id = $formrequest->tipo;
+            $competencia->seleccionmultiple = $formrequest->seleccionmultiple ? 1 : 0;
             $competencia->save();
          } catch (QueryException $e) {
-            Alert::error('Competencia',Arr::random(['duplicada','Repetida']));
+           // Alert::error('Competencia',Arr::random(['duplicada','Repetida']));
             return redirect()
             ->back()->withErrors('Error imposible Guardar este registro. El Nombre de la competencia debe ser unico, no se permite duplicados.');
         }
@@ -81,7 +82,7 @@ class CompetenciaController extends Controller
             $grado->ponderacion=$gPonderacion[$i];
             $competencia->grados()->save($grado);
         }
-        Alert::success('Competencia '.$formrequest->name,Arr::random(['Registrada exitosamente','Registro Exitoso']));
+        //Alert::success('Competencia '.$formrequest->name,Arr::random(['Registrada exitosamente','Registro Exitoso']));
         return \redirect('competencia')->withSuccess('Competencia creada exitosasmente : '.$formrequest->name.' Registrado exitosamente');
     }
 
@@ -116,6 +117,7 @@ class CompetenciaController extends Controller
             $competencia->description=$formrequest->description;
             $competencia->nivelrequerido = $formrequest->nivelrequerido;
             $competencia->tipo_id = $formrequest->tipo;
+            $competencia->seleccionmultiple = $formrequest->seleccionmultiple ? 1 : 0;
             $competencia->save();
 
             //Creamos los grados con las preguntas
@@ -132,12 +134,12 @@ class CompetenciaController extends Controller
             }
 
         } catch (QueryException $e) {
-            Alert::error('Competencia '.$formrequest->name,Arr::random(['Duplicada','Registro Ya existe']));
+           // Alert::error('Competencia '.$formrequest->name,Arr::random(['Duplicada','Registro Ya existe']));
 
             return redirect()->back()
             ->withErrors('Error imposible Guardar este registro. Revise los datos del formulario e intente nuevamante.');
         }
-        Alert::success('Competencia '.$formrequest->name,Arr::random(['Bien','Excelente']));
+        //Alert::success('Competencia '.$formrequest->name,Arr::random(['Bien','Excelente']));
 
         return \redirect('competencia')->withSuccess('Competencia : '.$formrequest->name.' Actualizada exitosamente');
     }

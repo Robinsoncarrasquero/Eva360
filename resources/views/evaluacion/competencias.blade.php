@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Respondiendo la Prueba")
+@section('title',"Respondiendo la Evaluacion")
 
 @section('content')
 
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center">
-                            @if($competencia->grado)
+                            @if($competencia->resultado)
                                 <a href="{{route('evaluacion.responder', $competencia->id)}}" >
                                     <span ><i class="material-icons text-success">thumb_up_alt check_box</i></span></a>
                             @else

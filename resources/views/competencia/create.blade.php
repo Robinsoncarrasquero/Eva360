@@ -21,24 +21,24 @@
             @csrf
             <div class="row">
 
-                <div class="col-sm-12">
+                <div class="col-lg-12">
                     <label for="name">Competencia</label>
                     <input type="text" id="name" placeholder="Competencia" class="form-control"  name="name" value="{{old('name')  }}" autofocus>
                 </div>
 
-                <div class="col-sm-12">
+                <div class="col-lg-12">
                     <label for="description">Descripcion</label>
                     <textarea placeholder="Descripcion de la competencia" type="text" id="description" class="form-control" rows="4"
                         maxlength="1000" name="description">{{ old('description') }}</textarea>
                 </div>
 
-                <div class="row col-sm-12">
-                    <div class="col-sm-6">
+                <div class="row col-lg-12">
+                    <div class="col-lg-6">
                         <label for="nivelrequerido">Nivel requerido</label>
                         <input placeholder="Nivel entre 0 y 100" id="nivelrequerido" class="form-control" type="text" name="nivelrequerido" value="{{ old('nivelrequerido') }}">
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-lg-6">
                         <label for="tipo">Tipo</label>
                         <select id="tipo" class="form-control" name="tipo" >
                             @foreach ($tipos as $tipo)
@@ -50,6 +50,11 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+
+                <div class="form-check">
+                    <label class="form-check-label " for="seleccionmultiple" style="color: rgb(255, 165, 0);font-size:1.5em">Seleccion multiple</label>
+                    <input type="checkbox" class="check-select "   name="seleccionmultiple">
                 </div>
 
             </div>

@@ -30,11 +30,12 @@ class Evaluacion extends Model
 
     public function setFrecuenciaAttribute($value)
     {
-        # code...
-
         $this->attributes['frecuencia'] = is_string($value) ? intval($value) : $value;
+    }
 
-
+    //Una evaluacion tiene varios comportamientos
+    public function comportamientos(){
+        return $this->hasMany(Comportamiento::class);
     }
 
 }

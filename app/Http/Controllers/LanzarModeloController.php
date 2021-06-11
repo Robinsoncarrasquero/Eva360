@@ -62,19 +62,18 @@ class LanzarModeloController extends Controller
         //Convertimos la coleccion de competencias pluck en un array con flatten
         $flattened = Arr::flatten($pluck);
 
-        $datacompetencias = Competencia::all();
         //Obtenemos una coleccion de competencias del array devuelto por flatten
+        $datacompetencias = Competencia::all();
         $competencias = $datacompetencias->only($flattened);
 
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
-        $user = User::find($evaluado->user_id);
 
         //Creamos un objeto de lanzamiento de Evaluacion
         $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado_id);
 
-        if (!$objlanzaEvaluacion->crearEvaluacion()){
+        if (!$objlanzaEvaluacion->crearEvaluacionMultiple($evaluado)){
             return \redirect()->route('proyectoevaluado.index')
             ->with('error',"Error, Esas competencias para el Evaluado $evaluado->name, ya habian sido lanzadas en la Prueba..");
         }

@@ -27,15 +27,17 @@
 
         @foreach($competencias as $key=>$value)
         <div class="table table-responsive col-sm-12 col-md-6">
+
             <table id="{{$key}}" class="table table-bordered table-table">
                 <thead>
-                <tr>
-                    <th class="text text-center title-th-competencia" colspan="2">
-                    <strong >{{ $value['competencia']}} (Margen Requerido {{ $value['nivelRequerido'] }})
-                    </strong> </th>
-                </tr>
-                <th>Evaluador</th>
-                <th>Ponderado</th>
+                    <tr>
+                        <th class="text text-center title-th-competencia" colspan="2">
+                        <strong >{{ $value['competencia']}} (Margen Requerido {{ $value['nivelRequerido'] }})
+                        </strong>
+                        </th>
+                    </tr>
+                    <th>Evaluador</th>
+                    <th>Ponderado</th>
                 </thead>
                 <tbody>
                 @foreach ($value['data'] as $item)
@@ -51,6 +53,7 @@
                 </tr>
                 </tbody>
             </table>
+
         </div>
         @endforeach
     </div>

@@ -46,6 +46,11 @@
             </select>
         </div>
 
+        <div class="form-check">
+            <label class="form-check-label " for="seleccionmultiple[]" style="color: rgb(255, 165, 0);font-size:1.5em">Los comportamiento son de seleccion multiple</label>
+            <input type="checkbox" class="check-select "  id="{{"seleccionmultiple$competencia->id"}}" name="seleccionmultiple[]" @if($competencia->seleccionmultiple) checked @endif>
+        </div>
+
         <table class="table table-table">
             <thead class="table-thead">
                 <th>#</th>
