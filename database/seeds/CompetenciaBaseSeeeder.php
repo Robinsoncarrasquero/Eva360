@@ -34,14 +34,14 @@ class CompetenciaBaseSeeeder extends Seeder
         //comenzamos a recorrer el array desde la posicion 2
         foreach ($jscompetencias[2]->data as $kc=>$c){
             $seleccionmultiple=$c->id ==25 ? 1 : 0;
-            $seleccionfrecuencia=$c->id ==25 ? 1 : 0;
+
             $new_competencia=factory(Competencia::class)->create([
                 'name'=>$c->name,
                 'tipo_id'=>$c->tipo_id,
                 'description'=>$c->description,
                 'nivelrequerido'=>$c->nivelrequerido,
                 'seleccionmultiple'=>$seleccionmultiple,
-                'seleccionfrecuencia'=>$seleccionfrecuencia,
+
             ]);
 
             foreach ($jsgrados[2]->data as $kg => $g) {
