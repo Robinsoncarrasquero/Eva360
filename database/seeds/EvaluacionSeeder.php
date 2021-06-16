@@ -25,8 +25,7 @@ class EvaluacionSeeder extends Seeder
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;'); //ACTIVA EL CHECKEO DE CLAVES FORANEAS
 
-
-        //Evaluador
+        //Evaluadores
         for ($xevaluador=1; $xevaluador <41 ; $xevaluador++) {
             $this->add_evaluacion($xevaluador);
         }
@@ -34,36 +33,32 @@ class EvaluacionSeeder extends Seeder
 
     }
 
+    /** Creamos la evaluacion por evaluador*/
     public function add_evaluacion($evaluador){
 
-        //$this->call(CompetenciaBaseSeeeder::class);
-
-       //Creamos una evaluacion
-       for ($i=1; $i <5 ; $i++) {
+        for ($i=1; $i <5 ; $i++) {
             $competencia=Competencia::find($i);
-
             $this->add_competencia($evaluador,$competencia);
-       }
-
-
+        }
 
     }
 
-    /** Obtenemos los resultados de la prueba en una array */
-    public function prueba($nivel)
+    /** Obtenemos los resultados de la condu$conducta en una array */
+    public function conducta($findgrado)
     {
-       // $nivel=75;
-        $grado=Arr::random(['A','B','C','D']);
-        //$gradofinal=Arr::get(['A'=>100,'B'=>75,'C'=>100,'D'=>100],$grado);
-        $gradofinal=Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],$grado);
 
-        //$frecuencia=Arr::random(['A'=>100,'B'=>100,'C'=>75,'D'=>75]);
+        $grado=Arr::random(['A','B','C','D']);
+        $gradofinal=Arr::get(['A'=>100,'B'=>75,'C'=>50,'D'=>25],$findgrado);
+        //$gradofinal=Arr::get(['A'=>$nivel*1,'B'=>$nivel*0.75,'C'=>$nivel*0.50,'D'=>$nivel*0.25],$grado);
+
         $xyz=Arr::random(['A','B','C','D']);
-        $frecuencia=Arr::get(['A'=>100,'B'=>75,'C'=>50,'D'=>25],$xyz);
-        $pondera= $gradofinal;
-        $resultado=round($pondera *  $frecuencia /100,2);
-        return ['grado'=>$grado,'ponderacion'=>$pondera,'frecuencia'=>$frecuencia,'resultado'=>$resultado];
+        //$frecuencia=Arr::get(['A'=>100,'B'=>75,'C'=>50,'D'=>25],$xyz);
+        $frecuencia=Arr::random(['A'=>100,'B'=>100,'C'=>100,'D'=>100]);
+
+        $resultado=round($gradofinal *  $frecuencia /100,2);
+        return ['grado'=>$grado,'ponderacion'=>$gradofinal,'frecuencia'=>$frecuencia,'resultado'=>$resultado];
     }
+
     /** Generamos las competencias de cada evaluador */
     public function add_competencia($evaluador,Competencia $competencia)
     {
@@ -73,30 +68,39 @@ class EvaluacionSeeder extends Seeder
             'evaluador_id'=>$evaluador,
         ]);
 
-        $this->add_comportamiento($evaluacion,$competencia);
+        $this->add_comportamientos($evaluacion,$competencia);
+   }
 
-
-    }
-
-    /** Generamos los comportamientos de las competencias a evaluar */
-    public function add_comportamiento(Evaluacion $evaluacion,Competencia $competencia)
+    /** Generamos los comportamientos de cada competencia */
+    public function add_comportamientos(Evaluacion $evaluacion,Competencia $competencia)
     {
-
-        $prueba= $this->prueba($competencia->nivelrequerido);
 
         $grados = Grado::where('competencia_id',$competencia->id)->get();
 
+        $modelkeys=$grados->modelKeys();
+        $gradokey=collect($modelkeys);
+        $grado_id=$gradokey->random();
+
         foreach ($grados as $grado) {
+            $conducta= $this->conducta($grado->grado);
+            $ponderacion=0;
+            $frecuencia=0;
+            $resultado=0;
+            if ($grado->id==$grado_id || $competencia->seleccionmultiple){
+                $ponderacion=Arr::get($conducta,'ponderacion');
+                $frecuencia=Arr::get($conducta,'frecuencia');
+                $resultado=Arr::get($conducta,'resultado');
+            }
             factory(Comportamiento::class)->create([
                 'evaluacion_id' => $evaluacion->id,
                 'grado_id'=>$grado->id,
-                'ponderacion'=>Arr::get($prueba,'ponderacion'),
-                'frecuencia'=>Arr::get($prueba,'frecuencia'),
-                'resultado'=>Arr::get($prueba,'resultado'),
+                'ponderacion'=>$ponderacion,
+                'frecuencia'=>$frecuencia,
+                'resultado'=>$resultado,
             ]);
         }
 
-        $evaluacion->resultado= $evaluacion->comportamientos->avg('resultado');
+        $evaluacion->resultado= $competencia->seleccionmultiple ? $evaluacion->comportamientos->avg('resultado') : $evaluacion->comportamientos->sum('resultado');
         $evaluacion->save();
     }
 

@@ -27,46 +27,41 @@
         @if($competencias)
 
                 <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
-                @csrf
+                    @csrf
 
                     @foreach($competencias as $competencia)
                     <div class="xcard mt-4">
+                        <div class="card-header mb-2">
+                            <div class="d-flex justify-content-center">
+                                <a href="{{route('evaluacion.responder', $competencia->id)}}" style="color: rgb(16, 17, 17)" >
+                                <h3 >{{$competencia->competencia->name}}</h3></a>
+                            </div>
 
-                    <div class="card-header mb-2">
-                        <div class="d-flex justify-content-center">
-                            <a href="{{route('evaluacion.responder', $competencia->id)}}" style="color: rgb(16, 17, 17)" >
-                            <h3 >{{$competencia->competencia->name}}</h3></a>
-                        </div>
-
-                        <div class="d-flex justify-content-center">
-                            @if($competencia->resultado)
-                                <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                    <span ><i class="material-icons text-success">thumb_up_alt check_box</i></span></a>
-                            @else
-                                <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                <span class="spinner-grow spinner-grow-sm text-danger align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
-                            @endif
+                            <div class="d-flex justify-content-center">
+                                @if($competencia->resultado)
+                                    <a href="{{route('evaluacion.responder', $competencia->id)}}" >
+                                        <span ><i class="material-icons text-success">thumb_up_alt check_box</i></span></a>
+                                @else
+                                    <a href="{{route('evaluacion.responder', $competencia->id)}}" >
+                                    <span class="spinner-grow spinner-grow-sm text-danger align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                   </div>
-
                     @endforeach
 
-
-                <div class="clearfix mt-3">
-                    @if (Auth::user()->admin())
-                        {{-- <span class="float-left"><a href="{{route('talent.historicoevaluaciones',$evaluador->evaluado->user_id)}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
-                    @else
-                        <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
-                        @if($evaluador->status!=2)
-                            <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
+                    <div class="clearfix mt-3">
+                        @if (Auth::user()->admin())
+                            {{-- <span class="float-left"><a href="{{route('talent.historicoevaluaciones',$evaluador->evaluado->user_id)}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
+                        @else
+                            <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
+                            @if($evaluador->status!=2)
+                                <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
+                            @endif
                         @endif
-                    @endif
-
-                </div>
+                    </div>
 
                 </form>
-
 
         @else
 

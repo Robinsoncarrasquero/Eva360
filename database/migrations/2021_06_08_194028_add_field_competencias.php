@@ -15,6 +15,7 @@ class AddFieldCompetencias extends Migration
     {
         Schema::table('competencias', function (Blueprint $table) {
             $table->boolean('seleccionmultiple')->default(0);
+
         });
     }
 

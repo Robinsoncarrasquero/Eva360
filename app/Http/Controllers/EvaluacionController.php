@@ -50,7 +50,7 @@ class EvaluacionController extends Controller
     {
 
         //Filtramos el evaluador segun el token recibido
-        $evaluador = Evaluador::all()->where('remember_token',$token)->first();
+        $evaluador = Evaluador::where('remember_token',$token)->first();
         if($evaluador==\null){
            abort(404);
            return redirect('login');
@@ -135,33 +135,47 @@ class EvaluacionController extends Controller
                 $datafrecuencia = explode(",", $frecuenciacheck[$i]);
 
                 $frecuencia_id=$datafrecuencia[1];
+                $valorfrecuencia=100;
+
                 $frecuencia = Frecuencia::find($frecuencia_id);
+                $valorfrecuencia=$frecuencia->valor;
 
-                $grado_id= $datafrecuencia[0];
-                $grado = Grado::find($grado_id);
+                $comportamiento_id= $datafrecuencia[0];
+                $conducta = Comportamiento::find($comportamiento_id);
 
-                Comportamiento::updateOrCreate(['evaluacion_id'=>$evaluacion->id,'grado_id'=>$grado_id],
-                ['frecuencia'=>$frecuencia->valor,
-                'ponderacion'=>$grado->ponderacion,
-                'resultado'=>$grado->ponderacion / 100 * $frecuencia->valor,
+                Comportamiento::updateOrCreate(['id'=>$comportamiento_id],
+                [
+                'ponderacion'=>$conducta->grado->ponderacion,
+                'frecuencia'=>$valorfrecuencia,
+                'resultado'=>$conducta->grado->ponderacion / 100 * $valorfrecuencia,
                 ]);
 
             }
         }else{
+            $valorfrecuencia=100;
+            $conductas=Comportamiento::where('evaluacion_id',$evaluacion_id)->get();
+            foreach ($conductas as $conducta) {
+                $conducta->frecuencia=0;
+                $conducta->ponderacion=0;
+                $conducta->resultado=0;
+                $conducta->save();
+            }
+
             for ($i=0; $i < count($gradocheck); $i++) {
                 $grado_id=$gradocheck[$i];
-                $grado = Grado::find($grado_id);
+                $conducta = Comportamiento::find($grado_id);
 
-                Comportamiento::updateOrCreate(['evaluacion_id'=>$evaluacion->id,'grado_id'=>$grado_id],
-                ['frecuencia'=>100,
-                'ponderacion'=>$grado->ponderacion,
-                'resultado'=>$grado->ponderacion,
+                Comportamiento::updateOrCreate(['id'=>$grado_id],
+                [
+                'ponderacion'=>$conducta->grado->ponderacion,
+                'frecuencia'=>$valorfrecuencia,
+                'resultado'=>$conducta->grado->ponderacion,
                 ]);
             }
 
         }
 
-        $evaluacion->resultado= $evaluacion->comportamientos->avg('resultado');
+        $evaluacion->resultado= $evaluacion->competencia->seleccionmultiple ? $evaluacion->comportamientos->avg('resultado') : $evaluacion->comportamientos->sum('resultado') ;
         $evaluacion->save();
         //redirigimos al usuario a ruta de sus competencias con el token del evaluador
         $evaluador=$evaluacion->evaluador;
@@ -182,15 +196,12 @@ class EvaluacionController extends Controller
 
         }
 
-
         $falta= $preguntas - $respondidas;
 
         $mensaje=[0=>'Terminastes buen trabajo',1=>'Excelente, solo quedan '.$falta,2=>'Magnifico, ya llevas '.$respondidas, 3=>'Muy Bien, te restan '.$falta,3=>'Iniciastes muy bien, te restan '.$falta];
 
        // Alert::success($evaluacion->competencia->name,Arr::get($mensaje,$falta));
-
         return \redirect()->route('evaluacion.competencias',$evaluacion->evaluador->id);
-
 
     }
 
@@ -256,8 +267,6 @@ class EvaluacionController extends Controller
        // Alert::success($evaluacion->competencia->name,Arr::get($mensaje,$falta));
 
         return \redirect()->route('evaluacion.competencias',$evaluacion->evaluador->id);
-
-
     }
 
     /**

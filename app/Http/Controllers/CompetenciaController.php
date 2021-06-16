@@ -63,6 +63,7 @@ class CompetenciaController extends Controller
             $competencia->nivelrequerido = $formrequest->nivelrequerido;
             $competencia->tipo_id = $formrequest->tipo;
             $competencia->seleccionmultiple = $formrequest->seleccionmultiple ? 1 : 0;
+            // $competencia->seleccionfrecuencia = $formrequest->seleccionfrecuencia ? 1 : 0;
             $competencia->save();
          } catch (QueryException $e) {
            // Alert::error('Competencia',Arr::random(['duplicada','Repetida']));
@@ -118,6 +119,7 @@ class CompetenciaController extends Controller
             $competencia->nivelrequerido = $formrequest->nivelrequerido;
             $competencia->tipo_id = $formrequest->tipo;
             $competencia->seleccionmultiple = $formrequest->seleccionmultiple ? 1 : 0;
+            // $competencia->seleccionfrecuencia = $formrequest->seleccionfrecuencia ? 1 : 0;
             $competencia->save();
 
             //Creamos los grados con las preguntas

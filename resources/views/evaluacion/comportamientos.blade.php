@@ -28,7 +28,7 @@
                     <thead class="table-preguntas border-warning">
                         <th scope="col">#</th>
                         <th scope="col">Comportamiento observado</th>
-                        <th scope="col">Indique</th>
+                        <th scope="col">Seleccione</th>
                         <th scope="col">Frecuencia</th>
                     </thead>
                     <tbody>
@@ -52,18 +52,18 @@
                             <td>
                                 @foreach ($frecuencias  as $frecuencia)
                                 <div class="xform-check ">
-                                        <label for="frecuencia[]" class="xform-check-label">{{ $frecuencia->name}}</label>
-                                        @if ($evaluacion->competencia->seleccionmultiple)
-                                            <input type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                                            value="{{"$comportamiento->grado_id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                                            @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                                            @if ($evaluacion->evaluador->status==2) disabled  @endif>
-                                        @else
-                                            <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                                            value="{{"$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                                            @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                                            @if ($evaluacion->evaluador->status==2) disabled  @endif>
-                                        @endif
+                                    <label for="frecuenciacheck[]" class="xform-check-label">{{ $frecuencia->name}}</label>
+                                    @if ($evaluacion->competencia->seleccionmultiple)
+                                        <input type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
+                                        value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
+                                        @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
+                                        @if ($evaluacion->evaluador->status==2) disabled  @endif>
+                                    @else
+                                        <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
+                                        value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
+                                        @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
+                                        @if ($evaluacion->evaluador->status==2) disabled  @endif>
+                                    @endif
                                 </div>
                                 @endforeach
                             </td>
