@@ -21,6 +21,7 @@ $(document).ready(function() {
             if (id!=xrow){
                 $(this).remove();
             }
+
         });
         if (!$("#radiogrado"+id).is(':checked')){
             $("#radiogrado"+id).prop('checked',true);
@@ -31,6 +32,7 @@ $(document).ready(function() {
     $('.no-radiofrecuencia').click(function(e){
         var row = $(this).parents('tr');
         var id=row.data('id');
+
         $(".filas").each(function(){
             var xrow = $(this).attr('data-id');
             // if (id!=xrow){

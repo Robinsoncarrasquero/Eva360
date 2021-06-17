@@ -82,29 +82,31 @@ class DataPersonal{
                 //Promedio del Modelo
                 $arrayPromedio[]=['name'=>$value['categoria'],'data'=>$item['eva360']];
 
+                //Cumplimiento
+                $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
+
                 /**
                  * Cuando el resultado es menos que nivel requerido se genera una oportunidad de mejora
                  */
                 if ($item['eva360']<$item['nivel']){
                     $arraydataOportunidad[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
-                    $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 }else{
                     $arraydataFortaleza[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
-                    $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 }
+
             }
 
             $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
 
             {
-                $brecha=0;$cumplimiento=0;$potencial=0;
+                $brecha=$cumplimiento=$potencial=0;
 
                 $cumplimiento=collect($arrayCumplimiento)->avg('data');
                 $brecha= 100 - $cumplimiento;
 
                 $potencial=collect($arrayPotencial)->avg('data')/collect($dataMeta)->avg('data')*100;
-               // $potencial= collect($arrayCumplimiento)->avg('data');
                 $potencial= $potencial > 100 ? $potencial : 0;
+
                 $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad,'datafortaleza'=>$arraydataFortaleza,'potencial'=>$potencial];
 
                 //Creamos la categoria para el cumplimiento y la brecha
@@ -113,7 +115,6 @@ class DataPersonal{
                 $arraySerieBrecha[]=[$brecha];
                 $arraySeriePotencial[]=[$potencial];
             }
-
 
         }
 
@@ -143,7 +144,6 @@ class DataPersonal{
         foreach ($agrouped as $key => $datavalue) {
             $arraydataSerie[]=['name'=>$key,'data'=>$datavalue];
         }
-
 
         $this->dataBrecha=$arraydataBrecha;
         $this->dataCategoria=$arrayCategoria;;
