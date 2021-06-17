@@ -42,7 +42,7 @@
                                     <label class="form-check-label " for="gradocheck[]" style="color: rgb(255, 165, 0);font-size:1.5em"></label>
                                     @if ($evaluacion->competencia->seleccionmultiple)
                                         <input type="checkbox" class="no-check-select "  id="{{"radiogrado$comportamiento->grado_id"}}" name="gradocheck[]" value="{{"$comportamiento->id"}}"
-                                        @if($comportamiento->frecuencia) checked @endif>
+                                        checked >
                                     @else
                                         <input type="checkbox" class="check-select "  id="{{"radiogrado$comportamiento->grado_id"}}" name="gradocheck[]" value="{{"$comportamiento->id"}}"
                                         @if($comportamiento->frecuencia) checked @endif>
