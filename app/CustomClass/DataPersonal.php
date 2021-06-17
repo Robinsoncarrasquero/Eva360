@@ -48,6 +48,8 @@ class DataPersonal{
         //Creamos un array con las competencias metas y su margen
         $arrayCategoria[]='Modelo';
         $dataMeta= $this->getDataMeta();
+        $arrayCompetencias=[];
+        $arrayPromedio=[];
         foreach ($dataMeta as $item) {
             $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
             $arrayPromedio []=['name'=> $item['name'],'data'=>$item['data']];
@@ -88,21 +90,17 @@ class DataPersonal{
                     $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 }else{
                     $arraydataFortaleza[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
-                    $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['nivel']];
+                    $arrayCumplimiento[] =['name'=> $item['name'],'data'=>$item['eva360']];
                 }
             }
 
             $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
 
             {
-                $brecha=100;$cumplimiento=0;$potencial=0;
+                $brecha=0;$cumplimiento=0;$potencial=0;
 
-                if (collect($dataMeta)->avg('data')!=0){
-                    //$cumplimiento=collect($arrayCumplimiento)->avg('data')/collect($dataMeta)->avg('data')*100;
-                    $cumplimiento=collect($arrayCumplimiento)->avg('data');
-                    $brecha= 100 - $cumplimiento;
-                }
-
+                $cumplimiento=collect($arrayCumplimiento)->avg('data');
+                $brecha= 100 - $cumplimiento;
                 //$potencial=collect($arrayPotencial)->avg('data')/collect($dataMeta)->avg('data')*100;
                 $potencial= $cumplimiento=collect($arrayCumplimiento)->avg('data');
                 $potencial= $potencial > 100 ? $potencial : 0;
@@ -114,6 +112,7 @@ class DataPersonal{
                 $arraySerieBrecha[]=[$brecha];
                 $arraySeriePotencial[]=[$potencial];
             }
+
 
         }
 

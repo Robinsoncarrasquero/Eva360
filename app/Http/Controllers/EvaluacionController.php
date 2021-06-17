@@ -117,66 +117,56 @@ class EvaluacionController extends Controller
         $validate = $request->validate(
             [
                 'gradocheck.*'=>'required',
-                'frecuenciacheck.*'=>'required'
+                'frecuenciacheck.*'=>'required',
             ],
             [
                 'gradocheck.*.required'=>'Debe seleccionar una opcion',
-                'frecuenciacheck.*.required'=>'Debe indicar una frecuencia, este dato es requerido'
+                'frecuenciacheck.*.required'=>'Debe indicar una frecuencia, este dato es requerido',
             ]);
 
-        $gradocheck=$request->input('gradocheck.*');
+
         $frecuenciacheck=$request->input('frecuenciacheck.*');
 
         $evaluacion=Evaluacion::findOrFail($evaluacion_id);
 
-        //seleccion multiple
-        if ($evaluacion->competencia->seleccionmultiple){
-            for ($i=0; $i < count($frecuenciacheck); $i++) {
-                $datafrecuencia = explode(",", $frecuenciacheck[$i]);
+        if ($evaluacion->competencia->seleccionmultiple && $evaluacion->comportamientos->count()>count(collect($frecuenciacheck))){
+            return back()->withError('Debe selecionar cada opcion y con su frecuencia');
+        }elseif ($evaluacion->comportamientos->count()>0 && count(collect($frecuenciacheck))<1){
+            return back()->withError('Debe especificar una opcion con su frecuencia');
+        }
 
-                $frecuencia_id=$datafrecuencia[1];
-                $valorfrecuencia=100;
+        //Inicializamos las conductas de seleccion simple
+        $conductas = Comportamiento::where('evaluacion_id',$evaluacion_id)->get();
 
-                $frecuencia = Frecuencia::find($frecuencia_id);
-                $valorfrecuencia=$frecuencia->valor;
+        foreach ($conductas as $conducta) {
+            $conducta->frecuencia=0;
+            $conducta->ponderacion=0;
+            $conducta->resultado=0;
+            $conducta->save();
+        }
 
-                $comportamiento_id= $datafrecuencia[0];
-                $conducta = Comportamiento::find($comportamiento_id);
+        //Actualizamos las conductas con la frecuencia
+        for ($i=0; $i < count($frecuenciacheck); $i++) {
 
-                Comportamiento::updateOrCreate(['id'=>$comportamiento_id],
-                [
-                'ponderacion'=>$conducta->grado->ponderacion,
-                'frecuencia'=>$valorfrecuencia,
-                'resultado'=>$conducta->grado->ponderacion / 100 * $valorfrecuencia,
-                ]);
+            $datafrecuencia = explode(",", $frecuenciacheck[$i]);
 
-            }
-        }else{
-            $valorfrecuencia=100;
-            $conductas=Comportamiento::where('evaluacion_id',$evaluacion_id)->get();
-            foreach ($conductas as $conducta) {
-                $conducta->frecuencia=0;
-                $conducta->ponderacion=0;
-                $conducta->resultado=0;
-                $conducta->save();
-            }
+            $frecuencia_id=$datafrecuencia[1];
+            $frecuencia = Frecuencia::find($frecuencia_id);
 
-            for ($i=0; $i < count($gradocheck); $i++) {
-                $grado_id=$gradocheck[$i];
-                $conducta = Comportamiento::find($grado_id);
+            $comportamiento_id= $datafrecuencia[0];
+            $conducta = Comportamiento::find($comportamiento_id);
 
-                Comportamiento::updateOrCreate(['id'=>$grado_id],
-                [
-                'ponderacion'=>$conducta->grado->ponderacion,
-                'frecuencia'=>$valorfrecuencia,
-                'resultado'=>$conducta->grado->ponderacion,
-                ]);
-            }
-
+            Comportamiento::updateOrCreate(['id'=>$comportamiento_id],
+            [
+            'ponderacion'=>$conducta->grado->ponderacion,
+            'frecuencia'=>$frecuencia->valor,
+            'resultado'=>$conducta->grado->ponderacion / 100 * $frecuencia->valor,
+            ]);
         }
 
         $evaluacion->resultado= $evaluacion->competencia->seleccionmultiple ? $evaluacion->comportamientos->avg('resultado') : $evaluacion->comportamientos->sum('resultado') ;
         $evaluacion->save();
+
         //redirigimos al usuario a ruta de sus competencias con el token del evaluador
         $evaluador=$evaluacion->evaluador;
 
@@ -198,75 +188,8 @@ class EvaluacionController extends Controller
 
         $falta= $preguntas - $respondidas;
 
-        $mensaje=[0=>'Terminastes buen trabajo',1=>'Excelente, solo quedan '.$falta,2=>'Magnifico, ya llevas '.$respondidas, 3=>'Muy Bien, te restan '.$falta,3=>'Iniciastes muy bien, te restan '.$falta];
-
-       // Alert::success($evaluacion->competencia->name,Arr::get($mensaje,$falta));
         return \redirect()->route('evaluacion.competencias',$evaluacion->evaluador->id);
 
-    }
-
-
-     /**
-     * El controlador Guardar la evaluacion con los resultados directamente
-     */
-    public function Xstore(Request $request,$evaluacion_id){
-
-        $validate = $request->validate(
-            [
-                'gradocheck'=>'required',
-                'frecuenciacheck'=>'required'
-            ],
-            [
-                'gradocheck.required'=>'Debe seleccionar una opcion',
-                'frecuenciacheck.required'=>'Debe indicar una frecuencia, este dato es requerido'
-            ]);
-
-
-        $evaluacion=Evaluacion::findOrFail($evaluacion_id);
-
-        //Obtenemos el modelo de grado
-        $modelgrado = $evaluacion->competencia->grados->find($request->gradocheck)->first;
-
-        //Obtenemos el modelo la frecuencia
-        $modelfrecuencia = Frecuencia::find($request->frecuenciacheck)->first;
-
-        //Actualizamos el grado en la evaluacion
-        $evaluacion->grado=$modelgrado->grado->grado;
-
-        //Actualizamos la ponderacion
-        $evaluacion->ponderacion= $modelgrado->grado->ponderacion;
-
-        //Actualizamos la frecuencia
-        $evaluacion->frecuencia=$modelfrecuencia->valor->valor;
-
-        //Obtenemos el resultado
-        $evaluacion->resultado=  $modelgrado->grado->ponderacion/100 * $modelfrecuencia->valor->valor ;
-
-        $evaluacion->save();
-
-        //redirigimos al usuario a ruta de sus competencias con el token del evaluador
-        $evaluador=$evaluacion->evaluador;
-
-        //Preguntas de la prueba
-        $preguntas=$evaluador->evaluaciones->count();
-
-        //Coleccion de preguntas
-        $respuestas=$evaluador->evaluaciones;
-
-        $respondidas=0;
-        //Contamos las preguntas que faltan
-        foreach ($respuestas as $key => $value) {
-
-            if ($value->grado){
-                $respondidas ++;
-            }
-        }
-        $falta= $preguntas - $respondidas;
-        $mensaje=[0=>'Terminastes buen trabajo',1=>'Excelente, solo quedan '.$falta,2=>'Magnifico, ya llevas '.$respondidas, 3=>'Muy Bien, te restan '.$falta,3=>'Iniciastes muy bien, te restan '.$falta];
-
-       // Alert::success($evaluacion->competencia->name,Arr::get($mensaje,$falta));
-
-        return \redirect()->route('evaluacion.competencias',$evaluacion->evaluador->id);
     }
 
     /**

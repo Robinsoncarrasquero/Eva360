@@ -114,7 +114,6 @@ class ResultadosController extends Controller
         $dataSerieBrecha = $objData->getDataSerieBrecha();
         $dataCategoriaBrecha = $objData->getDataCategoriaBrecha();
 
-        //dd($dataCategoriaBrecha,$dataSerieBrecha);
         if (!$dataBrecha){
             \abort(404);
         }
@@ -136,7 +135,7 @@ class ResultadosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
-        //dd($dataSerie);
+
         if (!$dataDofa){
             \abort(404);
         }
@@ -158,7 +157,7 @@ class ResultadosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
-        //dd($dataSerie,$dataCategoria);
+
         if (!$dataDofa){
             \abort(404);
         }
