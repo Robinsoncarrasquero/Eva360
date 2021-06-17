@@ -10,6 +10,8 @@ $(document).ready(function() {
                $(this).remove();
             }
         });
+
+
     });
 
 
@@ -23,9 +25,6 @@ $(document).ready(function() {
             }
 
         });
-        if (!$("#radiogrado"+id).is(':checked')){
-            $("#radiogrado"+id).prop('checked',true);
-        }
 
     });
 
@@ -55,6 +54,7 @@ $(document).ready(function() {
             //    $(this).remove();
             // }
         });
+
     });
 
 });
