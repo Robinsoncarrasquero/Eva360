@@ -164,7 +164,7 @@ class EvaluacionController extends Controller
             ]);
         }
 
-        $evaluacion->resultado= $evaluacion->competencia->seleccionmultiple ? $evaluacion->comportamientos->avg('resultado') : $evaluacion->comportamientos->sum('resultado') ;
+        $evaluacion->resultado= $evaluacion->competencia->seleccionmultiple ? $evaluacion->comportamientos()->avg('resultado') : $evaluacion->comportamientos()->sum('resultado') ;
         $evaluacion->save();
 
         //redirigimos al usuario a ruta de sus competencias con el token del evaluador
