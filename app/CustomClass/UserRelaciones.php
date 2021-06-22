@@ -192,14 +192,17 @@ class UserRelaciones
             $evaluado->user_id=$user->id;
             $evaluado->save();
 
-            $emanager = new Evaluador();
-            $emanager->name = $manager->name;
-            $emanager->email = $manager->email;
-            $emanager->relation = ($metodo=='90' ? 'Manager' :'Supervisor');
-            $emanager->remember_token = Str::random(32);
-            $emanager->status = 0;
-            $emanager->user_id = $manager->id;
-            $evaluado->evaluadores()->save($emanager);
+            //Cuando no existe un nivel superior
+            if ($manager->email != $supervisor->email){
+                $emanager = new Evaluador();
+                $emanager->name = $manager->name;
+                $emanager->email = $manager->email;
+                $emanager->relation = ($metodo=='90' ? 'Manager' :'Supervisor');
+                $emanager->remember_token = Str::random(32);
+                $emanager->status = 0;
+                $emanager->user_id = $manager->id;
+                $evaluado->evaluadores()->save($emanager);
+            }
 
             $esuper= new Evaluador();
             $esuper->name = $supervisor->name;
@@ -211,6 +214,7 @@ class UserRelaciones
             $evaluado->evaluadores()->save($esuper);
 
             //AutoEvaluacion
+
             if ($autoevaluacion){
                 $autoeva= new Evaluador();
                 $autoeva->name = $user->name;
@@ -220,6 +224,7 @@ class UserRelaciones
                 $autoeva->status = 0;
                 $autoeva->user_id = $user->id;
                 $evaluado->evaluadores()->save($autoeva);
+
             }
 
         }

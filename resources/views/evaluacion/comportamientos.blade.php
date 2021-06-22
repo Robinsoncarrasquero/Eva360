@@ -26,7 +26,7 @@
             <div class="table table-responsive">
                 <table class="table  table-striped table-table">
                     <thead class="table-preguntas border-warning">
-                        <th scope="col">#</th>
+                        {{-- <th scope="col">#</th> --}}
                         <th scope="col">Comportamiento observado</th>
                         <th scope="col">Seleccione</th>
                         <th scope="col">Frecuencia</th>
@@ -35,17 +35,19 @@
 
                     @foreach ($evaluacion->comportamientos as $comportamiento)
                         <tr data-id="{{"$comportamiento->id"}}" class="filas" >
-                            <th scope="row">{{ $comportamiento->grado_id }}</th>
+                            {{-- <th scope="row">{{ $comportamiento->grado_id }}</th> --}}
                             <td>{{$comportamiento->grado->description}}</td>
                             <td>
                                 <div class="form-check">
                                     <label class="form-check-label " for="gradocheck[]" style="color: rgb(255, 165, 0);font-size:1.5em"></label>
                                     @if ($evaluacion->competencia->seleccionmultiple)
                                         <input type="checkbox" class="no-check-select " id="{{"radiogrado$comportamiento->id"}}" name="gradocheck[]" value="{{"$comportamiento->id"}}"
-                                        disabled checked>
+                                        disabled checked
+                                        @if ($evaluacion->evaluador->status==2) disabled  @endif>
                                     @else
                                         <input type="checkbox" class="check-select "  id="{{"radiogrado$comportamiento->id"}}" name="gradocheck[]" value="{{"$comportamiento->id"}}"
-                                        @if($comportamiento->frecuencia) checked @endif>
+                                        @if($comportamiento->frecuencia) checked @endif
+                                        @if ($evaluacion->evaluador->status==2) disabled  @endif>
                                     @endif
                                 </div>
                             </td>

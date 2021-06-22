@@ -36,12 +36,8 @@
         <div class="col-sm-6">
             <label for="tipo">Tipo</label>
             <select id="tipo" class="form-control" name="tipo">
-               @foreach ($tipos as $tipo)
-                    @if ($competencia->tipo==$tipo)
-                        <option selected value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
-                    @else
-                        <option          value="{{$tipo->id}}">{{ $tipo->tipo }}</option>
-                    @endif
+                @foreach ($tipos as $tipo)
+                <option @if ($competencia->tipo==$tipo) selected @endif value="{{$tipo->id}}">{{ $tipo->tipo }}</option >
                 @endforeach
             </select>
         </div>
@@ -59,23 +55,23 @@
                 <th>Ponderacion</th>
             </thead>
             <tbody>
-                @foreach ($competencia->grados as $key=>$value)
-                <tr>
-                    <td>
-                        {{ $key }}
-                        <input class="col-sm-2" hidden type="text" name="gradoid[]" value="{{ $value->id }}">
-                    </td>
-                    <td>
-                        <input class="col-sm-2" type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">
-                    </td>
-                    <td>
-                        <textarea class="col-sm-12" cols="50" rows="4" name="gradoDescription[]">{{ old('gradoDescription.'.$key, $value->description)}}</textarea>
-                    </td>
-                    <td>
-                        <input class="col-sm-4" type="text" name="gradoPonderacion[]" value="{{ old('gradoPonderacion.'.$key, $value->ponderacion)}}">
-                    </td>
-                </tr>
-                @endforeach
+            @foreach ($competencia->grados as $key=>$value)
+            <tr>
+                <td>
+                    {{ $key }}
+                    <input class="col-sm-2" hidden type="text" name="gradoid[]" value="{{ $value->id }}">
+                </td>
+                <td>
+                    <input class="col-sm-2" type="text" name="gradoName[]" value="{{ old('gradoName.'.$key, $value->grado) }}">
+                </td>
+                <td>
+                    <textarea class="col-sm-12" cols="50" rows="4" name="gradoDescription[]">{{ old('gradoDescription.'.$key, $value->description)}}</textarea>
+                </td>
+                <td>
+                    <input class="col-sm-4" type="text" name="gradoPonderacion[]" value="{{ old('gradoPonderacion.'.$key, $value->ponderacion)}}">
+                </td>
+            </tr>
+            @endforeach
             </tbody>
         </table>
 
