@@ -183,6 +183,16 @@ Route::group(['middleware' => 'auth'], function() {
     ->middleware('role:admin');
 
 });
+
+//Routes para control de calficaciones
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('qualify', 'QualifyController')
+    ->middleware('role:admin');
+
+    Route::post('qualify/{id}/delete', 'QualifyController@destroy')->name('qualify.delete')
+    ->middleware('role:admin');
+
+});
 /**
  * Route de plantillas de personal con la carga masiva
  *

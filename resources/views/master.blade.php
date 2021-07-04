@@ -145,9 +145,12 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu4">
                         <a class="dropdown-item"  href="{{ route('tipo.index') }}">Tipos</a>
                         <a class="dropdown-item"  href="{{ route('competencia.index') }}">Competencias</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('modelo.index') }}">Modelo</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('frecuencia.index') }}">Frecuencia</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"  href="{{ route('qualify.index') }}">Calificacion</a>
                     </div>
                 </li>
 

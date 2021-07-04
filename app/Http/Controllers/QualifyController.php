@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Medida;
+use App\Qualify;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class MedidaController extends Controller
+class QualifyController extends Controller
 {
-
+    //
     /**
      * Display a listing of the medidas.
      *
@@ -18,8 +18,8 @@ class MedidaController extends Controller
      */
     public function index()
     {
-        $medidas=Medida::simplePaginate(5);
-        return \view('medidas.index',compact('medidas'));
+        $medidas=Qualify::simplePaginate(5);
+        return \view('qualify.index',compact('medidas'));
     }
 
     /**
@@ -29,7 +29,7 @@ class MedidaController extends Controller
      */
     public function create()
     {
-        return view('medidas.create');
+        return view('qualify.create');
     }
 
     /**
@@ -41,16 +41,17 @@ class MedidaController extends Controller
     public function store(Request  $formrequest)
     {
         try {
-            $medida = new Medida();
+            $medida = new Qualify();
             $medida->name = $formrequest->name;
-            $medida->medida = $formrequest->medida;
+            $medida->nivel = $formrequest->nivel;
             $medida->description = $formrequest->description;
+            $medida->color = $formrequest->color;
             $medida->save();
          } catch (QueryException $e) {
             return redirect()
-            ->back()->withErrors('Error imposible Guardar este registro. El Nombre de la medicion debe ser unico, no se permite duplicados.');
+            ->back()->withErrors('Error imposible Guardar este registro. El Nombre de la Calificacion debe ser unico, no se permite duplicados.');
         }
-        return \redirect('medida')->withSuccess('Medicion creada exitosamente : '.$formrequest->name.' Registrado exitosamente');
+        return \redirect('qualify')->withSuccess('Calificacion creada exitosamente : '.$formrequest->name.' Registrado exitosamente');
     }
 
     /**
@@ -61,8 +62,8 @@ class MedidaController extends Controller
      */
     public function edit($medida)
     {
-        $medida = Medida::findOrFail($medida);
-        return \view('medidas.edit',\compact('medida'));
+        $medida = Qualify::findOrFail($medida);
+        return \view('qualify.edit',\compact('medida'));
     }
 
     /**
@@ -74,17 +75,19 @@ class MedidaController extends Controller
      */
     public function update(Request $formrequest, $medida)
     {
-        $medida = Medida::findOrFail($medida);
-       try {
+        $medida = Qualify::findOrFail($medida);
+        try {
             $medida->name=$formrequest->name;
-            $medida->medida=$formrequest->medida;
+            $medida->nivel=$formrequest->nivel;
             $medida->description=$formrequest->description;
+            $medida->color = $formrequest->color;
             $medida->save();
+
         } catch (QueryException $e) {
             return redirect()->back()
             ->withErrors('Error imposible guardar este registro. Revise los datos del formulario e intente nuevamante.');
         }
-        return \redirect('medida')->withSuccess('Medicion : '.$formrequest->name.' Actualizada exitosamente');
+        return \redirect('qualify')->withSuccess('Calificacion : '.$formrequest->name.' Actualizada exitosamente');
     }
 
     /**
@@ -95,14 +98,14 @@ class MedidaController extends Controller
      */
     public function destroy($medida)
     {
-        $medida = Medida::find($medida);
+        $medida = Qualify::find($medida);
         try {
             $medida->delete();
             $success = true;
-            $message = "Medicion eliminada exitosamente";
+            $message = "Calificacion eliminada exitosamente";
         } catch (QueryException $e) {
             $success = false;
-      	    $message = "No se puede eliminar esta medicion, data restringida";
+      	    $message = "No se puede eliminar esta calificacion, data restringida";
         }
 
         //  Return response
@@ -110,7 +113,6 @@ class MedidaController extends Controller
             'success' => $success,
             'message' => $message,
         ]);
-
 
     }
 }

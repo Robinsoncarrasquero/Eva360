@@ -26,13 +26,13 @@
     <div class="row">
 
         @foreach($competencias as $key=>$value)
-        <div class="table table-responsive col-sm-12 col-md-6">
+        <div class="table table-responsive col-sm-12 col-md-6" >
 
             <table id="{{$key}}" class="table table-bordered table-table">
                 <thead>
-                    <tr>
-                        <th class="text text-center title-th-competencia" colspan="2">
-                        <strong >{{ $value['competencia']}} (Margen Requerido {{ $value['nivelRequerido'] }})
+                    <tr >
+                        <th class="text text-center title-th-competencia" colspan="2" style="background:{{  $value['colorcalificacion']}}">
+                        <strong >{{ $value['competencia']}} (Nivel Requerido {{ $value['nivelRequerido'] }})
                         </strong>
                         </th>
                     </tr>
@@ -49,6 +49,11 @@
                 <tr>
                     <td class="text text-center"><strong>Obtenido</strong></td>
                     <td class="text text-dark" ><a href=""><i class="material-icons">bar_chart</i></a>{{ number_format($value['eva360'],2)}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text text-center"><strong>Calificacion</strong></td>
+                    <td class="text text-center"><a href=""><i style="color:{{  $value['colorcalificacion']}}" ></i></a>{{ $value['calificacion']}}
                     </td>
                 </tr>
                 </tbody>

@@ -3,6 +3,7 @@ namespace app\CustomClass;
 
 use App\Configuracion;
 use App\Evaluado;
+use App\Qualify;
 use Illuminate\Support\Facades\DB;
 
 class DataEvaluacion{
@@ -20,6 +21,9 @@ class DataEvaluacion{
      *
     **/
     public function getDataEvaluacion(){
+
+        //Obtenemos la calificaciones
+        $calificaciones = Qualify::orderBy('nivel','DESC')->get();
 
         //Obtenemos la configuracion particular
         $configuraciones = Configuracion::first();
@@ -71,10 +75,19 @@ class DataEvaluacion{
                 }
                 $nivelRequerido=$item[2];
             }
+
+            foreach ($calificaciones as $calificacion) {
+                if ($sumaAverage/$contador <= $calificacion['nivel']){
+                    $calificado=$calificacion['name'];
+                    $colorcalificacion=$calificacion['color'];
+                }
+            }
             $adata[]=
             [
                 'competencia'=>$key,'eva360'=>$sumaAverage/$contador,
-                'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador
+                'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador,
+                'calificacion'=>$calificado,
+                'colorcalificacion'=>$colorcalificacion,
             ];
 
         }
