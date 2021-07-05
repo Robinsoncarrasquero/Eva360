@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Creacion de la medicion")
+@section('title',"Creacion medidas")
 
 @section('content')
 
@@ -14,7 +14,7 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Nueva Medicion</h5>
+            <h5>Nueva Medida</h5>
         </div>
 
         <form action="{{ route('medida.store') }}" method="POST">
@@ -26,7 +26,7 @@
                     <input type="text" id="name" maxlength="50" placeholder="Indique un nombre" class="form-control"  name="name" value="{{old('name')  }}" autofocus>
                 </div>
                 <div class="col-lg-12">
-                    <label for="medida">Medicion</label>
+                    <label for="medida">Medida</label>
                     <input type="text" id="medida" maxlength="20" placeholder="kilogramos, metros, toneladas, meses, horas..." class="form-control"  name="medida" value="{{old('medida')  }}" autofocus>
                 </div>
 

@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Editar Medicion")
+@section('title',"Editar Medida")
 
 @section('content')
 
@@ -11,7 +11,7 @@
     </div>
 
     <div class="text text-center">
-        <h5>Actualizar medicion</h5>
+        <h5>Actualizar medida</h5>
     </div>
 
     <form class="card-header" action="{{route('medida.update',$medida)  }}" method="post">
@@ -23,7 +23,7 @@
             <input id="name" maxlength="50" class="form-control" type="text" name="name" value="{{$medida->name }}">
         </div>
         <div class="col-lg-12">
-            <label for="medida">Medicion</label>
+            <label for="medida">Medida</label>
             <input id="medida" maxlength="20" class="form-control" type="text" name="medida" value="{{$medida->medida }}">
         </div>
         <div class="col-lg-12">

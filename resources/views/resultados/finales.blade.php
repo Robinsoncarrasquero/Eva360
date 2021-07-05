@@ -47,14 +47,12 @@
                 </tr>
                 @endforeach
                 <tr>
-                    <td class="text text-center"><strong>Obtenido</strong></td>
-                    <td class="text text-dark" ><a href=""><i class="material-icons">bar_chart</i></a>{{ number_format($value['eva360'],2)}}
-                    </td>
+                    <td class="text text-center"><a href=""><i class="material-icons">bar_chart</i></a>Resultado</td>
+                    <td class="text text-center" ><strong>{{ number_format($value['eva360'],2)}}</strong></td>
                 </tr>
                 <tr>
-                    <td class="text text-center"><strong>Calificacion</strong></td>
-                    <td class="text text-center"><a href=""><i style="color:{{  $value['colorcalificacion']}}" ></i></a>{{ $value['calificacion']}}
-                    </td>
+                    <td class="text text-center">Calificacion</td>
+                    <td class="alert alert-dark text-center"><strong>{{ $value['calificacion']}}</strong></td>
                 </tr>
                 </tbody>
             </table>

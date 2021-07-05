@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Catalogo de Mediciones")
+@section('title',"Catalogo de medidas")
 
 @section('content')
 
@@ -13,7 +13,7 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Catalogo de Mediciones</h5>
+            <h5>Catalogo de Medidas</h5>
         </div>
 
         <div class="d-flex justify-content-end">

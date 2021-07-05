@@ -75,7 +75,8 @@ class DataEvaluacion{
                 }
                 $nivelRequerido=$item[2];
             }
-
+            $calificado='Default';
+            $colorcalificacion='#b020a4';
             foreach ($calificaciones as $calificacion) {
                 if ($sumaAverage/$contador <= $calificacion['nivel']){
                     $calificado=$calificacion['name'];
