@@ -26,7 +26,8 @@
                     <th>#</th>
                     <th>Nombre</th>
                     {{-- <th>Descripcion</th> --}}
-                    <th>Margen</th>
+                    <th>Seleccion</th>
+                    <th>Requerido</th>
                     <th>Tipo</th>
                     <th></th>
                     <th></th>
@@ -36,6 +37,7 @@
                     <tr id="{{ $competencia->id }}">
                         <td>{{ $competencia->id }}</td>
                         <td>{{ $competencia->name }}</td>
+                        <td>@if ($competencia->seleccionmultiple) Multiple @else Simple @endif</td>
                         {{-- <td >{{ substr($competencia->description,0,100) }} ....</td> --}}
                         <td>{{ $competencia->nivelrequerido }}</td>
                         <td>{{ $competencia->tipo->tipo}}</td>

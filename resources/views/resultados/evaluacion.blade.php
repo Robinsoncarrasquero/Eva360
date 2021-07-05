@@ -39,7 +39,7 @@
                     </th>
                 </tr> --}}
                 <tr>
-                    <th class="text text-left  title-th-evaluador" colspan="5">
+                    <th class="text text-left  title-th-evaluador" colspan="4">
                     {{$evaluador->name}}({{ $evaluador->relation }}) <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
                     <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
                     <button type="button" data-id="{{$evaluador->id}}" class="btn btn-info btn-save-email">Guardar Email

@@ -177,7 +177,7 @@
                 type: element
             },
             title: {
-                text: 'Indicadpres de cumplimiento '
+                text: 'Indicadores de cumplimiento '
             },
             subtitle: {
                 text:  subProyectoName

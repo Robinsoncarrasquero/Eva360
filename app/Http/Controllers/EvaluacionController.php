@@ -58,6 +58,7 @@ class EvaluacionController extends Controller
         $user=Auth::loginUsingId($evaluador->user_id);
 
         if (!Auth::check()){
+            dd('no autentico',$user);
             return redirect('login');
         }
         session(['token' => $token]);

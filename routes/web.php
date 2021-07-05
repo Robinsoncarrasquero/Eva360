@@ -57,8 +57,7 @@ Route::get('/verorganigrama', function () {
 */
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::get('objetivo/{token}/evaluacion',"ObjetivosController@token")
-    ->name('objetivo.token');
+
 
     /**
      * Presenta las competencias por objetivos al evaluador
@@ -566,9 +565,12 @@ Route::post('lanzar/{evaluado}/procesarmodelo', "LanzarModeloController@procesar
 /**
  * Evaluador con logueo con token a la prueba
 */
+
+Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@token")
+->name('evaluacion.token');
+
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('evaluacion/{token}/evaluacion',"EvaluacionController@token")
-    ->name('evaluacion.token');
+
 
     /**
      * Presenta las competencias al evaluador
