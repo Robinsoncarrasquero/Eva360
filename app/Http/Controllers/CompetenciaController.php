@@ -25,7 +25,7 @@ class CompetenciaController extends Controller
     public function index()
     {
         //
-        $competencias=Competencia::simplePaginate(5);
+        $competencias=Competencia::simplePaginate(25);
         return \view('competencia.index',compact('competencias'));
 
     }

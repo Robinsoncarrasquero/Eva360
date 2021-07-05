@@ -31,7 +31,7 @@
             <table id="{{$key}}" class="table table-bordered table-table">
                 <thead>
                     <tr >
-                        <th class="text text-center title-th-competencia" colspan="2" style="background:{{  $value['colorcalificacion']}}">
+                        <th class="text text-center title-th-competencia-x" colspan="2" style="background:rgb(206, 204, 204)">
                         <strong >{{ $value['competencia']}} (Nivel Requerido {{ $value['nivelRequerido'] }})
                         </strong>
                         </th>
@@ -52,7 +52,7 @@
                 </tr>
                 <tr>
                     <td class="text text-center">Calificacion</td>
-                    <td class="alert alert-dark text-center"><strong>{{ $value['calificacion']}}</strong></td>
+                    <td class="text-center" style="background:{{  $value['colorcalificacion']}}"><strong>{{ $value['calificacion']}}</strong></td>
                 </tr>
                 </tbody>
             </table>
