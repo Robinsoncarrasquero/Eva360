@@ -133,7 +133,7 @@ class UserRelaciones
 
         foreach ($subor as $item) {
             # code...
-            $evaluadores[]=['name'=>$item->name,'email'=>$item->email,'user_id=>'=>$item->id,'relations'=>'Subordinado'];
+            $evaluadores[]=['name'=>$item->name,'email'=>$item->email,'user_id=>'=>$item->id,'relations'=>'Colaborador'];
         }
         return collect($evaluadores);
     }
@@ -197,7 +197,7 @@ class UserRelaciones
                 $emanager = new Evaluador();
                 $emanager->name = $manager->name;
                 $emanager->email = $manager->email;
-                $emanager->relation = ($metodo=='90' ? 'Manager' :'Supervisor');
+                $emanager->relation = ($metodo=='90' ? 'Manager' :'Supervisores');
                 $emanager->remember_token = Str::random(32);
                 $emanager->status = 0;
                 $emanager->user_id = $manager->id;
@@ -207,7 +207,7 @@ class UserRelaciones
             $esuper= new Evaluador();
             $esuper->name = $supervisor->name;
             $esuper->email = $supervisor->email;
-            $esuper->relation = ($metodo=='90' ? 'Supervisor' :'Supervisor');
+            $esuper->relation = ($metodo=='90' ? 'Supervisor' :'Supervisores');
             $esuper->remember_token = Str::random(32);
             $esuper->status = 0;
             $esuper->user_id = $supervisor->id;
@@ -237,7 +237,7 @@ class UserRelaciones
                 $npar= new Evaluador();
                 $npar->name = $par->name;
                 $npar->email = $par->email;
-                $npar->relation = 'Par';
+                $npar->relation = 'Pares';
                 $npar->remember_token = Str::random(32);
                 $npar->status = 0;
                 $npar->user_id = $par->id;
@@ -253,7 +253,7 @@ class UserRelaciones
                 $nsub= new Evaluador();
                 $nsub->name = $sub->name;
                 $nsub->email = $sub->email;
-                $nsub->relation = 'Subordinados';
+                $nsub->relation = 'Colaboradores';
                 $nsub->remember_token = Str::random(32);
                 $nsub->status = 0;
                 $nsub->user_id = $sub->id;
