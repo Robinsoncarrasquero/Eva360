@@ -166,7 +166,7 @@
         //     type: 'column'
         // },
         title: {
-            text: 'Analisis de cumplimiento'
+            text: 'Indicadores de cumplimiento'
         },
         subtitle: {
             text:  subProyectoName

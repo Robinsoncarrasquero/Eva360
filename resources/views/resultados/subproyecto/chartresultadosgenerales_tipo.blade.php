@@ -97,7 +97,7 @@
             type: 'column'
         },
         title: {
-            text: 'Resultados Generales por Tipo de Competencia'
+            text: 'Indicadores Generales por tipo de competencia'
         },
         subtitle: {
             text:  subProyectoName

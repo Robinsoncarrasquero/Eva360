@@ -106,7 +106,7 @@
             type: 'column'
         },
         title: {
-            text: 'Resultados Generales por Nivel de Cargo'
+            text: 'Indicadores Generales por nivel de cargo'
         },
         subtitle: {
             text:  subProyectoName

@@ -173,7 +173,7 @@
                 type: element
             },
             title: {
-                text: 'Resultados de competencias por grupo :'+element
+                text: 'Indicadores de competencias por grupo '
             },
             subtitle: {
                 text:  subProyectoName
