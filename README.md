@@ -7,6 +7,8 @@
 
 In the 360° feedback the inputs originate from many directions (superiors, colleagues, subordinates or internal and external customers) in a structured way along with relevant competencies, helping us successfully map the employee’s potential.
 
+You get an evaluation in just one minute.
+
 ## MODULES SYSTEMS 360° FEEDBACK?
 - Dictionary of Competencies
 - Models
