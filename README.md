@@ -1,5 +1,5 @@
 <p align="center">
-    SISTEMA DE GESTION POR COMPETENCIAS 360
+    ASSESSMENT FEEDBACK 360 DEGREE SYSTEMS
 </p>
 
 ## About Vision 360°
