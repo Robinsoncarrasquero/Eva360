@@ -1,31 +1,31 @@
 <p align="center">
-    SISTEMA DE GESTION POR COMPETENCIAS 360
+    ASSESSMENT FEEDBACK 360 DEGREE SYSTEMS
 </p>
 
-## About Vision 360°
-Es una aplicación web desarrollada para gestionar la evaluación integral y  medir las competencias de los colaboradores de una empresa. La evaluación se basa en las relaciones que tiene el empleado con su entorno laboral, de tal forma que la retroalimentación es el factor preponderante para evaluar el desempeño de los empleados, los equipos y las organizaciones de cualquier tamaño.
+## WHAT IS A SYSTEMS 360° FEEDBACK?
+360 degree feedback is a systematic tool for personal development. The feedback focuses on behavior at work – specific skills and competencies. Based on the results, individual development plans can be created. 360° feedback can be used to identify and recognize strengths and weaknesses and can serve as a starting point for better work effectiveness.
 
-La finalidad de la evaluación de 360 °, es dar al empleado retroalimentación para mejorar su desempeño y conductas de una manera más objetiva al consultar con diferentes puntos de vista y perspectivas que vienen de su entorno laboral como jefes, pares, subordinados, clientes internos, clientes externos, etc. También se incluye una autoevaluación del evaluado para que haga una introspección de su desempeño que junto con la retroalimentación de los evaluadores se logra apreciar una mayor objetividad. 
-Lo fundamental antes de lanzar un proceso de evaluación es conocer cuál es objetivo y que se perseguí. Cualquier modelo que se aborde, la herramienta permite lanzarla de una manera muy simple y rápida obteniendo resultados en tiempo real.
+In the 360° feedback the inputs originate from many directions (superiors, colleagues, subordinates or internal and external customers) in a structured way along with relevant competencies, helping us successfully map the employee’s potential.
 
-## Alcances del Sistema
-El sistema VISION 360° es una solución desarrollada con el Framework LARAVEL bajo el patrón de diseño MVC model-view-controller, el orm Eloquent y la base de datos Mysql. Provechando esta maravillosa tecnología open source simple, ágil, y escalable se logra desarrollar cualquier herramienta de pequeña a gran escala. Se utilizaron otras tecnologías como javascript, jquery, Ajax, Bootstrap, css, y html.
+You get an evaluation in just one minute.
 
-- Competencias
-- Modelos
-- Frecuencia
-- Usuarios
-- Mis evaluados
-- Crear evaluado
-- Lanzar por modelo
-- Lanzar por competencias
-- Prueba
-- Resultados
-- Graficas
+## MODULES SYSTEMS 360° FEEDBACK?
+- Dictionary of Competencies
+- Models
+- Frecuencies
+- Users
+- My collaborators
+- Launch evaluation
+- Answer test
+- Metrics with line graphics
+- Metrics with bar graphs
+- notifications by email
+- notifications by sms
+- Load masive.
+- 
+## Feedback 360 Sponsors
 
-## Vision 360 Sponsors
-
-We would like to extend our thanks to the following sponsors for funding vision360 development. If you are interested in becoming a sponsor, please visit the write to me
+We would like to extend our thanks to the following sponsors for funding feedback development. If you are interested in becoming a sponsor, please visit the write to me
 
  
 ## Contributing
