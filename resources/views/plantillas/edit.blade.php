@@ -23,15 +23,20 @@
                 @csrf
                 {{-- @method('PATCH') --}}
 
-                <div class="col-lg-12">
+                <div class="form-group">
                     <label for="name">Nombre de la importacion</label>
                     <input id="name" class="form-control" type="text" name="name" readonly value="{{$carga_masiva->name}}">
                 </div>
 
-                <div class="col-lg-12">
+                <div class="form-group">
                     <label for="description">Descripcion</label>
                     <textarea placeholder="Descripcion" type="text" id="description" class="form-control" rows="4"
                         maxlength="250" name="description">{{ $carga_masiva->description }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-check-label " for="updateplantilla" style="color: rgb(255, 165, 0);font-size:1em">Unicamente actualizar plantilla</label>
+                    <input type="checkbox" class="check-select "  name="updateplantilla" checked >
                 </div>
 
                 {{-- <div class="col-lg-12">

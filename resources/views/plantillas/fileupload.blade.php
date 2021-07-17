@@ -126,10 +126,7 @@
 
             <form action="{{ route('plantillas.upload') }}" method="POST" enctype="multipart/form-data" id='myform'>
                 @csrf
-                <div class="form-group">
-                    <label class="form-check-label " for="updateplantilla" style="color: rgb(255, 165, 0);font-size:1em">Unicamente actualizar plantilla</label>
-                    <input type="checkbox" class="check-select "  name="updateplantilla" checked >
-                </div>
+
                 <div class="form-group">
                     <input type="file" class="form-control-file" name="fileName" id="fileName" aria-describedby="fileHelp">
                     <small id="fileHelp" class="form-text text-muted">Por favor seleccion un archivo</small>

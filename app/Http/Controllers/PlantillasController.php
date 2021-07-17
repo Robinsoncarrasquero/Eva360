@@ -164,11 +164,7 @@ class PlantillasController extends Controller
 
             return \view('plantillas.errores',compact('errores','errores2','carga_masiva'));
         }
-        if ($request->updateplantilla){
-            $record= CargaMasiva::find($carga_masiva->id);
-            $record->delete();
-            return \redirect()->route('talent.index')->withSuccess('Plantilla actualizada exitosamente ');
-        }
+
 
         $modelos =  Modelo::all();
         return \view('plantillas.edit',compact('carga_masiva','metodos','modelos','pathFile'));
@@ -211,7 +207,6 @@ class PlantillasController extends Controller
 
             foreach ($plantillas as $plantilla) {
 
-                # code...
                 $ubicacion= Departamento::firstOrCreate(['name'=>$plantilla->ubicacion],
                     ['description'=>$plantilla->ubicacion,
                 ]);
@@ -265,7 +260,13 @@ class PlantillasController extends Controller
             ->withErrors('Error imposible Procesar esta Plantilla tiene errores. Revise que los datos este correctos en la hoja de Excel.');
         }
 
-       return \redirect()->route('plantillas.index')->withSuccess('Importacion de Plantilla : '.$request->name.' Procesada exitosamente');
+        if ($request->updateplantilla){
+            $record= CargaMasiva::find($cm->id);
+            $record->delete();
+            return \redirect()->route('talent.index')->withSuccess('Plantilla actualizada exitosamente ');
+        }
+
+        return \redirect()->route('plantillas.index')->withSuccess('Importacion de Plantilla : '.$request->name.' Procesada exitosamente');
     }
 
     /**
