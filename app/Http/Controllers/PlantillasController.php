@@ -164,6 +164,11 @@ class PlantillasController extends Controller
 
             return \view('plantillas.errores',compact('errores','errores2','carga_masiva'));
         }
+        if ($request->updateplantilla){
+            $record= CargaMasiva::find($carga_masiva->id);
+            $record->delete();
+            return \redirect()->route('talent.index')->withSuccess('Plantilla actualizada exitosamente ');
+        }
 
         $modelos =  Modelo::all();
         return \view('plantillas.edit',compact('carga_masiva','metodos','modelos','pathFile'));

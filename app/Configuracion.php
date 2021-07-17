@@ -9,7 +9,13 @@ class Configuracion extends Model
     //
     protected $table='configuraciones';
 
-    protected $fillable=['sms','email','promediarautoevaluacion','name'];
+    protected $fillable=
+    [
+    'sms','email','promediarautoevaluacion',
+    'name','manager',
+    'supervisor','supervisores','pares',
+    'subordinados','autoevaluacion'
+    ];
 
 
 

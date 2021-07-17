@@ -2,6 +2,7 @@
 
 namespace app\CustomClass;
 
+use App\Configuracion;
 use App\Evaluador;
 use App\Evaluado;
 use App\User;
@@ -19,9 +20,10 @@ class UserRelaciones
     private $manager;
     private $supervisor;
     private $team;
-
+    private $configuracion;
     function __construct() {
-
+        //Obtenemos la configuracion particular
+        $this->configuracion = Configuracion::first();
 
     }
 
@@ -117,23 +119,22 @@ class UserRelaciones
     public function getEvaluadores()
     {
 
+
         $manager = $this->manager;
-        $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id=>'=>$manager->id,'relations'=>'Manager'];
+        $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id=>'=>$manager->id,'relations'=>$this->configuracion->manager];
 
         $supervisor = $this->supervisor;
-        $evaluadores[]=['name'=>$supervisor->name,'email'=>$supervisor->email,'user_id=>'=>$supervisor->id,'relations'=>'Supervisor'];
+        $evaluadores[]=['name'=>$supervisor->name,'email'=>$supervisor->email,'user_id=>'=>$supervisor->id,'relations'=>$this->configuracion->supervisor];
 
         $pares = $this->pares;
         foreach ($pares as $item) {
-            # code...
-            $evaluadores[]=['name'=>$item->name,'email'=>$item->email,'user_id=>'=>$item->id,'relations'=>'Par'];
+            $evaluadores[]=['name'=>$item->name,'email'=>$item->email,'user_id=>'=>$item->id,'relations'=>$this->configuracion->pares];
         }
 
         $subor = $this->subordinados;
 
         foreach ($subor as $item) {
-            # code...
-            $evaluadores[]=['name'=>$item->name,'email'=>$item->email,'user_id=>'=>$item->id,'relations'=>'Colaborador'];
+            $evaluadores[]=['name'=>$item->name,'email'=>$item->email,'user_id=>'=>$item->id,'relations'=>$this->configuracion->subordinados];
         }
         return collect($evaluadores);
     }
@@ -197,7 +198,7 @@ class UserRelaciones
                 $emanager = new Evaluador();
                 $emanager->name = $manager->name;
                 $emanager->email = $manager->email;
-                $emanager->relation = ($metodo=='90' ? 'Manager' :'Supervisores');
+                $emanager->relation = ($metodo=='90' ? $this->configuracion->manager :$this->configuracion->supervisores);
                 $emanager->remember_token = Str::random(32);
                 $emanager->status = 0;
                 $emanager->user_id = $manager->id;
@@ -207,7 +208,7 @@ class UserRelaciones
             $esuper= new Evaluador();
             $esuper->name = $supervisor->name;
             $esuper->email = $supervisor->email;
-            $esuper->relation = ($metodo=='90' ? 'Supervisor' :'Supervisores');
+            $esuper->relation = ($metodo=='90' ? $this->configuracion->supervisor : $this->configuracion->supervisores);
             $esuper->remember_token = Str::random(32);
             $esuper->status = 0;
             $esuper->user_id = $supervisor->id;
@@ -219,7 +220,7 @@ class UserRelaciones
                 $autoeva= new Evaluador();
                 $autoeva->name = $user->name;
                 $autoeva->email = $user->email;
-                $autoeva->relation = 'Autoevaluacion';
+                $autoeva->relation = $this->configuracion->autoevaluacion;
                 $autoeva->remember_token = Str::random(32);
                 $autoeva->status = 0;
                 $autoeva->user_id = $user->id;
@@ -237,7 +238,7 @@ class UserRelaciones
                 $npar= new Evaluador();
                 $npar->name = $par->name;
                 $npar->email = $par->email;
-                $npar->relation = 'Pares';
+                $npar->relation = $this->configuracion->pares;
                 $npar->remember_token = Str::random(32);
                 $npar->status = 0;
                 $npar->user_id = $par->id;
@@ -253,7 +254,7 @@ class UserRelaciones
                 $nsub= new Evaluador();
                 $nsub->name = $sub->name;
                 $nsub->email = $sub->email;
-                $nsub->relation = 'Colaboradores';
+                $nsub->relation = $this->configuracion->subordinados;
                 $nsub->remember_token = Str::random(32);
                 $nsub->status = 0;
                 $nsub->user_id = $sub->id;
@@ -265,5 +266,7 @@ class UserRelaciones
         return true;
 
     }
+
+
 
 }

@@ -42,17 +42,24 @@ class ConfiguracionController extends Controller
     {
         //
 
-        // $request->validate([
-        //     'sendsms'=>'required',
-        //     'sendemail'=>'required',
-        //     'autoevaluacion'=>'required',
-        //     ],[
-        //         'sendsms.required'=>'SMS es requerido',
-        //         'sendemail.required'=>'Enviar email es requerido',
-        //         'autoevaluacion.required'=>'Promediar autoevaluacion es requerido',
-        //     ],
+        $request->validate([
+            'manager'=>'required',
+            'supervisor'=>'required',
+            'supervisores'=>'required',
+            'pares'=>'required',
+            'subordinados'=>'required',
+            'autoevaluacion'=>'required',
+            ],[
+                'manager.required'=>'El titulo para un manager es requerido',
+                'supervisor.required'=>'El titulo para un supervisor es requerido',
+                'supervisores.required'=>'El titulo para el grupo supervisores es requerido',
+                'pares.required'=>'El titulo para el grupo pares es requerido',
+                'subordinados.required'=>'El titulo para el grupo subordinados es requerido',
+                'autoevaluacion.required'=>'El titulo para la autoevaluacion es requerido',
 
-        // );
+            ],
+
+        );
 
         try {
 
@@ -60,10 +67,16 @@ class ConfiguracionController extends Controller
             $record->sms=$request->sendsms ? 1 : 0;
             $record->email= $request->sendemail ? 1 : 0;
             $record->promediarautoevaluacion= $request->autoevaluacion ? 1 : 0;
+            $record->manager= $request->manager;
+            $record->supervisor = $request->supervisor;
+            $record->supervisores = $request->supervisores;
+            $record->pares = $request->pares;
+            $record->subordinados = $request->subordinados;
+            $record->autoevaluacion = $request->autoevaluacion;
             $record->save();
 
         } catch (QueryException $e) {
-            dd($e);
+
             return redirect()->back()
             ->withErrors('Error imposible Guardar este registro. Algo no esta bien con la configuracion.');
         }
