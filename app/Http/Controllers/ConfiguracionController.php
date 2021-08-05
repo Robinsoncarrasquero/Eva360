@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Configuracion;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+
 
 class ConfiguracionController extends Controller
 {
@@ -43,12 +45,12 @@ class ConfiguracionController extends Controller
         //
 
         $request->validate([
-            'manager'=>'required',
-            'supervisor'=>'required',
-            'supervisores'=>'required',
-            'pares'=>'required',
-            'subordinados'=>'required',
-            'autoevaluacion'=>'required',
+            'manager'=>'required|max:15,string',
+            'supervisor'=>'required|max:15,string',
+            'supervisores'=>'required|max:15,string',
+            'pares'=>'required|max:15,string',
+            'subordinados'=>'required|max:15,string',
+            'autoevaluacion'=>'required|max:15,string',
             ],[
                 'manager.required'=>'El titulo para un manager es requerido',
                 'supervisor.required'=>'El titulo para un supervisor es requerido',
@@ -61,12 +63,13 @@ class ConfiguracionController extends Controller
 
         );
 
+
         try {
 
             $record = Configuracion::first();
             $record->sms=$request->sendsms ? 1 : 0;
             $record->email= $request->sendemail ? 1 : 0;
-            $record->promediarautoevaluacion= $request->autoevaluacion ? 1 : 0;
+            $record->promediarautoevaluacion= $request->promediarautoevaluacion ? 1 : 0;
             $record->manager= $request->manager;
             $record->supervisor = $request->supervisor;
             $record->supervisores = $request->supervisores;
