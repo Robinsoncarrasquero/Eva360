@@ -63,7 +63,7 @@
             <th>% <br>Cumpmto</th>
             <th>% <br> Brecha</th>
             <th>% <br> Potencial</th>
-            <th>Oportunidad</th>
+            <th>Debilidad</th>
             <th>Fortaleza</th>
             </thead>
             <tbody>
@@ -127,12 +127,37 @@
             <div class="justify-content-between	">
 
                 <div class="col-lg-12 d-flex p-2">
-                    <label for="feedback" style="font-size:1em">Escriba un FeedBack</label>
-                    <textarea placeholder="Indique su feedback" type="text" id="fb_feedback{{ $feedback->id }}" class="form-control" rows="6"
+                    <label for="feedback" style="font-size:1em">FeedBack</label>
+                    <textarea placeholder="feedback" type="text" id="fb_feedback{{ $feedback->id }}" class="form-control" rows="6"
                         maxlength="1000" name="fb_feedback[]">{{ old('fb_feedback'.$feedback->id,  $feedback->feedback) }}</textarea>
                 </div>
 
             </div>
+
+            <div class="justify-content-between	">
+
+                <div class="col-lg-12 d-flex p-2">
+                    <label for="fb_development" style="font-size:1em">Desarroll</label>
+                    <textarea placeholder="Desarrollo" type="text" id="fb_development{{ $feedback->id }}" class="form-control" rows="6"
+                        maxlength="1000" name="fb_development[]">{{ old('fb_development'.$feedback->id,  $feedback->development) }}</textarea>
+                </div>
+
+            </div>
+            <div class="justify-content-start">
+                <div class="col-sm-6">
+                    <label >Frecuencia</label>
+                    <select class="form-control" id="fb_periodo{{ $feedback->id }}" name="fb_periodo[]">
+                        @foreach ($periodos as $periodo)
+                            @if ($feedback->periodo==$periodo)
+                                <option  selected  value="{{ $periodo->id }}">{{ $periodo->name }} </option>
+                            @else
+                                <option   value="{{ $periodo->id }}">{{ $periodo->name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
             <div class="justify-content-start">
                 <div class="col-lg-6">
                     <label for="fb_finicio">Fecha Inicio</label>
@@ -147,14 +172,14 @@
             </div>
 
             <div class="justify-content-start">
-                <div class="col-sm-6">
-                    <label >Estatus</label>
+                <div class="col-lg-6">
+                    <label >Status</label>
                     <select class="form-control" id="fb_status{{ $feedback->id }}" name="fb_status[]">
                         @foreach ($fb_status as $status)
-                            @if ($feedback->fb_status==$status)
-                                <option  selected  value="{{ $status}}">{{ $status}}</option>
+                            @if ($feedback->fbstatu_id==$status->id)
+                                <option  selected  value="{{ $status->id }}">{{ $status->name }}</option>
                             @else
-                                <option   value="{{ $status}}">{{ $status}}</option>
+                                <option   value="{{ $status->id }}">{{ $status->name }}</option>
                             @endif
                         @endforeach
                     </select>

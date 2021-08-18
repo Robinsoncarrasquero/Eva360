@@ -77,7 +77,6 @@
                     <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
-
                 @if (Auth::check() && !Auth::user()->admin())
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
@@ -138,6 +137,16 @@
                     </div>
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        FeedBack
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu3">
+                        <a class="dropdown-item"  href="{{ route('periodo.index') }}">Frecuencia</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"  href="{{ route('fbstatu.index') }}">Status</a>
+                    </div>
+                </li>
                 <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Modelos

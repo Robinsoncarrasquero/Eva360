@@ -183,12 +183,32 @@ Route::group(['middleware' => 'auth'], function() {
 
 });
 
-//Routes para control de calficaciones
+//Routes para control de calificaciones
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('qualify', 'QualifyController')
     ->middleware('role:admin');
 
     Route::post('qualify/{id}/delete', 'QualifyController@destroy')->name('qualify.delete')
+    ->middleware('role:admin');
+
+});
+
+//Routes para control de periodos
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('periodo', 'PeriodoController')
+    ->middleware('role:admin');
+
+    Route::post('periodo/{id}/delete', 'PeriodoController@destroy')->name('periodo.delete')
+    ->middleware('role:admin');
+
+});
+
+//Routes para control de status de feedback
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('fbstatu', 'FBstatuController')
+    ->middleware('role:admin');
+
+    Route::post('fbstatu/{id}/delete', 'FBstatuController@destroy')->name('fbstatu.delete')
     ->middleware('role:admin');
 
 });
@@ -208,7 +228,6 @@ Route::middleware(['auth', 'role:admin'])->group( function() {
 
     Route::post('/plantillasdelete/{id}/delete', 'PlantillasController@destroy')->name('plantillas.delete');
 
-
     Route::get('/plantillas/verproyecto/{id}', 'PlantillasController@verproyecto')->name('plantillas.verproyecto');
 
     Route::post('/plantillas/upload', 'PlantillasController@upload')->name('plantillas.upload');
@@ -223,14 +242,16 @@ Route::middleware(['auth', 'role:admin'])->group( function() {
 //Routes para control de evaluaciones del manager
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/manager/index', 'ManagerController@index')->name('manager.index');
+
     Route::get('/manager/staff/{id}', 'ManagerController@staff')->name('manager.staff');
+
     Route::get('/manager/personal', 'ManagerController@personal')->name('manager.personal');
+
     Route::get('manager/historico/evaluaciones/{id}', 'ManagerController@historicoevaluaciones')
     ->name('manager.historicoevaluaciones'); // Manager
+
     Route::get('managerobjetivosporproyecto', 'ManagerController@objetivosporproyecto')
     ->name('manager.objetivosporproyecto'); // Manager
-
-
 
     Route::get('/plantillas/downloads', function () {
         return Storage::download("plantilla.xlsx");
@@ -238,7 +259,6 @@ Route::group(['middleware' => 'auth'], function() {
     })->where(['file' => '(.*?)\.(xlsx|json|jpg|png|jpeg|gif)$'])->name('plantillas.downloads');
 
 });
-
 
 
 /**
@@ -275,7 +295,6 @@ Route::middleware(['auth'])->group( function() {
      */
 
     Route::get('feedback/export/{evaluado}', 'FeedBackController@exportFeedBack')->name('feedBack->exportfeedback');
-
 
 });
 

@@ -11,7 +11,9 @@ use App\Departamento;
 use App\Evaluado;
 use App\Exports\FeedBackExport;
 use App\Exports\UsersExport;
+use App\FBstatu;
 use App\FeedBack;
+use App\Periodo;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -24,9 +26,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class FeedBackController extends Controller
 {
-
-
-
 
     /**
      * Update the specified resource in storage.
@@ -47,14 +46,20 @@ class FeedBackController extends Controller
             $fb_ffinal=$formrequest->input('fb_ffinal.*');
             $fb_nota=$formrequest->input('fb_nota.*');
             $fb_status=$formrequest->input('fb_status.*');
+            $fb_periodo=$formrequest->input('fb_periodo.*');
+            $fb_development=$formrequest->input('fb_development.*');
+
             for ($i=0; $i < count($fb_competencia); $i++) {
                 $fb= FeedBack::find($fb_competencia[$i]);
                 $fb->feedback=$fb_feedback[$i];
                 $fb->fb_finicio=$fb_finicio[$i];
                 $fb->fb_ffinal=$fb_ffinal[$i];
                 $fb->fb_nota=$fb_nota[$i];
-                $fb->fb_status=$fb_status[$i];
+                $fb->periodo_id=$fb_periodo[$i];
+                $fb->fbstatu_id=$fb_status[$i];
+                $fb->development=$fb_development[$i];
                 $fb->save();
+
             }
 
         } catch (QueryException $e) {
@@ -116,17 +121,21 @@ class FeedBackController extends Controller
                 //dd($competencia);
                 $feedbacks = FeedBack::updateOrCreate(
                     ['competencia'=> $competencia,
-                    'evaluado_id' => $evaluado_id],[
-                    'fb_status' => ($dataValue['data'][0]>($dataValue['data'][1]) ? 'No_Cumplida' : 'Cumplida')
-                ]);
+                    'evaluado_id' => $evaluado_id],
+                    [
+                //    'fb_status' => ($dataValue['data'][0]>($dataValue['data'][1]) ? 'No_Cumplida' : 'Cumplida')
+                    ]
+                );
 
              }
 
         }
 
         $fb_status=['Cumplida','No_Cumplida'];
-        $feedbacks= $evaluado->feedback()->get();
+        $fb_status= FBstatu::all();
 
+        $feedbacks= $evaluado->feedback()->get();
+        $periodos = Periodo::all();
         if (!$dataSerie){
             \abort(404);
         }
@@ -137,7 +146,7 @@ class FeedBackController extends Controller
                 break;
 
             default:
-                return \view('feedback.fbedit',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks'));
+                return \view('feedback.fbedit',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks','periodos'));
             break;
         }
 

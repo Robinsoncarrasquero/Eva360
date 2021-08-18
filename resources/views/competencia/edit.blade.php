@@ -20,12 +20,12 @@
 
         <div class="col-sm-6">
             <label for="name">Nombre</label>
-            <input id="name" class="form-control" type="text" name="name" value="{{$competencia->name }}">
+            <input id="name" class="form-control" type="text" name="name" value="{{ $competencia->name }}">
         </div>
 
         <div class="col-sm-12">
             <label for="description">Descripcion</label>
-            <textarea id="description" class="form-control"  name="description" rows="4" >{{$competencia->description }}</textarea>
+            <textarea id="description" class="form-control"  name="description" rows="4" >{{ $competencia->description }}</textarea>
         </div>
 
         <div class="col-sm-6">
@@ -37,13 +37,13 @@
             <label for="tipo">Tipo</label>
             <select id="tipo" class="form-control" name="tipo">
                 @foreach ($tipos as $tipo)
-                <option @if ($competencia->tipo==$tipo) selected @endif value="{{$tipo->id}}">{{ $tipo->tipo }}</option >
+                <option @if ($competencia->tipo==$tipo) selected @endif value="{{ $tipo->id }}">{{ $tipo->tipo }}</option >
                 @endforeach
             </select>
         </div>
 
         <div class="form-check">
-            <label class="form-check-label " for="seleccionmultiple[]" style="color: rgb(255, 165, 0);font-size:1.5em">Los comportamiento son de seleccion multiple</label>
+            <label class="form-check-label " for="seleccionmultiple[]" style="color: rgb(255, 165, 0);font-size:1.5em">Comportamientos multinivel</label>
             <input type="checkbox" class="check-select "  id="{{"seleccionmultiple$competencia->id"}}" name="seleccionmultiple[]" @if($competencia->seleccionmultiple) checked @endif>
         </div>
 

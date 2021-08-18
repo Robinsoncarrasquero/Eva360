@@ -15,4 +15,16 @@ class FeedBack extends Model
     public function evaluado(){
         return $this->belongsTo(Evaluado::class);
     }
+
+     //Un feedback pertenece a un periodo
+     public function periodo(){
+        return $this->belongsTo(Periodo::class);
+
+    }
+
+     //Un feedback pertenece a un status
+     public function fbstatu(){
+        return $this->belongsTo(FBstatu::class);
+
+    }
 }
