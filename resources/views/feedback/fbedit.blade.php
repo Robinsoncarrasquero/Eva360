@@ -45,7 +45,7 @@
                         <td >{{$dataValue['name']}}</td>
                     @endif
                     @foreach ($dataValue['data'] as $vdata)
-                        @if ($dataValue['data'][0]>($dataValue['data'][1]))
+                        @if ($dataValue['data'][0]>($vdata['data'][1]))
                             <td style="font-size:1.5em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
                         @else
                             <td class="text text-center">{{ number_format($vdata,2)}}</td>

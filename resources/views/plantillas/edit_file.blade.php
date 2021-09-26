@@ -11,7 +11,7 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Importacion de Plantilla de Personal</h5>
+            <h>Importacion de Plantilla de Personal</h4>
         </div>
 
         <div class="card-header">

@@ -11,7 +11,7 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Lanzar una Evaluacion Masiva desde la Plantilla de Personal Importada</h5>
+            <h4>Lanzar una Evaluacion Masiva desde la Plantilla de Personal Importada</h4>
         </div>
 
         <div class="card-header">
@@ -61,7 +61,7 @@
                 </div>
                 <br>
                 <div class="col-lg-12 text-center">
-                    <h2>Seleccione un Modelo de Competencias</h2>
+                    <h3>Seleccione un Modelo de Competencias</h3>
                 </div>
 
                 <div class="row ">

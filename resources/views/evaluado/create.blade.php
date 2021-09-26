@@ -11,7 +11,7 @@
             </div>
 
             <div class="mt-1 titulo text-center">
-                <h6>Crear un Evaluado y sus Evaluadores</h6>
+                <h6>Crear una evaluacion individual</h6>
             </div>
 
             @if($evaluadoArray)

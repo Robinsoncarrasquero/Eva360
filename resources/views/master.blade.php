@@ -181,6 +181,8 @@
                         <a  class="dropdown-item"   href="{{ route('user.index') }}">Users</a>
                         <div class="dropdown-divider"></div>
                         <a  class="dropdown-item"   href="{{ route('configuracion.edit') }}">Config</a>
+                        <div class="dropdown-divider"></div>
+                        <a  class="dropdown-item"   href="{{ route('paypal.transactions') }}">Pagos</a>
                     </div>
                 </li>
                 {{-- <li class="nav-item ">

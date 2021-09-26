@@ -359,7 +359,6 @@ class PlantillasController extends Controller
                 //Creamos un objeto para el lanzamiento de la Evaluacion
                 $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado->id);
                 if (!$objlanzaEvaluacion->crearEvaluacionMultiple($evaluado)){
-                //if (!$objlanzaEvaluacion->crearEvaluacion()){
                     return \redirect()->route('plantillas.verproyecto')
                     ->with('error',"Error, Esas competencias para el Evaluado $user->name, ya habian sido lanzadas en la Prueba..");
                 }

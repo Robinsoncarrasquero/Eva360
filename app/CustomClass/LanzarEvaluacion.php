@@ -3,13 +3,10 @@
 namespace app\CustomClass;
 
 use App\Comportamiento;
-use App\EmailSend;
 use App\Evaluacion;
 use App\Evaluado;
 use App\Evaluador;
-use App\Mail\EvaluacionEnviada;
-use App\Role;
-use App\User;
+use App\Paypal;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -29,6 +26,7 @@ class LanzarEvaluacion
 
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($this->evaluado_id);
+
         //Buscamos los evaluadores del evaluado
         $evaluadores = $evaluado->evaluadores;
 
@@ -95,6 +93,9 @@ class LanzarEvaluacion
         $evaluado->status=1; //0:Inicio, 1:Lanzada 2:finalizada
         $evaluado->save();
 
+        $transaccion = new Transacciones();
+        $transaccion->addTransaccion($evaluado->id);
         return true;
     }
+
 }

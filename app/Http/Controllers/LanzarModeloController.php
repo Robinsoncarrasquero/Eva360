@@ -78,6 +78,7 @@ class LanzarModeloController extends Controller
             ->with('error',"Error, Esas competencias para el Evaluado $evaluado->name, ya habian sido lanzadas en la Prueba..");
         }
 
+
         $objlanzaEvaluacion=null;
 
         EnviarEmail::enviarEmailEvaluadores($evaluado->id);

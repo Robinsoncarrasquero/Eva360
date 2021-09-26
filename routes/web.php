@@ -20,6 +20,17 @@ use Nexmo\Laravel\Facade\Nexmo;
 */
 
 /**
+ * Route Paypal
+ */
+
+Route::middleware(['auth', 'role:admin'])->group( function() {
+    Route::post('/paypal/pay', 'PaymentController@payWithPayPal')->name('paypal.makepay');
+    Route::get('/paypal/status', 'PaymentController@payPalStatus')->name('paypal.status');
+    Route::get('/paypal/transactions', 'PaymentController@transactions')->name('paypal.transactions');
+    Route::get('/paypal/editpay', 'PaymentController@editPayPayPal')->name('paypal.editPayPayPal');
+});
+
+/**
  * Route de presentacion del sistema
  *
  */

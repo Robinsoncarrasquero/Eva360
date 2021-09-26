@@ -21,6 +21,7 @@
         "maatwebsite/excel": "^3.1",
         "nexmo/laravel": "^2.4",
         "opis/json-schema": "^1.0",
+        "paypal/rest-api-sdk-php": "^1.14",
         "realrashid/sweet-alert": "^3.2"
     },
     "require-dev": {
@@ -68,7 +69,8 @@
             "app/CustomClass/DataObjetivo.php",
             "app/CustomClass/DataObjetivoGlobal.php",
             "app/CustomClass/DataObjetivoPersonal.php",
-            "app/CustomClass/UserRelaciones.php"
+            "app/CustomClass/UserRelaciones.php",
+            "app/CustomClass/Transacciones.php"
 	]
     },
     "minimum-stability": "dev",

@@ -1,4 +1,5 @@
-@extends('lanzamiento.layout')
+{{-- @extends('lanzamiento.layout') --}}
+@extends('master')
 
 @section('title',"Crear un Evaluado")
 
@@ -11,15 +12,29 @@
             </div>
 
             <div class="mt-1 alert alert-info text text-center ">
-                <h6>Crear un Evaluado con sus evaluadores</h6>
+                <h4>Crear un evaluacion individual</h4>
             </div>
 
             @if($evaluadores)
                 <form action="{{ route('talent.storeevaluado',$empleado->id) }}" method="POST" id="frm-evaluado">
                 @csrf
                 <div class="card mb-3">
+
+                    <div class="card-header mb-3">
+                        <label>Ficha administrativa</label>
+                        <select  class="form-control" name="departamento" id="{{ $empleado->departamento->id}}">
+                            <option readonly value=" {{ $empleado->departamento->id}}">{{ $empleado->departamento->name}}
+                        </select>
+                        <select  class="form-control" name="cargo" id="{{ $empleado->cargo->id}}">
+                            <option readonly value=" {{ $empleado->cargo->id}}">{{ $empleado->cargo->name}}
+                        </select>
+                        <input  readonly class="form-control" placeholder="Nombre" maxlength="100" type="text" name="nameevaluado" value="{{ $empleado->name }}" >
+                    </div>
                     <div class="card-header">
-                        <label  for="proyecto">Proyectos</label>
+
+
+
+                        <label  for="proyecto">SubProyecto de trabajo</label>
                         <select id="subproyecto"  class="form-control" name="subproyecto" >
                             @foreach ($proyectos as $proyectodata)
                                 @foreach ( $proyectodata->subproyectos as $subpro )
@@ -31,18 +46,9 @@
                                 @endforeach
                             @endforeach
                         </select>
-                    </div>
-                    <div class="card-header mb-3">
-                        <label>Ficha administrativa</label>
-                        <select  class="form-control" name="departamento" id="{{ $empleado->departamento->id}}">
-                            <option readonly value=" {{ $empleado->departamento->id}}">{{ $empleado->departamento->name}}
-                        </select>
-                        <select  class="form-control" name="cargo" id="{{ $empleado->cargo->id}}">
-                            <option readonly value=" {{ $empleado->cargo->id}}">{{ $empleado->cargo->name}}
-                        </select>
-                        <input  readonly class="form-control" placeholder="Nombre" maxlength="100" type="text" name="nameevaluado" value="{{ $empleado->name }}" >
-                    </div>
-                    <div class="card-header mb-3">
+                   </div>
+
+                   <div class="card-header mb-3">
                         <label for="metodo">Metodos</label>
                         <select id="metodo" class="form-control" name="metodo" >
                             @foreach ($metodos as $metodo)
@@ -78,8 +84,8 @@
                     </table>
 
                     <div class="clearfix">
-                        <span class="float-left"><a href=" {{route('talent.index') }}" class="btn btn-dark btn-lg">Back</a></span>
-                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Save</button>
+                        <span class="float-left"><a href=" {{route('talent.index') }}" class="btn btn-dark btn-lg">Regresar</a></span>
+                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Next">Crear</button>
                     </div>
                 </form>
                 </div>

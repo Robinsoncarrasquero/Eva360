@@ -23,7 +23,8 @@ class CreateFeedbackTable extends Migration
             $table->set('fb_status', ['Cumplida', 'No_Cumplida']);
             $table->string('fb_nota',1000)->nullable();
             $table->string('unidades',4)->nullable();
-            $table->foreignId('evaluado_id')->constrained()->cascadeOnDelete();           $table->foreignId('medida_id')->nullable()->constrained();
+            $table->foreignId('evaluado_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('medida_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
