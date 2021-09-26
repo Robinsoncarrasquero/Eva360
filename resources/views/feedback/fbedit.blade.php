@@ -40,13 +40,13 @@
                 @foreach ($dataSerie as $key=>$dataValue)
                 <tr>
                     @if ($dataValue['data'][0]>($dataValue['data'][1]))
-                        <td  class="text xtext-danger" style="font-size:1.5em; color:white;background:red">{{$dataValue['name']}}</td>
+                        <td  class="text xtext-danger" style="font-size:1em; color:white;background:red">{{$dataValue['name']}}</td>
                     @else
                         <td >{{$dataValue['name']}}</td>
                     @endif
                     @foreach ($dataValue['data'] as $vdata)
-                        @if ($dataValue['data'][0]>($vdata['data'][1]))
-                            <td style="font-size:1.5em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
+                        @if ($dataValue['data'][0]>($dataValue['data'][1]))
+                            <td style="font-size:1em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
                         @else
                             <td class="text text-center">{{ number_format($vdata,2)}}</td>
                         @endif
@@ -60,11 +60,11 @@
         <table id="{{ 'table'.$evaluado->id }}" class="table  table-bordered table-striped table-table">
             <thead class="table-thead" style="text-align: center;background:rgb(68, 0, 255);color:white">
 
-            <th>% <br>Cumpmto</th>
+            <th>% <br>Cumplido</th>
             <th>% <br> Brecha</th>
             <th>% <br> Potencial</th>
-            <th>Debilidad</th>
-            <th>Fortaleza</th>
+            <th>Debilidades</th>
+            <th>Fortalezas</th>
             </thead>
             <tbody>
                 @foreach ($dataBrecha as $key=>$value)
@@ -78,7 +78,7 @@
                 </td>
                 <td>
                     @if ($value['potencial']>100)
-                    <span style="font-size:1.5em; color:white;background:green">{{ number_format($value['potencial'],2) }}</span>
+                    <span style="font-size:1em; color:white;background:green">{{ number_format($value['potencial'],2) }}</span>
                     @endif
                 </td>
                 <td>
@@ -110,9 +110,9 @@
 
         <fieldset >
             @if ($feedback->fb_status=='Cumplida')
-                <legend class="text text-center" style="background-color:green ;color:white; font-size:2em;">{{ $feedback->competencia }}</legend>
+                <legend class="text text-center" style="background-color:green ;color:white; font-size:1.2em;">{{ $feedback->competencia }}</legend>
             @else
-                <legend class="text text-center" style="background-color:red ;color:white; font-size:2em;">{{ $feedback->competencia }}</legend>
+                <legend class="text text-center" style="background-color:red ;color:white; font-size:1.2em;">{{ $feedback->competencia }}</legend>
             @endif
 
             <div class="justify-content-start">
@@ -124,27 +124,43 @@
 
             </div>
 
-            <div class="justify-content-between	">
+            <div class="d-flex justify-content-between	">
 
-                <div class="col-lg-12 d-flex p-2">
-                    <label for="feedback" style="font-size:1em">FeedBack</label>
-                    <textarea placeholder="feedback" type="text" id="fb_feedback{{ $feedback->id }}" class="form-control" rows="6"
-                        maxlength="1000" name="fb_feedback[]">{{ old('fb_feedback'.$feedback->id,  $feedback->feedback) }}</textarea>
+                <div class="col-lg-12 p-2">
+                    <label for="fb_feedback[]" style="font-size:1em">Feedback</label>
+                    <textarea placeholder="Feedback" type="text" id="fb_feedback{{ $feedback->id }}" class="form-control" rows="6"
+                        maxlength="1000" name="fb_feedback[]">{{ old('fb_feedback'.$feedback->id,  $feedback->feedback) }}
+                    </textarea>
                 </div>
 
             </div>
 
-            <div class="justify-content-between	">
+            <div class="d-flex justify-content-between	">
 
-                <div class="col-lg-12 d-flex p-2">
-                    <label for="fb_development" style="font-size:1em">Desarroll</label>
+                <div class="col-lg-12 p-2">
+                    <label for="fb_development[]" style="font-size:1em">Desarrollo</label>
                     <textarea placeholder="Desarrollo" type="text" id="fb_development{{ $feedback->id }}" class="form-control" rows="6"
                         maxlength="1000" name="fb_development[]">{{ old('fb_development'.$feedback->id,  $feedback->development) }}</textarea>
                 </div>
 
             </div>
-            <div class="justify-content-start">
-                <div class="col-sm-6">
+
+            <div class="xd-flex justify-content-start">
+                <div class="col-lg-6">
+                    <label for="fb_finicio">Fecha Inicio</label>
+                    <input type="date" id="fb_finicio{{ $feedback->id }}" class="form-control"  name="fb_finicio[]"  value="{{ old('fb_finicio'.$feedback->id, $feedback->fb_finicio) }}">
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="col-lg-6">
+                    <label for="fb_ffinal">Fecha Final</label>
+                    <input type="date" id="fb_ffinal{{ $feedback->id }}" class="form-control"  name="fb_ffinal[]"  value="{{ old('fb_ffinal'.$feedback->id, $feedback->fb_ffinal) }}">
+                </div>
+            </div>
+
+            <div class=" d-flex justify-content-start">
+                <div class="col-lg-6">
                     <label >Frecuencia</label>
                     <select class="form-control" id="fb_periodo{{ $feedback->id }}" name="fb_periodo[]">
                         @foreach ($periodos as $periodo)
@@ -158,20 +174,7 @@
                 </div>
             </div>
 
-            <div class="justify-content-start">
-                <div class="col-lg-6">
-                    <label for="fb_finicio">Fecha Inicio</label>
-                    <input type="date" id="fb_finicio{{ $feedback->id }}" class="form-control"  name="fb_finicio[]"  value="{{ old('fb_finicio'.$feedback->id, $feedback->fb_finicio) }}">
-                </div>
-            </div>
-            <div class="justify-content-end">
-            <div class="col-lg-6">
-                    <label for="fb_ffinal">Fecha Final</label>
-                    <input type="date" id="fb_ffinal{{ $feedback->id }}" class="form-control"  name="fb_ffinal[]"  value="{{ old('fb_ffinal'.$feedback->id, $feedback->fb_ffinal) }}">
-                </div>
-            </div>
-
-            <div class="justify-content-start">
+            <div class="d-flex justify-content-start">
                 <div class="col-lg-6">
                     <label >Status</label>
                     <select class="form-control" id="fb_status{{ $feedback->id }}" name="fb_status[]">
@@ -186,10 +189,10 @@
                 </div>
             </div>
 
-            <div class="justify-content-start ">
+            <div class="d-flex justify-content-start ">
 
-                <div class="col-lg-12 d-flex p-2">
-                    <label for="fb_nota">Nota de Observacion</label>
+                <div class="col-lg-12 p-2">
+                    <label for="fb_nota">Nota</label>
                     <textarea placeholder="Escriba alguna observacion" type="text" id="fb_nota{{ $feedback->id }}" class="form-control" rows="4"
                         maxlength="500" name="fb_nota[]">{{ old('fb_nota'.$feedback->id, $feedback->fb_nota) }}</textarea>
                 </div>
