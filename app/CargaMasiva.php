@@ -40,7 +40,7 @@ class CargaMasiva extends Model
      * Una carga_masiva tiene pares
     */
     public function pares(){
-        return $this->hasMany(Plantillapar::class,'carga_masivas_id');
+        return $this->hasMany(PlantillaPar::class,'carga_masivas_id');
     }
 
 }
