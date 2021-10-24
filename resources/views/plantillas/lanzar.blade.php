@@ -11,7 +11,7 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h4>Lanzar una Evaluacion Masiva desde la Plantilla de Personal Importada</h4>
+            <h4>Lanzar una Evaluacion Masiva desde la Plantilla Importada</h4>
         </div>
 
         <div class="card-header">
@@ -59,9 +59,19 @@
                     <label class="form-check-label " for="sendsms[]" style="color: orange;font-size:1.5em"> Enviar SMS</label>
                     <input type="checkbox" class="check-select "  name="sendsms[]" >
                 </div>
+
+                <div class="col-lg-12 form-check">
+                    <label class="form-check-label " for="soloestaplantilla" style="color: orange;font-size:1.5em"> Exclusivamente esta plantilla</label>
+                    <input type="checkbox" class="check-select " checked  name="soloestaplantilla">
+                </div>
+                <div class="col-lg-12 form-check">
+                    <label class="form-check-label " for="supervisordirecto" style="color: orange;font-size:1.5em"> Unicamente Supervisor directo</label>
+                    <input type="checkbox" class="check-select " checked  name="supervisordirecto">
+                </div>
+
                 <br>
                 <div class="col-lg-12 text-center">
-                    <h3>Seleccione un Modelo de Competencias</h3>
+                    <h4>Seleccione un Modelo de Competencias</h4>
                 </div>
 
                 <div class="row ">

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Throwable;
+
 class UserRelaciones
 {
     private $user;
@@ -39,16 +41,20 @@ class UserRelaciones
             return false;
         }
 
-        //$user = User::where('email',$user->email)->first();
+        try {
 
-        $supervisor= User::where('email',$user->email_super)->first();
+            $supervisor= User::where('email',$user->email_super)->first();
 
-        $evaluadores[]=['name'=>$supervisor->name,'email'=>$supervisor->email,'user_id=>'=>$supervisor->id];
-        $this->supervisor=$supervisor;
+            $evaluadores[]=['name'=>$supervisor->name,'email'=>$supervisor->email,'user_id=>'=>$supervisor->id];
+            $this->supervisor=$supervisor;
 
-        $manager= User::where('email',$supervisor->email_super)->first();
-        $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id'=>$manager->id];
-        $this->manager=$manager;
+            $manager= User::where('email',$supervisor->email_super)->first();
+            $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id'=>$manager->id];
+            $this->manager=$manager;
+        } catch (Throwable $e) {
+            report($e);
+            return false;
+        }
 
         //Equipo de trabajo
         $this->team = DB::table('users')->where([
@@ -58,18 +64,27 @@ class UserRelaciones
 
         //Subordinados
         $this->subordinados = DB::table('users')->where([
-            ['departamento_id', '=', $user->departamento_id],
+            //['departamento_id', '=', $user->departamento_id],
             ['email_super', '=', $user->email],
         ])->get();
 
         //Pares
-        $this->pares = DB::table('users')->where([
+        $pares_directos = DB::table('users')->where([
             ['departamento_id', '=', $user->departamento_id],
             ['email_super', '=', $supervisor->email],
             ['email', '<>', $supervisor->email],
             ['id', '<>', $user->id],
         ])->get();
+        $idpares_directos=$pares_directos->pluck('id');
 
+        $pares_indirectos = DB::table('pares')->where('user_id',$user->id)->get();
+        $idpares_indirectos=$pares_indirectos->pluck('user_id_par');
+
+        $id_pares_concatenated = $idpares_indirectos->concat($idpares_directos)->unique();
+
+        $this->pares = User::whereIn('id',$id_pares_concatenated)->get();
+
+        return true;
 
     }
 
@@ -116,15 +131,18 @@ class UserRelaciones
     /**
      * Retorna los evaluadores del usuario
      */
-    public function getEvaluadores()
-    {
+    public function getEvaluadores(){
 
+        try {
+           $manager = $this->manager;
+            $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id=>'=>$manager->id,'relations'=>$this->configuracion->manager];
 
-        $manager = $this->manager;
-        $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id=>'=>$manager->id,'relations'=>$this->configuracion->manager];
+            $supervisor = $this->supervisor;
+            $evaluadores[]=['name'=>$supervisor->name,'email'=>$supervisor->email,'user_id=>'=>$supervisor->id,'relations'=>$this->configuracion->supervisor];
 
-        $supervisor = $this->supervisor;
-        $evaluadores[]=['name'=>$supervisor->name,'email'=>$supervisor->email,'user_id=>'=>$supervisor->id,'relations'=>$this->configuracion->supervisor];
+        } catch (Throwable $e) {
+            return false;
+        }
 
         $pares = $this->pares;
         foreach ($pares as $item) {
@@ -146,15 +164,15 @@ class UserRelaciones
         $evaluadores[] = $this->manager;
         $metodo=[];
 
-        if (count($evaluadores)>1 && $this->pares->count()>1 && $this->subordinados->count()>1){
+        if (count($evaluadores)>=1 && $this->pares->count()>1 && $this->subordinados->count()>1){
             $metodo[]='360';
         }
 
-        if (count($evaluadores)>1 && $this->pares->count()>1){
+        if (count($evaluadores)>=1 && $this->pares->count()>1){
             $metodo[]='180';
         }
 
-        if (count($evaluadores)>1){
+        if (count($evaluadores)>=1){
             $metodo[]='90';
         }
 
@@ -179,9 +197,9 @@ class UserRelaciones
         $subordinados= $this->subordinados;
 
         //Metodo de 90 grados
-        if (($metodo=='90' && count($evaluadores)>1)
-        || ($metodo=='180' && count($evaluadores)>1 && $pares->count()>1)
-        || ($metodo=='360' && count($evaluadores)>1 && $pares->count()>1 && $subordinados->count()>1)){
+        if (($metodo=='90' && count($evaluadores)>=1)
+        || ($metodo=='180' && count($evaluadores)>=1 && $pares->count()>1)
+        || ($metodo=='360' && count($evaluadores)>=1 && $pares->count()>1 && $subordinados->count()>1)){
 
             //Creamos el evaluado
             $evaluado= new Evaluado();
@@ -194,7 +212,7 @@ class UserRelaciones
             $evaluado->save();
 
             //Cuando no existe un nivel superior
-            if ($manager->email != $supervisor->email){
+            if ($manager && $manager->email != $supervisor->email){
                 $emanager = new Evaluador();
                 $emanager->name = $manager->name;
                 $emanager->email = $manager->email;
@@ -231,8 +249,8 @@ class UserRelaciones
         }
 
         //Generamos los pares
-        if (($metodo=='180' && count($evaluadores)>1 && $pares->count()>1)
-        || ($metodo=='360' && count($evaluadores)>1 && $pares->count()>1 && $subordinados->count()>1)){
+        if (($metodo=='180' && count($evaluadores)>=1 && $pares->count()>1)
+        || ($metodo=='360' && count($evaluadores)>=1 && $pares->count()>1 && $subordinados->count()>1)){
 
             foreach ($pares as $par) {
                 $npar= new Evaluador();
@@ -248,7 +266,7 @@ class UserRelaciones
         }
 
         //Generamos los subordinados
-        if ($metodo=='360' && count($evaluadores)>1 && $pares->count()>1 && $subordinados->count()>1){
+        if ($metodo=='360' && count($evaluadores)>=1 && $pares->count()>1 && $subordinados->count()>1){
 
             foreach ($subordinados as $sub) {
                 $nsub= new Evaluador();
@@ -264,6 +282,85 @@ class UserRelaciones
         }
 
         return true;
+
+    }
+
+    //Crea las relaciones de forma libre y setea las relaciones o roles
+    public function GeneraData($lista_de_evaluadores)
+    {
+
+        $user= $this->user;
+
+        if ($user->email_super===null){
+            return false;
+        }
+        $subordinados=[];
+        $pares=[];
+        $this->manager='';
+        $this->supervisor='';
+
+        foreach ($lista_de_evaluadores as $key => $record) {
+
+            $userEvaluador= User::where('email',$record['email'])->first();
+
+            if ($userEvaluador){
+
+                if ($record['relation']==$this->configuracion->supervisor) {
+                    $this->supervisor=$userEvaluador;
+                }
+
+                if ($record['relation']==$this->configuracion->manager) {
+                    $this->manager=$userEvaluador;
+                }
+
+                if ($record['relation']==$this->configuracion->pares) {
+                    $pares[]= $userEvaluador->id;
+                }
+
+                if ($record['relation']==$this->configuracion->subordinados) {
+                    $subordinados[]= $userEvaluador->id;
+                }
+            }
+        }
+
+        //Equipo de trabajo
+        $this->team = DB::table('users')->where([
+            ['departamento_id', '=', $user->departamento_id],
+            ['active', '=', true]
+        ])->get();
+
+
+        //Pares
+
+        $this->pares = DB::table('users')->whereIn('id',$pares)->get();
+
+        //Subordinados
+        $this->subordinados =  DB::table('users')->whereIn('id',$subordinados)->get();
+
+        return true;
+
+    }
+
+    public function getValidaMetodo($metodoaprocesar)
+    {
+
+        $evaluadores[] = $this->supervisor;
+        $evaluadores[] = $this->manager;
+        $metodo=[];
+
+        if ($metodoaprocesar="360" && count($evaluadores)>=1 && $this->pares->count()>1 && $this->subordinados->count()>1){
+            return true;
+        }
+
+        if ($metodoaprocesar="180" && count($evaluadores)>=1 && $this->pares->count()>1){
+            return true;
+        }
+
+        if ($metodoaprocesar="90" && count($evaluadores)>=1){
+            return true;
+        }
+
+        return false;
 
     }
 

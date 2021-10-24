@@ -6,6 +6,7 @@ use App\Proyecto;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
+
 class ProyectoController extends Controller
 {
     /**

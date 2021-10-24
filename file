@@ -1,0 +1,21 @@
+Migrating: 2021_10_23_182944_update_cargo_table_cargo
+
+   Error 
+
+  Class 'Doctrine\DBAL\Driver\PDOMySql\Driver' not found
+
+  at C:\Proyectos\eva360\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:64
+    60|      * @return \Doctrine\DBAL\Driver\PDOMySql\Driver
+    61|      */
+    62|     protected function getDoctrineDriver()
+    63|     {
+  > 64|         return new DoctrineDriver;
+    65|     }
+    66| }
+    67|
+
+  1   C:\Proyectos\eva360\vendor\laravel\framework\src\Illuminate\Database\Connection.php:894
+      Illuminate\Database\MySqlConnection::getDoctrineDriver()
+
+  2   C:\Proyectos\eva360\vendor\laravel\framework\src\Illuminate\Database\Schema\Grammars\ChangeColumn.php:36
+      Illuminate\Database\Connection::getDoctrineSchemaManager()

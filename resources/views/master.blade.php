@@ -92,7 +92,7 @@
                         Admon
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu2">
-                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Nomina</a>
+                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Plantilla</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a>
                         <a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a>

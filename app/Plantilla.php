@@ -10,7 +10,8 @@ class Plantilla extends Model
     protected $table='plantillas';
 
     protected $fillable = [
-        'ubicacion','name', 'dni','email', 'email_super','celular','manager','cargo','carga_masivas_id','nivel_cargo',
+        'ubicacion','name', 'dni','email', 'email_super','celular','manager',
+        'cargo','carga_masivas_id','nivel_cargo','evaluar',
     ];
 
 

@@ -83,8 +83,10 @@ class TalentController extends Controller
 
         $userR= new UserRelaciones();
         $userR->Crear($empleado);
-
         $evaluadores = $userR->getEvaluadores();
+        if (!$evaluadores){
+            return \redirect()->back()->withErrors($empleado->name.', no tiene evaluadores relacionados');
+        }
         $metodos= $userR->getMetodos();
 
         $cargos = Cargo::all();
@@ -97,7 +99,7 @@ class TalentController extends Controller
 
 
     /**Crea los datos del evaluado */
-    public function storeevaluado(Request $request,$empleado_id)
+    public function xstoreevaluado(Request $request,$empleado_id)
     {
         request()->validate(
             [
@@ -121,8 +123,45 @@ class TalentController extends Controller
         // Alert::success('Evaluacion creada ..',Arr::random(['Good','Excelente','Magnifico','Exito']));
 
         return redirect()->route('proyectoevaluado.index')
-        ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar una evaluacion.');
+        ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar la evaluacion.');
     }
 
+    /**Crea los datos del evaluado con los datos del formulario*/
+    public function storeevaluado(Request $request,$empleado_id)
+    {
+        request()->validate(
+            [
+                'metodo' => 'required',
+                'subproyecto' => 'required',
+            ],
+            [
+                'metodo.required'=>'Debe seleccionar un metodo.',
+                'subproyecto.required'=>'Debe seleccionar un Subproyecto.',
+            ]
+        );
+        $name=$request->input('name.*');
+        $relation=$request->input('relation.*');
+        $email=$request->input('email.*');
+
+        for ($i=0; $i < count($name); $i++) {
+
+            $listadeevaluadores []=['email'=>$email[$i],'relation'=>$relation[$i]];
+
+        }
+
+        $user= User::find($empleado_id);
+        $userR = new UserRelaciones();
+        $userR->Crear($user);
+        $userR->GeneraData($listadeevaluadores);
+
+        if (!$userR->CreaEvaluacion($request->metodo,$request->subproyecto,$request->autoevaluacion)){
+            \abort(404);
+        }
+
+        // Alert::success('Evaluacion creada ..',Arr::random(['Good','Excelente','Magnifico','Exito']));
+
+        return redirect()->route('proyectoevaluado.index')
+        ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar una evaluacion.');
+    }
 
 }

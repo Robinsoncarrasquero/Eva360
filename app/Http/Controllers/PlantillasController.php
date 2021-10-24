@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CargaMasiva;
 use App\Cargo;
 use App\Competencia;
+use App\Configuracion;
 use app\CustomClass\EnviarEmail;
 use app\CustomClass\EnviarSMS;
 use app\CustomClass\LanzarEvaluacion;
@@ -36,6 +37,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\HeadingRowImport;
 use Stringable;
+use Throwable;
+use App\Exceptions\InvalidOrderException;
+use App\Par;
+use App\PlantillaPar;
 
 class PlantillasController extends Controller
 {
@@ -108,38 +113,78 @@ class PlantillasController extends Controller
             'description'=>$carga_masiva_name,
             'carga_masivas_id'=> $carga_masiva->id
         ]);
+        if (count($data_excel_array)>1){
+            $data_excel_plantilla=$data_excel_array[0];
+            $data_excel_pares=$data_excel_array[1];
+        }else{
+            $data_excel_plantilla=$data_excel_array;
 
-        foreach ($data_excel_array as $datarow)
+        }
+
+        //Carga Plantilla
+        foreach ($data_excel_plantilla as $rowplantilla)
         {
 
-            foreach ($datarow as $key=> $row)
-
+            //foreach ($datarow as $key=> $row)
             {
-                if ($row['ubicacion']!=\null){
+                try {
 
-                    Plantilla::firstOrCreate(['email' => $row['email'],'carga_masivas_id'=>$carga_masiva->id],[
-                        'ubicacion' => $row['ubicacion'],
-                        'name' => $row['name'],
-                        'dni' => $row['dni'],
-                        'email_super' => $row['email_super'],
-                        'celular' => $row['celular'],
-                        'manager' => $row['manager'],
-                        'cargo' => $row['cargo'],
-                        'nivel_cargo' => $row['nivel_cargo'],
+                    //if ($row['ubicacion']!=\null){
+                    if ($rowplantilla['ubicacion']){
 
-                    ]);
+                        Plantilla::firstOrCreate(['email' => $rowplantilla['email'],'carga_masivas_id'=>$carga_masiva->id],[
+                            'ubicacion' => $rowplantilla['ubicacion'],
+                            'name' => $rowplantilla['name'],
+                            'dni' => $rowplantilla['dni'],
+                            'email_super' => $rowplantilla['email_super'],
+                            'celular' => $rowplantilla['celular'],
+                            'manager' => $rowplantilla['manager'],
+                            'cargo' => $rowplantilla['cargo'],
+                            'nivel_cargo' => $rowplantilla['nivel_cargo'],
+                            'evaluar' => $rowplantilla['evaluar'],
+
+                        ]);
+
+                    }
+                } catch (Throwable $e) {
+                    report($e);
+                    return false;
                 }
             }
 
         }
-        $errores=[];
 
+
+        //Carga Pares
+        foreach ($data_excel_pares as $rowpares)
+        {
+
+            //foreach ($datarow as $key=> $row)
+            {
+                try {
+
+                    //if ($row['ubicacion']!=\null){
+                    if ($rowpares['email_evaluado']){
+
+                        PlantillaPar::firstOrCreate([
+                        'email_par' => $rowpares['email_par'],
+                        'email_evaluado' => $rowpares['email_evaluado'],
+                        'carga_masivas_id'=>$carga_masiva->id]);
+
+                    }
+                } catch (Throwable $e) {
+                    report($e);
+                    return false;
+                }
+            }
+
+        }
+
+        $errores=[];
 
         $plantillas= Plantilla::where('carga_masivas_id',$carga_masiva->id)->get();
 
         foreach ($plantillas as $plantilla) {
-
-
             //Crea o actualizada usuario
             $user = User::where('email',$plantilla->email)->first();
             if($user!==null){
@@ -157,6 +202,8 @@ class PlantillasController extends Controller
             }
 
         }
+
+
         if ($errores)
         {
             $errores2= collect($errores2);
@@ -260,6 +307,29 @@ class PlantillasController extends Controller
             ->withErrors('Error imposible Procesar esta Plantilla tiene errores. Revise que los datos este correctos en la hoja de Excel.');
         }
 
+        $pares= $cm->pares;
+        //Elimina los pares anteriores
+        foreach ($pares as $par) {
+            //Elimina los pares anteriores
+            $user_evaluado = User::where('email',$par->email_evaluado)->first();
+            DB::table('pares')->where('user_id', '=', $user_evaluado->id)->delete();
+        }
+
+        //Agrega los pares nuevos
+        foreach ($pares as $par) {
+
+            //Agrega los pares nuevos
+            $user_evaluado = User::where('email',$par->email_evaluado)->first();
+            $user_par = User::where('email',$par->email_par)->first();
+
+            Par::firstOrCreate(
+                [
+                'user_id'=>$user_evaluado->id,'user_id_par'=>$user_par->id
+                ],);
+
+        }
+
+
         if ($request->updateplantilla){
             $record= CargaMasiva::find($cm->id);
             $record->delete();
@@ -283,7 +353,7 @@ class PlantillasController extends Controller
     }
 
     /**
-     * Genera la evaluaciones de la carga masiva
+     * Genera la evaluaciones de la carga masiva con data directo de la plantilla
      */
     public function crearevaluaciones(Request $request,$id)
     {
@@ -298,36 +368,105 @@ class PlantillasController extends Controller
 
         $plantillas= $cm->plantillas;
 
+        $configuracion = Configuracion::first();
+
+        $eva360=[];
         foreach ($plantillas as $plantilla) {
 
             //Un empleado no manager
-            if (!$plantilla->manager){
+            if ( $plantilla->evaluar && $plantilla->email <> $plantilla->email_super){
 
                 //Sub proyecto
                 $proyecto = Proyecto::where('carga_masivas_id',$cm->id)->first();
 
                 $subproyecto = SubProyecto::firstOrCreate([
-                    'name'=>$plantilla->ubicacion." ".$cm->id,
+                    'name'=>$plantilla->ubicacion."_".$cm->metodo."_".$cm->id,
                     'proyecto_id'=>$proyecto->id,
                 ],['description'=>$plantilla->ubicacion]);
+
+                $listadeevaluadores=[];
+                if($request->soloestaplantilla){
+
+                    if (!$request->supervisordirecto){
+                        //Manager para obtener el supervisor del supervisor directo
+                        $supervisor = DB::table('plantillas')->where([
+                            ['carga_masivas_id', '=', $cm->id],
+                            ['email', '=', $plantilla->email_super],
+                        ])->first();
+
+                        $listadeevaluadores []=['email'=>$supervisor->email_super,'relation'=>$configuracion->manager];
+                    }
+
+                    $listadeevaluadores []=['email'=>$plantilla->email_super,'relation'=>$configuracion->supervisor];
+
+                    //Colaboradores del empleado
+                    $subordinados = DB::table('plantillas')
+                    ->select('email')
+                    ->where([
+                        ['carga_masivas_id', '=', $cm->id],
+                        ['email_super', '=', $plantilla->email],
+                    ])->get();
+
+                    foreach ($subordinados as $key => $record) {
+                        $listadeevaluadores []=['email'=>$record->email,'relation'=>$configuracion->subordinados];
+                    }
+
+                    //Pares directo
+                    $pares_directos = DB::table('plantillas')
+                    ->select('email')
+                    ->where([
+                        ['carga_masivas_id', '=', $cm->id],
+                        ['email_super', '=', $plantilla->email_super],
+                        ['email', '<>', $plantilla->email],
+                        ['email', '<>',  $plantilla->email_super],
+
+                    ])->get();
+
+                    //Pares indirectos o clientes internos
+                    $pares_indirectos = DB::table('plantillapares')
+                    ->select('email_par as email')
+                    ->where([
+                        ['carga_masivas_id', '=', $cm->id],
+                        ['email_evaluado', '=', $plantilla->email]
+                    ])->get();
+
+                    $pares_concatenated = $pares_indirectos->concat($pares_directos)->unique('email');
+
+                    foreach ($pares_concatenated as $key => $record) {
+                        $listadeevaluadores []=['email'=>$record->email,'relation'=>$configuracion->pares];
+                    }
+
+                }
 
                 $user = User::where('email',$plantilla->email)->first();
 
                 $userR= new UserRelaciones();
-                $userR->Crear($user);
 
-                if (!$userR->CreaEvaluacion($request->metodo,$subproyecto->id,$request->autoevaluacion)){
-                    \abort(404);
+
+                if ($userR->Crear($user)){
+                    //Genera data de la plantilla
+                    if($request->soloestaplantilla){
+                        $userR->GeneraData($listadeevaluadores);
+                    }
+
+                    if ($userR->getValidaMetodo($request->metodo)){
+
+                        if (!$userR->CreaEvaluacion($request->metodo,$subproyecto->id,$request->autoevaluacion)){
+                            \abort(404);
+                        }
+
+                    }
+                    $cm->procesado= true;
+                    $cm->save();
+
                 }
 
-                $cm->procesado= true;
-                $cm->save();
-
             }
+
+
         }
 
         //Lanzar Modelo
-
         // Buscamos el modelo para obtener las competencias asociadas
 
         $modelo = Modelo::find($cm->modelo_id);
@@ -352,7 +491,6 @@ class PlantillasController extends Controller
         foreach ($proyecto->subproyectos as $subproyecto) {
 
             foreach ($subproyecto->evaluados as $evaluado) {
-                # code...
 
                 $user = User::find($evaluado->user_id);
 

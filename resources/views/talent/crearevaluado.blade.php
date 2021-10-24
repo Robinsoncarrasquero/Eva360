@@ -65,6 +65,8 @@
                         <th>#</th>
                         <th>Evaluador</th>
                         <th>Relacion</th>
+                        <th>Email</th>
+                        <th></th>
                         {{-- <th>
                         <button type="button" class="btnponer btn btn-dark " ><i class=" material-icons">library_add</library-add></i></button>
                         </th> --}}
@@ -73,11 +75,12 @@
                         @foreach ($evaluadores as $key=>$evaluador)
                             <tr id="{{$key}}">
                                 <td class="form-control">{{ $key }}</td>
-                                <td><input disabled class="form-control" type="text" maxlength="50" name="name[]" value="{{$evaluador['name']}}"></td>
-                                <td><input disabled class="form-control" type="text" maxlength="50" name="relation[]" value="{{ $evaluador['relations'] }}"></td>
-                               {{-- <td>
+                                <td><input readonly class="form-control" type="text" maxlength="50" name="name[]" value="{{$evaluador['name']}}"></td>
+                                <td><input readonly class="form-control" type="text" maxlength="50" name="relation[]" value="{{ $evaluador['relations'] }}"></td>
+                                <td><input readonly class="form-control" type="text" maxlength="50" name="email[]" value="{{ $evaluador['email'] }}"></td>
+                               <td>
                                 <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>
-                                </td> --}}
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
