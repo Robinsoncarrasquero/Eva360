@@ -37,7 +37,8 @@ class UserRelaciones
 
         $this->user = $user;
 
-        if ($user->email_super===null){
+
+        if ($user->email_super==null){
             return false;
         }
 
@@ -52,7 +53,6 @@ class UserRelaciones
             $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id'=>$manager->id];
             $this->manager=$manager;
         } catch (Throwable $e) {
-            report($e);
             return false;
         }
 
@@ -75,6 +75,7 @@ class UserRelaciones
             ['email', '<>', $supervisor->email],
             ['id', '<>', $user->id],
         ])->get();
+
         $idpares_directos=$pares_directos->pluck('id');
 
         $pares_indirectos = DB::table('pares')->where('user_id',$user->id)->get();
@@ -331,7 +332,6 @@ class UserRelaciones
 
 
         //Pares
-
         $this->pares = DB::table('users')->whereIn('id',$pares)->get();
 
         //Subordinados

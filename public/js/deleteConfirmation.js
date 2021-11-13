@@ -13,8 +13,7 @@ function deleteConfirmation(id,route) {
             $.ajax({
                 type: 'POST',
                 data: {_token: CSRF_TOKEN},
-                 url:route,
-                //url:"{{ url('evaluado/delete') }}/"+id,
+                url:route,
                 dataType: 'JSON',
                 success: function (results) {
                     if (results.success === true) {

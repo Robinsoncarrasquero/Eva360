@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cargo;
+use App\Configuracion;
 use app\CustomClass\UserRelaciones;
 use App\Departamento;
 use App\Evaluado;
@@ -92,38 +93,9 @@ class TalentController extends Controller
         $cargos = Cargo::all();
         $proyectos = Proyecto::where('tipo','<>','Objetivos')->get();
 
-        $relations = Relation::all();
+        $configuracion = Configuracion::first();
 
-        return \view('talent.crearevaluado',compact('empleado','evaluadores','cargos','proyectos','relations','metodos'));
-    }
-
-
-    /**Crea los datos del evaluado */
-    public function xstoreevaluado(Request $request,$empleado_id)
-    {
-        request()->validate(
-            [
-                'metodo' => 'required',
-                'subproyecto' => 'required',
-            ],
-            [
-                'metodo.required'=>'Debe seleccionar un metodo.',
-                'subproyecto.required'=>'Debe seleccionar un Subproyecto.',
-            ]
-        );
-
-        $user= User::find($empleado_id);
-        $userR = new UserRelaciones();
-        $userR->Crear($user);
-
-        if (!$userR->CreaEvaluacion($request->metodo,$request->subproyecto,$request->autoevaluacion)){
-            \abort(404);
-        }
-
-        // Alert::success('Evaluacion creada ..',Arr::random(['Good','Excelente','Magnifico','Exito']));
-
-        return redirect()->route('proyectoevaluado.index')
-        ->withSuccess('Evaluado creado con exito!!. Ya estamos listo para lanzar la evaluacion.');
+        return \view('talent.crearevaluado',compact('empleado','evaluadores','cargos','proyectos','configuracion','metodos'));
     }
 
     /**Crea los datos del evaluado con los datos del formulario*/

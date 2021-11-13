@@ -79,7 +79,9 @@
                                 <td><input readonly class="form-control" type="text" maxlength="50" name="relation[]" value="{{ $evaluador['relations'] }}"></td>
                                 <td><input readonly class="form-control" type="text" maxlength="50" name="email[]" value="{{ $evaluador['email'] }}"></td>
                                <td>
-                                <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>
+
+                                   <button type="button" @if ($evaluador['relations']==$configuracion->supervisor) disabled @endif class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>
+
                                 </td>
                             </tr>
                             @endforeach

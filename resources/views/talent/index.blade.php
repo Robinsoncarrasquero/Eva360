@@ -23,7 +23,7 @@
 
                 <div class="text text-center">
 
-                    <h4 style="color:royalblue; font-size:1.5rem">PLANTILLA DE PERSONAL POR UBICACION</h4>
+                    <h4 style="color:royalblue; font-size:1.5rem">Plantilla por ubicacion</h4>
                 </div>
 
             </div>
