@@ -10,7 +10,7 @@ class Evaluacion extends Model
     //
     protected $table='evaluaciones';
 
-    protected $fillable=['competencia_id','grado','ponderacion','frecuencia','evaluador_id'];
+    protected $fillable=['competencia_id','grado','ponderacion','frecuencia','evaluador_id','nivelrequerido'];
     protected $casts = [
         'frecuencia' => 'integer',
     ];

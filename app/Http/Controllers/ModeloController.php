@@ -61,15 +61,16 @@ class ModeloController extends Controller
             ],
 
         );
-        $competencias=$request->all('competenciascheck');
+        $competencias= $request->input('competenciascheck');
+        $nivelrequerido=$request->input('nivelrequerido');
 
         //Generamos un array sigle
-        $flattened = Arr::flatten($competencias);
+        //$flattened = Arr::flatten($competencias);
 
         // Filtramos las competencias selecctionadas en el array generado por Array flatten
         // y creamos una coleccion nueva del modelo con el metodo collection only
-        $datacompetencias = Competencia::all();
-        $competencias = $datacompetencias->only($flattened);
+        //$datacompetencias = Competencia::all();
+        //$competencias = $datacompetencias->only($flattened);
 
         //Creamos el Modelos
         try {
@@ -83,14 +84,18 @@ class ModeloController extends Controller
         }
 
         //Creamos el modelo con sus respectivas competencias
-        foreach($competencias as $key=>$competencia){
+        foreach($competencias as $key=>$competenciaID){
+
+            $nivel = Arr::pull($nivelrequerido, $key);
             try {
                 $modeloCompetencia= new ModeloCompetencia();
-                $modeloCompetencia->competencia_id=$competencia->id;
+                $modeloCompetencia->competencia_id=$competenciaID;
+                $modeloCompetencia->nivelrequerido=$nivel;
                 $modelo->competencias()->save($modeloCompetencia);
             }catch(QueryException $e) {
                 abort(404);
             }
+
         }
 
         return \redirect()->route('modelo.index')->withSuccess("Modelo Registrado exitosamente");

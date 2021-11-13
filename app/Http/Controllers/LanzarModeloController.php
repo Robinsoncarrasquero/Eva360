@@ -47,33 +47,16 @@ class LanzarModeloController extends Controller
 
         );
 
-        //Creamos una array filtrando el modelo seleccionado en el formulario
+        //Reducimos el array filtrando el modelo seleccionado
         $modeloflattened = Arr::flatten($modelo);
-
-        // Buscamos el modelo para obtener las competencias asociadas
-        $modelo = Modelo::find($modeloflattened)->first();
-
-        //Obtenemos la coleccion de competencias asociadas al modelo
-        $modelocompetencias = $modelo->competencias;
-
-        //Obtenemos una coleccion de competencias
-        $pluck = $modelocompetencias->pluck('competencia_id');
-
-        //Convertimos la coleccion de competencias pluck en un array con flatten
-        $flattened = Arr::flatten($pluck);
-
-        //Obtenemos una coleccion de competencias del array devuelto por flatten
-        $datacompetencias = Competencia::all();
-        $competencias = $datacompetencias->only($flattened);
 
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
-
         //Creamos un objeto de lanzamiento de Evaluacion
-        $objlanzaEvaluacion = new LanzarEvaluacion ($competencias,$evaluado_id);
+        $objlanzaEvaluacion = new LanzarEvaluacion ($modelo,$evaluado_id);
 
-        if (!$objlanzaEvaluacion->crearEvaluacionMultiple($evaluado)){
+        if (!$objlanzaEvaluacion->CrearEvaluacionPorModelo()){
             return \redirect()->route('proyectoevaluado.index')
             ->with('error',"Error, Esas competencias para el Evaluado $evaluado->name, ya habian sido lanzadas en la Prueba..");
         }
@@ -86,7 +69,7 @@ class LanzarModeloController extends Controller
 
         //Alert::success('Modelo fue lanzado',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
 
-        return \redirect()->route('proyectoevaluado.index')->withSuccess('Excelente, La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
+        return \redirect()->route('proyectoevaluado.index')->withSuccess('La Prueba de '.$evaluado->name.' ha sido lanzada exitosamente');
 
     }
 

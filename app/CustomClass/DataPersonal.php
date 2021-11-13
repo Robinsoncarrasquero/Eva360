@@ -104,7 +104,11 @@ class DataPersonal{
                 $cumplimiento=collect($arrayCumplimiento)->avg('data');
                 $brecha= 100 - $cumplimiento;
 
-                $potencial=collect($arrayPotencial)->avg('data')/collect($dataMeta)->avg('data')*100;
+                if (collect($dataMeta)->avg('data')>0){
+                    $potencial=collect($arrayPotencial)->avg('data')/collect($dataMeta)->avg('data')*100;
+                }else{
+                    $potencial=0;
+                }
                 $potencial= $potencial > 100 ? $potencial : 0;
 
                 $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad,'datafortaleza'=>$arraydataFortaleza,'potencial'=>$potencial];

@@ -20,7 +20,6 @@ use App\Modelo;
 use App\NivelCargo;
 use App\Plantilla;
 use App\Proyecto;
-use App\Relation;
 use App\Role;
 use App\SubProyecto;
 use App\User;

@@ -16,10 +16,11 @@
 
     <div class="card-header">
 
-        <form action="{{route('tipo.update',$tipo)  }}" method="post">
+        <form action="{{route('tipo.update',$tipo->id)  }}" method="post">
 
             @csrf
             @method('PATCH' )
+
 
             <div class="form-group">
                 <label for="tipo">Tipo</label>

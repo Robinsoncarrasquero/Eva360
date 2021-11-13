@@ -37,7 +37,7 @@
             <thead>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Objetivo</th>
+                <th scope="col">Descripcion</th>
                 <th>Ver</th>
                 <th>Borrar</th>
             </thead>

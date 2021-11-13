@@ -19,15 +19,15 @@
                     </form>
                 </div>
                 <div class="text text-center">
-                    <h5 style="color:royalblue; font-size:1.5rem">EVALUACIONES POR COMPETENCIAS</h5>
+                    <h5 style="color:royalblue; font-size:1.5rem">Evaluaciones por competencias</h5>
                 </div>
 
             </div>
 
             @if ($proyectos->count())
                 @foreach ($proyectos as $proyecto)
-                    <div class="card-header mt-4">
-                        <span class="titulo-proyecto text-dark">{{$proyecto->name }} </span>
+                    <div class="panel pb-1 mt-2">
+                        <span class="titulo-proyecto text-dark">{{ $proyecto->name }} </span>
                         <span class="float-right d-flex flex-column ">
                             <a href="{{ route('resultados.resultadosgeneralestipo',$proyecto->id) }}" style="color:green;"><span style="font-size: 0.75rem">Tipo <i class="material-icons">leaderboard</i></span></a>
                             <a href="{{ route('resultados.resultadosgeneralesnivel',$proyecto->id) }}" style="color:green;"><span style="font-size: 0.75rem">Nivel <i class="material-icons">assessment</i></span></a>
@@ -38,8 +38,7 @@
                     @foreach ($proyecto->subproyectos as $subproyecto)
                     @if ($subproyecto->evaluados->count())
                         <div class="panel mt-2">
-
-                            <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span  style="font-size: 0.75rem;" class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
+                           <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span  style="font-size: 0.75rem;" class="titulo-proyecto" ><i class="material-icons">east</i> {{$proyecto->name}}</span>
                             <span class="float-right d-flex justify-content-around">
                                 <a href="{{ route('resultados.charpersonalporgrupo',$subproyecto->id) }}" style="color:black"><span style="font-size: 0.75rem">Grupos <i class="material-icons">table_chart</i></span></a>
                                 <a href="{{ route('resultados.analisiscumplimiento',$subproyecto->id) }}" style="color: black"><span style="font-size: 0.75rem">Cumplimiento <i class="material-icons">dynamic_feed</i></span></a>

@@ -19,7 +19,7 @@
     @if ($modelo)
         <div class=" row col-md-12">
             <form action="{{ route('modelo.index') }}" method="get">
-            {{ csrf_field() }}
+            @csrf
             <div class="card">
 
             <div class="card-header">
@@ -29,7 +29,7 @@
                         <input class="form-control" type="text" name="name" id="name" placeholder="Nombre" value="{{ $modelo->name }}">
                     </div>
                     <div class="col-sm-12 col-md-6">
-                        <label for="description">Objetivo</label>
+                        <label for="description">Descripcion</label>
                         <textarea class="form-control" rows="2"  type="text" name="description" id="description" placeholder="Objetivo del modelo">{{ $modelo->description}}</textarea>
                     </div>
                 </div>
@@ -38,19 +38,21 @@
             </div>
             <table class="table ">
                 <thead>
-                <tr>
+
                     <th scope="col">#</th>
                     <th scope="col">Competencia</th>
-                    <th scope="col">Objetivo</th>
-                    <th scope="col"></th>
-                </tr>
+                    <th scope="col">Nivel Gen.</th>
+                    <th scope="col">Nivel Req.</th>
+                    <th scope="col">?</th>
+
                 </thead>
                 <tbody>
                 @foreach ($modelo->competencias as $competencia)
                 <tr>
                     <td>{{ $competencia->id }} </th>
                     <td>{{ $competencia->competencia->name }} </td>
-                    <td>{{ substr($competencia->competencia->description,0,100) }} ...</td>
+                    <td>{{ $competencia->competencia->nivelrequerido }} </td>
+                    <td>{{ $competencia->nivelrequerido }} </td>
                     <td>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="{{"$competencia->id"}}"

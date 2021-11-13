@@ -33,4 +33,11 @@ class Competencia extends Model
         return $this->belongsto(GrupoCompetencia::class);
     }
 
+    //Una competencia tiene uno o mas niveles
+    public function niveles(){
+
+        return $this->hasMany(Nivel::class);
+
+    }
+
 }

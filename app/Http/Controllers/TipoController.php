@@ -54,13 +54,13 @@ class TipoController extends Controller
             $tipo->save();
 
         } catch (QueryException $e) {
-            Alert::error($request->tipo,Arr::random(['Duplicada','Registro Ya existe']));
+        //    Alert::error($request->tipo,Arr::random(['Duplicada','Registro Ya existe']));
 
             return redirect()->back()
             ->withErrors('Error imposible Guardar este registro. El Tipo debe ser unico, no se permite duplicados.');
         }
 
-        Alert::success('Registro '.$request->tipo,Arr::random(['Exitoso','Excelente','Perfecto','Muy Bien']));
+       // Alert::success('Registro '.$request->tipo,Arr::random(['Exitoso','Excelente','Perfecto','Muy Bien']));
 
         return redirect('tipo')->withSuccess('Tipo de Competencia : '.$request->tipo.' Registrado exitosamente');
 
@@ -96,7 +96,7 @@ class TipoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $tipo)
+    public function update(Request $request, $tipo_id)
     {
         //
         $request->validate([
@@ -107,15 +107,15 @@ class TipoController extends Controller
         );
 
         try {
-            $tipo = Tipo::findOrFail($tipo);
+            $tipo = Tipo::findOrFail($tipo_id);
             $tipo->tipo=$request->tipo;
             $tipo->save();
         } catch (QueryException $e) {
-            Alert::error($request->tipo,Arr::random(['Duplicada','Registro Ya existe']));
+         //   Alert::error($request->tipo,Arr::random(['Duplicada','Registro Ya existe']));
             return redirect()->back()
             ->withErrors('Error imposible Guardar este registro. El Tipo debe ser unico, no se permite duplicados.');
         }
-        Alert::success($request->tipo,Arr::random(['Registro actualizado','Excelente actualizado']));
+        //Alert::success($request->tipo,Arr::random(['Registro actualizado','Excelente actualizado']));
 
         return \redirect('tipo')->withSuccess('Tipo de Competencia : '.$request->tipo.' Actualizado exitosamente');
     }

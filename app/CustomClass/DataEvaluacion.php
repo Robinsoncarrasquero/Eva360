@@ -15,7 +15,6 @@ class DataEvaluacion{
 
     }
 
-
     /**
      * Genera la data de la evaluacion con los resultados y los devuelve en una coleccion obtenida con querybuilder
      *
@@ -23,7 +22,7 @@ class DataEvaluacion{
     public function getDataEvaluacion(){
 
         //Obtenemos la calificaciones
-        $calificaciones = Qualify::orderBy('nivel','DESC')->get();
+        $calificaciones = Qualify::orderBy('nivel','ASC')->get();
 
         //Obtenemos la configuracion particular
         $configuraciones = Configuracion::first();
@@ -32,14 +31,15 @@ class DataEvaluacion{
         $evaluadores = Evaluado::find($this->evaluado_id)->evaluadores;
 
         $whereIn=$evaluadores->pluck('id');
+
         $competencias = DB::table('evaluaciones')
         ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
         ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
         ->join('evaluados', 'evaluadores.evaluado_id', '=', 'evaluados.id')
-        ->select('competencias.name','evaluadores.relation','competencias.nivelrequerido','evaluados.status',
+        ->select('competencias.name','evaluadores.relation','evaluaciones.nivelrequerido','evaluados.status',
          DB::raw('AVG(resultado) as average,count(relation) as numevaluadores'))
         ->whereIn('evaluador_id',$whereIn)
-        ->groupBy('competencias.name','relation','competencias.nivelrequerido','evaluados.status')
+        ->groupBy('competencias.name','relation','evaluaciones.nivelrequerido','evaluados.status')
         ->having('evaluados.status','>',1)
        ->orderByRaw('competencias.name')
         ->get();
@@ -54,7 +54,6 @@ class DataEvaluacion{
 
         //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
         $adata=[];
-
 
         foreach ($grouped as $key => $value) {
 
@@ -77,8 +76,9 @@ class DataEvaluacion{
             }
             $calificado='Default';
             $colorcalificacion='#b020a4';
+
             foreach ($calificaciones as $calificacion) {
-                if ($sumaAverage/$contador <= $calificacion['nivel']){
+                if ($sumaAverage/$contador >= $calificacion['nivel']){
                     $calificado=$calificacion['name'];
                     $colorcalificacion=$calificacion['color'];
                 }

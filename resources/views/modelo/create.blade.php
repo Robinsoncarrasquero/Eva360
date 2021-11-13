@@ -25,34 +25,35 @@
                             <input class="form-control" type="text" name="name" id="name" placeholder="Modelo" autofocus>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <label for="description">Objetivo</label>
-                            <textarea class="form-control" rows="2"  type="text" name="description" id="description" placeholder="Objetivo"></textarea>
+                            <label for="description">Descripcion</label>
+                            <textarea class="form-control" rows="2"  type="text" name="description" id="description" placeholder="Describa el modelo"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                         <table class="table table-table" id="table1">
                             <thead class="table-thead">
                                 <th scope="col">#</th>
                                 <th scope="col">Competencia</th>
-                                <th scope="col">Objetivo</th>
+                                <th scope="col">Nivel</th>
                                 <th scope="col">Tipo</th>
-                                <th scope="col">ok</th>
+                                <th scope="col">Select</th>
                             </thead>
                             <tbody>
                             @foreach ($competencias as $competencia)
                                 <tr id="{{ $competencia->id }}">
-                                    <th scope="row">{{ $competencia->id }}</th>
+                                    <th >{{ $competencia->id }}</th>
                                     <td>{{$competencia->name}}</td>
-                                    <td>{{ substr($competencia->description,0,50)}}....</td>
+                                    <td>
+                                        <input type="number" maxlength="3" value="{{ $competencia->nivelrequerido }}" name="nivelrequerido[{{$competencia->id}}]">
+                                    </td>
                                     <td>{{$competencia->tipo->tipo}}</td>
-                                    {{-- <td>{{$competencia->grupocompetencia->name}}</td> --}}
                                     <td>
                                         <div class="form-check">
                                         <input type="checkbox" class="btncheck"
-                                        value="{{"$competencia->id"}}" name="competenciascheck[]">
+                                        value="{{ $competencia->id }}" name="competenciascheck[{{ $competencia->id }}]">
                                         <label class="form-check-label" for="{{"$competencia->id"}}">
                                         </label>
                                         </div>

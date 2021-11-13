@@ -2,6 +2,7 @@
 $(document).ready(function () {
 
     $(document).on('click','.btncheck',function(e){
+
         if ($('#name').val()==''){
             e.preventDefault();
             return;
