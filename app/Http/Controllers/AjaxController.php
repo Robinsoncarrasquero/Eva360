@@ -7,6 +7,7 @@ use App\Evaluador;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AjaxController extends Controller
@@ -36,8 +37,8 @@ class AjaxController extends Controller
         if ($request->id>0) {
             $evaluador = Evaluador::find($evaluador_id,['id','email','user_id']);
             $user = User::find($evaluador->user_id, ['id', 'email']);
-
-            //creamos un validador
+            $email_old=$user->email;
+            //creamos un validador de email
             $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users,email,'.$user->id,
             'email' => 'email:rfc,dns',
@@ -51,9 +52,15 @@ class AjaxController extends Controller
             if ($user->email==$email_new){
                 return response()->json(['success'=>false,'message'=>'No hay cambios que realizar...','errors'=>["email"=>"The email no ha sido modficado."]]);
             }
+            //Actualiza email user
             try {
+
                 $user->email = $email_new;
                 $user->save();
+
+                //Actualiza colaboradores
+                DB::table('users')->where('email_super', $email_old)->update(['email_super' => $email_new]);
+
             }catch(QueryException $e) {
                 return response()->json(['success'=>false,'message'=>'Error e-mail ya ha sido tomado por otro usuario ...','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
                 abort(404,$e);
@@ -66,9 +73,12 @@ class AjaxController extends Controller
             foreach($evaluadores as $evaluadorx){
                 //Actualizamos el email del evaluador
                 try {
+
                     $evaluadorx->email=$email_new;
                     $evaluadorx->save();
+
                 }catch(QueryException $e) {
+
                     return response()->json(['success'=>false,'message'=>'Error Fatal intentando modificar Email de Evaluador, reporte este incidente.','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
                     abort(404,$e);
                 }
