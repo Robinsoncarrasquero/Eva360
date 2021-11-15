@@ -78,7 +78,7 @@ class DataEvaluacion{
             $colorcalificacion='#b020a4';
 
             foreach ($calificaciones as $calificacion) {
-                if ($sumaAverage/$contador >= $calificacion['nivel']){
+                if ($sumaAverage/$contador <= $calificacion['nivel']){
                     $calificado=$calificacion['name'];
                     $colorcalificacion=$calificacion['color'];
                 }
