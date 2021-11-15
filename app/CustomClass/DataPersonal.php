@@ -102,8 +102,8 @@ class DataPersonal{
                 $brecha=$cumplimiento=$potencial=0;
 
                 $cumplimiento=collect($arrayCumplimiento)->avg('data');
-                $modelo=collect($dataMeta)->avg('data')*100;
-                $cumplimiento= $cumplimiento / $modelo;
+                $modelo=collect($dataMeta)->avg('data');
+                $cumplimiento= $cumplimiento / $modelo *100;
 
                 if ($cumplimiento >100){
                     $cumplimiento = 100; $brecha=0;
