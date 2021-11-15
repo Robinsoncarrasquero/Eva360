@@ -22,7 +22,7 @@ class DataEvaluacion{
     public function getDataEvaluacion(){
 
         //Obtenemos la calificaciones
-        $calificaciones = Qualify::orderBy('nivel','ASC')->get();
+        $calificaciones = Qualify::orderBy('nivel','DESC')->get();
 
         //Obtenemos la configuracion particular
         $configuraciones = Configuracion::first();
