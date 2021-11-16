@@ -101,10 +101,10 @@ class DataEvaluacionGlobal{
         ->join('nivel_cargos', 'cargos.nivel_cargo_id', '=', 'nivel_cargos.id')
         ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
         ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
-        ->select('nivel_cargos.name as nivelcargo','competencias.name','competencias.nivelrequerido','evaluados.status',
+        ->select('nivel_cargos.name as nivelcargo','competencias.name','evaluaciones.nivelrequerido','evaluados.status',
         DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
         ->where([['proyectos.id','=',$whereIn],['relation','<>',$autoevaluacion]])
-        ->groupBy('nivel_cargos.name','competencias.name','competencias.nivelrequerido','evaluados.status')
+        ->groupBy('nivel_cargos.name','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
         ->having('evaluados.status','>',1)
         ->orderByRaw('nivel_cargos.name','competencias.name')
         ->get();

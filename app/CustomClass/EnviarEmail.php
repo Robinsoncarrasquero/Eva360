@@ -14,6 +14,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class EnviarEmail
 {
@@ -133,7 +134,7 @@ class EnviarEmail
             $data->enviado =true;
             $data->save();
 
-        }catch(QueryException $e) {
+        }catch(Throwable $e) {
             abort(404);
         }
         return true;
