@@ -50,6 +50,7 @@
                             </thead>
                             <tbody>
                             @foreach ($departamento->empleados as $empleado)
+                            @if ($empleado->active)
                             <tr>
                                 {{-- <td>{{ substr($empleado->name,0,50) }}<span style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)"><br>{{ $empleado->cargo->name}}</span></td> --}}
                                 <td>{{ ($empleado->name) }}
@@ -86,6 +87,7 @@
                                 </td> --}}
 
                             </tr>
+                            @endif
                             @endforeach
                             </tbody>
                         </table>
