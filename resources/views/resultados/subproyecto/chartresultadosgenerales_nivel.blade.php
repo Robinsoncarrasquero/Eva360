@@ -123,9 +123,9 @@
 
     function mychar(element,index,array)
     {
+        name=categorias[i];
+        dataSeriex=array[0];
         categoriasx=categorias[i];
-        dataSeriex=array;
-        name=dataSeriex[0]['name'];
         Highcharts.chart('container-'+i, {
             chart: {
                 type: 'column'
