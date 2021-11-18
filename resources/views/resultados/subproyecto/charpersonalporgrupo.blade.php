@@ -30,14 +30,21 @@
 <body>
 <div class="container">
 
-    <div class="mt-3">
-        <div class="col-12 mb-1" id="container-line"></div>
-        <div class="col-12 mb-1" id="container-column"></div>
+    <div class="col-lg-12">
+
+        <div class="col-md-12 mt-3">
+            <div class="mb-1" id="container-line"></div>
+        </div>
+
+        <div class="cold-md-12 mt-3">
+            <div  class="mb-1" id="container-column"></div>
+        </div>
+
+
     </div>
 
-
     <div class="col-lg-12">
-        <div class="col-sm-12">
+        <div class="col-lg-12">
 
 
             <div class="clearfix">
@@ -168,6 +175,7 @@
 
     function mychar(element,index,array)
     {
+
             Highcharts.chart('container-'+element, {
                 chart: {
                 type: element

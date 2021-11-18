@@ -27,10 +27,34 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-sm-12 mt-3">
-        <div class="mb-1" id="container"></div>
+    <div class="row col-lg-12">
+
+            <div class="col-sm-6 mt-3">
+                <div class="mb-1" id="container-0"></div>
+            </div>
+
+            <div class="col-sm-6 mt-3">
+                <div class="mb-1" id="container-1"></div>
+            </div>
+            <div class="col-sm-6 mt-3">
+                <div class="mb-1" id="container-2"></div>
+            </div>
+            <div class="col-sm-6 mt-3">
+                <div class="mb-1" id="container-3"></div>
+            </div>
+            <div class="col-sm-6 mt-3">
+                <div class="mb-1" id="container-4"></div>
+            </div>
+            <div class="col-sm-6 mt-3">
+                <div class="mb-1" id="container-5"></div>
+            </div>
+            <div class="col-sm-6 mt-3">
+                <div class="mb-1" id="container-6"></div>
+            </div>
     </div>
-    <div class="col-sm-12">
+
+
+    <div class="col-lg-12">
         <div class="text-left">
             <h6>Cuadro de resultados Fortalezas / Oportunidades</h6>
         </div>
@@ -92,45 +116,65 @@
     var dataSerie =  @json($dataSerie);
     var categorias =  @json($dataCategoria);
     var subProyectoName = @json($subProyecto->name);
-    Highcharts.chart('container', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Indicadores Generales por tipo de competencia'
-        },
-        subtitle: {
-            text:  subProyectoName
+    // $.each(dataSerie, function() {
+    //     $.each(this, function(key, val){
+    //         //alert(val);//here data
+    //         //alert (key); //here key
+    //         //console.log(key+"=>"+val);
+    //     });
+    // });
+    var i=0;
+    for ( obj of dataSerie) {
+        [obj].forEach(mychar);
+        i= i + 1;
+    }
 
-        },
-        xAxis: {
-            categories:categorias,
-
-            crosshair: true
-        },
-        yAxis: {
-            min: 0,
+    function mychar(element,index,array)
+    {
+        categoriasx=categorias[i];
+        dataSeriex=array;
+        name=dataSeriex[0]['name'];
+        Highcharts.chart('container-'+i, {
+            chart: {
+                type: 'column'
+            },
             title: {
-                text: 'Nivel de dominio'
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        series:dataSerie,
+                text: 'Indicadores Generales por tipo de competencia '+name
+            },
+            subtitle: {
+                text:  subProyectoName
 
-    });
+            },
+            xAxis: {
+                categories:categoriasx,
+
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Nivel de dominio'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series:dataSeriex,
+
+        });
+    }
+
 </script>
 
 </body>

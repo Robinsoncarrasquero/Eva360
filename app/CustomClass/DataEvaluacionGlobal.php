@@ -40,12 +40,12 @@ class DataEvaluacionGlobal{
         ->join('evaluados', 'evaluadores.evaluado_id', '=', 'evaluados.id')
         ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
         ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
-        ->select('tipos.tipo','competencias.name','evaluaciones.nivelrequerido','evaluados.status',
+        ->select('tipos.tipo','competencias.name','competencias.nivelrequerido','evaluados.status',
         DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
         ->where([['proyectos.id',$whereIn],['relation','<>',$autoevaluacion]])
-        ->groupBy('tipos.tipo','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
+        ->groupBy('tipos.tipo','competencias.name','competencias.nivelrequerido','evaluados.status')
         ->having('evaluados.status','>',1)
-        ->orderByRaw('tipos.tipo,competencias.name')
+        ->orderByRaw('tipos.tipo,competencias.name,competencias.nivelrequerido')
         ->get();
         //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
         $dataArray = json_decode(json_encode($competencias), true);
@@ -133,7 +133,7 @@ class DataEvaluacionGlobal{
             $data_join=collect($this->join_fortaleza_oportunidad($agrupa));
             $adata[]=['nivel'=>$agrupa,'data'=>$record];
        }
-       //dd($adata,$join_fortaleza_oportunidad);
+
         $this->dataCruda=$adata;
         return collect($adata);
     }

@@ -34,22 +34,32 @@ class DataResultadoTipo{
         $dataEvaluacion = new $this->objDataEvaluacion($this->proyecto_id);
         $competencias = $dataEvaluacion->getDataEvaluacionTipo();
         $this->dataFortalezaOportunidad = $dataEvaluacion->getDataFortalezaOptunidad();
-
         $arrayDataSerie=[];
         $arrayDataCategoria=[];
         $arrayData=[];
+        $arrayCategoria2=[];
+        $arrayData2=[];
+        $i=0;
         foreach ($competencias as $key => $value) {
             //Creamos una array con la data de los averages
+            $arrayCategoria2=[];
+            $arrayData2=[];
             foreach ($value['data'] as $vdata) {
                 $arrayData[] =[$vdata['average']];
                 $arrayDataCategoria[] =$value['tipo']."<br>".$vdata['competencia'];
+                $arrayCategoria2[]=$vdata['competencia'];
+                $arrayData2[] =[$vdata['average']];
             }
-        }
-        $arrayDataSerie[] =['name'=> 'Competencias','data'=>$arrayData,'color'=>'rgb(100, 100, 163)'];
+            $arrayDataSerie2[] =['name'=> $value['tipo'],'data'=>$arrayData2,'color'=>$this->getColor($i)];
+            $i++;
+            $arrayDataCategoria2[]=$arrayCategoria2;
 
-        $this->dataSerie=$arrayDataSerie;
-        $this->dataCategoria=$arrayDataCategoria;
-        return ['categoria'=>$arrayDataCategoria,'data'=>$arrayDataSerie];
+        }
+        $arrayDataSerie[] =['name'=> 'Competencias','data'=>$arrayData];
+        $this->dataSerie=$arrayDataSerie2;
+        $this->dataCategoria=$arrayDataCategoria2;
+
+        return ['categoria'=>$arrayDataCategoria2,'data'=>$arrayDataSerie2];
     }
 
     /**Data de la serie */
@@ -65,6 +75,34 @@ class DataResultadoTipo{
     /**Obtenemos los datos de Fortalezas y Oportunidades */
     public function getDataFortalezaOptunidad(){
         return $this->dataFortalezaOportunidad;
+    }
+
+    public function getColor($index)
+    {
+
+        $color =[
+            'rgb(128, 128, 0)',
+            'rgb(255, 255, 0)',
+            'rgb(128, 0, 0)',
+            'rgb(255, 0, 0)',
+            'rgb(0, 0, 0)',
+            'rgb(0, 255, 255)',
+            'rgb(0 ,128, 0)',
+            'rgb(0, 255, 0)',
+            'rgb(128, 128, 128)',
+            'rgb(128, 128, 0)',
+            'rgb(214, 137, 16)',
+            'rgb(128, 0, 128)',
+            'rgb(0, 0, 128)',
+            'rgb(255, 0, 255)',
+            'rgb(0, 0, 128)',
+            'rgb(0, 0, 255)',
+            'rgb(0, 128, 128)',
+            'rgb(0, 0, 255)',
+            'rgb(0, 128, 128)',
+            ];
+        $index=rand(0,count($color)-1);
+        return $color[$index];
     }
 
 }

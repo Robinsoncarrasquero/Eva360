@@ -29,11 +29,28 @@
 <body>
 <div class="container">
 
-    <div class="mt-3">
-        <div class="col-lg-12 mb-1" id="container"></div>
+    <div class="mt-1">
+        <div class="col-lg-12 mb-1" id="container-0"></div>
     </div>
 
-    <div class="col-sm-12">
+    <div class="mt-1">
+        <div class="col-lg-12 mb-1" id="container-1"></div>
+    </div>
+
+    <div class="mt-1">
+        <div class="col-lg-12 mb-1" id="container-2"></div>
+    </div>
+
+    <div class="mt-1">
+        <div class="col-lg-12 mb-1" id="container-3"></div>
+    </div>
+
+    <div class="mt-1">
+        <div class="col-lg-12 mb-1" id="container-4"></div>
+    </div>
+
+
+    <div class="col-lg-12">
         <div class="text-left">
             <h6>Cuadro Nivel de Cargo Fortalezas / Debilidades</h6>
         </div>
@@ -98,49 +115,57 @@
     var categorias =  @json($dataCategoria);
 
     var subProyectoName = @json($subProyecto->name);
-    Highcharts.setOptions({
-    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
-    });
-    Highcharts.chart('container', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Indicadores Generales por nivel de cargo'
-        },
-        subtitle: {
-            text:  subProyectoName
+    var i=0;
+    for ( obj of dataSerie) {
+        [obj].forEach(mychar);
+        i= i + 1;
+    }
 
-        },
-
-        xAxis: {
-            categories:categorias,
-            crosshair: true
-        },
-        yAxis: {
-            min: 0,
+    function mychar(element,index,array)
+    {
+        categoriasx=categorias[i];
+        dataSeriex=array;
+        name=dataSeriex[0]['name'];
+        Highcharts.chart('container-'+i, {
+            chart: {
+                type: 'column'
+            },
             title: {
-                text: 'Nivel de Dominio'
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        series:dataSerie,
+                text: 'Indicadores Generales por nivel de cargo ' + name
+            },
+            subtitle: {
+                text:  subProyectoName
 
+            },
 
-    });
+            xAxis: {
+                categories:categoriasx,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Nivel de Dominio'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series:dataSeriex,
+
+        });
+    }
 
 </script>
 </body>
