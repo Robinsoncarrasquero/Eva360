@@ -111,11 +111,11 @@
                 <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                     <thead class="table-thead" style="text-align: center">
                     <th>Evaluado</th>
-                    <th>% Cumplimiento</th>
+                    <th>% Cump.</th>
                     <th>% Brecha</th>
                     <th>% Potencial</th>
-                    <th>Oportunidades</th>
-                    <th>Fortalezas</th>
+                    <th>Debilidad</th>
+                    <th>Fortaleza</th>
                     </thead>
                     <tbody>
                         @foreach ($dataBrecha as $key=>$value)

@@ -12,7 +12,7 @@
 
     <div class="mt-2 pb-2 text text-center col-lg-12">
         <h3 style="color:blue" >FEEDBACK</h3>
-        <h3>{{ $evaluado->name }}</h3>
+        <h3>{{ $evaluado->user->name }}</h3>
     </div>
 
     @if ($feedbacks->count()>0)
@@ -63,8 +63,8 @@
             <th>% <br>Cumplido</th>
             <th>% <br> Brecha</th>
             <th>% <br> Potencial</th>
-            <th>Debilidades</th>
-            <th>Fortalezas</th>
+            <th>Debilidad</th>
+            <th>Fortaleza</th>
             </thead>
             <tbody>
                 @foreach ($dataBrecha as $key=>$value)

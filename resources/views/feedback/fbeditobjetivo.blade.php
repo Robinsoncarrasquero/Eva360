@@ -12,7 +12,7 @@
 
     <div class="mt-2 pb-2 text text-center col-lg-12">
         <h3 style="color:blue" >FEEDBACK</h3>
-        <h3>{{ $evaluado->name }}</h3>
+        <h3>{{ $evaluado->user->name }}</h3>
     </div>
 
     @if ($feedbacks->count()>0)

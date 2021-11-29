@@ -218,7 +218,7 @@ class DataPersonal{
         $this->dataSerie=$arrayDataSerie;
         $this->dataCategoria=$evaluado->name;
 
-        return ['categoria'=>$evaluado->name,'data'=>$arrayDataSerie];
+        return ['categoria'=>$evaluado->user->name,'data'=>$arrayDataSerie];
     }
 
     /**Data de la serie */

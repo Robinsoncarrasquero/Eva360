@@ -51,7 +51,7 @@
 
     var dataSerie =  @json($dataSerie);
     var categorias =  @json($dataCategoria);
-    var evaluado =  @json($evaluado->name);
+    var evaluado =  @json($evaluado->user->name);
 
     // categorias.forEach(logArrayElements);
 
