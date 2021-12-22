@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Pagination\Paginator;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,5 +35,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Schema::defaultStringLength(191);
+        //mantiene paginacion con bootstrap no con tailwind
+        Paginator::useBootstrap();
     }
 }

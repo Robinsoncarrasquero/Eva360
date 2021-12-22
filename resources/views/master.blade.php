@@ -54,12 +54,15 @@
             grid-column: 2;
             grid-row-start: 1; grid-row-end: 4;
         }
+        body{
+            max-width: 100%; ;
+        }
 
     </style>
 
   </head>
 
-  <body>
+  <body >
 
     {{-- <nav class="navbar navbar-expand-lg navbar-light bg-lightxx" style="background-color: #e3f2fd;""> --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
