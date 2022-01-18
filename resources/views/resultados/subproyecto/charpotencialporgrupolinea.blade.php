@@ -72,7 +72,7 @@
                         </td>
                         <td>
                             @if ($value['potencial']>100)
-                            {{ number_format($value['potencial'],2) }}
+                            {{ number_format($value['potencial']-100,2) }}
                             @endif
                         </td>
                         <td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cargo;
+use app\CustomClass\UserRelaciones;
 use App\Departamento;
 use App\Role;
 use App\User;
@@ -125,12 +126,16 @@ class UserController extends Controller
 
 
         //$user = User::findOrFail($user);
+
+           //Actualiza colaboradores que reportan al usuarios
+        $supervisados=   DB::table('users')->where('email_super', $user->email)->get();
+
         $cargos= Cargo::all();
         $departamentos= Departamento::all();
         $user_admin= $user->hasRole('admin') ;
 
         $roles = Role::all();
-        return \view('user.edit',\compact('user','roles','departamentos','cargos', 'user_admin'));
+        return \view('user.edit',\compact('user','roles','departamentos','cargos', 'user_admin','supervisados'));
 
     }
 
@@ -166,7 +171,8 @@ class UserController extends Controller
 
 
         $user =User::findOrFail($id);
-        $user->email=$request['email'];
+        $email_new= $request['email'];
+
         if(!$user->hasRole('admin')){
             $user->name = $request['name'];
             $user->departamento_id = $request['departamento'];
@@ -183,6 +189,11 @@ class UserController extends Controller
             $user->roles($userRol)->detach();
             $user->roles()->attach($userRol);
         }
+
+        //Cambiamos email nuevo de las evaluaciones del usuario evaluador
+        $UserRelaciones = new UserRelaciones();
+        $UserRelaciones->cambia_email($user,$email_new);
+
         return redirect()->route('user.index')->withSuccess('Usuario Modificado con exito');
     }
 

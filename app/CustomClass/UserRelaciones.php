@@ -364,6 +364,44 @@ class UserRelaciones
 
     }
 
+    //cambia email del supervisores y evaluadores
+    public function cambia_email(User $user, $email_new)
+
+    {
+
+        //Actualiza email user
+        try {
+            $email_old = $user->email;
+            $user->email = $email_new;
+            $user->save();
+
+            //Actualiza colaboradores que reportan al usuarios
+            DB::table('users')->where('email_super', $email_old)->update(['email_super' => $email_new]);
+
+        }catch(QueryException $e) {
+            return response()->json(['success'=>false,'message'=>'Error e-mail ya ha sido tomado por otro usuario ...','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
+            abort(404,$e);
+        }
+
+        //Buscamos todas las evaluaciones de un usuario evaluador
+        $evaluadores = $user->evaluadores;
+
+        //Cambiamos el email de las evaluaciones del evaluador
+        foreach($evaluadores as $evaluadorx){
+            //Actualizamos el email del evaluador
+            try {
+
+                $evaluadorx->email=$email_new;
+                $evaluadorx->save();
+
+            }catch(QueryException $e) {
+
+                return response()->json(['success'=>false,'message'=>'Error Fatal intentando modificar Email de Evaluador, reporte este incidente.','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
+                abort(404,$e);
+            }
+        }
+    }
+
 
 
 }

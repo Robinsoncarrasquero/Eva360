@@ -113,11 +113,7 @@ class EnviarEmail
         $evaluado = Evaluado::find($evaluado_id);
 
         $receivers = env("MAIL_FROM_ADDRESS");
-        $x=env('MAIL_FROM_ADDRESS', false);
 
-        // $environment =  App::environment();
-        // $receivers=App::environment("MAIL_FROM_ADDRESS");
-        // dd($receivers);
         //Creamos un objeto para pasarlo a la clase Mailable
         $data = new EmailSend();
         $data->nameEvaluador="Administrador";

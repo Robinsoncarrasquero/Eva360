@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use app\CustomClass\EnviarEmail;
+use app\CustomClass\UserRelaciones;
 use App\Evaluador;
 use App\User;
 use Illuminate\Database\QueryException;
@@ -37,7 +38,6 @@ class AjaxController extends Controller
         if ($request->id>0) {
             $evaluador = Evaluador::find($evaluador_id,['id','email','user_id']);
             $user = User::find($evaluador->user_id, ['id', 'email']);
-            $email_old=$user->email;
             //creamos un validador de email
             $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users,email,'.$user->id,
@@ -52,37 +52,11 @@ class AjaxController extends Controller
             if ($user->email==$email_new){
                 return response()->json(['success'=>false,'message'=>'No hay cambios que realizar...','errors'=>["email"=>"The email no ha sido modficado."]]);
             }
-            //Actualiza email user
-            try {
 
-                $user->email = $email_new;
-                $user->save();
+            //Cambiamos email nuevo de las evaluaciones del usuario evaluador
+            $UserRelaciones = new UserRelaciones();
+            $UserRelaciones->cambia_email($user,$email_new);
 
-                //Actualiza colaboradores
-                DB::table('users')->where('email_super', $email_old)->update(['email_super' => $email_new]);
-
-            }catch(QueryException $e) {
-                return response()->json(['success'=>false,'message'=>'Error e-mail ya ha sido tomado por otro usuario ...','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
-                abort(404,$e);
-            }
-
-            //Buscamos todas las evaluaciones de un usuario evaluador
-            $evaluadores = User::find($evaluador->user_id)->evaluadores;
-
-            //Iteramos los evaluadores
-            foreach($evaluadores as $evaluadorx){
-                //Actualizamos el email del evaluador
-                try {
-
-                    $evaluadorx->email=$email_new;
-                    $evaluadorx->save();
-
-                }catch(QueryException $e) {
-
-                    return response()->json(['success'=>false,'message'=>'Error Fatal intentando modificar Email de Evaluador, reporte este incidente.','errors'=>["email"=>"The email ha sido tomado por otro usuario."]]);
-                    abort(404,$e);
-                }
-            }
             return response()->json(['success'=>true,'message'=>'Email modificado con exitosamente....','errors'=>["email"=>"El e-mail ha sido modificado con exito."]]);
         }
      }
