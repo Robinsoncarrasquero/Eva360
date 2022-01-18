@@ -36,7 +36,10 @@ class EnviarEmail
 
         //Iteramos los evaluadores
         foreach($evaluadores as $evaluador){
-            EnviarEmail::enviarEmailEvaluador($evaluador->id);
+
+            if ($evaluador->user->active){
+                EnviarEmail::enviarEmailEvaluador($evaluador->id);
+            }
         }
 
         return true;
@@ -53,9 +56,13 @@ class EnviarEmail
             return false;
         }
 
+
         //Buscamos el evaluador
         $evaluador = Evaluador::find($evaluador_id);
 
+        if (!$evaluador->user->active){
+            return false;
+        }
         //Buscamos el evaluado del evaluador
         $evaluado = Evaluado::find($evaluador->evaluado_id);
 
