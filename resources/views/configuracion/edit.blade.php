@@ -20,8 +20,9 @@
                 @csrf
                 <div class="form-row">
                     <div class="col-sm-4 form-check">
-                        <input type="checkbox" class="check-select "   name="sendemail[]" @if($record->email) checked @endif>
-                        <label class="form-check-label " for="sendemail[]" style="color: orange;font-size:1em">Enviar Emails</label>
+
+                        <input type="checkbox" class="check-select "  id="sendemail"  name="sendemail[]" @if($record->email) checked @endif>
+                        <label class="form-check-label " for="sendemail[]" style="color: orange;font-size:1em;">Enviar Emails</label>
                     </div>
 
                     <div class="col-sm-4 form-check">
@@ -84,3 +85,12 @@
 </div>
 
 @endsection
+
+@section('script')
+
+<script>
+
+
+</script>
+@endsection
+

@@ -12,4 +12,7 @@ class Par extends Model
         'user_id', 'user_id_par',
     ];
 
+
+
+
 }

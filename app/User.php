@@ -133,6 +133,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
+
     /**
      * Route notifications for the Nexmo channel.
      *
