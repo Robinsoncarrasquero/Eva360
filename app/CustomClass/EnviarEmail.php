@@ -60,7 +60,7 @@ class EnviarEmail
         //Buscamos el evaluador
         $evaluador = Evaluador::find($evaluador_id);
 
-        if (!$evaluador->user->active){
+        if ($evaluador->user->email_inactivo){
             return false;
         }
         //Buscamos el evaluado del evaluador

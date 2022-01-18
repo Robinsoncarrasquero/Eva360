@@ -180,6 +180,7 @@ class UserController extends Controller
             $user->email_super=$request['email_super'];
             $user->phone_number = $request['phone_number'];
             $user->active = $request['active'] ? 1 : 0;
+            $user->email_inactivo = $request['email_inactivo'] ? 1 : 0;
         }
         $user->save();
 

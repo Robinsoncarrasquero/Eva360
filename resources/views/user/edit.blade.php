@@ -124,6 +124,13 @@
                     </div>
                 </div>
 
+                <div class="justify-content-start">
+                    <div class="col-6">
+                        <label class="form-check-label " for="email_inactivo" style="color: rgb(255, 165, 0);font-size:1.em">Email Inactivo</label>
+                        <input type="checkbox" class="check-select "  name="email_inactivo" @if($user->email_inactivo) checked @endif>
+                    </div>
+                </div>
+
                 <div class="clearfix col-12 mt-2">
                     <div class="col-sm-6">
                         <a href="{{url()->previous()}}" class="btn btn-dark float-left">Back</a>
