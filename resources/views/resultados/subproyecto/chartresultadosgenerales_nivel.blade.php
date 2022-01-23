@@ -27,30 +27,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
-<div class="container">
+<div class="container" >
 
-    <div class="mt-1">
-        <div class="col-lg-12 mb-1" id="container-0"></div>
+    <div class="row col " id="container-x">
+
+        {{-- <div class="col-sm-6 mt-3">
+            <div class="mb-1" id="container-0"></div>
+        </div>--}}
+
     </div>
 
-    <div class="mt-1">
-        <div class="col-lg-12 mb-1" id="container-1"></div>
-    </div>
-
-    <div class="mt-1">
-        <div class="col-lg-12 mb-1" id="container-2"></div>
-    </div>
-
-    <div class="mt-1">
-        <div class="col-lg-12 mb-1" id="container-3"></div>
-    </div>
-
-    <div class="mt-1">
-        <div class="col-lg-12 mb-1" id="container-4"></div>
-    </div>
-
-
-    <div class="col-lg-12">
+    <div class="col-8">
         <div class="text-left">
             <h6>Cuadro Nivel de Cargo Fortalezas / Debilidades</h6>
         </div>
@@ -126,6 +113,17 @@
         name=categorias[i];
         dataSeriex=array[0];
         categoriasx=categorias[i];
+
+        // busca un elemento creado y su contenido al DOM
+        var currentDiv = document.getElementById("container-x");
+
+        var elemento = document.createElement("div");
+        elemento.setAttribute("id", "container-"+i);
+        elemento.setAttribute("class", "col-6 mt-2");
+
+        currentDiv.appendChild(elemento); //añade texto al div creado.
+
+
         Highcharts.chart('container-'+i, {
             chart: {
                 type: 'column'

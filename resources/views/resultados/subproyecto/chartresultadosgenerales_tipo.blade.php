@@ -27,34 +27,17 @@
 </head>
 <body>
 <div class="container">
-    <div class="row col-lg-12">
 
-            <div class="col-sm-6 mt-3">
+    <div class="row col " id="container-x">
+
+            {{-- <div class="col-sm-6 mt-3">
                 <div class="mb-1" id="container-0"></div>
-            </div>
+            </div>--}}
 
-            <div class="col-sm-6 mt-3">
-                <div class="mb-1" id="container-1"></div>
-            </div>
-            <div class="col-sm-6 mt-3">
-                <div class="mb-1" id="container-2"></div>
-            </div>
-            <div class="col-sm-6 mt-3">
-                <div class="mb-1" id="container-3"></div>
-            </div>
-            <div class="col-sm-6 mt-3">
-                <div class="mb-1" id="container-4"></div>
-            </div>
-            <div class="col-sm-6 mt-3">
-                <div class="mb-1" id="container-5"></div>
-            </div>
-            <div class="col-sm-6 mt-3">
-                <div class="mb-1" id="container-6"></div>
-            </div>
     </div>
 
 
-    <div class="col-lg-12">
+    <div class="col-8">
         <div class="text-left">
             <h6>Cuadro de resultados Fortalezas / Oportunidades</h6>
         </div>
@@ -131,6 +114,18 @@
 
     function mychar(element,index,array)
     {
+
+
+
+        // busca un elemento creado y su contenido al DOM
+        var currentDiv = document.getElementById("container-x");
+
+        var elemento = document.createElement("div");
+        elemento.setAttribute("id", "container-"+i);
+        elemento.setAttribute("class", "col-6 mt-2");
+
+        currentDiv.appendChild(elemento); //añade texto al div creado.
+
         name=categorias[i];
         dataSeriex=array[0];
         categoriasx=categorias[i];

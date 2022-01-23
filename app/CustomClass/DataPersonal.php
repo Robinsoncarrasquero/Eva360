@@ -90,8 +90,11 @@ class DataPersonal{
                  */
                 if ($item['eva360']<$item['nivel']){
                     $arraydataOportunidad[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
+                    $arrayEfectivo[] =['name'=> $item['name'],'data'=>$item['eva360']];
+
                 }else{
                     $arraydataFortaleza[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
+                    $arrayEfectivo[] =['name'=> $item['name'],'data'=>$item['nivel']];
                 }
 
             }
@@ -101,7 +104,8 @@ class DataPersonal{
             {
                 $brecha=$cumplimiento=$potencial=0;
 
-                $cumplimiento=collect($arrayCumplimiento)->avg('data');
+               // $cumplimiento=collect($arrayCumplimiento)->avg('data');
+                $cumplimiento=collect($arrayEfectivo)->avg('data');
                 $modelo=collect($dataMeta)->avg('data');
                 $cumplimiento= $cumplimiento / $modelo *100;
 
@@ -118,7 +122,14 @@ class DataPersonal{
                 }
                 $potencial= $potencial > 100 ? $potencial : 0;
 
-                $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad,'datafortaleza'=>$arraydataFortaleza,'potencial'=>$potencial];
+                $arraydataBrecha[]=
+                [
+                    'categoria'=>$value['categoria'],
+                    'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,
+                    'dataoportunidad'=>$arraydataOportunidad,
+                    'datafortaleza'=>$arraydataFortaleza,
+                    'potencial'=>$potencial
+                ];
 
                 //Creamos la categoria para el cumplimiento y la brecha
                 $arrayCategoriaBrecha[]=[$value['categoria']];

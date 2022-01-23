@@ -22,7 +22,7 @@ class DataEvaluacion{
     public function getDataEvaluacion(){
 
         //Obtenemos la calificaciones
-        $calificaciones = Qualify::orderBy('nivel','DESC')->get();
+        $calificaciones = Qualify::orderBy('nivel','ASC')->get();
 
         //Obtenemos la configuracion particular
         $configuraciones = Configuracion::first();
@@ -78,7 +78,7 @@ class DataEvaluacion{
             $colorcalificacion='#b020a4';
 
             foreach ($calificaciones as $calificacion) {
-                if ($sumaAverage/$contador <= $calificacion['nivel']){
+                if ($sumaAverage/$contador >= $calificacion['nivel']){
                     $calificado=$calificacion['name'];
                     $colorcalificacion=$calificacion['color'];
                 }

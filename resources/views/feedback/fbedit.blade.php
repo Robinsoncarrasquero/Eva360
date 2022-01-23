@@ -10,14 +10,14 @@
         @include('flash-message')
     </div>
 
-    <div class="mt-2 pb-2 text text-center col-lg-12">
+    <div class="text text-center col">
         <h3 style="color:blue" >FEEDBACK</h3>
         <h3>{{ $evaluado->user->name }}</h3>
     </div>
 
     @if ($feedbacks->count()>0)
-        <div class="justify-content-start">
-            <div class="col-lg-12 text text-center">
+        <div class="d-flex justify-content-start">
+            <div class="col text text-center">
                 <a href=" {{route('feedBack->exportfeedback',$evaluado)  }} "><h3 style="color:orange"> Exportar Feedback a Excel </h3></a>
             </div>
         </div>
@@ -25,7 +25,7 @@
     @endif
 
     <div class="table table-responsive">
-        <table id="{{ 'tablex' }}" class="table  table-bordered table-striped table-table">
+        <table id="{{ 'tablex' }}" class="table table-bordered table-striped table-table">
             <thead class="table-thead" style="text-align: center;background:rgb(2, 54, 2);color:rgba(247, 240, 240, 0.932)">
                 <tr>
                     <th>Competencias</th>
@@ -40,7 +40,7 @@
                 @foreach ($dataSerie as $key=>$dataValue)
                 <tr>
                     @if ($dataValue['data'][0]>($dataValue['data'][1]))
-                        <td  class="text xtext-danger" style="font-size:1em; color:white;background:red">{{$dataValue['name']}}</td>
+                        <td  class="btn btn-danger" xstyle="font-size:1em; color:white;background:red">{{$dataValue['name']}}</td>
                     @else
                         <td >{{$dataValue['name']}}</td>
                     @endif
@@ -56,7 +56,7 @@
             </tbody>
         </table>
     </div>
-    <div class="table table-responsive">
+    <div class="table table-responsive mt-4">
         <table id="{{ 'table'.$evaluado->id }}" class="table  table-bordered table-striped table-table">
             <thead class="table-thead" style="text-align: center;background:rgb(68, 0, 255);color:white">
 
@@ -100,19 +100,19 @@
         {{-- @method('PATCH') --}}
 
 
-        <div class="clearfix">
+    <div class="clearfix mt-2">
 
 
         <form  class="card-header" action="{{route('feedback.update',$evaluado->id)  }}" method="post" name="frmfb">
         @csrf
 
         @foreach ( $feedbacks as $feedback )
+        <div class="xd-flex justify-content-start xrow ">
 
-        <fieldset >
             @if ($feedback->fb_status=='Cumplida')
                 <legend class="text text-center" style="background-color:green ;color:white; font-size:1.2em;">{{ $feedback->competencia }}</legend>
             @else
-                <legend class="text text-center" style="background-color:red ;color:white; font-size:1.2em;">{{ $feedback->competencia }}</legend>
+                <legend class="text text-center text text-danger" >{{ $feedback->competencia }}</legend>
             @endif
 
             <div class="justify-content-start">
@@ -124,58 +124,51 @@
 
             </div>
 
-            <div class="d-flex justify-content-between	">
+            <div class="d-flex justify-content-start col">
 
-                <div class="col-lg-12 p-2">
+                <div class="col-6 p-2">
                     <label for="fb_feedback[]" style="font-size:1em">Feedback</label>
-                    <textarea placeholder="Feedback" type="text" id="fb_feedback{{ $feedback->id }}" class="form-control" rows="6"
+                    <textarea placeholder="Feedback"  id="fb_feedback{{ $feedback->id }}" class="form-control" rows="2"
                         maxlength="1000" name="fb_feedback[]">{{ old('fb_feedback'.$feedback->id,  $feedback->feedback) }}
                     </textarea>
                 </div>
 
-            </div>
-
-            <div class="d-flex justify-content-between	">
-
-                <div class="col-lg-12 p-2">
+                <div class="col-6 p-2">
                     <label for="fb_development[]" style="font-size:1em">Desarrollo</label>
-                    <textarea placeholder="Desarrollo" type="text" id="fb_development{{ $feedback->id }}" class="form-control" rows="6"
+                    <textarea placeholder="Desarrollo" type="text" id="fb_development{{ $feedback->id }}" class="form-control" rows="2"
                         maxlength="1000" name="fb_development[]">{{ old('fb_development'.$feedback->id,  $feedback->development) }}</textarea>
                 </div>
 
             </div>
 
-            <div class="xd-flex justify-content-start">
-                <div class="col-lg-6">
+            <div class="d-flex justify-content-start col">
+                <div class="col-6">
                     <label for="fb_finicio">Fecha Inicio</label>
                     <input type="date" id="fb_finicio{{ $feedback->id }}" class="form-control"  name="fb_finicio[]"  value="{{ old('fb_finicio'.$feedback->id, $feedback->fb_finicio) }}">
                 </div>
-            </div>
 
-            <div class="d-flex justify-content-start">
-                <div class="col-lg-6">
+                <div class="col-6">
                     <label for="fb_ffinal">Fecha Final</label>
                     <input type="date" id="fb_ffinal{{ $feedback->id }}" class="form-control"  name="fb_ffinal[]"  value="{{ old('fb_ffinal'.$feedback->id, $feedback->fb_ffinal) }}">
                 </div>
             </div>
 
-            <div class=" d-flex justify-content-start">
-                <div class="col-lg-6">
-                    <label >Frecuencia</label>
-                    <select class="form-control" id="fb_periodo{{ $feedback->id }}" name="fb_periodo[]">
-                        @foreach ($periodos as $periodo)
-                            @if ($feedback->periodo==$periodo)
-                                <option  selected  value="{{ $periodo->id }}">{{ $periodo->name }} </option>
-                            @else
-                                <option   value="{{ $periodo->id }}">{{ $periodo->name }}</option>
-                            @endif
-                        @endforeach
-                    </select>
+            <div class="d-flex justify-content-start col">
+                <div class="col-6">
+                <label >Frecuencia</label>
+                <select class="form-control" id="fb_periodo{{ $feedback->id }}" name="fb_periodo[]">
+                    @foreach ($periodos as $periodo)
+                        @if ($feedback->periodo==$periodo)
+                            <option  selected  value="{{ $periodo->id }}">{{ $periodo->name }} </option>
+                        @else
+                            <option   value="{{ $periodo->id }}">{{ $periodo->name }}</option>
+                        @endif
+                    @endforeach
+                </select>
                 </div>
-            </div>
 
-            <div class="d-flex justify-content-start">
-                <div class="col-lg-6">
+
+                <div class="col-6">
                     <label >Status</label>
                     <select class="form-control" id="fb_status{{ $feedback->id }}" name="fb_status[]">
                         @foreach ($fb_status as $status)
@@ -187,9 +180,9 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
 
-            <div class="d-flex justify-content-start ">
+            </div>
+            {{-- <div class="d-flex justify-content-start ">
 
                 <div class="col-lg-12 p-2">
                     <label for="fb_nota">Nota</label>
@@ -197,9 +190,9 @@
                         maxlength="500" name="fb_nota[]">{{ old('fb_nota'.$feedback->id, $feedback->fb_nota) }}</textarea>
                 </div>
 
-            </div>
+            </div> --}}
 
-            <hr class="text text-dark">
+            <hr style="color:green;background-color:green" >
 
 
 
@@ -207,7 +200,8 @@
                 <button class="btn btn-danger" onclick="deleteConfirmation({{$feedback->id}},'{{route('feedback.delete',$feedback->id)}}')">Delete</button>
             </td> --}}
 
-    </fieldset>
+
+        </div>
     @endforeach
     <div class="row">
         <div class="col-lg-12">
