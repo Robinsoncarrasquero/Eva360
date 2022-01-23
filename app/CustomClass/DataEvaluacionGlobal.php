@@ -16,131 +16,6 @@ class DataEvaluacionGlobal{
         $this->proyecto_id = $proyecto_id;
     }
 
-    /**
-     * Genera la data de la evaluacion por tipo con los resultados y los devuelve en una coleccion
-     *
-    **/
-    public function getDataEvaluacionTipo(){
-
-         //Obtenemos la configuracion particular
-         $configuraciones = Configuracion::first();
-         if ($configuraciones->promediarautoevaluacion){
-             $autoevaluacion=' ';
-         }else {
-             $autoevaluacion='Autoevaluacion';
-         }
-
-        //Buscamos los evaluadores del evaluado
-        $proyecto = Proyecto::find($this->proyecto_id);
-        $whereIn=$proyecto->id;
-        $competencias = DB::table('evaluaciones')
-        ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
-        ->join('tipos', 'competencias.tipo_id', '=', 'tipos.id')
-        ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
-        ->join('evaluados', function ($join) {
-            $join->on('evaluadores.evaluado_id', '=', 'evaluados.id')
-                 ->where('evaluados.status', '=', 2);
-        })
-        ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
-        ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
-        ->select(DB::raw('count(evaluados.id) as records,tipos.tipo,
-        competencias.name,competencias.nivelrequerido'), DB::raw('AVG(evaluaciones.resultado) as average'))
-        ->where([['proyectos.id',$whereIn],['relation','<>',$autoevaluacion]])
-        ->groupBy('tipos.tipo','competencias.name','competencias.nivelrequerido','evaluados.status')
-        ->having('evaluados.status','=',2)
-        ->orderByRaw('tipos.tipo,competencias.name,competencias.nivelrequerido')
-        ->get();
-        //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
-        $dataArray = json_decode(json_encode($competencias), true);
-        $collection= collect($dataArray);
-        //Agrupamos la coleccion por nombre de competencia
-
-        $grouped = $collection->mapToGroups(function ($item, $key) {
-            return [$item['tipo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido']]];
-        });
-
-        //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
-        $adata=[];
-        foreach ($grouped as $tipo => $value) {
-
-            $record=[];
-            foreach ($value as $item) {
-                $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3]];
-                $competencia=$item[0];
-
-                $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
-            }
-
-            $this->join_fortaleza_oportunidad($tipo);
-            $adata[]=['tipo'=>$tipo,'data'=>$record];
-        }
-
-        $this->dataCruda=$adata;
-        return collect($adata);
-    }
-
-
-    /**
-     * Genera la data de la evaluacion por nivel de cargo con los resultados y los devuelve en una coleccion
-     *
-    **/
-    public function getDataEvaluacionNivel(){
-
-        //Obtenemos la configuracion particular
-        $configuraciones = Configuracion::first();
-        if ($configuraciones->promediarautoevaluacion){
-            $autoevaluacion=' ';
-        }else {
-            $autoevaluacion='Autoevaluacion';
-        }
-        //Buscamos los evaluadores del evaluado
-        $proyecto = Proyecto::find($this->proyecto_id);
-        $whereIn=$proyecto->id;
-
-        $competencias = DB::table('evaluaciones')
-        ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
-        ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
-        ->join('evaluados', 'evaluadores.evaluado_id', '=', 'evaluados.id')
-        ->join('cargos', 'evaluados.cargo_id', '=', 'cargos.id')
-        ->join('nivel_cargos', 'cargos.nivel_cargo_id', '=', 'nivel_cargos.id')
-        ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
-        ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
-        ->select('nivel_cargos.name as nivelcargo','competencias.name','evaluaciones.nivelrequerido','evaluados.status',
-        DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
-        ->where([['proyectos.id','=',$whereIn],['relation','<>',$autoevaluacion]])
-        ->groupBy('nivel_cargos.name','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
-        ->having('evaluados.status','=',2)
-        ->orderByRaw('nivel_cargos.name','competencias.namexx')
-        ->get();
-
-        //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
-        $dataArray = json_decode(json_encode($competencias), true);
-        $collection= collect($dataArray);
-
-        //Agrupamos la coleccion por nombre de competencia
-        $grouped = $collection->mapToGroups(function ($item, $key) {
-            return [$item['nivelcargo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido']]];
-        });
-
-        //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
-        $adata=[];
-        foreach ($grouped as $agrupa=> $value) {
-
-            $record=[];
-
-            foreach ($value as $item) {
-                $competencia=$item[0];
-                $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3]];
-                $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
-            }
-
-            $data_join=collect($this->join_fortaleza_oportunidad($agrupa));
-            $adata[]=['nivel'=>$agrupa,'data'=>$record];
-       }
-
-        $this->dataCruda=$adata;
-        return collect($adata);
-    }
 
     /** Fortaleza y Oportunidades */
     private function add_fortaleza_oportunidad($competencia,$resultado,$margen){
@@ -177,6 +52,174 @@ class DataEvaluacionGlobal{
     public function getDataFortalezaOptunidad(){
         return $this->dataOportunidadFortaleza;
     }
+
+    /**
+     * Genera la data de la evaluacion por nivel de cargo con los resultados y los devuelve en una coleccion
+     *
+    **/
+    public function getDataEvaluacionNivel(){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if ($configuraciones->promediarautoevaluacion){
+            $autoevaluacion=' ';
+        }else {
+            $autoevaluacion='Autoevaluacion';
+        }
+        //Buscamos los evaluadores del evaluado
+        $proyecto = Proyecto::find($this->proyecto_id);
+        $whereIn=$proyecto->id;
+
+        $competencias = DB::table('evaluaciones')
+        ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
+        ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
+        ->join('evaluados', 'evaluadores.evaluado_id', '=', 'evaluados.id')
+        ->join('cargos', 'evaluados.cargo_id', '=', 'cargos.id')
+        ->join('nivel_cargos', 'cargos.nivel_cargo_id', '=', 'nivel_cargos.id')
+        ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
+        ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
+        ->select('nivel_cargos.name as nivelcargo','competencias.name','evaluaciones.nivelrequerido',
+        'evaluadores.relation','evaluados.status',
+        DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
+        ->where([['proyectos.id','=',$whereIn],['evaluadores.relation','<>',$autoevaluacion]])
+        ->groupBy('evaluadores.relation','nivel_cargos.name','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
+        ->having('evaluados.status','=',2)
+        //->orderByRaw('nivel_cargos.name','cccompetencias.name')
+        ->get();
+
+        //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
+        $dataArray = json_decode(json_encode($competencias), true);
+        $collection= collect($dataArray);
+
+       // dd($dataArray);
+
+         //Agrupamos la coleccion por nombre de competencia
+        $grouped = $collection->mapToGroups(function ($item, $key) {
+            return [$item['nivelcargo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido'],$item['relation'],]];
+        });
+
+        //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
+        $adata=[];
+        foreach ($grouped as $agrupa=> $value) {
+
+            $record=[];
+            $recordx=[];
+            foreach ($value as $item) {
+                $competencia=$item[0];
+                $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3],'relation'=>$item[4]];
+                $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
+            }
+
+            $collection= collect($record);
+
+             //Agrupamos la coleccion por nombre de competencia
+            $groupdatar = $collection->mapToGroups(function ($item, $key) {
+                return [$item['competencia'] => [$item['average'],$item['records'],$item['nivel'],$item['relation']]];
+            });
+
+            foreach ($groupdatar as $agrupacompetencias=> $valued) {
+
+                $datax=[];
+                foreach ($valued as $item) {
+                    $datax[] = ['average'=>$item[0],'records'=>$item[1],'nivel'=>$item[2],'relation'=>$item[3]];
+                }
+                $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>collect($datax)->avg('average'),'grupos'=>count($datax)];
+            }
+
+            $data_join=collect($this->join_fortaleza_oportunidad($agrupa));
+            $adata[]=['nivel'=>$agrupa,'data'=>$recordx];
+
+        }
+        $this->dataCruda=$adata;
+        return collect($adata);
+    }
+
+    /**
+     * Genera la data de la evaluacion por tipo con los resultados y los devuelve en una coleccion
+     *
+    **/
+
+    public function getDataEvaluacionTipo(){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if ($configuraciones->promediarautoevaluacion){
+            $autoevaluacion=' ';
+        }else {
+            $autoevaluacion='Autoevaluacion';
+        }
+
+       //Buscamos los evaluadores del evaluado
+       $proyecto = Proyecto::find($this->proyecto_id);
+       $whereIn=$proyecto->id;
+       $competencias = DB::table('evaluaciones')
+       ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
+       ->join('tipos', 'competencias.tipo_id', '=', 'tipos.id')
+       ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
+       ->join('evaluados', function ($join) {
+           $join->on('evaluadores.evaluado_id', '=', 'evaluados.id')
+                ->where('evaluados.status', '=', 2);
+       })
+       ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
+       ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
+       ->select(DB::raw('count(evaluados.id) as records,tipos.tipo,evaluadores.relation,
+        competencias.name,competencias.nivelrequerido'), DB::raw('AVG(evaluaciones.resultado) as average'))
+       ->where([['proyectos.id',$whereIn],['relation','<>',$autoevaluacion]])
+       ->groupBy('evaluadores.relation','tipos.tipo','competencias.name','competencias.nivelrequerido','evaluados.status')
+       ->having('evaluados.status','=',2)
+       ->orderByRaw('evaluadores.relation,tipos.tipo,competencias.name,competencias.nivelrequerido')
+       ->get();
+       //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
+       $dataArray = json_decode(json_encode($competencias), true);
+       $collection= collect($dataArray);
+       //Agrupamos la coleccion por nombre de competencia
+
+       $grouped = $collection->mapToGroups(function ($item, $key) {
+           return [$item['tipo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido'],$item['relation']]];
+       });
+
+       //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
+       $adata=[];
+
+       foreach ($grouped as $agrupa => $value) {
+
+           $record=[];
+           $recordx=[];
+           foreach ($value as $item) {
+                $competencia=$item[0];
+                $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3],'relation'=>$item[4]];
+                $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
+           }
+
+           $collection= collect($record);
+
+
+          //Agrupamos la coleccion por nombre de competencia
+          $groupdatar = $collection->mapToGroups(function ($item, $key) {
+              return [$item['competencia'] => [$item['average'],$item['records'],$item['nivel'],$item['relation']]];
+          });
+
+          foreach ($groupdatar as $agrupacompetencias=> $valued) {
+
+              $datax=[];
+              foreach ($valued as $item) {
+                  $datax[] = ['average'=>$item[0],'records'=>$item[1],'nivel'=>$item[2],'relation'=>$item[3]];
+              }
+              $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>collect($datax)->avg('average'),'grupos'=>count($datax)];
+          }
+
+           $this->join_fortaleza_oportunidad($agrupa);
+           $adata[]=['tipo'=>$agrupa,'data'=>$recordx];
+
+       }
+
+
+       $this->dataCruda=$adata;
+       return collect($adata);
+   }
+
+
+
 
 
 }

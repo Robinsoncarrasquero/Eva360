@@ -68,7 +68,7 @@
             type: element
         },
             title: {
-                text: "Resultado individual de la evaluacion :"+element
+                text: "Resultado individual de la evaluacion de"
             },
             subtitle: {
                 text: evaluado

@@ -39,9 +39,9 @@
     </div>
 
 
-    <div class="col-lg-12">
+    <div class="col">
 
-        <div class="col-sm-12">
+        <div class="col">
 
             <div class="panel panel">
 
@@ -78,8 +78,8 @@
                         @endif
                         </td>
                         <td>
-                            @if ($value['potencial']>100)
-                            <span style="font-size:1.5em; color:white;background:green">{{ number_format($value['potencial']-100,2) }}</span>
+                            @if ($value['potencial']>0)
+                            <span style="font-size:1.5em; color:white;background:green">{{ number_format($value['potencial'],2)-100 }}</span>
 
                             @endif
                         </td>
@@ -100,7 +100,7 @@
             </div>
         </div>
 
-        <div class="col-sm-12">
+        <div class="col">
 
             <div class="clearfix">
                 <div class=" text-center">
@@ -108,8 +108,8 @@
                 </div>
 
             </div>
-
-            @if($subProyecto)
+            <div class="xcol-6">
+                @if($subProyecto)
                 <div class="table table-responsive">
                 <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                     <thead class="table-thead">
@@ -149,6 +149,8 @@
                 </div>
             @endif
         </div>
+
+
 
         <div class="col-6">
             <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
