@@ -61,8 +61,7 @@ class ResultadosController extends Controller
         $objData = new DataResultado($evaluado_id,new DataEvaluacion(0));
         $objData->procesarData();
         $dataSerie = $objData->getDataSerie();
-        $dataCategoria = collect($objData->getDataCategoria());
-        dd($dataCategoria);
+        $dataCategoria = $objData->getDataCategoria();
         $title="Finales";
         if (!$dataSerie){
             \abort(404);
