@@ -28,7 +28,7 @@
 <body>
 <div class="container">
 
-    <div class="row col " id="container-x">
+    <div class="row" id="container-x">
 
             {{-- <div class="col-sm-6 mt-3">
                 <div class="mb-1" id="container-0"></div>
@@ -37,7 +37,7 @@
     </div>
 
 
-    <div class="col-8">
+    <div class="col">
         <div class="text-left">
             <h6>Cuadro de resultados Fortalezas / Oportunidades</h6>
         </div>

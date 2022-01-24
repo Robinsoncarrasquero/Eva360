@@ -107,7 +107,7 @@ class DataEvaluacionGlobal{
             foreach ($value as $item) {
                 $competencia=$item[0];
                 $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3],'relation'=>$item[4]];
-                $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
+               // $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
             }
 
             $collection= collect($record);
@@ -123,7 +123,10 @@ class DataEvaluacionGlobal{
                 foreach ($valued as $item) {
                     $datax[] = ['average'=>$item[0],'records'=>$item[1],'nivel'=>$item[2],'relation'=>$item[3]];
                 }
-                $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>collect($datax)->avg('average'),'grupos'=>count($datax)];
+                $resultado=collect($datax)->avg('average');
+                $nivel=$datax[0]['nivel'];
+                $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>$resultado,'grupos'=>count($datax)];
+                $this->add_fortaleza_oportunidad($agrupacompetencias,$resultado,$nivel);
             }
 
             $data_join=collect($this->join_fortaleza_oportunidad($agrupa));
@@ -163,11 +166,11 @@ class DataEvaluacionGlobal{
        ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
        ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
        ->select(DB::raw('count(evaluados.id) as records,tipos.tipo,evaluadores.relation,
-        competencias.name,competencias.nivelrequerido'), DB::raw('AVG(evaluaciones.resultado) as average'))
+        competencias.name,evaluaciones.nivelrequerido'), DB::raw('AVG(evaluaciones.resultado) as average'))
        ->where([['proyectos.id',$whereIn],['relation','<>',$autoevaluacion]])
-       ->groupBy('evaluadores.relation','tipos.tipo','competencias.name','competencias.nivelrequerido','evaluados.status')
+       ->groupBy('evaluadores.relation','tipos.tipo','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
        ->having('evaluados.status','=',2)
-       ->orderByRaw('evaluadores.relation,tipos.tipo,competencias.name,competencias.nivelrequerido')
+       ->orderByRaw('evaluadores.relation,tipos.tipo,competencias.name,evaluaciones.nivelrequerido')
        ->get();
        //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
        $dataArray = json_decode(json_encode($competencias), true);
@@ -188,8 +191,8 @@ class DataEvaluacionGlobal{
            foreach ($value as $item) {
                 $competencia=$item[0];
                 $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3],'relation'=>$item[4]];
-                $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
-           }
+                // $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
+            }
 
            $collection= collect($record);
 
@@ -198,15 +201,17 @@ class DataEvaluacionGlobal{
           $groupdatar = $collection->mapToGroups(function ($item, $key) {
               return [$item['competencia'] => [$item['average'],$item['records'],$item['nivel'],$item['relation']]];
           });
-
           foreach ($groupdatar as $agrupacompetencias=> $valued) {
 
               $datax=[];
               foreach ($valued as $item) {
                   $datax[] = ['average'=>$item[0],'records'=>$item[1],'nivel'=>$item[2],'relation'=>$item[3]];
               }
-              $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>collect($datax)->avg('average'),'grupos'=>count($datax)];
-          }
+              $resultado=collect($datax)->avg('average');
+              $nivel=$datax[0]['nivel'];
+              $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>$resultado,'grupos'=>count($datax)];
+              $this->add_fortaleza_oportunidad($agrupacompetencias,$resultado,$nivel);
+            }
 
            $this->join_fortaleza_oportunidad($agrupa);
            $adata[]=['tipo'=>$agrupa,'data'=>$recordx];
