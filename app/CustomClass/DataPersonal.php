@@ -164,7 +164,7 @@ class DataPersonal{
         });
         //Agregamos el promedio en la serie para presentaros en la grafica
         foreach ($agrouped as $key => $datavalue) {
-            $arraydataSerie[]=['name'=>$key,'data'=>$datavalue];
+        //    $arraydataSerie[]=['name'=>$key,'data'=>$datavalue];
         }
 
         $this->dataBrecha=$arraydataBrecha;
