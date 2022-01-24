@@ -21,8 +21,8 @@
     <div class="row">
 
         @foreach($evaluadores as $evaluador)
-        <div class="table table-responsive col-sm-12 col-md-6 mt-1">
-            <table id="table{{ $evaluador->id }}" class="table table-striped table-table">
+        <div class="table col-sm-12 col-md-6 ">
+            <table id="table{{ $evaluador->id }}" class="table table-striped table-table table-responsive ">
                 <thead>
                 <tr id="{{ $evaluador->id }}">
                     <th class="chk-enviar-prueba" colspan="4">
@@ -42,7 +42,7 @@
                     <th class="text text-left  title-th-evaluador" colspan="4">
                     {{$evaluador->name}}({{ $evaluador->relation }}) <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
                     <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
-                    <button type="button" data-id="{{$evaluador->id}}" class="btn btn-info btn-save-email">Guardar Email
+                    <button type="button" data-id="{{$evaluador->id}}" class="btn btn-danger btn-save-email">Guardar Email
                     </th>
                 </tr>
                 <tr>
@@ -56,7 +56,7 @@
                 @foreach ($evaluador->evaluaciones as $evaluacion)
                 <tr>
                     <td>{{$evaluacion->competencia->name}}</td>
-                    <td style="font-size:70%">{{substr($evaluacion->competencia->description,0,100)}}</td>
+                    <td style="font-size:60%">{{substr($evaluacion->competencia->description,0,50)}}..</td>
                     <td class="text text-center">{{$evaluacion->nivelrequerido}}</td>
                     <td class="text text-center"><span class="badge badge-dark">{{ $evaluacion->resultado}}</span></td>
                 </tr>
