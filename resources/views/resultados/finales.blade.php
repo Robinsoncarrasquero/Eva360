@@ -11,7 +11,7 @@
 
     </div>
 
-    <div class="card-header mt-2 mb-4">
+    <div class="card-header mt-1 mb-3">
         @if ($evaluado->status!==Helper::estatus('Finalizada'))
             <h5 class="text-center text-danger">La Prueba de {{ $evaluado->user->name }} aun no ha finalizado</h5>
         @else
@@ -24,15 +24,15 @@
     @if($competencias)
 
     <div class="row">
-
         @foreach($competencias as $key=>$value)
-        <div class="table table-responsive col-sm-12 col-md-6" >
+        <div class="col-sm-12 col-md-3">
+        <div class="table " >
 
-            <table id="{{$key}}" class="table table-bordered table-table">
+            <table id="{{$key}}" class="table table-bordered table-table table-responsibe">
                 <thead>
                     <tr >
-                        <th class="text text-center title-th-competencia-x" colspan="2" style="background:rgb(206, 204, 204)">
-                        <strong >{{ $value['competencia']}} (Nivel Requerido {{ $value['nivelRequerido'] }})
+                        <th class="text text-center title-th-competencia-x" colspan="2" style="background:rgb(235, 229, 229)">
+                        <strong >{{ $value['competencia']}}<br> (Nivel Requerido {{ $value['nivelRequerido'] }})
                         </strong>
                         </th>
                     </tr>
@@ -40,25 +40,31 @@
                     <th>Ponderado</th>
                 </thead>
                 <tbody>
+
                 @foreach ($value['data'] as $item)
+
                 <tr>
                     <td >{{ $item['name']}}</td>
                     <td>{{ number_format($item['average'],2)}}</td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td class="text text-center"><a href=""><i class="material-icons">bar_chart</i></a>Resultado</td>
+                    <td class="text text-center"><a href=""><i class="material-icons" >bar_chart</i></a>Resultado</td>
                     <td class="text text-center" ><strong>{{ number_format($value['eva360'],2)}}</strong></td>
                 </tr>
                 <tr>
                     <td class="text text-center">Calificacion</td>
                     <td class="text-center" style="background:{{  $value['colorcalificacion']}}"><strong>{{ $value['calificacion']}}</strong></td>
                 </tr>
+
                 </tbody>
             </table>
 
         </div>
+        </div>
         @endforeach
+
+
     </div>
 
     <div class="clearfix">
