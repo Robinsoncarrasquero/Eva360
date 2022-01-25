@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
 
 class Evaluador extends Model
 {
     //
+    use Notifiable;
+
     protected $table='evaluadores';
 
     protected $fillable=[
@@ -34,8 +38,6 @@ class Evaluador extends Model
         return $this->belongsTo(User::class);
     }
 
-
-
     public function metas()
     {
         return $this->hasManyThrough('App\Meta', 'App\Objetivo','evaluador_id','id','id','meta_id');
@@ -45,4 +47,6 @@ class Evaluador extends Model
        public function objetivos(){
         return $this->hasMany(Objetivo::class);
     }
+
+
 }

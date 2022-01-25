@@ -162,7 +162,7 @@ class LanzarEvaluacion
                     $evaluador->save();
 
                 } catch (QueryException $e) {
-                    dd($e);
+
                     return false;
                 }
             }

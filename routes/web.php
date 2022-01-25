@@ -1,12 +1,16 @@
 <?php
 
+use App\Evaluador;
+use App\Notifications\EvaluacionPendiente;
 use App\Notifications\Nexmosms;
+use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 use Nexmo\Laravel\Facade\Nexmo;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +26,23 @@ use Nexmo\Laravel\Facade\Nexmo;
 /**
  * Route Paypal
  */
+
+
+Route::get('/tareapendiente/{evaluador}',function ($evaluador)
+{
+
+    $receptor = Evaluador::where('status',1)->first();
+
+
+
+    $invoice = [
+        'id' => $receptor->id,
+        'destinatario_id' => $receptor->id,
+        'mensaje' => 'Hola algún mensaje',
+    ];
+    $receptor->notify(new EvaluacionPendiente($invoice));
+    //return back()->with('enviado', 'La notificación ha sido enviada.');
+})->where('id', '[0-9]+');
 
 Route::middleware(['auth', 'role:admin'])->group( function() {
     Route::post('/paypal/pay', 'PaymentController@payWithPayPal')->name('paypal.makepay');
