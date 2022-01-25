@@ -12,7 +12,7 @@
 
     <div class="card card-header mt-2 mb-4">
         <div class="text text-center">
-            <h5>Evaluadores de <span class="text-danger">{{ $evaluado->user->name }}</span></h5>
+            <h5>Evaluadores de <span class=" text text-success">{{ $evaluado->user->name }}</span></h5>
         </div>
     </div>
 

@@ -53,7 +53,11 @@
                     <td class="text text-center" ><strong>{{ number_format($value['eva360'],2)}}</strong></td>
                 </tr>
                 <tr>
-                    <td class="text text-center">Calificacion</td>
+                    @if ($value['calificacion'] >=$value['nivelRequerido']){
+                        <td class="text text-success">Cumplida</td>
+                    @else
+                        <td class="text text-danger">No Cumplida</td>
+                    @endif
                     <td class="text-center" style="background:{{  $value['colorcalificacion']}}"><strong>{{ $value['calificacion']}}</strong></td>
                 </tr>
 
