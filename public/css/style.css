@@ -297,4 +297,7 @@ body > .container {
         font-size: 0.75rem;
     }
 
+    html {
+        font-size: 1rem;
+      }
 

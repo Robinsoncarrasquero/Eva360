@@ -49,14 +49,14 @@
                 </tr>
                 @endforeach
                 <tr>
-                    <td class="text text-center"><a href=""><i class="material-icons" >bar_chart</i></a>Resultado</td>
+                    <td class="text text-center"><a href=""><i class="material-icons" >bar_chart</i></a>Logrado</td>
                     <td class="text text-center" ><strong>{{ number_format($value['eva360'],2)}}</strong></td>
                 </tr>
                 <tr>
-                    @if ($value['calificacion'] >=$value['nivelRequerido']){
-                        <td class="text text-success">Cumplida</td>
+                    @if ($value['eva360'] >=$value['nivelRequerido']){
+                        <td class="font-weight-bold text text-success">Cumplida</td>
                     @else
-                        <td class="text text-danger">No Cumplida</td>
+                        <td class="text text-danger font-weight-bold">No Cumplida</td>
                     @endif
                     <td class="text-center" style="background:{{  $value['colorcalificacion']}}"><strong>{{ $value['calificacion']}}</strong></td>
                 </tr>
