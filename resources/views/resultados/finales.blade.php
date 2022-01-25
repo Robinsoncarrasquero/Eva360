@@ -53,7 +53,7 @@
                     <td class="text text-center" ><strong>{{ number_format($value['eva360'],2)}}</strong></td>
                 </tr>
                 <tr>
-                    @if ($value['eva360'] >=$value['nivelRequerido']){
+                    @if ($value['eva360'] >=$value['nivelRequerido'])
                         <td class="font-weight-bold text text-success">Cumplida</td>
                     @else
                         <td class="text text-danger font-weight-bold">No Cumplida</td>
