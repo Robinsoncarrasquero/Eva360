@@ -30,8 +30,10 @@ use Nexmo\Laravel\Facade\Nexmo;
 
 Route::get('/tareapendiente/{evaluador}',function ($evaluador)
 {
-    $receptor = Evaluador::where('status',1)->get();
-    $receptor->notify(new EvaluacionPendiente());
+    $receptores = Evaluador::where('status',1)->get();
+    foreach ($receptores as $receptor) {
+        $receptor->notify(new EvaluacionPendiente());
+    }
     //return back()->with('enviado', 'La notificación ha sido enviada.');
 })->where('id', '[0-9]+');
 
