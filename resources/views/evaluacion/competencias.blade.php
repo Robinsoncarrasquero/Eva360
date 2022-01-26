@@ -55,7 +55,7 @@
                         @if (Auth::user()->admin())
                             {{-- <span class="float-left"><a href="{{ url()->previous()}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
                         @else
-                            <span class="float-left"><a href="{{ url()->back() }}" class="btn btn-dark btn-lg">Regresar</a></span>
+                            <span class="float-left"><a href="{{ route('evaluacion.index') }}" class="btn btn-dark btn-lg">Regresar</a></span>
                             @if($evaluador->status!=2)
                                 <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
                             @endif
