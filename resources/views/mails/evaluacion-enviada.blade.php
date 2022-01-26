@@ -29,7 +29,7 @@
 
     </ul>
     <footer>
-        Sistema de Evaluacion de Desempe&ntilde;o por Competencias <strong>TALENT360</strong>
+        Sistema de Evaluacion de Desempe&ntilde;o Por Competencias <strong> {{ config('app.name') }}</strong>
     </footer>
 </body>
 </html>

@@ -16,7 +16,7 @@
 </head>
 <body>
     <p>Estimado Administrador le informamos que la evaluacion de <strong>{{ $dataEvaluador->nameEvaluado }} </strong> ha finalizado.</p>
-    <p>Loss resultados estan disponibles en el siguiente link.</p>
+    <p>Los resultados estan disponibles en el siguiente link.</p>
     <ul>
         <li>
             <a href="{{ $dataEvaluador->linkweb}}">
@@ -26,7 +26,7 @@
 
     </ul>
     <footer>
-        Sistema de Evaluacion de Desempe&ntilde;o por Competencias <strong>TALENT360</strong>
+        Sistema de Evaluacion de Desempe&ntilde;o por Competencias <strong>{{ config('app.name') }}</strong>
     </footer>
 
 </body>

@@ -48,9 +48,9 @@ class EvaluacionPendiente extends Notification
             ->greeting('Hola.')
             ->line($notifiable->name)
 
-            ->line('Recuerda que tienes pendientes Evaluaciones por realizar...')
+            ->line('Recuerda que tienes pendiente Evaluaciones por realizar en la plataforma...')
             ->action('Responder las evaluaciones', url($url))
-            ->line('Thank you for using our application!')
+            ->line('Gracias por responder la evaluacion a tiempo!')
             ->salutation('Saludos');
     }
 
