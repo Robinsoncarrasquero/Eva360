@@ -34,7 +34,7 @@ Route::get('/tareapendiente/{evaluador}',function ($evaluador)
     $delay = now()->addSeconds(1);
 
     foreach ($receptores as $receptor) {
-        $receptor->notify(new EvaluacionPendiente())->delay($delay);
+        $receptor->notify((new EvaluacionPendiente())->delay($delay));
     }
     //return back()->with('enviado', 'La notificación ha sido enviada.');
 })->where('id', '[0-9]+');
