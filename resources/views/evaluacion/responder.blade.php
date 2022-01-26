@@ -10,8 +10,8 @@
     </div>
 
     <div class="card-header mb-3">
-        <h5 class="text text-center">Estimado evaluador {{  $evaluacion->evaluador->name }}, analice con criterio y determinacion la competencia de
-        <span class="text text-danger"><br>{{ $evaluacion->evaluador->evaluado->name }}</span> relacionada con</h5>
+        <h5 class="text text-center">Estimado evaluador {{  $evaluacion->evaluador->name }}, analice con criterio y determinacion las competencias de</h5>
+        <h4 class="text text-danger d-flex justify-content-center">{{ $evaluacion->evaluador->evaluado->name }}</h4>
     </div>
 
     <div class="mb-2">

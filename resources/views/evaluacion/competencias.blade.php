@@ -15,7 +15,8 @@
         <div class="pb-1 mt-2">
 
             <div class="text text-center">
-                <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de <br><span class="text-danger">{{ $evaluado->name }}</span></h5>
+                <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de
+                    <h4 class="text text-danger d-flex justify-content-center">{{ $evaluado->name }}</h4>
             </div>
 
             {{-- <div class="text-center mt-3">
@@ -52,9 +53,9 @@
 
                     <div class="clearfix mt-3">
                         @if (Auth::user()->admin())
-                            {{-- <span class="float-left"><a href="{{route('talent.historicoevaluaciones',$evaluador->evaluado->user_id)}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
+                            {{-- <span class="float-left"><a href="{{ url()->previous()}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
                         @else
-                            <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
+                            <span class="float-left"><a href="{{ url()->back() }}" class="btn btn-dark btn-lg">Regresar</a></span>
                             @if($evaluador->status!=2)
                                 <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
                             @endif

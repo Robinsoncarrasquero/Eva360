@@ -10,8 +10,8 @@
     </div>
 
     <div class="card-header mb-3">
-        <h5 class="text text-center">Estimado evaluador {{  $evaluacion->evaluador->name }}, analice con criterio y determinacion la competencia de
-        <span class="text text-danger"><br>{{ $evaluacion->evaluador->evaluado->name }}</span> relacionada con</h5>
+        <h5 class="text text-center">Estimado evaluador {{  $evaluacion->evaluador->name }}, analice con criterio y determinacion las competencia de</h5>
+        <h4 class="text text-danger d-flex justify-content-center">{{ $evaluacion->evaluador->evaluado->name }}</h4>
     </div>
 
     <div class="mb-2">
@@ -86,9 +86,9 @@
 
         <div class="clearfix">
             @if (Auth::user()->admin())
-                {{-- <span class="float-left"><a href="{{route('talent.historicoevaluaciones',$evaluador->evaluado->user_id)}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
+                {{-- <span class="float-left"><a href="{{ url()->previous() }}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
             @else
-                <span class="float-left"><a href="{{route('evaluacion.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
+                <span class="float-left"><a href="{{ url()->previous() }}" class="btn btn-dark btn-lg">Regresar</a></span>
                 @if ($evaluacion->evaluador->status!=2)
                     <button type="submit" class="btn btn-dark btn-lg float-right" value="Next" >Guardar</button>
                  @endif
