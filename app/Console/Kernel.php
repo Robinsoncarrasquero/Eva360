@@ -32,6 +32,11 @@ class Kernel extends ConsoleKernel
             Notification::send($receptores, new EvaluacionPendiente());
         //})->twiceDaily(9, 14);
         })->everyMinute();
+
+        $schedule->command('report:generate')
+        ->daily()
+        ->sendOutputTo('files')
+        ->emailOutputTo('taylor@example.com');
         //Ejecuta la tarea diariamente a la 1:00 & 13:00
     }
 
