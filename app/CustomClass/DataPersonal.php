@@ -102,7 +102,7 @@ class DataPersonal{
             $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
 
             {
-                $brecha=$cumplimiento=$potencial=0;
+                $brecha=0;$cumplimiento=0;$potencial=0;
 
                // $cumplimiento=collect($arrayCumplimiento)->avg('data');
                 $cumplimiento=collect($arrayEfectivo)->avg('data');

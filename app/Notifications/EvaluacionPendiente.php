@@ -63,7 +63,11 @@ class EvaluacionPendiente extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'evaluacion_id' => $this->notifiable->id,
+            'name' => $this->notifiable->name,
+            'email'=> $this->notifiable->email,
         ];
     }
+
+
 }
