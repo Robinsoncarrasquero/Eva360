@@ -30,13 +30,8 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $receptores = Evaluador::where('status',1)->get();
             Notification::send($receptores, new EvaluacionPendiente());
-        //})->twiceDaily(9, 14);
-        })->everyMinute();
-
-        $schedule->command('report:generate')
-        ->daily()
-        ->sendOutputTo('files')
-        ->emailOutputTo('taylor@example.com');
+        })->twiceDaily(11, 14);
+        //})->everyMinute();
         //Ejecuta la tarea diariamente a la 1:00 & 13:00
     }
 
