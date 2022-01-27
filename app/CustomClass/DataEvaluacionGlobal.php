@@ -79,10 +79,10 @@ class DataEvaluacionGlobal{
         ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
         ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
         ->select('nivel_cargos.name as nivelcargo','competencias.name','evaluaciones.nivelrequerido',
-        'evaluadores.relation','evaluados.status',
+        'evaluados.status',
         DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
         ->where([['proyectos.id','=',$whereIn],['evaluadores.relation','<>',$autoevaluacion]])
-        ->groupBy('evaluadores.relation','nivel_cargos.name','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
+        ->groupBy('nivel_cargos.name','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
         ->having('evaluados.status','=',2)
         //->orderByRaw('nivel_cargos.name','cccompetencias.name')
         ->get();
@@ -91,11 +91,11 @@ class DataEvaluacionGlobal{
         $dataArray = json_decode(json_encode($competencias), true);
         $collection= collect($dataArray);
 
-       // dd($dataArray);
+
 
          //Agrupamos la coleccion por nombre de competencia
         $grouped = $collection->mapToGroups(function ($item, $key) {
-            return [$item['nivelcargo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido'],$item['relation'],]];
+            return [$item['nivelcargo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido']]];
         });
 
         //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
@@ -106,7 +106,7 @@ class DataEvaluacionGlobal{
             $recordx=[];
             foreach ($value as $item) {
                 $competencia=$item[0];
-                $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3],'relation'=>$item[4]];
+                $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3]];
                // $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
             }
 
@@ -114,18 +114,21 @@ class DataEvaluacionGlobal{
 
              //Agrupamos la coleccion por nombre de competencia
             $groupdatar = $collection->mapToGroups(function ($item, $key) {
-                return [$item['competencia'] => [$item['average'],$item['records'],$item['nivel'],$item['relation']]];
+                return [$item['competencia'] => [$item['average'],$item['records'],$item['nivel']]];
             });
 
             foreach ($groupdatar as $agrupacompetencias=> $valued) {
 
                 $datax=[];
                 foreach ($valued as $item) {
-                    $datax[] = ['average'=>$item[0],'records'=>$item[1],'nivel'=>$item[2],'relation'=>$item[3]];
+                    $datax[] = ['average'=>$item[0],'records'=>$item[1],'nivel'=>$item[2]];
                 }
+
                 $resultado=collect($datax)->avg('average');
+
                 $nivel=$datax[0]['nivel'];
                 $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>$resultado,'grupos'=>count($datax)];
+
                 $this->add_fortaleza_oportunidad($agrupacompetencias,$resultado,$nivel);
             }
 
@@ -133,6 +136,7 @@ class DataEvaluacionGlobal{
             $adata[]=['nivel'=>$agrupa,'data'=>$recordx];
 
         }
+        //dd($recordx,$grouped);
         $this->dataCruda=$adata;
         return collect($adata);
     }
@@ -165,12 +169,12 @@ class DataEvaluacionGlobal{
        })
        ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
        ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
-       ->select(DB::raw('count(evaluados.id) as records,tipos.tipo,evaluadores.relation,
-        competencias.name,evaluaciones.nivelrequerido'), DB::raw('AVG(evaluaciones.resultado) as average'))
-       ->where([['proyectos.id',$whereIn],['relation','<>',$autoevaluacion]])
-       ->groupBy('evaluadores.relation','tipos.tipo','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
+       ->select(DB::raw('count(evaluados.id) as records,tipos.tipo,
+       competencias.name,evaluaciones.nivelrequerido'), DB::raw('AVG(evaluaciones.resultado) as average'))
+       ->where([['proyectos.id',$whereIn],['evaluadores.relation','<>',$autoevaluacion]])
+       ->groupBy('tipos.tipo','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
        ->having('evaluados.status','=',2)
-       ->orderByRaw('evaluadores.relation,tipos.tipo,competencias.name,evaluaciones.nivelrequerido')
+       ->orderByRaw('tipos.tipo,competencias.name,evaluaciones.nivelrequerido')
        ->get();
        //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
        $dataArray = json_decode(json_encode($competencias), true);
@@ -178,7 +182,7 @@ class DataEvaluacionGlobal{
        //Agrupamos la coleccion por nombre de competencia
 
        $grouped = $collection->mapToGroups(function ($item, $key) {
-           return [$item['tipo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido'],$item['relation']]];
+           return [$item['tipo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido']]];
        });
 
        //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
@@ -190,7 +194,7 @@ class DataEvaluacionGlobal{
            $recordx=[];
            foreach ($value as $item) {
                 $competencia=$item[0];
-                $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3],'relation'=>$item[4]];
+                $record[] = ['competencia'=>$item[0],'average'=>$item[1],'records'=>$item[2],'nivel'=>$item[3]];
                 // $this->add_fortaleza_oportunidad($competencia,$item[1],$item[3]);
             }
 
@@ -199,13 +203,13 @@ class DataEvaluacionGlobal{
 
           //Agrupamos la coleccion por nombre de competencia
           $groupdatar = $collection->mapToGroups(function ($item, $key) {
-              return [$item['competencia'] => [$item['average'],$item['records'],$item['nivel'],$item['relation']]];
+              return [$item['competencia'] => [$item['average'],$item['records'],$item['nivel']]];
           });
           foreach ($groupdatar as $agrupacompetencias=> $valued) {
 
               $datax=[];
               foreach ($valued as $item) {
-                  $datax[] = ['average'=>$item[0],'records'=>$item[1],'nivel'=>$item[2],'relation'=>$item[3]];
+                  $datax[] = ['average'=>$item[0],'records'=>$item[1],'nivel'=>$item[2]];
               }
               $resultado=collect($datax)->avg('average');
               $nivel=$datax[0]['nivel'];
@@ -222,9 +226,6 @@ class DataEvaluacionGlobal{
        $this->dataCruda=$adata;
        return collect($adata);
    }
-
-
-
 
 
 }

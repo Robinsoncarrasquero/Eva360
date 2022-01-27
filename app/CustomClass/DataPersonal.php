@@ -50,6 +50,7 @@ class DataPersonal{
         $dataMeta= $this->getDataMeta();
         $arrayCompetencias=[];
         $arrayPromedio=[];
+        $arrayPromedioModelo=[];
         foreach ($dataMeta as $item) {
             $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
             $arrayPromedio []=['name'=> $item['name'],'data'=>$item['data']];
@@ -60,6 +61,7 @@ class DataPersonal{
         $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
 
         $arraySerieBrecha=[];$arrayCategoriaBrecha=[];
+        $nr=0;
         foreach ($data as $key => $value) {
             $arrayCategoria[]=$value['categoria']; //El nombre del evaluado es la categoria
 
@@ -74,6 +76,7 @@ class DataPersonal{
             $arraydataFortaleza=[];
             $arrayPotencial=[];
             $arrayPromedio=[];
+            $arrayEfectivo=[];
             foreach ($value['data'] as $item) {
                 $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['eva360']];
 
@@ -100,7 +103,7 @@ class DataPersonal{
             }
 
             $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
-
+            $nr++;
             {
                 $brecha=0;$cumplimiento=0;$potencial=0;
 
@@ -166,7 +169,6 @@ class DataPersonal{
         foreach ($agrouped as $key => $datavalue) {
         //    $arraydataSerie[]=['name'=>$key,'data'=>$datavalue];
         }
-
         $this->dataBrecha=$arraydataBrecha;
         $this->dataCategoria=$arrayCategoria;;
         $this->dataSerie=$arraydataSerie;
