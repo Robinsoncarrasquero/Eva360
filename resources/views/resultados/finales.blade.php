@@ -48,16 +48,26 @@
                     <td>{{ number_format($item['average'],2)}}</td>
                 </tr>
                 @endforeach
+
                 <tr>
-                    <td class="text text-center"><a href=""><i class="material-icons" >bar_chart</i></a>Logrado</td>
+                    <td class="font-weight-bold">Brecha</td>
+                    @if ($value['brecha'] >=0)
+                    <td class="font-weight-bold alert-success">{{ $value['brecha']  }}</td>
+                    @else
+                    <td class="alert alert-danger font-weight-bold">{{ $value['brecha']  }}</td>
+                    @endif
+                </tr>
+                <tr>
+                    <td class="text text-center font-weight-bold"><a href=""><i class="material-icons" >bar_chart</i></a>Logrado</td>
                     <td class="text text-center" ><strong>{{ number_format($value['eva360'],2)}}</strong></td>
                 </tr>
                 <tr>
                     @if ($value['eva360'] >=$value['nivelRequerido'])
-                        <td class="font-weight-bold text text-success">Cumplida</td>
+                        <td class="font-weight-bold text text-success">{{ $value['cumplido']  }}</td>
                     @else
-                        <td class="text text-danger font-weight-bold">No Cumplida</td>
+                        <td class="text text-danger font-weight-bold">{{ $value['cumplido']  }}</td>
                     @endif
+
                     <td class="text-center" style="background:{{  $value['colorcalificacion']}}"><strong>{{ $value['calificacion']}}</strong></td>
                 </tr>
 

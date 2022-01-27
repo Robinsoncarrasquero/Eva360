@@ -87,12 +87,12 @@ class ResultadosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
-
+        $dataBrechaPorCompetencias = $objData->getDataBrechaPorCompetencia();
         if (!$dataCategoria){
             \abort(404);
         }
         $title="Resultado personal por grupo";
-        return \view('resultados.subproyecto.charpersonalporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha'));
+        return \view('resultados.subproyecto.charpersonalporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha','dataBrechaPorCompetencias'));
     }
 
     /**
@@ -113,12 +113,12 @@ class ResultadosController extends Controller
         $dataBrecha = $objData->getDataBrecha();
         $dataSerieBrecha = $objData->getDataSerieBrecha();
         $dataCategoriaBrecha = $objData->getDataCategoriaBrecha();
-
+        $dataBrechaPorCompetencias = $objData->getDataBrechaPorCompetencia();
         if (!$dataBrecha){
             \abort(404);
         }
         $title="Analisis de cumplimiento";
-        return \view('resultados.subproyecto.charcumplimientoporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha"));
+        return \view('resultados.subproyecto.charcumplimientoporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha",'dataBrechaPorCompetencias'));
     }
 
     /**

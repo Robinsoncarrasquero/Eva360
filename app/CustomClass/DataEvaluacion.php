@@ -76,19 +76,22 @@ class DataEvaluacion{
             }
             $calificado='Default';
             $colorcalificacion='#b020a4';
-
             foreach ($calificaciones as $calificacion) {
                 if ($sumaAverage/$contador >= $calificacion['nivel']){
                     $calificado=$calificacion['name'];
                     $colorcalificacion=$calificacion['color'];
                 }
             }
+            $resultado =$sumaAverage/$contador;
+            $brecha = ($resultado < $nivelRequerido ?  ($resultado / $nivelRequerido * 100) - $nivelRequerido : 0);
             $adata[]=
             [
                 'competencia'=>$key,'eva360'=>$sumaAverage/$contador,
                 'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador,
                 'calificacion'=>$calificado,
                 'colorcalificacion'=>$colorcalificacion,
+                'cumplido'=>($sumaAverage/$contador > $nivelRequerido ? 'Cumplido' : 'No Cumplido'),
+                'brecha' => $brecha,
             ];
 
         }

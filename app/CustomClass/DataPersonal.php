@@ -13,7 +13,7 @@ class DataPersonal{
     private $dataBrecha;
     private $dataSerieBrecha;
     private $dataCategoriaBrecha;
-
+    private $dataBrechaxCompetencia;
     function __construct($evaluados,$dataEvaluacion) {
         $this->evaluados = $evaluados;
         $this->objDataEvaluacion=$dataEvaluacion;
@@ -51,16 +51,21 @@ class DataPersonal{
         $arrayCompetencias=[];
         $arrayPromedio=[];
         $arrayPromedioModelo=[];
+        $_arrayBrechaxCompetencia=[];
+
         foreach ($dataMeta as $item) {
             $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];
             $arrayPromedio []=['name'=> $item['name'],'data'=>$item['data']];
+            $_arrayBrechaxCompetencia[] =['name'=> $item['name'],'data'=>$item['data']];
+
         }
 
         //Promedio de las competencias del Modelo
 
         $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
 
-        $arraySerieBrecha=[];$arrayCategoriaBrecha=[];
+        $arraySerieBrecha=[];
+        $arrayCategoriaBrecha=[];
         $nr=0;
         foreach ($data as $key => $value) {
             $arrayCategoria[]=$value['categoria']; //El nombre del evaluado es la categoria
@@ -77,6 +82,7 @@ class DataPersonal{
             $arrayPotencial=[];
             $arrayPromedio=[];
             $arrayEfectivo=[];
+
             foreach ($value['data'] as $item) {
                 $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['eva360']];
 
@@ -94,10 +100,11 @@ class DataPersonal{
                 if ($item['eva360']<$item['nivel']){
                     $arraydataOportunidad[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
                     $arrayEfectivo[] =['name'=> $item['name'],'data'=>$item['eva360']];
-
+                    $_arrayBrechaxCompetencia[] =['name'=> $item['name'],'data'=>($item['eva360']/$item['nivel']*100)-$item['nivel']];
                 }else{
                     $arraydataFortaleza[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
                     $arrayEfectivo[] =['name'=> $item['name'],'data'=>$item['nivel']];
+                    $_arrayBrechaxCompetencia[] =['name'=> $item['name'],'data'=>0];
                 }
 
             }
@@ -128,10 +135,11 @@ class DataPersonal{
                 $arraydataBrecha[]=
                 [
                     'categoria'=>$value['categoria'],
-                    'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,
+                    'cumplimiento'=>$cumplimiento,
+                    'brecha'=>$brecha,
+                    'potencial'=>$potencial,
                     'dataoportunidad'=>$arraydataOportunidad,
                     'datafortaleza'=>$arraydataFortaleza,
-                    'potencial'=>$potencial
                 ];
 
                 //Creamos la categoria para el cumplimiento y la brecha
@@ -139,6 +147,8 @@ class DataPersonal{
                 $arraySerieCumplimiento[]=[$cumplimiento];
                 $arraySerieBrecha[]=[$brecha];
                 $arraySeriePotencial[]=[$potencial];
+
+
             }
 
         }
@@ -169,6 +179,19 @@ class DataPersonal{
         foreach ($agrouped as $key => $datavalue) {
         //    $arraydataSerie[]=['name'=>$key,'data'=>$datavalue];
         }
+
+        //Generamos las brechas de cada evaluado por cada competencia
+        //Generamos una colleccion para agrupar la data de la serie
+         $datacollection=collect($_arrayBrechaxCompetencia);
+
+         $agrouped = $datacollection->mapToGroups(function ($item, $key) {
+             return [$item['name']=>$item['data']];
+         });
+
+         foreach ($agrouped as $key => $datavalue) {
+             $__arrayBrechaxCompetencia[]=['name'=>$key,'data'=>$datavalue];
+         }
+
         $this->dataBrecha=$arraydataBrecha;
         $this->dataCategoria=$arrayCategoria;;
         $this->dataSerie=$arraydataSerie;
@@ -176,6 +199,7 @@ class DataPersonal{
         //creamos la data categoria y la seria para la brecha y cumplimiento
         $this->dataCategoriaBrecha=$arrayCategoriaBrecha;
         $this->dataSerieBrecha=$arraydataSerieBrecha;
+        $this->dataBrechaxCompetencia=$__arrayBrechaxCompetencia;
     }
 
     /**
@@ -262,6 +286,11 @@ class DataPersonal{
     /**Data de la categoria brecha*/
     public function getDataCategoriaBrecha(){
         return $this->dataCategoriaBrecha;
+    }
+
+    /**Data de la brecha por competencias*/
+    public function getDataBrechaPorCompetencia(){
+        return $this->dataBrechaxCompetencia;
     }
 
 }

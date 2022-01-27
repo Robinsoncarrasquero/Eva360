@@ -30,14 +30,13 @@
 <body>
 <div class="container">
 
-    <div class="mt-3">
-        <div class="col-lg-12 mb-1" id="container-line"></div>
+    <div class="mt-3 ">
+        <div class="col-sm-12 mb-1" id="container-line"></div>
     </div>
 
-    <div class="mt-3" >
-        <div class="col-lg-12 mb-1" id="container-column"></div>
+    <div class="mt-3 " >
+        <div class="col-sm-12 mb-1" id="container-column"></div>
     </div>
-
 
     <div class="col">
 
@@ -70,16 +69,16 @@
 
                         <td style="text-align: left">{{$value['categoria']}}</strong></td>
                         <td>
-                            <span style="font-size:1.5em; color:green">{{ number_format($value['cumplimiento'],2) }}</span>
+                            <span style="font-size:1em; color:green">{{ number_format($value['cumplimiento'],2) }}</span>
                         </td>
                         <td>
                         @if ($value['cumplimiento']!=100)
-                        <span style="font-size:1.5em; color:red">{{ number_format($value['brecha'],2) }}</span>
+                        <span style="font-size:1em; color:red">{{ number_format($value['brecha'],2) }}</span>
                         @endif
                         </td>
                         <td>
                             @if ($value['potencial']>0)
-                            <span style="font-size:1.5em; color:white;background:green">{{ number_format($value['potencial'],2)-100 }}</span>
+                            <span style="font-size:1em; color:white;background:green">{{ number_format($value['potencial'],2)-100 }}</span>
 
                             @endif
                         </td>
@@ -98,6 +97,46 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="col">
+
+            <div class=" text-center">
+                <h5>Brecha por Competencias</span></h5>
+            </div>
+
+
+            @if($subProyecto)
+            <div class="table table-responsive">
+                <table id="{{ 'table_brechas_detalladas'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                    <thead class="table-thead">
+                        <tr>
+                            <th>Brecha por Competencia</th>
+                            @foreach ($dataCategoria as $key=>$value)
+                            <th>
+                                {{$value}}</strong>
+                            </th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($dataBrechaPorCompetencias as $key=>$dataValue)
+                    <tr>
+                      <td>{{$dataValue['name']}} </td>
+                       @foreach ($dataValue['data'] as $key2=>$vdata)
+                        @if($vdata>=0)
+                            <td style="font-size:1em; color:green" class="text text-center">{{ number_format($vdata,2)}}</td>
+                        @else
+                        <td style="font-size:1em; color:red;" class="text text-center">{{ number_format($vdata,2)}}</td>
+                        @endif
+                        @endforeach
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endif
+
         </div>
 
         <div class="col">
@@ -133,10 +172,10 @@
 
 
                                 @if($dataValue['data'][0]>($vdata) && $key2>0)
-                                    <td style="font-size:1.5em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
+                                    <td style="font-size:1em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
 
                                 @else
-                                <td style="font-size:1.5em; color:green;" class="text text-center">{{ number_format($vdata,2)}}</td>
+                                <td style="font-size:1em; color:green;" class="text text-center">{{ number_format($vdata,2)}}</td>
 
                                     {{-- <td style="font-size:1.5em; color:white;background:green" class="text text-center">{{ number_format($vdata,2)}}</td> --}}
                                 @endif
