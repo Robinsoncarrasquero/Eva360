@@ -254,7 +254,6 @@ class DataPersonal{
         $this->dataMeta=$arrayDataMeta;
         $this->dataSerie=$arrayDataSerie;
         $this->dataCategoria=$evaluado->name;
-
         return ['categoria'=>$evaluado->user->name,'data'=>$arrayDataSerie];
     }
 

@@ -70,9 +70,9 @@ class DataResultadoNivel{
                 $arrayDataCategoria[] =$value['nivel']."<br>".$vdata['competencia'];
                 $arrayCategoria2[]=$vdata['competencia'];
                 $arrayData2 []=[$vdata['average']];
-                $arrayData3[]=['name'=>$vdata['competencia'],'data'=>[$vdata['average']]];
+                $arrayData3[]=['name'=>$vdata['competencia'],'data'=>[$vdata['average'],$vdata['nivel']]];
             }
-            $arrayDataCategoria3[]=[$value['nivel']];
+            $arrayDataCategoria3[]=[$value['nivel'],'Modelo'];
             $arrayDataSerie3[]=$arrayData3;
 
             $arrayDataSerie2[] =['name'=> $value['nivel'],'data'=>$arrayData2,'color'=>$this->getColor($i)];

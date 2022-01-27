@@ -41,20 +41,21 @@ class DataResultadoTipo{
         $arrayData2=[];
         $i=0;
 
-
         foreach ($competencias as $key => $value) {
             //Creamos una array con la data de los averages
             $arrayCategoria2=[];
             $arrayData2=[];
             $arrayData3=[];
             foreach ($value['data'] as $vtipo) {
+
                 $arrayData[] =[$vtipo['average']];
                 $arrayDataCategoria[] =$value['tipo']."<br>".$vtipo['competencia'];
                 $arrayCategoria2[]=$vtipo['competencia'];
                 $arrayData2[] =[$vtipo['average']];
-                $arrayData3[]=['name'=>$vtipo['competencia'],'data'=>[$vtipo['average']]];
+                $arrayData3[]=['name'=>$vtipo['competencia'],'data'=>[$vtipo['average'],$vtipo['nivel']]];
+
             }
-            $arrayDataCategoria3[]=[$value['tipo']];
+            $arrayDataCategoria3[]=[$value['tipo'],'Modelo'];
             $arrayDataSerie3[]=$arrayData3;
 
             $arrayDataSerie2[] =['name'=> $value['tipo'],'data'=>$arrayData2,'color'=>$this->getColor($i)];
@@ -65,7 +66,6 @@ class DataResultadoTipo{
         $arrayDataSerie[] =['name'=> 'Competencias','data'=>$arrayData];
         $this->dataSerie=$arrayDataSerie3;
         $this->dataCategoria=$arrayDataCategoria3;
-
         return ['categoria'=>$arrayDataCategoria3,'data'=>$arrayDataSerie3];
     }
 

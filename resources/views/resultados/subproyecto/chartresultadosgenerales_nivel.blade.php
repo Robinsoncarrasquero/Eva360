@@ -29,7 +29,7 @@
 <body>
 <div class="container" >
 
-    <div class="row" id="container-x">
+    <div class="row col" id="container-x">
 
         {{-- <div class="col-sm-6 mt-3">
             <div class="mb-1" id="container-0"></div>
@@ -48,7 +48,7 @@
                 <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                     <thead class="table-thead">
                         <th>Nivel</th>
-                        <th>Debilidad</th>
+                        <th>Oportunidad</th>
                         <th>Fortaleza</th>
                     </thead>
                     <tbody>
@@ -119,7 +119,7 @@
 
         var elemento = document.createElement("div");
         elemento.setAttribute("id", "container-"+i);
-        elemento.setAttribute("class", "col-6 mt-2");
+        elemento.setAttribute("class", "col-12 mt-2");
 
         currentDiv.appendChild(elemento); //añade texto al div creado.
 

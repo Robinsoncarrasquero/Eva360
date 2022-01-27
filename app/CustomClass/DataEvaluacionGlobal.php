@@ -129,17 +129,17 @@ class DataEvaluacionGlobal{
                 $resultado=collect($datax)->avg('average');
 
                 $nivel=$datax[0]['nivel'];
-                $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>$resultado,'grupos'=>count($datax)];
-                $recordm[] = ['competencia'=>$agrupacompetencias,'average'=>$nivel,'grupos'=>count($datax)];
+                $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>$resultado,'grupos'=>count($datax),'nivel'=>$nivel];
+                $recordm[] = ['competencia'=>$agrupacompetencias,'average'=>$nivel,'grupos'=>count($datax),'nivel'=>$nivel];
 
                 $this->add_fortaleza_oportunidad($agrupacompetencias,$resultado,$nivel);
             }
 
             $data_join=collect($this->join_fortaleza_oportunidad($agrupa));
             $adata[]=['nivel'=>$agrupa,'data'=>$recordx];
-            $adata[]=['nivel'=>$agrupa.' Modelo','data'=>$recordm];
+            //$adata[]=['nivel'=>$agrupa.' Modelo','data'=>$recordm];
         }
-        //dd($recordx,$grouped);
+
         $this->dataCruda=$adata;
         return collect($adata);
     }
@@ -217,14 +217,14 @@ class DataEvaluacionGlobal{
               }
               $resultado=collect($datax)->avg('average');
               $nivel=$datax[0]['nivel'];
-              $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>$resultado,'grupos'=>count($datax)];
-              $recordm[] = ['competencia'=>$agrupacompetencias,'average'=>$nivel,'grupos'=>count($datax)];
+              $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>$resultado,'grupos'=>count($datax),'nivel'=>$nivel];
+              $recordm[] = ['competencia'=>$agrupacompetencias,'average'=>$nivel,'grupos'=>count($datax),'nivel'=>$nivel];
               $this->add_fortaleza_oportunidad($agrupacompetencias,$resultado,$nivel);
             }
 
            $this->join_fortaleza_oportunidad($agrupa);
            $adata[]=['tipo'=>$agrupa,'data'=>$recordx];
-           $adata[]=['tipo'=>$agrupa.' Modelo','data'=>$recordm];
+           //$adata[]=['tipo'=>$agrupa.' Modelo','data'=>$recordm];
 
 
        }
