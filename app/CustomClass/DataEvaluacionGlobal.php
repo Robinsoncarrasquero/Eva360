@@ -172,12 +172,13 @@ class DataEvaluacionGlobal{
        })
        ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
        ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
-       ->select(DB::raw('count(evaluados.id) as records,tipos.tipo,
-       competencias.name,evaluaciones.nivelrequerido'), DB::raw('AVG(evaluaciones.resultado) as average'))
+       ->select(
+        DB::raw('count(evaluados.id) as records,tipos.tipo,competencias.name'),
+        DB::raw('AVG(evaluaciones.resultado) as average,AVG(evaluaciones.nivelrequerido) as avgnivelrequerido'))
        ->where([['proyectos.id',$whereIn],['evaluadores.relation','<>',$autoevaluacion]])
-       ->groupBy('tipos.tipo','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
+       ->groupBy('tipos.tipo','competencias.name','evaluados.status')
        ->having('evaluados.status','=',2)
-       ->orderByRaw('tipos.tipo,competencias.name,evaluaciones.nivelrequerido')
+       ->orderByRaw('tipos.tipo,competencias.name')
        ->get();
        //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
        $dataArray = json_decode(json_encode($competencias), true);
@@ -185,7 +186,7 @@ class DataEvaluacionGlobal{
        //Agrupamos la coleccion por nombre de competencia
 
        $grouped = $collection->mapToGroups(function ($item, $key) {
-           return [$item['tipo'] => [$item['name'],$item['average'],$item['records'],$item['nivelrequerido']]];
+           return [$item['tipo'] => [$item['name'],$item['average'],$item['records'],$item['avgnivelrequerido']]];
        });
 
        //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
@@ -209,6 +210,7 @@ class DataEvaluacionGlobal{
           $groupdatar = $collection->mapToGroups(function ($item, $key) {
               return [$item['competencia'] => [$item['average'],$item['records'],$item['nivel']]];
           });
+
           foreach ($groupdatar as $agrupacompetencias=> $valued) {
 
               $datax=[];
