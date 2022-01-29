@@ -12,16 +12,16 @@
 
         </div>
 
-        <div class="pb-1 mt-2">
+        <div class="pb-1 ">
 
             <div class="text text-center">
                 <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de
-                    <h4 class="text text-danger d-flex justify-content-center">{{ $evaluado->name }}</h4>
+                    <h5 class="text text-danger d-flex justify-content-center">{{ $evaluado->name }}</h5>
             </div>
 
-            {{-- <div class="text-center mt-3">
-                <h4>Competencias a evaluar</h4>
-            </div> --}}
+            <div class="text text-center mt-3 text-success">
+                <h4>COMPETENCIAS</h4>
+            </div>
 
         </div>
 
@@ -31,24 +31,24 @@
                     @csrf
 
                     @foreach($competencias as $competencia)
-                    <div class="xcard mt-4">
-                        <div class="card-header mb-2">
-                            <div class="d-flex justify-content-center">
+
+                        <div class="card-header mt-3 mb-2">
+                            <div class="text text-center">
                                 <a href="{{route('evaluacion.responder', $competencia->id)}}" style="color: rgb(16, 17, 17)" >
                                 <h3 >{{$competencia->competencia->name}}</h3></a>
                             </div>
 
-                            <div class="d-flex justify-content-center">
+                            <div class="text text-center">
                                 @if($competencia->resultado)
                                     <a href="{{route('evaluacion.responder', $competencia->id)}}" >
-                                        <span ><i class="material-icons text-success">thumb_up_alt check_box</i></span></a>
+                                        <span ><i class="material-icons text-success">thumb_up_alt</i></span></a>
                                 @else
                                     <a href="{{route('evaluacion.responder', $competencia->id)}}" >
                                     <span class="spinner-grow spinner-grow-sm text-danger align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
                                 @endif
                             </div>
                         </div>
-                    </div>
+
                     @endforeach
 
                     <div class="clearfix mt-3">

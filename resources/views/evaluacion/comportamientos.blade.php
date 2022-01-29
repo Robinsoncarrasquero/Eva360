@@ -26,7 +26,8 @@
         @if ($evaluacion->competencia->grados->isNotEmpty())
             <form action="{{ route('evaluacion.store',$evaluacion) }}" method="POST" id="form-select">
             @csrf
-                <div class="table ">
+
+                <div class="table d-flex justify-content-right">
                     <table class="table  table-striped table-table">
                         <thead class="table-preguntas text-dark">
                             {{-- <th scope="col">#</th> --}}
@@ -76,7 +77,6 @@
                         @endforeach
                         </tbody>
                     </table>
-
                 </div>
 
                 <div class="col-md-4 ">

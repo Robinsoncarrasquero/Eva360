@@ -268,7 +268,7 @@
 
     <footer id="footer" class="footer">
         <div class="xcontainer">
-           <span class="text-white d-flex justify-content-center">Sistema de Evaluacion de Desempeño Talent360</span>
+           <span class="text-white d-flex justify-content-center">Sistema de Evaluacion de Desempeño {{ config('app.name') }}</span>
         </div>
     </footer>
 
