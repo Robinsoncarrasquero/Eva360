@@ -25,11 +25,11 @@
             <table id="table{{ $evaluador->id }}" class="table table-striped table-table table-responsive ">
                 <thead>
                 <tr id="{{ $evaluador->id }}">
-                    <th class="chk-enviar-prueba" colspan="4">
+                    <th class="chk-enviar-prueba" colspan="3">
                         <input type="checkbox" class="btncheck">Reenviar email
                     </th>
                     <th>
-                        <span><a class="btn btn-success btn-sm" href="{{ route('evaluacion.competencias',$evaluador) }}">Ver</a></span>
+                        <span><a class="btn btn-success btn-block" href="{{ route('evaluacion.competencias',$evaluador) }}">Ver</a></span>
                     </th>
                 </tr>
 
@@ -40,15 +40,15 @@
                 </tr> --}}
                 <tr>
                     <th class="text text-left  title-th-evaluador" colspan="4">
-                    {{$evaluador->name}}({{ $evaluador->relation }}) <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
+                    {{$evaluador->name}}({{ $evaluador->relation }})<br> <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
                     <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
-                    <button type="button" data-id="{{$evaluador->id}}" class="btn btn-danger btn-save-email">Guardar Email
+                    <button type="button" data-id="{{$evaluador->id}}" class="btn btn-danger btn-save-email">Cambiar email
                     </th>
                 </tr>
                 <tr>
                 <th>Competencia</th>
-                <th>Descripcion</th>
-                <th>Requerido</th>
+                {{-- <th>Descripcion</th> --}}
+                <th>Nivel</th>
                 <th>Resultado</th>
                 </tr>
                 </thead>
@@ -56,7 +56,7 @@
                 @foreach ($evaluador->evaluaciones as $evaluacion)
                 <tr>
                     <td>{{$evaluacion->competencia->name}}</td>
-                    <td style="font-size:60%">{{substr($evaluacion->competencia->description,0,50)}}..</td>
+                    {{-- <td style="text text-small">{{substr($evaluacion->competencia->description,0,50)}}..</td> --}}
                     <td class="text text-center">{{$evaluacion->nivelrequerido}}</td>
                     <td class="text text-center"><span class="badge badge-dark">{{ $evaluacion->resultado}}</span></td>
                 </tr>

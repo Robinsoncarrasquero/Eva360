@@ -5,20 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Listen for Xdebug 2 (Legacy)",
-            "type": "php",
-            "request": "launch",
-            "port": 9000
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "pwa-chrome",
+            "webRoot": "${workspaceFolder}"
         },
         {
-            "name": "Launch Chrome",
+            "name": "Listen for Xdebug",
+            "type": "php",
             "request": "launch",
-            "type": "pwa-chrome",
-            "url": "http://eva360.test.ve",
-            "webRoot": "${workspaceFolder}"
+            "port": 9003
         }
-
-
 
     ]
 }

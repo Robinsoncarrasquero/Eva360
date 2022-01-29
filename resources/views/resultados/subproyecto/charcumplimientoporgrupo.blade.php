@@ -78,7 +78,7 @@
                         </td>
                         <td>
                             @if ($value['potencial']>0)
-                            <span style="font-size:1em; color:white;background:green">{{ number_format($value['potencial'],2)-100 }}</span>
+                            <span style="font-size:1em; color:white;background:green">{{ number_format($value['potencial'],2) }}</span>
 
                             @endif
                         </td>

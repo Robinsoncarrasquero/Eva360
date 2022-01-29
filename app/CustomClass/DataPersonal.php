@@ -100,7 +100,7 @@ class DataPersonal{
                 if ($item['eva360']<$item['nivel']){
                     $arraydataOportunidad[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
                     $arrayEfectivo[] =['name'=> $item['name'],'data'=>$item['eva360']];
-                    $_arrayBrechaxCompetencia[] =['name'=> $item['name'],'data'=>($item['eva360']/$item['nivel']*100)-$item['nivel']];
+                    $_arrayBrechaxCompetencia[] =['name'=> $item['name'],'data'=>($item['eva360']/$item['nivel']*100)-100];
                 }else{
                     $arraydataFortaleza[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
                     $arrayEfectivo[] =['name'=> $item['name'],'data'=>$item['nivel']];
@@ -130,7 +130,7 @@ class DataPersonal{
                 }else{
                     $potencial=0;
                 }
-                $potencial= $potencial > 100 ? $potencial : 0;
+                $potencial= $potencial > 100 ? $potencial-100 : 0;
 
                 $arraydataBrecha[]=
                 [

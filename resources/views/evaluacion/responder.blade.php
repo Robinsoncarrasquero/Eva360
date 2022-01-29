@@ -59,7 +59,7 @@
                             </td>
                             <td>
                                 @foreach ($frecuencias  as $frecuencia)
-                                <div class="xform-check ">
+                                <div class="form-check ">
                                     <label for="frecuencia[]" class="form-check-label">{{ $frecuencia->name}}</label>
                                     @if($evaluacion->frecuencia===$frecuencia->valor && $evaluacion->grado===$grado->grado)
                                         <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$grado->id"}}"

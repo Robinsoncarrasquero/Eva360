@@ -49,16 +49,16 @@
                 </tr>
                 @endforeach
 
-                <tr>
+                {{-- <tr>
                     <td class="font-weight-bold">Brecha</td>
                     @if ($value['brecha'] >=0)
                     <td class="font-weight-bold alert-success">{{ $value['brecha']  }}</td>
                     @else
                     <td class="alert alert-danger font-weight-bold">{{ $value['brecha']  }}</td>
                     @endif
-                </tr>
+                </tr> --}}
                 <tr>
-                    <td class="text text-center font-weight-bold"><a href=""><i class="material-icons" >bar_chart</i></a>Logrado</td>
+                    <td class="text text-center font-weight-bold"><a href=""><i class="material-icons md-48" >bar_chart</i></a>Resultado</td>
                     <td class="text text-center" ><strong>{{ number_format($value['eva360'],2)}}</strong></td>
                 </tr>
                 <tr>

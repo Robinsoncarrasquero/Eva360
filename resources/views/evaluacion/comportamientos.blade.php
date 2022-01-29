@@ -9,6 +9,9 @@
         @include('flash-message')
     </div>
 
+
+
+
     <div class="card-header mb-3">
         <h5 class="text text-center">Estimado evaluador {{  $evaluacion->evaluador->name }}, analice con criterio y determinacion las competencia de</h5>
         <h4 class="text text-danger d-flex justify-content-center">{{ $evaluacion->evaluador->evaluado->name }}</h4>
@@ -19,31 +22,31 @@
         <h6 class="card card-header description" >{{ $evaluacion->competencia->description}}</h6>
     </div>
 
-
+    <div class="clearfix">
     @if ($evaluacion->competencia->grados->isNotEmpty())
         <form action="{{ route('evaluacion.store',$evaluacion) }}" method="POST" id="form-select">
         @csrf
-            <div class="table table-responsive">
+            <div class="table ">
                 <table class="table  table-striped table-table">
-                    <thead class="table-preguntas border-warning">
+                    <thead class="table-preguntas text-dark">
                         {{-- <th scope="col">#</th> --}}
                         <th scope="col">Comportamiento observado</th>
-                        <th scope="col">Seleccione</th>
+                        <th scope="col">Seleccion</th>
                         <th scope="col">Frecuencia</th>
                     </thead>
                     <tbody>
 
                     @foreach ($evaluacion->comportamientos as $comportamiento)
-                        <tr data-id="{{"$comportamiento->id"}}" class="filas" >
+                        <tr data-id="{{"$comportamiento->id"}}" >
                             {{-- <th scope="row">{{ $comportamiento->grado_id }}</th> --}}
                             <td>{{$comportamiento->grado->description}}</td>
-                            <td>
+                            <td >
                                 <div class="form-check">
-                                    <label class="form-check-label " for="gradocheck[]" style="color: rgb(255, 165, 0);font-size:1.5em"></label>
+                                    <label class="form-check-label " for="gradocheck[]"></label>
                                     @if ($evaluacion->competencia->seleccionmultiple)
                                         <input type="checkbox" class="no-check-select " id="{{"radiogrado$comportamiento->id"}}" name="gradocheck[]" value="{{"$comportamiento->id"}}"
                                         disabled checked
-                                        @if ($evaluacion->evaluador->status==2) disabled  @endif>
+                                        @if ($evaluacion->evaluador->status==2) disabled  @endif >
                                     @else
                                         <input type="checkbox" class="check-select "  id="{{"radiogrado$comportamiento->id"}}" name="gradocheck[]" value="{{"$comportamiento->id"}}"
                                         @if($comportamiento->frecuencia) checked @endif
@@ -51,12 +54,12 @@
                                     @endif
                                 </div>
                             </td>
-                            <td>
+                            <td >
                                 @foreach ($frecuencias  as $frecuencia)
-                                <div class="xform-check ">
+                                <div class="xform-check d-flex justify-content-between">
                                     <label for="frecuenciacheck[]" class="xform-check-label">{{ $frecuencia->name}}</label>
                                     @if ($evaluacion->competencia->seleccionmultiple)
-                                        <input type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
+                                        <input  type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
                                         value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
                                         @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
                                         @if ($evaluacion->evaluador->status==2) disabled  @endif>
@@ -105,7 +108,7 @@
             <p>No hay datos disponible para evaluacion</p>
         </div>
     @endif
-
+    </div>
 
 </div>
 
