@@ -27,7 +27,7 @@
             <form action="{{ route('evaluacion.store',$evaluacion) }}" method="POST" id="form-select">
             @csrf
 
-                <div class="table d-flex justify-content-right">
+                <div class="table clearfix">
                     <table class="table  table-striped table-table">
                         <thead class="table-preguntas text-dark">
                             {{-- <th scope="col">#</th> --}}
@@ -57,7 +57,7 @@
                                 </td>
                                 <td >
                                     @foreach ($frecuencias  as $frecuencia)
-                                    <div class="xform-check d-flex justify-content-between">
+                                    <div class="form-check d-flex justify-content-between">
                                         <label for="frecuenciacheck[]" class="xform-check-label">{{ $frecuencia->name}}</label>
                                         @if ($evaluacion->competencia->seleccionmultiple)
                                             <input  type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
