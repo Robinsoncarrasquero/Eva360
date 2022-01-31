@@ -18,58 +18,58 @@
 
     @if($evaluadores)
 
-    <div class="row">
+        <div class="row">
 
-        @foreach($evaluadores as $evaluador)
-        <div class="table col-sm-12 col-md-6 ">
-            <table id="table{{ $evaluador->id }}" class="table table-striped table-table table-responsive ">
-                <thead>
-                <tr id="{{ $evaluador->id }}">
-                    <th class="chk-enviar-prueba" colspan="3">
-                        <input type="checkbox" class="btncheck">Reenviar email
-                    </th>
-                    <th>
-                        <span><a class="btn btn-success btn-block" href="{{ route('evaluacion.competencias',$evaluador) }}">Ver</a></span>
-                    </th>
-                </tr>
+            @foreach($evaluadores as $evaluador)
+            <div class="table col-sm-12 col-md-6 ">
+                <table id="table{{ $evaluador->id }}" class="table table-striped table-table table-responsive ">
+                    <thead>
+                    <tr id="{{ $evaluador->id }}">
+                        <th class="chk-enviar-prueba" colspan="3">
+                            <input type="checkbox" class="btncheck">Reenviar email
+                        </th>
+                        <th>
+                            <span><a class="btn btn-success btn-block" href="{{ route('evaluacion.competencias',$evaluador) }}">Ver</a></span>
+                        </th>
+                    </tr>
 
-                {{-- <tr id="send{{ $evaluador->id }}">
-                    <th colspan="5">
-                        <button class="btn btn-warning" onclick="sendEmail({{$evaluador->id}})">Reenviar Email</button>
-                    </th>
-                </tr> --}}
-                <tr>
-                    <th class="text text-left  title-th-evaluador" colspan="4">
-                    {{$evaluador->name}}({{ $evaluador->relation }})<br> <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
-                    <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
-                    <button type="button" data-id="{{$evaluador->id}}" class="btn btn-danger btn-save-email">Cambiar email
-                    </th>
-                </tr>
-                <tr>
-                <th>Competencia</th>
-                <th>Descripcion</th>
-                <th>Nivel</th>
-                <th>Resultado</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($evaluador->evaluaciones as $evaluacion)
-                <tr>
-                    <td>{{$evaluacion->competencia->name}}</td>
-                    <td style="text text-small">{{substr($evaluacion->competencia->description,0,50)}}..</td>
-                    <td class="text text-center">{{$evaluacion->nivelrequerido}}</td>
-                    <td class="text text-center"><span class="badge badge-dark">{{ $evaluacion->resultado}}</span></td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    {{-- <tr id="send{{ $evaluador->id }}">
+                        <th colspan="5">
+                            <button class="btn btn-warning" onclick="sendEmail({{$evaluador->id}})">Reenviar Email</button>
+                        </th>
+                    </tr> --}}
+                    <tr>
+                        <th class="text text-left  title-th-evaluador" colspan="4">
+                        {{$evaluador->name}}({{ $evaluador->relation }})<br> <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
+                        <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
+                        <button type="button" data-id="{{$evaluador->id}}" class="btn btn-danger btn-save-email">Cambiar email
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Competencia</th>
+                        <th>Descripcion</th>
+                        <th>Nivel</th>
+                        <th>Resultado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($evaluador->evaluaciones as $evaluacion)
+                    <tr>
+                        <td>{{$evaluacion->competencia->name}}</td>
+                        <td style="text text-small">{{substr($evaluacion->competencia->description,0,50)}}..</td>
+                        <td class="text text-center">{{$evaluacion->nivelrequerido}}</td>
+                        <td class="text text-center"><span class="badge badge-dark">{{ $evaluacion->resultado}}</span></td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
 
-    <div class="clearfix">
-        <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
-    </div>
+        <div class="clearfix">
+            <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+        </div>
 
     @else
         <div class="alert-info">

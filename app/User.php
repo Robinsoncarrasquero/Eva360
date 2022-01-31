@@ -145,6 +145,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->phone_number;
     }
 
+     /**Indica si el usuario es adminitrator*/
+     public function name_short(){
+        $namex=explode(" ",$this->name);
+        return $namex[0];
+
+    }
+
 
 
 

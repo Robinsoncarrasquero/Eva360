@@ -16,26 +16,26 @@
 
             <div class="text text-center">
                 <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de
-                    <h5 class="text text-danger d-flex justify-content-center">{{ $evaluado->name }}</h5>
+                <h4 class="text text-center" style="color:limegreen">{{ $evaluado->name }}</h4>
             </div>
 
-            <div class="text text-center mt-3 text-dark">
+            <div class="text text-center mt-3" style="color:dodgerblue">
                 <h4 >COMPETENCIAS</h4>
             </div>
 
         </div>
 
 
-            @if($competencias)
-                    <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
-                    @csrf
-                    <div class="row ">
 
+            @if($competencias)
+
+                <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
+                @csrf
+                <div class="card-columns ">
                     @foreach($competencias as $competencia)
 
-                    <div class ="col-sm-12 col-md-4">
 
-                        <div class="card mt-4 pb-2  @if($competencia->resultado) border-success @else border-danger @endif" style="width:18rem;">
+                        <div class="card mt-4 pb-2  @if($competencia->resultado) border-success @else border-danger @endif">
                             {{-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
                             <div class="card-body">
                                 <h5 class="card-title">{{$competencia->competencia->name}}</h5>
@@ -52,22 +52,22 @@
 
                             </div>
                         </div>
-                    </div>
 
                     @endforeach
                 </div>
-                    <div class="clearfix mt-3">
-                        @if (Auth::user()->admin())
-                            {{-- <span class="float-left"><a href="{{ url()->previous()}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
-                        @else
-                            <span class="float-left"><a href="{{ route('evaluacion.index') }}" class="btn btn-dark btn-lg">Regresar</a></span>
-                            @if($evaluador->status!=2)
-                                <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
-                            @endif
-                        @endif
-                    </div>
 
-                    </form>
+                <div class="clearfix mt-3">
+                    @if (Auth::user()->admin())
+                        {{-- <span class="float-left"><a href="{{ url()->previous()}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
+                    @else
+                        <span class="float-left"><a href="{{ route('evaluacion.index') }}" class="btn btn-dark btn-lg">Regresar</a></span>
+                        @if($evaluador->status!=2)
+                            <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
+                        @endif
+                    @endif
+                </div>
+
+                </form>
             @else
 
                 <div class="alert-info">

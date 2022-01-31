@@ -226,7 +226,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdownMenu5" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons " style="font-size:1rem; color: green">person</i> <span class="username">{{ Auth::user()->name }}</span>
+                            <i class="material-icons " style="font-size:1rem; color: green">person</i> <span class="username">{{ Auth::user()->name_short() }}</span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenu5">
