@@ -108,7 +108,7 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text text-center text-white ">Sistema de Evaluacion Por Competencias Talent 360</span>
+        <span class="text text-center text-white ">Sistema de Evaluacion de Desempeño {{ config('app.name') }}</span>
      </div>
     </footer>
 
