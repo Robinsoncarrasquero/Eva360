@@ -12,8 +12,8 @@
 
     <div class="xclearfix">
 
-        <div class="card-header mb-3">
-            <h5 class="text text-center">Estimado evaluador {{  $evaluacion->evaluador->name }}, analice con criterio y determinacion las competencia de</h5>
+        <div class="card-header mb-2">
+            <h5 class="text text-center">{{  $evaluacion->evaluador->name }}, analice con criterio y determinacion las competencia de :</h5>
             <h4 class="text text-danger d-flex justify-content-center">{{ $evaluacion->evaluador->evaluado->name }}</h4>
         </div>
 

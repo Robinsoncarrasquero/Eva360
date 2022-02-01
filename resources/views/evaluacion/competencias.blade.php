@@ -14,9 +14,9 @@
 
         <div class="pb-1 ">
 
-            <div class="text text-center">
-                <h5>Estimado evaluador {{ $evaluador->name }}, analíce con criterio y determinacion las competencias de
-                <h4 class="text text-center" style="color:limegreen">{{ $evaluado->name }}</h4>
+            <div class="card-header mb-2">
+                <h5 class="text text-center">{{  $evaluador->name }}, analice con criterio y determinacion las competencia de :</h5>
+                <h4 class="text text-danger d-flex justify-content-center" style="color:limegreen">{{ $evaluado->name }}</h4>
             </div>
 
             <div class="text text-center mt-3" style="color:dodgerblue">
