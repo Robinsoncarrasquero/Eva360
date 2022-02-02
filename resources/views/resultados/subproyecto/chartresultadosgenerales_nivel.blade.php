@@ -110,7 +110,7 @@
 
     function mychar(element,index,array)
     {
-        name=categorias[i];
+        name=categorias[i][0];
         dataSeriex=array[0];
         categoriasx=categorias[i];
 

@@ -126,7 +126,7 @@
 
         currentDiv.appendChild(elemento); //añade texto al div creado.
 
-        name=categorias[i];
+        name=categorias[i][0];
         dataSeriex=array[0];
         categoriasx=categorias[i];
         Highcharts.chart('container-'+i, {

@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Responder los comportamientos")
+@section('title',"Cuestionario de comportamientos")
 
 @section('content')
 
@@ -28,57 +28,56 @@
             <form action="{{ route('evaluacion.store',$evaluacion) }}" method="POST" id="form-select">
             @csrf
 
-                @foreach ($evaluacion->comportamientos as $comportamiento)
+            @foreach ($evaluacion->comportamientos as $comportamiento)
 
-                    <div id="{{"$comportamiento->id"}}"  class="card  filas mt-4  @if($evaluacion->resultado) border-success @else border-danger @endif">
-                        <div class="card-body ">
-                            <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5>
-                            <h5 class="card-text"> {{$comportamiento->grado->description}}</h5>
-                        </div>
-
-                        <div class="card-footer" >
-                            <h5 class="card-title @if($evaluacion->resultado) text-success @else text-danger @endif">Que frecuencia?</h5>
-                            @foreach ($frecuencias  as $frecuencia)
-                            {{-- <div class="form-check d-flex justify-content-between"> --}}
-                            <div class="form-check ">
-                                <label for="frecuenciacheck[]" class="xform-check-label">{{ $frecuencia->name}}</label>
-                                @if ($evaluacion->competencia->seleccionmultiple)
-                                    <input  type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                                    value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                                    @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                                    @if ($evaluacion->evaluador->status==2) disabled  @endif
-                                    data-id="{{"$comportamiento->id"}}">
-                                @else
-                                    <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                                    value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                                    @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                                    @if ($evaluacion->evaluador->status==2) disabled  @endif
-                                    data-id="{{"$comportamiento->id"}}">
-                                @endif
-                            </div>
-                            @endforeach
-                        </div>
+                <div id="{{"$comportamiento->id"}}"  class="card  filas mt-4  @if($evaluacion->resultado) border-success @else border-danger @endif">
+                    <div class="card-body ">
+                        <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5>
+                        <h5 class="card-text"> {{$comportamiento->grado->description}}</h5>
                     </div>
 
-                @endforeach
-
-                <div class="col-md-4 ">
-                    <div id="divtodo">
-
+                    <div class="card-footer" >
+                        <h5 class="card-title @if($evaluacion->resultado) text-success @else text-danger @endif">Que frecuencia?</h5>
+                        @foreach ($frecuencias  as $frecuencia)
+                        {{-- <div class="form-check d-flex justify-content-between"> --}}
+                        <div class="form-check ">
+                            <label for="frecuenciacheck[]" class="xform-check-label">{{ $frecuencia->name}}</label>
+                            @if ($evaluacion->competencia->seleccionmultiple)
+                                <input  type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
+                                value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
+                                @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
+                                @if ($evaluacion->evaluador->status==2) disabled  @endif
+                                data-id="{{"$comportamiento->id"}}">
+                            @else
+                                <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
+                                value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
+                                @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
+                                @if ($evaluacion->evaluador->status==2) disabled  @endif
+                                data-id="{{"$comportamiento->id"}}">
+                            @endif
+                        </div>
+                        @endforeach
                     </div>
                 </div>
 
-                <div class="clearfix mt-2">
-                    @if (Auth::user()->admin())
+            @endforeach
 
-                    @else
-                        <span class="float-left"><a href="{{ route('evaluacion.competencias',$evaluacion->evaluador->id) }}" class="btn btn-dark btn-lg">Regresar</a></span>
-                        @if ($evaluacion->evaluador->status!=2)
-                            <button type="submit" class="btn btn-dark btn-lg float-right" value="Next" >Guardar</button>
-                        @endif
+            <div class="col-md-4 ">
+                <div id="divtodo">
+
+                </div>
+            </div>
+
+            <div class="clearfix mt-2">
+                @if (Auth::user()->admin())
+
+                @else
+                    <span class="float-left"><a href="{{ route('evaluacion.competencias',$evaluacion->evaluador->id) }}" class="btn btn-dark btn-lg">Regresar</a></span>
+                    @if ($evaluacion->evaluador->status!=2)
+                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Next" >Guardar</button>
                     @endif
-
-                </div>
+                @endif
+            </div>
 
             </form>
 

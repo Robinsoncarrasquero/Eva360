@@ -1,10 +1,7 @@
 <?php
 namespace app\CustomClass;
-
-use App\Configuracion;
 use App\Evaluado;
 use App\Qualify;
-use ConfigSingleton;
 use Illuminate\Support\Facades\DB;
 
 class DataEvaluacion{
@@ -17,7 +14,7 @@ class DataEvaluacion{
         $this->evaluado_id = $evaluado_id;
 
         //Obtenemos la configuracion singleton
-        $this->configuraciones = ConfigSingleton::getInstance()->data();
+        $this->configuraciones =  app('configuracion')->data();
         $this->calificaciones = Qualify::orderBy('nivel','ASC')->get();
 
     }

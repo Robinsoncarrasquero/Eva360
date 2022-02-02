@@ -30,6 +30,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+        $this->app->singleton(
+            'configuracion',
+            \App\CustomClass\ConfigSingleton::class
+        );
+
         Validator::extend('check_email_dns', function ($attribute, $value, $parameters, $validator) {
             return (new EmailValidator())->isValid($value, new DNSCheckValidation());
         });
