@@ -4,14 +4,21 @@ namespace app\CustomClass;
 use App\Configuracion;
 use App\Evaluado;
 use App\Qualify;
+use ConfigSingleton;
 use Illuminate\Support\Facades\DB;
 
 class DataEvaluacion{
     private $evaluado_id;
     private $dataCruda;
+    private $configuraciones =null;
+    private $calificaciones = null;
 
     function __construct($evaluado_id) {
         $this->evaluado_id = $evaluado_id;
+
+        //Obtenemos la configuracion singleton
+        $this->configuraciones = ConfigSingleton::getInstance()->data();
+        $this->calificaciones = Qualify::orderBy('nivel','ASC')->get();
 
     }
 
@@ -22,10 +29,10 @@ class DataEvaluacion{
     public function getDataEvaluacion(){
 
         //Obtenemos la calificaciones
-        $calificaciones = Qualify::orderBy('nivel','ASC')->get();
+        $calificaciones = $this->calificaciones;
 
-        //Obtenemos la configuracion particular
-        $configuraciones = Configuracion::first();
+        //Obtenemos la configuracion particular singleton del constructor
+        $configuraciones = $this->configuraciones;
 
         //Buscamos los evaluadores del evaluado
         $evaluadores = Evaluado::find($this->evaluado_id)->evaluadores;
