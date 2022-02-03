@@ -74,23 +74,17 @@ class EvaluacionController extends Controller
 
     /**
      * El controlador recibe el token del evaluador y muestra la lista de competencias relacionadas.
+     * Tambien permite acceder al administrador pero en modo de constulta
      */
     public function competencias($evaluador_id)
     {
         $evaluador = Evaluador::find($evaluador_id);
         $evaluado = $evaluador->evaluado;
         $user =Auth::user();
-        $userroles=$user->roles->first();
-        //$roles = User::find($user)->roles()->orderBy('name')->get();
-
-        $admin= Role::where('name','admin')->first();
-        if ($evaluador->user_id != $user->id && !Auth::user()->is_manager && $userroles->name!==$admin->name){
+        $admin=User::find($user->id)->hasRole('admin');
+        if ($evaluador->user_id != $user->id && !$admin){
             \abort(404);
         }
-
-        // if(session()->has('token') &&  $evaluador->remember_token!=session('token')){
-        //     \abort(404);
-        // }
 
         $competencias = $evaluador->evaluaciones;
         return \view('evaluacion.competencias',\compact('competencias','evaluador','evaluado'));
@@ -116,22 +110,28 @@ class EvaluacionController extends Controller
     public function store(Request $request,$evaluacion_id){
 
         $validate = $request->validate(
-            [
-                'gradocheck.*'=>'required',
-                'frecuenciacheck.*'=>'required',
-            ],
-            [
-                'gradocheck.*.required'=>'Debe seleccionar una opcion',
-                'frecuenciacheck.*.required'=>'Debe indicar una frecuencia, este dato es requerido',
-            ]);
+        [
+            'gradocheck.*'=>'required',
+            'frecuenciacheck.*'=>'required',
+        ],
+        [
+            'gradocheck.*.required'=>'Debe seleccionar una opcion',
+            'frecuenciacheck.*.required'=>'Debe indicar una frecuencia, este dato es requerido',
+        ]);
 
-
-        $frecuenciacheck=$request->input('frecuenciacheck.*');
 
         $evaluacion=Evaluacion::findOrFail($evaluacion_id);
 
+        $user =Auth::user();
+        if ($evaluacion->evaluador->user_id != $user->id){
+            return back()->withError('Error de informacion, esta intentando violar datos ....!');
+            \abort(404);
+        }
+
+        $frecuenciacheck=$request->input('frecuenciacheck.*');
+
         if ($evaluacion->competencia->seleccionmultiple && $evaluacion->comportamientos->count()>count(collect($frecuenciacheck))){
-            return back()->withError('Debe selecionar cada opcion y con su frecuencia');
+            return back()->withError('Debe seleccionar cada opcion y con su frecuencia');
         }elseif ($evaluacion->comportamientos->count()>0 && count(collect($frecuenciacheck))<1){
             return back()->withError('Debe especificar una opcion con su frecuencia');
         }
@@ -145,6 +145,8 @@ class EvaluacionController extends Controller
             $conducta->resultado=0;
             $conducta->save();
         }
+
+
 
         //Actualizamos las conductas con la frecuencia
         for ($i=0; $i < count($frecuenciacheck); $i++) {
