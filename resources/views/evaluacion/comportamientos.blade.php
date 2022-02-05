@@ -30,36 +30,36 @@
 
             @foreach ($evaluacion->comportamientos as $comportamiento)
 
-                <div id="{{"$comportamiento->id"}}"  class="card  filas mt-4  @if($evaluacion->resultado) border-success @else border-danger @endif">
-                    <div class="card-body ">
-                        <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5>
-                        <h5 class="card-text"> {{$comportamiento->grado->description}}</h5>
-                    </div>
+            <div id="{{$comportamiento->id}}" class="card  filas mt-4  @if($evaluacion->resultado) border-success @else border-danger @endif">
 
-                    <div class="card-footer" >
-                        <h5 class="card-title @if($evaluacion->resultado) text-success @else text-danger @endif">Que frecuencia?</h5>
-                        @foreach ($frecuencias  as $frecuencia)
-                        {{-- <div class="form-check d-flex justify-content-between"> --}}
-                        <div class="form-check ">
-                            <label for="frecuenciacheck[]" class="xform-check-label">{{ $frecuencia->name}}</label>
-                            @if ($evaluacion->competencia->seleccionmultiple)
-                                <input  type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                                value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                                @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                                @if ($evaluacion->evaluador->status==2) disabled  @endif
-                                data-id="{{"$comportamiento->id"}}">
-                            @else
-                                <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                                value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                                @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                                @if ($evaluacion->evaluador->status==2) disabled  @endif
-                                data-id="{{"$comportamiento->id"}}">
-                            @endif
-                        </div>
-                        @endforeach
-                    </div>
+                <div class="card-body ">
+                    <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5>
+                    <h5 class="card-text"> {{$comportamiento->grado->description}}</h5>
                 </div>
 
+                <div class="card-footer" >
+                    <h5 class="card-title @if($evaluacion->resultado) text-success @else text-danger @endif">Que frecuencia?</h5>
+                    @foreach ($frecuencias  as $frecuencia)
+                    {{-- <div class="form-check d-flex justify-content-between"> --}}
+                    <div class="form-check ">
+                        <label for="frecuenciacheck[]" class="xform-check-label">{{ $frecuencia->name}}</label>
+                        @if ($evaluacion->competencia->seleccionmultiple)
+                            <input  type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
+                            value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
+                            @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
+                            @if ($evaluacion->evaluador->status==2) disabled  @endif
+                            data-id="{{"$comportamiento->id"}}">
+                        @else
+                            <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
+                            value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
+                            @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
+                            @if ($evaluacion->evaluador->status==2) disabled  @endif
+                            data-id="{{"$comportamiento->id"}}">
+                        @endif
+                    </div>
+                    @endforeach
+                </div>
+            </div>
             @endforeach
 
             <div class="col-md-4 ">
@@ -96,6 +96,26 @@
 
 @section('scripts')
 <script src="{{ asset('js/elimina_div_padre_lista.js') }}"></script>
+<script >
+    $(document).ready(function() {
+        var ultimo_click=0;
+
+        $('.filas').click(function(e){
+
+            if (ultimo_click > 0){
+                document.getElementById(ultimo_click).style.backgroundColor="white";
+            }
+
+            var padre_id= $(this).attr('id');
+            ultimo_click= $(this).attr('id');
+
+            var btn =document.getElementById(padre_id);
+            btn.style.backgroundColor="azure";
+
+        });
+});
+
+</script>
 @endsection
 
 
