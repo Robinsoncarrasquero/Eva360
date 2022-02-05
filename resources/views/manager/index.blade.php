@@ -12,7 +12,7 @@
     <div class="card pb-0 ">
 
         <div class="text text-center">
-            <h5 style="color:rgb(131, 132, 136); font-size:1.5rem">PROYECTOS DE EVALUACIONES DEL EQUIPO</h5>
+            <h5 style="color:rgb(131, 132, 136); font-size:1.5rem">Proyectos de Evaluacion del Equipo</h5>
         </div>
     </div>
 

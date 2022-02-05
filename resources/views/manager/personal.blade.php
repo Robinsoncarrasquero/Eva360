@@ -21,7 +21,7 @@
 
                 <div class="text text-center">
 
-                    <h4 style="color:royalblue; font-size:1.5rem">EQUIPO DE TRABAJO</h4>
+                    <h4 style="color:royalblue; font-size:1.5rem">Equipo de trabajo</h4>
                 </div>
 
             </div>

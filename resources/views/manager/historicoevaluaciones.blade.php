@@ -12,7 +12,7 @@
 
     <div class="card mt-3 ">
         <div class="text text-center p-3">
-            <h4>HISTORIAS DE EVALUACIONES</h5>
+            <h4>Historico de Evaluaciones</h5>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
                     <th style="background-color:rgb(102, 197, 7);width:10%" class="text-dark">Status</th>
                     <th style="background-color:gray;width:15%" class="text-white">Inicio</th>
                     <th style="background-color:rgb(20, 20, 20);width:15%" class="text-white">Final</th>
-                    <th style="background-color:darkkhaki;width:10%" class="text-dark">Evaluadores</th>
+
                     <th style="background-color:rgb(144, 142, 158);width:10%" class="text-white">Resultado</th>
                     <th style="background-color:gold;width:10%" class="text-dark">Grafica</th>
                     <th style="background-color:rgb(76, 0, 255);width:10%" class="text-white">FeedBack</th>
@@ -53,13 +53,13 @@
                     </td> <td>{{ $evaluado->created_at }}</td>
                     <td>{{ $evaluado->updated_at }}</td>
 
-                    <td >
+                    {{-- <td >
                         @if($evaluado->word_key=='Objetivos')
                             <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
                         @else
                             <a href=""><span><i class="material-icons text-info">question_answer</i></span></a>
                         @endif
-                    </td>
+                    </td> --}}
                     <td>
                         @if($evaluado->word_key=='Objetivos')
                             <a href="{{route('objetivo.resultado', $evaluado->id)}}" ><span><i class="material-icons ">score</i></span></a>

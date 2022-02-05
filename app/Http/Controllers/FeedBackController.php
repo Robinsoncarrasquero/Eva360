@@ -44,7 +44,7 @@ class FeedBackController extends Controller
             $fb_feedback=$formrequest->input('fb_feedback.*');
             $fb_finicio=$formrequest->input('fb_finicio.*');
             $fb_ffinal=$formrequest->input('fb_ffinal.*');
-            $fb_nota=$formrequest->input('fb_nota.*');
+            //$fb_nota=$formrequest->input('fb_nota.*');
             $fb_status=$formrequest->input('fb_status.*');
             $fb_periodo=$formrequest->input('fb_periodo.*');
             $fb_development=$formrequest->input('fb_development.*');
@@ -54,7 +54,7 @@ class FeedBackController extends Controller
                 $fb->feedback=$fb_feedback[$i];
                 $fb->fb_finicio=$fb_finicio[$i];
                 $fb->fb_ffinal=$fb_ffinal[$i];
-                $fb->fb_nota=$fb_nota[$i];
+                //$fb->fb_nota=$fb_nota[$i];
                 $fb->periodo_id=$fb_periodo[$i];
                 $fb->fbstatu_id=$fb_status[$i];
                 $fb->development=$fb_development[$i];
