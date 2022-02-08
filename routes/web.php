@@ -309,7 +309,7 @@ Route::get('/plantillas/downloads', function () {
 Route::middleware(['auth'])->group( function() {
 
 
-    Route::get('feedback/edit/{id}', 'FeedBackController@edit')
+    Route::get('feedback/{id}/edit', 'FeedBackController@edit')
     ->name('feedback.edit');
     // ->middleware('role:user');
 

@@ -113,7 +113,7 @@
 
             @foreach ( $feedbacks as $feedback )
 
-            <div class="card-header mt-4" style="background-color:darkmagenta;color:white" >
+            <div class="card-header mt-4" style="background-color:burlywood;color:black" >
 
                 <div class="card-body" >
 
