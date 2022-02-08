@@ -98,9 +98,9 @@ class FeedBackController extends Controller
 
         $email = Auth::user()->email;
         $user= Auth::user();
-        if ($user->is_manager && $email!= $evaluado->user->email_super || $evaluado==null){
-            abort(404);
-        }
+        // if ($user->is_manager && $email!= $evaluado->user->email_super || $evaluado==null){
+        //     abort(404);
+        // }
 
         //instanciamos un objeto de data personal
         $loteEvaluados[]=$evaluado_id;
