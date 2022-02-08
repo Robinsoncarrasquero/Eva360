@@ -92,8 +92,15 @@ class FeedBackController extends Controller
     public function edit($evaluado_id)
     {
 
+
         //Buscamos el evaluado
         $evaluado = Evaluado::find($evaluado_id);
+
+        $email = Auth::user()->email;
+        $user= Auth::user();
+        if ($user->is_manager && $email!= $evaluado->user->email_super || $evaluado==null){
+            abort(404);
+        }
 
         //instanciamos un objeto de data personal
         $loteEvaluados[]=$evaluado_id;
@@ -107,8 +114,6 @@ class FeedBackController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
-        //dd($dataSerie,$dataBrecha,$dataCategoria);
-
 
         //Generamos las competencias del Feedback
         foreach ($dataSerie as $key=>$dataValue){
