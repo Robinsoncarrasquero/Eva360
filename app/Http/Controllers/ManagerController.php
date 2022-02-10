@@ -88,7 +88,10 @@ class ManagerController extends Controller
     /**Lista los empleados */
     public function personal(Request $request)
     {
-        if (!Auth::user()->is_manager && !Auth::admin()){
+        $user=Auth::user();
+        $manager= $user->is_manager;
+
+        if (!$manager){
             return redirect('login');
         }
         $title="Lista de empleados por Departamentos";
@@ -96,6 +99,7 @@ class ManagerController extends Controller
         // $departamentos = Departamento::name($buscarWordKey)->orderBy('id','DESC')->paginate(5);
         $departamento_id=Auth::user()->departamento_id;
         $departamentos=Departamento::where('id',$departamento_id)->orderBy('id','DESC')->paginate(25);
+
         return \view('manager.personal',compact('departamentos','title'));
     }
 

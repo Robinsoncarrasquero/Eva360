@@ -31,6 +31,7 @@ class TalentController extends Controller
         $title="Lista de empleados por Ubicacion";
         $user=Auth::user();
 
+
         //Ubicamos el rol
         $dpto = Departamento::findOrFail($user->departamento_id);
         if ($user->is_manager){

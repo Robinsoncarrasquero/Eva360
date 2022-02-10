@@ -73,9 +73,9 @@ class LanzarObjetivoController extends Controller
 
         );
 
-
-        $departamento = Departamento::find($user->departamento_id);
-        $manager = User::find($departamento->manager_id);
+        //Obtenemos el manager atraves del usuario logueado que efectivamente es el manager
+        $depto= Auth::user()->is_manager;
+        $manager= $depto->manager;
 
         //Generamos un array sigle
         $flattened = Arr::flatten($metas);

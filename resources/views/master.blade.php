@@ -85,7 +85,7 @@
                     <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('objetivo.index') }}">Mis Metas</span></a>
+                    <a class="nav-link" href="{{ route('objetivo.index') }}">Mis Objetivos</span></a>
                 </li>
 
                 @endif

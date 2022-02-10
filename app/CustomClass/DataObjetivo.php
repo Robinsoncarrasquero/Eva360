@@ -55,11 +55,14 @@ class DataObjetivo{
                 $sumaAverage += $item[0];
                 $nivelRequerido=$item[2];
             }
+
+            $promedio= $sumaAverage/$value->count();
+
             $adata[]=
             [
-                'competencia'=>$key,'eva360'=>$sumaAverage/$value->count(),
+                'competencia'=>$key,'eva360'=>$promedio,
                 'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador,
-                'cumplido'=>($sumaAverage/$value->count() >= $nivelRequerido ? 'Cumplido' : 'No Cumplido'),
+                'cumplido'=>($promedio >= $nivelRequerido ? 'Cumplido' : 'No Cumplido'),
             ];
 
 
