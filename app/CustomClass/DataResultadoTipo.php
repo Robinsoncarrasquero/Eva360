@@ -66,6 +66,7 @@ class DataResultadoTipo{
         $arrayDataSerie[] =['name'=> 'Competencias','data'=>$arrayData];
         $this->dataSerie=$arrayDataSerie3;
         $this->dataCategoria=$arrayDataCategoria3;
+
         return ['categoria'=>$arrayDataCategoria3,'data'=>$arrayDataSerie3];
     }
 

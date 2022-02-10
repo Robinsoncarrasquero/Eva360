@@ -28,9 +28,9 @@
                         <th class="chk-enviar-prueba" colspan="3">
                             <input type="checkbox" class="btncheck">Reenviar email
                         </th>
-                        <th>
+                        {{-- <th>
                             <span><a class="btn btn-success btn-block" href="{{ route('evaluacion.competencias',$evaluador) }}">Ver</a></span>
-                        </th>
+                        </th> --}}
                     </tr>
 
                     {{-- <tr id="send{{ $evaluador->id }}">

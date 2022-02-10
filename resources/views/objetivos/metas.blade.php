@@ -56,13 +56,14 @@
 
                 <div class="clearfix mt-3">
                     @if (Auth::user()->is_manager)
-
                         <span class="float-left"><a href="{{route('objetivo.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
-                        @if($evaluador->status!=2)
-                            <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
-                        @endif
+                    @else
+                        <span class="float-left"><a href="{{route('lanzarobjetivo.index')}}" class="btn btn-dark btn-lg">Regresar</a></span>
+                        {{-- <span class="float-left"><a href="{{route('objetivo.evaluacion',$evaluador->evaluado_id)}}" class="btn btn-dark btn-lg">Regresar</a></span> --}}
                     @endif
-
+                    @if($evaluador->status!=2)
+                        <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
+                    @endif
                 </div>
 
                 </form>

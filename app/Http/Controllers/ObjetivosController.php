@@ -366,7 +366,7 @@ class ObjetivosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
-
+        //dd($dataSerie,$dataCategoria,$dataDofa);
         if (!$dataDofa){
             \abort(404);
         }

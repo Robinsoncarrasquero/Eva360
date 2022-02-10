@@ -113,6 +113,17 @@
                 </li>
 
                 <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Proyectos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu3">
+                        <a class="dropdown-item"  href="{{ route('proyecto.index') }}">Proyecto</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"  href="{{ route('subproyecto.index') }}">Sub proyecto</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Evaluacion
                     </a>
@@ -125,18 +136,6 @@
                         <a class="dropdown-item"  href="{{ route('lanzarobjetivo.index') }}">Objetivos</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="{{ route('lanzar.index') }}">Individual</a>
-                    </div>
-                </li>
-
-
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Proyectos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu3">
-                        <a class="dropdown-item"  href="{{ route('proyecto.index') }}">Proyecto</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('subproyecto.index') }}">Sub proyecto</a>
                     </div>
                 </li>
 

@@ -30,9 +30,6 @@
 
     <div class="row col" id="container-x">
 
-            {{-- <div class="col-sm-6 mt-3">
-                <div class="mb-1" id="container-0"></div>
-            </div>--}}
 
     </div>
 
@@ -169,7 +166,7 @@
 
         });
     }
-
+}
 </script>
 
 </body>

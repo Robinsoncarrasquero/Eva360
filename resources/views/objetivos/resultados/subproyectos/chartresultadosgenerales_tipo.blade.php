@@ -30,6 +30,11 @@
     <div class="col-sm-12 mt-3">
         <div class="mb-1" id="container"></div>
     </div>
+
+    <div class="row col" id="container-x">
+
+
+    </div>
     <div class="col-sm-12">
         <div class="text-left">
             <h6>Cuadro de resultados Fortalezas / Oportunidades</h6>
@@ -92,7 +97,31 @@
     var dataSerie =  @json($dataSerie);
     var categorias =  @json($dataCategoria);
     var subProyectoName = @json($subProyecto->name);
-    Highcharts.chart('container', {
+
+    var i=0;
+    for ( obj of dataSerie) {
+        [obj].forEach(mychar);
+        i= i + 1;
+    }
+
+    function mychar(element,index,array)
+    {
+
+
+        // busca un elemento creado y su contenido al DOM
+        var currentDiv = document.getElementById("container-x");
+
+        var elemento = document.createElement("div");
+        elemento.setAttribute("id", "container-"+i);
+        elemento.setAttribute("class", "col-12 mt-2");
+
+        currentDiv.appendChild(elemento); //añade texto al div creado.
+
+        name=categorias[i][0];
+        dataSeriex=array[0];
+        categoriasx=categorias[i];
+
+        Highcharts.chart('container-'+i, {
         chart: {
             type: 'column'
         },
@@ -100,11 +129,11 @@
             text: 'Resultados Generales por Tipo de Competencia'
         },
         subtitle: {
-            text:  subProyectoName
+            text: subProyectoName
 
         },
         xAxis: {
-            categories:categorias,
+            categories:categoriasx,
 
             crosshair: true
         },
@@ -128,9 +157,10 @@
                 borderWidth: 0
             }
         },
-        series:dataSerie,
+        series:dataSeriex,
 
     });
+}
 </script>
 
 </body>

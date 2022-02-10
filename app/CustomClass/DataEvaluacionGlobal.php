@@ -232,6 +232,7 @@ class DataEvaluacionGlobal{
        }
 
 
+
        $this->dataCruda=$adata;
        return collect($adata);
    }

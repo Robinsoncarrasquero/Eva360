@@ -39,10 +39,11 @@
                             <th style="width: 15%">Inicio</th>
                             <th style="width: 15%">Update</th>
                             {{-- <th>Lanzar</th> --}}
-                            {{-- <th style="width: 10%">Evaluadores</th> --}}
+                            <th style="width: 10%">Evaluadores</th>
                             <th style="width: 10%">Resultado</th>
                             <th style="width: 10%">Grafica</th>
                             <th style="width: 5%">Feedback</th>
+                            <th style="width: 5%">Borrar</th>
                         </thead>
                         <tbody>
                         @foreach ($evaluados as $evaluado)
@@ -73,7 +74,7 @@
                         </td>
                         <td>{{ $evaluado->created_at }}</td>
                         <td>{{ $evaluado->updated_at }}</td>
-                        {{-- <td >
+                        <td >
 
                             @if($evaluado->word_key=='Objetivos')
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
@@ -83,13 +84,13 @@
                                 @endif
                             @else
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                    <a href=""><span><i class="material-icons">question_answer</i></span></a>
+                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
                                 @else
-                                    <a href=""><span><i class="material-icons text-dark">question_answer</i></span></a>
+                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-dark">question_answer</i></span></a>
                                 @endif
 
                             @endif
-                        </td> --}}
+                        </td>
 
                         <td>
                             @if($evaluado->word_key=='Objetivos')
@@ -130,9 +131,9 @@
                                 <a href="{{route('feedback.edit', $evaluado->id)}}" ><span><i class="material-icons text-dark">comment</i></span></a>
                             @endif
                         </td>
-                        {{-- <td>
+                        <td>
                             <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')">Delete</button>
-                        </td> --}}
+                        </td>
                         </tr>
                         @endif
                         @endforeach

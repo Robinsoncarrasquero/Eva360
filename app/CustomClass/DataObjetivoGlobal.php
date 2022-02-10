@@ -62,6 +62,7 @@ class DataObjetivoGlobal{
             $adata[]=['tipo'=>$tipo,'data'=>$record];
         }
 
+
         $this->dataCruda=$adata;
         return collect($adata);
     }

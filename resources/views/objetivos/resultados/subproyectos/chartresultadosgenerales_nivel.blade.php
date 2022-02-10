@@ -29,8 +29,9 @@
 <body>
 <div class="container">
 
-    <div class="mt-3">
-        <div class="col-lg-12 mb-1" id="container"></div>
+    <div class="row col" id="container-x">
+
+
     </div>
 
     <div class="col-sm-12">
@@ -44,7 +45,7 @@
                 <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                     <thead class="table-thead">
                         <th>Nivel</th>
-                        <th>Debilidad</th>
+                        <th>Oportunidad</th>
                         <th>Fortaleza</th>
                     </thead>
                     <tbody>
@@ -98,49 +99,69 @@
     var categorias =  @json($dataCategoria);
 
     var subProyectoName = @json($subProyecto->name);
-    Highcharts.setOptions({
-    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
-    });
-    Highcharts.chart('container', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Resultados Generales por Nivel de Cargo'
-        },
-        subtitle: {
-            text:  subProyectoName
+    var i=0;
+    for ( obj of dataSerie) {
+        [obj].forEach(mychar);
+        i= i + 1;
+    }
 
-        },
+    function mychar(element,index,array)
+    {
+        name=categorias[i][0];
+        dataSeriex=array[0];
+        categoriasx=categorias[i];
 
-        xAxis: {
-            categories:categorias,
-            crosshair: true
-        },
-        yAxis: {
-            min: 0,
+        // busca un elemento creado y su contenido al DOM
+        var currentDiv = document.getElementById("container-x");
+
+        var elemento = document.createElement("div");
+        elemento.setAttribute("id", "container-"+i);
+        elemento.setAttribute("class", "col-12 mt-2");
+
+        currentDiv.appendChild(elemento); //añade texto al div creado.
+
+
+        Highcharts.chart('container-'+i, {
+            chart: {
+                type: 'column'
+            },
             title: {
-                text: 'Nivel de Dominio'
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        series:dataSerie,
+                text: 'Resultados Generales por Nivel de Cargo'
+            },
+            subtitle: {
+                text:  subProyectoName
+
+            },
+
+            xAxis: {
+                categories:categoriasx,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Nivel de Dominio'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series:dataSeriex,
 
 
-    });
+        });
+    }
 
 </script>
 </body>

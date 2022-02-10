@@ -174,7 +174,7 @@
             type: element
         },
         title: {
-            text: 'Resultados de objetivos por grupo :'+element
+            text: 'Resultados de objetivos por grupo '
         },
         subtitle: {
             text:  subProyectoName
