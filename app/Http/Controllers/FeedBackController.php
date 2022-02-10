@@ -37,6 +37,9 @@ class FeedBackController extends Controller
     public function update(Request $formrequest, $id)
     {
         $evaluado = Evaluado::find($id);
+        if ($formrequest->input('fb_competencia.*')==null){
+
+        }
 
         try {
             //Update a los feeedback

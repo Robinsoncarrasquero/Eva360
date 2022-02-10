@@ -51,7 +51,7 @@ class ObjetivosController extends Controller
 
         $evaluadores = Evaluador::has('objetivos')->with(['objetivos'=>function($query){
         $query->latest();
-       }])->whereUser_id($user->id)->simplePaginate(25);
+       }])->whereUser_id($user->id)->orderBy('created_at','desc')->simplePaginate(25);
 
         return view('objetivos.index',compact('evaluadores','title'));
 
@@ -209,7 +209,7 @@ class ObjetivosController extends Controller
         //Revisamos cuantas estan pendientes por realizar
         if ($evaluaciones->count()>$competencias->count()){
            // Alert::error('Prueba inconclusa',Arr::random(['Culmínela','Finalícela','Terminála']));
-            return \redirect()->back()->withDanger('Aun tiene competencias pendientes');
+            return \redirect()->back()->withDanger('Aun tiene competencias pendientes...');
         }
 
         $evaluado= $evaluador->evaluado;
@@ -240,7 +240,7 @@ class ObjetivosController extends Controller
 
         //Alert::success('Prueba Finalizada',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
 
-        return \redirect()->route('objetivo.index')
+        return \redirect()->route('manager.personal')
         ->withSuccess("Evaluacion de $evaluado->name finalizada exitosamente");
 
     }

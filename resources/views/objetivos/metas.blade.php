@@ -61,8 +61,6 @@
                         @if($evaluador->status!=2)
                             <button type="submit" class="btn btn-dark btn-lg float-right" value="Finalizar">Finalicé</button>
                         @endif
-                    @else
-
                     @endif
 
                 </div>

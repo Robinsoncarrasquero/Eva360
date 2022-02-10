@@ -58,7 +58,8 @@ class DataObjetivo{
             $adata[]=
             [
                 'competencia'=>$key,'eva360'=>$sumaAverage/$value->count(),
-                'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador
+                'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador,
+                'cumplido'=>($sumaAverage/$value->count() >= $nivelRequerido ? 'Cumplido' : 'No Cumplido'),
             ];
 
 

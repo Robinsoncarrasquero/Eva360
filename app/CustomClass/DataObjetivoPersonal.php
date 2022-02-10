@@ -81,15 +81,28 @@ class DataObjetivoPersonal{
             }
 
             {
-                $brecha=100;$cumplimiento=0;$potencial=0;
+                $brecha=0;$cumplimiento=0;$potencial=0;
 
                 if (collect($dataMeta)->avg('data')!=0){
                     $cumplimiento=collect($arrayCumplimiento)->avg('data');
-                    $brecha= 100 - $cumplimiento;
+                    if ($cumplimiento >100){
+                        $brecha= 0;
+                        $cumplimiento=100;
+                    }else{
+                        $brecha= 100 - $cumplimiento;
+                    }
+
                 }
 
-                $potencial=collect($arrayPotencial)->avg('data') > 100 ? collect($arrayPotencial)->avg('data')  : 0;
-                $arraydataBrecha[]=['categoria'=>$value['categoria'],'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,'dataoportunidad'=>$arraydataOportunidad,'datafortaleza'=>$arraydataFortaleza,'potencial'=>$potencial];
+                $potencial=collect($arrayPotencial)->avg('data') > 100 ? collect($arrayPotencial)->avg('data') - 100  : 0;
+                $arraydataBrecha[]=
+                [
+                    'categoria'=>$value['categoria'],
+                    'cumplimiento'=>$cumplimiento,'brecha'=>$brecha,
+                    'dataoportunidad'=>$arraydataOportunidad,
+                    'datafortaleza'=>$arraydataFortaleza,
+                    'potencial'=>$potencial
+                ];
 
                 //Creamos la categoria para el cumplimiento y la brecha
                 $arrayCategoriaBrecha[]=[$value['categoria']];

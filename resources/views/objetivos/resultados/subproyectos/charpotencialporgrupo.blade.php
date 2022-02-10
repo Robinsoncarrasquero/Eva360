@@ -75,7 +75,7 @@
                         @endif
                         </td>
                         <td>
-                            @if ($value['potencial']>100)
+                            @if ($value['potencial']>0)
                             <span style="font-size:1.5em; color:white;background:green"> {{ number_format($value['potencial'],2) }}</span>
                             @endif
                         </td>
@@ -168,7 +168,7 @@ function mychar(element,index,array)
         type: element
     },
         title: {
-            text: 'Analisis de cumplimiento :'+element
+            text: 'Analisis de cumplimiento :'
         },
         subtitle: {
             text:  subProyectoName

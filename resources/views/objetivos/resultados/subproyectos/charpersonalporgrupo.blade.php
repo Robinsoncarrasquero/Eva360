@@ -115,11 +115,11 @@
                         <td>{{ number_format($value['cumplimiento'],2) }}</td>
                         <td>
                         @if ($value['cumplimiento']!=100)
-                            <span style="font-size:1.5em; color:red"> {{ number_format($value['brecha'],2) }}</span>
+                            <span style="font-size:1.5em; color:red"> {{  number_format($value['brecha'],2) }}</span>
                         @endif
                         </td>
                         <td>
-                            @if ($value['potencial']>100)
+                            @if ($value['potencial']>0)
                             <span style="font-size:1.5em; color:white;background:green"> {{ number_format($value['potencial'],2) }}</span>
                             @endif
                         </td>

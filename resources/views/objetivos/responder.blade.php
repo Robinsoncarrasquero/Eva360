@@ -98,12 +98,12 @@
 
 
         <div class="clearfix">
-           @if (!Auth::user()->admin())
-                <span class="float-left"><a href="{{ url()->previous() }}" class="btn btn-dark btn-lg">Back</a></span>
+           {{-- @if (!Auth::user()->admin()) --}}
+                <span class="float-left"><a href="{{ url()->previous() }}" class="btn btn-dark btn-lg">Regresar</a></span>
                 @if ($objetivo->evaluador->status!=2)
-                    <button type="submit" class="btn btn-dark btn-lg float-right" value="Next" >Next</button>
+                    <button type="submit" class="btn btn-dark btn-lg float-right" value="Next" >Siguiente</button>
                 @endif
-            @endif
+            {{-- @endif --}}
 
 
         </div>

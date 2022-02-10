@@ -26,12 +26,12 @@
     <div class="row">
 
         @foreach($competencias as $key=>$value)
-        <div class="table table-responsive col-sm-12 col-md-6">
+        <div class="table table-responsive col-8">
             <table id="{{$key}}" class="table table-bordered table-table">
                 <thead>
                 <tr>
                     <th class="text text-center title-th-competencia" colspan="2">
-                    <strong >{{ $value['competencia']}} (Nivel minimo requerido {{ $value['nivelRequerido'] }})
+                    <strong >{{ $value['competencia']}} (Nivel requerido {{ $value['nivelRequerido'] }})
                     </strong> </th>
 
                 </tr>
@@ -50,12 +50,21 @@
                     <td>{{ number_format($item['average'],2)}}</td>
                     @endif
 
+
                 </tr>
                 @endforeach
                 <tr>
                     <td class="text text-center"><strong>Resultado</strong></td>
                     <td class="text text-dark" ><a href=""><i class="material-icons">bar_chart</i></a>{{ number_format($value['eva360'],2)}}
                     </td>
+
+                </tr>
+                <tr>
+                    @if ($value['eva360'] >=$value['nivelRequerido'])
+                        <td class="font-weight-bold text text-success">{{ $value['cumplido']  }}</td>
+                    @else
+                        <td class="text text-danger font-weight-bold">{{ $value['cumplido']  }}</td>
+                    @endif
                 </tr>
                 </tbody>
             </table>

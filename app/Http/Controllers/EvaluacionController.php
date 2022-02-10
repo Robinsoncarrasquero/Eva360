@@ -40,7 +40,9 @@ class EvaluacionController extends Controller
 
         $evaluadores = Evaluador::has('evaluaciones')->with(['evaluaciones'=>function($query){
             $query->latest();
-           }])->whereUser_id($user->id)->simplePaginate(25);
+           }])->whereUser_id($user->id)->orderBy('created_at','desc')->simplePaginate(25);
+
+        //$evaluadores = Evaluador::where('user_id',$user->id)->orderBy('created_at','desc')->simplePaginate(25);
 
         return view('evaluacion.index',compact('evaluadores','title'));
 

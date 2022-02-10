@@ -15,7 +15,7 @@
         <div class="card pb-2 mt-2">
 
             <div class="text text-center">
-                <h4 style="color:rgb(4, 44, 165); font-size:1.5rem">MIS EVALUADOS</h4>
+                <h4 style="color:rgb(4, 44, 165); font-size:1.5rem">MIS EVALUACIONES POR COMPETENCIAS</h4>
 
             </div>
 
@@ -28,10 +28,10 @@
 
             <thead>
                 <th style="width: 30%">Nombre</th>
+                <th style="width: 15%">Progreso</th>
                 <th style="width: 15%">Status</th>
-                <th style="width: 15%">Lectura</th>
-                <th style="width: 15%">Accion</th>
-
+                <th style="width: 15%">Ver</th>
+                <th style="width: 15%">Fecha</th>
             </thead>
             <tbody>
             @foreach($evaluadores as $evaluador)
@@ -39,40 +39,39 @@
                 <td>{{$evaluador->evaluado->name}}</td>
 
                 <td class="status-progress" >
-                    @if(Helper::estatus($evaluador->status)=='Finalizada')
-                        <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
-                        <i class="spinner-grow spinner-grow-sm text-success" role="status"></i></a>
-                    @endif
+                    @if($evaluador->evaluado->word_key=='Objetivos')
 
-                    @if(Helper::estatus($evaluador->status)=='Inicio')
-                        <a href="{{route('evaluacion.competencias',$evaluador->id)}}"><i class="spinner-grow spinner-grow-sm text-warning " role="status"></i></a><span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
-                    @endif
-
-                    @if(Helper::estatus($evaluador->status)=='Lanzada')
-                        <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
-                        <i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
-                    @endif
-                </td>
-                <td>
-                    {{-- <div class="status-progress">
                         @if(Helper::estatus($evaluador->status)=='Finalizada')
-                            <span id="inicio" class="radio-checkeado" ></span>
-                            <span id="medio" class="radio-checkeado" ></span>
-                            <span id="final" class="radio-checkeado" ></span>
+                            <a href="{{route('objetivo.metas',$evaluador->id)}}" >
+                            <i class="spinner-grow spinner-grow-sm text-success" role="status"></i></a>
                         @endif
 
                         @if(Helper::estatus($evaluador->status)=='Inicio')
-                            <span id="inicio" class="radio-checkeado" ></span>
-                            <span id="medio" class="radio-no-checkeado" ></span>
-                            <span id="final" class="radio-no-checkeado"></span>
+                            <a href="{{route('objetivo.metas',$evaluador->id)}}"><i class="spinner-grow spinner-grow-sm text-warning " role="status"></i></a><span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
                         @endif
 
                         @if(Helper::estatus($evaluador->status)=='Lanzada')
-                            <span id="inicio" class="radio-checkeado"></span>
-                            <span id="medio" class="radio-checkeado"></span>
-                            <span id="final" class="radio-no-checkeado"></span>
+                            <a href="{{route('objetivo.metas',$evaluador->id)}}" >
+                            <i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
                         @endif
-                    </div> --}}
+
+                    @else
+                        @if(Helper::estatus($evaluador->status)=='Finalizada')
+                            <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
+                            <i class="spinner-grow spinner-grow-sm text-success" role="status"></i></a>
+                        @endif
+
+                        @if(Helper::estatus($evaluador->status)=='Inicio')
+                            <a href="{{route('evaluacion.competencias',$evaluador->id)}}"><i class="spinner-grow spinner-grow-sm text-warning " role="status"></i></a><span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
+                        @endif
+
+                        @if(Helper::estatus($evaluador->status)=='Lanzada')
+                            <a href="{{route('evaluacion.competencias',$evaluador->id)}}" >
+                            <i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
+                        @endif
+                    @endif
+                </td>
+                <td>
                     <span>{{ Helper::estatus($evaluador->status) }}</span>
                 </td>
                 <td>
@@ -84,6 +83,8 @@
                         <span><i class="material-icons">visibility</i></span></a>
                     @endif
                 </td>
+
+                <td>{{ $evaluador->created_at }}</td>
             </tr>
             @endforeach
             </tbody>

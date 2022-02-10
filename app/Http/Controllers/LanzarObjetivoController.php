@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use app\CustomClass\LanzarObjetivo;
+use app\CustomClass\UserRelaciones;
+use App\Departamento;
 use App\Evaluado;
 use App\Evaluador;
 use App\Meta;
@@ -72,6 +74,9 @@ class LanzarObjetivoController extends Controller
         );
 
 
+        $departamento = Departamento::find($user->departamento_id);
+        $manager = User::find($departamento->manager_id);
+
         //Generamos un array sigle
         $flattened = Arr::flatten($metas);
 
@@ -93,14 +98,14 @@ class LanzarObjetivoController extends Controller
 
         //creamos el evaluador que en este caso es el mismo evaluado
         $evaluador= new  Evaluador();
-        $evaluador->name = $evaluado->name;
-        $evaluador->relation ="Mi Meta";
+        $evaluador->name = $manager->name;
+        $evaluador->relation ="Objetivo";
         $evaluador->remember_token = Str::random(32);
         $evaluador->status = 0;
-        $evaluador->email = $user->email;
-        $evaluador->cargo_id = $user->cargo_id;
-        $evaluador->departamento_id = $user->departamento_id;
-        $evaluador->user_id = $user->id;
+        $evaluador->email = $manager->email;
+        $evaluador->cargo_id = $manager->cargo_id;
+        $evaluador->departamento_id = $manager->departamento_id;
+        $evaluador->user_id = $manager->id;
         $evaluado->evaluadores()->save($evaluador);
 
 

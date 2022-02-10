@@ -26,13 +26,13 @@
         <div class="table table-responsive">
             <table id="mytable" class="table  table-bordred table-striped">
 
-            <thead>
-                <th style="width: 40%">Nombre</th>
-                <th style="width: 20%">Status</th>
-                <th style="width: 20%">Status</th>
-                <th style="width: 20%">Accion</th>
-
-            </thead>
+                <thead>
+                    <th style="width: 30%">Nombre</th>
+                    <th style="width: 15%">Progreso</th>
+                    <th style="width: 15%">Status</th>
+                    <th style="width: 15%">Ver</th>
+                    <th style="width: 15%">Fecha</th>
+                </thead>
             <tbody>
             @foreach($evaluadores as $evaluador)
             <tr>
@@ -84,6 +84,7 @@
                         <span><i class="material-icons">visibility</i></span></a>
                     @endif
                 </td>
+                <td>{{ $evaluador->created_at }}</td>
             </tr>
             @endforeach
             </tbody>
