@@ -74,22 +74,25 @@
                         </td>
                         <td>{{ $evaluado->created_at }}</td>
                         <td>{{ $evaluado->updated_at }}</td>
+
                         <td >
-
-                            @if($evaluado->word_key=='Objetivos')
-                                @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                    <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
-                                @else
-                                    <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-dark">question_answer</i></span></a>
-                                @endif
-                            @else
-                                @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
-                                @else
-                                    <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-dark">question_answer</i></span></a>
-                                @endif
-
-                            @endif
+                            @switch($evaluado->word_key)
+                                @case('Objetivos')
+                                    @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                        <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
+                                    @else
+                                        <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-dark">question_answer</i></span></a>
+                                    @endif
+                                    @break
+                                @case('90')
+                                    @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                        <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
+                                    @else
+                                        <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-dark">question_answer</i></span></a>
+                                    @endif
+                                @default
+                                    @break
+                            @endswitch
                         </td>
 
                         <td>
@@ -132,7 +135,8 @@
                             @endif
                         </td>
                         <td>
-                            <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')">Delete</button>
+                            <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')"
+                            @if($evaluado->word_key=='Objetivos') enabled @else disabled @endif>Delete</button>
                         </td>
                         </tr>
                         @endif

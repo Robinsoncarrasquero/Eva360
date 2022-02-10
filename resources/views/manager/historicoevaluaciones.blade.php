@@ -56,11 +56,15 @@
                     <td>{{ $evaluado->updated_at }}</td>
 
                     <td >
-                        @if($evaluado->word_key=='Objetivos')
-                            <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
-                        @else
-                            <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-info">question_answer</i></span></a>
-                        @endif
+                        @switch($evaluado->word_key)
+                            @case('Objetivos')
+                                <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
+                                @break
+                            @case('90')
+                                <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-info">question_answer</i></span></a>
+                            @default
+
+                        @endswitch
                     </td>
                     <td>
                         @if($evaluado->word_key=='Objetivos')
@@ -85,7 +89,8 @@
                     </td>
 
                     <td>
-                        <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')">Delete</button>
+                        <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')"
+                        @if($evaluado->word_key=='Objetivos') enabled @else disabled @endif>Delete</button>
                     </td>
                 </tr>
                 @endforeach
