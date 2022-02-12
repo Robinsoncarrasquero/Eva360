@@ -10,7 +10,7 @@
         <img class="img-fluid" src="{{asset('images/AdobeStock_340828216.jpeg') }}"  alt="Equipo 360">
     </div> --}}
     <div class="card-header text-center xtitulo360 " style="background-color:brown; color:white; font-size:1.5rem">
-        Diccionario de Evaluaciones de Desempeño Por Competencias<span><i class="material-icons">360</i></span></i>
+        Diccionario de Evaluacion de Desempeño Por Competencias<span><i class="material-icons">360</i></span></i>
     </div>
     {{-- <div class="card-body ">
         <div class="d-flex-justify-content-center">
@@ -22,7 +22,7 @@
 
     <div class="card-columns ">
         @foreach($competencias as $competencia)
-        <div class="card mt-4 pb-2  @if($competencia->mutinivel) border-success @else border-danger @endif">
+        <div class="card mt-4 pb-2  @if($competencia->seleccionmultiple) border-success @else border-danger @endif">
 
             <div class="card-body">
 
@@ -34,7 +34,7 @@
                 <a href="{{route('verdiccionariodecompetencia', $competencia->id)}}" style="color: rgb(16, 17, 17)" >
                 @if($competencia->seleccionmultiple)
                     {{-- <span ><i class="material-icons text-success">thumb_up_alt</i></span></a> --}}
-                    <a href="{{route('verdiccionariodecompetencia', $competencia->id)}}" class="btn btn-dark">Ver</a>
+                    <a href="{{route('verdiccionariodecompetencia', $competencia->id)}}" class="btn btn-success">Ver</a>
                 @else
                     {{-- <span class="spinner-grow spinner-grow-sm text-danger align-center" role="status"><i class="material-icons spellcheck"></i></span></a> --}}
                     <a href="{{route('verdiccionariodecompetencia', $competencia->id)}}" class="btn btn-danger">Ver</a>
@@ -44,7 +44,7 @@
         </div>
         @endforeach
     </div>
-    <div class="mt-2 text text-center text-danger">
+    <div class="mt-2 text text-center" style="color:orangered">
         <h3> Metodos de Evaluacion</h3>
 
     </div>
