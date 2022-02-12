@@ -72,7 +72,9 @@
             "app/CustomClass/DataObjetivoPersonal.php",
             "app/CustomClass/UserRelaciones.php",
             "app/CustomClass/Transacciones.php",
-            "app/CustomClass/ConfigSingleton.php"
+            "app/CustomClass/ConfigSingleton.php",
+            "app/CustomClass/Color.php"
+
 	]
     },
     "minimum-stability": "dev",

@@ -15,6 +15,7 @@
         <div class="pb-1 ">
 
             <div class="card-header mb-2">
+
                 <h5 class="text text-center">{{  $evaluador->name }}, analice con criterio y determinacion las competencia de :</h5>
                 <h4 class="text text-danger d-flex justify-content-center" style="color:limegreen">{{ $evaluado->name }}</h4>
             </div>
@@ -32,8 +33,12 @@
             <div class="card-columns ">
                 @foreach($competencias as $competencia)
                 <div class="card mt-4 pb-2  @if($competencia->resultado) border-success @else border-danger @endif">
-                    {{-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
+
                     <div class="card-body">
+
+                        <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white">
+                            <span class="text-capitalize ">{{substr($competencia->competencia->name,0,1)}}</span>
+                        </div>
                         <h5 class="card-title">{{$competencia->competencia->name}}</h5>
                         <p class="card-text">{{ substr($competencia->competencia->description,0,40) }}...</p>
                         <a href="{{route('evaluacion.responder', $competencia->id)}}" style="color: rgb(16, 17, 17)" >

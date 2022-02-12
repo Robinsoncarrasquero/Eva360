@@ -180,7 +180,6 @@ return [
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
-
     ],
 
     /*
@@ -235,7 +234,7 @@ return [
         'Helper'=> app\Helpers\Helper::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
+        'Color' => app\CustomClass\Color::class,
 
     ],
 

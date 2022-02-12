@@ -33,7 +33,11 @@
             <div id="{{$comportamiento->id}}" class="card  filas mt-4  @if($evaluacion->resultado) border-success @else border-danger @endif">
 
                 <div class="card-body ">
-                    <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5>
+
+                    {{-- <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5> --}}
+                    <div class="circle" style="background-color:{{ Color::getBGColor()}};color:{{ Color::getColor() }}">
+                        <span class="text-capitalize " >{{substr($comportamiento->grado->description,0,1)}}</span>
+                    </div>
                     <h5 class="card-text"> {{$comportamiento->grado->description}}</h5>
                 </div>
 
