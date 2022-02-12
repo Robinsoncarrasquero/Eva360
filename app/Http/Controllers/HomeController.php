@@ -40,7 +40,7 @@ class HomeController extends Controller
     /**Mostrar un view con una breve descripcion del sistema */
     public function vision360(){
 
-        return view('vision360');
+        return view('master');
 
 
     }

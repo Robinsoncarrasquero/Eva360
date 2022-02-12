@@ -104,7 +104,7 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('vision360') }}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 @if (Auth::check() && !Auth::user()->admin())

@@ -1,6 +1,8 @@
 <?php
 
+use App\Competencia;
 use App\Evaluador;
+use App\Frecuencia;
 use App\Notifications\EvaluacionPendiente;
 use App\Notifications\Nexmosms;
 use App\User;
@@ -47,12 +49,23 @@ Route::middleware(['auth', 'role:admin'])->group( function() {
 });
 
 /**
- * Route de presentacion del sistema
+ * Route de presentacion competencias publicas
  *
  */
 Route::get('/', function () {
-    return view('vision360');
-});
+    $competencias = Competencia::all();
+    return view('vision360',compact('competencias'));
+})->name('vision360');
+
+/**
+ * Mostrar una competencia seleccionada desde la competencias publicas
+ */
+Route::get('/diccionariodecompetencias/{id}/competencia', function ($id) {
+
+    $competencia = Competencia::find($id);
+    $frecuencias = Frecuencia::all();
+    return view('vision360ver',compact('competencia','frecuencias'));
+})->name('verdiccionariodecompetencia');
 
 /**
  * Configuracion del sistema
@@ -417,7 +430,7 @@ Route::post('/logout', 'HomeController@logout')->name('logout');
  * Entrada al modulo de Vision 360
  *
  */
-Route::get('talent', 'HomeController@vision360')->name('vision360');
+// Route::get('home', 'HomeController@vision360')->name('vision360');
 
 /**
 * Resource de Frecuencia de la evaluacion
