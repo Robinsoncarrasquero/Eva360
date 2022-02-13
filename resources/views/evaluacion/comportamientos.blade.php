@@ -35,7 +35,7 @@
                 <div class="card-body ">
 
                     {{-- <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5> --}}
-                    <div class="circle" style="background-color:{{ Color::getBGColor()}};color:{{ Color::getColor() }}">
+                    <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white;fontsize:1rem;font-weight: bold;">
                         <span class="text-capitalize " >{{substr($comportamiento->grado->description,0,1)}}</span>
                     </div>
                     <h5 class="card-text"> {{$comportamiento->grado->description}}</h5>

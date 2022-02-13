@@ -36,7 +36,7 @@
 
                     <div class="card-body">
 
-                        <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white">
+                        <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white;fontsize:1rem;font-weight: bold;">
                             <span class="text-capitalize ">{{substr($competencia->competencia->name,0,1)}}</span>
                         </div>
                         <h5 class="card-title">{{$competencia->competencia->name}}</h5>

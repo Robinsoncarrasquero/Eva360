@@ -26,7 +26,7 @@
 
             <div class="card-body">
 
-                <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white">
+                <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white;fontsize:1rem;font-weight: bold;">
                     <span class="text-capitalize ">{{substr($competencia->name,0,1)}}</span>
                 </div>
                 <h5 class="card-title">{{$competencia->name}}</h5>
@@ -104,7 +104,7 @@
                     METODO 360 &#176;
                     </div>
                     <div class="card-body modelo-360">
-                    <p class="card-text">Es una evaluacion integral abarca supervisores, pares, colaboradores
+                    <p class="card-text">Es una evaluacion integral abarca supervisor, pares, colaboradores
                         , clientes internos o externos y la autoevaluacion.</p>
                     </div>
                     {{-- <div class="card-footer text-muted">
