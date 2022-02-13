@@ -57,7 +57,7 @@
                     METODO 90&#176;
                     </div>
                     <div class="card-body ">
-                        <p class="card-text modelo-90">El empleado es evaluado por sus supervisores y la autoevaluacion.</p>
+                        <p class="card-text modelo-90">El empleado es evaluado por su supervisor y la autoevaluacion.</p>
                     </div>
                     <div class="cajaimagen300">
                         <img class="img-fluid" src="{{asset('images/comunicacion.png') }}"  alt="Evaluacion 180 grados">
