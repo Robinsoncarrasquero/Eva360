@@ -157,7 +157,7 @@ class SimuladorController extends Controller
         Simulador::emailtareapendiente($autoevaluado);
         if (!Auth::check()) {
 
-            return \redirect()->route('home')
+            return \redirect()->route('login')
             ->withSuccess('Auto Evaluacion Generada exitosamente. Verifique su bandeja de correos para que ingrese al sistema!');
 
         }
