@@ -43,7 +43,6 @@ class EvaluacionPendiente extends Notification
     public function toMail($notifiable)
     {
 
-        //$url=Route('evaluacion.token',$notifiable->remember_token);
         $url=Route($this->route,$notifiable->remember_token);
 
         return (new MailMessage)
