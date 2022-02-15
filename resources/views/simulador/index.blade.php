@@ -6,7 +6,6 @@
 
 <div class="container">
 
-
         <div id="flash-message">
             @include('flash-message')
 
@@ -28,71 +27,70 @@
         @if($evaluadores->count())
 
         <div class="table">
-            <table id="mytable" class="table  table-bordred table-striped table-light">
+            <table id="mytable" class="table  table-bordred table-striped table-dark table-responsive">
+                <thead>
+                    <th >Nombre</th>
+                    <th >Cuestionario</th>
+                    <th >Historico</th>
+                    <th >Fecha</th>
+                </thead>
+                <tbody>
+                @foreach($evaluadores as $evaluador)
+                <tr>
+                    <td>{{$evaluador->evaluado->name}} </td>
 
-            <thead>
-                <th >Nombre</th>
-                <th >Cuestionario</th>
-                <th >Historico</th>
-                <th >Fecha</th>
-            </thead>
-            <tbody>
-            @foreach($evaluadores as $evaluador)
-            <tr>
-                <td>{{$evaluador->evaluado->name}} </td>
+                    <td class="status-progress" >
+                        @if($evaluador->evaluado->word_key=='Objetivos')
 
-                <td class="status-progress" >
-                    @if($evaluador->evaluado->word_key=='Objetivos')
+                            @if(Helper::estatus($evaluador->status)=='Finalizada')
+                                <a href="{{route('objetivo.metas',$evaluador->id)}}" >
+                                <i class="spinner-grow spinner-grow-sm text-success" role="status"></i></a>
+                            @endif
 
-                        @if(Helper::estatus($evaluador->status)=='Finalizada')
-                            <a href="{{route('objetivo.metas',$evaluador->id)}}" >
-                            <i class="spinner-grow spinner-grow-sm text-success" role="status"></i></a>
+                            @if(Helper::estatus($evaluador->status)=='Inicio')
+                                <a href="{{route('objetivo.metas',$evaluador->id)}}"><i class="spinner-grow spinner-grow-sm text-warning " role="status"></i></a><span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
+                            @endif
+
+                            @if(Helper::estatus($evaluador->status)=='Lanzada')
+                                <a href="{{route('objetivo.metas',$evaluador->id)}}" >
+                                <i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
+                            @endif
+
+                        @else
+                            @if(Helper::estatus($evaluador->status)=='Finalizada')
+                                <a href="{{route('simulador.competencias',$evaluador->id)}}" >
+                                <i class="spinner-grow spinner-grow-sm text-success" role="status"></i></a>
+                            @endif
+
+                            @if(Helper::estatus($evaluador->status)=='Inicio')
+                                <a href="{{route('simulador.competencias',$evaluador->id)}}">
+                                <i class="spinner-grow spinner-grow-sm text-warning " role="status"></i></a>
+                                <span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
+                            @endif
+
+                            @if(Helper::estatus($evaluador->status)=='Lanzada')
+                                <a href="{{route('simulador.competencias',$evaluador->id)}}" >
+                                <i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
+                            @endif
                         @endif
 
-                        @if(Helper::estatus($evaluador->status)=='Inicio')
-                            <a href="{{route('objetivo.metas',$evaluador->id)}}"><i class="spinner-grow spinner-grow-sm text-warning " role="status"></i></a><span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
+                    </td>
+
+                    <td>
+                        @if($evaluador->status==0)
+                            <a href="{{route('simulador.historicoevaluaciones')}}" >
+                            <span><i class="material-icons ">send</i></span></a>
+                        @else
+                            <a href="{{route('simulador.historicoevaluaciones')}}" >
+                            <span><i class="material-icons">visibility</i></span></a>
                         @endif
 
-                        @if(Helper::estatus($evaluador->status)=='Lanzada')
-                            <a href="{{route('objetivo.metas',$evaluador->id)}}" >
-                            <i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
-                        @endif
+                    </td>
 
-                    @else
-                        @if(Helper::estatus($evaluador->status)=='Finalizada')
-                            <a href="{{route('simulador.competencias',$evaluador->id)}}" >
-                            <i class="spinner-grow spinner-grow-sm text-success" role="status"></i></a>
-                        @endif
-
-                        @if(Helper::estatus($evaluador->status)=='Inicio')
-                            <a href="{{route('simulador.competencias',$evaluador->id)}}">
-                            <i class="spinner-grow spinner-grow-sm text-warning " role="status"></i></a>
-                            <span class="badge badge-alert">{{ $evaluador->evaluaciones->count()}} </span>
-                        @endif
-
-                        @if(Helper::estatus($evaluador->status)=='Lanzada')
-                            <a href="{{route('simulador.competencias',$evaluador->id)}}" >
-                            <i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
-                        @endif
-                    @endif
-
-                </td>
-
-                <td>
-                    @if($evaluador->status==0)
-                        <a href="{{route('simulador.historicoevaluaciones')}}" >
-                        <span><i class="material-icons ">send</i></span></a>
-                    @else
-                        <a href="{{route('simulador.historicoevaluaciones')}}" >
-                        <span><i class="material-icons">visibility</i></span></a>
-                    @endif
-
-                </td>
-
-                <td>{{ $evaluador->created_at }}</td>
-            </tr>
-            @endforeach
-            </tbody>
+                    <td>{{ $evaluador->created_at }}</td>
+                </tr>
+                @endforeach
+                </tbody>
             </table>
         </div>
 
