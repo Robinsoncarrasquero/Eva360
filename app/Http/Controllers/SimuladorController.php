@@ -65,7 +65,7 @@ class SimuladorController extends Controller
     {
 
         $faker = Factory::create();
-        $nombre = $faker->name;
+        $nombre = $faker->firstName. " ".$faker->lastName;
         $email = '';
         $cargos = Cargo::all();
         $departamentos = Departamento::all();
