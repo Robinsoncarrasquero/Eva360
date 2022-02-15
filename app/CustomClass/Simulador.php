@@ -302,6 +302,7 @@ class Simulador
         return $autoeva;
     }
 
+
     public static function respuestaVirtual(Evaluado $evaluado)
     {
 

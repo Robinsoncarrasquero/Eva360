@@ -325,6 +325,7 @@ class SimuladorController extends Controller
         $falta = $preguntas - $respondidas;
 
         $evaluado = $evaluador->evaluado;
+        //El Robot responde la prueba completamente con todas las competencias
         Simulador::respuestaVirtual($evaluado);
 
         return \redirect()->route('simulador.competencias', $evaluacion->evaluador->id);
@@ -352,7 +353,7 @@ class SimuladorController extends Controller
         //Revisamos cuantas estan pendientes por realizar
         if ($evaluaciones->count() > $competencias->count()) {
             // Alert::error('Prueba inconclusa',Arr::random(['Culmínela','Finalícela','Terminála']));
-            return \redirect()->back()->withDanger('Error aun tiene compentencias pendientes por finalizar');
+            return \redirect()->back()->withDanger('Error aun tiene competencias pendientes por completar');
         }
 
         //Flag para indicar que le evaluador ha culminado la prueba

@@ -10,7 +10,7 @@
         @include('flash-message')
     </div>
 
-    <div class="xclearfix">
+    <div class="clearfix">
 
         {{-- <div class="card-header mb-2">
             <h5 class="text text-center">Analice con criterio y determinacion las competencia de :</h5>
@@ -77,7 +77,7 @@
                 </div>
             </div>
 
-            <div class="clearfix mt-2">
+            <div class="clearfix mt-2 col">
                 <span class="float-left"><a href="{{ route('vision360') }}" class="btn btn-warning btn-lg">Regresar</a></span>
                 <span class="float-right"><a href="{{ route('vision360') }}" class="btn btn-success btn-lg">Guardar</a></span>
 

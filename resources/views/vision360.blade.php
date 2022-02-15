@@ -10,21 +10,28 @@
         <img class="img-fluid" src="{{asset('images/AdobeStock_340828216.jpeg') }}"  alt="Equipo 360">
     </div> --}}
 
-    <div class="card-header">
+    <div class="mt-2 pb-2">
+        <div class="text text-center">
+            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Auto Evaluacion Virtual en un minuto y con cualquier metodo</h3>
+        </div>
+        <p>
 
-        <p>Realizar una AutoEvaluacion virtual es muy sencillo. Debes registrarte con un correo y hacer evaluaciones con los metodos 90,180,270 y 360.
-            El sistema te generara un usuario virtual y los evaluadores virtuales. Las evaluaciones cuentan con un robot para cada Evaluador Virtual
-            por cada rol segun el método de evaluacion seleccionado.Ejemplo: El Metodo 270 grados se componen con dos pares y el supervisor. En este caso el sistema proveerá
-            tres evaluadores virtuales que responderan las competencias automaticamente, sin la intervencion humana. Igualmente
-            para los modelos(90,180,360). El sistema creará los evaluadores virtuales segun el metodo. La Autoevaluacion es respondida por un Humano.
-            Cada vez que el Evaluador Humano responde una competencia del cuestionario, los evaluadores virtuales tambien lo haran.</p>
+            La AutoEvaluacion virtual es un mecanismo ingenioso que permite que un Humano pueda experimentar como funciona las <strong>Evaluaciones de Desempeño por Competencias</strong>.
+            Es un proceso muy sencillo e intuitivo. Solo debes registrarte con un correo valido y podrás crear evaluaciones de <strong>90,180,270 y 360 grados en un minuto</strong>.
+            Como funciona? El sistema creará un usuario virtual y los evaluadores virtuales cada vez que se lanza una Evaluacion.
+            El robot de evaluaciones creará los evaluadores virtuales por cada relacion laboral <strong>(supervisor, pares, colaboradores, clientes)</strong> segun el método seleccionado.
+            Ejemplo:
+            El Metodo 270 grados se compone de dos pares y el supervisor; en este caso el Robot creará
+            tres evaluadores virtuales que responderan el cuestionario de competencias automaticamente cada vez que el usuario registrado responde la Auto Evaluacion.
+            Los resultados pueden ser consultados en el historico de Evaluaciones. El sistema enviará notificaciones por correo al usuario registrado sobre el proceso.
+            El sistema tiene configurado tres modelos de evaluacion para tres niveles de cargos <strong>(Nivel 2, Nivel 3, NIvel 4)</strong> que incluye <strong>Competencias de Tipo Corporativa, Gerenciales, Especificas y Digitales</strong>.
 
+        </p>
             <div class="d-flex justify-content-center">
-                <span><a href="{{route('simulador.autoevaluacion')}}" class="btn btn-dark btn-lg">Auto Evaluacion Virtual</a></span>
+                <span><a href="{{route('simulador.autoevaluacion')}}" class="btn btn-dark btn-lg">Lanzar Auto Evaluacion Virtual</a></span>
          </div>
-    </div>
 
-       </p>
+    </div>
     <div class="card-header text-center xtitulo360 " style="background-color:brown; color:white; font-size:1.5rem">
         Diccionario de Evaluacion de Desempeño Por Competencias<span><i class="material-icons">360</i></span></i>
     </div>
