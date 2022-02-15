@@ -26,17 +26,17 @@
 
         @if($evaluadores->count())
 
-        <div class="table">
-            <table id="mytable" class="table  table-bordred table-striped table-dark table-responsive">
+        <div class="table table-light">
+            <table id="mytable" class="table  table-bordered table-striped table-responsive">
                 <thead>
                     <th >Nombre</th>
-                    <th >Cuestionario</th>
+                    <th ></th>
                     <th >Historico</th>
                     <th >Fecha</th>
                 </thead>
                 <tbody>
                 @foreach($evaluadores as $evaluador)
-                <tr>
+                <tr class="table-info">
                     <td>{{$evaluador->evaluado->name}} </td>
 
                     <td class="status-progress" >

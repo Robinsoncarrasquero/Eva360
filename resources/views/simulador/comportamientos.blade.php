@@ -24,8 +24,8 @@
         </div>
 
         <p>Se presenta la competencia del cuestionario que usted debe responder.
-            Esta competencia tiene 4 preguntas y cada pregunta tiene 4 opciones que indican la frecuencia. Debe indicar
-            la valoracion para esta competencia.
+            Esta competencia tiene 4 preguntas y cada pregunta tiene 4 opciones que representa la frecuencia que usted considera
+            es realizada por el Evaluado.
         </p>
 
         @if ($evaluacion->competencia->grados->isNotEmpty())
@@ -71,11 +71,11 @@
                 </div>
                 @endforeach
 
-                <div class="col-md-4 ">
+                {{-- <div class="col-md-4 ">
                     <div id="divtodo">
 
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="clearfix">
 
