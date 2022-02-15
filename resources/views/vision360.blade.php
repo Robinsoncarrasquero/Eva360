@@ -23,8 +23,8 @@
             Ejemplo:
             El método 90: (Supervisor + Autoevaluacion). El método 180: (Supervisor + Pares + Autoevaluacion).
             El método 270: (Supervisor + Pares + Colaboradores + Autoevaluacion).
-            El método 360: (Supervisor + Pares + Colaboradores + Clientes Internos o Externos + Autoevaluacion)
-            El modelo está configurado para tres niveles de cargos <strong>(Nivel 2, Nivel 3, Nivel 4)</strong>.
+            El método 360: (Supervisor + Pares + Colaboradores + Clientes Internos o Externos + Autoevaluacion).
+            El modelo de competencias está configurado para tres niveles de cargos <strong>(Nivel 2, Nivel 3, Nivel 4)</strong>.
             Los evaluadores virtuales responderan el cuestionario automáticamente cada vez que el usuario registrado responde la Auto Evaluacion.
             Los resultados pueden ser consultados en el historico de Evaluaciones.
         </p>

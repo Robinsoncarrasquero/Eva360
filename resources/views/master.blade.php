@@ -200,7 +200,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu4">
                         <a class="dropdown-item"  href="{{ route('meta.index') }}">Metas</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('medida.index') }}">Medicion</a>
+                        <a class="dropdown-item"  href="{{ route('medida.index') }}">Medidas</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

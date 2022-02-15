@@ -23,9 +23,9 @@
             <h6 class="card-header description" >{{ $evaluacion->competencia->description}}</h6>
         </div>
 
-        <p>Se presenta la competencia del cuestionario que usted debe responder.
-            Esta competencia tiene 4 preguntas y cada pregunta tiene 4 opciones que representa la frecuencia que usted considera
-            es realizada por el Evaluado.
+        <p><strong>Responda la competencia seleccionada. Esta competencia tiene 4 preguntas
+             y cada pregunta tiene 4 opciones que representan la frecuencia que usted considera
+            es realizada por el Evaluado.</strong>
         </p>
 
 

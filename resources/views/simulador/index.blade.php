@@ -11,23 +11,24 @@
 
         </div>
 
-        <div class="pb-2 mt-2">
+        <div class="mt-2">
 
              <div class="text text-center mt-3" style="color:dodgerblue">
                 <h4 >AUTO EVALUACION</h4>
             </div>
-            <p class="card-body">Se presenta la lista de Evaluaciones que usted ha creado para acceder al cuestionario de competencias.
+            <p class="card-body">Se presenta la lista de Evaluaciones que usted ha creado y en donde podrá acceder al cuestionario de competencias.
                 Tambien puede acceder al histórico para revisar los resultados de la Evaluacion simulada.
-                El Evaluador virtual es un robot que actuará por cada evaluador virtual y responderá
-                automáticamente cada vez que usted responda una competencia del cuestionaario. El estatus de la Evaluacion
-                es indicado mediante un circulo que parpadea parecido a un semáforo para indicar
-                que cuando es Verde= Finalizada, Amarillo = Respondiendo,  Rojo = Sin responder.</p>
+                El estatus de la Evaluacion es indicado mediante un circulo parpadeante parecido a un semáforo:
+                <span><i class="spinner-grow spinner-grow-sm text-success" role="status"></i>Finalizada</span>
+                <span><i class="spinner-grow spinner-grow-sm text-warning" role="status"></i>Proceso</span>
+                <span><i class="spinner-grow spinner-grow-sm text-danger" role="status"></i>Detenida</span>
+                </p>
         </div>
 
         @if($evaluadores->count())
 
             <div class="table table-light">
-                <table id="mytable" class="table  table-bordered table-striped table-responsive">
+                <table id="mytable" class="table  table-bordered table-striped">
                     <thead>
                         <th >Nombre</th>
                         <th >Evaluacion</th>
@@ -36,8 +37,8 @@
                     </thead>
                     <tbody>
                     @foreach($evaluadores as $evaluador)
-                    <tr class="table-info">
-                        <td>{{$evaluador->evaluado->name}} </td>
+                    <tr >
+                        <td>{{$evaluador->evaluado->name}}<br>Metodo: {{ $evaluador->evaluado->word_key }} </td>
 
                         <td class="status-progress" >
                             @if($evaluador->evaluado->word_key=='Objetivos')
