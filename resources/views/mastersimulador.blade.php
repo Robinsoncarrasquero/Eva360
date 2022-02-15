@@ -107,137 +107,18 @@
                     <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
-
                 @if (Auth::check() && !Auth::user()->admin())
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('evaluacion.index') }}">Mis Evaluados<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('simulador.index') }}">Mis Autoevaluaciones<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('objetivo.index') }}">Mis Objetivos</span></a>
+                    <a class="nav-link" href="{{ route('simulador.historicoevaluaciones') }}">Historico<span class="sr-only"></span></a>
                 </li>
-
-                @endif
-                @if (Auth::check() && Auth::user()->admin())
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Admon
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu2">
-                        <a class="dropdown-item"  href="{{ route('talent.index') }}">Plantilla</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('nivelCargo.index') }}">Nivel</a>
-                        <a class="dropdown-item"  href="{{ route('cargo.index') }}">Cargo</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('ubicacion.index') }}">Ubicacion</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Importar
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
-                        <a class="dropdown-item"  href="{{ route('plantillas.fileupload') }}">Plantilla</a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Proyectos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu3">
-                        <a class="dropdown-item"  href="{{ route('proyecto.index') }}">Proyecto</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('subproyecto.index') }}">Sub proyecto</a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Evaluacion
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu1">
-
-                        <a class="dropdown-item"  href="{{ route('plantillas.index') }}">Importadas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('proyectoevaluado.index') }}">Competencias</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('lanzarobjetivo.index') }}">Objetivos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('lanzar.index') }}">Individual</a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        FeedBack
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu3">
-                        <a class="dropdown-item"  href="{{ route('periodo.index') }}">Frecuencia</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('fbstatu.index') }}">Status</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Modelos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu4">
-                        <a class="dropdown-item"  href="{{ route('tipo.index') }}">Tipos</a>
-                        <a class="dropdown-item"  href="{{ route('competencia.index') }}">Competencias</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('modelo.index') }}">Modelo</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('frecuencia.index') }}">Frecuencia</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('qualify.index') }}">Calificacion</a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Metas
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu4">
-                        <a class="dropdown-item"  href="{{ route('meta.index') }}">Metas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"  href="{{ route('medida.index') }}">Medicion</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Config
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu4">
-                        <a  class="dropdown-item"   href="{{ route('user.index') }}">Users</a>
-                        <div class="dropdown-divider"></div>
-                        <a  class="dropdown-item"   href="{{ route('configuracion.edit') }}">Config</a>
-                        <div class="dropdown-divider"></div>
-                        <a  class="dropdown-item"   href="{{ route('paypal.transactions') }}">Pagos</a>
-                    </div>
-                </li>
-                {{-- <li class="nav-item ">
-                    <a  class="nav-link" href="{{ route('user.index') }}">Users</a>
-                </li>
-
                 <li class="nav-item ">
-                    <a  class="nav-link" href="{{ route('configuracion.edit') }}">Config</a>
-                </li> --}}
-                @endif
-
-                @if (Auth::check() && Auth::user()->is_manager)
-
-
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('manager.index') }}">Proyectos<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('simulador.autoevaluacion') }}">Crear Evaluacion<span class="sr-only"></span></a>
                 </li>
-
-                <li class="nav-item ">
-                    <a class="nav-link"  href="{{ route('manager.personal') }}">Team</span></a>
-                 </li>
-
                 @endif
             </ul>
-
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
@@ -245,11 +126,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}  </a>
                     </li>
-                    {{-- @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif --}}
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdownMenu5" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -26,20 +26,85 @@ use Nexmo\Laravel\Facade\Nexmo;
 */
 
 /**
- * Route Paypal
+ * Route simulador de Autoevaluacion
  */
+Route::get('simulador/{token}/evaluacion',"SimuladorController@token")
+->name('simulador.token');
 
+Route::get('simulador/{evaluador}/simulador',"SimuladorController@competencias")
+->name('simulador.competencias')->middleware(['auth']);
 
+Route::get('simulador/autoevaluacion',"SimuladorController@autoevaluacion")
+->name('simulador.autoevaluacion');
+
+Route::get('simulador/{competencia}/responder',"SimuladorController@responder")
+    ->name('simulador.responder')
+    ->where('evaluador','[0-9]+')
+    ->middleware(['auth']);
+ /**
+     * Evaluador Responde la pregunta
+    */
+    Route::post('simuladorstore/{competencia}/respuesta',"SimuladorController@store")
+    ->name('simulador.store')
+    ->where('evaluador','[0-9]+')
+    ->middleware(['auth']);
+
+    /**
+     * Evaluador finaliza la prueba
+    */
+    Route::post('simuladorfinaliza/{evaluador}/finalizar',"SimuladorController@finalizar")
+    ->name('simulador.finalizar')
+    ->middleware(['auth']);
+
+    /**
+     * Lista de evaluados del Evaluador
+    */
+    Route::get('simuladorindex',"SimuladorController@index")
+    ->name('simulador.index')
+    ->middleware(['auth']);
+
+     /**
+     * Simulador historico del Evaluado
+    */
+    Route::get('simuladorhistorico',"SimuladorController@historicoevaluaciones")
+    ->name('simulador.historicoevaluaciones')
+    ->middleware(['auth']);
+
+Route::post('simulador/registrar',"SimuladorController@registrar")
+->name('simulador.registrar');
+
+Route::get('simulador/ajaxmodeloajax', 'SimuladorController@ajaxCompetencias')->name('simulador.ajaxcompetencias');
+
+Route::get('simulador/{evaluado_id}/resultados',"SimuladorController@resultados")
+->name('simulador.resultados')
+->middleware(['auth']);
+
+Route::get('simulador/{evaluado_id}/finales',"SimuladorController@finales")
+->name('simulador.finales')
+->middleware(['auth']);
+
+/**
+ * Presenta una grafica con resultados 360
+ */
+Route::get('simulador/{evaluado_id}/charindividual',"SimuladorController@charindividual")
+->name('simulador.charindividual')
+->middleware(['auth']);
+
+/**Tareas de notificaciones */
 Route::get('/tareapendiente/{evaluador}',function ($evaluador)
 {
-    $receptores = Evaluador::where('status',1)->get();
+    if ($evaluador){
+        $receptores = Evaluador::where('id',$evaluador->id)->get();
+    }else{
+        $receptores = Evaluador::where('status',1)->get();
+    }
     $delay = now()->addSeconds(1);
 
     foreach ($receptores as $receptor) {
-        $receptor->notify((new EvaluacionPendiente())->delay($delay));
+        $receptor->notify((new EvaluacionPendiente('evaluacion.token'))->delay($delay));
     }
-    //return back()->with('enviado', 'La notificación ha sido enviada.');
-})->where('id', '[0-9]+');
+
+})->where('id', '[0-9]+')->name('tareapendiente');
 
 Route::middleware(['auth', 'role:admin'])->group( function() {
     Route::post('/paypal/pay', 'PaymentController@payWithPayPal')->name('paypal.makepay');

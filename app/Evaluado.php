@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Evaluado extends Model
 {
+
+    use Notifiable;
+
     /**
     * The Table associated with the model evaluados
     */

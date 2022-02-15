@@ -9,6 +9,22 @@
     {{-- <div class="cajaimagen1200 mt-2 ">
         <img class="img-fluid" src="{{asset('images/AdobeStock_340828216.jpeg') }}"  alt="Equipo 360">
     </div> --}}
+
+    <div class="card-header">
+
+        <p>Realizar una AutoEvaluacion virtual es muy sencillo. Debes registrarte con un correo y hacer evaluaciones con los metodos 90,180,270 y 360.
+            El sistema te generara un usuario virtual y los evaluadores virtuales. Las evaluaciones cuentan con un robot para cada Evaluador Virtual
+            por cada rol segun el método de evaluacion seleccionado.Ejemplo: El Metodo 270 grados se componen con dos pares y el supervisor. En este caso el sistema proveerá
+            tres evaluadores virtuales que responderan las competencias automaticamente, sin la intervencion humana. Igualmente
+            para los modelos(90,180,360). El sistema creará los evaluadores virtuales segun el metodo. La Autoevaluacion es respondida por un Humano.
+            Cada vez que el Evaluador Humano responde una competencia del cuestionario, los evaluadores virtuales tambien lo haran.</p>
+
+            <div class="d-flex justify-content-center">
+                <span><a href="{{route('simulador.autoevaluacion')}}" class="btn btn-dark btn-lg">Auto Evaluacion Virtual</a></span>
+         </div>
+    </div>
+
+       </p>
     <div class="card-header text-center xtitulo360 " style="background-color:brown; color:white; font-size:1.5rem">
         Diccionario de Evaluacion de Desempeño Por Competencias<span><i class="material-icons">360</i></span></i>
     </div>

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
+use App\RoleUser;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-      // $this->middleware('auth');
+       $this->middleware('auth');
     }
 
     /**
@@ -25,6 +28,10 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
+        $role = Role::where('name', 'simulador')->first();
+        if($request->user()->hasRole($role->name)){
+            return view('mastersimulador');
+        }
         return view('master');
 
     }
@@ -39,6 +46,7 @@ class HomeController extends Controller
 
     /**Mostrar un view con una breve descripcion del sistema */
     public function vision360(){
+
 
         return view('master');
 

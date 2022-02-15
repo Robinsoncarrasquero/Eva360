@@ -6,21 +6,23 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\URL;
 
-class EvaluacionPendiente extends Notification
+class SimuladorEvaluacionFinalizada extends Notification
 {
     use Queueable;
     protected $route;
+    protected $evaluado;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($route)
+    public function __construct($route,$evaluado)
     {
         //
         $this->route=$route;
+        $this->evaluado=$evaluado;
     }
 
     /**
@@ -43,16 +45,14 @@ class EvaluacionPendiente extends Notification
     public function toMail($notifiable)
     {
 
-        //$url=Route('evaluacion.token',$notifiable->remember_token);
-        $url=Route($this->route,$notifiable->remember_token);
-
+        $url=Route($this->route,$this->evaluado->id);
         return (new MailMessage)
             ->greeting('Hola.')
             ->line($notifiable->name)
 
-            ->line('Recuerda que tienes pendiente Evaluaciones por realizar en la plataforma...')
-            ->action('Responder las evaluaciones', url($url))
-            ->line('Gracias por responder la evaluacion a tiempo!')
+            ->line('Estimado usuario virtual, le notificamos que la Evaluacion Virtual ha finalizado.')
+            ->action('Resultados', url($url))
+            ->line('Gracias por utilizar el Robot de AutoEvaluacion virtual.')
             ->salutation('Saludos');
     }
 
@@ -65,11 +65,9 @@ class EvaluacionPendiente extends Notification
     public function toArray($notifiable)
     {
         return [
-            'evaluacion_id' => $this->notifiable->id,
+            'evaluado_id' => $this->notifiable->id,
             'name' => $this->notifiable->name,
-            'email'=> $this->notifiable->email,
+            'email'=> $this->notifiable->user->email,
         ];
     }
-
-
 }
