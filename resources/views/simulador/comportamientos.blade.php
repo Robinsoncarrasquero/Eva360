@@ -10,7 +10,7 @@
         @include('flash-message')
     </div>
 
-    <div class="clearfix">
+
 
         <div class="card-header mb-2">
             <h5 class="text text-center">{{  $evaluacion->evaluador->name }}, analice con criterio y determinacion las competencia de :</h5>
@@ -20,8 +20,13 @@
         <h4 class="text text-center mt-2 border-primary "><strong> {{ $evaluacion->competencia->name }}</strong></h4>
 
         <div class="card mb-2">
-            <h6 class="card card-header description" >{{ $evaluacion->competencia->description}}</h6>
+            <h6 class="card-header description" >{{ $evaluacion->competencia->description}}</h6>
         </div>
+
+        <p>Se presenta la competencia del cuestionario que usted debe responder.
+            Esta competencia tiene 4 preguntas y cada pregunta tiene 4 opciones para indicar la frecuencia y su valoracion
+            que aprecia para esta competencia.</p>
+       <p>
 
         @if ($evaluacion->competencia->grados->isNotEmpty())
 
@@ -91,7 +96,7 @@
             </div>
         @endif
 
-    </div>
+
 
 </div>
 

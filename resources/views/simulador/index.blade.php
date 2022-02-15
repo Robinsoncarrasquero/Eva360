@@ -12,25 +12,23 @@
 
         </div>
 
-        <div class="card-header pb-2 mt-2">
+        <div class="pb-2 mt-2">
 
-            <div class="text text-center">
-
-                <h5 style="color:blue;">AUTO EVALUACION</h5>
-
+             <div class="text text-center mt-3" style="color:dodgerblue">
+                <h4 >AUTO EVALUACION</h4>
             </div>
-            <p class="card-body" style="color:darkgreen">Se presenta la lista Evaluaciones que usted ha creado. Puede acceder al cuestionario de competencias
-                para responderlo. Tambien puede acceder al historico para revisar los resultados logrados de la Evaluacion simulada.
-                El Evaluador virtual es un robot que actuará por cada evaluador simulado y responderá
-                automáticamente cada vez que usted responda su autoevaluacion. El estatus de la Evaluacion
-                es indicada mediante un circulo que parpadea parecido a un semáforo para indicar
-                que cuando es Verde= Finalizada, Amarillo = Respondiendo,  Rojo = Creada.</p>
+            <p class="card-body">Se presenta la lista de Evaluaciones que usted ha creado para acceder al cuestionario de competencias.
+                Tambien puede acceder al histórico para revisar los resultados de la Evaluacion simulada.
+                El Evaluador virtual es un robot que actuará por cada evaluador virtual y responderá
+                automáticamente cada vez que usted responda una competencia del cuestionaario. El estatus de la Evaluacion
+                es indicado mediante un circulo que parpadea parecido a un semáforo para indicar
+                que cuando es Verde= Finalizada, Amarillo = Respondiendo,  Rojo = Sin responder.</p>
         </div>
 
         @if($evaluadores->count())
 
-        <div class="table table-responsive">
-            <table id="mytable" class="table  table-bordred table-striped">
+        <div class="table">
+            <table id="mytable" class="table  table-bordred table-striped table-light">
 
             <thead>
                 <th >Nombre</th>
