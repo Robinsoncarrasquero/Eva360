@@ -24,20 +24,21 @@
             <div class="text text-center mt-3" style="color:dodgerblue">
                 <h4 >COMPETENCIAS</h4>
             </div>
-            <p>Aqui se presentan todas la competencias que debe responder. Seleccione cada competencia en el orden que considere conveniente.
-                 Cada competencia tiene 4 preguntas y cada pregunta tiene 4 opciones para indicar la valoracion
-                 que usted aprecia para esa competencia.
-                 Las evaluaciones cuentan con un robot para cada Evaluador Virtual por cada rol segun el método de evaluacion seleccionado.
-                 Ejemplo: El Metodo 270 grados se componen con dos pares y el supervisor. En este caso el sistema proveerá
-                 tres evaluadores virtuales que responderan las competencias automaticamente, sin la intervencion humana. Igualmente
-                 para los modelos(90,180,360) el sistema creará los evaluadores virtuales requeridos. La Autoevaluacion es respondida por un Humano.
-                 Cada vez que responda una competencia los evaluadores lo haran tambien. Para consultar el avance de este proceso
-                 en el historico de evaluaciones accediendo a este link <span><i><a href="{{route('simulador.resultados', $evaluado->id)}}">Evaluadores</i></span></a>
-
+            <p>Se presentan todas la competencias del cuestionario que usted debe responder. Seleccione la competencia en el orden que considere conveniente.
+                 Cada competencia tiene 4 preguntas y cada pregunta tiene 4 opciones para indicar la frecuencia y su valoracion
+                 que aprecia para esa competencia.</p>
+            <p>
+                 Las evaluaciones cuentan con un robot para cada Evaluador Virtual en cada relacion laboral segun el método escogido.
+                 Ejemplo: El Metodo 270 grados se compone de: Supervisor + Pares + Colaboradores + Autoevaluacion. En este caso el sistema creará
+                 cinco evaluadores virtuales que responderán las competencias automaticamente, sin la intervencion humana. Igualmente
+                 para los modelos(90,180,360). La Autoevaluacion debe ser respondida por el usuario registrado.
+                 Cada vez que responda una competencia los Evaluadores Virtuales tambien lo haran. Para consultar el avance
+                 accediendo en este link
+                 <span><a href="{{route('simulador.resultados', $evaluado->id)}}" class="btn btn-dark btn-lg">Evaluadores</a></span>
                 </p>
 
         </div>
-        </div>
+
 
         @if($competencias)
 

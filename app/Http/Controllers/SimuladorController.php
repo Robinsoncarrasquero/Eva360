@@ -306,7 +306,7 @@ class SimuladorController extends Controller
 
         //redirigimos al usuario a ruta de sus competencias con el token del evaluador
         $evaluador = $evaluacion->evaluador;
-
+        $evaluador->status = Helper::estatus('Lanzada'); //0=Inicio,1=Lanzada, 2=Finalizada
         //Preguntas de la prueba
         $preguntas = $evaluador->evaluaciones->count();
 

@@ -10,7 +10,7 @@
         @include('flash-message')
     </div>
 
-    <div class="xclearfix">
+    <div class="clearfix">
 
         <div class="card-header mb-2">
             <h5 class="text text-center">{{  $evaluacion->evaluador->name }}, analice con criterio y determinacion las competencia de :</h5>

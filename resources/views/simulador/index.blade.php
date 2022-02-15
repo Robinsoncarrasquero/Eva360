@@ -19,10 +19,12 @@
                 <h5 style="color:blue;">AUTO EVALUACION</h5>
 
             </div>
-            <p class="card-body" style="color:darkgreen">Usted realiza una evaluacion simulada con el Evaluador virtual que es un robot que reponde el cuestionario automaticamente
-                , hasta que el evaluador real(Usted) culmine la prueba. Luego podrá revisar los resultados en la Opcion Historico donde se puede
-            observar tres resultados: Evaluadores, Resultados y Grafica. Recuerde que debe responder todas las competencias.
-            Tambien recibirá un correo de finalizacion para indicarle que ha concluido la evaluacion.</p>
+            <p class="card-body" style="color:darkgreen">Se presenta la lista Evaluaciones que usted ha creado. Puede acceder al cuestionario de competencias
+                para responderlo. Tambien puede acceder al historico para revisar los resultados logrados de la Evaluacion simulada.
+                El Evaluador virtual es un robot que actuará por cada evaluador simulado y responderá
+                automáticamente cada vez que usted responda su autoevaluacion. El estatus de la Evaluacion
+                es indicada mediante un circulo que parpadea parecido a un semáforo para indicar
+                que cuando es Verde= Finalizada, Amarillo = Respondiendo,  Rojo = Creada.</p>
         </div>
 
         @if($evaluadores->count())
@@ -31,10 +33,10 @@
             <table id="mytable" class="table  table-bordred table-striped">
 
             <thead>
-                <th style="width: 20%">Nombre</th>
-                <th style="width: 15%">Cuestionario</th>
-                <th style="width: 15%">Historico</th>
-                <th style="width: 15%">Fecha</th>
+                <th >Nombre</th>
+                <th >Cuestionario</th>
+                <th >Historico</th>
+                <th >Fecha</th>
             </thead>
             <tbody>
             @foreach($evaluadores as $evaluador)

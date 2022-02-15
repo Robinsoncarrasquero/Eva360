@@ -27,8 +27,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // $role= Role::firstOrCreate([
+        //     'name'=>'simulador',
+        // ],['description'=>'Simulador']);
 
         $role = Role::where('name', 'simulador')->first();
+
         if($request->user()->hasRole($role->name)){
             return view('mastersimulador');
         }
