@@ -10,7 +10,7 @@
         @include('flash-message')
     </div>
 
-
+    <div class="xclearfix">
 
         <div class="card-header mb-2">
             <h5 class="text text-center">{{  $evaluacion->evaluador->name }}, analice con criterio y determinacion las competencia de :</h5>
@@ -27,6 +27,7 @@
             Esta competencia tiene 4 preguntas y cada pregunta tiene 4 opciones que representa la frecuencia que usted considera
             es realizada por el Evaluado.
         </p>
+
 
         @if ($evaluacion->competencia->grados->isNotEmpty())
 
@@ -94,6 +95,7 @@
             </div>
         @endif
 
+    </div>
 
 
 </div>

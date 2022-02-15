@@ -10,7 +10,7 @@
         @include('flash-message')
     </div>
 
-    <div class="clearfix">
+    <div class="xclearfix">
 
         {{-- <div class="card-header mb-2">
             <h5 class="text text-center">Analice con criterio y determinacion las competencia de :</h5>

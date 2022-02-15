@@ -16,20 +16,22 @@
         </div>
         <p>
 
-            La AutoEvaluacion virtual es un mecanismo ingenioso que permite que un Humano pueda experimentar como funciona las <strong>Evaluaciones de Desempeño por Competencias</strong>.
-            Es un proceso muy sencillo e intuitivo. Solo debes registrarte con un correo valido y podrás crear evaluaciones de <strong>90,180,270 y 360 grados en un minuto</strong>.
-            Como funciona? El sistema creará un usuario virtual y los evaluadores virtuales cada vez que se lanza una Evaluacion.
-            El robot de evaluaciones creará los evaluadores virtuales por cada relacion laboral <strong>(supervisor, pares, colaboradores, clientes)</strong> segun el método seleccionado.
+            La AutoEvaluacion virtual es un mecanismo ingenioso que permite a un Humano experimentar como funciona las <strong>Evaluaciones de Desempeño por Competencias</strong>.
+            Es un proceso muy sencillo e intuitivo. Solo debes registrarte con un correo válido y podrás crear evaluaciones con los métodos <strong>90, 180, 270 y 360 grados en un minuto</strong>.
+            Como funciona? El sistema creará los evaluadores virtuales cada vez que se lanza una Evaluacion segun el metodo escogido.
+            El robot de evaluaciones creará los evaluadores virtuales por cada relacion laboral <strong>(Supervisor, Pares, Colaboradores, Clientes)</strong>.
             Ejemplo:
-            El Metodo 270 grados se compone de dos pares y el supervisor; en este caso el Robot creará
-            tres evaluadores virtuales que responderan el cuestionario de competencias automaticamente cada vez que el usuario registrado responde la Auto Evaluacion.
-            Los resultados pueden ser consultados en el historico de Evaluaciones. El sistema enviará notificaciones por correo al usuario registrado sobre el proceso.
-            El sistema tiene configurado tres modelos de evaluacion para tres niveles de cargos <strong>(Nivel 2, Nivel 3, NIvel 4)</strong> que incluye <strong>Competencias de Tipo Corporativa, Gerenciales, Especificas y Digitales</strong>.
-
+            El método 90: (Supervisor + Autoevaluacion). El método 180: (Supervisor + Pares + Autoevaluacion).
+            El método 270: (Supervisor + Pares + Colaboradores + Autoevaluacion).
+            El método 360: (Supervisor + Pares + Colaboradores + Clientes Internos o Externos + Autoevaluacion)
+            El modelo está configurado para tres niveles de cargos <strong>(Nivel 2, Nivel 3, Nivel 4)</strong>.
+            Los evaluadores virtuales responderan el cuestionario automáticamente cada vez que el usuario registrado responde la Auto Evaluacion.
+            Los resultados pueden ser consultados en el historico de Evaluaciones.
         </p>
-            <div class="d-flex justify-content-center">
-                <span><a href="{{route('simulador.autoevaluacion')}}" class="btn btn-dark btn-lg">Lanzar Auto Evaluacion Virtual</a></span>
-         </div>
+
+        <div class="d-flex justify-content-center">
+            <span><a href="{{route('simulador.autoevaluacion')}}" class="btn btn-dark btn-lg">Lanzar Auto Evaluacion Virtual</a></span>
+        </div>
 
     </div>
     <div class="card-header text-center xtitulo360 " style="background-color:brown; color:white; font-size:1.5rem">
