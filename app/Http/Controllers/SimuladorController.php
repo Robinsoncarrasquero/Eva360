@@ -153,8 +153,14 @@ class SimuladorController extends Controller
         $objlanzaEvaluacion = null;
 
         //Envia un correo al evaluador simulador
-        Simulador::emailtareapendiente($autoevaluado);
 
+        Simulador::emailtareapendiente($autoevaluado);
+        if (!Auth::check()) {
+
+            return \redirect()->route('home')
+            ->withSuccess('Auto Evaluacion Generada exitosamente. Verifique su bandeja de correos para que ingrese al sistema!');
+
+        }
 
         return \redirect()->route('simulador.token', $autoevaluado->remember_token)
             ->withSuccess('Auto Evaluacion Generada exitosamente. Ahora responda las competencias. Al terminar sus evaluadores virtuales tambien!');
