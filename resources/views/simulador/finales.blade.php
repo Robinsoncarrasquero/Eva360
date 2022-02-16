@@ -19,11 +19,11 @@
             <h5>Resultado final de <span class="text-danger">{{ $evaluado->user->name }}</span></h5>
         </div>
         @endif
-        <p>Aqui se muestran los resultados poderados por cada competencia. Se puede observar si el empleado cumplió con el nivel requerido
-            y tambien se le presenta una calificacion para indicar en que fase se encuentra su progreso con respecto a la competencia.
-            Las fases son configurables por rango desde 0 hasta el nivel mas alto(100) tales como : Inicio(0-25), En proceso(26-50), Avanzado(76-99) y Desarrollada(100).
-            El cumplimiento nos indica cuando el empleado logró o no logró superar el nivel de la competencia para el cargo.
-        El cumplimiento son dos valores : Cumplió o No cumplió</p>
+        <p>Se muestran los resultados finales poderados por cada competencia. Se puede observar si el empleado Cumplió con el nivel requerido
+            y tambien se le dá una calificacion que indica en que fase se encuentra su progreso con respecto a la competencia.
+            Las fases son configurables por rango desde 0 hasta el nivel mas alto(100) Ejemplo : Inicio(0-25), En proceso(26-50), Avanzado(76-99) y Desarrollada(100).
+            El cumplimiento nos indica cuando el empleado logró o no logró superar el nivel de la competencia
+            representados en dos valores : Cumplió o No cumplió</p>
     </div>
 
     @if($competencias)

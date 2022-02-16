@@ -15,14 +15,9 @@
         </div>
         <p>
 
-            Debes llenar el formulario con los datos de tu correo y seleccionar un Cargo, una Ubicacion laboral,
+            Debes llenar el formulario con los datos de tu correo, seleccionar un Cargo, una Ubicacion ,
             y el Método de Evaluacion que prefieras <strong>90, 180, 270 o 360 grados</strong>.
-             El método 90: (Supervisor + Autoevaluacion). El método 180: (Supervisor + Pares + Autoevaluacion).
-             El método 270: (Supervisor + Pares + Colaboradores + Autoevaluacion).
-             El método 360: (Supervisor + Pares + Colaboradores + Clientes Internos o Externos + Autoevaluacion)
-             El modelo está configurado para tres niveles de cargos <strong>(Nivel 2, Nivel 3, Nivel 4)</strong>
-              con <strong>Competencias de Tipo Corporativa, Gerenciales, Especificas y Digitales</strong>.
-             Hacer una Evaluacion es muy sencillo y rápido. Obtendrás los resultados en un cerrar y abrir de ojos.
+            Hacer una Evaluacion es muy sencillo y rápido. Obtendrás los resultados en un minuto con un cerrar y abrir de ojos.
         </p>
         <p class="text text-center text-success"><strong >Exito con tu AutoEvaluacion Virtual</strong>.</p>
 
@@ -86,8 +81,7 @@
                         <thead>
                             <th >Nombre</th>
                             <th >Competencias</th>
-                            <th >Seleccion</th>
-
+                            <th >Seleccione</th>
                         </thead>
                         <tbody>
                             @foreach($modelos as $modelo)

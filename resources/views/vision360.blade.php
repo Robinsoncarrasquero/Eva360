@@ -16,9 +16,9 @@
         </div>
         <p>
 
-            La AutoEvaluacion virtual es un mecanismo ingenioso que permite a un Humano experimentar como funciona las <strong>Evaluaciones de Desempeño por Competencias</strong>.
+            La AutoEvaluacion virtual es un mecanismo ingenioso que permite conocer a una Persona y experimentar como funciona las <strong>Evaluaciones de Desempeño por Competencias</strong>.
             Es un proceso muy sencillo e intuitivo. Solo debes registrarte con un correo válido y podrás crear evaluaciones con los métodos <strong>90, 180, 270 y 360 grados en un minuto</strong>.
-            Como funciona? El sistema creará los evaluadores virtuales cada vez que se lanza una Evaluacion segun el metodo escogido.
+            Como funciona? El sistema creará los evaluadores virtuales cada vez que se lanza una Evaluacion segun el método escogido.
             El robot de evaluaciones creará los evaluadores virtuales por cada relacion laboral <strong>(Supervisor, Pares, Colaboradores, Clientes)</strong>.
             Ejemplo:
             El método 90: (Supervisor + Autoevaluacion). El método 180: (Supervisor + Pares + Autoevaluacion).

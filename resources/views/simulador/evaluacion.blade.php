@@ -15,9 +15,8 @@
             <h5>Evaluadores de <span class=" text text-success">{{ $evaluado->user->name }}</span></h5>
 
         </div>
-        <p>Aqui se muestra las respuestas dadas por cada evaluador que ha respondido el cuestionario con las competencias
-            del modelo de competencias seleccionado. Los nombres y los correos de los evaluadores son ficticios. El correo del evaluadore
-        humano debe estar correcto para que pueda recibir las notificaciones.</p>
+        <p>Se presentan las respuestas dadas por cada evaluador. Los nombres y los correos de los evaluadores son virtuales.
+            Las notificaciones son enviadas al correo de usuario registrado que es quien realiza la autoevaluacion.</p>
 
     </div>
 

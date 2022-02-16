@@ -31,7 +31,7 @@
                  Ejemplo: El Metodo 270 grados se compone de: Supervisor + Pares + Colaboradores + Autoevaluacion. En este caso el sistema creará
                  cinco evaluadores virtuales que responderán las competencias automaticamente, sin la intervencion humana. La Autoevaluacion debe ser respondida por el usuario registrado.
                  Cada vez que responda una competencia los Evaluadores Virtuales tambien lo haran junto con usted.
-                 <p class="text text-center"><a href="{{route('simulador.resultados', $evaluado->id)}}" class="btn btn-dark btn-lg">Respuesta de Evaluadores</a></p>
+                 <p class="text text-center"><a href="{{route('simulador.resultados', $evaluado->id)}}" class="btn btn-warning btn-lg">Respuesta de Evaluadores</a></p>
                 </p>
 
         </div>
