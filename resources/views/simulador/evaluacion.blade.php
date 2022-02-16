@@ -29,9 +29,10 @@
                 <table id="table{{ $evaluador->id }}" class="table table-striped table-table table-responsive ">
                     <thead>
                     <tr id="{{ $evaluador->id }}">
-                        <th class="chk-enviar-prueba" colspan="3">
+                        <span class="material-icons orange600" style="font-size:2rem" >@if ($evaluador->relation=='Autoevaluacion')face @else android @endif</span>
+                        {{-- <th class="chk-enviar-prueba" colspan="3">
                             <input disabled type="checkbox" class="btncheck">Reenviar email
-                        </th>
+                        </th> --}}
                         {{-- <th>
                             <span><a class="btn btn-success btn-block" href="{{ route('evaluacion.competencias',$evaluador) }}">Ver</a></span>
                         </th> --}}
@@ -43,9 +44,11 @@
                         </th>
                     </tr> --}}
                     <tr>
+
                         <th class="text text-left  title-th-evaluador" colspan="4">
                         {{$evaluador->name}}({{ $evaluador->relation }}) <br>
                         <span>@if ($evaluador->relation=='Autoevaluacion') Evaluador Humano @else Evaluador Virtual @endif </span>
+
                         <input disabled type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
                         {{-- <button disabled type="button" data-id="{{$evaluador->id}}" class="btn btn-danger btn-save-email">Cambiar email --}}
                         </th>
