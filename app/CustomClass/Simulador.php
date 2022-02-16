@@ -23,6 +23,7 @@ use App\Notifications\SimuladorEvaluacionFinalizada;
 use App\Proyecto;
 use App\SubProyecto;
 use App\User;
+use Carbon\Carbon;
 use Faker\Factory;
 use Faker\Generator as Faker;
 
@@ -61,13 +62,16 @@ class Simulador
         $metodo = $this->metodo;
         $modelo = Modelo::find($this->modelo);
 
+        $date = Carbon::parse(now())->locale('us');
+        $proyecto_name=$date->getTranslatedShortMonthName('MMM YYYY'); // мар
+
         $proyecto = Proyecto::firstOrCreate(
             [
-                'name' => $modelo->name,
+                'name' =>  $proyecto_name,
             ],
             [
-                'tipo' => 'Competencias',
-                'description' => $modelo->name,
+                'tipo' => 'Simulador',
+                'description' => $proyecto_name,
             ]
         );
 

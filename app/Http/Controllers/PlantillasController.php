@@ -68,8 +68,8 @@ class PlantillasController extends Controller
 
         request()->validate(
         [
-            'fileName' => 'required|file|max:100',
-            'fileName.*' => 'mimes:excel|max:100',
+            'fileName' => 'required|file|max:1000',
+            'fileName.*' => 'mimes:excel|max:1000',
         ],
         [
             'fileName.required'=>'Debe seleccionar un archivo en formato Excel segun el formato definido.',
