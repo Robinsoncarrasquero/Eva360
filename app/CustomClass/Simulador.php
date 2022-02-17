@@ -121,7 +121,7 @@ class Simulador
             ],
             [
                 'description' => 'Simulador Cliente I/E Virtual',
-                'nivel_cargo_id' => $nivelcargonosuper,
+                'nivel_cargo_id' => $nivelcargonosuper->id,
             ]
         );
 
@@ -131,7 +131,7 @@ class Simulador
             ],
             [
                 'description' => 'Simulador Colaborador Virtual',
-                'nivel_cargo_id' => $nivelcargonosuper,
+                'nivel_cargo_id' => $nivelcargonosuper->id,
             ]
         );
 
