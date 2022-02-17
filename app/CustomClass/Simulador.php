@@ -16,6 +16,7 @@ use App\Grado;
 use App\Helpers\Helper;
 use App\Mail\EvaluacionEnviada;
 use App\Modelo;
+use App\NivelCargo;
 use App\Notifications\EvaluacionFinalizada;
 use App\Notifications\EvaluacionFinalizadaSimulador;
 use App\Notifications\EvaluacionPendiente;
@@ -63,15 +64,15 @@ class Simulador
         $modelo = Modelo::find($this->modelo);
 
         $date = Carbon::parse(now())->locale('us');
-        $proyecto_name=$date->getTranslatedShortMonthName('MMM YYYY'); // мар
+        $proyecto_name=$date->year.$date->getTranslatedShortMonthName('MMM YYYY');
 
         $proyecto = Proyecto::firstOrCreate(
             [
-                'name' =>  $proyecto_name,
+                'name' =>  'Virtual '.$proyecto_name,
             ],
             [
                 'tipo' => 'Simulador',
-                'description' => $proyecto_name,
+                'description' => 'Virtual '.$proyecto_name ,
             ]
         );
 
@@ -83,72 +84,92 @@ class Simulador
             'proyecto_id' => $proyecto->id,
         ]);
 
-        $cargogerente = Cargo::firstOrCreate(
+        $nivelcargosupervisorio = NivelCargo::firstOrCreate(
             [
-                'name' => 'Simulador Gerente',
+                'name' => 'Supervisorio Virtual',
 
             ],
             [
-                'description' => 'Simulador Gerente',
-                'nivel_cargo_id' => 1,
+                'description' => 'Simulador Nivel Gerente Virtual',
+            ]
+        );
+
+        $cargogerente = Cargo::firstOrCreate(
+            [
+                'name' => 'Gerente Virtual',
+
+            ],
+            [
+                'description' => 'Simulador Cargo Gerente Virtual',
+                'nivel_cargo_id' =>$nivelcargosupervisorio->id,
+            ]
+        );
+
+        $nivelcargonosuper = NivelCargo::firstOrCreate(
+            [
+                'name' => 'No Supervisorio Virtual',
+
+            ],
+            [
+                'description' => 'Simulador No Supervisorio Virtual',
             ]
         );
 
         $cargocliente = Cargo::firstOrCreate(
             [
-                'name' => 'Simulador Cliente',
+                'name' => 'Cliente I/E Virtual',
             ],
             [
-                'description' => 'Simulador Cliente',
-                'nivel_cargo_id' => 2,
+                'description' => 'Simulador Cliente I/E Virtual',
+                'nivel_cargo_id' => $nivelcargonosuper,
             ]
         );
 
         $cargocolaboradores = Cargo::firstOrCreate(
             [
-                'name' => 'Simulador Colaboradores',
+                'name' => 'Colaborador Virtual',
             ],
             [
-                'description' => 'Simulador Colaboradores',
-                'nivel_cargo_id' => 3,
+                'description' => 'Simulador Colaborador Virtual',
+                'nivel_cargo_id' => $nivelcargonosuper,
             ]
         );
 
         $departamento = Departamento::firstOrCreate(
             [
-                'name' => 'Simulador Produccion',
+                'name' => 'Departamento Virtual',
             ],
             [
-                'description' => 'Simulador Produccion',
+                'description' => 'Simulador Departamento Virtual',
             ]
         );
 
         $supervisor = User::updateOrCreate([
-            'email' => 'supervisor@fb360.cf',
+            'email' => 'supervisorvirtual@fb360.cf',
         ], [
             'cargo_id' => $cargogerente->id,
             'departamento_id' => $departamento->id,
             'codigo' => ' ',
             'phone_number' => ' ',
             'password' => bcrypt('secret'),
-            'name' => 'Supervisor',
+            'name' => 'Supervisor Virtual',
         ]);
 
         $par1 = User::firstOrCreate([
-            'email' => 'par1@fb360.cf',
+            'email' => 'parvirtual1@fb360.cf',
         ], [
             'cargo_id' => $user->cargo_id,
             'departamento_id' => $departamento->id,
             'codigo' => ' ',
             'phone_number' => ' ',
             'password' => bcrypt('secret'),
-            'name' => 'Par1',
+            'name' => 'Par Virtual',
 
         ]);
 
         $par2 = User::firstOrCreate([
 
-            'email' => 'par2@fb360.cf',
+            'email' => 'parvirtual2@fb360.cf',
 
         ], [
             'cargo_id' => $user->cargo_id,
@@ -156,7 +177,7 @@ class Simulador
             'codigo' => ' ',
             'phone_number' => ' ',
             'password' => bcrypt('secret'),
-            'name' => 'Par 2',
+            'name' => 'Par Virtual',
 
         ]);
         $pares[] = ['name' => $par1->name, 'email' => $par1->email, 'id' => $par1->id];
@@ -164,7 +185,7 @@ class Simulador
 
 
         $colab1 = User::firstOrCreate([
-            'email' => 'colaborador1@fb360.cf',
+            'email' => 'colaboradorvirtual1@fb360.cf',
 
         ], [
             'cargo_id' => $cargocolaboradores->id,
@@ -172,14 +193,14 @@ class Simulador
             'codigo' => ' ',
             'phone_number' => ' ',
             'password' => bcrypt('secret'),
-            'name' => 'Colaborador 1',
+            'name' => 'Colaborador Virtual',
 
         ]);
         $colaboradores[] = ['name' => $colab1->name, 'email' => $colab1->email, 'id' => $colab1->id];
 
         $colab2 = User::firstOrCreate([
 
-            'email' => 'colaborador2@fb360.cf',
+            'email' => 'colaboradorvirtual2@fb360.cf',
 
         ], [
             'cargo_id' => $cargocolaboradores->id,
@@ -187,14 +208,14 @@ class Simulador
             'codigo' => ' ',
             'phone_number' => ' ',
             'password' => bcrypt('secret'),
-            'name' => 'Colaborador 2',
+            'name' => 'Colaborador Virtual',
 
         ]);
         $colaboradores[] = ['name' => $colab2->name, 'email' => $colab2->email, 'id' => $colab2->id];
 
         $cliente1 = User::firstOrCreate([
 
-            'email' => 'cliente1@fb360.cf',
+            'email' => 'clientevirtual1@fb360.cf',
 
         ], [
             'cargo_id' => $cargocliente->id,
@@ -202,14 +223,14 @@ class Simulador
             'codigo' => ' ',
             'phone_number' => ' ',
             'password' => bcrypt('secret'),
-            'name' => 'Cliente Interno o Externo 1',
+            'name' => 'Cliente Interno o Externo',
 
         ]);
         $clientes[] = ['name' => $cliente1->name, 'email' => $cliente1->email, 'id' => $cliente1->id];
 
         $cliente2 = User::firstOrCreate([
 
-            'email' => 'cliente2@fb360.cf',
+            'email' => 'clientevirtual2@fb360.cf',
 
         ], [
             'cargo_id' => $cargocliente->id,
@@ -217,7 +238,7 @@ class Simulador
             'codigo' => ' ',
             'phone_number' => ' ',
             'password' => bcrypt('secret'),
-            'name' => 'Cliente Interno o Externo 2',
+            'name' => 'Cliente Interno o Externo',
 
         ]);
         $clientes[] = ['name' => $cliente2->name, 'email' => $cliente2->email, 'id' => $cliente2->id];
@@ -239,7 +260,7 @@ class Simulador
             $esuper = new Evaluador();
             $esuper->name = $faker->name;
 
-            $esuper->email = 'supervisor@fb360.cf';
+            $esuper->email = $supervisor->email;
             $esuper->relation = $this->configuracion->supervisor;
             $esuper->remember_token = Str::random(32);
             $esuper->status = 0;
