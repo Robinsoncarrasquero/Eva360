@@ -25,13 +25,15 @@
         <div class="table table-responsive mt-3">
             <table class="table table-light">
                 <thead>
-                    <th style="background-color:darkseagreen;width:20%" class="text-dark">Proyecto</th>
+                    <th style="background-color:darkseagreen;width:10%" class="text-dark">Proyecto</th>
                     <th style="background-color:rgb(102, 197, 7);width:10%" class="text-dark">Status</th>
-                    <th style="background-color:gray;width:15%" class="text-white">Inicio</th>
-                    <th style="background-color:rgb(20, 20, 20);width:15%" class="text-white">Final</th>
+                    <th style="background-color:gray;width:10%" class="text-white">Inicio</th>
+                    <th style="background-color:rgb(20, 20, 20);width:10%" class="text-white">Final</th>
                     <th style="background-color:darkkhaki;width:10%" class="text-dark">Evaluadores</th>
                     <th style="background-color:rgb(144, 142, 158);width:10%" class="text-white">Resultado</th>
-                    <th style="background-color:gold;width:10%" class="text-dark">Grafica</th>
+                    <th style="background-color:gold;width:10%" class="text-dark">Grafica Individual</th>
+                    <th style="background-color:chocolate;width:10%" class="text-white">Grafica Consolidada</th>
+                    <th style="background-color:darkslategray;width:10%" class="text-white">Grafica Cumplimiento</th>
                     <th style="background-color:rgb(76, 0, 255);width:10%" class="text-white">FeedBack</th>
                     <th style="background-color:rgb(255, 0, 0);width:10%" class="text-white">Borrar</th>
                 </thead>
@@ -79,6 +81,23 @@
                             <a href="{{route('simulador.charindividual', $evaluado->id)}}" ><span><i class="material-icons text-info">stacked_line_chart</i></span></a>
                         @endif
                     </td>
+
+                    <td >
+                        @if($evaluado->word_key=='Objetivos')
+                            <a href="{{route('feedback.edit', $evaluado->id)}}"><span><i class="material-icons ">comment</i></span></a>
+                        @else
+                            <a href="{{ route('simulador.charpersonalporgrupo',$evaluado->subproyecto_id) }}"><span><i class="material-icons text-info">comment</i></span></a>
+                        @endif
+                    </td>
+
+                    <td >
+                        @if($evaluado->word_key=='Objetivos')
+                            <a href="{{route('feedback.edit', $evaluado->id)}}"><span><i class="material-icons ">comment</i></span></a>
+                        @else
+                            <a href="{{ route('simulador.analisiscumplimiento',$evaluado->subproyecto_id) }}"><span><i class="material-icons text-info">comment</i></span></a>
+                        @endif
+                    </td>
+
                     <td >
                         @if($evaluado->word_key=='Objetivos')
                             <a href="{{route('feedback.edit', $evaluado->id)}}"><span><i class="material-icons ">comment</i></span></a>
@@ -86,6 +105,8 @@
                             <a href=""><span><i class="material-icons text-info">comment</i></span></a>
                         @endif
                     </td>
+
+
 
                     <td>
                         <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')"

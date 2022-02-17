@@ -192,7 +192,7 @@
 
 
         <div class="col-6">
-            <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+            <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Regresar</a></span>
         </div>
 
     </div>

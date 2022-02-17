@@ -12,25 +12,20 @@
 
     <div class="mt-2 pb-2">
         <div class="text text-center">
-            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Auto Evaluacion Virtual en un minuto y con cualquier metodo</h3>
+            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Evaluacion de Desempeño por Competencias en un minuto</h3>
         </div>
         <p>
-
-            La AutoEvaluacion virtual es un mecanismo ingenioso que permite conocer a una Persona y experimentar como funciona las <strong>Evaluaciones de Desempeño por Competencias</strong>.
-            Es un proceso muy sencillo e intuitivo. Solo debes registrarte con un correo válido y podrás crear evaluaciones con los métodos <strong>90, 180, 270 y 360 grados en un minuto</strong>.
-            Como funciona? El sistema creará los evaluadores virtuales cada vez que se lanza una Evaluacion segun el método escogido.
-            El robot de evaluaciones creará los evaluadores virtuales por cada relacion laboral <strong>(Supervisor, Pares, Colaboradores, Clientes)</strong>.
-            Ejemplo:
-            El método 90: (Supervisor + Autoevaluacion). El método 180: (Supervisor + Pares + Autoevaluacion).
-            El método 270: (Supervisor + Pares + Colaboradores + Autoevaluacion).
-            El método 360: (Supervisor + Pares + Colaboradores + Clientes Internos o Externos + Autoevaluacion).
-            El modelo de competencias está configurado para tres niveles de cargos <strong>(Nivel 2, Nivel 3, Nivel 4)</strong>.
-            Los evaluadores virtuales responderan el cuestionario automáticamente cada vez que el usuario registrado responde la Auto Evaluacion.
-            Los resultados pueden ser consultados en el historico de Evaluaciones.
-        </p>
-
+            La AutoEvaluacion Virtual es un mecanismo ideado para que una Persona conozca y experimente como funcionan las <strong>Evaluaciones de Desempeño por Competencias</strong>,
+            en un proceso sencillo, resumido, intuitivo y rápido pero brindandole todos los resultados de una evaluacion real. Como funciona?
+            El sistema creará los evaluadores virtuales <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
+            por cada metodo. El método 90 : creará 2 Evaluadores (Supervisor + Autoevaluacion).
+            El método 180: creará 4 Evaluadores(Supervisor + Pares + Autoevaluacion).
+            El método 270: creará 6 Evaluadores (Supervisor + Pares + Colaboradores + Autoevaluacion).
+            El método 360: creará 8 Evaluadores (Supervisor + Pares + Colaboradores + Clientes + Autoevaluacion).
+            El modelo de competencias está configurado. Los evaluadores virtuales responderan el cuestionario mediante un robot que reaccionará automaticamente.
+            </p>
         <div class="d-flex justify-content-center">
-            <span><a href="{{route('simulador.autoevaluacion')}}" class="btn btn-dark btn-lg">Lanzar Auto Evaluacion Virtual</a></span>
+            <span><a href="{{route('simulador.autoevaluacion')}}" class="btn btn-dark btn-lg">Probar Auto Evaluacion Virtual</a></span>
         </div>
 
     </div>

@@ -6,6 +6,7 @@ use App\Cargo;
 use App\Competencia;
 use App\Comportamiento;
 use app\CustomClass\DataEvaluacion;
+use app\CustomClass\DataPersonal;
 use app\CustomClass\DataResultado;
 use app\CustomClass\EnviarEmail;
 use app\CustomClass\LanzarEvaluacion;
@@ -18,6 +19,7 @@ use App\Frecuencia;
 use App\Helpers\Helper;
 use App\Modelo;
 use App\Role;
+use App\SubProyecto;
 use App\User;
 use Faker\Factory;
 use Illuminate\Database\QueryException;
@@ -443,5 +445,56 @@ class SimuladorController extends Controller
         }
         //dd($dataSerie,$dataCategoria);
         return \view('simulador.charteva360', compact("dataSerie", "dataCategoria", "title", "evaluado"));
+    }
+
+     /**
+     * Presenta la grafica de resultados personales por subproyecto
+     */
+    public function charpersonalporgrupo($subproyecto_id)
+    {
+        $subProyecto = SubProyecto::find($subproyecto_id);
+        //Buscamos el grupo de evaluados relacionados al subproyecto
+        $grupoevaluados = Evaluado::where('subproyecto_id',$subproyecto_id);
+        $loteEvaluados=$grupoevaluados->pluck('id');
+
+        //instanciamos un objeto de data personal
+        $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
+        $objData->procesarData();
+
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
+        $dataBrecha = $objData->getDataBrecha();
+        $dataBrechaPorCompetencias = $objData->getDataBrechaPorCompetencia();
+        if (!$dataCategoria){
+            \abort(404);
+        }
+        $title="Resultado personal por grupo";
+        return \view('simulador.charpersonalporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha','dataBrechaPorCompetencias'));
+    }
+
+     /**
+     * Presenta informacion tabuladada de analisis personal por subproyecto
+     */
+    public function analisiscumplimiento($subproyecto_id)
+    {
+        $subProyecto = SubProyecto::find($subproyecto_id);
+        //Buscamos el grupo de evaluados relacionados al subproyecto
+        $grupoevaluados = Evaluado::where('subproyecto_id',$subproyecto_id);
+        $loteEvaluados=$grupoevaluados->pluck('id');
+
+        //instanciamos un objeto de data personal
+        $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
+        $objData->procesarData();
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
+        $dataBrecha = $objData->getDataBrecha();
+        $dataSerieBrecha = $objData->getDataSerieBrecha();
+        $dataCategoriaBrecha = $objData->getDataCategoriaBrecha();
+        $dataBrechaPorCompetencias = $objData->getDataBrechaPorCompetencia();
+        if (!$dataBrecha){
+            \abort(404);
+        }
+        $title="Analisis de cumplimiento";
+        return \view('simulador.charcumplimientoporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha",'dataBrechaPorCompetencias'));
     }
 }

@@ -464,4 +464,16 @@ class Simulador
 
     }
 
+
+    /**Nombre del proyecto virtual */
+    public function nombre_proyecto_simulador(){
+
+        $date = Carbon::parse(now())->locale('us');
+        $proyecto_name=$date->year.$date->getTranslatedShortMonthName('MMM YYYY');
+        return $proyecto_name;
+
+    }
+
+
+
 }

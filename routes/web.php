@@ -28,6 +28,24 @@ use Nexmo\Laravel\Facade\Nexmo;
 /**
  * Route simulador de Autoevaluacion
  */
+
+ /**
+ * Presenta una grafica de resultados personales por subproyecto
+ */
+Route::get('simulador/{subproyecto_id}/charpersonalporgrupo',"SimuladorController@charpersonalporgrupo")
+->name('simulador.charpersonalporgrupo')
+->middleware(['auth']);
+
+/**
+ * Presenta una tabla de analisis personales tabulados por subproyecto
+ */
+/**
+ * Presenta una tabla de analisis personales tabulados por subproyecto
+ */
+Route::get('simulador/{subproyecto_id}/cumplimiento',"SimuladorController@analisiscumplimiento")
+->name('simulador.analisiscumplimiento')
+->middleware(['auth']);
+
 Route::get('simulador/{token}/evaluacion',"SimuladorController@token")
 ->name('simulador.token');
 
