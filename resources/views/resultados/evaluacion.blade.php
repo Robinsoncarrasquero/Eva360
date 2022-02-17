@@ -25,6 +25,7 @@
                 <table id="table{{ $evaluador->id }}" class="table table-striped table-table table-responsive ">
                     <thead>
                     <tr id="{{ $evaluador->id }}">
+                        <span class="material-icons orange600" style="font-size:2rem" >face</span>
                         <th class="chk-enviar-prueba" colspan="3">
                             <input type="checkbox" class="btncheck">Reenviar email
                         </th>
