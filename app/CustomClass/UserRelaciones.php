@@ -136,7 +136,7 @@ class UserRelaciones
 
         try {
            $manager = $this->manager;
-            $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id=>'=>$manager->id,'relations'=>$this->configuracion->manager];
+           // $evaluadores[]=['name'=>$manager->name,'email'=>$manager->email,'user_id=>'=>$manager->id,'relations'=>$this->configuracion->manager];
 
             $supervisor = $this->supervisor;
             $evaluadores[]=['name'=>$supervisor->name,'email'=>$supervisor->email,'user_id=>'=>$supervisor->id,'relations'=>$this->configuracion->supervisor];

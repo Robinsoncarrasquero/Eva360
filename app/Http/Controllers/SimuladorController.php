@@ -117,7 +117,7 @@ class SimuladorController extends Controller
                 $user->departamento_id = $request->departamento;
                 $user->cargo_id = $request->cargo;
                 $user->codigo = Str::random(10);;
-                $user->email_super = 'supervisor@fb360.cf';
+                $user->email_super = 'supervisorvirtual@fb360.cf';
                 $user->email_verified_at = now();
                 $user->password = bcrypt('secret1234');
                 $user->remember_token = Str::random(10);
