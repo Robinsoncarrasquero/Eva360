@@ -16,7 +16,8 @@ class SubProyectoController extends Controller
      */
     public function index()
     {
-        $records= SubProyecto ::simplePaginate(10);
+        $records= SubProyecto::simplePaginate(25);
+
         return \view('subproyecto.index',compact('records'));
     }
 

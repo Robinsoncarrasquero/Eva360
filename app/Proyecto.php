@@ -8,7 +8,7 @@ class Proyecto extends Model
 {
      protected $table='proyectos';
 
-     protected $fillable=['name','description','carga_masivas_id'];
+     protected $fillable=['name','description','carga_masivas_id','virtual'];
 
     //Hacer busquedas por nombre
     public function scopeName($query,$name){

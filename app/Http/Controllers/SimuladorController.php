@@ -66,11 +66,13 @@ class SimuladorController extends Controller
     public function autoevaluacion(Request $request)
     {
 
+        Simulador::crear_cargo_dpto_virtual();
         $faker = Factory::create();
         $nombre = $faker->firstName. " ".$faker->lastName;
         $email = '';
-        $cargos = Cargo::all();
-        $departamentos = Departamento::all();
+        $cargos = Cargo::where('virtual',true)->get();
+        $departamentos = Departamento::where('virtual',true)->get();
+
         $modelos = Modelo::all();
         if (Auth::check()) {
             $nombre = Auth::user()->name;

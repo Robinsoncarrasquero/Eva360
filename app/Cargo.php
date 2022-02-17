@@ -9,7 +9,7 @@ class Cargo extends Model
     //
     protected $table='cargos';
 
-    protected $fillable=['name','description','nivel_cargo_id'];
+    protected $fillable=['name','description','nivel_cargo_id','virtual'];
 
     /**
      * Un cargo pertenece a un nivel de cargo

@@ -73,6 +73,7 @@ class Simulador
             [
                 'tipo' => 'Simulador',
                 'description' => 'Virtual '.$proyecto_name ,
+                'virtual' => true,
             ]
         );
 
@@ -90,7 +91,8 @@ class Simulador
 
             ],
             [
-                'description' => 'Simulador Nivel Gerente Virtual',
+                'description' => 'Simulador Supervisorio Virtual',
+                'virtual' => true,
             ]
         );
 
@@ -100,8 +102,9 @@ class Simulador
 
             ],
             [
-                'description' => 'Simulador Cargo Gerente Virtual',
+                'description' => 'Simulador Gerente Virtual',
                 'nivel_cargo_id' =>$nivelcargosupervisorio->id,
+                'virtual' => true,
             ]
         );
 
@@ -112,6 +115,7 @@ class Simulador
             ],
             [
                 'description' => 'Simulador No Supervisorio Virtual',
+                'virtual' => true,
             ]
         );
 
@@ -122,6 +126,7 @@ class Simulador
             [
                 'description' => 'Simulador Cliente I/E Virtual',
                 'nivel_cargo_id' => $nivelcargonosuper->id,
+                'virtual' => true,
             ]
         );
 
@@ -132,15 +137,17 @@ class Simulador
             [
                 'description' => 'Simulador Colaborador Virtual',
                 'nivel_cargo_id' => $nivelcargonosuper->id,
+                'virtual' => true,
             ]
         );
 
         $departamento = Departamento::firstOrCreate(
             [
-                'name' => 'Departamento Virtual',
+                'name' => 'Ventas Virtual',
             ],
             [
-                'description' => 'Simulador Departamento Virtual',
+                'description' => 'Simulador Ventas Virtual',
+                'virtual' => true,
             ]
         );
 
@@ -151,7 +158,7 @@ class Simulador
             'departamento_id' => $departamento->id,
             'codigo' => ' ',
             'phone_number' => ' ',
-            'password' => bcrypt('secret'),
+            'password' => bcrypt('secret@1234'),
             'name' => 'Supervisor Virtual',
         ]);
 
@@ -162,7 +169,7 @@ class Simulador
             'departamento_id' => $departamento->id,
             'codigo' => ' ',
             'phone_number' => ' ',
-            'password' => bcrypt('secret'),
+            'password' => bcrypt('secret@1234'),
             'name' => 'Par Virtual',
 
         ]);
@@ -176,7 +183,7 @@ class Simulador
             'departamento_id' => $departamento->id,
             'codigo' => ' ',
             'phone_number' => ' ',
-            'password' => bcrypt('secret'),
+            'password' => bcrypt('secret@1234'),
             'name' => 'Par Virtual',
 
         ]);
@@ -192,7 +199,7 @@ class Simulador
             'departamento_id' => $departamento->id,
             'codigo' => ' ',
             'phone_number' => ' ',
-            'password' => bcrypt('secret'),
+            'password' => bcrypt('secret@1234'),
             'name' => 'Colaborador Virtual',
 
         ]);
@@ -207,7 +214,7 @@ class Simulador
             'departamento_id' => $departamento->id,
             'codigo' => ' ',
             'phone_number' => ' ',
-            'password' => bcrypt('secret'),
+            'password' => bcrypt('secret@1234'),
             'name' => 'Colaborador Virtual',
 
         ]);
@@ -222,8 +229,8 @@ class Simulador
             'departamento_id' => $departamento->id,
             'codigo' => ' ',
             'phone_number' => ' ',
-            'password' => bcrypt('secret'),
-            'name' => 'Cliente Interno o Externo',
+            'password' => bcrypt('secret@1234'),
+            'name' => 'Cliente Virtual',
 
         ]);
         $clientes[] = ['name' => $cliente1->name, 'email' => $cliente1->email, 'id' => $cliente1->id];
@@ -237,8 +244,8 @@ class Simulador
             'departamento_id' => $departamento->id,
             'codigo' => ' ',
             'phone_number' => ' ',
-            'password' => bcrypt('secret'),
-            'name' => 'Cliente Interno o Externo',
+            'password' => bcrypt('secret@1234'),
+            'name' => 'Cliente Virtual',
 
         ]);
         $clientes[] = ['name' => $cliente2->name, 'email' => $cliente2->email, 'id' => $cliente2->id];
@@ -471,6 +478,76 @@ class Simulador
         $date = Carbon::parse(now())->locale('us');
         $proyecto_name=$date->year.$date->getTranslatedShortMonthName('MMM YYYY');
         return $proyecto_name;
+
+    }
+
+    public static function crear_cargo_dpto_virtual(){
+
+        $nivelcargosupervisorio = NivelCargo::firstOrCreate(
+            [
+                'name' => 'Supervisorio Virtual',
+
+            ],
+            [
+                'description' => 'Simulador Supervisorio Virtual',
+                'virtual' => 1,
+            ]
+        );
+
+        $cargogerente = Cargo::firstOrCreate(
+            [
+                'name' => 'Gerente Virtual',
+
+            ],
+            [
+                'description' => 'Simulador Gerente Virtual',
+                'nivel_cargo_id' =>$nivelcargosupervisorio->id,
+                'virtual' => 1,
+            ]
+        );
+
+        $nivelcargonosuper = NivelCargo::firstOrCreate(
+            [
+                'name' => 'No Supervisorio Virtual',
+
+            ],
+            [
+                'description' => 'Simulador No Supervisorio Virtual',
+                'virtual' => 1,
+            ]
+        );
+
+        $cargocliente = Cargo::firstOrCreate(
+            [
+                'name' => 'Analista Virtual',
+            ],
+            [
+                'description' => 'Simulador Analista Virtual',
+                'nivel_cargo_id' => $nivelcargonosuper->id,
+                'virtual' => 1,
+            ]
+        );
+
+        $cargocolaboradores = Cargo::firstOrCreate(
+            [
+                'name' => 'Coordinador Virtual',
+            ],
+            [
+                'description' => 'Simulador Coordinador Virtual',
+                'nivel_cargo_id' => $nivelcargosupervisorio->id,
+                'virtual' => 1,
+            ]
+        );
+
+        $departamento = Departamento::firstOrCreate(
+            [
+                'name' => 'Ventas Virtual',
+            ],
+            [
+                'description' => 'Simulador Ventas Virtual',
+                'virtual' => true,
+            ]
+        );
 
     }
 

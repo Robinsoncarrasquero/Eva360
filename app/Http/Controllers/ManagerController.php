@@ -125,9 +125,9 @@ class ManagerController extends Controller
         // $subproyectos = SubProyecto::has('evaluados')->with(['evaluados.evaluado' => function($query) use ($departamento_id) {
         // $query->where('departamento_id', $departamento_id)->latest('created_at');
         // }])->simplePaginate(25);
-        $subproyectos = SubProyecto::has('evaluados')->with(['evaluados.user' => function($query) use ($departamento_id) {
-            $query->where('departamento_id', $departamento_id)->latest('created_at');
-            }])->simplePaginate(25);
+        // $subproyectos = SubProyecto::has('evaluados')->with(['evaluados.user' => function($query) use ($departamento_id) {
+        //     $query->where('departamento_id', $departamento_id)->latest('created_at');
+        //     }])->simplePaginate(25);
 
         $proyectos = Proyecto::has('subproyectos')->with(['subproyectos.evaluados.user' => function($query) use ($departamento_id) {
             $query->where('users.departamento_id', $departamento_id)->latest('created_at');

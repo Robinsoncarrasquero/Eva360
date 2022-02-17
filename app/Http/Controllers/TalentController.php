@@ -50,7 +50,7 @@ class TalentController extends Controller
     {
         $title="Lista de empleados por Departamentos";
         $buscarWordKey = $request->get('buscarWordKey');
-        $departamentos = Departamento::name($buscarWordKey)->orderBy('id','DESC')->paginate(5);
+        $departamentos = Departamento::name($buscarWordKey)->where('virtual',false)->orderBy('id','DESC')->paginate(5);
         return \view('talent.index',compact('departamentos','title'));
     }
 
