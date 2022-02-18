@@ -14,12 +14,11 @@
             <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Registro de usuario para Auto Evaluacion Virtual</h3>
         </div>
         <p>
-
-            Debes llenar el formulario con los datos de tu correo, seleccionar un Cargo, una Ubicacion ,
-            y el Método de Evaluacion que prefieras <strong>90, 180, 270 o 360 grados</strong>.
-            Hacer una Evaluacion es muy sencillo y rápido. Obtendrás los resultados en un minuto con un cerrar y abrir de ojos.
+           LLena el formulario con los datos de tu correo, selecciona un Cargo, una Ubicacion ,
+            y un Método de Evaluacion <strong>90, 180, 270 o 360 grados</strong>.
+           Al finalizar obtendrás los resultados en un minuto.
         </p>
-        <p class="text text-center text-success"><strong >Exito con tu AutoEvaluacion Virtual</strong>.</p>
+        <p class="text text-center text-success"><strong >Exitos con tu AutoEvaluacion Virtual</strong>.</p>
 
     </div>
 
