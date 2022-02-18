@@ -12,15 +12,15 @@
 
     <div class="mt-2 pb-2">
         <div class="text text-center">
-            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Evaluacion Virtual de Desempeño por Competencias</h3>
+            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.2rem">Evaluacion Virtual de Desempeño por Competencias</h3>
         </div>
         <p>
-            La AutoEvaluacion Virtual es una facilidad creada para que una Persona experiemente mediante la<strong class="btn btn-dark">Auto Evaluacion</strong>,
-            en un proceso facil, resumido, intuitivo y rápido , el sistema <strong class="bg-warning">HRFeedBack360</strong>.
-            Como funciona? <strong class="bg-warning">HRFeedBack360</strong> creará los Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
-            Segun el metodo seleccionado. El método 90(2 EV); El método 180(4 EV); El método 270(6 EV); El método 360(8 EV).
-            Los EV responderan el cuestionario medinate un robot virtual <span class="material-icons bg-success" style="font-size:2rem" >android</span>
-            que reaccionará automaticamente.
+            La <strong>Evaluacion Virtual</strong> es una facilidad creada para que una Persona experimente mediante la <strong class="text text-dark">Auto Evaluacion</strong>,
+            en nuestro sistema <strong class="text text-warning">HRFeedBack360</strong>, en un proceso sencillo, resumido, intuitivo y rápido.
+            Como funciona? <strong class="text text-warning">HRFeedBack360</strong> creará Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
+            , segun el método de evaluación seleccionado. El método 90(2 EV); El método 180(4 EV); El método 270(6 EV); El método 360(8 EV).
+            Los EV responderan el cuestionario mediante un robot <span class="material-icons bg-success" style="" >android</span>
+            que reaccionará automáticamente.
             </p>
             {{-- <p>
                 La AutoEvaluacion Virtual es un mecanismo ideado para que una Persona conozca y experimente como funcionan las <strong>Evaluaciones de Desempeño por Competencias</strong>,
@@ -37,7 +37,7 @@
         </div>
 
     </div>
-    <div class="card-header text-center xtitulo360 " style="background-color:brown; color:white; font-size:1.5rem">
+    <div class="card-header text-center xtitulo360 " style="background-color:brown; color:white; font-size:1.2rem">
         Diccionario de Evaluacion de Desempeño Por Competencias<span><i class="material-icons">360</i></span></i>
     </div>
     {{-- <div class="card-body ">

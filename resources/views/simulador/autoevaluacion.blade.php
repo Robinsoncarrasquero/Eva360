@@ -11,14 +11,14 @@
     </div>
     <div class="mt-2 pb-2">
         <div class="text text-center">
-            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Registro de usuario para Auto Evaluacion Virtual</h3>
+            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Auto Evaluacion Virtual</h3>
         </div>
-        <p>
-           LLena el formulario con los datos de tu correo, selecciona un Cargo, una Ubicacion ,
-            y un Método de Evaluacion <strong>90, 180, 270 o 360 grados</strong>.
-           Al finalizar obtendrás los resultados en un minuto.
-        </p>
-        <p class="text text-center text-success"><strong >Exitos con tu AutoEvaluacion Virtual</strong>.</p>
+        <p >
+            LLena el formulario con los datos de tu correo, selecciona un Cargo, una Ubicacion ,
+            y un Método de Evaluacion <strong >90, 180, 270 o 360 grados</strong>.
+           Al finalizar obtendrás los resultados e indicadores graficos.
+            </p>
+        <p class="text text-center text-success"><strong> Exitos con la Auto Evaluacion Virtual</strong></p>
 
     </div>
 
@@ -26,9 +26,11 @@
 
             <form action="{{ route('simulador.registrar') }}" method="POST">
                 @csrf
+
                 <div class="form-group">
+
                     <div class="col">
-                        <label for="name">Nombre</label>
+                        <label for="name">Nombre Virtual</label>
                         <input readonly id="name" class="form-control" type="text" name="name" value="{{old('name',$nombre)}}">
                     </div>
 
@@ -40,7 +42,7 @@
                     </div>
 
                     <div class="col">
-                        <label >Cargo</label>
+                        <label >Cargo Virtual</label>
                         <select class="form-control" id="cargo" name="cargo">
                             @foreach ($cargos as $cargo)
                                 <option  value="{{ $cargo->id }}">{{ $cargo->name}}</option>
@@ -49,7 +51,7 @@
                     </div>
 
                     <div class="col">
-                        <label >Ubicacion</label>
+                        <label >Ubicacion Virtual</label>
                         <select class="form-control" id="departamento" name="departamento">
                             @foreach ($departamentos as $departamento)
                                 <option  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
@@ -59,7 +61,7 @@
 
 
                     <div class="col">
-                        <label for="metodo">Metodo de evaluacion</label>
+                        <label for="metodo">Metodos de evaluacion</label>
                         <select id="metodo" class="form-control" name="metodo" >
                             @foreach ($metodos as $metodo)
                                     <option value="{{$metodo}}">{{ $metodo }}</option>
@@ -67,16 +69,15 @@
                         </select>
                     </div>
 
-                </div>
-
-                <div class="form-group">
 
 
-                    <div class="panel pb-3 text-center">
+
+
+                    <div class="pb-2 text text-center">
                         <h5 class="text text-danger">Modelo de competencias</h5>
                     </div>
 
-                    <table id="table1" class="table table-condensed table-dark">
+                    <table  class="table table-condensed table-dark">
                         <thead>
                             <th >Nombre</th>
                             <th >Competencias</th>
@@ -94,7 +95,7 @@
                                 </td>
                                 <td>
                                     <div class="form-check">
-                                        <input type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[]">
+                                        <input checked type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[]">
                                         <label class="form-check-label" for="{{"$modelo->id"}}">
                                         </label>
                                     </div>
@@ -105,10 +106,11 @@
 
                         </tbody>
                     </table>
-                    <div class="clearfix">
+                    <div class="xclearfix">
                         <span><a href="{{ route('vision360') }}" class="btn btn-dark btn-lg">Regresar</a></span>
                         <button type="submit" class="btn btn-dark btn-lg " value="Next">Registrar</button>
                     </div>
+
                 </div>
 
             </form>
