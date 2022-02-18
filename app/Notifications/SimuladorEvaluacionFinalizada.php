@@ -50,9 +50,10 @@ class SimuladorEvaluacionFinalizada extends Notification
             ->greeting('Hola.')
             ->line($notifiable->name)
 
-            ->line('Estimado usuario virtual, le notificamos que la Evaluacion Virtual ha finalizado.')
+            ->line('Estimado usuario virtual, le notificamos que la Evaluacion Virtual ha finalizado. Revise los resultados.')
             ->action('Resultados', url($url))
-            ->line('Gracias por utilizar el Robot de AutoEvaluacion virtual.')
+            ->line('Gracias por probar nuestro Sistema de Evaluacion de Desempeño Por Competencias HR-FeedBack-360')
+            ->line('Vuelva pronto y haga otra Auto Evaluacion simulada con el mismo usuario registrado.')
             ->salutation('Saludos');
     }
 

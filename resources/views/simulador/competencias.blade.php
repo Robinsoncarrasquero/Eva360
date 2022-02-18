@@ -25,14 +25,9 @@
                 <h4 >COMPETENCIAS</h4>
             </div>
 
-            <p>Se presentan las competencias del cuestionario que usted debe responder. Seleccione la competencia en el orden que considere conveniente.</p>
-            <p>
-                 Las evaluaciones cuentan con un robot para cada Evaluador Virtual en cada relacion laboral segun el método escogido.
-                 Ejemplo: El Metodo 270 grados se compone de: Supervisor + Pares + Colaboradores + Autoevaluacion. En este caso el sistema creará
-                 cinco evaluadores virtuales que responderán las competencias automaticamente, sin la intervencion humana. La Autoevaluacion debe ser respondida por el usuario registrado.
-                 Cada vez que responda una competencia los Evaluadores Virtuales tambien lo haran junto con usted.
-                 <p class="text text-center"><a href="{{route('simulador.resultados', $evaluado->id)}}" class="btn btn-warning btn-lg">Respuesta de Evaluadores</a></p>
-                </p>
+            <p>Se presentan las competencias del modelo que usted debe responder. Seleccione la competencia en el orden que considere conveniente, no hay un orden específico.</p>
+
+            <p class="text text-center"><a href="{{route('simulador.resultados', $evaluado->id)}}" class="btn btn-warning btn-lg">Respuesta de Evaluadores</a></p>
 
         </div>
 

@@ -24,8 +24,8 @@
 <body>
 <div class="container">
 
-    <p>Aqui se muestran dos graficas una de linea y otra de barra del resultado individual obtenido en la evaluacion simulada
-        para apreciar los indicadores de una forma mas sencilla y facil de interpretacion para tomar acciones de desarrollo.</p>
+    <p>Se presentan dos graficas una de linea y otra de barra del resultado, con
+         indicadores graficos de facíl lectura para la toma de decisiones y acciones de desarrollo.</p>
     <div class="mt-3">
         <div class="col-lg-12 mb-1" id="container-line"></div>
     </div>

@@ -94,18 +94,21 @@ class SimuladorController extends Controller
                 'name' => 'required',
                 'email' => 'required|unique:users,email,1',
                 'email' => 'email:rfc,dns',
-                'metodo' => 'required',
+                // 'metodo' => 'required',
+                'metodoradio' => 'required',
             ],
 
             [
-                'modeloradio.required' => 'Debe seleccionar un modelo. Es requerido',
+                'modeloradio.required' => 'Debe seleccionar un modelo.',
                 'name.required' => 'El Nombre es requerido.',
                 'email.email' => "Este email es requerido y debe tener el formato correcto.",
                 'email.required' => "Email de usuario es unico y obligatorio.",
-                'metodo.required' => 'Metodo requerido.',
+                // 'metodo.required' => 'Metodo requerido.',
+                'metodoradio.required' => 'Metodo radio requerido.',
             ],
 
         );
+
 
         $modelo = Arr::get($request->modeloradio, '0', 0);
 
@@ -140,7 +143,7 @@ class SimuladorController extends Controller
 
         //registro de evaluadores
 
-        $userSimulador = new Simulador($user, $modelo, $request->metodo);
+        $userSimulador = new Simulador($user, $modelo, $request->metodoradio);
         $autoevaluado = $userSimulador->CrearEvaluadores();
         if (!$autoevaluado) {
             return \redirect()->back()->withErrors($user->name . ', no se pudo crear la evaluacion simulada, intente nuevamente');

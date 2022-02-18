@@ -45,7 +45,8 @@
                 <h5>Indicadores de Cumplimiento</span></h5>
             </div>
         </div>
-
+       <p>Se presentan dos graficas una de linea y otra de barra del resultado, con
+         indicadores graficos facil de leer e interpretar para la toma de acciones de desarrollo.</p>
         <div class="table table-responsive">
             <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                 <thead class="table-thead" style="text-align: center">

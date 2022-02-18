@@ -10,7 +10,7 @@
         @include('flash-message')
     </div>
 
-    <div class="card card-header mt-2 mb-4">
+    <div class="card-header mt-2 mb-4">
         <div class="text text-center">
             <h5>Evaluadores de <span class=" text text-success">{{ $evaluado->user->name }}</span></h5>
 
