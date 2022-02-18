@@ -363,7 +363,13 @@ class Simulador
 
         $grados = Grado::where('competencia_id',$competencia->id)->get();
 
-        $comportamientos = Comportamiento::where('evaluacion_id', $evaluacion->id)->get();
+        $conducta = Comportamiento::where('evaluacion_id', $evaluacion->id)->get();
+        foreach ($conducta as $conducta) {
+            $conducta->frecuencia = 0;
+            $conducta->ponderacion = 0;
+            $conducta->resultado = 0;
+            $conducta->save();
+        }
         $modelkeys=$grados->modelKeys();
         $gradokey=collect($modelkeys);
         $grado_id=$gradokey->random();
@@ -377,19 +383,18 @@ class Simulador
                 $ponderacion = Arr::get($conducta, 'ponderacion');
                 $frecuencia = Arr::get($conducta, 'frecuencia');
                 $resultado = Arr::get($conducta, 'resultado');
-
-                Comportamiento::updateOrCreate(
-                    [
-                        'grado_id' => $comportamiento->id,
-                        'evaluacion_id'=>$evaluacion->id,
-                    ],
-                    [
-                        'poderacion' => $ponderacion,
-                        'frecuencia' => $frecuencia,
-                        'resultado' => $resultado,
-                    ]
-                );
             }
+            Comportamiento::updateOrCreate(
+                [
+                    'grado_id' => $comportamiento->id,
+                    'evaluacion_id'=>$evaluacion->id,
+                ],
+                [
+                    'poderacion' => $ponderacion,
+                    'frecuencia' => $frecuencia,
+                    'resultado' => $resultado,
+                ]
+            );
 
 
         }
