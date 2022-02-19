@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $receptores = Evaluador::where('status',1)->get();
+            $receptores = Evaluador::where('status',1)->where('virtual',false)->get();;
             Notification::send($receptores, new EvaluacionPendiente('evaluacion.token'));
         })->dailyAt('10:00')->weekdays();
         //})->twiceDaily(11, 14)->weekdays();
@@ -39,8 +39,11 @@ class Kernel extends ConsoleKernel
         //Evaluados Virtuales que no terminaron la prueba
         //El robot responde la prueba y envia correo de resultados
         $schedule->call(function () {
-            $abandonadores = Evaluador::where('status',1)->where('relation','Autoevaluacion')->get();
-            Simulador::respuestaPruebaOlvidada($abandonadores);
+            $evaluadores = Evaluador::where(['virtual'=>true,'relation'=>'Autoevaluacion'])->get();
+            $abandonadores = $evaluadores->reject(function ($evaluador) {
+                return $evaluador->status==2;
+            });
+            Simulador::responderPruebaOlvidada($abandonadores);
         //})->dailyAt('10:00')->weekdays();
         })->everyMinute();
     }

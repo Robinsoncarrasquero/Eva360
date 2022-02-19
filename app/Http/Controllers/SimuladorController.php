@@ -129,6 +129,7 @@ class SimuladorController extends Controller
                 $user->password = bcrypt('secret1234');
                 $user->remember_token = Str::random(10);
                 $user->phone_number = '999-999-999';
+                $user->virtual = true;
                 $user->save();
 
                 //Agredamos el rol simulador
@@ -161,7 +162,13 @@ class SimuladorController extends Controller
 
         //Envia un correo al evaluador simulador
 
-        Simulador::emailtareapendiente($autoevaluado);
+        Simulador::emailRegistroAutoEvaluacion($autoevaluado);
+
+        //Responder durante el registro
+        //$evaluado = $autoevaluado->evaluado;
+        //Simulador::respuestaVirtual($evaluado,false);
+        // Simulador::emailevaluacionFinalizadaEvaluador($autoevaluado);
+
         if (!Auth::check()) {
 
             return \redirect()->route('login')
@@ -218,6 +225,26 @@ class SimuladorController extends Controller
 
         return \redirect()->route('simulador.competencias', $evaluador->id);
     }
+
+     /*Redirige al usuario cuando ha finalizado la prueba para llevarlo al historico desde el correo
+     recibido Token*/
+     public function tokenresultado($token)
+     {
+
+         //Filtramos el evaluador segun el token recibido
+         $evaluador = Evaluador::where('remember_token', $token)->first();
+
+         if ($evaluador == \null) {
+             abort(404);
+             return redirect('login');
+         }
+         $user = Auth::loginUsingId($evaluador->user_id);
+
+         if (!Auth::check()) {
+             return redirect('login');
+         }
+        return \redirect()->route('simulador.historicoevaluaciones');
+     }
 
     /**
      * El controlador recibe el token del evaluador y muestra la lista de competencias relacionadas.
@@ -340,6 +367,7 @@ class SimuladorController extends Controller
 
         $evaluado = $evaluador->evaluado;
         //El Robot responde la prueba completamente con todas las competencias
+        //de los evaluadores virtuales
         Simulador::respuestaVirtual($evaluado,false);
 
         return \redirect()->route('simulador.competencias', $evaluacion->evaluador->id);
@@ -393,7 +421,7 @@ class SimuladorController extends Controller
 
             //Enviamos el correo de finalizacion al administrador
 
-            Simulador::emailevaluacionFinalizada($evaluado);
+            Simulador::emailevaluacionFinalizadaEvaluador($evaluador);
         }
 
         //Alert::success('Prueba Finalizada',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));

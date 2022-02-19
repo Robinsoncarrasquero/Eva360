@@ -18,16 +18,38 @@
 
                 <h5 class="text text-center">{{  $evaluador->name }}, analice con criterio y determinacion las competencia de :</h5>
                 <h4 class="text text-danger d-flex justify-content-center" style="color:limegreen">{{ $evaluado->name }}</h4>
-                <h3 class="text text-danger d-flex justify-content-center">Evaluacion de {{ $evaluado->word_key }} Grados</h3>
             </div>
 
-            <div class="text text-center mt-3" style="color:dodgerblue">
+            <div class="mb-2">
+                <h4 class="text text-danger d-flex justify-content-center">Evaluacion de {{ $evaluado->word_key }} Grados</h4>
+                @switch($evaluado->word_key)
+                    @case('180')
+                        <p class="text text-dark d-flex justify-content-center" >
+                        Sus Evaluadores Virtual son 3: EV Supervisor - EV 2 Pares </p>
+                        @break
+                    @case('270')
+                        <p class="text text-dark d-flex justify-content-center">
+                        Sus Evaluadores Virtual son 5: EV Supervisor - EV 2 Pares - EV 2 Colaboradores </p>
+                        @break
+                    @case('360')
+                        <p class="text text-dark d-flex justify-content-center" >
+                            Sus Evaluadores Virtual son 7: EV Supervisor - EV 2 Pares - EV 2 Colaboradores - EV 2 Clientes</p>
+                            @break
+                    @default
+                        <p class="text text-dark d-flex justify-content-center" >
+                            Su Evaluador Virtual es 1: EV Supervisor </p>
+                        @break
+
+                @endswitch
+            </div>
+
+            <div class="text text-center mt-2" style="color:dodgerblue">
                 <h4 >COMPETENCIAS</h4>
             </div>
 
             <p>Se presentan las competencias del modelo que usted debe responder. Seleccione la competencia en el orden que considere conveniente, no hay un orden específico.</p>
 
-            <p class="text text-center"><a href="{{route('simulador.resultados', $evaluado->id)}}" class="btn btn-warning btn-lg">Respuesta de Evaluadores</a></p>
+            <p class="text text-center"><a href="{{route('simulador.resultados', $evaluado->id)}}" class="btn btn-danger btn-lg">Respuesta de Evaluadores</a></p>
 
         </div>
 

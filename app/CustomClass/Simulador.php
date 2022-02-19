@@ -17,9 +17,11 @@ use App\Helpers\Helper;
 use App\Mail\EvaluacionEnviada;
 use App\Modelo;
 use App\NivelCargo;
+use App\Notifications\AutoEvaluacionFinalizada;
 use App\Notifications\EvaluacionFinalizada;
 use App\Notifications\EvaluacionFinalizadaSimulador;
 use App\Notifications\EvaluacionPendiente;
+use App\Notifications\RegistroAutoEvaluacionVirtual;
 use App\Notifications\SimuladorEvaluacionFinalizada;
 use App\Proyecto;
 use App\SubProyecto;
@@ -272,6 +274,7 @@ class Simulador
             $esuper->remember_token = Str::random(32);
             $esuper->status = 0;
             $esuper->user_id = $supervisor->id;
+            $esuper->virtual= true;
             $evaluado->evaluadores()->save($esuper);
 
             //AutoEvaluacion
@@ -283,6 +286,7 @@ class Simulador
                 $autoeva->remember_token = Str::random(32);
                 $autoeva->status = 0;
                 $autoeva->user_id = $user->id;
+                $autoeva->virtual= true;
                 $evaluado->evaluadores()->save($autoeva);
             }
         }
@@ -297,6 +301,7 @@ class Simulador
                 $npar->remember_token = Str::random(32);
                 $npar->status = 0;
                 $npar->user_id = $par['id'];
+                $npar->virtual= true;
                 $evaluado->evaluadores()->save($npar);
             }
         }
@@ -312,6 +317,7 @@ class Simulador
                 $nsub->remember_token = Str::random(32);
                 $nsub->status = 0;
                 $nsub->user_id = $sub['id'];
+                $nsub->virtual= true;
                 $evaluado->evaluadores()->save($nsub);
             }
         }
@@ -327,6 +333,7 @@ class Simulador
                 $nsub->remember_token = Str::random(32);
                 $nsub->status = 0;
                 $nsub->user_id = $sub['id'];
+                $nsub->virtual= true;
                 $evaluado->evaluadores()->save($nsub);
             }
         }
@@ -362,7 +369,30 @@ class Simulador
                 }
                 $evaluador->status=Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
                 $evaluador->save();
+                //Ennvia el correo de prueba finalida cuando se ha indicado que la fuerce a terminar
+                if($autoevaluacion && $evaluador->relation=='Autoevaluacion'){
+                    Simulador::emailevaluacionFinalizadaEvaluador($evaluador);
+                }
             }
+        }
+
+    }
+
+    //Respondera la prueba olvidada por el usuario despues de pasar un ciertoo tiempo
+    //y enviarle los resultados
+    public static function responderPruebaOlvidada($evaluadores)
+    {
+        $unsoloevaluadorporevaluado=$evaluadores->unique('evaluado_id');
+
+        foreach ($unsoloevaluadorporevaluado as $evaluador) {
+            //El robot enviara correo de finalizacion
+            $evaluado=$evaluador->evaluado;
+            $evaluado->status=Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
+            $evaluado->save();
+            if (Simulador::tiempoMaximoParaResponder($evaluado->created_at)>30){
+                simulador::respuestaVirtual($evaluado,true);
+            }
+
         }
 
     }
@@ -463,31 +493,30 @@ class Simulador
 
     }
 
-    public static function emailtareapendiente($evaluador)
+    public static function emailRegistroAutoEvaluacion($evaluador)
     {
         $receptores = Evaluador::where('id',$evaluador->id)->get();
         $delay = now()->addSeconds(0);
 
         foreach ($receptores as $receptor) {
-            $receptor->notify((new EvaluacionPendiente('simulador.token'))->delay($delay));
+            $receptor->notify((new RegistroAutoEvaluacionVirtual('simulador.token'))->delay($delay));
         }
     }
 
-    public static function emailevaluacionFinalizada(Evaluado $evaluado)
+
+    public static function emailevaluacionFinalizadaEvaluador(Evaluador $evaluador)
     {
         //Buscamos el Evaluado
-        $user = $evaluado->user;
+        $user = $evaluador->user;
         //$receptores = Evaluador::where('evaluado_id',$evaluado->id)->get();
 
         $delay = now()->addSeconds(0);
-        $route='simulador.charindividual';
         // foreach ($receptores as $receptor) {
         //     $receptor->notify((new SimuladorEvaluacionFinalizada($route)));
         // }
-        $user->notify((new SimuladorEvaluacionFinalizada($route,$evaluado))->delay($delay));
+        $user->notify((new AutoEvaluacionFinalizada($evaluador))->delay($delay));
 
     }
-
 
     /**Nombre del proyecto virtual */
     public function nombre_proyecto_simulador(){
@@ -569,31 +598,9 @@ class Simulador
     }
 
 
-    //Respondera la prueba olvidada por el usuario despues de pasar un ciertoo tiempo
-    //y enviarle los resultados
-    public static function respuestaPruebaOlvidada($evaluadores)
-    {
-        $unsoloevaluadorporevaluado=$evaluadores->unique('evaluado_id');
 
-        foreach ($unsoloevaluadorporevaluado as $evaluador) {
-            //El robot enviara correo de finalizacion
-
-            $evaluado=$evaluador->evaluado;
-            $evaluado->status=Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
-            $evaluado->save();
-            if (Simulador::minutos($evaluado->created_at)>1440){
-                simulador::respuestaVirtual($evaluado,true);
-                Simulador::emailevaluacionFinalizada($evaluado);
-            }
-
-        }
-
-
-
-
-    }
-
-    public static function minutos($fecha)
+    //Calcula los minutos entre dos fechas
+    public static function tiempoMaximoParaResponder($fecha)
     {
         //convertimos la fecha 1 a objeto Carbon
         $carbon1 = Carbon::now();

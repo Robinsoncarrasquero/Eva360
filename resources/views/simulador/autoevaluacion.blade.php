@@ -1,4 +1,4 @@
-@extends('master')
+@extends('mastersimulador')
 
 @section('title',"Simulador de Autoevealuacion")
 

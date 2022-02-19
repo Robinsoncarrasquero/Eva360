@@ -42,6 +42,9 @@ Route::get('simulador/{subproyecto_id}/charpersonalporgrupo',"SimuladorControlle
 /**
  * Presenta una tabla de analisis personales tabulados por subproyecto
  */
+Route::get('simulador/{token}/tokenresultado',"SimuladorController@tokenresultado")
+->name('simulador.tokenresultado');
+
 Route::get('simulador/{subproyecto_id}/cumplimiento',"SimuladorController@analisiscumplimiento")
 ->name('simulador.analisiscumplimiento')
 ->middleware(['auth']);
