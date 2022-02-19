@@ -109,7 +109,7 @@
                         </td>
                         <td>
                             <div class="form-check">
-                                <input checked type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[]">
+                                <input type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[]">
                                 <label class="form-check-label" for="{{"$modelo->id"}}">
                                 </label>
                             </div>
