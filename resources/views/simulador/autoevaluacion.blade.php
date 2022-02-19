@@ -109,8 +109,8 @@
                         </td>
                         <td>
                             <div class="form-check">
-                                <input type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[{{"$modelo->id"}}]">
-                                <label class="form-check-label" for="{{"$modelo->id"}}">
+                                <input type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[]">
+                                <label class="form-check-label" for="{{"$modelo->name"}}">
                                 </label>
                             </div>
                         </td>
