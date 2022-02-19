@@ -97,19 +97,16 @@ Route::post('simulador/registrar',"SimuladorController@registrar")
 Route::get('simulador/ajaxmodeloajax', 'SimuladorController@ajaxCompetencias')->name('simulador.ajaxcompetencias');
 
 Route::get('simulador/{evaluado_id}/resultados',"SimuladorController@resultados")
-->name('simulador.resultados')
-->middleware(['auth']);
+->name('simulador.resultados');
 
 Route::get('simulador/{evaluado_id}/finales',"SimuladorController@finales")
-->name('simulador.finales')
-->middleware(['auth']);
+->name('simulador.finales');
 
 /**
  * Presenta una grafica con resultados 360
  */
 Route::get('simulador/{evaluado_id}/charindividual',"SimuladorController@charindividual")
-->name('simulador.charindividual')
-->middleware(['auth']);
+->name('simulador.charindividual');
 
 /**Tareas de notificaciones */
 Route::get('/tareapendiente/{evaluador}',function ($evaluador)
