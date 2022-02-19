@@ -14,21 +14,25 @@
         <div class="mt-2">
 
              <div class="text text-center mt-3" style="color:dodgerblue">
-                <h4 >AUTO EVALUACION</h4>
+                <h4 >AUTO EVALUACION VIRTUAL</h4>
             </div>
-            <p class="card-body">Se presenta la lista de Evaluaciones que usted ha creado y en donde podrá acceder al cuestionario de competencias.
-                Tambien puede acceder al histórico para revisar los resultados de la Evaluacion simulada.
-                El estatus de la Evaluacion es indicado mediante un circulo parpadeante parecido a un semáforo:
-                <span><i class="spinner-grow spinner-grow-sm text-success" role="status"></i>Finalizada</span>
-                <span><i class="spinner-grow spinner-grow-sm text-warning" role="status"></i>Proceso</span>
-                <span><i class="spinner-grow spinner-grow-sm text-danger" role="status"></i>Detenida</span>
-                </p>
+            <p class="card-footer "><strong>Lista de Auto Evaluaciones Virtuales con un icono para ir a cada Link.
+                El histórico presenta los diferentes resultados de la Evaluaciones Virtuales realizadas.
+                El estatus indica el progreso de la Evaluacion como un semáforo:</strong>
+                <ul class="d-flex justify-content-between">
+                    <li><i class="spinner-grow spinner-grow-sm text-success"  ></i>Finalizada</li>
+                    <li><i class="spinner-grow spinner-grow-sm text-warning" ></i>Proceso</li>
+                    <li><i class="spinner-grow spinner-grow-sm text-danger" ></i>Detenida</li>
+                </ul>
+            </p>
+
+
         </div>
 
         @if($evaluadores->count())
 
-            <div class="table table-light">
-                <table id="mytable" class="table  table-bordered table-striped">
+            <div class="table table-light table-responsive">
+                <table class="table  table-bordered table-striped">
                     <thead>
                         <th >Nombre</th>
                         <th >Evaluacion</th>
