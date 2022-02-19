@@ -102,14 +102,14 @@
                     <tr id="{{$modelo->id}}">
                         <td>{{$modelo->name}}</td>
 
-                        <td style="font-size:0.8rem">
+                        <td style="font-size:0.6rem">
                             @foreach ($modelo->competencias as $modelocompetencia)
                                 {{ $modelocompetencia->competencia->name}},
                             @endforeach
                         </td>
                         <td>
                             <div class="form-check">
-                                <input type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[]">
+                                <input type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[{{"$modelo->id"}}]">
                                 <label class="form-check-label" for="{{"$modelo->id"}}">
                                 </label>
                             </div>
