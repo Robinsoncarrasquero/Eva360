@@ -340,7 +340,7 @@ class SimuladorController extends Controller
 
         $evaluado = $evaluador->evaluado;
         //El Robot responde la prueba completamente con todas las competencias
-        Simulador::respuestaVirtual($evaluado);
+        Simulador::respuestaVirtual($evaluado,false);
 
         return \redirect()->route('simulador.competencias', $evaluacion->evaluador->id);
     }

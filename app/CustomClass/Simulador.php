@@ -335,15 +335,27 @@ class Simulador
     }
 
 
-    public static function respuestaVirtual(Evaluado $evaluado)
+    /**Procesa un evaluador virtual */
+    public static function respuestaVirtual(Evaluado $evaluado,$autoevaluacion)
     {
 
         $evaluadores = $evaluado->evaluadores;
 
+        Simulador::respuestaEvaluadores($evaluadores,$autoevaluacion);
 
+
+    }
+
+    /**Responde la prueba por cada evaluador */
+    public static function respuestaEvaluadores($evaluadores,$autoevaluacion)
+
+    {
+        //Excluye la autoevaluacion cuando el evaluador responde la prueba.
+        //Ena caso de pasar un ciclo sin responde el robot respondera la prueba automaticamente
+        // y autoevaluacion indica true
         foreach ($evaluadores as $evaluador) {
-            //No toma la autoevaluacion
-            if ($evaluador->relation!='Autoevaluacion'){
+
+            if ($autoevaluacion || (!$autoevaluacion && $evaluador->relation!='Autoevaluacion')){
                 $evaluaciones = $evaluador->evaluaciones;
                 foreach ($evaluaciones as $evaluacion) {
                     Simulador::add_comportamientos($evaluacion);
@@ -554,6 +566,42 @@ class Simulador
             ]
         );
 
+    }
+
+
+    //Respondera la prueba olvidada por el usuario despues de pasar un ciertoo tiempo
+    //y enviarle los resultados
+    public static function respuestaPruebaOlvidada($evaluadores)
+    {
+        $unsoloevaluadorporevaluado=$evaluadores->unique('evaluado_id');
+
+        foreach ($unsoloevaluadorporevaluado as $evaluador) {
+            //El robot enviara correo de finalizacion
+
+            $evaluado=$evaluador->evaluado;
+            $evaluado->status=Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
+            $evaluado->save();
+            if (Simulador::minutos($evaluado->created_at)>1440){
+                simulador::respuestaVirtual($evaluado,true);
+                Simulador::emailevaluacionFinalizada($evaluado);
+            }
+
+        }
+
+
+
+
+    }
+
+    public static function minutos($fecha)
+    {
+        //convertimos la fecha 1 a objeto Carbon
+        $carbon1 = Carbon::now();
+        //convertimos la fecha 2 a objeto Carbon
+        $carbon2 = new Carbon ($fecha);
+        //de esta manera sacamos la diferencia en minutos
+        $minutesDiff=Carbon::now()->floatDiffInMinutes($fecha);
+        return $minutesDiff;
     }
 
 

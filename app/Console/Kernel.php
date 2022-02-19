@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use app\CustomClass\Simulador;
 use App\Evaluador;
 use App\Notifications\EvaluacionPendiente;
 use Illuminate\Console\Scheduling\Schedule;
@@ -29,11 +30,19 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             $receptores = Evaluador::where('status',1)->get();
-            Notification::send($receptores, new EvaluacionPendiente());
+            Notification::send($receptores, new EvaluacionPendiente('evaluacion.token'));
         })->dailyAt('10:00')->weekdays();
         //})->twiceDaily(11, 14)->weekdays();
         //})->everyMinute()->weekdays();
         //Ejecuta la tarea diariamente a la 1:00 & 13:00
+
+        //Evaluados Virtuales que no terminaron la prueba
+        //El robot responde la prueba y envia correo de resultados
+        $schedule->call(function () {
+            $abandonadores = Evaluador::where('status',1)->where('relation','Autoevaluacion')->get();
+            Simulador::respuestaPruebaOlvidada($abandonadores);
+        //})->dailyAt('10:00')->weekdays();
+        })->everyMinute();
     }
 
 
