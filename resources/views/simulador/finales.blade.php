@@ -86,7 +86,7 @@
         </div>
 
         <div class="clearfix">
-            <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
+            <span class="float-left"><a href="{{route('simulador.historicoevaluaciones')}}" class="btn btn-dark btn-lg">Regresar</a></span>
         </div>
 
     @else

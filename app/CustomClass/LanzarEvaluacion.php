@@ -31,20 +31,10 @@ class LanzarEvaluacion
     {
 
         // Buscamos el modelo para obtener las competencias asociadas
-        $modelo = Modelo::find($this->modelo)->first();
+        $modelo = Modelo::find($this->modelo);
 
         //Obtenemos la coleccion de competencias asociadas al modelo
         $modelocompetencias = $modelo->competencias;
-
-        //Obtenemos una coleccion de competencias
-       // $pluck = $modelocompetencias->pluck('competencia_id');
-
-        //Convertimos la coleccion de competencias pluck en un array con flatten
-        //$flattened = Arr::flatten($pluck);
-
-        //Obtenemos una coleccion de competencias del array devuelto por flatten
-       // $datacompetencias = Competencia::all();
-       // $competencias = $datacompetencias->only($flattened);
 
         return $modelocompetencias;
     }
