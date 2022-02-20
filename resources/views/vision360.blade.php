@@ -16,7 +16,7 @@
         </div>
         <p>
             La <strong>Evaluacion Virtual</strong> es una facilidad creada para que una Persona experimente mediante la <strong class="text text-dark">Auto Evaluacion</strong>,
-            en nuestro sistema <strong class="text text-warning">HRFeedBack360</strong>, en un proceso sencillo, resumido, intuitivo y rápido.
+            en nuestro sistema <strong class="text text-warning">HRFeedBack360</strong>, con un proceso sencillo, intuitivo y rápido.
             Como funciona? <strong class="text text-warning">HRFeedBack360</strong> creará Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
             , segun el método de evaluación seleccionado. El método 90(2 EV); El método 180(4 EV); El método 270(6 EV); El método 360(8 EV).
             Los EV responderan el cuestionario mediante un robot <span class="material-icons bg-success" style="" >android</span>

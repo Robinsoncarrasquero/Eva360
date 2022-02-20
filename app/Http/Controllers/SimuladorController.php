@@ -29,8 +29,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
+
 class SimuladorController extends Controller
 {
+
 
     /**Lista el historico de evaluaciones del empleado */
     public function historicoevaluaciones(Request $request)
@@ -449,6 +451,7 @@ class SimuladorController extends Controller
     public function finales($evaluado_id)
     {
         $title = "Finales";
+        $configuraciones =  app('configuracion')->data();
 
         //Obtenemos los evaluadores del evaluador
         $evaluado = Evaluado::find($evaluado_id);
@@ -456,7 +459,7 @@ class SimuladorController extends Controller
         $objDataEvaluacion = new DataEvaluacion($evaluado_id);
         $competencias = $objDataEvaluacion->getDataEvaluacion();
 
-        return \view('simulador.finales', compact("evaluado", "competencias", "title"));
+        return \view('simulador.finales', compact("evaluado", "competencias", "title",'configuraciones'));
     }
 
     /*

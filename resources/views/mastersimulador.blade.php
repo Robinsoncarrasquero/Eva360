@@ -84,7 +84,6 @@
     .forcedStack span {max-width: 50px; margin-top: -5em; top: 2.5em;  white-space: normal; overflow: auto; /*IE9 needs this*/}
     .forcedStack + .circle {background-color: red!important}
 
-
     </style>
 
   </head>
@@ -115,7 +114,7 @@
                     <a class="nav-link" href="{{ route('simulador.historicoevaluaciones') }}">Historico<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('simulador.autoevaluacion') }}">Crear Evaluacion<span class="sr-only"></span></a>
+                    <a class="nav-link" href="{{ route('simulador.autoevaluacion') }}">Evaluacion <i class="material-icons">library_add</library-add></i><span class="sr-only"></span></a>
                 </li>
                 @endif
             </ul>

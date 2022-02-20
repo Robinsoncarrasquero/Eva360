@@ -20,7 +20,7 @@
                 El histórico presenta los diferentes resultados de la Evaluaciones Virtuales realizadas.
                 El estatus indica el progreso de la Evaluacion como un semáforo:</strong>
                 <ul class="d-flex justify-content-between">
-                    <li><i class="spinner-grow spinner-grow-sm text-success"  ></i>Finalizada</li>
+                    <li ><i class="spinner-grow spinner-grow-sm text-success"  ></i>Finalizada</li>
                     <li><i class="spinner-grow spinner-grow-sm text-warning" ></i>Proceso</li>
                     <li><i class="spinner-grow spinner-grow-sm text-danger" ></i>Detenida</li>
                 </ul>
@@ -28,7 +28,9 @@
 
 
         </div>
-
+        <div class="d-flex justify-content-end">
+            <a href="{{ route('simulador.autoevaluacion') }}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
+        </div>
         @if($evaluadores->count())
 
             <div class="table table-light table-responsive">
