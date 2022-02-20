@@ -14,8 +14,8 @@
             <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Auto Evaluacion Virtual</h3>
         </div>
         <p >
-            LLena el formulario con los datos de tu correo, selecciona un cargo, una ubicacion ,
-            un método y un módelo <strong >90, 180, 270 o 360 grados</strong>.
+            LLenar el formulario con los datos del correo, seleccionar un cargo, una ubicacion,
+            un método y un módelo</strong>.
         </p>
 
     </div>
