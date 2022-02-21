@@ -14,19 +14,19 @@
     <div class="card-header mt-1 mb-3">
         @if ($evaluado->status!==Helper::estatus('Finalizada'))
             <h5 class="text-center text-danger">Debe culminar la evaluacion de {{ $evaluado->user->name }} para ver los resultado finales.</h5>
-        @endif
-
-    </div>
-
-    @if ($competencias)
-
-        <div class="row">
+        @else
             <div class="text text-center">
                 <h5>Resultado final de <span class="text-danger">{{ $evaluado->user->name }}</span></h5>
                 @if ($configuraciones->promediarautoevaluacion)
                     <p class="btn btn-dark">La Auto Evaluacion está incluida en los Resultados</p>
                 @endif
             </div>
+        @endif
+    </div>
+
+    @if ($competencias)
+
+        <div class="row">
 
             <p>Resultados por cada competencia. Indica si el empleado Cumplió o No Cumplió. Tambien recibe una calificacion
                  cualitativa basada en un rango que indica su avance progresivo con respecto a la competencia.

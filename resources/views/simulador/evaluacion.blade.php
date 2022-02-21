@@ -9,6 +9,12 @@
     <div id="flash-message">
         @include('flash-message')
     </div>
+    <div class="card-header mt-2 mb-4">
+        <div class="text text-center">
+            <h5>Evaluadores de <span class=" text text-success">{{ $evaluado->user->name }}</span></h5>
+
+        </div>
+    </div>
 
 
 
@@ -16,13 +22,6 @@
 
         <div class="row">
 
-            <div class="card-header mt-2 mb-4">
-                <div class="text text-center">
-                    <h5>Evaluadores de <span class=" text text-success">{{ $evaluado->user->name }}</span></h5>
-
-                </div>
-
-            </div>
 
             @foreach($evaluadores as $evaluador)
             <div class="table col-sm-12 col-md-6 ">
