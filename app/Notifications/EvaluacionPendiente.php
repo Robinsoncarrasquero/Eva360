@@ -49,10 +49,10 @@ class EvaluacionPendiente extends Notification
             ->greeting('Hola.')
             ->line($notifiable->name)
 
-            ->line('Bienvenido a la plataforma para la Evaluacion Virtual. Desde aqui puedes acceder directamente al cuestionario..')
+            ->line('Bienvenido a la plataforma para la Evaluacion Virtual. Acceda directamente al cuestionario.')
             ->line('Que tengas mucho exito en tu Auto Evaluacion Virtual.')
             ->action('Responder Auto Evaluacion', url($url))
-            ->line('Gracias por probar nuestro Sistema de Evaluacion de Desempeño Por Competencias HR-FeedBack-360')
+            ->line('Gracias por probar nuestro Sistema de Evaluacion de Desempeño Por Competencias HR-FeedBack-360.')
             ->salutation('Saludos');
     }
 

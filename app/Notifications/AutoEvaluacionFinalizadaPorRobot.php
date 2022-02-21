@@ -47,7 +47,7 @@ class AutoEvaluacionFinalizadaPorRobot extends Notification
             ->greeting('Hola.')
             ->line($notifiable->name)
 
-            ->line('Estimado usuario virtual, le notificamos que la Auto Evaluacion Virtual fue respondida por el Robot. La prueba tiene una maximo de 10 minutos.')
+            ->line('Estimado usuario virtual, le notificamos que la Auto Evaluacion Virtual fue respondida por el Robot debido a que no fue respondida en el tiempo máximo de 10 minutos .')
             ->action('Resultados', url($url))
             ->line('Gracias por probar nuestro Sistema de Evaluacion de Desempeño Por Competencias HR-FeedBack-360')
             ->line('Vuelva pronto y haga otra Auto Evaluacion simulada con el mismo usuario registrado.')
