@@ -469,7 +469,12 @@ class SimuladorController extends Controller
     {
         //Buscamos el evaluado
         $evaluado = Evaluado::find($evaluado_id);
-
+        //En caso  que le evaluado no este logueado lo pasa solo pars resolver los resultados
+        //temporal
+        //Pendiente esto es no es lo ideal
+        if (!Auth::check()) {
+            $user = Auth::loginUsingId($evaluado->user_id);
+        }
         //instanciamos un objeto de data resultados
         $objData = new DataResultado($evaluado_id, new DataEvaluacion(0));
         $objData->procesarData();

@@ -15,23 +15,25 @@
         @if ($evaluado->status!==Helper::estatus('Finalizada'))
             <h5 class="text-center text-danger">Debe culminar la evaluacion de {{ $evaluado->user->name }} para ver los resultado finales.</h5>
         @else
-        <div class="text text-center">
-            <h5>Resultado final de <span class="text-danger">{{ $evaluado->user->name }}</span></h5>
-            @if ($configuraciones->promediarautoevaluacion)
-                <p class="btn btn-dark">La Auto Evaluacion está incluida en los Resultados</p>
-            @endif
-        </div>
-        @endif
-        <p>Se muestran los resultados de cada competencia. Indica si el empleado Cumplió o No Cumplió. Tambien recibe una calificacion
-             para indicar en que fase se encuentra su progreso con respecto a la competencia.
-            Calificacion : No desarrollada(0-25) - Inicio(26-50) - En proceso(51-75) - Avanzada(76-99) - Desarrollada(100).
-        </p>
+
 
     </div>
 
     @if ($competencias)
 
         <div class="row">
+            <div class="text text-center">
+                <h5>Resultado final de <span class="text-danger">{{ $evaluado->user->name }}</span></h5>
+                @if ($configuraciones->promediarautoevaluacion)
+                    <p class="btn btn-dark">La Auto Evaluacion está incluida en los Resultados</p>
+                @endif
+            </div>
+            @endif
+            <p>Se muestran los resultados de cada competencia. Indica si el empleado Cumplió o No Cumplió. Tambien recibe una calificacion
+                 cualitativa basadas en un rango que indica su avance progresivo con respecto a la competencia.
+                 Calificacion : No desarrollada(0-25) - Inicio(26-50) - En proceso(51-75) - Avanzada(76-99) - Desarrollada(100).
+            </p>
+
             @foreach($competencias as $key=>$value)
             <div class="col-sm-12 col-md-3">
             <div class="table " >

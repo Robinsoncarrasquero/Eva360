@@ -10,19 +10,19 @@
         @include('flash-message')
     </div>
 
-    <div class="card-header mt-2 mb-4">
-        <div class="text text-center">
-            <h5>Evaluadores de <span class=" text text-success">{{ $evaluado->user->name }}</span></h5>
 
-        </div>
-        <p>Se presentan las respuestas dadas por cada evaluador. Los nombres y los correos de los evaluadores son virtuales.
-            Las notificaciones son enviadas al correo de usuario registrado que es quien realiza la autoevaluacion.</p>
-
-    </div>
 
     @if($evaluadores)
 
         <div class="row">
+
+            <div class="card-header mt-2 mb-4">
+                <div class="text text-center">
+                    <h5>Evaluadores de <span class=" text text-success">{{ $evaluado->user->name }}</span></h5>
+
+                </div>
+
+            </div>
 
             @foreach($evaluadores as $evaluador)
             <div class="table col-sm-12 col-md-6 ">
