@@ -16,13 +16,12 @@
              <div class="text text-center mt-3" style="color:dodgerblue">
                 <h4 >AUTO EVALUACION VIRTUAL</h4>
             </div>
-            <p class="card-footer "><strong>Lista de Auto Evaluaciones Virtuales con un icono para ir a cada Link.
-                El histórico presenta los diferentes resultados de la Evaluaciones Virtuales realizadas.
-                El estatus indica el progreso de la Evaluacion como un semáforo:</strong>
+            <p class="card-footer "><strong>Lista de Auto Evaluaciones. Cada icono accede opciones relacionadas.
+                El histórico presenta los resultados de la Evaluaciones realizadas. El estatus indica el progreso de la Evaluacion como un semáforo:</strong>
                 <ul class="d-flex justify-content-between">
-                    <li ><i class="spinner-grow spinner-grow-sm text-success"  ></i>Finalizada</li>
-                    <li><i class="spinner-grow spinner-grow-sm text-warning" ></i>Proceso</li>
-                    <li><i class="spinner-grow spinner-grow-sm text-danger" ></i>Detenida</li>
+                    <li >Finalizada<i class="spinner-grow spinner-grow-sm text-success"  ></i></li>
+                    <li>Activa<i class="spinner-grow spinner-grow-sm text-warning" ></i></li>
+                    <li>Detenida<i class="spinner-grow spinner-grow-sm text-danger" ></i></li>
                 </ul>
             </p>
 

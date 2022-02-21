@@ -93,11 +93,12 @@
     {{-- <nav class="navbar navbar-expand-lg navbar-light bg-lightxx" style="background-color: #e3f2fd;""> --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-        <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" style="width:2em" src="{{asset('logo/logo170x60.png') }}"  alt="Talent 360"></a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
+        <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" style="width:2em" src="{{asset('logo/logo170x60.png') }}"  alt="Talent 360"></a>
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
@@ -107,15 +108,15 @@
                 </li>
 
                 @if (Auth::check() && !Auth::user()->admin())
-                <li class="nav-item ">
+                <li class="nav-item active">
                     <a class="nav-link" href="{{ route('simulador.index') }}">Mis Autoevaluaciones<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item ">
+                {{-- <li class="nav-item ">
                     <a class="nav-link" href="{{ route('simulador.historicoevaluaciones') }}">Historico<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item ">
+                </li> --}}
+                {{-- <li class="nav-item ">
                     <a class="nav-link" href="{{ route('simulador.autoevaluacion') }}">Evaluacion <i class="material-icons">library_add</library-add></i><span class="sr-only"></span></a>
-                </li>
+                </li> --}}
                 @endif
             </ul>
             <!-- Right Side Of Navbar -->
