@@ -18,6 +18,7 @@ use App\Mail\EvaluacionEnviada;
 use App\Modelo;
 use App\NivelCargo;
 use App\Notifications\AutoEvaluacionFinalizada;
+use App\Notifications\AutoEvaluacionFinalizadaPorRobot;
 use App\Notifications\EvaluacionFinalizada;
 use App\Notifications\EvaluacionFinalizadaSimulador;
 use App\Notifications\EvaluacionPendiente;
@@ -371,7 +372,7 @@ class Simulador
                 $evaluador->save();
                 //Ennvia el correo de prueba finalida cuando se ha indicado que la fuerce a terminar
                 if($autoevaluacion && $evaluador->relation=='Autoevaluacion'){
-                    Simulador::emailevaluacionFinalizadaEvaluador($evaluador);
+                    Simulador::emailevaluacionFinalizadaPorRobot($evaluador);
                 }
             }
         }
@@ -389,7 +390,7 @@ class Simulador
             $evaluado=$evaluador->evaluado;
             $evaluado->status=Helper::estatus('Finalizada'); //0=Inicio,1=Lanzada, 2=Finalizada
             $evaluado->save();
-            if (Simulador::tiempoMaximoParaResponder($evaluado->created_at)>30){
+            if (Simulador::tiempoMaximoParaResponder($evaluado->created_at)>10){
                 simulador::respuestaVirtual($evaluado,true);
             }
 
@@ -518,6 +519,19 @@ class Simulador
 
     }
 
+    public static function emailevaluacionFinalizadaPorRobot(Evaluador $evaluador)
+    {
+        //Buscamos el Evaluado
+        $user = $evaluador->user;
+        //$receptores = Evaluador::where('evaluado_id',$evaluado->id)->get();
+
+        $delay = now()->addSeconds(0);
+        // foreach ($receptores as $receptor) {
+        //     $receptor->notify((new SimuladorEvaluacionFinalizada($route)));
+        // }
+        $user->notify((new AutoEvaluacionFinalizadaPorRobot($evaluador))->delay($delay));
+
+    }
     /**Nombre del proyecto virtual */
     public function nombre_proyecto_simulador(){
 
