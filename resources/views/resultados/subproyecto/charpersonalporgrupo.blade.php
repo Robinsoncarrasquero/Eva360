@@ -42,7 +42,7 @@
 
             <div class="clearfix">
                 <div class=" text-center">
-                    <h5>Indicadores por Competencias</span></h5>
+                    <h5>Resultado por Competencias</h5>
                 </div>
 
             </div>
@@ -87,7 +87,7 @@
 
 
             <div class=" text-center">
-                <h5>Brecha por Competencias</span></h5>
+                <h5>Cumplimiento y Brechar por Competencias</span></h5>
             </div>
 
             @if($subProyecto)
@@ -100,12 +100,12 @@
                             @if ($key>0)
                                 <th colspan="2">
                                     {{$value}}
-                                    
+
                                 </th>
                             @else
                                 <th >
                                     {{$value}}
-                                </th>    
+                                </th>
                             @endif
                             @endforeach
                         </tr>
@@ -115,30 +115,30 @@
                                 Competencias
                             </td>
                             @foreach ($dataCategoria as $key=>$value)
-                            
+
                             @if ($key >0)
                                 <td>
                                     Brecha
                                 </td>
                                 <td>
-                                    Dif.
+                                    Cumplimiento.
                                 </td>
                             @else
                                 <td>
                                 {{$value}}
-                                </td>    
+                                </td>
                             @endif
                             @endforeach
                         </tr>
                     </thead>
                     <tbody>
                     @foreach ($dataBrechaPorCompetencias as $key=>$dataValue)
-                   
+
                     <tr>
 
                         <td>{{$dataValue['name']}} </td>
                        @foreach ($dataValue['data'] as $key2=>$vdata)
-                        
+
                         @if($vdata>=0)
                             <td style="font-size:1em; color:green" class="text text-center">{{ number_format($vdata,2)}}</td>
                         @else
@@ -158,7 +158,7 @@
 
             <div class="clearfix">
                 <div class=" text-center">
-                    <h5>Indicadores de Cumplimiento</span></h5>
+                    <h5>Indicadores de Cumplimiento Global</span></h5>
                 </div>
             </div>
 
