@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $receptores = Evaluador::where('status',1)->where('virtual',false)->get();;
             Notification::send($receptores, new EvaluacionPendiente('evaluacion.token'));
-        })->dailyAt('10:00')->weekdays();
+        })->dailyAt('13:00')->weekdays();
         //})->twiceDaily(11, 14)->weekdays();
         //})->everyMinute()->weekdays();
         //Ejecuta la tarea diariamente a la 1:00 & 13:00

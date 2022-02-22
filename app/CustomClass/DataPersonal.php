@@ -100,13 +100,18 @@ class DataPersonal{
                 if ($item['eva360']<$item['nivel']){
                     $arraydataOportunidad[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
                     $arrayEfectivo[] =['name'=> $item['name'],'data'=>$item['eva360']];
+                    $diferenciador= ($item['eva360']/$item['nivel']*100);
                     $_arrayBrechaxCompetencia[] =['name'=> $item['name'],'data'=>($item['eva360']/$item['nivel']*100)-100];
+                    $_arrayBrechaxCompetencia[] =['name'=> $item['name'],'data'=> $diferenciador];
+                    
                 }else{
                     $arraydataFortaleza[]=['competencia'=> $item['name'],'data'=>$item['eva360']];
                     $arrayEfectivo[] =['name'=> $item['name'],'data'=>$item['nivel']];
+                    $diferenciador= ($item['eva360']/$item['nivel']*100);
                     $_arrayBrechaxCompetencia[] =['name'=> $item['name'],'data'=>0];
+                    $_arrayBrechaxCompetencia[] =['name'=> $item['name'],'data'=>$diferenciador];
                 }
-
+        
             }
 
             $arrayPromedioModelo[]=['name'=> 'Promedio','data'=>collect($arrayPromedio)->avg('data')];
@@ -124,6 +129,7 @@ class DataPersonal{
                 }else{
                     $brecha= 100 - $cumplimiento;
                 }
+                $diferenciador=100-$brecha;
 
                 if (collect($dataMeta)->avg('data')>0){
                     $potencial=collect($arrayPotencial)->avg('data')/collect($dataMeta)->avg('data')*100;
@@ -137,6 +143,7 @@ class DataPersonal{
                     'categoria'=>$value['categoria'],
                     'cumplimiento'=>$cumplimiento,
                     'brecha'=>$brecha,
+                    'diferenciador'=>$diferenciador,
                     'potencial'=>$potencial,
                     'dataoportunidad'=>$arraydataOportunidad,
                     'datafortaleza'=>$arraydataFortaleza,
@@ -147,7 +154,8 @@ class DataPersonal{
                 $arraySerieCumplimiento[]=[$cumplimiento];
                 $arraySerieBrecha[]=[$brecha];
                 $arraySeriePotencial[]=[$potencial];
-
+                $arraySerieDiferenciador[]=[$diferenciador];
+                
 
             }
 
@@ -156,8 +164,9 @@ class DataPersonal{
         //Generar la data serie del cumpliento y la brecha
         $arraydataSerieBrecha[]=['name'=>'Cumplimiento','data'=>$arraySerieCumplimiento];
         $arraydataSerieBrecha[]=['name'=>'Brecha','data'=>$arraySerieBrecha];
+        $arraydataSerieBrecha[]=['name'=>'Diferenciador','data'=>$arraySerieDiferenciador];
         $arraydataSerieBrecha[]=['name'=>'Potencial','data'=>$arraySeriePotencial];
-
+        
         //Generamos una colleccion para agrupar la data de la serie
         $datacollection=collect($arrayCompetencias);
         $agrouped = $datacollection->mapToGroups(function ($item, $key) {
@@ -200,6 +209,7 @@ class DataPersonal{
         $this->dataCategoriaBrecha=$arrayCategoriaBrecha;
         $this->dataSerieBrecha=$arraydataSerieBrecha;
         $this->dataBrechaxCompetencia=$__arrayBrechaxCompetencia;
+
     }
 
     /**
@@ -212,7 +222,7 @@ class DataPersonal{
         $dataEvaluacion = new $this->objDataEvaluacion($this->evaluado_id);
         $competencias = $dataEvaluacion->getDataEvaluacion();
         $arrayEvaluador =[];$arrayNivel=[];$arrayEvaluacion=[];
-
+    
         //Cuando no recibimos ningun record con datos de la evaluacion anulados el record
         if ($competencias->count()==0){
             $this->dataMeta=[];
@@ -254,6 +264,7 @@ class DataPersonal{
         $this->dataMeta=$arrayDataMeta;
         $this->dataSerie=$arrayDataSerie;
         $this->dataCategoria=$evaluado->name;
+        
         return ['categoria'=>$evaluado->user->name,'data'=>$arrayDataSerie];
     }
 

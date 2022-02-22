@@ -3,15 +3,21 @@
 namespace app\CustomClass;
 
 use App\Configuracion;
+use App\Departamento;
 use App\EmailSend;
 use App\Evaluacion;
 use App\Evaluado;
 use App\Evaluador;
 use App\Mail\EvaluacionEnviada;
+use App\Notifications\FinalizacionEvaluacion;
+use App\Notifications\NuevaEvaluacion;
 use App\Role;
+use App\RoleUser;
 use App\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
@@ -20,7 +26,7 @@ class EnviarEmail
 {
 
     /** Envia los correos de invitacion a los evaluadores */
-    public static function enviarEmailEvaluadores($evaluado_id){
+    public static function eenviarEmailEvaluadores($evaluado_id){
 
         //Obtenemos la configuracion particular
         $configuraciones = Configuracion::first();
@@ -46,7 +52,52 @@ class EnviarEmail
 
     }
 
+    /** Envia el correo de una nueva evaluacion a los evaluadores de un evaluador */
+    public static function EmailENuevaEvaluacion($evaluado_id){
 
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if (!$configuraciones->email){
+            return false;
+        }
+
+        //Buscamos el Evaluado
+        $evaluado = Evaluado::find($evaluado_id);
+
+        //Buscamos los evaluadores del evaluado
+        $evaluadores = Evaluado::find($evaluado->id)->evaluadores;
+
+
+        //$evaluadores->notify(new NuevaEvaluacion());
+        Notification::send($evaluadores, new NuevaEvaluacion());
+        return true;
+
+    }
+
+    /** Envia los correos de de finallizacion a los administradores y los manager */
+    public static function EmailFinalizacion($evaluado_id){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if (!$configuraciones->email){
+            return false;
+        }
+
+        //Buscamos el Evaluado
+        $evaluado = Evaluado::find($evaluado_id);
+
+        $adminRole = Role::where('name','admin')->first();
+
+        $administradores = RoleUser::where('role_id',$adminRole->id)->get();
+        $userIn = $administradores->pluck('user_id');
+
+        $users =  User::whereIn('id', $userIn)
+                    ->get();
+        Notification::send($users, new FinalizacionEvaluacion($evaluado));
+
+        return true;
+
+    }
     /** Enviar email de invitacion a Evaluador para responder questionario */
     public static function enviarEmailEvaluador($evaluador_id){
 

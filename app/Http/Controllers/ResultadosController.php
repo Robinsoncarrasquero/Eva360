@@ -88,6 +88,7 @@ class ResultadosController extends Controller
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
         $dataBrechaPorCompetencias = $objData->getDataBrechaPorCompetencia();
+        //dd($dataCategoria,$dataBrecha,$dataBrechaPorCompetencias);
         if (!$dataCategoria){
             \abort(404);
         }

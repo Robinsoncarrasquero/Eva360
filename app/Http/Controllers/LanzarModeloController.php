@@ -47,9 +47,9 @@ class LanzarModeloController extends Controller
 
         );
 
-        //Reducimos el array filtrando el modelo seleccionado
-        $modeloflattened = Arr::flatten($modelo);
+        $modelo = Arr::get($formrequest->modeloradio, '0', 0);
 
+        //Reducimos el array filtrando el modelo seleccionado
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);
 
@@ -64,7 +64,7 @@ class LanzarModeloController extends Controller
 
         $objlanzaEvaluacion=null;
 
-        EnviarEmail::enviarEmailEvaluadores($evaluado->id);
+        EnviarEmail::EmailENuevaEvaluacion($evaluado->id);
         // EnviarSMS::SendSMSFacade($evaluado_id);
 
         //Alert::success('Modelo fue lanzado',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));

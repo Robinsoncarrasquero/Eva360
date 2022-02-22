@@ -242,7 +242,8 @@ class EvaluacionController extends Controller
             $evaluado->save();
 
            //Enviamos el correo de finalizacion al administrador
-            EnviarEmail::enviarEmailFinal($evaluado->id);
+            //EnviarEmail::enviarEmailFinal($evaluado->id);
+            EnviarEmail::EmailFinalizacion($evaluado->id);
         }
 
         //Alert::success('Prueba Finalizada',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));

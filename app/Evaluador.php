@@ -13,7 +13,13 @@ class Evaluador extends Model
     protected $table='evaluadores';
 
     protected $fillable=[
-        'name','email','relation','status','remember_token','evaluado_id','linkweb'
+        'name',
+        'email',
+        'relation',
+        'status',
+        'remember_token',
+        'evaluado_id',
+        'linkweb','virtual',
 
     ];
 

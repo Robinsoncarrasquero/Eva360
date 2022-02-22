@@ -88,14 +88,18 @@ class DataEvaluacion{
             }
             $resultado =$sumaAverage/$contador;
             $brecha = ($resultado < $nivelRequerido ?  ($resultado / $nivelRequerido * 100) - 100 : 0);
+            $diferenciador = $resultado / $nivelRequerido * 100 - $brecha;
             $adata[]=
             [
-                'competencia'=>$key,'eva360'=>$sumaAverage/$contador,
+                'competencia'=>$key,
+                'eva360'=>$sumaAverage/$contador,
                 'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador,
                 'calificacion'=>$calificado,
                 'colorcalificacion'=>$colorcalificacion,
                 'cumplido'=>($resultado >= $nivelRequerido ? 'Cumplido' : 'No Cumplido'),
                 'brecha' => $brecha,
+                'diferenciador' => $diferenciador,
+                
             ];
 
         }

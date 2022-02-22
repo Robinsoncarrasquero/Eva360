@@ -95,19 +95,50 @@
                 <table id="{{ 'table_brechas_detalladas'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
                     <thead class="table-thead">
                         <tr>
-                            <th>Brecha por Competencias</th>
+                            <th>Brecha por</th>
                             @foreach ($dataCategoria as $key=>$value)
-                            <th>
-                                {{$value}}</strong>
-                            </th>
+                            @if ($key>0)
+                                <th colspan="2">
+                                    {{$value}}
+                                    
+                                </th>
+                            @else
+                                <th >
+                                    {{$value}}
+                                </th>    
+                            @endif
+                            @endforeach
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Competencias
+                            </td>
+                            @foreach ($dataCategoria as $key=>$value)
+                            
+                            @if ($key >0)
+                                <td>
+                                    Brecha
+                                </td>
+                                <td>
+                                    Dif.
+                                </td>
+                            @else
+                                <td>
+                                {{$value}}
+                                </td>    
+                            @endif
                             @endforeach
                         </tr>
                     </thead>
                     <tbody>
                     @foreach ($dataBrechaPorCompetencias as $key=>$dataValue)
+                   
                     <tr>
-                      <td>{{$dataValue['name']}} </td>
+
+                        <td>{{$dataValue['name']}} </td>
                        @foreach ($dataValue['data'] as $key2=>$vdata)
+                        
                         @if($vdata>=0)
                             <td style="font-size:1em; color:green" class="text text-center">{{ number_format($vdata,2)}}</td>
                         @else

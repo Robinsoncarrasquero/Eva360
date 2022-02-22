@@ -84,8 +84,11 @@ class TalentController extends Controller
         }
 
         $userR= new UserRelaciones();
+
         $userR->Crear($empleado);
+
         $evaluadores = $userR->getEvaluadores();
+
         if (!$evaluadores){
             return \redirect()->back()->withErrors($empleado->name.', no tiene evaluadores relacionados');
         }
@@ -124,6 +127,7 @@ class TalentController extends Controller
 
         $user= User::find($empleado_id);
         $userR = new UserRelaciones();
+
         $userR->Crear($user);
         $userR->GeneraData($listadeevaluadores);
 
