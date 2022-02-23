@@ -25,7 +25,7 @@
         </p> --}}
 
         <div class="d-flex justify-content-center">
-            <span><a href="{{route('simulador.autoevaluacion')}}" class="btn btn-dark btn-lg">Probar Auto Evaluacion Virtual</a></span>
+            <span><a href=" {{url("https://hr.fb360.cf/simulador/autoevaluacion")}}" class="btn btn-dark btn-lg">Probar Auto Evaluacion Virtual</a></span>
         </div>
 
     </div>
