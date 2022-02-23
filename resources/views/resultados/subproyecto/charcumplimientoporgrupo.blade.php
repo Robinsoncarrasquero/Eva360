@@ -102,7 +102,7 @@
 
 
             <div class=" text-center">
-                <h5>Cumplimiento y Brechas por Competencias</span></h5>
+                <h5>Cumplimiento y Brechas por Competencias</h5>
             </div>
 
             @if($subProyecto)

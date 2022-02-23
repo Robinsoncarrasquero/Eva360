@@ -42,7 +42,7 @@
 
             <div class="clearfix">
                 <div class=" text-center">
-                    <h5>Resultado por Competencias</h5>
+                    <h5>Resultados por Competencias</h5>
                 </div>
 
             </div>
@@ -87,7 +87,7 @@
 
 
             <div class=" text-center">
-                <h5>Cumplimiento y Brechar por Competencias</span></h5>
+                <h5>Cumplimiento y Brechas por Competencias</h5>
             </div>
 
             @if($subProyecto)
@@ -158,7 +158,7 @@
 
             <div class="clearfix">
                 <div class=" text-center">
-                    <h5>Indicadores de Cumplimiento Global</span></h5>
+                    <h5>Indicadores de Cumplimiento General</span></h5>
                 </div>
             </div>
 
