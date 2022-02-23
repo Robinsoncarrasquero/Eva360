@@ -169,12 +169,12 @@ class SimuladorController extends Controller
         //Simulador::respuestaVirtual($evaluado,false);
         // Simulador::emailevaluacionFinalizadaEvaluador($autoevaluado);
 
-        if (!Auth::check()) {
+        // if (!Auth::check()) {
 
-            return \redirect()->route('login')
-            ->withSuccess('Auto Evaluacion Generada exitosamente. Verifique su bandeja de correos para ingresar al sistema!');
+        //     return \redirect()->route('login')
+        //     ->withSuccess('Auto Evaluacion Generada exitosamente. Verifique su bandeja de correos para ingresar al sistema!');
 
-        }
+        // }
 
         return \redirect()->route('simulador.token', $autoevaluado->remember_token)
             ->withSuccess('Auto Evaluacion Generada exitosamente. Ahora responda el cuestionario del modelo de competencias!');
