@@ -10,11 +10,11 @@
         <img class="img-fluid" src="{{asset('images/AdobeStock_340828216.jpeg') }}"  alt="Equipo 360">
     </div> --}}
 
-    {{-- <div class="mt-2 pb-2">
-        <div class="text text-center">
+    <div class="mt-2 pb-2">
+        {{-- <div class="text text-center">
             <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.2rem">Evaluacion Virtual de Desempeño por Competencias</h3>
-        </div>
-        <p>
+        </div> --}}
+        {{-- <p>
             La <strong>Evaluacion Virtual</strong> es una facilidad disponible para que una persona experimente mediante la <strong class="text text-dark">Auto Evaluacion</strong>,
             en nuestro sistema <strong class="text text-warning">HRFeedBack360</strong>, con un proceso sencillo, intuitivo y rápido.
             Como funciona? <strong class="text text-warning">HRFeedBack360</strong> creará Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
@@ -22,13 +22,13 @@
             Los EV responderan el cuestionario mediante un robot <span class="material-icons bg-success" style="" >android</span>
             que reaccionará automáticamente.
             Si la prueba no es finalizada durante 10 minutos el Robot responderá la Auto Evaluacion y notificará la finalización.
-        </p>
+        </p> --}}
 
         <div class="d-flex justify-content-center">
             <span><a href="{{route('simulador.autoevaluacion')}}" class="btn btn-dark btn-lg">Probar Auto Evaluacion Virtual</a></span>
         </div>
 
-    </div> --}}
+    </div>
     <div class="card-header text-center xtitulo360 " style="background-color:brown; color:white; font-size:1.2rem">
         Diccionario de Evaluacion de Desempeño Por Competencias<span><i class="material-icons">360</i></span></i>
     </div>
