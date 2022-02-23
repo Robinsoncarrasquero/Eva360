@@ -164,7 +164,7 @@ class DataPersonal{
         //Generar la data serie del cumpliento y la brecha
         $arraydataSerieBrecha[]=['name'=>'Cumplimiento','data'=>$arraySerieCumplimiento];
         $arraydataSerieBrecha[]=['name'=>'Brecha','data'=>$arraySerieBrecha];
-        $arraydataSerieBrecha[]=['name'=>'Diferenciador','data'=>$arraySerieDiferenciador];
+       // $arraydataSerieBrecha[]=['name'=>'Diferenciador','data'=>$arraySerieDiferenciador];
         $arraydataSerieBrecha[]=['name'=>'Potencial','data'=>$arraySeriePotencial];
 
         //Generamos una colleccion para agrupar la data de la serie

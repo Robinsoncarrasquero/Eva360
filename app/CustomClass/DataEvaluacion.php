@@ -98,8 +98,8 @@ class DataEvaluacion{
                 'colorcalificacion'=>$colorcalificacion,
                 'cumplido'=>($resultado >= $nivelRequerido ? 'Cumplido' : 'No Cumplido'),
                 'brecha' => $brecha,
-                'diferenciador' => $diferenciador,
-                
+
+
             ];
 
         }
