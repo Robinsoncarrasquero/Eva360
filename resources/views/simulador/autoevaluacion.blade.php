@@ -9,13 +9,29 @@
     <div id="flash-message">
         @include('flash-message')
     </div>
+
+    <div class="mt-2 pb-2">
+        <div class="text text-center">
+            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.2rem">Evaluacion Virtual de Desempeño por Competencias</h3>
+        </div>
+        <p>
+            La <strong>Evaluacion Virtual</strong> es una facilidad disponible para que una persona experimente con nuestro sistema <strong class="text text-warning">HRFeedBack360</strong>,
+            realizando una<strong class="text text-dark">Auto Evaluacion</strong>en con un proceso sencillo, intuitivo y rápido.
+            Como funciona? <strong class="text text-warning">HRFeedBack360</strong> creará Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
+            , segun un método de evaluación. El método 90(2 EV); El método 180(4 EV); El método 270(6 EV); El método 360(8 EV).
+            Los EV responderan el cuestionario mediante un robot <span class="material-icons bg-success" style="" >android</span>
+            que reaccionará automáticamente.
+            Si la prueba cuenta con un limite de 10 minutos para culminarla. Si la prueba no es completada
+             el Robot responderá la Auto Evaluacion incompleta y notificará la finalización.
+            </p>
+    </div>
     <div class="mt-2 pb-2">
         <div class="text text-center">
             <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Auto Evaluacion Virtual</h3>
         </div>
         <p >
-            LLenar el formulario con los datos del correo, seleccionar un cargo, una ubicacion,
-            un método y un módelo</strong>.
+            LLene el formulario con los datos del correo, seleccione un cargo, una ubicacion,
+            un método de evaluacion y un módelo de competencias</strong>.
         </p>
 
     </div>
@@ -35,7 +51,7 @@
                 <div class="col">
                     <label for="email">Email</label>
                     <input
-                    id="email" placeholder="Indique un correo" class="form-control"
+                    id="email" placeholder="Indica un correo" class="form-control"
                     @if ($email) readonly @endif name="email"  value="{{ old('email',$email)}}">
                 </div>
 
@@ -84,7 +100,7 @@
                 </div>
 
                 <div class="mt-4 text text-center">
-                    <h5 class="text text-danger">Modelo de competencias</h5>
+                    <h5 class="text text-danger">Modelos de competencias</h5>
                 </div>
 
                 <div class="form-group">

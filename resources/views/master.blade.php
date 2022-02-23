@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Sistema de Evaluacion de Desempeño por Competencias. HR-FeedBack-360 es el software que te ayudará a obtener los indicadores
+     de gestión en minutos para tomar acciones de desarrollo a tiempo y realizar evaluaciones con mayor frecuencia.
+    La Evaluacion Virtual es una facilidad disponible en la plataforma para experimentar con el sistema HRFeedBack360. Prueba la Evaluacion Virtual de Desempeño por Competencias En 1 Minuto.">
+    <meta name="author" content="HRFeedBack360">
 
     <link rel="icon" href="favicon.ico">    <!-- Iconos para bootstrap -->
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">

@@ -96,17 +96,15 @@ class SimuladorController extends Controller
                 'name' => 'required',
                 'email' => 'required|unique:users,email,1',
                 'email' => 'email:rfc,dns',
-                // 'metodo' => 'required',
                 'metodoradio' => 'required',
             ],
 
             [
                 'modeloradio.required' => 'Debe seleccionar un modelo.',
                 'name.required' => 'El Nombre es requerido.',
-                'email.email' => "Este email es requerido y debe tener el formato correcto.",
+                'email.email' => "Debe indicar un correo.",
                 'email.required' => "Email de usuario es unico y obligatorio.",
-                // 'metodo.required' => 'Metodo requerido.',
-                'metodoradio.required' => 'Metodo radio requerido.',
+                'metodoradio.required' => 'Debe seleccionar un metodo de evaluacion.',
             ],
 
         );
@@ -140,7 +138,7 @@ class SimuladorController extends Controller
                 $user->roles()->attach($user_role);
             } catch (QueryException $e) {
                 return redirect()->back()
-                    ->withErrors('Error correo ya fue tomado por otro usuario. Ingrese otro correo');
+                    ->withErrors('Error correo ya esta registrado por otro usuario. Ingrese otro correo.');
             }
         }
 
@@ -174,12 +172,12 @@ class SimuladorController extends Controller
         if (!Auth::check()) {
 
             return \redirect()->route('login')
-            ->withSuccess('Auto Evaluacion Generada exitosamente. Verifique su bandeja de correos para que ingrese al sistema!');
+            ->withSuccess('Auto Evaluacion Generada exitosamente. Verifique su bandeja de correos para ingresar al sistema!');
 
         }
 
         return \redirect()->route('simulador.token', $autoevaluado->remember_token)
-            ->withSuccess('Auto Evaluacion Generada exitosamente. Ahora responda las competencias. Al terminar sus evaluadores virtuales tambien!');
+            ->withSuccess('Auto Evaluacion Generada exitosamente. Ahora responda el cuestionario del modelo de competencias!');
     }
 
 
