@@ -42,7 +42,11 @@
                 </div>
 
                 <div class="card-footer" >
-                    <h5 class="card-title @if($evaluacion->resultado) text-success @else text-danger @endif">Que frecuencia?</h5>
+
+                    @if ($frecuencias->count()>1)
+                         <h5 class="card-title @if($evaluacion->resultado) text-success @else text-danger @endif">Que frecuencia?</h5>
+                    @endif
+
                     @foreach ($frecuencias  as $frecuencia)
                     {{-- <div class="form-check d-flex justify-content-between"> --}}
                     <div class="form-check ">
