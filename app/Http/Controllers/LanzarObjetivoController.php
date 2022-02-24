@@ -74,8 +74,9 @@ class LanzarObjetivoController extends Controller
         );
 
         //Obtenemos el manager atraves del usuario logueado que efectivamente es el manager
-        $depto= Auth::user()->is_manager;
-        $manager= $depto->manager;
+        $user->departamento_id;
+        $depto= Departamento::find($user->departamento_id);
+        $usermanager= $depto->manager;
 
         //Generamos un array sigle
         $flattened = Arr::flatten($metas);
@@ -98,14 +99,14 @@ class LanzarObjetivoController extends Controller
 
         //creamos el evaluador que en este caso es el mismo evaluado
         $evaluador= new  Evaluador();
-        $evaluador->name = $manager->name;
+        $evaluador->name = $usermanager->name;
         $evaluador->relation ="Objetivo";
         $evaluador->remember_token = Str::random(32);
         $evaluador->status = 0;
-        $evaluador->email = $manager->email;
-        $evaluador->cargo_id = $manager->cargo_id;
-        $evaluador->departamento_id = $manager->departamento_id;
-        $evaluador->user_id = $manager->id;
+        $evaluador->email = $usermanager->email;
+        $evaluador->cargo_id = $usermanager->cargo_id;
+        $evaluador->departamento_id = $usermanager->departamento_id;
+        $evaluador->user_id = $usermanager->id;
         $evaluado->evaluadores()->save($evaluador);
 
 

@@ -49,7 +49,7 @@ class FinalizacionEvaluacion extends Notification
 
             ->line('Estimado administrador, le notificamos que la Evaluacion de '.$this->evaluado->name.', ha finalizado. Revise los resultados.')
             ->action('Resultados', url($url))
-            ->line('Gracias por utilizar nuestro Sistema de Evaluacion de Desempeño Por Competencias HR-FeedBack-360')
+            ->line('Gracias por utilizar El sistema de Evaluaciones de Desempeño Por Competencias HR-FeedBack-360')
             ->salutation('Saludos');
     }
 

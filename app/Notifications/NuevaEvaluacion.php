@@ -51,7 +51,7 @@ class NuevaEvaluacion extends Notification
             ->line('Se ha enviado una Nueva Evaluacion para que la respondas en la plataforma.')
             ->action('Responder', url($url))
             ->line('Responder la evaluacion es muy simple, intuito, facil y rápido.')
-            ->line('Gracias por utilizar nuestro Sistema de Evaluacion de Desempeño Por Competencias HR-FeedBack-360')
+            ->line('Gracias por utilizar nuestro Sistema de Evaluaciones de Desempeño Por Competencias HR-FeedBack-360')
             ->salutation('Saludos');
     }
 
