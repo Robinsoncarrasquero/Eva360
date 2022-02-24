@@ -47,8 +47,8 @@ class AutoEvaluacionFinalizada extends Notification
             ->greeting('Hola.')
             ->line($notifiable->name)
 
-            ->line('Estimado usuario virtual, le notificamos que la Auto Evaluacion Virtual ha finalizado. Revise los resultados.')
-            ->action('Resultados', url($url))
+            ->line('Estimado usuario virtual, le notificamos que la Auto Evaluacion Virtual ha finalizado y fué completada correctamente. Revise los resultados.')
+            ->action('Ver Resultados', url($url))
             ->line('Gracias por probar nuestro Sistema de Evaluacion de Desempeño Por Competencias HR-FeedBack-360')
             ->line('Vuelva pronto y haga otra Auto Evaluacion simulada con el mismo usuario registrado.')
             ->salutation('Saludos');
