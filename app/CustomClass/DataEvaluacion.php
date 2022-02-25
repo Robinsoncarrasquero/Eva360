@@ -81,14 +81,14 @@ class DataEvaluacion{
             $calificado='Nothing';
             $colorcalificacion='#b020a4';
             foreach ($calificaciones as $calificacion) {
-                $promedio = $contador > 0 ? $sumaAverage/$contador : 0;
-                if ($promedio >= $calificacion['nivel']){
+                if ($sumaAverage/$contador >= $calificacion['nivel']){
                     $calificado=$calificacion['name'];
                     $colorcalificacion=$calificacion['color'];
                 }
             }
-            $resultado = $contador > 0 ? $sumaAverage/$contador : 0;
+            $resultado =$sumaAverage/$contador;
             $brecha = ($resultado < $nivelRequerido ?  ($resultado / $nivelRequerido * 100) - 100 : 0);
+            $diferenciador = $resultado / $nivelRequerido * 100 - $brecha;
             $adata[]=
             [
                 'competencia'=>$key,
@@ -98,6 +98,7 @@ class DataEvaluacion{
                 'colorcalificacion'=>$colorcalificacion,
                 'cumplido'=>($resultado >= $nivelRequerido ? 'Cumplido' : 'No Cumplido'),
                 'brecha' => $brecha,
+
 
             ];
 

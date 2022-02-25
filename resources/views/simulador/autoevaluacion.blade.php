@@ -134,46 +134,6 @@
                     </table>
                 </div>
 
-            @foreach ($modelos as $modelocompetencia)
-
-
-               <div class="card-body ">
-
-                    {{-- <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5> --}}
-                    <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white;fontsize:1rem;font-weight: bold;">
-                        <span class="text-capitalize " >{{substr($comportamiento->grado->description,0,1)}}</span>
-                    </div>
-                    <h5 class="card-text"> {{$comportamiento->grado->description}}</h5>
-                </div>
-
-                <div class="card-footer" >
-
-                    @if ($frecuencias->count()>1)
-                         <h5 class="card-title @if($evaluacion->resultado) text-success @else text-danger @endif">Que frecuencia?</h5>
-                    @endif
-
-                    @foreach($modelos as $modelo)
-                    {{-- <div class="form-check d-flex justify-content-between"> --}}
-                    <div class="form-check ">
-                        <label for="frecuenciacheck[]" class="xform-check-label">{{ $frecuencia->name}}</label>
-                        @if ($evaluacion->competencia->seleccionmultiple)
-                            <input  type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                            value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                            @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                            @if ($evaluacion->evaluador->status==2) disabled  @endif
-                            data-id="{{"$comportamiento->id"}}">
-                        @else
-                            <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                            value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                            @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                            @if ($evaluacion->evaluador->status==2) disabled  @endif
-                            data-id="{{"$comportamiento->id"}}">
-                        @endif
-                    </div>
-                    @endforeach
-                </div>
-
-            @endforeach
                 <div class="clearfix">
                     <span><a href="{{ route('vision360') }}" class="btn btn-dark btn-lg">Regresar</a></span>
                     <button type="submit" class="btn btn-dark btn-lg " value="Next">Registrar</button>
