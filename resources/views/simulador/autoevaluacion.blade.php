@@ -29,7 +29,7 @@
             <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Auto Evaluacion Virtual</h3>
         </div>
         <p >
-            LLene el formulario con los datos del correo, seleccione un cargo, una ubicacion,
+            LLena el formulario con los datos del correo, seleccione un cargo, una ubicacion,
             un método de evaluacion y un módelo de competencias</strong>.
         </p>
 
@@ -44,7 +44,7 @@
 
                 <div class="col">
                     <label for="name">Nombre Virtual</label>
-                    <input readonly id="name" class="form-control" type="text" name="name" value="{{old('name',$nombre)}}">
+                    <input id="name" class="form-control" type="text" name="name" value="{{old('name',$nombre)}}">
                 </div>
 
                 <div class="col">
