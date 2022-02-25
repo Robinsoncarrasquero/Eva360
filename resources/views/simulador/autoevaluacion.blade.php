@@ -102,7 +102,7 @@
                     <h5 class="text text-danger">Modelos de competencias</h5>
                 </div>
 
-                <div class="form-group">
+                <div class="table">
                     <table  class="table table-responsive table-condensed table-dark">
 
                     <thead>
