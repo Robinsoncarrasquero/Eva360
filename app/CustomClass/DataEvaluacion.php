@@ -92,7 +92,7 @@ class DataEvaluacion{
             $adata[]=
             [
                 'competencia'=>$key,
-                'eva360'=>$sumaAverage/$contador,
+                'eva360'=>$resultado,
                 'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador,
                 'calificacion'=>$calificado,
                 'colorcalificacion'=>$colorcalificacion,
