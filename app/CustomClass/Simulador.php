@@ -155,7 +155,7 @@ class Simulador
         );
 
         $supervisor = User::updateOrCreate([
-            'email' => 'supervisorvirtual@fb360.cf',
+            'email' => 'talent.360.fb+sp@gmail.com',
         ], [
             'cargo_id' => $cargogerente->id,
             'departamento_id' => $departamento->id,
@@ -166,7 +166,7 @@ class Simulador
         ]);
 
         $par1 = User::firstOrCreate([
-            'email' => 'parvirtual1@fb360.cf',
+            'email' => 'talent.360.fb+p1@gmail.com',
         ], [
             'cargo_id' => $user->cargo_id,
             'departamento_id' => $departamento->id,
@@ -179,7 +179,7 @@ class Simulador
 
         $par2 = User::firstOrCreate([
 
-            'email' => 'parvirtual2@fb360.cf',
+            'email' => 'talent.360.fb+p2@gmail.com',
 
         ], [
             'cargo_id' => $user->cargo_id,
@@ -195,7 +195,7 @@ class Simulador
 
 
         $colab1 = User::firstOrCreate([
-            'email' => 'colaboradorvirtual1@fb360.cf',
+            'email' => 'talent.360.fb+c1@gmail.com',
 
         ], [
             'cargo_id' => $cargocolaboradores->id,
@@ -210,7 +210,7 @@ class Simulador
 
         $colab2 = User::firstOrCreate([
 
-            'email' => 'colaboradorvirtual2@fb360.cf',
+            'email' => 'talent.360.fb+c2@gmail.com',
 
         ], [
             'cargo_id' => $cargocolaboradores->id,
@@ -225,7 +225,7 @@ class Simulador
 
         $cliente1 = User::firstOrCreate([
 
-            'email' => 'clientevirtual1@fb360.cf',
+            'email' => 'talent.360.fb+c1@gmail.com',
 
         ], [
             'cargo_id' => $cargocliente->id,
@@ -240,7 +240,7 @@ class Simulador
 
         $cliente2 = User::firstOrCreate([
 
-            'email' => 'clientevirtual2@fb360.cf',
+            'email' => 'talent.360.fb+c2@gmail.com',
 
         ], [
             'cargo_id' => $cargocliente->id,
