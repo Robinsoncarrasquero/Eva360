@@ -293,6 +293,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('meta/{id}/delete', 'MetasController@destroy')->name('metas.delete')
     ->middleware('role:admin');
 
+    Route::post('submeta/{id}/delete', 'MetasController@submetadestroy')->name('submeta.delete')
+    ->middleware('role:admin');
+
+    Route::get('meta/{id}/copy', 'MetasController@copy')->name('meta.copy')
+    ->middleware('role:admin');
 });
 
 

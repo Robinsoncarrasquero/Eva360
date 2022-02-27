@@ -40,16 +40,14 @@
                 <tr>
                     <th class="text text-left  title-th-evaluador" colspan="5">
                     {{$evaluador->name}}({{ $evaluador->relation }}) <span id="dataemail{{$evaluador->id}}">{{$evaluador->email}}</span>
-                    <input type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
-                    <button type="button" data-id="{{$evaluador->id}}" class="btn btn-info btn-save-email">Guardar Email
+                    <input disabled type="email" required class="editemail" id="email{{$evaluador->id}}" value="{{$evaluador->email}}">
+                    <button disabled type="button" data-id="{{$evaluador->id}}" class="btn btn-info btn-save-email">Guardar Email
                     </th>
                 </tr>
                 <tr>
                 <th>Meta</th>
                 <th>Descripcion</th>
-
-                <th>Meta</th>
-                <th>Cumplida</th>
+                <th>Peso Objetivo</th>
                 <th>Resultado</th>
                 </tr>
                 </thead>
@@ -58,8 +56,8 @@
                 <tr>
                     <td>{{$objetivo->meta->name}}</td>
                     <td>{{substr($objetivo->meta->description,0,50)}}</td>
-                    <td class="text text-center">{{ $objetivo->requerido}}</td>
-                    <td class="text text-center">{{ $objetivo->cumplida}}</td>
+                    <td class="text text-center">{{ $objetivo->nivelrequerido}}</td>
+
                     <td class="text text-center"><span class="badge badge-dark">{{ $objetivo->resultado}}</span></td>
                 </tr>
                 @endforeach

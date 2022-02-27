@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Respondiendo la Prueba")
+@section('title',"Responder los Objetivos")
 
 @section('content')
 
@@ -15,7 +15,7 @@
         <div class="pb-1 mt-2">
 
             <div class="text text-center">
-                <h5> <span class="text text-danger">{{  $evaluado->user->name }}</span>, Actualice cada meta de acuerdo a sus logros e intrucciones dadas por su supervisor
+                <h5> <span class="text text-danger">{{  $evaluado->user->name }}</span>, Actualice cada meta de acuerdo a logros e intrucciones dadas por su supervisor
             </div>
 
             {{-- <div class="text-center mt-3">
@@ -31,28 +31,28 @@
 
 
                     @foreach($objetivos as $objetivo)
-                    <div class="xcard mt-4">
 
-                    <div class="card-header mb-2">
-                        <div class="d-flex justify-content-center">
-                            <a href="{{route('objetivo.responder', $objetivo->id)}}" style="color: rgb(16, 17, 17)" >
-                            <h3 >{{$objetivo->meta->name}}</h3></a>
-                        </div>
+                        <div class="xcard mt-4">
 
-                        <div class="d-flex justify-content-center">
-                            @if($objetivo->submeta)
-                                <a href="{{route('objetivo.responder', $objetivo->id)}}" >
-                                    <span ><i class="material-icons text-success">thumb_up_alt check_box</i></span></a>
-                            @else
-                                <a href="{{route('objetivo.responder', $objetivo->id)}}" >
-                                <span class="spinner-grow spinner-grow-sm text-danger align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
-                            @endif
+                        <div class="card-header mb-2">
+                            <div class="d-flex justify-content-center">
+                                <a href="{{route('objetivo.responder', $objetivo->id)}}" style="color: rgb(16, 17, 17)" >
+                                <h3 >{{$objetivo->meta->name}}</h3></a>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                @if(Helper::estatus($objetivo->evaluador->status)=='Finalizada')
+                                    <a href="{{route('objetivo.responder', $objetivo->id)}}" >
+                                        <span ><i class="material-icons text-success">thumb_up_alt</i></span></a>
+                                @else
+                                    <a href="{{route('objetivo.responder', $objetivo->id)}}" >
+                                    <span class="spinner-grow spinner-grow-sm text-danger align-center" role="status"><i class="material-icons spellcheck"></i></span></a>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                   </div>
 
                     @endforeach
-
 
                 <div class="clearfix mt-3">
                     @if (Auth::user()->is_manager)

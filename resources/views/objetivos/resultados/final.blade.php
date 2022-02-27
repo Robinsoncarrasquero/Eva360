@@ -13,7 +13,7 @@
 
     <div class="card-header mt-2 mb-4">
         @if ($evaluado->status!==Helper::estatus('Finalizada'))
-            <h5 class="text-center text-danger">La Prueba de {{ $evaluado->name }} aun no ha finalizado</h5>
+            <h5 class="text-center text-danger">La Evaluacion de {{ $evaluado->name }} aun no ha finalizado</h5>
         @else
         <div class="text text-center">
             <h5>Resultado final de <span class="text-danger">{{ $evaluado->name }}</span></h5>
@@ -36,13 +36,13 @@
 
                 </tr>
                 <th>Objetivos</th>
-                <th>Lograda</th>
+                <th>Cumplida</th>
                 </thead>
                 <tbody>
                 @foreach ($value['data'] as $item)
                 <tr>
                     <td >{{ $item['name']}}</td>
-                    @if ($item['average']< $value['nivelRequerido']))
+                    @if ($item['average']< $value['nivelRequerido'])
                     <td>
                     <span style="background-color: red; color:white">{{ number_format($item['average'],2)}}</span>
                     </td>

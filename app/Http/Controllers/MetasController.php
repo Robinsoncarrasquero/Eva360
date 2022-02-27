@@ -38,10 +38,10 @@ class MetasController extends Controller
 
         //Buscamos el json configurado con la tabla de submeta
         $jsonfile = Storage::disk('local')->get('config/submetas.json');
-
         //Convertimos en una array
         $submetas=collect(json_decode($jsonfile));
         $tipos = Tipo::all();
+
 
         return view('metas.create',compact('submetas','tipos'));
     }
@@ -54,12 +54,20 @@ class MetasController extends Controller
      */
     public function store(MetaCreateRequest  $formrequest)
     {
+
+        $submetaName=$formrequest->input('submetaName.*');
+        if (!$submetaName){
+            return redirect()
+            ->back()->withErrors('Error imposible Guardar este registro. No tiene objetivos definidos.');
+        }
+
         try {
             $meta = new Meta();
             $meta->name=$formrequest->name;
             $meta->description=$formrequest->description;
             $meta->nivelrequerido = $formrequest->nivelrequerido;
             $meta->tipo_id = $formrequest->tipo;
+            $meta->pilarestrategico = $formrequest->pilarestrategico;
             $meta->save();
          } catch (QueryException $e) {
             //Alert::error('meta',Arr::random(['duplicada','Repetida']));
@@ -68,17 +76,22 @@ class MetasController extends Controller
         }
 
         //Creamos los submetas con las preguntas
-        $gName=$formrequest->input('submetaName.*');
-        $submetaDescripcion=$formrequest->input('submetaDescription.*');
-        $submetaRequerido=$formrequest->input('submetaRequerido.*');
+        $submetaName=$formrequest->input('submetaName.*');
+        {
+            $submetaDescripcion=$formrequest->input('submetaDescription.*');
+            $submetaValorMeta=$formrequest->input('submetaValorMeta.*');
+            $submetaPeso=$formrequest->input('submetaPeso.*');
 
-        for ($i=0; $i < count($gName); $i++) {
-            $submeta= new SubMeta();
-            $submeta->submeta=$gName[$i];
-            $submeta->description=$submetaDescripcion[$i];
-            $submeta->requerido=$submetaRequerido[$i];
-            $meta->submetas()->save($submeta);
+            for ($i=0; $i < count($submetaName); $i++) {
+                $submeta= new SubMeta();
+                $submeta->submeta=$submetaName[$i];
+                $submeta->description=$submetaDescripcion[$i];
+                $submeta->valormeta=$submetaValorMeta[$i];
+                $submeta->peso=$submetaPeso[$i];
+                $meta->submetas()->save($submeta);
+            }
         }
+
         //Alert::success('meta '.$formrequest->name,Arr::random(['Registrada exitosamente','Registro Exitoso']));
         return \redirect('meta')->withSuccess('Meta creada exitosamente : '.$formrequest->name.' Registrado exitosamente');
     }
@@ -97,6 +110,17 @@ class MetasController extends Controller
         return \view('metas.edit',\compact('meta','tipos'));
     }
 
+    public function copy($meta)
+    {
+
+        $meta = Meta::findOrFail($meta);
+        $tipos = Tipo::all();
+
+        return \view('metas.copy',\compact('meta','tipos'));
+    }
+
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -106,35 +130,47 @@ class MetasController extends Controller
      */
     public function update(MetaCreateRequest $formrequest, $meta)
     {
-
         $meta = Meta::findOrFail($meta);
-
         try {
             $meta->name=$formrequest->name;
             $meta->description=$formrequest->description;
             $meta->nivelrequerido = $formrequest->nivelrequerido;
             $meta->tipo_id = $formrequest->tipo;
+            $meta->pilarestrategico = $formrequest->pilarestrategico;
             $meta->save();
 
             //Creamos las submetas de la meta
             $submetaDescripcion=$formrequest->input('submetaDescription.*');
-            $submetaRequerido=$formrequest->input('submetaRequerido.*');
+            $submetaValorMeta=$formrequest->input('submetaValorMeta.*');
+            $submetaPeso=$formrequest->input('submetaPeso.*');
+            $gName=$formrequest->input('submetaName.*');
             $submetaid=$formrequest->input('submetaid');
 
-            for ($i=0; $i < count($submetaid); $i++) {
-                $submeta= SubMeta::find($submetaid[$i]);
-                $submeta->description=$submetaDescripcion[$i];
-                $submeta->requerido=$submetaRequerido[$i];
-                $submeta->save();
+            if ($submetaid){
+                for ($i=0; $i < count($submetaid); $i++) {
+                    $submeta= SubMeta::find($submetaid[$i]);
+                    if (!$submeta){
+                        $submeta= new SubMeta();
+                        $submeta->submeta=$gName[$i];
+                        $submeta->meta_id=$meta->id;
+                    }
+                    $submeta->description=$submetaDescripcion[$i];
+                    $submeta->valormeta=$submetaValorMeta[$i];
+                    $submeta->peso=$submetaPeso[$i];
+                    $submeta->save();
+                }
+
             }
 
+
         } catch (QueryException $e) {
-            Alert::error('Meta '.$formrequest->name,Arr::random(['Duplicada','Registro ya existe']));
+            dd($e);
+            //Alert::error('Meta '.$formrequest->name,Arr::random(['Duplicada','Registro ya existe']));
 
             return redirect()->back()
             ->withErrors('Error imposible guardar este registro. Revise los datos del formulario e intente nuevamante.');
         }
-        Alert::success('Meta '.$formrequest->name,Arr::random(['Bien','Excelente']));
+       // Alert::success('Meta '.$formrequest->name,Arr::random(['Bien','Excelente']));
 
         return \redirect('meta')->withSuccess('Meta : '.$formrequest->name.' Actualizada exitosamente');
     }
@@ -150,6 +186,29 @@ class MetasController extends Controller
         $meta = Meta::find($meta);
         try {
             $meta->delete();
+            $success = true;
+            $message = "meta eliminada exitosamente";
+        } catch (QueryException $e) {
+            $success = false;
+      	    $message = "No se puede eliminar esta meta, data restringida";
+            // return redirect()->back()
+            // ->withErrors('Error imposible Eliminar este registro, tiene restricciones con algunas evaluaciones realizadas.');
+        }
+
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
+        // return redirect('meta')->withSuccess('La meta ha sido eliminada con exito!!');
+    }
+
+    public function submetadestroy($submeta_id)
+    {
+        $submeta = SubMeta::find($submeta_id);
+        try {
+            $submeta->delete();
             $success = true;
             $message = "meta eliminada exitosamente";
         } catch (QueryException $e) {

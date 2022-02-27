@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Responder la Prueba")
+@section('title',"Responder la Meta")
 
 @section('content')
 
@@ -20,7 +20,7 @@
     </div>
 
 
-    @if ($objetivo->meta->submetas->isNotEmpty())
+    @if ($objetivo->objetivos->isNotEmpty())
         <form action="{{ route('objetivo.store',$objetivo) }}" method="POST" id="form-select">
         @csrf
             <div class="table table-responsive">
@@ -28,41 +28,42 @@
                     <thead class="table-preguntas border-warning">
                         <th scope="col">#</th>
                         <th scope="col">Descripcion</th>
-                        <th scope="col">% Meta Minima</th>
-                        <th scope="col">Cantidad de la Meta 100%</th>
-                        <th scope="col">Cantidad de la Meta Cumplida</th>
-                        <th scope="col">Medida</th>
+                        <th scope="col">Valor Meta</th>
+                        <th scope="col">Peso Objetivo</th>
+                        <th scope="col">Cumplida</th>
                     </thead>
                     <tbody>
 
-                    @foreach ($objetivo->meta->submetas as $submeta)
-                        <tr data-id="{{"$submeta->id"}}" class="filas" >
+                    @foreach ($objetivo->objetivos as $submeta)
+
+                        <tr  class="filas" >
                             <td>
-                                <input type="text"  id="submeta" value="{{ "$submeta->submeta" }}" name="submeta" hidden>
+                                <input type="text"  id="submeta[]" value="{{ $submeta->id }}" name="submeta[]" hidden>
                             </td>
-                            <td>{{$submeta->description}}</td>
+                            <td>{{ $submeta->submeta->description }}</td>
                             <td>
-                                <input type="text" readonly class="form-control" id="nivelrequerido" value= "{{ $objetivo->meta->nivelrequerido }} " name="nivelrequerido"
+                                <input type="text" readonly class="form-control" id="valormeta[{{ $submeta->id }}]"  value= "{{ $submeta->valormeta }}" name="valormeta[{{ $submeta->id }}]"
                                 @if ($objetivo->evaluador->status==2)
                                     disabled
                                 @endif>
 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="montoasignado" value= "{{ $objetivo->montoasignado }} " name="montoasignado"
+                                <input type="number" class="form-control" id="peso[{{ $submeta->id }}]"  value= "{{ $submeta->peso }}" name="peso[{{ $submeta->id }}]" disabled
                                 @if ($objetivo->evaluador->status==2)
                                     disabled
                                 @endif>
 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="montocumplido" value="{{ $objetivo->montocumplido }}" name="montocumplido"
+                                <input type="number" class="form-control" id="cumplido[{{ $submeta->id }}]" value= "{{ $submeta->cumplido }}" name="cumplido[{{ $submeta->id }}]" autofocus
                                 @if ($objetivo->evaluador->status==2)
                                     disabled
-                                @endif>
+                                @endif >
+
                             </td>
 
-                            <td>
+                            {{-- <td>
                                 @foreach ($mediciones  as $medida)
                                 <div class="xform-check ">
                                     <label for="medidacheck[]" class="form-check-label">{{ $medida->name}}</label>
@@ -81,8 +82,10 @@
                                     @endif
                                 </div>
                                 @endforeach
-                            </td>
+                            </td> --}}
                         </tr>
+
+
                     @endforeach
 
                     </tbody>

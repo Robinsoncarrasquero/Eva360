@@ -100,7 +100,7 @@ class LanzarObjetivoController extends Controller
         //creamos el evaluador que en este caso es el mismo evaluado
         $evaluador= new  Evaluador();
         $evaluador->name = $usermanager->name;
-        $evaluador->relation ="Objetivo";
+        $evaluador->relation ="Objetivos";
         $evaluador->remember_token = Str::random(32);
         $evaluador->status = 0;
         $evaluador->email = $usermanager->email;

@@ -10,6 +10,7 @@ function deleteConfirmation(id,route) {
     }).then(function (e) {
         if (e.value === true) {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            e.preventDefault();
             $.ajax({
                 type: 'POST',
                 data: {_token: CSRF_TOKEN},

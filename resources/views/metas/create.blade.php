@@ -22,7 +22,7 @@
             <div class="row">
 
                 <div class="col-sm-12">
-                    <label for="name">Meta</label>
+                    <label for="name">Nombre meta</label>
                     <input type="text" id="name" placeholder="Indique una meta" class="form-control"  name="name" value="{{old('name')  }}" autofocus>
                 </div>
 
@@ -30,6 +30,10 @@
                     <label for="description">Descripcion</label>
                     <textarea placeholder="Describa sobre la meta" type="text" id="description" class="form-control" rows="4"
                         maxlength="1000" name="description">{{ old('description') }}</textarea>
+                </div>
+                <div class="col-sm-12">
+                    <label for="pilarestrategico">Pilar Estratégico</label>
+                    <input type="text" id="pilarestrategico" placeholder="Pilar Estratégico" class="form-control" maxlength="50"  name="pilarestrategico" value="{{old('pilarestrategico')  }}" autofocus>
                 </div>
 
                 <div class="row col-sm-12">
@@ -57,16 +61,17 @@
             <div class="table">
 
                     <table  class="table">
-                        <thead>
+
                             <table id="tablepreguntas" class="table table-dark">
-                                <thead class="thead-light">
+                                <thead >
                                     <tr>
                                         <th>Submeta</th>
                                         <th>Descripcion</th>
-                                        <th>Minimo Esperado</th>
-                                        {{-- <th>
+                                        <th>Valor Meta</th>
+                                        <th>Peso Objetivo</th>
+                                        <th>
                                             <button type="button" class="btnponer btn btn-dark " ><i class=" material-icons">library_add</library-add></i></button>
-                                         </th> --}}
+                                         </th>
 
                                     </tr>
                                 </thead>
@@ -77,20 +82,23 @@
                                             <input  type="text" name="submetaName[]" value="{{ old('submetaName.'.$key, $value->meta) }}">
                                         </td>
                                         <td>
-                                            <textarea  cols="50" rows="3" name="submetaDescription[]">{{ old('submetaDescription.'.$key, $value->description)}}</textarea>
+                                            <textarea  cols="50" rows="1" name="submetaDescription[]">{{ old('submetaDescription.'.$key, $value->description)}}</textarea>
                                         </td>
                                         <td>
-                                            <input  type="text" name="submetaRequerido[]" value="{{ old('submetaRequerido.'.$key, $value->requerido)}}">
+                                            <input  type="text" name="submetaValorMeta[]" value="{{ old('submetaValorMeta.'.$key, $value->valormeta)}}">
                                         </td>
-                                        {{-- <td>
+                                        <td>
+                                            <input  type="number" name="submetaPeso[]" value="{{ old('submetaPeso.'.$key, $value->peso)}}">
+                                        </td>
+                                        <td>
                                             <button type="button" class="btnquitar btn btn-danger"> <i class="material-icons">delete</i></button>
-                                        </td> --}}
+                                        </td>
 
                                     </tr>
                                     @endforeach
                                 </tbody>
 
-                        </thead>
+
 
                     </table>
 
@@ -109,7 +117,7 @@
 
 </div>
 @section('scripts')
-    <script src="{{ asset('js/preguntacreate.js') }}"></script>
+    <script src="{{ asset('js/metasnivelescreate.js') }}"></script>
 @endsection
 
 @endsection

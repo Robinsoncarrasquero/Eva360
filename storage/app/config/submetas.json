@@ -2,6 +2,9 @@
 	"Submeta":"Tabla de Submetas",
 	"submetas":
 	[
-		{"meta":"1","description":"Realizar la tarea asignada del periodo","requerido":100}
+		{"meta":"A","description":"EXACTITUD DE INVENTARIOS MP Y ME","valormeta":"= 0.05%","peso":20},
+		{"meta":"B","description":"Tiempo de despacho PP","valormeta":">=85%","peso":25},
+		{"meta":"C","description":"Tiempo de despacho PTT","valormeta":">=85%","peso":25},
+		{"meta":"D","description":"Costo Transporte","valormeta":"= 4%","peso":30}
 	]
 }

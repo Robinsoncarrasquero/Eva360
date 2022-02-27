@@ -8,16 +8,18 @@ class Objetivo extends Model
 {
     protected $table='objetivos';
 
-    protected $fillable=['meta_id','evaluador_id',
-        	'medida_id','submeta',
-            'requerido','cumplida',
+    protected $fillable=['id','meta_id','evaluador_id',
+        	'medida_id',
+            'submeta',
+            'requerido',
+            'cumplida',
             'finicio','ffinal',
             'status',
             'description','nota'
     ];
     protected $casts = [
         'requerido' => 'float',
-        'cumplidad' => 'float'
+        'cumplida' => 'float'
     ];
 
     /**
@@ -31,6 +33,13 @@ class Objetivo extends Model
     public function meta(){
         return $this->belongsTo(Meta::class);
     }
+
+    //Un objetivo tiene varias detalle de objetivos
+    public function objetivos(){
+        return $this->hasMany(Objetivo_Det::class);
+    }
+
+
 
 
 }

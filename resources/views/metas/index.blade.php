@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title',"Catalogo de Metas")
+@section('title',"Lista de Metas Objetivos")
 
 @section('content')
 
@@ -13,7 +13,7 @@
         </div>
 
         <div class="mt-1 text-center">
-            <h5>Catalogo de Metas</h5>
+            <h5>Lista de Metas</h5>
         </div>
 
         <div class="d-flex justify-content-end">
@@ -28,8 +28,9 @@
                     {{-- <th>Descripcion</th> --}}
                     <th>Requerido</th>
                     <th>Tipo</th>
-                    <th></th>
-                    <th></th>
+                    <th>Copy</th>
+                    <th>Edit</th>
+                    <th>Del</th>
                 </thead>
                 <tbody>
                     @foreach ($metas as $meta)
@@ -39,6 +40,8 @@
                         {{-- <td >{{ substr($competencia->description,0,100) }} ....</td> --}}
                         <td>{{ $meta->nivelrequerido }}</td>
                         <td>{{ $meta->tipo->tipo}}</td>
+                        <td><a href="{{ route('meta.copy',$meta) }}" class="btn btn-dark"><i class="material-icons">copy_all</i></a></td>
+
                         <td><a href="{{ route('meta.edit',$meta) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                         <td>
                             <button class="btn btn-danger" onclick="deleteConfirmation({{$meta->id}},'{{route('metas.delete',$meta->id)}}')">Delete</button>

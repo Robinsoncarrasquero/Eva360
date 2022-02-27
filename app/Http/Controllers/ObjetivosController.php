@@ -18,6 +18,7 @@ use App\Evaluado;
 use App\Helpers\Helper;
 use App\Medida;
 use App\Objetivo;
+use App\Objetivo_Det;
 use App\Proyecto;
 use App\Role;
 use App\SubMeta;
@@ -95,6 +96,7 @@ class ObjetivosController extends Controller
         // }
 
         $objetivos = $evaluador->objetivos;
+
         return \view('objetivos.metas',\compact('objetivos','evaluador','evaluado'));
 
     }
@@ -106,10 +108,11 @@ class ObjetivosController extends Controller
 
 
         $objetivo = Objetivo::find($competencia_id);
+        $objetivos = $objetivo->objetivos;
 
         $mediciones = Medida::all();
 
-        return \view('objetivos.responder',\compact('objetivo','mediciones'));
+        return \view('objetivos.responder',\compact('objetivos','objetivo','mediciones'));
     }
 
     /**
@@ -119,69 +122,67 @@ class ObjetivosController extends Controller
 
         $validate = $request->validate(
             [
-                'montocumplido'=>'required|numeric',
-                'montoasignado'=>'required|numeric',
-                'medidacheck'=>'required',
+                'cumplido.*'=>'required|numeric|between:0,100',
+                //'peso'=>'required|numeric|between:0,100',
+                //'medidacheck'=>'required',
                 'submeta'=>'required',
                 // 'cumplida'=>'required|numeric|between:0,100',
                 // 'requerido'=>'required|numeric|between:0,100',
             ],
             [
-                'montocumplido.required'=>'Cantidad de la Meta Cumplida es requerida. Debe indicar un valor numerico',
-                'montoasignado.required'=>'Cantidad de la Meta Asignada es requerida. Debe indicar un valor numerico',
-                'medidacheck.required'=>'La Unidad de Medida es requerida. Debe seleccionar una unidad de medida'
+                'cumplido.required'=>'Cumplido es un valor entre 0-100. Debe indicar un valor numerico.',
+                'peso.required'=>'Peso es un valor requerido entre 0-100. Debe indicar un valor numerico entre 0-100',
+                //'medidacheck.required'=>'La Unidad de Medida es requerida. Debe seleccionar una unidad de medida'
             ]);
 
 
         $evaluacion=Objetivo::findOrFail($evaluacion_id);
 
-        //Obtenemos el modelo de grado
-        $modelsubmeta = $evaluacion->meta->submetas->first();
 
-        //Obtenemos el modelo de las mediciones
-        $modelMedida = Medida::find($request->medidacheck)->first;
+         //Inicializamos las conductas de seleccion simple
+         $conductas = Objetivo_Det::where('objetivo_id',$evaluacion_id)->get();
 
-        //Actualizamos el medida de la evaluacion
-        $evaluacion->medida_id=$modelMedida->medida->id;
+         foreach ($conductas as $conducta) {
+             $conducta->cumplido=0;
+             $conducta->save();
+         }
 
-        //Actualizamos la submeta o pregunta de la evaluacion
-        $evaluacion->submeta=$modelsubmeta->submeta;
+         $submeta=$request->input('submeta.*');
+         $cumplido=$request->input('cumplido.*');
+         //Actualizamos las conductas con la frecuencia
+         for ($i=0; $i < count($submeta); $i++) {
 
+             $xx=Objetivo_Det::UpdateOrCreate(['id'=>$submeta[$i]],
+             [
+             'cumplido'=>$cumplido[$i],
+             ]);
 
-        //Actualizamos el valor de la montocumplido y asignados
-        $evaluacion->montoasignado=$request->montoasignado;
-        $evaluacion->montocumplido=$request->montocumplido;
+         }
+         //$evaluacion->resultado= $evaluacion->meta->seleccionmultiple ? $evaluacion->comportamientos()->avg('resultado') : $evaluacion->comportamientos()->sum('resultado') ;
+         $evaluacion->nivelrequerido= $evaluacion->objetivos()->sum('peso');
+         $evaluacion->resultado= $evaluacion->objetivos()->sum('cumplido')  ;
+         $evaluacion->save();
 
-        //Actualizamos el porcentaje de valor requerido por el supervisor
-        $evaluacion->requerido= 100;
+         //redirigimos al usuario a ruta de sus competencias con el token del evaluador
+         $evaluador=$evaluacion->evaluador;
 
-        //Actualizamos el valor de la meta cumplida
-        $evaluacion->cumplida=$request->montocumplido / $request->montoasignado * 100;
+         //Preguntas de la prueba
+         $preguntas=$evaluador->objetivos->count();
 
-        //Obtenemos el resultado
-        $evaluacion->resultado=  $request->montocumplido / $request->montoasignado * 100;
+         //Coleccion de preguntas
+         $respuestas=$evaluador->objetivos;
 
-        $evaluacion->save();
+         $respondidas=0;
+         //Contamos las preguntas que faltan
+         foreach ($respuestas as $key => $value) {
 
-        //redirigimos al usuario a ruta de sus competencias con el token del evaluador
-        $evaluador=$evaluacion->evaluador;
+             if ($value->submeta){
+                 $respondidas ++;
+             }
 
-        //Preguntas de la prueba
-        $preguntas=$evaluador->evaluaciones->count();
+         }
 
-        //Coleccion de preguntas
-        $respuestas=$evaluador->objetivos;
-
-        $respondidas=0;
-        //Contamos las preguntas que faltan
-        foreach ($respuestas as $key => $respuesta) {
-
-            if ($respuesta->submeta){
-                $respondidas ++;
-            }
-        }
         $falta= $preguntas - $respondidas;
-        $mensaje=[0=>'Terminastes buen trabajo',1=>'Excelente, solo quedan '.$falta,2=>'Magnifico, ya llevas '.$respondidas, 3=>'Muy Bien, te restan '.$falta,3=>'Iniciastes muy bien, te restan '.$falta];
 
        // Alert::success($evaluacion->competencia->name,Arr::get($mensaje,$falta));
 
@@ -317,6 +318,7 @@ class ObjetivosController extends Controller
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
+
         //dd($dataSerie,$dataBrecha,$dataCategoria);
         if (!$dataCategoria){
             \abort(404);

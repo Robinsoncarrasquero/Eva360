@@ -53,7 +53,7 @@
             @if($subProyecto)
                 <div class="table table-responsive">
                     <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                        <thead class="table-thead">
+                        <thead class="table-thead text-center">
                             <tr>
                                 <th>Objetivos</th>
                                 @foreach ($dataCategoria as $key=>$value)
@@ -64,18 +64,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dataSerie as $key=>$dataValue)
-                            <tr>
+                        @foreach ($dataSerie as $key=>$dataValue)
+                            <tr class="text-center">
                                 <td>{{$dataValue['name']}}</td>
                                 @foreach ($dataValue['data'] as $vdata)
-                                    @if ($dataValue['data'][0]>($vdata))
+                                    @if ($vdata>100)
                                         <td>
-                                            @if ($vdata>100)
                                             <span style="font-size:1.5em; color:red">{{ number_format($vdata,2) }}</span>
-                                            @endif
                                         </td>
                                     @else
-                                        <td><span style="font-size:1.5em; color:green">{{ number_format($vdata,2)}}</span> </td>
+                                    <td><span style="font-size:1.5em; color:green">{{ number_format($vdata,2)}}</span> </td>
                                     @endif
                                 @endforeach
                             </tr>
@@ -99,7 +97,7 @@
 
             <div class="table table-responsive">
                 <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                    <thead class="table-thead" style="text-align: center">
+                    <thead class="table-thead"  class="text-center">
                         <th>Evaluado</th>
                         <th>% Cumplimiento</th>
                         <th>% Brecha</th>
@@ -107,7 +105,7 @@
                         <th>Sin Lograr</th>
                         <th>Lograda</th>
                     </thead>
-                    <tbody>
+                    <tbody >
                         @foreach ($dataBrecha as $key=>$value)
                         <tr style="text-align: center">
 

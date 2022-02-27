@@ -118,16 +118,14 @@
                         @endforeach
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         @foreach ($dataSerie as $key=>$dataValue)
                         <tr>
                             <td>{{$dataValue['name']}}</td>
                             @foreach ($dataValue['data'] as $vdata)
-                                @if ($dataValue['data'][0]>($vdata))
+                                @if ($vdata>100)
                                     <td>
-                                        @if ($vdata>100)
                                         <span style="font-size:1.5em; color:red">{{ number_format($vdata,2) }}</span>
-                                        @endif
                                     </td>
                                 @else
                                     <td><span style="font-size:1.5em; color:green">{{ number_format($vdata,2)}}</span> </td>
