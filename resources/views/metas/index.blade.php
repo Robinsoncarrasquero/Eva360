@@ -44,7 +44,7 @@
 
                         <td><a href="{{ route('meta.edit',$meta) }}" class="btn btn-dark"><i class="material-icons">create</i></a></td>
                         <td>
-                            <button class="btn btn-danger" onclick="deleteConfirmation({{$meta->id}},'{{route('metas.delete',$meta->id)}}')">Delete</button>
+                            <button class="btn btn-danger btnquitar" onclick="deleteConfirmation({{$meta->id}},'{{route('metas.delete',$meta->id)}}')">Delete</button>
                         </td>
 
                     </tr>
