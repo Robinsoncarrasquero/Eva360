@@ -46,7 +46,7 @@ class DataObjetivoPersonal{
             return;
         }
         //Creamos un array con las competencias metas y su margen
-        $arrayCategoria[]='Meta Minima';
+        $arrayCategoria[]='Valor Meta';
         $dataMeta= $this->getDataMeta();
         foreach ($dataMeta as $item) {
             $arrayCompetencias[] =['name'=> $item['name'],'data'=>$item['data']];

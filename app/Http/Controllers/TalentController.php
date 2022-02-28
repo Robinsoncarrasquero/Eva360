@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cargo;
 use App\Configuracion;
+use app\CustomClass\DataProyecto;
 use app\CustomClass\UserRelaciones;
 use App\Departamento;
 use App\Evaluado;
@@ -95,7 +96,9 @@ class TalentController extends Controller
         $metodos= $userR->getMetodos();
 
         $cargos = Cargo::all();
-        $proyectos = Proyecto::where('tipo','<>','Objetivos')->get();
+        //$proyectos = Proyecto::where('tipo','<>','Objetivos')->get();
+        $proyectos= DataProyecto::getProyectosPorCompetencias(" ");
+
 
         $configuracion = Configuracion::first();
 

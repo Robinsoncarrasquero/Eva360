@@ -130,7 +130,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     //Un usuario puede tener varias evaluaciones
     public function evaluaciones(){
-        return $this->hasMany(Evaluado::class);
+        return $this->hasMany(Evaluado::class)->orderBy('created_at','DESC');
     }
 
 

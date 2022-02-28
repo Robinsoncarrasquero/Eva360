@@ -381,6 +381,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('managerobjetivosporproyecto', 'ManagerController@objetivosporproyecto')
     ->name('manager.objetivosporproyecto'); // Manager
 
+    Route::get('managerconsolidar/{evaluado_id}/consolidar', 'ManagerController@consolidar')
+    ->name('manager.consolidar'); // Manager
+
     Route::get('/plantillas/downloads', function () {
         return Storage::download("plantilla.xlsx");
         abort(404);

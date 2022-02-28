@@ -49,7 +49,7 @@ class Evaluador extends Model
     }
 
        //Un evaluador tiene uno o muchas evaluaciones por objetivos asociados
-       public function objetivos(){
+    public function objetivos(){
         return $this->hasMany(Objetivo::class);
     }
 

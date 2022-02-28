@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use app\CustomClass\DataProyecto;
 use app\CustomClass\LanzarObjetivo;
 use app\CustomClass\UserRelaciones;
 use App\Departamento;
@@ -35,7 +36,7 @@ class LanzarObjetivoController extends Controller
         //     return redirect('login');
         // }
         $buscarWordKey = $request->get('buscarWordKey');
-        $proyectos = Proyecto::name($buscarWordKey)->where('tipo','Objetivos')->orderBy('id','DESC')->paginate(5);
+        $proyectos= DataProyecto::getProyectosPorObjetivos($buscarWordKey);
 
         return view('lanzarobjetivo.index',compact('proyectos'));
 
@@ -50,9 +51,9 @@ class LanzarObjetivoController extends Controller
 
         //Obtenemos las metas
         $metas = Meta::all();
-        $subproyectos = SubProyecto::all();
-        $proyectos = Proyecto::where('tipo','Objetivos')->get();
 
+        $buscarWordKey = " ";
+        $proyectos= DataProyecto::getProyectosPorObjetivos($buscarWordKey);
 
 
         return view('lanzarobjetivo.seleccionar',compact("user","metas","title",'proyectos'));

@@ -74,7 +74,8 @@
             "app/CustomClass/Transacciones.php",
             "app/CustomClass/ConfigSingleton.php",
             "app/CustomClass/Color.php",
-            "app/CustomClass/Simulador.php"
+            "app/CustomClass/Simulador.php",
+            "app/CustomClass/DataProyecto.php"
 
 	]
     },

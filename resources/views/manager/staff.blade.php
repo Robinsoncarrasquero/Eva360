@@ -34,7 +34,7 @@
                 <div class="table table-table table-responsive">
                     <table class="table" id="p{{ $subproyecto->id }}">
                         <thead>
-                            <th style="width: 30%">Nombre</th>
+                            <th style="width: 20%">Nombre</th>
                             <th style="width: 5%">Status</th>
                             <th style="width: 15%">Inicio</th>
                             <th style="width: 15%">Update</th>
@@ -43,101 +43,110 @@
                             <th style="width: 10%">Resultado</th>
                             <th style="width: 10%">Grafica</th>
                             <th style="width: 5%">Feedback</th>
+                            <th style="width: 5%">Consolidar</th>
                             <th style="width: 5%">Borrar</th>
                         </thead>
                         <tbody>
                         @foreach ($evaluados as $evaluado)
                         @if ($evaluado->user->active)
                         <tr id="{{ $evaluado->id }}">
-                        <td>{{ $evaluado->user->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p><p style="color:rgb(228, 74, 82)" >{{ $evaluado->word_key}}</p></td>
-                        <td class="status-progress" >
-                            @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                {{-- <span id="inicio" class="radio-checkeado" ></span>
-                                <span id="medio" class="radio-checkeado" ></span>
-                                <span id="final" class="radio-checkeado" ></span> --}}
-                                <i class="spinner-grow spinner-grow-sm text-success" role="status"></i>
-                            @endif
+                            <td>{{ $evaluado->user->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p><p style="color:rgb(228, 74, 82)" >{{ $evaluado->word_key}}</p></td>
+                            <td class="status-progress" >
+                                @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                    {{-- <span id="inicio" class="radio-checkeado" ></span>
+                                    <span id="medio" class="radio-checkeado" ></span>
+                                    <span id="final" class="radio-checkeado" ></span> --}}
+                                    <i class="spinner-grow spinner-grow-sm text-success" role="status"></i>
+                                @endif
 
-                            @if(Helper::estatus($evaluado->status)=='Inicio')
-                                {{-- <span id="inicio" class="radio-checkeado" ></span>
-                                <span id="medio" class="radio-no-checkeado" ></span>
-                                <span id="final" class="radio-no-checkeado"></span> --}}
-                                <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
-                            @endif
+                                @if(Helper::estatus($evaluado->status)=='Inicio')
+                                    {{-- <span id="inicio" class="radio-checkeado" ></span>
+                                    <span id="medio" class="radio-no-checkeado" ></span>
+                                    <span id="final" class="radio-no-checkeado"></span> --}}
+                                    <a href="{{ route('lanzar.seleccionarmodelo',$evaluado->id) }}"><i class="spinner-grow spinner-grow-sm text-danger" role="status"></i></a>
+                                @endif
 
-                            @if(Helper::estatus($evaluado->status)=='Lanzada')
-                                {{-- <span id="inicio" class="radio-checkeado"></span>
-                                <span id="medio" class="radio-checkeado"></span>
-                                <span id="final" class="radio-no-checkeado"></span> --}}
-                                <i class="spinner-grow spinner-grow-sm text-warning" role="status"></i>
-                            @endif
-                        </td>
-                        <td>{{ $evaluado->created_at }}</td>
-                        <td>{{ $evaluado->updated_at }}</td>
+                                @if(Helper::estatus($evaluado->status)=='Lanzada')
+                                    {{-- <span id="inicio" class="radio-checkeado"></span>
+                                    <span id="medio" class="radio-checkeado"></span>
+                                    <span id="final" class="radio-no-checkeado"></span> --}}
+                                    <i class="spinner-grow spinner-grow-sm text-warning" role="status"></i>
+                                @endif
+                            </td>
+                            <td>{{ $evaluado->created_at }}</td>
+                            <td>{{ $evaluado->updated_at }}</td>
 
-                        <td >
-                            @switch($evaluado->word_key)
-                                @case('Objetivos')
+                            <td >
+                                @switch($evaluado->word_key)
+                                    @case('Objetivos')
+                                        @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                            <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
+                                        @else
+                                            <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-dark">question_answer</i></span></a>
+                                        @endif
+                                        @break
+                                    @case('90')
+                                        @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                            <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
+                                        @else
+                                            <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-dark">question_answer</i></span></a>
+                                        @endif
+                                    @default
+                                        @break
+                                @endswitch
+                            </td>
+
+                            <td>
+                                @if($evaluado->word_key=='Objetivos')
                                     @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                        <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
+                                        <a href="{{route('objetivo.resultado', $evaluado->id)}}" ><span><i class="material-icons ">score</i></span></a>
                                     @else
-                                        <a href="{{route('objetivo.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-dark">question_answer</i></span></a>
+                                        <a href="{{route('objetivo.resultado', $evaluado->id)}}" ><span><i class="material-icons text-dark ">score</i></span></a>
                                     @endif
-                                    @break
-                                @case('90')
+                                @else
                                     @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                        <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons">question_answer</i></span></a>
-                                    @else
-                                        <a href="{{route('resultados.evaluacion', $evaluado->id)}}"><span><i class="material-icons text-dark">question_answer</i></span></a>
+                                            <a href="{{route('resultados.finales', $evaluado->id)}}" ><span><i class="material-icons ">score</i></span></a>
+                                        @else
+                                            <a href="{{route('resultados.finales', $evaluado->id)}}" ><span><i class="material-icons text-dark ">score</i></span></a>
+                                        @endif
                                     @endif
-                                @default
-                                    @break
-                            @endswitch
-                        </td>
-
-                        <td>
-                            @if($evaluado->word_key=='Objetivos')
-                                @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                    <a href="{{route('objetivo.resultado', $evaluado->id)}}" ><span><i class="material-icons ">score</i></span></a>
-                                @else
-                                    <a href="{{route('objetivo.resultado', $evaluado->id)}}" ><span><i class="material-icons text-dark ">score</i></span></a>
-                                @endif
-                            @else
-                                @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                        <a href="{{route('resultados.finales', $evaluado->id)}}" ><span><i class="material-icons ">score</i></span></a>
+                            </td>
+                            <td >
+                                @if($evaluado->word_key=='Objetivos')
+                                    @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                        <a href="{{route('objetivo.charindividual', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
                                     @else
-                                        <a href="{{route('resultados.finales', $evaluado->id)}}" ><span><i class="material-icons text-dark ">score</i></span></a>
+                                        <a href="{{route('objetivo.charindividual', $evaluado->id)}}" ><span><i class="material-icons text-dark">stacked_line_chart</i></span></a>
+                                    @endif
+                                @else
+                                    @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                        <a href="{{route('resultados.charindividual', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
+                                    @else
+                                        <a href="{{route('resultados.charindividual', $evaluado->id)}}" ><span><i class="material-icons text-dark">stacked_line_chart</i></span></a>
                                     @endif
                                 @endif
-                        </td>
-                        <td >
-                            @if($evaluado->word_key=='Objetivos')
-                                @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                    <a href="{{route('objetivo.charindividual', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
-                                @else
-                                    <a href="{{route('objetivo.charindividual', $evaluado->id)}}" ><span><i class="material-icons text-dark">stacked_line_chart</i></span></a>
-                                @endif
-                            @else
-                                @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                    <a href="{{route('resultados.charindividual', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
-                                @else
-                                    <a href="{{route('resultados.charindividual', $evaluado->id)}}" ><span><i class="material-icons text-dark">stacked_line_chart</i></span></a>
-                                @endif
-                            @endif
 
-                        </td>
+                            </td>
 
-                        <td >
-                            @if(Helper::estatus($evaluado->status)=='Finalizada')
-                                <a href="{{route('feedback.edit', $evaluado->id)}}"><span><i class="material-icons ">comment</i></span></a>
-                            @else
-                                <a href="{{route('feedback.edit', $evaluado->id)}}" ><span><i class="material-icons text-dark">comment</i></span></a>
-                            @endif
-                        </td>
-                        <td>
-                            <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')"
-                            @if($evaluado->word_key=='Objetivos') enabled @else disabled @endif>Delete</button>
-                        </td>
+                            <td >
+                                @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                    <a href="{{route('feedback.edit', $evaluado->id)}}"><span><i class="material-icons ">comment</i></span></a>
+                                @else
+                                    <a href="{{route('feedback.edit', $evaluado->id)}}" ><span><i class="material-icons text-dark">comment</i></span></a>
+                                @endif
+                            </td>
+                            <td>
+                                @if(Helper::estatus($evaluado->status)=='Finalizada')
+                                    <a href="{{route('manager.consolidar', $evaluado->id)}}"><span><i class="material-icons ">money</i></span></a>
+                                @else
+                                    <a href="{{route('manager.consolidar', $evaluado->id)}}" ><span><i class="material-icons text-dark">money</i></span></a>
+                                @endif
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')"
+                                @if($evaluado->word_key=='Objetivos') enabled @else disabled @endif>Delete</button>
+                            </td>
+
                         </tr>
                         @endif
                         @endforeach

@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request ;
 use App\Evaluado;
 use App\Competencia;
+use app\CustomClass\DataProyecto;
 use app\CustomClass\LanzarEvaluacion;
 use App\Modelo;
 use App\Proyecto;
@@ -28,9 +29,11 @@ class ProyectoPanelController extends Controller
     {
         $title="Lista de Evaluados por Proyecto";
         $buscarWordKey = $request->get('buscarWordKey');
-        //$proyectos = Proyecto::name($buscarWordKey)->where('carga_masivas_id',null)->orderBy('id','DESC')->paginate(5);
-        $proyectos = Proyecto::name($buscarWordKey)->where('tipo','=','Competencias')->orderBy('id','DESC')->paginate(5);
+        //$proyectos = Proyecto::name($buscarWordKey)->where('tipo','=','Competencias')->orderBy('id','DESC')->paginate(5);
+        // $filtro = SubProyecto::where('tipo','Competencias')->get();
+        // $lista_proyectos=$filtro->pluck('proyecto_id');
 
+        $proyectos= DataProyecto::getProyectosPorCompetencias($buscarWordKey);
         return view('lanzamiento.proyecto.index',compact('proyectos','title'));
 
     }

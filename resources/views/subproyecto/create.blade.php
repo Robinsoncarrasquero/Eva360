@@ -42,6 +42,22 @@
                 </select>
             </div>
 
+            <div class="card-header">
+                <label  for="tipo">Tipo</label>
+                <select id="tipo"  class="form-control" name="tipo" >
+
+                    @foreach ( $tipos as $tipo )
+                        @if (old('tipo')==$tipo)
+                            <option selected value="{{ $tipo }}">{{ $tipo }}</option>
+                        @else
+                            <option          value="{{ $tipo }}">{{ $tipo }}</option>
+                        @endif
+                    @endforeach
+
+                </select>
+            </div>
+
+
             <div class="clearfix col-sm-12 mt-2">
                 <a href="{{route('subproyecto.index')}}" class="btn btn-dark float-left">Back</a>
                 <button type="submit" class="btn btn-dark float-right btn-dark">Crear</button>

@@ -9,7 +9,7 @@ class SubProyecto extends Model
     //
     protected $table='subproyectos';
 
-    protected $fillable=['name','description','proyecto_id'];
+    protected $fillable=['name','description','proyecto_id','tipo'];
 
      /**
      * Un subproyecto pertenece a un proyecto

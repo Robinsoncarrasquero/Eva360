@@ -25,14 +25,16 @@
         <div class="table table-responsive mt-3">
             <table class="table table-light">
                 <thead>
-                    <th style="background-color:darkseagreen;width:30%" class="text-dark">Proyecto</th>
+                    <th style="background-color:darkseagreen;width:20%" class="text-dark">Proyecto</th>
                     <th style="background-color:rgb(102, 197, 7);width:10%" class="text-dark">Status</th>
                     <th style="background-color:gray;width:15%" class="text-white">Inicio</th>
                     <th style="background-color:rgb(20, 20, 20);width:15%" class="text-white">Final</th>
                     <th style="background-color:darkkhaki;width:10%" class="text-dark">Evaluadores</th>
                     <th style="background-color:rgb(144, 142, 158);width:10%" class="text-white">Resultado</th>
                     <th style="background-color:gold;width:10%" class="text-dark">Grafica</th>
+                    <th style="background-color:rgb(76, 0, 255);width:10%" class="text-white">Consolidar</th>
                     <th style="background-color:rgb(76, 0, 255);width:10%" class="text-white">FeedBack</th>
+                </thead>
                 </thead>
                 <tbody>
                 @foreach ($evaluaciones as $key=>$evaluado)
@@ -72,6 +74,13 @@
                             <a href="{{route('objetivo.charindividual', $evaluado->id)}}"><span><i class="material-icons ">stacked_line_chart</i></span></a>
                         @else
                             <a href="{{route('resultados.charindividual', $evaluado->id)}}" ><span><i class="material-icons text-info">stacked_line_chart</i></span></a>
+                        @endif
+                    </td>
+                    <td>
+                        @if(Helper::estatus($evaluado->status)=='Finalizada')
+                            <a href="{{route('manager.consolidar', $evaluado->id)}}"><span><i class="material-icons ">money</i></span></a>
+                        @else
+                            <a href="{{route('manager.consolidar', $evaluado->id)}}" ><span><i class="material-icons text-dark">money</i></span></a>
                         @endif
                     </td>
                     <td >

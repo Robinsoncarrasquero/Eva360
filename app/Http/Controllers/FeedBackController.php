@@ -106,6 +106,7 @@ class FeedBackController extends Controller
         // }
 
         //instanciamos un objeto de data personal
+
         $loteEvaluados[]=$evaluado_id;
         if ($evaluado->word_key=="Objetivos"){
             $objData = new DataObjetivoPersonal($loteEvaluados,new DataObjetivo(0));

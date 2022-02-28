@@ -29,8 +29,8 @@ class SubProyectoController extends Controller
     public function create()
     {
         $proyectos=Proyecto::all();
-
-        return view('subproyecto.create',\compact("proyectos"));
+        $tipos=['Competencias','Objetivos'];
+        return view('subproyecto.create',\compact("proyectos",'tipos'));
     }
 
     /**
@@ -55,6 +55,7 @@ class SubProyectoController extends Controller
             $record->name=$request->name;
             $record->description=$request->description;
             $record->proyecto_id = $request->proyecto;
+            $record->tipo= $request->tipo;
             $record->save();
         } catch (QueryException $e) {
             return redirect()->back()
@@ -85,7 +86,8 @@ class SubProyectoController extends Controller
     {
         $record = SubProyecto::findOrFail($id);
         $proyectos= Proyecto::all();
-        return \view('subproyecto.edit',\compact('record','proyectos'));
+        $tipos=['Competencias','Objetivos'];
+        return \view('subproyecto.edit',\compact('record','proyectos','tipos'));
     }
 
     /**
@@ -114,6 +116,7 @@ class SubProyectoController extends Controller
             $record->name=$request->name;
             $record->description= $request->description;
             $record->proyecto_id= $request->proyecto;
+            $record->tipo= $request->tipo;
             $record->save();
 
         } catch (QueryException $e) {

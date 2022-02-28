@@ -10,7 +10,7 @@ class Objetivo_Det extends Model
     use HasFactory;
     protected $table='objetivos_dets';
 
-    protected $fillable=['id','objetivo_id','submeta_id','valormeta','peso','cumplido'];
+    protected $fillable=['objetivo_id','submeta_id','valormeta','peso','cumplido'];
     protected $casts = [
         'cumplido' => 'float',
     ];
