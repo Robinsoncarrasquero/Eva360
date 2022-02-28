@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Sistema de Evaluacion de Desempeño por Competencias. HR-FeedBack-360 es el software que te ayudará a obtener los indicadores
-     de gestión en minutos para tomar acciones de desarrollo a tiempo y realizar evaluaciones con mayor frecuencia.
-    La Evaluacion Virtual es una facilidad disponible en la plataforma para experimentar con el sistema HRFeedBack360. Prueba la Evaluacion Virtual de Desempeño por Competencias En 1 Minuto.">
+    <meta name="description"
+    content="Sistema de Evaluación de Desempeño por Competencias. HR-FeedBack-360 es el software que te ayudará a obtener los indicadores de gestión en minutos para tomar acciones a tiempo y realizar evaluaciones con mayor frecuencia.
+    Quieres Evaluar tus Competencias en 1 Minuto con una Simulación?">
     <meta name="author" content="HRFeedBack360">
 
     <link rel="icon" href="favicon.ico">    <!-- Iconos para bootstrap -->
@@ -28,10 +28,11 @@
 
 
     <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script> --}}
 
-    {{-- <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
-    <script src="{{ asset('js/sweetalert2.min.js') }}"></script> --}}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
