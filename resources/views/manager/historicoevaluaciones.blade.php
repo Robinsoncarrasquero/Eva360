@@ -90,7 +90,7 @@
 
                     <td>
                         <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')"
-                        @if($evaluado->word_key=='Objetivos') enabled @else disabled @endif>Delete</button>
+                        @if($evaluado->word_key=='Objetivos') enabled @else enabled @endif>Delete</button>
                     </td>
                 </tr>
                 @endforeach
