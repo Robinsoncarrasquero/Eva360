@@ -1,10 +1,6 @@
 function deleteConfirmationSubItem(id,route) {
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    $(document).on('click','.btnquitar',function(e){
-        id=$(this).parents('tr').prop('id');
-        var row= $(this).parents('tr');
-        $(this).parents("tr").remove();
-    })
+
     //e.preventDefault();
     $.ajax({
         type: 'POST',
@@ -18,6 +14,10 @@ function deleteConfirmationSubItem(id,route) {
             // } else {
             //     swal("Error!", results.message, "error");
             // }
+                dataid=$(this).parents('tr').prop('id');
+                let row= $(this).parents('tr');
+                row.remove();
+
         }
     });
 

@@ -1,8 +1,5 @@
 function deleteConfirmation(id,route) {
-    $(document).on('click','.btnquitar',function(e){
-        var row= $(this).parents('tr');
-        $(this).parents("tr").remove();
-    })
+
     swal({
         title: "Borrar?",
         text: "Por favor asegurate y entonces confirma!",
@@ -26,6 +23,8 @@ function deleteConfirmation(id,route) {
                     // } else {
                     //     swal("Error!", results.message, "error");
                     // }
+                    let row= $(this).parents('tr');
+                    row.remove();
                 }
             });
         } else {
