@@ -11,7 +11,7 @@
     </div>
 
     <div class="text text-center col">
-        <h4 style="color:blue" >CONSOLIDACION DE RESULTADOS</h4>
+        <h4 style="color:blue" >RESULTADOS CONSOLIDADOS</h4>
 
     </div>
 
@@ -206,7 +206,7 @@
 
         <div class="col-12">
             <div class="text-center">
-                <h2>Resultado Final</h2>
+                <h3>RESULTADO FINAL DE EVALUACION</h3>
                 <h4 class="text text-primary">{{ $evaluado_com->user->name }}</h4>
             </div>
 

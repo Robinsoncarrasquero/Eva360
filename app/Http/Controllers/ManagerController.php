@@ -148,8 +148,8 @@ class ManagerController extends Controller
         $evaluado = Evaluado::find($evaluado_id);
         $proyecto_id = $evaluado->subproyecto->proyecto_id;
 
+        /**Datos del evaluado competencias blandas */
         $evaluado_com = DataProyecto::consolidarEvaluadoCompetencias($evaluado->user_id,$proyecto_id);
-
         $loteEvaluadosCom[]=$evaluado_com->id;
         $competenciaData = new DataPersonal($loteEvaluadosCom,new DataEvaluacion(0));
         $competenciaData->procesarData();
@@ -157,9 +157,8 @@ class ManagerController extends Controller
         $dataCategoriaCom = $competenciaData->getDataCategoria();
         $dataBrechaCom = $competenciaData->getDataBrecha();
 
-
+        /**Datos del evaluado objetivo o competencias duras*/
         $evaluado_obj = DataProyecto::consolidarEvaluadoObjetivos($evaluado->user_id,$proyecto_id);
-
         $loteEvaluadosObj[]=$evaluado_obj->id;
         $objetivoData = new DataObjetivoPersonal($loteEvaluadosObj,new DataObjetivo(0));
         $objetivoData->procesarData();
