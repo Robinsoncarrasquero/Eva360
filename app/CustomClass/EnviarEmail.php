@@ -131,8 +131,9 @@ class EnviarEmail
 
         //Buscamos el Evaluado
         $evaluado = Evaluado::find($evaluado_id);
-
-        $manager = Departamento::where('id',$evaluado->user_id)->is_manager;
+        $manager= Departamento::find($evaluado->user->departamento_id)->manager;
+        //$usermanager= $depto->manager;
+        //$manager = Departamento::where('id',$evaluado->user_id)->is_manager();
 
         Notification::send($manager, new FinalizacionEvaluacion($evaluado));
 
