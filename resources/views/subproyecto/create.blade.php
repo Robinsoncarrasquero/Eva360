@@ -57,6 +57,16 @@
                 </select>
             </div>
 
+            <div class="justify-content-start">
+                <div class="col">
+                    <label >Ubicacion</label>
+                    <select class="form-control" id="departamento" name="departamento">
+                        @foreach ($departamentos as $departamento)
+                            <option  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 
             <div class="clearfix col-sm-12 mt-2">
                 <a href="{{route('subproyecto.index')}}" class="btn btn-dark float-left">Back</a>

@@ -98,4 +98,35 @@ class DataProyecto
           }])->first();
         return $evaluados;
     }
+
+    /** Retorna una coleccion de subproyectos para un manager o departamento */
+    public static function subproyectos_manager($departamento_id){
+
+        $proyectos = Proyecto::has('subproyectos')->with(['subproyectos.evaluados.user' => function($query) use ($departamento_id) {
+            $query->where('users.departamento_id', $departamento_id)->latest('created_at');
+            }])->simplePaginate(25);
+        return $proyectos;
+
+    }
+
+    /** Retorna una coleccion de subproyectos para un manager o departamento */
+    public static function getSubproyectosPorCompetenciasDpto($departamento_id){
+
+        $proyectos = Proyecto::has('subproyectos')->with(['subproyectos' => function($query) use ($departamento_id) {
+            $query->where('subproyectos.departamento_id', $departamento_id)
+            ->where('subproyectos.tipo','Competencias')->latest('created_at');
+            }])->simplePaginate(25);return $proyectos;
+
+    }
+
+    /** Retorna una coleccion de subproyectos para un manager o departamento */
+    public static function getSubproyectosPorObjetivosDpto($departamento_id){
+
+        $proyectos = Proyecto::has('subproyectos')->with(['subproyectos' => function($query) use ($departamento_id) {
+            $query->where('subproyectos.departamento_id', $departamento_id)
+            ->where('subproyectos.tipo','Objetivos')->latest('created_at');
+            }])->simplePaginate(25);return $proyectos;
+
+    }
+
 }

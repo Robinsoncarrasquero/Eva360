@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Departamento;
 use App\Meta;
 use App\SubMeta;
 use App\Http\Requests\MetaCreateRequest;
@@ -42,8 +43,8 @@ class MetasController extends Controller
         $submetas=collect(json_decode($jsonfile));
         $tipos = Tipo::all();
 
-
-        return view('metas.create',compact('submetas','tipos'));
+        $departamentos =Departamento::all();
+        return view('metas.create',compact('submetas','tipos','departamentos'));
     }
 
     /**
@@ -68,6 +69,7 @@ class MetasController extends Controller
             $meta->nivelrequerido = $formrequest->nivelrequerido;
             $meta->tipo_id = $formrequest->tipo;
             $meta->pilarestrategico = $formrequest->pilarestrategico;
+            $meta->departamento_id= $formrequest->departamento;
             $meta->save();
          } catch (QueryException $e) {
             //Alert::error('meta',Arr::random(['duplicada','Repetida']));
@@ -106,8 +108,8 @@ class MetasController extends Controller
     {
         $meta = Meta::findOrFail($meta);
         $tipos = Tipo::all();
-
-        return \view('metas.edit',\compact('meta','tipos'));
+        $departamentos =Departamento::all();
+        return \view('metas.edit',\compact('meta','tipos','departamentos'));
     }
 
     public function copy($meta)
@@ -115,8 +117,8 @@ class MetasController extends Controller
 
         $meta = Meta::findOrFail($meta);
         $tipos = Tipo::all();
-
-        return \view('metas.copy',\compact('meta','tipos'));
+        $departamentos =Departamento::all();
+        return \view('metas.copy',\compact('meta','tipos','departamentos'));
     }
 
 
@@ -137,6 +139,7 @@ class MetasController extends Controller
             $meta->nivelrequerido = $formrequest->nivelrequerido;
             $meta->tipo_id = $formrequest->tipo;
             $meta->pilarestrategico = $formrequest->pilarestrategico;
+            $meta->departamento_id= $formrequest->departamento;
             $meta->save();
 
             //Creamos las submetas de la meta

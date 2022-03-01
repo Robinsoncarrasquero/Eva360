@@ -53,6 +53,23 @@
                 </select>
             </div>
 
+            <div class="justify-content-start">
+                <div class="col-6">
+                    <label >Ubicacion</label>
+                    <select class="form-control" id="departamento" name="departamento">
+                        @foreach ($departamentos as $departamento)
+
+                           @if ($meta->departamento_id==$departamento->id)
+                                <option selected value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                            @else
+                                <option          value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                            @endif
+                         @endforeach
+
+                    </select>
+                </div>
+            </div>
+
             <table id="tablepreguntas" class="table table-dark">
                 <thead >
                     <th>#</th>

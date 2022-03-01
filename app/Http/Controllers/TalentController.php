@@ -97,7 +97,7 @@ class TalentController extends Controller
 
         $cargos = Cargo::all();
         //$proyectos = Proyecto::where('tipo','<>','Objetivos')->get();
-        $proyectos= DataProyecto::getProyectosPorCompetencias(" ");
+        $proyectos= DataProyecto::getSubproyectosPorCompetenciasDpto($empleado->departamento_id);
 
 
         $configuracion = Configuracion::first();

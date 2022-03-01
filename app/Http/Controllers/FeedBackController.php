@@ -151,7 +151,7 @@ class FeedBackController extends Controller
 
         switch ($evaluado->word_key) {
             case 'Objetivos':
-                return \view('feedback.fbeditobjetivo',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks'));
+                return \view('feedback.fbeditobjetivo',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks','periodos'));
                 break;
 
             default:

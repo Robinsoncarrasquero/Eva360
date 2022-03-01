@@ -56,6 +56,18 @@
                     </div>
                 </div>
 
+                <div class="justify-content-start">
+                    <div class="col">
+                        <label >Ubicacion</label>
+                        <select class="form-control" id="departamento" name="departamento">
+                            @foreach ($departamentos as $departamento)
+                                <option  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+
             </div>
 
             <div class="table">

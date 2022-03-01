@@ -50,12 +50,12 @@ class LanzarObjetivoController extends Controller
         $title="Metas";
 
         //Obtenemos las metas
-        $metas = Meta::all();
+        $metas = Meta::where('departamento_id',$user->departamento_id)->get();
 
         $buscarWordKey = " ";
-        $proyectos= DataProyecto::getProyectosPorObjetivos($buscarWordKey);
-
-
+        //$proyectos= DataProyecto::getProyectosPorObjetivos($buscarWordKey);
+        $departamento_id = $user->departamento_id;
+        $proyectos= DataProyecto::getSubproyectosPorObjetivosDpto($user->departamento_id);
         return view('lanzarobjetivo.seleccionar',compact("user","metas","title",'proyectos'));
 
     }

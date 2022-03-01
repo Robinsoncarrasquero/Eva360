@@ -16,11 +16,11 @@
     </div>
 
     @if ($user)
-        <div class="col-sm-12">
+        <div class="card-header">
             <form action="{{ route('lanzarobjetivo.procesar',$user) }}" method="POST" id="form-select">
                 @csrf
 
-                <div class="card-header">
+                <div class="col-8">
                     <label  for="proyecto">Proyectos</label>
                     <select id="subproyecto"  class="form-control" name="subproyecto" >
                         @foreach ($proyectos as $proyectodata)

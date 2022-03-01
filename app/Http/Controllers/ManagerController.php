@@ -24,12 +24,6 @@ use Illuminate\Support\Facades\DB;
 
 class ManagerController extends Controller
 {
-    //
-    public function __construct(){
-
-
-    }
-
     /*
     * Presenta los proyectos de evaluaciones del manager.
     *
@@ -73,10 +67,6 @@ class ManagerController extends Controller
     }
 
     $departamento_id=Auth::user()->departamento_id;
-
-    // $subproyecto = SubProyecto::with(['evaluados.user' => function($query) use ($departamento_id) {
-    //     $query->where('users.departamento_id', $departamento_id)->latest();
-    // }])->findOrFail($subproyecto);
 
     $subproyecto = SubProyecto::findOrFail($subproyecto);
 
@@ -132,9 +122,7 @@ class ManagerController extends Controller
         $buscarWordKey = $request->get('buscarWordKey');
         $departamento_id=Auth::user()->departamento_id;
 
-        $proyectos = Proyecto::has('subproyectos')->with(['subproyectos.evaluados.user' => function($query) use ($departamento_id) {
-            $query->where('users.departamento_id', $departamento_id)->latest('created_at');
-            }])->simplePaginate(25);
+        $proyectos = DataProyecto::subproyectos_manager($departamento_id);
 
         return view('lanzarobjetivo.index',compact('proyectos'));
 
@@ -150,6 +138,10 @@ class ManagerController extends Controller
 
         /**Datos del evaluado competencias blandas */
         $evaluado_com = DataProyecto::consolidarEvaluadoCompetencias($evaluado->user_id,$proyecto_id);
+        if(!$evaluado_com){
+            return \redirect()->back()
+            ->withErrors("Error, No tiene la evaluacion por competencias culminada..");
+        }
         $loteEvaluadosCom[]=$evaluado_com->id;
         $competenciaData = new DataPersonal($loteEvaluadosCom,new DataEvaluacion(0));
         $competenciaData->procesarData();
@@ -159,6 +151,11 @@ class ManagerController extends Controller
 
         /**Datos del evaluado objetivo o competencias duras*/
         $evaluado_obj = DataProyecto::consolidarEvaluadoObjetivos($evaluado->user_id,$proyecto_id);
+        if(!$evaluado_obj){
+            return \redirect()->back()
+            ->withErrors("Error, No tiene la evaluacion por objetivos culminada..");
+        }
+
         $loteEvaluadosObj[]=$evaluado_obj->id;
         $objetivoData = new DataObjetivoPersonal($loteEvaluadosObj,new DataObjetivo(0));
         $objetivoData->procesarData();

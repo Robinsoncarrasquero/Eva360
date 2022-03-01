@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Departamento;
 use App\Proyecto;
 use App\SubProyecto;
 use Illuminate\Database\QueryException;
@@ -30,7 +31,8 @@ class SubProyectoController extends Controller
     {
         $proyectos=Proyecto::all();
         $tipos=['Competencias','Objetivos'];
-        return view('subproyecto.create',\compact("proyectos",'tipos'));
+        $departamentos =Departamento::all();
+        return view('subproyecto.create',\compact("proyectos",'tipos','departamentos'));
     }
 
     /**
@@ -56,6 +58,7 @@ class SubProyectoController extends Controller
             $record->description=$request->description;
             $record->proyecto_id = $request->proyecto;
             $record->tipo= $request->tipo;
+            $record->departamento_id= $request->departamento;
             $record->save();
         } catch (QueryException $e) {
             return redirect()->back()
@@ -87,7 +90,9 @@ class SubProyectoController extends Controller
         $record = SubProyecto::findOrFail($id);
         $proyectos= Proyecto::all();
         $tipos=['Competencias','Objetivos'];
-        return \view('subproyecto.edit',\compact('record','proyectos','tipos'));
+        $departamentos =Departamento::all();
+
+        return \view('subproyecto.edit',\compact('record','proyectos','tipos','departamentos'));
     }
 
     /**
@@ -117,6 +122,7 @@ class SubProyectoController extends Controller
             $record->description= $request->description;
             $record->proyecto_id= $request->proyecto;
             $record->tipo= $request->tipo;
+            $record->departamento_id= $request->departamento;
             $record->save();
 
         } catch (QueryException $e) {

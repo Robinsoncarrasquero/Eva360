@@ -59,6 +59,23 @@
                 </select>
             </div>
 
+            <div class="justify-content-start">
+                <div class="col">
+                    <label >Ubicacion</label>
+                    <select class="form-control" id="departamento" name="departamento">
+                        @foreach ($departamentos as $departamento)
+
+                           @if ($record->departamento_id==$departamento->id)
+                                <option selected value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                            @else
+                                <option          value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                            @endif
+                         @endforeach
+
+                    </select>
+                </div>
+            </div>
+
             <div class="clearfix col-sm-12 mt-2">
                 <a href="{{route('subproyecto.index')}}" class="btn btn-dark float-left">Back</a>
                 <button type="submit" class="btn btn-dark float-right">Save</button>

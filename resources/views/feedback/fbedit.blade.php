@@ -11,7 +11,7 @@
     </div>
 
     <div class="text text-center col">
-        <h4 style="color:blue" >FEEDBACK</h4>
+        <h4 style="color:blue" >FEEDBACK COMPETENCIAS</h4>
         <h4>{{ $evaluado->user->name }}</h4>
     </div>
 
