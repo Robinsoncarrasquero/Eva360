@@ -10,6 +10,7 @@ use App\Evaluado;
 use App\Evaluador;
 use App\Mail\EvaluacionEnviada;
 use App\Notifications\FinalizacionEvaluacion;
+use App\Notifications\FinalizacionEvaluacionPorObjetivo;
 use App\Notifications\NuevaEvaluacion;
 use App\Notifications\NuevaEvaluacionPorObjetivo;
 use App\Role;
@@ -135,7 +136,7 @@ class EnviarEmail
         //$usermanager= $depto->manager;
         //$manager = Departamento::where('id',$evaluado->user_id)->is_manager();
 
-        Notification::send($manager, new FinalizacionEvaluacion($evaluado));
+        Notification::send($manager, new FinalizacionEvaluacionPorObjetivo($evaluado));
 
         return true;
 
