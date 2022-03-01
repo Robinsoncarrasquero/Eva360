@@ -170,7 +170,7 @@ class ManagerController extends Controller
         $objetivo = Objetivo::where('evaluador_id',$evaluador->id)->first();
         $objetivos = Objetivo::find($objetivo->id)->objetivos;
         $totalobj = $dataBrechaObj[0]['cumplimiento']+$dataBrechaObj[0]['potencial']+$dataBrechaObj[0]['brecha'];
-        $totalcom = $dataBrechaCom[0]['cumplimiento']+$dataBrechaCom[0]['potencial']+$dataBrechaObj[0]['brecha'];
+        $totalcom = $dataBrechaCom[0]['cumplimiento']+$dataBrechaCom[0]['potencial']+$dataBrechaCom[0]['brecha'];
         //$total =$dataBrechaObj[0]['cumplimiento'] + $dataBrechaCom[0]['cumplimiento'] ;
         $total =$totalobj + $totalcom ;
 
