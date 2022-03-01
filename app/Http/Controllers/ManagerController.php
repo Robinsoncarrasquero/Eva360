@@ -169,7 +169,10 @@ class ManagerController extends Controller
         //varias submetas
         $objetivo = Objetivo::where('evaluador_id',$evaluador->id)->first();
         $objetivos = Objetivo::find($objetivo->id)->objetivos;
+        $totalobj = collect($dataCategoriaObj)->avg('data');
+        $totalcom = collect($dataCategoriaCom)->avg('data');
         $total =$dataBrechaObj[0]['cumplimiento'] + $dataBrechaCom[0]['cumplimiento'] ;
+        $total =$totalobj + $totalcom ;
         $resultado=['data'=>['Resultado'=>$total/2,'Objetivos'=>$dataBrechaObj[0]['cumplimiento'],'Competencias'=>$dataBrechaCom[0]['cumplimiento']]];
         $resultado = collect($resultado);
 
