@@ -236,7 +236,8 @@ class ObjetivosController extends Controller
             $evaluado->save();
 
            //Enviamos el correo de finalizacion al administrador
-            EnviarEmail::enviarEmailFinal($evaluado->id);
+            //EnviarEmail::enviarEmailFinal($evaluado->id);
+            EnviarEmail::EmailFinalizacionPorObjetivo($evaluado->id);
         }
 
         //Alert::success('Prueba Finalizada',Arr::random(['Good','Excelente','Magnifico','Listo','Bien hecho']));
@@ -397,5 +398,7 @@ class ObjetivosController extends Controller
         $title="Resultados Generales por Nivel de Cargo";
         return \view('objetivos.resultados.subproyectos.chartresultadosgenerales_nivel',compact("dataSerie","dataCategoria","dataDofa","title","subProyecto"));
     }
+
+
 
 }

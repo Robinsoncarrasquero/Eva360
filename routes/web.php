@@ -180,7 +180,8 @@ Route::get('/verorganigrama', function () {
 */
 Route::group(['middleware' => 'auth'], function() {
 
-
+    Route::get('objetivos/{token}/evaluacion',"ObjetivosController@token")
+    ->name('objetivo.token');
 
     /**
      * Presenta las competencias por objetivos al evaluador

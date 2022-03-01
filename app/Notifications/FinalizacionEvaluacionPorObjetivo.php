@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AutoEvaluacionFinalizada extends Notification
+class FinalizacionEvaluacionPorObjetivo extends Notification
 {
     use Queueable;
 
@@ -16,10 +16,10 @@ class AutoEvaluacionFinalizada extends Notification
      *
      * @return void
      */
-    public function __construct($evaluador)
+    public function __construct($evaluado)
     {
         //
-        $this->evaluador=$evaluador;
+        $this->evaluado=$evaluado;
     }
 
     /**
@@ -42,15 +42,14 @@ class AutoEvaluacionFinalizada extends Notification
     public function toMail($notifiable)
     {
 
-        $url=Route('simulador.tokenresultado',$this->evaluador->remember_token);
+        $url=Route('manager.consolidar',$this->evaluado->id);
         return (new MailMessage)
             ->greeting('Hola.')
             ->line($notifiable->name)
 
-            ->line('Estimado usuario virtual, le notificamos que la Auto Evaluacion Virtual ha finalizado y fué completada correctamente. Revise los resultados.')
-            ->action('Ver Resultados', url($url))
-            ->line('Gracias por experimentar con el Sistema de Evaluaciones de Desempeño Por Competencias HR-FeedBack-360')
-            ->line('Vuelva pronto y haga otra Auto Evaluacion simulada con el mismo usuario registrado.')
+            ->line('Estimado Manager, le notificamos que la Evaluacion por Objetivo de '.$this->evaluado->name.', ha finalizado. Revise los resultados.')
+            ->action('Resultados', url($url))
+            ->line('Gracias por utilizar El sistema de Evaluaciones de Desempeño Por Competencias HR-FeedBack-360')
             ->salutation('Saludos');
     }
 
@@ -65,7 +64,7 @@ class AutoEvaluacionFinalizada extends Notification
         return [
             'evaluado_id' => $this->notifiable->id,
             'name' => $this->notifiable->name,
-            'email'=> $this->notifiable->user->email,
+            'email'=> $this->notifiable->email,
         ];
     }
 }

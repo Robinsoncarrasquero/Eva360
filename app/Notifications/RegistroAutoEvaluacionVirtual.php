@@ -51,7 +51,7 @@ class RegistroAutoEvaluacionVirtual extends Notification
             ->line('Bienvenido a la plataforma para la Evaluacion Virtual. Desde aqui puedes acceder directamente al cuestionario de Competencias.')
             ->line('Que tengas mucho exito en tu Auto Evaluacion Virtual.')
             ->action('Responder Auto Evaluacion', url($url))
-            ->line('Gracias por probar el  Sistema de Evaluaciones de Desempeño Por Competencias HR-FeedBack-360')
+            ->line('Gracias por experimentar con el  Sistema de Evaluaciones de Desempeño Por Competencias HR-FeedBack-360')
             ->salutation('Saludos');
     }
 

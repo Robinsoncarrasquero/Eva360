@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use app\CustomClass\DataProyecto;
+use app\CustomClass\EnviarEmail;
+use app\CustomClass\EnviarSMS;
 use app\CustomClass\LanzarObjetivo;
 use app\CustomClass\UserRelaciones;
 use App\Departamento;
@@ -110,7 +112,6 @@ class LanzarObjetivoController extends Controller
         $evaluador->user_id = $usermanager->id;
         $evaluado->evaluadores()->save($evaluador);
 
-
         //Creamos un objeto para el lanzamiento de Evaluacion
         $Objetivo = new LanzarObjetivo($metas);
 
@@ -118,6 +119,8 @@ class LanzarObjetivoController extends Controller
             return \redirect()->route('lanzarobjetivo.index')
             ->with('error',"Error, Esas metas para el Evaluado $evaluado->name, ya habian sido lanzadas ..");
         }
+
+        EnviarEmail::EmailNuevaEvaluacionPorObjetivo($evaluado->id);
 
         $Objetivo=null;
         if (Auth::user()->is_manager){

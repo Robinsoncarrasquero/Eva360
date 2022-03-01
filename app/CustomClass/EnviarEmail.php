@@ -11,6 +11,7 @@ use App\Evaluador;
 use App\Mail\EvaluacionEnviada;
 use App\Notifications\FinalizacionEvaluacion;
 use App\Notifications\NuevaEvaluacion;
+use App\Notifications\NuevaEvaluacionPorObjetivo;
 use App\Role;
 use App\RoleUser;
 use App\User;
@@ -74,6 +75,28 @@ class EnviarEmail
 
     }
 
+    /** Envia el correo de una nueva evaluacion a los evaluadores de un evaluador */
+    public static function EmailNuevaEvaluacionPorObjetivo($evaluado_id){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if (!$configuraciones->email){
+            return false;
+        }
+
+        //Buscamos el Evaluado
+        $evaluado = Evaluado::find($evaluado_id);
+
+        //Buscamos los evaluadores del evaluado
+        $evaluadores = Evaluado::find($evaluado->id)->evaluadores;
+
+
+        //$evaluadores->notify(new NuevaEvaluacion());
+        Notification::send($evaluadores, new NuevaEvaluacionPorObjetivo());
+        return true;
+
+    }
+
     /** Envia los correos de de finallizacion a los administradores y los manager */
     public static function EmailFinalizacion($evaluado_id){
 
@@ -91,9 +114,27 @@ class EnviarEmail
         $administradores = RoleUser::where('role_id',$adminRole->id)->get();
         $userIn = $administradores->pluck('user_id');
 
-        $users =  User::whereIn('id', $userIn)
-                    ->get();
+        $users =  User::whereIn('id', $userIn)->get();
         Notification::send($users, new FinalizacionEvaluacion($evaluado));
+
+        return true;
+
+    }
+      /** Envia los correos de de finallizacion a los administradores y los manager */
+      public static function EmailFinalizacionPorObjetivo($evaluado_id){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if (!$configuraciones->email){
+            return false;
+        }
+
+        //Buscamos el Evaluado
+        $evaluado = Evaluado::find($evaluado_id);
+
+        $manager = Departamento::where('id',$evaluado->user_id)->manager;
+
+        Notification::send($manager, new FinalizacionEvaluacion($evaluado));
 
         return true;
 
