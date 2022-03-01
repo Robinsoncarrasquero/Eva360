@@ -223,9 +223,9 @@
                         @foreach ($resultado as $key=>$value)
                         <tr >
 
-                        <td>{{ $value['Competencias']}}</td>
-                        <td class="btn btn-success">{{ $value['Resultado'] }}</td>
-                        <td>{{ $value['Objetivos']  }}</td>
+                        <td>{{ number_format($value['Competencias'],2) }}</td>
+                        <td class="btn btn-success">{{ number_format($value['Resultado'],2) }}</td>
+                        <td>{{ number_format($value['Objetivos'],2)  }}</td>
 
                         </tr>
                         @endforeach
