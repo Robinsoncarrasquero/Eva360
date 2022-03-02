@@ -163,23 +163,29 @@ class ManagerController extends Controller
         $dataCategoriaObj = $objetivoData->getDataCategoria();
         $dataBrechaObj = $objetivoData->getDataBrecha();
 
-        $evaluador = $evaluado_obj->evaluadores->unique('evaluador_id')->first();
-
-        //Aqui busca un registro de una colleccion por ser los objetivos una meta con
-        //varias submetas
-        $objetivo = Objetivo::where('evaluador_id',$evaluador->id)->first();
-        $objetivos = Objetivo::find($objetivo->id)->objetivos;
-        $totalobj = $dataBrechaObj[0]['cumplimiento']+$dataBrechaObj[0]['potencial']+$dataBrechaObj[0]['brecha'];
-        $totalcom = $dataBrechaCom[0]['cumplimiento']+$dataBrechaCom[0]['potencial']+$dataBrechaCom[0]['brecha'];
-        //$total =$dataBrechaObj[0]['cumplimiento'] + $dataBrechaCom[0]['cumplimiento'] ;
-        $total =$totalobj + $totalcom ;
-
-        $resultado=['data'=>['Resultado'=>$total/2,'Objetivos'=>$totalobj,'Competencias'=>$totalcom]];
-        $resultado = collect($resultado);
-
         if (!$dataSerieCom || !$dataSerieObj){
             \abort(404);
         }
+
+        //Aqui busca un registro de una colleccion por ser los objetivos una meta con
+        //varias submetas
+
+        $evaluador = $evaluado_obj->evaluadores->unique('evaluador_id')->first();
+
+        $objetivo = Objetivo::where('evaluador_id',$evaluador->id)->first();
+        $objetivos = Objetivo::find($objetivo->id)->objetivos;
+
+        //Calculamos las competencias y objetivos
+        $totalobj = $dataBrechaObj[0]['cumplimiento']+$dataBrechaObj[0]['potencial']+$dataBrechaObj[0]['brecha'];
+
+        $totalcom = $dataBrechaCom[0]['cumplimiento']+$dataBrechaCom[0]['potencial']+$dataBrechaCom[0]['brecha'];
+
+        $total =$totalobj + $totalcom ;
+
+        $resultado=['data'=>['Resultado'=>$total/2,'Objetivos'=>$totalobj,'Competencias'=>$totalcom]];
+
+        $resultado = collect($resultado);
+
 
        return \view('manager.consolidar',compact("resultado","objetivos","dataSerieCom","dataCategoriaCom","dataBrechaCom","evaluado_com","dataSerieObj","dataCategoriaObj","dataBrechaObj"));
 
