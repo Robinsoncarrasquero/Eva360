@@ -7,7 +7,6 @@ use App\Notifications\EntradaAlSistema;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Notification;
 
 class LoginController extends Controller
@@ -24,7 +23,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-    use Notifiable;
+
 
     /**
      * Where to redirect users after login.
@@ -45,9 +44,6 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        //
-        //$usermanager= $depto->manager;
-        //$manager = Departamento::where('id',$evaluado->user_id)->is_manager();
 
         Notification::send($user, new EntradaAlSistema());
 
