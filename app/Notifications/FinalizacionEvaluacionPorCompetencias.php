@@ -42,7 +42,7 @@ class FinalizacionEvaluacionPorCompetencias extends Notification
     public function toMail($notifiable)
     {
 
-        $url=Route('manager.historicoevaluaciones',$this->evaluado->id);
+        $url=Route('manager.historicoevaluaciones',$this->evaluado->user_id);
         return (new MailMessage)
             ->greeting('Hola.')
             ->line($notifiable->name)
