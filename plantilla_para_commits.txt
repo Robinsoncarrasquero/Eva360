@@ -1,0 +1,47 @@
+# ----------------------------------------------------------
+# Primera línea: Algo breve pero descriptivo
+#                de lo que se ha hecho
+#                ¡Que sirva para algo! :-S
+#                Que facilite las búsquedas si es preciso
+# ----------------------------------------------------------
+#    Debe empezar por uno de estos prefijos:
+#    - WIP: si lleva trabajo sin terminar
+#    - END: si es código final, listo para revisar
+#
+#    Además, según el tipo de código, debe llevar un de estos:
+#    - #NNN: número de tarea a la que pertenece el trabajo
+#    - BUG: cuando corrige un bug
+#    - DOC: si se está tocando documentación
+#    - REF: si es solo una refactorización
+#    - IMG: si son retoques estéticos/de imagen
+#    - PRF: retoques de rendimiento
+#    - TST: código relacionado con tests
+#    - CID: cambios al proceso de CI/CD
+# ----------------------------------------------------------
+#    Por ejemplo:
+#    - WIP:#123: Nuevo formulario de crear usuario
+#    - END:BUG: Problema con cálculo de hash
+#    - WIP:DOC: Actualizado manual del alumno
+# ----------------------------------------------------------
+
+
+# ----------------------------------------------------------
+# Info extra (opc)
+# ----------------------------------------------------------
+#    Si la línea anterior no tiene todo lo necesario
+#    o si el id de tarea no existe, ofrecer detalles sobre
+#    - por qué se han hecho los cambios
+#    - detalles importantes sobre cambios
+#    - posible rotura de compatibilidad
+#    - cambios de funcionalidad
+#    - etc...
+# ----------------------------------------------------------
+
+
+# ----------------------------------------------------------
+# Recursos relacionados - Donde ver información extra (opc)
+# ----------------------------------------------------------
+#    Por ejemplo, urls a documentos internos/externos
+#    sobre técnicas utilizadas, funcionalidad,
+#    casos de uso, docs técnicos, etc..
+# ----------------------------------------------------------
