@@ -176,7 +176,7 @@ class ManagerController extends Controller
         $objetivos = Objetivo::find($objetivo->id)->objetivos;
 
         //Calculamos las competencias y objetivos
-        $totalobj = $dataBrechaObj[0]['cumplimiento']+$dataBrechaObj[0]['potencial']+$dataBrechaObj[0]['brecha'];
+        $totalobj = $dataBrechaObj[0]['cumplimiento'];
 
         $totalcom = $dataBrechaCom[0]['cumplimiento']+$dataBrechaCom[0]['potencial']+$dataBrechaCom[0]['brecha'];
 

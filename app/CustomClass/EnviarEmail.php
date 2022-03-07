@@ -27,33 +27,6 @@ use Throwable;
 class EnviarEmail
 {
 
-    /** Envia los correos de invitacion a los evaluadores */
-    public static function eenviarEmailEvaluadores($evaluado_id){
-
-        //Obtenemos la configuracion particular
-        $configuraciones = Configuracion::first();
-        if (!$configuraciones->email){
-            return false;
-        }
-
-        //Buscamos el Evaluado
-        $evaluado = Evaluado::find($evaluado_id);
-
-        //Buscamos los evaluadores del evaluado
-        $evaluadores = Evaluado::find($evaluado->id)->evaluadores;
-
-        //Iteramos los evaluadores
-        foreach($evaluadores as $evaluador){
-
-            if ($evaluador->user->active){
-                EnviarEmail::enviarEmailEvaluador($evaluador->id);
-            }
-        }
-
-        return true;
-
-    }
-
     /** Envia el correo de una nueva evaluacion a los evaluadores de un evaluador */
     public static function EmailENuevaEvaluacion($evaluado_id){
 
