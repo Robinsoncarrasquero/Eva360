@@ -10,6 +10,7 @@ use App\Evaluado;
 use App\Evaluador;
 use App\Mail\EvaluacionEnviada;
 use App\Notifications\FinalizacionEvaluacion;
+use App\Notifications\FinalizacionEvaluacionPorCompetencias;
 use App\Notifications\FinalizacionEvaluacionPorObjetivo;
 use App\Notifications\NuevaEvaluacion;
 use App\Notifications\NuevaEvaluacionPorObjetivo;
@@ -91,6 +92,10 @@ class EnviarEmail
         $users =  User::whereIn('id', $userIn)->get();
         Notification::send($users, new FinalizacionEvaluacion($evaluado));
 
+        //Enviamos al manager
+        $manager= Departamento::find($evaluado->user->departamento_id)->manager;
+
+        Notification::send($manager, new FinalizacionEvaluacionPorCompetencias($evaluado));
         return true;
 
     }
@@ -110,6 +115,25 @@ class EnviarEmail
         //$manager = Departamento::where('id',$evaluado->user_id)->is_manager();
 
         Notification::send($manager, new FinalizacionEvaluacionPorObjetivo($evaluado));
+
+        return true;
+
+    }
+
+      /** Envia el correode de finaliacion de evaluacion por competencias al manager */
+      public static function EmailFinalizacionPorCompetencias($evaluado_id){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if (!$configuraciones->email){
+            return false;
+        }
+
+        //Buscamos el Evaluado
+        $evaluado = Evaluado::find($evaluado_id);
+        $manager= Departamento::find($evaluado->user->departamento_id)->manager;
+
+        Notification::send($manager, new FinalizacionEvaluacionPorCompetencias($evaluado));
 
         return true;
 
