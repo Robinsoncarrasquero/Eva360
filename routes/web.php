@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Nexmo\Laravel\Facade\Nexmo;
 
 
@@ -114,13 +115,15 @@ Route::get('/tareapendiente/{evaluador}',function ($evaluador)
     if ($evaluador){
         $receptores = Evaluador::where('id',$evaluador->id)->get();
     }else{
-        $receptores = Evaluador::where('status',1)->get();
+        //$receptores = Evaluador::where('status',1)->get();
+        $receptores = Evaluador::where('status',1)->where('virtual',false)->get();
     }
     $delay = now()->addSeconds(1);
 
-    foreach ($receptores as $receptor) {
-        $receptor->notify((new EvaluacionPendiente('evaluacion.token'))->delay($delay));
-    }
+    // foreach ($receptores as $receptor) {
+    //     $receptor->notify((new EvaluacionPendiente('evaluacion.token'))->delay($delay));
+    // }
+    Notification::send($receptores, new EvaluacionPendiente('evaluacion.token'));
 
 })->where('id', '[0-9]+')->name('tareapendiente');
 
