@@ -5,6 +5,7 @@ namespace App\Console;
 use app\CustomClass\Simulador;
 use App\Evaluador;
 use App\Notifications\EvaluacionPendiente;
+use App\Notifications\TareaPendienteDeEvaluacion;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Notification;
@@ -30,7 +31,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             $receptores = Evaluador::where('status',1)->where('virtual',false)->get();;
-            Notification::send($receptores, new EvaluacionPendiente('evaluacion.token'));
+            Notification::send($receptores, new TareaPendienteDeEvaluacion('evaluacion.token'));
         })->dailyAt('13:00')->weekdays();
         //})->twiceDaily(11, 14)->weekdays();
         //})->everyMinute()->weekdays();
