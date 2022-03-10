@@ -28,10 +28,10 @@
         <div class="text text-center">
             <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Auto Evaluacion Virtual</h3>
         </div>
-        <p >
+        {{-- <p >
             LLena el formulario con los datos del correo, seleccione un cargo, una ubicacion,
             un método de evaluacion y un módelo de competencias</strong>.
-        </p>
+        </p> --}}
 
     </div>
 
@@ -42,16 +42,18 @@
 
             <div class="form-group">
 
-                <div class="col">
-                    <label for="name">Nombre Virtual</label>
-                    <input id="name" class="form-control" type="text" name="name" value="{{old('name',$nombre)}}">
-                </div>
+
 
                 <div class="col">
                     <label for="email">Email</label>
                     <input
                     id="email" placeholder="Indica un correo" class="form-control"
                     @if ($email) readonly @endif name="email"  value="{{ old('email',$email)}}">
+                </div>
+
+                <div class="col">
+                    <label for="name">Nombre Virtual</label>
+                    <input id="name" class="form-control" type="text" name="name" value="{{old('name',$nombre)}}">
                 </div>
 
                 <div class="col">
@@ -106,7 +108,7 @@
                     <table  class="table table-responsive table-condensed table-dark">
 
                     <thead>
-                        <th >Nombre</th>
+                        <th >Modelo</th>
                         <th >Competencias</th>
                         <th >Seleccione</th>
                     </thead>
