@@ -22,6 +22,7 @@ class UserRelaciones
     private $manager;
     private $supervisor;
     private $team;
+    private $clientes;
     private $configuracion;
     function __construct() {
         //Obtenemos la configuracion particular
@@ -85,6 +86,9 @@ class UserRelaciones
 
         $this->pares = User::whereIn('id',$id_pares_concatenated)->get();
 
+        //$this->clientes = DB::table('pares')->where('user_id',$user->id)->where('relation','clientes')->get();
+
+
         return true;
 
     }
@@ -130,6 +134,14 @@ class UserRelaciones
     }
 
     /**
+     * Retorna el equipo
+     */
+    public function getClientes()
+    {
+       return $this->clientes;
+    }
+
+    /**
      * Retorna los evaluadores del usuario
      */
     public function getEvaluadores(){
@@ -164,6 +176,7 @@ class UserRelaciones
         $evaluadores[] = $this->supervisor;
         $evaluadores[] = $this->manager;
         $metodo=[];
+
 
         if (count($evaluadores)>=1 && $this->pares->count()>1 && $this->subordinados->count()>1){
             $metodo[]='360';

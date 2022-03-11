@@ -459,6 +459,7 @@ class Simulador
         //$frecuencia=Arr::get(['A'=>100,'B'=>75,'C'=>50,'D'=>25],$xyz);
         $frecuencia = Arr::random(['A' => 100, 'B' => 75, 'C' => 50, 'D' => 25]);
 
+        $frecuencia = Arr::random(['A' => 100, 'B' => 100, 'C' => 100, 'D' => 75,'E' => 75, 'F' => 75, 'G' => 50, 'H' => 50,'I' => 25]);
         $resultado = round($ponderacion *  $frecuencia / 100, 2);
         return ['grado' => $grado, 'ponderacion' => $ponderacion, 'frecuencia' => $frecuencia, 'resultado' => $resultado];
     }
