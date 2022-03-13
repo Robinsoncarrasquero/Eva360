@@ -89,7 +89,7 @@
                     </td>
 
                     <td>
-                        <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')"
+                        <button class="btn btn-danger" onclick="confirmationDelete({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')"
                         @if($evaluado->word_key=='Objetivos') enabled @else enabled @endif>Delete</button>
                     </td>
                 </tr>
@@ -118,5 +118,6 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/deleteConfirmation.js') }}"></script>
+<script src="{{ asset('js/confirmationDelete.js') }}"></script>
+
 @endsection

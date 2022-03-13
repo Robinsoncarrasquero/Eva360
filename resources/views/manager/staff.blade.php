@@ -10,18 +10,13 @@
             @include('flash-message')
         </div>
 
-        <div class="card pb-2 mt-2">
-
-            <div class="text text-center">
-                <h4 style="color:rgb(4, 44, 165); font-size:1.5rem">EVALUACIONES DEL PERSONAL</h4>
-
-            </div>
-
+        <div class="text text-center">
+            <h4 >Evaluaciones</h4>
         </div>
 
         @if ($subproyecto->count())
 
-                <div class="panel mt-3 pb-2">
+                <div class="panel mt-2">
                     <span class="titulo-subproyecto">{{$subproyecto->name}} </span> <span  style="font-size: 0.75rem;" class="titulo-proyecto" ><i class="material-icons">east</i> {{$subproyecto->proyecto->name}}</span>
                     <span class="float-right d-flex justify-content-around">
                         @if ($subproyecto->proyecto->tipo=='Objetivos')
@@ -50,7 +45,7 @@
                         @foreach ($evaluados as $evaluado)
                         @if ($evaluado->user->active)
                         <tr id="{{ $evaluado->id }}">
-                            <td>{{ $evaluado->user->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}}</p><p style="color:rgb(228, 74, 82)" >{{ $evaluado->word_key}}</p></td>
+                            <td>{{ $evaluado->user->name }}<p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->cargo->name}} <br> <span style="color:rgb(228, 74, 82)" >{{ $evaluado->word_key}}</span></p></td>
                             <td class="status-progress" >
                                 @if(Helper::estatus($evaluado->status)=='Finalizada')
                                     {{-- <span id="inicio" class="radio-checkeado" ></span>
@@ -143,7 +138,7 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-danger" onclick="deleteConfirmation({{$evaluado->id}},'{{route('evaluado.delete',$evaluado->id)}}')"
+                                <button class="btn btn-danger" onclick="confirmationDelete({{ $evaluado->id }},'{{route('evaluado.delete',$evaluado->id)}}')"
                                 @if($evaluado->word_key=='Objetivos') enabled @else enabled @endif>Delete</button>
                             </td>
 
@@ -172,7 +167,11 @@
 </div>
 
 @section('scripts')
-    <script src="{{ asset('js/deleteConfirmation.js') }}"></script>
+    <script src="{{ asset('js/confirmationDelete.js') }}"></script>
+
 @endsection
 
 @endsection
+
+
+

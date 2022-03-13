@@ -28,11 +28,11 @@
 
 
     <!-- SweetAlert2 -->
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script> --}}
 
-    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
-    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+    {{-- <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script> --}}
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -81,11 +81,13 @@
         white-space: nowrap;
     }
 
-    .circle + .circle {background-color: yellow;}
+
+    /* .circle + .circle {background-color: yellow;}
     .circle + .circle + .circle {background-color: pink;}
     .forcedStack {background-color: cyan!important;}
-    .forcedStack span {max-width: 50px; margin-top: -5em; top: 2.5em;  white-space: normal; overflow: auto; /*IE9 needs this*/}
-    .forcedStack + .circle {background-color: red!important}
+
+    .forcedStack span {max-width: 50px; margin-top: -5em; top: 2.5em;  white-space: normal; overflow: auto;} //E9 needs this
+    .forcedStack + .circle {background-color: red!important} */
 
 
     </style>
@@ -308,13 +310,14 @@
     <script src={{ asset('bs40/core/js/popper.min.js') }}> </script>
     <script src={{ asset('bs40/core/js/bootstrap.min.js') }}> </script> --}}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS -->
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> --}}
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
     @yield('scripts')
 

@@ -1,5 +1,5 @@
-function deleteConfirmation(id,route) {
-   swal({
+function confirmationDelete(id,route) {
+    swal({
         title: "Borrar?",
         text: "Por favor asegurate y entonces confirma!",
         type: "warning",
