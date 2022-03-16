@@ -178,7 +178,8 @@ class ManagerController extends Controller
         //Calculamos las competencias y objetivos
         $totalobj = $dataBrechaObj[0]['cumplimiento'];
 
-        $totalcom = $dataBrechaCom[0]['cumplimiento']+$dataBrechaCom[0]['potencial']+$dataBrechaCom[0]['brecha'];
+        //$totalcom = $dataBrechaCom[0]['cumplimiento']+$dataBrechaCom[0]['potencial']+$dataBrechaCom[0]['brecha'];
+        $totalcom = $dataBrechaCom[0]['cumplimiento']+$dataBrechaCom[0]['potencial'];
 
         $total =$totalobj + $totalcom ;
 
