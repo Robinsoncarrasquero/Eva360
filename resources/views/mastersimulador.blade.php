@@ -169,11 +169,11 @@
 
     </main>
 
-    <footer id="footer" class="footer">
+    {{-- <footer id="footer" class="footer">
         <div class="xcontainer">
            <span class="text-white d-flex justify-content-center">Sistema de Evaluacion de Desempeño Por Competencias {{ config('app.name') }}</span>
         </div>
-    </footer>
+    </footer> --}}
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

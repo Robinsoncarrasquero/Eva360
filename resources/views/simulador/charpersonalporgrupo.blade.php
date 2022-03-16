@@ -47,50 +47,7 @@
         </div>
        <p>Se presentan dos graficas una de linea y otra de barra del resultado, con
          indicadores graficos facil de leer e interpretar para la toma de acciones de desarrollo.</p>
-        <div class="table table-responsive">
-            <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                <thead class="table-thead" style="text-align: center">
-                <th>Evaluado</th>
-                <th>Cump.</th>
-                <th>Brecha</th>
-                <th>Potencial</th>
-                <th>Oportunidad</th>
-                <th>Fortaleza</th>
-                </thead>
-                <tbody>
-                @foreach ($dataBrecha as $key=>$value)
-                <tr style="text-align: center">
 
-                <td style="text-align: left">{{$value['categoria']}}</strong></td>
-                <td>
-                    <span style="font-size:1em; color:green">{{ number_format($value['cumplimiento'],2) }}</span>
-                </td>
-                <td>
-                @if ($value['cumplimiento']!=100)
-                <span style="font-size:1em; color:red">{{ number_format($value['brecha'],2) }}</span>
-                @endif
-                </td>
-                <td>
-                    @if ($value['potencial']>0)
-                    <span style="font-size:1em; color:white;background:green">{{ number_format($value['potencial'],2) }}</span>
-
-                    @endif
-                </td>
-                <td>
-                    @foreach ($value['dataoportunidad'] as $vdata)
-                        {{$vdata['competencia']}},
-                    @endforeach
-                </td>
-                <td>
-                    @foreach ($value['datafortaleza'] as $vdata)
-                        {{$vdata['competencia']}},
-                    @endforeach
-                </td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
     </div>
 
     <div class="col">
