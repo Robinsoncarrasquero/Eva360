@@ -1,6 +1,6 @@
 @extends('mastersimulador')
 
-@section('title',"Simulador de Autoevealuacion")
+@section('title',"Simulador de Auto Evaluacion")
 
 @section('content')
 
@@ -14,15 +14,19 @@
         <div class="text text-center">
             <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.2rem">Evaluacion Virtual de Desempeño por Competencias</h3>
         </div>
-        <p>
-            La <strong>Evaluacion Virtual</strong> es una facilidad disponible para que una persona experimente con nuestro sistema <strong class="text text-warning">HRFeedBack360</strong>,
-            realizando una <strong class="text text-dark">Auto Evaluacion</strong> con un proceso sencillo, intuitivo y rápido.
-            <br>Como funciona? <strong class="text text-warning">HRFeedBack360</strong>, creará Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
-            , según el método de evaluación. El método 90(2 EV); El método 180(4 EV); El método 270(6 EV); El método 360(8 EV).
-             Los EV responderán el cuestionario de competencias con un Robot <span class="material-icons bg-success" style="" >android</span>.
-             La evaluaccion tiene un limite máximo de 10 minutos para culminarla. Si la prueba queda incompleta el Robot responderá
-            la Auto Evaluacion y notificará la finalización via email para revisar los resultados.
-            </p>
+        <div class="small">
+            <p >
+                La <strong>Evaluacion Virtual</strong> es una facilidad disponible para que una persona experimente con el sistema <strong class="text text-warning">HRFeedBack360</strong>,
+                realizando una <strong class="text text-dark">Auto Evaluacion</strong> con un proceso sencillo, intuitivo y rápido.</p>
+                <p>
+                <strong> Como funciona?</strong> <br><strong class="text text-warning">HRFeedBack360</strong>, creará Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
+                , según el método de evaluación. El método 90(2 EV); El método 180(4 EV); El método 270(6 EV); El método 360(8 EV).
+                 Los EV responderán el cuestionario de competencias con un Robot <span class="material-icons bg-success" style="" >android</span>.
+                 La evaluaccion tiene un limite máximo de 10 minutos para culminarla. Si la prueba queda incompleta el Robot responderá
+                la Auto Evaluacion y notificará la finalización via email para revisar los resultados.
+                </p>
+        </div>
+
     </div>
     <div class="mt-2 pb-2">
         <div class="text text-center">
@@ -85,21 +89,6 @@
                     </select>
                 </div> --}}
 
-                <div class="col mt-2">
-                    <div class="card-footer" style="background-color:darkgoldenrod;color:white">
-                        <h5 class="card-title">Metodo</h5>
-                        <div class="d-flex justify-content-between">
-                            @foreach ($metodos as $metodo)
-                            <label for="metodoradio" class="form-check-label">{{ $metodo}}</label>
-                                <input type="radio"  id="{{"$metodo"}}"
-                                value="{{"$metodo"}}"
-                                name="metodoradio"
-                                data-id="{{"$metodo"}}">
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-
                 <div class="mt-4 text text-center">
                     <h5 class="text text-danger">Modelos de competencias</h5>
                 </div>
@@ -123,11 +112,7 @@
                             @endforeach
                         </td>
                         <td>
-                            <div class="form-check">
-                                <input type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[]">
-                                <label class="form-check-label" for="{{"$modelo->name"}}">
-                                </label>
-                            </div>
+                            <input type="radio" class="btnradio" value="{{"$modelo->id"}}" name="modeloradio[]">
                         </td>
 
                     </tr>
@@ -136,10 +121,106 @@
                     </table>
                 </div>
 
-                <div class="clearfix">
+                <section>
+                    <div class="row d-flex justify-content-between">
+
+                        <div class="col-sm-12 col-md-3 mt-3 p-2">
+                            <div class="card text-center">
+                                <div class="card-header subtitulo90" style="background-color:blueviolet;color:white">
+                                METODO 90&#176;
+                                </div>
+                                <div class="card-body ">
+                                    <p class="card-text modelo-90">El empleado es evaluado por su supervisor y la autoevaluacion.</p>
+                                </div>
+                                <div class="cajaimagen300">
+                                    <img class="img-fluid" src="{{asset('images/comunicacion.png') }}"  alt="Evaluacion 180 grados">
+                                </div>
+                                <button type="submit" class="btn btn-dark btn-lg " name="btn[]" value="90">Seleccionar</button>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 mt-3 p-2" >
+                            <div class="card text-center">
+                                <div class="card-header subtitulo180" style="background-color:rgb(18, 224, 204); color:white;">
+                                METODO 180&#176;
+                                </div>
+                                <div class="card-body">
+                                <p class="card-text modelo-180">El empleado es evaluado por su supervisor,
+                                    sus pares y la autoevaluacion.</p>
+                                </div>
+                                {{-- <div class="card-footer text-muted">
+                                    <i class="material-icons">people_alt group_add </i>
+                                </div> --}}
+                                <div class="cajaimagen300">
+                                    <img class="img-fluid" src="{{asset('images/colaboracion.png') }}"  alt="Evaluacion 360 grados">
+                                </div>
+                                <button type="submit" class="btn btn-dark btn-lg " name="btn[]" value="180">Seleccionar</button>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 mt-3 p-2" >
+                            <div class="card text-center">
+                                <div class="card-header subtitulo180" style="background-color:darkgoldenrod; color:white;">
+                                METODO 270&#176;
+                                </div>
+                                <div class="card-body modelo-360">
+                                    <p class="card-text">El empleado es evaluado por su supervisor, pares, colaboradores y
+                                    la autoevaluacion.</p>
+                                </div>
+                                {{-- <div class="card-footer text-muted">
+                                    <i class="material-icons">people_alt group_add </i>
+                                </div> --}}
+                                <div class="cajaimagen300">
+                                    <img class="img-fluid" src="{{asset('images/grupo.png') }}"  alt="Evaluacion 360 grados">
+                                </div>
+                                <button type="submit" class="btn btn-dark btn-lg " name="btn[]" value="270">Seleccionar</button>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 mt-3 p-2 ">
+                            <div class="card text-center">
+                                <div class="card-header subtitulo360" style="background-color: seagreen;color:white">
+                                METODO 360 &#176;
+                                </div>
+                                <div class="card-body modelo-360">
+                                <p class="card-text">Es una evaluacion integral abarca supervisor, pares, colaboradores
+                                    , clientes internos o externos y la autoevaluacion.</p>
+                                </div>
+                                {{-- <div class="card-footer text-muted">
+                                    <i class="material-icons">people_alt  360</i>
+                                </div> --}}
+                                <div class="cajaimagen300">
+                                    <img class="img-fluid" src="{{asset('images/grupo-de-trabajo.png') }}"  alt="Evaluacion 90 grados">
+                                </div>
+                                 <button type="submit" class="btn btn-dark btn-lg " name="btn[]" value="360">Seleccionar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {{-- <div class="col mt-2">
+                    <div class="card-footer" style="background-color:darkgoldenrod;color:white">
+                        <h5 class="card-title">Metodo</h5>
+                        <div class="d-flex justify-content-between">
+                            @foreach ($metodos as $metodo)
+                            <label for="metodoradio" class="form-check-label">{{ $metodo}}</label>
+                                <input type="radio"  id="{{"$metodo"}}"
+                                value="{{"$metodo"}}"
+                                name="metodoradio"
+                                data-id="{{"$metodo"}}">
+                            @endforeach
+                        </div>
+                    </div>
+                </div> --}}
+
+
+                {{-- <div class="clearfix">
                     <span><a href="{{ route('vision360') }}" class="btn btn-dark btn-lg">Regresar</a></span>
                     <button type="submit" class="btn btn-dark btn-lg " value="Next">Registrar</button>
-                </div>
+                </div> --}}
 
             </div>
 

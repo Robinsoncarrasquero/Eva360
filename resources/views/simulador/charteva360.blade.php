@@ -23,15 +23,16 @@
 </head>
 <body>
 <div class="container">
-
-    <p>Se presentan dos graficas una de linea y otra de barra del resultado, con
-         indicadores graficos de facíl lectura para la toma de decisiones y acciones de desarrollo.</p>
+    <div class="small">
+        <p>Se presentan dos indicadores: De linea y barra de facíl lectura para la toma de decisiones que son exportables en diferentes formaros tales como :
+             PDF, Excel, PNG, JPG, Table y otros.</p>
+    </div>
     <div class="mt-3">
-        <div class="col-lg-12 mb-1" id="container-line"></div>
+        <div class="col-lg-12 " id="container-line"></div>
     </div>
 
     <div class="mt-3">
-        <div class="col-lg-12 mb-1" id="container-column"></div>
+        <div class="col-lg-12" id="container-column"></div>
     </div>
 
     <div class="clearfix">

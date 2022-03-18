@@ -16,10 +16,18 @@
             <h5 class="text-center text-danger">Debe culminar la evaluacion de {{ $evaluado->user->name }} para ver los resultado finales.</h5>
         @else
             <div class="text text-center">
-                <h5>Resultado final de <span class="text-danger">{{ $evaluado->user->name }}</span></h5>
+                <h5>Resultado</h5>
+                <h5 class="text-danger">{{ $evaluado->user->name }}</h5>
                 @if ($configuraciones->promediarautoevaluacion)
                     <p class="btn btn-dark">La Auto Evaluacion está incluida en los Resultados</p>
                 @endif
+            </div>
+            <div class="small">
+                <p>Resultados por cada competencia. Indica si el evaluado Cumplió o No Cumplió. Tambien recibe una calificación
+                    cualitativa basada en una tabla de rango configurable que indica su avance progresivo con respecto a la competencia.
+                    Calificacion : No desarrollada(0-25) - Inicio(26-50) - En proceso(51-75) - Avanzada(76-99) - Desarrollada(100).
+               </p>
+
             </div>
         @endif
     </div>
@@ -28,62 +36,56 @@
 
         <div class="row">
 
-            <p>Resultados por cada competencia. Indica si el empleado Cumplió o No Cumplió. Tambien recibe una calificacion
-                 cualitativa basada en un rango que indica su avance progresivo con respecto a la competencia.
-                 Calificacion : No desarrollada(0-25) - Inicio(26-50) - En proceso(51-75) - Avanzada(76-99) - Desarrollada(100).
-            </p>
-
-            @foreach($competencias as $key=>$value)
+           @foreach($competencias as $key=>$value)
             <div class="col-sm-12 col-md-3">
-            <div class="table " >
+                <div class="table " >
+                    <table id="{{$key}}" class="table table-bordered table-table table-responsibe">
+                        <thead>
+                            <tr >
+                                <th class="text text-center title-th-competencia-x" colspan="2" style="background:rgb(235, 229, 229)">
+                                <strong >{{ $value['competencia']}}<br> (Nivel Requerido {{ $value['nivelRequerido'] }})
+                                </strong>
+                                </th>
+                            </tr>
+                            <th>Evaluador</th>
+                            <th>Ponderado</th>
+                        </thead>
+                        <tbody>
 
-                <table id="{{$key}}" class="table table-bordered table-table table-responsibe">
-                    <thead>
-                        <tr >
-                            <th class="text text-center title-th-competencia-x" colspan="2" style="background:rgb(235, 229, 229)">
-                            <strong >{{ $value['competencia']}}<br> (Nivel Requerido {{ $value['nivelRequerido'] }})
-                            </strong>
-                            </th>
+                        @foreach ($value['data'] as $item)
+
+                        <tr>
+                            <td >{{ $item['name']}}</td>
+                            <td>{{ number_format($item['average'],2)}}</td>
                         </tr>
-                        <th>Evaluador</th>
-                        <th>Ponderado</th>
-                    </thead>
-                    <tbody>
+                        @endforeach
 
-                    @foreach ($value['data'] as $item)
+                        {{-- <tr>
+                            <td class="font-weight-bold">Brecha</td>
+                            @if ($value['brecha'] >=0)
+                            <td class="font-weight-bold alert-success">{{ $value['brecha']  }}</td>
+                            @else
+                            <td class="alert alert-danger font-weight-bold">{{ $value['brecha']  }}</td>
+                            @endif
+                        </tr> --}}
+                        <tr>
+                            <td class="text text-center font-weight-bold"><a href=""><i class="material-icons md-48" >bar_chart</i></a>Resultado</td>
+                            <td class="text text-center" ><strong>{{ number_format($value['eva360'],2)}}</strong></td>
+                        </tr>
+                        <tr>
+                            @if ($value['eva360'] >=$value['nivelRequerido'])
+                                <td class="font-weight-bold text text-success">{{ $value['cumplido']  }}</td>
+                            @else
+                                <td class="text text-danger font-weight-bold">{{ $value['cumplido']  }}</td>
+                            @endif
 
-                    <tr>
-                        <td >{{ $item['name']}}</td>
-                        <td>{{ number_format($item['average'],2)}}</td>
-                    </tr>
-                    @endforeach
+                            <td class="text-center" style="background:{{  $value['colorcalificacion']}}"><strong>{{ $value['calificacion']}}</strong></td>
+                        </tr>
 
-                    {{-- <tr>
-                        <td class="font-weight-bold">Brecha</td>
-                        @if ($value['brecha'] >=0)
-                        <td class="font-weight-bold alert-success">{{ $value['brecha']  }}</td>
-                        @else
-                        <td class="alert alert-danger font-weight-bold">{{ $value['brecha']  }}</td>
-                        @endif
-                    </tr> --}}
-                    <tr>
-                        <td class="text text-center font-weight-bold"><a href=""><i class="material-icons md-48" >bar_chart</i></a>Resultado</td>
-                        <td class="text text-center" ><strong>{{ number_format($value['eva360'],2)}}</strong></td>
-                    </tr>
-                    <tr>
-                        @if ($value['eva360'] >=$value['nivelRequerido'])
-                            <td class="font-weight-bold text text-success">{{ $value['cumplido']  }}</td>
-                        @else
-                            <td class="text text-danger font-weight-bold">{{ $value['cumplido']  }}</td>
-                        @endif
+                        </tbody>
+                    </table>
 
-                        <td class="text-center" style="background:{{  $value['colorcalificacion']}}"><strong>{{ $value['calificacion']}}</strong></td>
-                    </tr>
-
-                    </tbody>
-                </table>
-
-            </div>
+                </div>
             </div>
             @endforeach
 

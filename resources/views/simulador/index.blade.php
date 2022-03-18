@@ -14,30 +14,29 @@
         <div class="mt-2">
 
              <div class="text text-center mt-3" style="color:dodgerblue">
-                <h4 >AUTO EVALUACION VIRTUAL</h4>
+                <h4 >Auto Evalución Virtual</h4>
             </div>
-            <p class="card-footer "><strong>Lista de Auto Evaluaciones. Cada icono accede opciones relacionadas.
-                El histórico presenta los resultados de la Evaluaciones realizadas. El estatus indica el progreso de la Evaluacion como un semáforo:</strong>
+            <p class="card-footer small"><strong>Lista de Auto Evaluaciones. El icono del histórico presenta todas las evaluaciones registradas y realizadas del evaluado. El estatus indica el progreso de la Evaluacion como un semáforo:</strong>
                 <ul class="d-flex justify-content-between">
-                    <li >Finalizada<i class="spinner-grow spinner-grow-sm text-success"  ></i></li>
+                    <li>Finalizada<i class="spinner-grow spinner-grow-sm text-success"  ></i></li>
                     <li>Activa<i class="spinner-grow spinner-grow-sm text-warning" ></i></li>
                     <li>Detenida<i class="spinner-grow spinner-grow-sm text-danger" ></i></li>
                 </ul>
             </p>
-
-
         </div>
+
         <div class="d-flex justify-content-end">
-            <a href="{{ route('simulador.autoevaluacion') }}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i> </a>
+            <a href="{{ route('simulador.autoevaluacion') }}" class="btn btn-dark"><i class="material-icons">library_add</library-add></i>Nueva </a>
         </div>
+
         @if($evaluadores->count())
 
             <div class="table table-light table-responsive">
-                <table class="table  table-bordered table-striped">
+                <table class="table table-bordered table-striped">
                     <thead>
                         <th >Nombre</th>
-                        <th >Evaluacion</th>
-                        <th >Historico</th>
+                        <th >Evaluación</th>
+                        <th >Histórico</th>
                         <th >Fecha</th>
                     </thead>
                     <tbody>

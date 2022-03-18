@@ -29,8 +29,8 @@
                     <th style="background-color:rgb(102, 197, 7);width:10%" class="text-dark">St</th>
                     <th style="background-color:gray;width:14%" class="text-white">Inicio</th>
                     <th style="background-color:rgb(20, 20, 20);width:14%" class="text-white">Final</th>
-                    <th style="background-color:darkkhaki;width:10%" class="text-dark">Evaluadores Respuestas</th>
-                    <th style="background-color:rgb(144, 142, 158);width:10%" class="text-white">Resultado Competencias</th>
+                    <th style="background-color:darkkhaki;width:10%" class="text-dark">Evaluadores</th>
+                    <th style="background-color:rgb(144, 142, 158);width:10%" class="text-white">Resultados</th>
                     <th style="background-color:gold;width:10%" class="text-dark">Grafica Individual</th>
                     <th style="background-color:chocolate;width:10%" class="text-white">Grafica Consolidada</th>
                     <th style="background-color:darkslategray;width:10%" class="text-white">Grafica Cumplimiento</th>
@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                 @foreach ($evaluaciones as $key=>$evaluado)
-                <tr id="{{ $evaluado->id }}">
+                <tr id="{{ $evaluado->id }}" class="small">
                     <td>{{ $evaluado->subproyecto->name }} <br><strong class="text-dark">{{ $evaluado->word_key }}</strong>  <p style="background:rgb(179, 248, 179);  color:rgb(15, 16, 24)">{{ $evaluado->work_key}}</p></td>
                     <td class="status-progress" >
                         @if(Helper::estatus($evaluado->status)=='Finalizada')

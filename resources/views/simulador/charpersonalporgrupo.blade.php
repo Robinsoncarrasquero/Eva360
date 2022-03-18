@@ -45,8 +45,12 @@
                 <h5>Indicadores de Cumplimiento</span></h5>
             </div>
         </div>
-       <p>Se presentan dos graficas una de linea y otra de barra del resultado, con
-         indicadores graficos facil de leer e interpretar para la toma de acciones de desarrollo.</p>
+        <div class="small">
+            <p>Se presentan dos indicadores : Una de linea y otra de barra fácil de interpretar para la toma de acciones de desarrollo. Son exprotables
+                en diferentes formatos como : Pdf, Excel, png, jpg, table y otros.
+            </p>
+
+        </div>
 
     </div>
 
@@ -119,6 +123,56 @@
         </div>
         @endif
 
+    </div>
+
+    <div class="col">
+
+        <div class="clearfix">
+            <div class=" text-center">
+                <h5>Resultados por Competencias</span></h5>
+            </div>
+
+        </div>
+        <div class="xcol-6">
+            @if($subProyecto)
+            <div class="table table-responsive">
+            <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                <thead class="table-thead">
+                <tr>
+                    <th>Competencias</th>
+                    @foreach ($dataCategoria as $key=>$value)
+                    <th>
+                    {{$value}}</strong>
+                    </th>
+                    @endforeach
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach ($dataSerie as $key=>$dataValue)
+                    <tr>
+                        <td>{{$dataValue['name']}} </td>
+
+                        @foreach ($dataValue['data'] as $key2=>$vdata)
+
+                        {{-- <td class="text text-danger">{{ number_format($vdata,2)}} key {{ $key2}} {{ $dataValue['data'][0] }}</td> --}}
+
+
+                            @if($dataValue['data'][0]>($vdata) && $key2>0)
+                                <td style="font-size:1em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
+
+                            @else
+                            <td style="font-size:1em; color:green;" class="text text-center">{{ number_format($vdata,2)}}</td>
+
+                                {{-- <td style="font-size:1.5em; color:white;background:green" class="text text-center">{{ number_format($vdata,2)}}</td> --}}
+                            @endif
+
+                        @endforeach
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            </div>
+        @endif
     </div>
 
     <div class="col">
