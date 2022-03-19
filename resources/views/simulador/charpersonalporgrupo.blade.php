@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="small">
-            <p>Se presentan dos indicadores : Una de linea y otra de barra fácil de interpretar para la toma de acciones de desarrollo. Son exprotables
+            <p>Se presentan dos indicadores : Uno de linea y otro de barra, fácil de interpretar para la toma de acciones de desarrollo. Son exportables
                 en diferentes formatos como : Pdf, Excel, png, jpg, table y otros.
             </p>
 
@@ -135,44 +135,45 @@
         </div>
         <div class="xcol-6">
             @if($subProyecto)
-            <div class="table table-responsive">
-            <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                <thead class="table-thead">
-                <tr>
-                    <th>Competencias</th>
-                    @foreach ($dataCategoria as $key=>$value)
-                    <th>
-                    {{$value}}</strong>
-                    </th>
-                    @endforeach
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach ($dataSerie as $key=>$dataValue)
+                <div class="table table-responsive">
+                <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                    <thead class="table-thead">
                     <tr>
-                        <td>{{$dataValue['name']}} </td>
-
-                        @foreach ($dataValue['data'] as $key2=>$vdata)
-
-                        {{-- <td class="text text-danger">{{ number_format($vdata,2)}} key {{ $key2}} {{ $dataValue['data'][0] }}</td> --}}
-
-
-                            @if($dataValue['data'][0]>($vdata) && $key2>0)
-                                <td style="font-size:1em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
-
-                            @else
-                            <td style="font-size:1em; color:green;" class="text text-center">{{ number_format($vdata,2)}}</td>
-
-                                {{-- <td style="font-size:1.5em; color:white;background:green" class="text text-center">{{ number_format($vdata,2)}}</td> --}}
-                            @endif
-
+                        <th>Competencias</th>
+                        @foreach ($dataCategoria as $key=>$value)
+                        <th>
+                        {{$value}}</strong>
+                        </th>
                         @endforeach
                     </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            </div>
-        @endif
+                    </thead>
+                    <tbody>
+                        @foreach ($dataSerie as $key=>$dataValue)
+                        <tr>
+                            <td>{{$dataValue['name']}} </td>
+
+                            @foreach ($dataValue['data'] as $key2=>$vdata)
+
+                            {{-- <td class="text text-danger">{{ number_format($vdata,2)}} key {{ $key2}} {{ $dataValue['data'][0] }}</td> --}}
+
+
+                                @if($dataValue['data'][0]>($vdata) && $key2>0)
+                                    <td style="font-size:1em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
+
+                                @else
+                                <td style="font-size:1em; color:green;" class="text text-center">{{ number_format($vdata,2)}}</td>
+
+                                    {{-- <td style="font-size:1.5em; color:white;background:green" class="text text-center">{{ number_format($vdata,2)}}</td> --}}
+                                @endif
+
+                            @endforeach
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                </div>
+            @endif
+        </div>
     </div>
 
     <div class="col">
@@ -231,10 +232,9 @@
 
 
 
-        <div class="col-6">
-            <span class="float-left"><a href="{{route('simulador.historicoevaluaciones')}}" class="btn btn-dark btn-lg">Regresar</a></span>
-        </div>
-
+    <div class="col-6">
+        <span class="float-left"><a href="{{route('simulador.historicoevaluaciones')}}" class="btn btn-dark btn-lg">Regresar</a></span>
+    </div>
 
 
 </div>
@@ -259,6 +259,7 @@
                 type: element
             },
             title: {
+
                 text: 'Indicadores de competencias por grupo '
             },
             subtitle: {

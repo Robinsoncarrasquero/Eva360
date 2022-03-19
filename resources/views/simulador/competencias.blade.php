@@ -12,7 +12,7 @@
 
         </div>
 
-        <div class="pb-1 ">
+        <div class="card">
 
             <div class="mb-2">
 
@@ -24,36 +24,38 @@
                 <h4 class="text text-danger d-flex justify-content-center">Evaluacion de {{ $evaluado->word_key }} Grados</h4>
                 @switch($evaluado->word_key)
                     @case('180')
-                        <p class="text text-dark d-flex justify-content-center" >
-                        Sus Evaluadores Virtual son 3: EV Supervisor - EV 2 Pares </p>
+                        <p class="text text-dark d-flex justify-content-center small" >
+                        Sus Evaluadores Virtual son 3 : 1 EV Supervisor - EV 2 Pares </p>
                         @break
                     @case('270')
-                        <p class="text text-dark d-flex justify-content-center">
-                        Sus Evaluadores Virtual son 5: EV Supervisor - EV 2 Pares - EV 2 Colaboradores </p>
+                        <p class="text text-dark d-flex justify-content-center small">
+                        Sus Evaluadores Virtual son 5: 1 EV Supervisor - EV 2 Pares - EV 2 Colaboradores </p>
                         @break
                     @case('360')
-                        <p class="text text-dark d-flex justify-content-center" >
-                            Sus Evaluadores Virtual son 7: EV Supervisor - EV 2 Pares - EV 2 Colaboradores - EV 2 Clientes</p>
+                        <p class="text text-dark d-flex justify-content-center small" >
+                            Sus Evaluadores Virtual son 7: 1 EV Supervisor - EV 2 Pares - EV 2 Colaboradores - EV 2 Clientes</p>
                             @break
                     @default
-                        <p class="text text-dark d-flex justify-content-center" >
-                            Su Evaluador Virtual es 1: EV Supervisor </p>
+                        <p class="text text-dark d-flex justify-content-center small" >
+                            Su Evaluador Virtual es 1 EV Supervisor </p>
                         @break
 
                 @endswitch
             </div>
 
-            <div class="text text-center mt-2" style="color:dodgerblue">
-                <h4 >COMPETENCIAS</h4>
-            </div>
 
-            <p>Se presentan las competencias del modelo que usted debe responder. Seleccione la competencia en el orden que considere conveniente, no hay un orden específico.</p>
+            {{-- <div class="small">
+                <p>Se presentan las competencias del modelo para responder. Seleccione la competencia en el orden que considere conveniente, no hay un orden específico.</p>
+            </div> --}}
 
             <p class="text text-center"><a href="{{route('simulador.resultados', $evaluado->id)}}" class="btn btn-danger btn-lg">Respuesta de Evaluadores</a></p>
 
+
         </div>
 
-
+        <div class="text text-center mt-2 text-dark">
+            <h4 >COMPETENCIAS</h4>
+        </div>
         @if($competencias)
 
             <form method="POST" action="{{ route('simulador.finalizar',$evaluador->id) }}">
@@ -68,7 +70,8 @@
                             <span class="text-capitalize ">{{substr($competencia->competencia->name,0,1)}}</span>
                         </div>
                         <h5 class="card-title">{{$competencia->competencia->name}}</h5>
-                        <p class="card-text">{{ substr($competencia->competencia->description,0,40) }}...</p>
+                        <p class="card-text">{{ substr($competencia->competencia->description,0,50) }}...</p>
+                        {{-- <p class="card-text"><abbr>{{$competencia->competencia->description }}</abbr></p> --}}
                         <a href="{{route('simulador.responder', $competencia->id)}}" style="color: rgb(16, 17, 17)" >
                         @if($competencia->resultado)
                             {{-- <span ><i class="material-icons text-success">thumb_up_alt</i></span></a> --}}

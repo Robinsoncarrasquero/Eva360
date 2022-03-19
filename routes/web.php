@@ -5,6 +5,7 @@ use App\Evaluador;
 use App\Frecuencia;
 use App\Notifications\EvaluacionPendiente;
 use App\Notifications\Nexmosms;
+use App\Notifications\TareaPendienteDeEvaluacion;
 use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -29,6 +30,12 @@ use Nexmo\Laravel\Facade\Nexmo;
 /**
  * Route simulador de Autoevaluacion
  */
+
+
+Route::get('simuladorfeedback/{id}/edit', 'SimuladorController@feedbackedit')->name('simulador.feedback.edit');
+// ->middleware('role:user');
+
+Route::post('simuladorfeedback/update/{id}', 'SimuladorController@feedbackupdate')->name('simulador.feedback.update');
 
  /**
  * Presenta una grafica de resultados personales por subproyecto
@@ -123,7 +130,7 @@ Route::get('/tareapendiente/{evaluador}',function ($evaluador)
     // foreach ($receptores as $receptor) {
     //     $receptor->notify((new EvaluacionPendiente('evaluacion.token'))->delay($delay));
     // }
-    Notification::send($receptores, new EvaluacionPendiente('evaluacion.token'));
+    Notification::send($receptores, new TareaPendienteDeEvaluacion('evaluacion.token'));
 
 })->where('id', '[0-9]+')->name('tareapendiente');
 

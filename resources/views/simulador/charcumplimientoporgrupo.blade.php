@@ -177,6 +177,7 @@
                 </div>
 
             </div>
+
             <div class="xcol-6">
                 @if($subProyecto)
                 <div class="table table-responsive">

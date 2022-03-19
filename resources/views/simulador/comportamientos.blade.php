@@ -10,7 +10,7 @@
         @include('flash-message')
     </div>
 
-    <div class="xclearfix">
+    <div class="clearfix">
 
         <div class="card-header mb-2">
             <h5 class="text text-center">{{  $evaluacion->evaluador->name }}, analice con criterio y determinacion las competencia de :</h5>
@@ -20,7 +20,7 @@
         <h4 class="text text-center mt-2 border-primary "><strong> {{ $evaluacion->competencia->name }}</strong></h4>
 
         <div class="card mb-2">
-            <h6 class="card-header description" >{{ $evaluacion->competencia->description}}</h6>
+            <h2 class="card-header description" >{{ $evaluacion->competencia->description}}</h2>
         </div>
 
 
@@ -29,53 +29,60 @@
             <form action="{{ route('simulador.store',$evaluacion) }}" method="POST" id="form-select">
             @csrf
 
+            <div class="card-columns">
+
                 @foreach ($evaluacion->comportamientos as $comportamiento)
 
-                <div id="{{$comportamiento->id}}" class="card  filas mt-4  @if($evaluacion->resultado) border-success @else border-danger @endif">
 
-                    <div class="card-body ">
+                    <div id="{{$comportamiento->id}}" class="card  filas mt-2"  @if($evaluacion->resultado) border-success @else border-danger @endif>
 
-                        {{-- <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5> --}}
-                        <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white;fontsize:1rem;font-weight: bold;">
-                            <span class="text-capitalize " >{{substr($comportamiento->grado->description,0,1)}}</span>
+                        <div class="card-body ">
+
+                            {{-- <h5 class="card-title  @if($evaluacion->resultado) text-success @else text-danger @endif">Pregunta #{{ $comportamiento->id }}</h5> --}}
+                            <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white;fontsize:1rem;font-weight: bold;">
+                                <span class="text-capitalize " >{{substr($comportamiento->grado->description,0,1)}}</span>
+                            </div>
+                            <p > {{$comportamiento->grado->description}}</p>
                         </div>
-                        <h5 class="card-text"> {{$comportamiento->grado->description}}</h5>
-                    </div>
 
-                    <div class="card-footer" >
-                        @if ($frecuencias->count()>1)
-                            <h5 class="card-title @if($evaluacion->resultado) text-success @else text-danger @endif">Que frecuencia?</h5>
-                        @endif
-                        @foreach ($frecuencias  as $frecuencia)
-                        {{-- <div class="form-check d-flex justify-content-between"> --}}
-                        <div class="form-check ">
-                            <label for="frecuenciacheck[]" class="xform-check-label">{{ $frecuencia->name}}</label>
-                            @if ($evaluacion->competencia->seleccionmultiple)
-                                <input  type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                                value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                                @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                                @if ($evaluacion->evaluador->status==2) disabled  @endif
-                                data-id="{{"$comportamiento->id"}}">
-                            @else
-                                <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
-                                value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
-                                @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
-                                @if ($evaluacion->evaluador->status==2) disabled  @endif
-                                data-id="{{"$comportamiento->id"}}">
+                        <div class="card-footer" >
+                            @if ($frecuencias->count()>1)
+                                <h6 class="card-title @if($evaluacion->resultado) text-success @else text-danger @endif">Que frecuencia?</h6>
                             @endif
+
+                            @foreach ($frecuencias  as $frecuencia)
+                            {{-- <div class="form-check d-flex justify-content-between"> --}}
+                            <div class="form-check ">
+                                <label for="frecuenciacheck[]" class="xform-check-label small">{{ $frecuencia->name}}</label>
+                                @if ($evaluacion->competencia->seleccionmultiple)
+                                    <input  type="radio" class="no-radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
+                                    value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
+                                    @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
+                                    @if ($evaluacion->evaluador->status==2) disabled  @endif
+                                    data-id="{{"$comportamiento->id"}}">
+                                @else
+                                    <input type="radio" class="radiofrecuencia" id="{{"radiofrecuencia$comportamiento->grado_id"}}"
+                                    value="{{"$comportamiento->id,$frecuencia->id"}}" name="frecuenciacheck[{{ $comportamiento->grado_id }}]"
+                                    @if ($comportamiento->frecuencia===$frecuencia->valor) checked @endif
+                                    @if ($evaluacion->evaluador->status==2) disabled  @endif
+                                    data-id="{{"$comportamiento->id"}}">
+                                @endif
+                            </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
-                </div>
+
                 @endforeach
 
+            </div>
                 {{-- <div class="col-md-4 ">
                     <div id="divtodo">
 
                     </div>
                 </div> --}}
 
-                <div class="clearfix">
+
+                <div class="clearfix mt-1">
 
                     <span class="float-left"><a href="{{ route('simulador.competencias',$evaluacion->evaluador->id) }}" class="btn btn-dark btn-lg">Regresar</a></span>
                     @if ($evaluacion->evaluador->status!=2)

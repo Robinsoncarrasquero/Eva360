@@ -32,7 +32,7 @@
                     <th style="background-color:darkkhaki;width:10%" class="text-dark">Evaluadores</th>
                     <th style="background-color:rgb(144, 142, 158);width:10%" class="text-white">Resultados</th>
                     <th style="background-color:gold;width:10%" class="text-dark">Grafica Individual</th>
-                    <th style="background-color:chocolate;width:10%" class="text-white">Grafica Consolidada</th>
+                    <th style="background-color:chocolate;width:10%" class="text-white">Grafica Grupal</th>
                     <th style="background-color:darkslategray;width:10%" class="text-white">Grafica Cumplimiento</th>
                     <th style="background-color:rgb(76, 0, 255);width:2%" class="text-white">FeedBack</th>
                     <th style="background-color:rgb(255, 0, 0);width:10%" class="text-white">Borrar</th>
@@ -104,9 +104,9 @@
 
                     <td >
                         @if($evaluado->word_key=='Objetivos')
-                            <a href="{{route('feedback.edit', $evaluado->id)}}"><span><i class="material-icons ">comment</i></span></a>
+                            <a href=""><span><i class="material-icons ">comment</i></span></a>
                         @else
-                            <a href=""><span><i class="material-icons text-dark">comment</i></span></a>
+                        <a href="{{route('simulador.feedback.edit', $evaluado->id)}}"><span><i class="material-icons text-dark">comment</i></span></a>
                         @endif
                     </td>
 

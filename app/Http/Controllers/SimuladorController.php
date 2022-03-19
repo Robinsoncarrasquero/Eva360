@@ -6,6 +6,8 @@ use App\Cargo;
 use App\Competencia;
 use App\Comportamiento;
 use app\CustomClass\DataEvaluacion;
+use app\CustomClass\DataObjetivo;
+use app\CustomClass\DataObjetivoPersonal;
 use app\CustomClass\DataPersonal;
 use app\CustomClass\DataResultado;
 use app\CustomClass\EnviarEmail;
@@ -15,9 +17,13 @@ use App\Departamento;
 use App\Evaluacion;
 use App\Evaluado;
 use App\Evaluador;
+use App\Exports\FeedBackExport;
+use App\FBstatu;
+use App\FeedBack;
 use App\Frecuencia;
 use App\Helpers\Helper;
 use App\Modelo;
+use App\Periodo;
 use App\Role;
 use App\SubProyecto;
 use App\User;
@@ -28,7 +34,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
+use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SimuladorController extends Controller
 {
@@ -539,5 +546,137 @@ class SimuladorController extends Controller
         }
         $title="Analisis de cumplimiento";
         return \view('simulador.charcumplimientoporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha",'dataBrechaPorCompetencias'));
+    }
+
+
+
+    /**
+     * Simulador Feedback Update
+     */
+    public function feedbackupdate(Request $formrequest, $id)
+    {
+        $evaluado = Evaluado::find($id);
+        if ($formrequest->input('fb_competencia.*')==null){
+
+        }
+
+        try {
+            //Update a los feeedback
+            $fb_competencia=$formrequest->input('fb_competencia.*');
+            $fb_feedback=$formrequest->input('fb_feedback.*');
+            $fb_finicio=$formrequest->input('fb_finicio.*');
+            $fb_ffinal=$formrequest->input('fb_ffinal.*');
+            //$fb_nota=$formrequest->input('fb_nota.*');
+            $fb_status=$formrequest->input('fb_status.*');
+            $fb_periodo=$formrequest->input('fb_periodo.*');
+            $fb_development=$formrequest->input('fb_development.*');
+
+            for ($i=0; $i < count($fb_competencia); $i++) {
+                $fb= FeedBack::find($fb_competencia[$i]);
+                $fb->feedback=$fb_feedback[$i];
+                $fb->fb_finicio=$fb_finicio[$i];
+                $fb->fb_ffinal=$fb_ffinal[$i];
+                //$fb->fb_nota=$fb_nota[$i];
+                $fb->periodo_id=$fb_periodo[$i];
+                $fb->fbstatu_id=$fb_status[$i];
+                $fb->development=$fb_development[$i];
+                $fb->save();
+
+            }
+
+        } catch (QueryException $e) {
+            Alert::error('Competencia '.$formrequest->competencia,Arr::random(['Duplicada','Registro Ya existe']));
+
+            return redirect()->back()
+            ->withErrors('Error imposible Guardar este registro. Revise los datos del formulario e intente nuevamante.');
+        }
+
+        if (Auth::user()->is_manager){
+
+            return \redirect()->route('manager.staff',$evaluado->subproyecto_id)->withSuccess('FeedBack Actualizado con exito');
+        }
+        return \redirect()->route('simulador.historicoevaluaciones')->withSuccess('FeedBack Actualizado con exito');
+    }
+
+    /**
+     * Exportar feedback en Excel de un evaluado.
+     *
+     */
+
+   public function exportFeedBack(Evaluado $evaluado)
+    {
+        return Excel::download(new FeedBackExport($evaluado), 'FeedBackExport.xlsx');
+    }
+
+     /*
+    * Edit Feedback de una evaluacion
+    */
+    public function feedbackedit($evaluado_id)
+    {
+
+
+        //Buscamos el evaluado
+        $evaluado = Evaluado::find($evaluado_id);
+
+        $email = Auth::user()->email;
+        $user= Auth::user();
+        // if ($user->is_manager && $email!= $evaluado->user->email_super || $evaluado==null){
+        //     abort(404);
+        // }
+
+        //instanciamos un objeto de data personal
+
+        $loteEvaluados[]=$evaluado_id;
+        if ($evaluado->word_key=="Objetivos"){
+            $objData = new DataObjetivoPersonal($loteEvaluados,new DataObjetivo(0));
+        }
+        else {
+            $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
+        }
+        $objData->procesarData();
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
+        $dataBrecha = $objData->getDataBrecha();
+
+        //Generamos las competencias del Feedback
+        foreach ($dataSerie as $key=>$dataValue){
+
+            $competencia=$dataValue['name'];
+             //Modelo > resultado genera feedback
+             //if ($dataValue['data'][0]>($dataValue['data'][1]))
+
+             if ($dataValue['name']!=='Promedio' && ($dataValue['data'][0]>$dataValue['data'][1])){
+                //dd($competencia);
+                $feedbacks = FeedBack::firstOrCreate(
+                    ['competencia'=> $competencia,
+                    'evaluado_id' => $evaluado_id],
+                    [
+                //    'fb_status' => ($dataValue['data'][0]>($dataValue['data'][1]) ? 'No_Cumplida' : 'Cumplida')
+                    ]
+                );
+
+             }
+
+        }
+
+        $fb_status=['Cumplida','No_Cumplida'];
+        $fb_status= FBstatu::all();
+
+        $feedbacks= $evaluado->feedback()->get();
+        $periodos = Periodo::all();
+        if (!$dataSerie){
+            \abort(404);
+        }
+
+        switch ($evaluado->word_key) {
+            case 'Objetivos':
+                return \view('simulador.fbedit',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks','periodos'));
+                break;
+
+            default:
+                return \view('simulador.fbedit',compact("dataSerie","dataCategoria","dataBrecha","evaluado",'fb_status','feedbacks','periodos'));
+            break;
+        }
+
     }
 }

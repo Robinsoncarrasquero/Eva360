@@ -24,8 +24,8 @@
 <body>
 <div class="container">
     <div class="small">
-        <p>Se presentan dos indicadores: De linea y barra de facíl lectura para la toma de decisiones que son exportables en diferentes formaros tales como :
-             PDF, Excel, PNG, JPG, Table y otros.</p>
+        <p>Se presentan dos indicadores: uno de linea y otro de barra de facíl lectura para la toma de decisiones que son exportables en diferentes formatos tales como :
+             pdf, excel, png, jpg, table y otros.</p>
     </div>
     <div class="mt-3">
         <div class="col-lg-12 " id="container-line"></div>
