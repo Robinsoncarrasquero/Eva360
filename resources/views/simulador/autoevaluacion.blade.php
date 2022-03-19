@@ -18,8 +18,10 @@
             <p >
                 La <strong>Evaluacion Virtual</strong> es una facilidad disponible para que una persona experimente con el sistema <strong class="text text-warning">HRFeedBack360</strong>,
                 realizando una <strong class="text text-dark">Auto Evaluacion</strong> con un proceso sencillo, intuitivo y rápido.</p>
-                <p>
-                <strong> Como funciona?</strong> <br><strong class="text text-warning">HRFeedBack360</strong>, creará Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
+
+
+                <h5>Como funciona?</h5>
+                <p><strong class="text text-warning">HRFeedBack360</strong>, creará Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
                 , según el método de evaluación. El método 90(2 EV); El método 180(4 EV); El método 270(6 EV); El método 360(8 EV).
                  Los EV responderán el cuestionario de competencias con un Robot <span class="material-icons bg-success" style="" >android</span>.
                  La evaluaccion tiene un limite máximo de 10 minutos para culminarla. Si la prueba queda incompleta el Robot responderá
@@ -93,8 +95,8 @@
                     <h5 class="text text-danger">Modelos de competencias</h5>
                 </div>
 
-                <div class="table">
-                    <table  class="table table-responsive table-condensed table-dark">
+                <div class="table table-responsive">
+                    <table  class="table table-condensed table-dark">
 
                     <thead>
                         <th >Modelo</th>
@@ -103,10 +105,10 @@
                     </thead>
                     <tbody>
                     @foreach($modelos as $modelo)
-                    <tr id="{{$modelo->id}}">
+                    <tr id="{{$modelo->id}}" class="small">
                         <td>{{$modelo->name}}</td>
 
-                        <td style="font-size:0.6rem">
+                        <td class="small">
                             @foreach ($modelo->competencias as $modelocompetencia)
                                 {{ $modelocompetencia->competencia->name}},
                             @endforeach

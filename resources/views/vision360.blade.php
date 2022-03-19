@@ -27,6 +27,8 @@
         <div class="d-flex justify-content-center">
             <span><a href=" {{url("https://hr.fb360.cf/simulador/autoevaluacion")}}" class="btn btn-dark btn-lg">Probar Auto Evaluacion Virtual</a></span>
         </div>
+
+
     </div>
     <div class="card-header text-center xtitulo360 " style="background-color:brown; color:white; font-size:1.2rem">
         Diccionario de Evaluacion de Desempeño Por Competencias<span><i class="material-icons">360</i></span></i>
