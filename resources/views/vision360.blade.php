@@ -28,9 +28,6 @@
             <span><a href=" {{url("https://hr.fb360.cf/simulador/autoevaluacion")}}" class="btn btn-dark btn-lg">Probar Auto Evaluacion Virtual</a></span>
         </div>
 
-        <div class="d-flex justify-content-center">
-            <span><a href=" {{url("/simulador/autoevaluacion")}}" class="btn btn-dark btn-lg">Probar Auto Evaluacion Virtual</a></span>
-        </div>
 
     </div>
     <div class="card-header text-center xtitulo360 " style="background-color:brown; color:white; font-size:1.2rem">
