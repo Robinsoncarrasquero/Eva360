@@ -12,27 +12,27 @@
 
     <div class="mt-2 pb-2">
         <div class="text text-center">
-            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.2rem">Evaluacion Virtual de Desempeño por Competencias</h3>
+            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.2rem">Evaluación Virtual de Desempeño por Competencias</h3>
         </div>
         <div class="small">
             <p >
-                La <strong>Evaluacion Virtual</strong> es una facilidad disponible para que una persona experimente con el sistema <strong class="text text-warning">HRFeedBack360</strong>,
-                realizando una <strong class="text text-dark">Auto Evaluacion</strong> con un proceso sencillo, intuitivo y rápido.</p>
+                La <strong>Evaluación Virtual</strong> es una facilidad disponible para que una persona experimente con el sistema <strong class="text text-warning">HRFeedBack360</strong>,
+                realizando una <strong class="text text-dark">Auto Evaluación</strong> con un proceso sencillo, intuitivo y rápido.</p>
 
 
-                <h5>Como funciona?</h5>
+                <h5>¿Cómo funciona?</h5>
                 <p><strong class="text text-warning">HRFeedBack360</strong>, creará Evaluadores Virtuales(EV) <strong>(Supervisor, Pares, Colaboradores y Clientes)</strong>
                 , según el método de evaluación. El método 90(2 EV); El método 180(4 EV); El método 270(6 EV); El método 360(8 EV).
                  Los EV responderán el cuestionario de competencias con un Robot <span class="material-icons bg-success" style="" >android</span>.
-                 La evaluaccion tiene un limite máximo de 10 minutos para culminarla. Si la prueba queda incompleta el Robot responderá
-                la Auto Evaluacion y notificará la finalización via email para revisar los resultados.
+                 La evaluación tiene un límite máximo de 10 minutos para culminarla. Si la prueba queda incompleta el Robot responderá
+                la Auto Evaluación y notificará la finalización vía email para revisar los resultados.
                 </p>
         </div>
 
     </div>
     <div class="mt-2 pb-2">
         <div class="text text-center">
-            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Auto Evaluacion Virtual</h3>
+            <h3 class="btn btn-lg" style="background-color:brown; color:white; font-size:1.5rem">Auto Evaluación Virtual</h3>
         </div>
         {{-- <p >
             LLena el formulario con los datos del correo, seleccione un cargo, una ubicacion,
@@ -132,7 +132,7 @@
                                 METODO 90&#176;
                                 </div>
                                 <div class="card-body ">
-                                    <p class="card-text modelo-90">El empleado es evaluado por su supervisor y la autoevaluacion.</p>
+                                    <p class="card-text modelo-90">El empleado es evaluado por su supervisor y la autoevaluación.</p>
                                 </div>
                                 <div class="cajaimagen300">
                                     <img class="img-fluid" src="{{asset('images/comunicacion.png') }}"  alt="Evaluacion 180 grados">
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="card-body">
                                 <p class="card-text modelo-180">El empleado es evaluado por su supervisor,
-                                    sus pares y la autoevaluacion.</p>
+                                    sus pares y la autoevaluación.</p>
                                 </div>
                                 {{-- <div class="card-footer text-muted">
                                     <i class="material-icons">people_alt group_add </i>
@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="card-body modelo-360">
                                     <p class="card-text">El empleado es evaluado por su supervisor, pares, colaboradores y
-                                    la autoevaluacion.</p>
+                                    la autoevaluación.</p>
                                 </div>
                                 {{-- <div class="card-footer text-muted">
                                     <i class="material-icons">people_alt group_add </i>
@@ -188,8 +188,8 @@
                                 METODO 360 &#176;
                                 </div>
                                 <div class="card-body modelo-360">
-                                <p class="card-text">Es una evaluacion integral abarca supervisor, pares, colaboradores
-                                    , clientes internos o externos y la autoevaluacion.</p>
+                                <p class="card-text">Es una evaluación integral abarca supervisor, pares, colaboradores
+                                    , clientes internos o externos y la autoevaluación.</p>
                                 </div>
                                 {{-- <div class="card-footer text-muted">
                                     <i class="material-icons">people_alt  360</i>
