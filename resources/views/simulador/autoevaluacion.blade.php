@@ -48,8 +48,6 @@
 
             <div class="form-group">
 
-
-
                 <div class="col">
                     <label for="email">Email</label>
                     <input
@@ -66,7 +64,7 @@
                     <label >Cargo Virtual</label>
                     <select class="form-control" id="cargo" name="cargo">
                         @foreach ($cargos as $cargo)
-                            <option  value="{{ $cargo->id }}">{{ $cargo->name}}</option>
+                            <option disabled value="{{ $cargo->id }}">{{ $cargo->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -75,21 +73,10 @@
                     <label >Ubicacion Virtual</label>
                     <select class="form-control" id="departamento" name="departamento">
                         @foreach ($departamentos as $departamento)
-                            <option  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                            <option  disabled value="{{ $departamento->id }}">{{ $departamento->name}}</option>
                         @endforeach
                     </select>
                 </div>
-
-                {{-- <div class="col">
-
-                    <label for="metodo">Metodo</label>
-                    <select id="metodo" class="form-control" name="metodo" >
-                        @foreach ($metodos as $metodo)
-                                <option value="{{$metodo}}">{{ $metodo }}</option>
-                        @endforeach
-
-                    </select>
-                </div> --}}
 
                 <div class="mt-4 text text-center">
                     <h5 class="text text-danger">Modelos de competencias</h5>

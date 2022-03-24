@@ -97,8 +97,6 @@ class SimuladorController extends Controller
     public function registrar(Request $request)
     {
 
-
-
         $request->validate(
             [
                 'modeloradio' => 'required',
@@ -149,7 +147,7 @@ class SimuladorController extends Controller
                 $user->roles()->attach($user_role);
             } catch (QueryException $e) {
                 return redirect()->back()
-                    ->withErrors('Error correo ya esta registrado por otro usuario. Ingrese otro correo.');
+                    ->withErrors('Error, correo ya está en uso por otro usuario. Ingrese otro correo.');
             }
         }
 
@@ -158,7 +156,7 @@ class SimuladorController extends Controller
         $userSimulador = new Simulador($user, $modelo, $metodo);
         $autoevaluado = $userSimulador->CrearEvaluadores();
         if (!$autoevaluado) {
-            return \redirect()->back()->withErrors($user->name . ', no se pudo crear la evaluacion simulada, intente nuevamente');
+            return \redirect()->back()->withErrors($user->name . ', no se pudo crear la evaluación simulada, intente nuevamente');
         }
 
         //Creamos un objeto de lanzamiento de Evaluacion
@@ -166,7 +164,7 @@ class SimuladorController extends Controller
 
         if (!$objlanzaEvaluacion->CrearEvaluacionPorModelo()) {
             return \redirect()->back()
-                ->withErrors("Error, Esas competencias para el Evaluado $autoevaluado->name, ya habian sido lanzadas en la Prueba..");
+                ->withErrors("Error, Esas competencias para $autoevaluado->name, ya habian sido lanzadas anteriormente..");
         }
 
         $objlanzaEvaluacion = null;
