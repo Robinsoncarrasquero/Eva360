@@ -64,7 +64,7 @@
                     <label >Cargo Virtual</label>
                     <select class="form-control" id="cargo" name="cargo">
                         @foreach ($cargos as $cargo)
-                            <option disabled value="{{ $cargo->id }}">{{ $cargo->name}}</option>
+                            <option value="{{ $cargo->id }}">{{ $cargo->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -73,7 +73,7 @@
                     <label >Ubicacion Virtual</label>
                     <select class="form-control" id="departamento" name="departamento">
                         @foreach ($departamentos as $departamento)
-                            <option  disabled value="{{ $departamento->id }}">{{ $departamento->name}}</option>
+                            <option  value="{{ $departamento->id }}">{{ $departamento->name}}</option>
                         @endforeach
                     </select>
                 </div>
