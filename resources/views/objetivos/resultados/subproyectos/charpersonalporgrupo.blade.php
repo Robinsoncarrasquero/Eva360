@@ -102,8 +102,8 @@
                         <th>% Cumplimiento</th>
                         <th>% Brecha</th>
                         <th>% Excedentes</th>
-                        <th>Sin Lograr</th>
-                        <th>Lograda</th>
+                        {{-- <th>Sin Lograr</th>
+                        <th>Lograda</th> --}}
                     </thead>
                     <tbody >
                         @foreach ($dataBrecha as $key=>$value)
@@ -121,7 +121,7 @@
                             <span style="font-size:1.5em; color:white;background:green"> {{ number_format($value['potencial'],2) }}</span>
                             @endif
                         </td>
-                        <td>
+                        {{-- <td>
                             @foreach ($value['dataoportunidad'] as $vdata)
                                 {{$vdata['competencia']}},
                             @endforeach
@@ -130,7 +130,7 @@
                             @foreach ($value['datafortaleza'] as $vdata)
                                 {{$vdata['competencia']}},
                             @endforeach
-                        </td>
+                        </td> --}}
                         </tr>
                         @endforeach
                     </tbody>
@@ -163,7 +163,7 @@
 
     // }
 
-    ['column','line'].forEach(mychar);
+    ['column'].forEach(mychar);
 
     function mychar(element,index,array)
     {

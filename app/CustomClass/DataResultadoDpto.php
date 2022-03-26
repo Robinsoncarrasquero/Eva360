@@ -1,10 +1,12 @@
 <?php
 namespace app\CustomClass;
 
+use App\Configuracion;
 use App\Evaluado;
+use App\Proyecto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
-class DataResultadoNivel{
+class DataResultadoDpto{
     private $dataSerie;
     private $dataCategoria;
     private $proyecto_id;
@@ -52,7 +54,7 @@ class DataResultadoNivel{
             'rgb(128, 128, 128)',
             ];
         $dataEvaluacion = new $this->objDataEvaluacion($this->proyecto_id);
-        $competencias = $dataEvaluacion->getDataEvaluacionNivel();
+        $competencias = $dataEvaluacion->getDataEvaluacionDpto();
         $this->dataFortalezaOportunidad = $dataEvaluacion->getDataFortalezaOptunidad();
         $arrayDataSerie=[];
         $arrayDataCategoria=[];
@@ -60,6 +62,7 @@ class DataResultadoNivel{
         $arrayCategoria2=[];
         $arrayData2=[];
         $i=0;
+        dd($competencias);
         foreach ($competencias as $key => $value) {
             //Creamos una array con la data de los averages
             $arrayCategoria2=[];
@@ -91,8 +94,8 @@ class DataResultadoNivel{
         }
 
         $arrayDataSerie[] =['name'=> 'Competencias','data'=>$arrayData,'color'=>'rgb(75,0,130)'];
-        $this->dataSerie=$arrayDataSerie3;
-        $this->dataCategoria=$arrayDataCategoria3;
+        $this->dataSerie=$arrayDataSerie2;
+        $this->dataCategoria=$arrayDataCategoria2;
         return ['categoria'=>$arrayDataCategoria3,'data'=>$arrayDataSerie3];
     }
 
@@ -135,5 +138,6 @@ class DataResultadoNivel{
         $index=rand(0,count($color)-1);
         return $color[$index];
     }
+
 
 }

@@ -1,8 +1,8 @@
 {{-- @extends('master') --}}
 
-{{-- @section('title',"Resultados Generales nivel de cargo")
+@section('title',"Resultados generales por tipo")
 
-@section('content') --}}
+@section('content')
 
 {{-- <div class="container"> --}}
 <!DOCTYPE html>
@@ -12,8 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
-    <title>Resultados Generales nivel de cargo</title>
-
+    <title>Resultados generales por tipo</title>
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
 
@@ -27,23 +26,59 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
-<div class="container" >
+<div class="container">
 
     <div class="row col" id="container-x">
-
 
 
     </div>
 
 
+    <div class="col">
+        <div class="text-left">
+            <h6>Cuadro de resultados Fortalezas / Oportunidades</h6>
+        </div>
+        @if($subProyecto)
+
+            <div class="table">
+                <table id="{{ 'table'.$subProyecto->id }}" class="table table-bordered table-striped table-table">
+                    <thead class="table-thead">
+                        <th>Tipo</th>
+                        <th>Oportunidad</th>
+                        <th>Fortaleza</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($dataDofa as $ddata)
+                        <tr>
+                        <td>{{$ddata['agrupa']}}</strong></td>
+                        <td>
+                            @if ($ddata['dataoportunidad'])
+                            @foreach ($ddata['dataoportunidad'] as $key=>$vdata)
+                                {{$vdata['competencia']}},
+                            @endforeach
+                            @endif
+                        </td>
+                        <td>
+                            @if ($ddata['datafortaleza'])
+                            @foreach ($ddata['datafortaleza'] as $key=>$vdata)
+                                {{$vdata['competencia']}},
+                            @endforeach
+                            @endif
+
+                        </td>
+
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
         {{-- {{ $competencias->links() }} --}}
         <div class="clearfix">
             <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
         </div>
-
+    </div>
 </div>
-
-
 
 {{-- <script src="{{ asset('js/hchar/highcharts.js') }}"></script>
 <script src="{{ asset('js/hchar/modules/series-label.js')}}"></script>
@@ -60,8 +95,14 @@
 <script type="text/javascript">
     var dataSerie =  @json($dataSerie);
     var categorias =  @json($dataCategoria);
-
     var subProyectoName = @json($subProyecto->name);
+    // $.each(dataSerie, function() {
+    //     $.each(this, function(key, val){
+    //         //alert(val);//here data
+    //         //alert (key); //here key
+    //         //console.log(key+"=>"+val);
+    //     });
+    // });
     var i=0;
     for ( obj of dataSerie) {
         [obj].forEach(mychar);
@@ -70,9 +111,8 @@
 
     function mychar(element,index,array)
     {
-        name=categorias[i][0];
-        dataSeriex=array[0];
-        categoriasx=categorias[i];
+
+
 
         // busca un elemento creado y su contenido al DOM
         var currentDiv = document.getElementById("container-x");
@@ -83,27 +123,29 @@
 
         currentDiv.appendChild(elemento); //añade texto al div creado.
 
-
+        name=categorias[i][0];
+        dataSeriex=array[0];
+        categoriasx=categorias[i];
         Highcharts.chart('container-'+i, {
             chart: {
                 type: 'column'
             },
             title: {
-                text: 'Indicadores Generales por nivel de cargo ' + name
+                text: 'Indicadores Generales por tipo de competencia '+name
             },
             subtitle: {
                 text:  subProyectoName
 
             },
-
             xAxis: {
                 categories:categoriasx,
+
                 crosshair: true
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Nivel de Dominio'
+                    text: 'Nivel de dominio'
                 }
             },
             tooltip: {
@@ -126,6 +168,6 @@
     }
 
 </script>
+
 </body>
 </html>
-

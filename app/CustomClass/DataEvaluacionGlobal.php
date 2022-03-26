@@ -121,14 +121,16 @@ class DataEvaluacionGlobal{
 
             foreach ($groupdatar as $agrupacompetencias=> $valued) {
 
+
                 $datax=[];
                 foreach ($valued as $item) {
                     $datax[] = ['average'=>$item[0],'records'=>$item[1],'nivel'=>$item[2]];
                 }
 
                 $resultado=collect($datax)->avg('average');
+                $nivel=collect($datax)->avg('nivel');
 
-                $nivel=$datax[0]['nivel'];
+               // $nivel=$datax[0]['nivel'];
                 $recordx[] = ['competencia'=>$agrupacompetencias,'average'=>$resultado,'grupos'=>count($datax),'nivel'=>$nivel];
                 $recordm[] = ['competencia'=>$agrupacompetencias,'average'=>$nivel,'grupos'=>count($datax),'nivel'=>$nivel];
 
@@ -227,15 +229,97 @@ class DataEvaluacionGlobal{
            $this->join_fortaleza_oportunidad($agrupa);
            $adata[]=['tipo'=>$agrupa,'data'=>$recordx];
            //$adata[]=['tipo'=>$agrupa.' Modelo','data'=>$recordm];
-
-
        }
-
-
 
        $this->dataCruda=$adata;
        return collect($adata);
    }
+
+    /**
+     * Genera la data de la evaluacion por departamento con los resultados y los devuelve en una coleccion
+     *
+    **/
+    public function getDataEvaluacionDpto(){
+
+        //Obtenemos la configuracion particular
+        $configuraciones = Configuracion::first();
+        if ($configuraciones->promediarautoevaluacion){
+            $autoevaluacion=' ';
+        }else {
+            $autoevaluacion='Autoevaluacion';
+        }
+        //Buscamos los evaluadores del evaluado
+        $proyecto = Proyecto::find($this->proyecto_id);
+        $whereIn=$proyecto->id;
+
+        $competencias = DB::table('evaluaciones')
+        ->join('competencias', 'evaluaciones.competencia_id', '=', 'competencias.id')
+        ->join('evaluadores', 'evaluaciones.evaluador_id', '=', 'evaluadores.id')
+        ->join('evaluados', 'evaluadores.evaluado_id', '=', 'evaluados.id')
+        ->join('users', 'evaluados.user_id', '=', 'users.id')
+        ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
+        ->join('subproyectos', 'evaluados.subproyecto_id', '=', 'subproyectos.id')
+        ->join('proyectos', 'subproyectos.proyecto_id', '=', 'proyectos.id')
+        ->select('departamentos.name as departamento','competencias.name','evaluaciones.nivelrequerido'
+        ,'evaluados.status',
+        DB::raw('AVG(resultado) as average,count(evaluaciones.resultado) as records'))
+        ->where([['proyectos.id','=',$whereIn],['evaluadores.relation','<>',$autoevaluacion]])
+        //->groupBy('departamentos.name','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
+        ->groupBy('departamentos.name','competencias.name','evaluaciones.nivelrequerido','evaluados.status')
+        ->having('evaluados.status','=',2)
+        //->orderByRaw('nivel_cargos.name','cccompetencias.name')
+        ->get();
+
+         //Recibimos un objeto sdtClass y lo convertimos a un arreglo manipulable
+         $dataArray = json_decode(json_encode($competencias), true);
+         $collection= collect($dataArray);
+         //Agrupamos la coleccion por nombre de competencia
+         $grouped = $collection->mapToGroups(function ($item, $key) {
+             return [$item['departamento'] => [$item['name'],$item['average'],$item['nivelrequerido']]];
+         });
+
+         //Creamos un arreglo desde la coleccion agrupada para reorganizar la informacion por competencia
+         $adata=[];
+         dd($grouped);
+         foreach ($grouped as $key => $value) {
+
+             $sumaAverage=0;
+             $evaluador=[];
+             $nivelRequerido=0;
+             $contador=0;
+             foreach ($value as $item) {
+
+                 $evaluador[] = ['name'=>$item[1],'average'=>$item[0]];
+
+                 if ($configuraciones->promediarautoevaluacion){
+                     $sumaAverage += $item[0];
+                     $contador ++;
+                 }elseif ($item[1]!='Autoevaluacion'){
+                     $sumaAverage += $item[0];
+                     $contador ++;
+                 }
+                 $nivelRequerido=$item[2];
+             }
+
+             $resultado = $contador >0 ? $sumaAverage/$contador :0;
+             $brecha = ($resultado < $nivelRequerido ?  ($resultado / $nivelRequerido * 100) - 100 : 0);
+             $adata[]=
+             [
+                 'competencia'=>$key,
+                 'eva360'=>$resultado,
+                 'nivelRequerido'=>$nivelRequerido,'data'=>$evaluador,
+                 'cumplido'=>($resultado >= $nivelRequerido ? 'Cumplido' : 'No Cumplido'),
+                 'brecha' => $brecha,
+
+
+             ];
+
+         }
+         dd($adata,$grouped);
+         $this->dataCruda=$adata;
+         return collect($adata);
+    }
+
 
 
 }

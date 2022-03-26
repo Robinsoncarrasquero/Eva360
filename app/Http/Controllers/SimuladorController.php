@@ -513,11 +513,14 @@ class SimuladorController extends Controller
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();
         $dataBrechaPorCompetencias = $objData->getDataBrechaPorCompetencia();
+        $dataCategoriaSinModelo = $objData->getDataCategoriaSinModelo();
+
         if (!$dataCategoria){
             \abort(404);
         }
         $title="Resultado personal por grupo";
-        return \view('simulador.charpersonalporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha','dataBrechaPorCompetencias'));
+        return \view('simulador.charpersonalporgrupo',compact("dataSerie","dataCategoria",
+        "title","subProyecto",'dataBrecha','dataBrechaPorCompetencias','dataCategoriaSinModelo'));
     }
 
      /**
@@ -539,11 +542,15 @@ class SimuladorController extends Controller
         $dataSerieBrecha = $objData->getDataSerieBrecha();
         $dataCategoriaBrecha = $objData->getDataCategoriaBrecha();
         $dataBrechaPorCompetencias = $objData->getDataBrechaPorCompetencia();
+        $dataCategoriaSinModelo = $objData->getDataCategoriaSinModelo();
+
         if (!$dataBrecha){
             \abort(404);
         }
         $title="Analisis de cumplimiento";
-        return \view('simulador.charcumplimientoporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha",'dataBrechaPorCompetencias'));
+        return \view('simulador.charcumplimientoporgrupo',compact("dataSerie","dataCategoria",
+        "title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha",'dataBrechaPorCompetencias',
+        'dataCategoriaSinModelo'));
     }
 
 
@@ -631,7 +638,7 @@ class SimuladorController extends Controller
         else {
             $objData = new DataPersonal($loteEvaluados,new DataEvaluacion(0));
         }
-        $objData->procesarData();
+        $objData->procesarDataConModelo();
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataBrecha = $objData->getDataBrecha();

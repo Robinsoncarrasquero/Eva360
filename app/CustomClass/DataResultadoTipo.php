@@ -19,16 +19,16 @@ class DataResultadoTipo{
     /**
      * Procesa los resultados por proyecto
      */
-    public function procesarData()
+    public function procesarData($modelo)
     {
-        $data=$this->crearData();
+        $data=$this->crearData($modelo);
 
     }
 
     /**
     * Generamos la data individual de la evaluacion obtenida por cada competencia
     */
-    private function crearData()
+    private function crearData($modelo)
     {
 
         $dataEvaluacion = new $this->objDataEvaluacion($this->proyecto_id);
@@ -52,10 +52,19 @@ class DataResultadoTipo{
                 $arrayDataCategoria[] =$value['tipo']."<br>".$vtipo['competencia'];
                 $arrayCategoria2[]=$vtipo['competencia'];
                 $arrayData2[] =[$vtipo['average']];
-                $arrayData3[]=['name'=>$vtipo['competencia'],'data'=>[$vtipo['average'],$vtipo['nivel']]];
+                if ($modelo){
+                    $arrayData3[]=['name'=>$vtipo['competencia'],'data'=>[$vtipo['average'],$vtipo['nivel']]];
+                }else{
+                    $arrayData3[]=['name'=>$vtipo['competencia'],'data'=>[$vtipo['average']]];
+
+                }
 
             }
-            $arrayDataCategoria3[]=[$value['tipo'],'Modelo'];
+            if ($modelo){
+                $arrayDataCategoria3[]=[$value['tipo'],'Modelo'];
+            }else{
+                $arrayDataCategoria3[]=[$value['tipo']];
+            }
             $arrayDataSerie3[]=$arrayData3;
 
             $arrayDataSerie2[] =['name'=> $value['tipo'],'data'=>$arrayData2,'color'=>$this->getColor($i)];

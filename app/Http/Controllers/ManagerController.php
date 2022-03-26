@@ -144,11 +144,10 @@ class ManagerController extends Controller
         }
         $loteEvaluadosCom[]=$evaluado_com->id;
         $competenciaData = new DataPersonal($loteEvaluadosCom,new DataEvaluacion(0));
-        $competenciaData->procesarData();
+        $competenciaData->procesarDataConModelo();
         $dataSerieCom = $competenciaData->getDataSerie();
         $dataCategoriaCom = $competenciaData->getDataCategoria();
         $dataBrechaCom = $competenciaData->getDataBrecha();
-
         /**Datos del evaluado objetivo o competencias duras*/
         $evaluado_obj = DataProyecto::consolidarEvaluadoObjetivos($evaluado->user_id,$proyecto_id);
         if(!$evaluado_obj){

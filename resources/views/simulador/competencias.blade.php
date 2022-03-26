@@ -60,7 +60,9 @@
 
             <form method="POST" action="{{ route('simulador.finalizar',$evaluador->id) }}">
             @csrf
+
             <div class="card-columns ">
+
                 @foreach($competencias as $competencia)
                 <div class="card mt-4 pb-2  @if($competencia->resultado) border-success @else border-danger @endif">
 
@@ -69,8 +71,9 @@
                         <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white;fontsize:1rem;font-weight: bold;">
                             <span class="text-capitalize ">{{substr($competencia->competencia->name,0,1)}}</span>
                         </div>
+                        <h5 class="badge">{{ $competencia->resultado }}</h5>
                         <h5 class="card-title">{{$competencia->competencia->name}}</h5>
-                        <p class="card-text">{{ substr($competencia->competencia->description,0,50) }}...</p>
+                        <p class="card-text small">{{ substr($competencia->competencia->description,0,50) }}...</p>
                         {{-- <p class="card-text"><abbr>{{$competencia->competencia->description }}</abbr></p> --}}
                         <a href="{{route('simulador.responder', $competencia->id)}}" style="color: rgb(16, 17, 17)" >
                         @if($competencia->resultado)

@@ -365,7 +365,7 @@ class ObjetivosController extends Controller
 
         //instanciamos un objeto de data por tipo
         $objData = new DataResultadoTipo($proyecto_id,new DataObjetivoGlobal(0));
-        $objData->procesarData();
+        $objData->procesarData(true);
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
@@ -387,7 +387,7 @@ class ObjetivosController extends Controller
 
         //instanciamos un objeto de data por tipo
         $objData = new DataResultadoNivel ($proyecto_id,new DataObjetivoGlobal(0));
-        $objData->procesarData();
+        $objData->procesarData(true);
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();

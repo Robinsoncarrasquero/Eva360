@@ -40,63 +40,59 @@
 
     <div class="col">
 
-        <div class="col">
-
-            <div class="panel panel">
-
-                <div class="clearfix">
-                    <div class=" text-center">
-                        <h5>Indicadores de Cumplimiento General</span></h5>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="table table-responsive">
-                <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                    <thead class="table-thead" style="text-align: center">
-                    <th>Evaluado</th>
-                    <th>% Cumplimiento</th>
-                    <th>% Brecha</th>
-                    <th>% Potencial</th>
-                    <th>Oportunidades</th>
-                    <th>Fortalezas</th>
-                    </thead>
-                    <tbody>
-                        @foreach ($dataBrecha as $key=>$value)
-                        <tr style="text-align: center">
-
-                        <td style="text-align: left">{{$value['categoria']}}</strong></td>
-                        <td>
-                            <span style="font-size:1em; color:green">{{ number_format($value['cumplimiento'],2) }}</span>
-                        </td>
-                        <td>
-                        @if ($value['cumplimiento']!=100)
-                        <span style="font-size:1em; color:red">{{ number_format($value['brecha'],2) }}</span>
-                        @endif
-                        </td>
-                        <td>
-                            @if ($value['potencial']>0)
-                            <span style="font-size:1em; color:white;background:green">{{ number_format($value['potencial'],2) }}</span>
-
-                            @endif
-                        </td>
-                        <td>
-                            @foreach ($value['dataoportunidad'] as $vdata)
-                                {{$vdata['competencia']}},
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach ($value['datafortaleza'] as $vdata)
-                                {{$vdata['competencia']}},
-                            @endforeach
-                        </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        <div class="clearfix">
+            <div class=" text-center">
+                <h5>Indicadores de Cumplimiento General</span></h5>
             </div>
         </div>
+
+        <div class="table table-responsive">
+            <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                <thead class="table-thead" style="text-align: center">
+                <th>Evaluado</th>
+                <th>Cump.</th>
+                <th>Brecha</th>
+                <th>Potencial</th>
+                <th>Oportunidad</th>
+                <th>Fortaleza</th>
+                </thead>
+                <tbody>
+                @foreach ($dataBrecha as $key=>$value)
+                <tr style="text-align: center">
+
+                <td style="text-align: left">{{$value['categoria']}}</strong></td>
+                <td>
+                    <span style="font-size:1em; color:green">{{ number_format($value['cumplimiento'],2) }}</span>
+                </td>
+                <td>
+                @if ($value['cumplimiento']!=100)
+                <span style="font-size:1em; color:red">{{ number_format($value['brecha'],2) }}</span>
+                @endif
+                </td>
+                <td>
+                    @if ($value['potencial']>0)
+                    <span style="font-size:1em; color:white;background:green">{{ number_format($value['potencial'],2) }}</span>
+
+                    @endif
+                </td>
+                <td>
+                    @foreach ($value['dataoportunidad'] as $vdata)
+                        {{$vdata['competencia']}},
+                    @endforeach
+                </td>
+                <td>
+                    @foreach ($value['datafortaleza'] as $vdata)
+                        {{$vdata['competencia']}},
+                    @endforeach
+                </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 
         <div class="col">
 
@@ -108,12 +104,17 @@
             @if($subProyecto)
             <div class="table table-responsive">
                 <table id="{{ 'table_brechas_detalladas'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                    <thead class="table-thead">
+                    <thead class="table-thead ">
                         <tr>
                             <th>Brecha por</th>
-                            @foreach ($dataCategoria as $key=>$value)
-                            @if ($key>0)
-                                <th colspan="2">
+                            @foreach ($dataCategoriaSinModelo as $key=>$value)
+                            <th colspan="3">
+                                {{$value}}
+
+                            </th>
+
+                            {{-- @if ($key>0)
+                                <th colspan="3">
                                     {{$value}}
 
                                 </th>
@@ -121,7 +122,7 @@
                                 <th >
                                     {{$value}}
                                 </th>
-                            @endif
+                            @endif --}}
                             @endforeach
                         </tr>
 
@@ -129,20 +130,32 @@
                             <td>
                                 Competencias
                             </td>
-                            @foreach ($dataCategoria as $key=>$value)
+                            @foreach ($dataCategoriaSinModelo as $key=>$value)
+                            <td>
+                                Brecha
+                            </td>
+                            <td>
+                                Cumplimiento.
+                            </td>
+                            <td>
+                                Modelo
+                            </td>
 
-                            @if ($key >0)
+                            {{-- @if ($key>0)
                                 <td>
                                     Brecha
                                 </td>
                                 <td>
                                     Cumplimiento.
                                 </td>
+                                <td>
+                                    Modelo
+                                </td>
                             @else
                                 <td>
                                 {{$value}}
                                 </td>
-                            @endif
+                            @endif --}}
                             @endforeach
                         </tr>
                     </thead>
@@ -169,63 +182,12 @@
 
         </div>
 
-        <div class="col">
-
-            <div class="clearfix">
-                <div class=" text-center">
-                    <h5>Resultados por Competencias</span></h5>
-                </div>
-
-            </div>
-            <div class="xcol-6">
-                @if($subProyecto)
-                <div class="table table-responsive">
-                <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                    <thead class="table-thead">
-                    <tr>
-                        <th>Competencias</th>
-                        @foreach ($dataCategoria as $key=>$value)
-                        <th>
-                        {{$value}}</strong>
-                        </th>
-                        @endforeach
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($dataSerie as $key=>$dataValue)
-                        <tr>
-                            <td>{{$dataValue['name']}} </td>
-
-                            @foreach ($dataValue['data'] as $key2=>$vdata)
-
-                            {{-- <td class="text text-danger">{{ number_format($vdata,2)}} key {{ $key2}} {{ $dataValue['data'][0] }}</td> --}}
-
-
-                                @if($dataValue['data'][0]>($vdata) && $key2>0)
-                                    <td style="font-size:1em; color:red" class="text text-center">{{ number_format($vdata,2)}}</td>
-
-                                @else
-                                <td style="font-size:1em; color:green;" class="text text-center">{{ number_format($vdata,2)}}</td>
-
-                                    {{-- <td style="font-size:1.5em; color:white;background:green" class="text text-center">{{ number_format($vdata,2)}}</td> --}}
-                                @endif
-
-                            @endforeach
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                </div>
-            @endif
-        </div>
-
-
 
         <div class="col-6">
             <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
         </div>
 
-    </div>
+
 
 </div>
 
@@ -239,7 +201,7 @@
     var categorias =  @json($dataCategoriaBrecha);
     var subProyectoName = @json($subProyecto->name);
 
-    ['column','line'].forEach(mychar);
+    ['column'].forEach(mychar);
 
     function mychar(element,index,array)
     {

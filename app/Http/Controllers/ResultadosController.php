@@ -6,6 +6,7 @@ use app\CustomClass\DataEvaluacion;
 use app\CustomClass\DataEvaluacionGlobal;
 use app\CustomClass\DataPersonal;
 use app\CustomClass\DataResultado;
+use app\CustomClass\DataResultadoDpto;
 use app\CustomClass\DataResultadoNivel;
 use app\CustomClass\DataResultadoTipo;
 use Illuminate\Http\Request;
@@ -86,14 +87,19 @@ class ResultadosController extends Controller
 
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
+
         $dataBrecha = $objData->getDataBrecha();
+
+
         $dataBrechaPorCompetencias = $objData->getDataBrechaPorCompetencia();
-        //dd($dataCategoria,$dataBrecha,$dataBrechaPorCompetencias);
+        $dataCategoriaSinModelo = $objData->getDataCategoriaSinModelo();
+
+        //dd($dataSerie,$dataCategoria);
         if (!$dataCategoria){
             \abort(404);
         }
         $title="Resultado personal por grupo";
-        return \view('resultados.subproyecto.charpersonalporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha','dataBrechaPorCompetencias'));
+        return \view('resultados.subproyecto.charpersonalporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha','dataBrechaPorCompetencias',"dataCategoriaSinModelo"));
     }
 
     /**
@@ -115,11 +121,13 @@ class ResultadosController extends Controller
         $dataSerieBrecha = $objData->getDataSerieBrecha();
         $dataCategoriaBrecha = $objData->getDataCategoriaBrecha();
         $dataBrechaPorCompetencias = $objData->getDataBrechaPorCompetencia();
+        $dataCategoriaSinModelo = $objData->getDataCategoriaSinModelo();
+
         if (!$dataBrecha){
             \abort(404);
         }
         $title="Analisis de cumplimiento";
-        return \view('resultados.subproyecto.charcumplimientoporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha",'dataBrechaPorCompetencias'));
+        return \view('resultados.subproyecto.charcumplimientoporgrupo',compact("dataSerie","dataCategoria","title","subProyecto",'dataBrecha',"dataSerieBrecha","dataCategoriaBrecha",'dataBrechaPorCompetencias','dataCategoriaSinModelo'));
     }
 
     /**
@@ -132,7 +140,7 @@ class ResultadosController extends Controller
 
         //instanciamos un objeto de data por tipo
         $objData = new DataResultadoTipo($proyecto_id,new DataEvaluacionGlobal(0));
-        $objData->procesarData();
+        $objData->procesarData(false);
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
@@ -154,7 +162,7 @@ class ResultadosController extends Controller
 
         //instanciamos un objeto de data por tipo
         $objData = new DataResultadoNivel ($proyecto_id,new DataEvaluacionGlobal(0));
-        $objData->procesarData();
+        $objData->procesarData(false);
         $dataSerie = $objData->getDataSerie();
         $dataCategoria = $objData->getDataCategoria();
         $dataDofa = $objData->getDataFortalezaOptunidad();
@@ -166,5 +174,25 @@ class ResultadosController extends Controller
         return \view('resultados.subproyecto.chartresultadosgenerales_nivel',compact("dataSerie","dataCategoria","dataDofa","title","subProyecto"));
     }
 
+     /**
+     * Presenta grafica lineal de competencias por departamentos por proyecto
+     */
+    public function rresultadosGeneralesNivel($proyecto_id)
+    {
+        $subProyecto = Proyecto::find($proyecto_id);
+        //Buscamos el grupo de evaluados relacionados al subproyecto
+
+        //instanciamos un objeto de data por tipo
+        $objData = new DataResultadoDpto($proyecto_id,new DataEvaluacionGlobal(0));
+        $objData->procesarData(false);
+        $dataSerie = $objData->getDataSerie();
+        $dataCategoria = $objData->getDataCategoria();
+        $dataDofa = $objData->getDataFortalezaOptunidad();
+        if (!$dataDofa){
+            \abort(404);
+        }
+        $title="Resultados Generales por Nivel de Cargo";
+        return \view('resultados.subproyecto.chartresultadosgenerales_dpto',compact("dataSerie","dataCategoria","dataDofa","title","subProyecto"));
+    }
 
 }

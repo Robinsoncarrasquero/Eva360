@@ -38,7 +38,7 @@
         <div  class="mb-1" id="container-column"></div>
     </div>
 
-        <div class="col">
+        {{-- <div class="col">
 
             <div class="clearfix">
                 <div class=" text-center">
@@ -80,8 +80,8 @@
                 </div>
             @endif
 
-            {{-- {{ $competencias->links() }} --}}
-        </div>
+            {{ $competencias->links() }}
+        </div> --}}
 
         <div class="col">
 
@@ -93,12 +93,17 @@
             @if($subProyecto)
             <div class="table table-responsive">
                 <table id="{{ 'table_brechas_detalladas'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
-                    <thead class="table-thead">
+                    <thead class="table-thead ">
                         <tr>
                             <th>Brecha por</th>
-                            @foreach ($dataCategoria as $key=>$value)
-                            @if ($key>0)
-                                <th colspan="2">
+                            @foreach ($dataCategoriaSinModelo as $key=>$value)
+                            <th colspan="3">
+                                {{$value}}
+
+                            </th>
+
+                            {{-- @if ($key>0)
+                                <th colspan="3">
                                     {{$value}}
 
                                 </th>
@@ -106,7 +111,7 @@
                                 <th >
                                     {{$value}}
                                 </th>
-                            @endif
+                            @endif --}}
                             @endforeach
                         </tr>
 
@@ -114,20 +119,32 @@
                             <td>
                                 Competencias
                             </td>
-                            @foreach ($dataCategoria as $key=>$value)
+                            @foreach ($dataCategoriaSinModelo as $key=>$value)
+                            <td>
+                                Brecha
+                            </td>
+                            <td>
+                                Cumplimiento.
+                            </td>
+                            <td>
+                                Modelo
+                            </td>
 
-                            @if ($key >0)
+                            {{-- @if ($key>0)
                                 <td>
                                     Brecha
                                 </td>
                                 <td>
                                     Cumplimiento.
                                 </td>
+                                <td>
+                                    Modelo
+                                </td>
                             @else
                                 <td>
                                 {{$value}}
                                 </td>
-                            @endif
+                            @endif --}}
                             @endforeach
                         </tr>
                     </thead>
@@ -227,7 +244,7 @@
     var categorias =  @json($dataCategoria);
     var subProyectoName = @json($subProyecto->name);
 
-    ['column','line'].forEach(mychar);
+    ['column'].forEach(mychar);
 
     function mychar(element,index,array)
     {
@@ -251,7 +268,8 @@
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Nivel de Dominio'
+                    text: 'Nivel de Dominio',
+                    align: 'high'
                 }
             },
             tooltip: {

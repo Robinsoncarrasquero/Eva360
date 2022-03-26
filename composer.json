@@ -75,7 +75,8 @@
             "app/CustomClass/ConfigSingleton.php",
             "app/CustomClass/Color.php",
             "app/CustomClass/Simulador.php",
-            "app/CustomClass/DataProyecto.php"
+            "app/CustomClass/DataProyecto.php",
+            "app/CustomClass/DataResultadoDpto.php"
 
 	]
     },

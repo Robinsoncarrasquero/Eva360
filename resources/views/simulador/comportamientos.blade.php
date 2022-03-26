@@ -23,6 +23,7 @@
             <h2 class="card-header description" >{{ $evaluacion->competencia->description}}</h2>
         </div>
 
+        @php($nivel =0)
 
         @if ($evaluacion->competencia->grados->isNotEmpty())
 
@@ -42,7 +43,8 @@
                             <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white;fontsize:1rem;font-weight: bold;">
                                 <span class="text-capitalize " >{{substr($comportamiento->grado->description,0,1)}}</span>
                             </div>
-                            <p > {{$comportamiento->grado->description}}</p>
+                            <h5 class="badge badge-secondary">{{ ++$nivel }}</h5>
+                            <p class="small"> {{$comportamiento->grado->description}}</p>
                         </div>
 
                         <div class="card-footer" >

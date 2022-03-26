@@ -35,12 +35,50 @@
 
     </div>
 
+    <div class="col">
+        <div class="text-left">
+            <h6>Cuadro Nivel de Cargo Fortalezas / Debilidades</h6>
+        </div>
 
+        @if($subProyecto)
+
+            <div class="table">
+                <table id="{{ 'table'.$subProyecto->id }}" class="table  table-bordered table-striped table-table">
+                    <thead class="table-thead">
+                        <th>Nivel</th>
+                        <th>Oportunidad</th>
+                        <th>Fortaleza</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($dataDofa as $ddata)
+                        <tr>
+                        <td>{{$ddata['agrupa']}}</strong></td>
+                        <td>
+                            @if ($ddata['dataoportunidad'])
+                            @foreach ($ddata['dataoportunidad'] as $key=>$vdata)
+                                {{$vdata['competencia']}},
+                            @endforeach
+                            @endif
+                        </td>
+                        <td>
+                            @if ($ddata['datafortaleza'])
+                            @foreach ($ddata['datafortaleza'] as $key=>$vdata)
+                                {{$vdata['competencia']}},
+                            @endforeach
+                            @endif
+
+                        </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
         {{-- {{ $competencias->links() }} --}}
         <div class="clearfix">
             <span class="float-left"><a href="{{url()->previous()}}" class="btn btn-dark btn-lg">Back</a></span>
         </div>
-
+    </div>
 </div>
 
 
@@ -128,4 +166,3 @@
 </script>
 </body>
 </html>
-
