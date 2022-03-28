@@ -30,7 +30,7 @@
 
             <form method="POST" action="{{ route('evaluacion.finalizar',$evaluador->id) }}">
             @csrf
-
+            @php($nivel =0)
             <div class="card-columns ">
 
                 @foreach($competencias as $competencia)
@@ -41,7 +41,7 @@
                         <div class="circle" style="background-color:{{ Color::getBGColor()}};color:white;fontsize:1rem;font-weight: bold;">
                             <span class="text-capitalize ">{{substr($competencia->competencia->name,0,1)}}</span>
                         </div>
-                        <h5 class="badge">{{ $competencia->resultado }}</h5>
+                        <h5 class="badge badge-secondary">{{ ++$nivel }}</h5>
                         <h5 class="card-title">{{$competencia->competencia->name}}</h5>
                         <p class="card-text small">{{ substr($competencia->competencia->description,0,50) }}...</p>
                         <a href="{{route('evaluacion.responder', $competencia->id)}}" style="color: rgb(16, 17, 17)" >
