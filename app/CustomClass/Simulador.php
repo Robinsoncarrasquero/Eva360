@@ -293,7 +293,7 @@ class Simulador
         }
 
         //Generamos los pares en 180
-        if ($metodo == '180' || $metodo == '270') {
+        if ($metodo == '180' || $metodo == '270' || $metodo == '360') {
             foreach ($pares as $par) {
                 $npar = new Evaluador();
                 $npar->name = $faker->name;;
