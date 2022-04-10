@@ -67,24 +67,24 @@ class Simulador
         $modelo = Modelo::find($this->modelo);
 
         $date = Carbon::parse(now())->locale('us');
-        $proyecto_name=$date->year.$date->getTranslatedShortMonthName('MMM YYYY');
+        $fecha_yyyy_mmm=$date->year.$date->getTranslatedShortMonthName('MMM YYYY');
 
         $proyecto = Proyecto::firstOrCreate(
             [
-                'name' =>  'Virtual '.$proyecto_name,
+                'name' =>  'Virtual '.$fecha_yyyy_mmm,
             ],
             [
                 'tipo' => 'Simulador',
-                'description' => 'Virtual '.$proyecto_name ,
+                'description' => 'Virtual '.$fecha_yyyy_mmm ,
                 'virtual' => true,
             ]
         );
 
         $subproyecto = subProyecto::firstOrCreate([
-            'name' => $modelo->name,
+            'name' => $modelo->name.' '.$fecha_yyyy_mmm,
 
         ], [
-            'description' => $modelo->name,
+            'description' =>$modelo->name.' '.$fecha_yyyy_mmm,
             'proyecto_id' => $proyecto->id,
         ]);
 
